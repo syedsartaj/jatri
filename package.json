@@ -8,6 +8,11 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^5.3.3",
     "nuxt": "3.0.0-rc.11"
+  },
+  "dependencies": {
+    "moment": "^2.29.4",
+    "v-calendar": "^2.4.1"
   }
 }

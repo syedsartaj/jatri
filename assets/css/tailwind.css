@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import './styles.css'; */
+
+.header {
+     @apply bg-white px-[100px] py-4 flex justify-between sticky top-0 z-50;
+}
+
+.footer{
+     @apply px-[100px] py-[60px] flex justify-between items-start lg:gap-x-[209px];
+}
+
+.searchbar{
+     box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.16)
+}
