@@ -8,7 +8,9 @@
         <div>
           <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Ticketing made easy!</h2>
           <h4 class="mt-4 text-xl text-blackSecondery leading-7 font-medium">Buy tickets online hassle-free.</h4>
-          <SearchFilterForm/>
+          <div class="mt-9">
+            <SearchFilterForm/>
+          </div>
         </div>
       </div>
     </div>
@@ -205,11 +207,9 @@
 </template>
 
 <script>
-import SearchCityFilter from '~~/components/SerachForm/SearchCityFilter.vue';
-import SearchBusFilter from '../components/SerachForm/SearchBusFilter.vue';
 import SearchFilterForm from '../components/SerachForm/SearchFilterForm.vue';
 export default {
-    components: { SearchCityFilter, SearchBusFilter, SearchFilterForm }
+    components: { SearchFilterForm }
 }
 </script>
 
