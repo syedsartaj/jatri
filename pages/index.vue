@@ -8,19 +8,7 @@
         <div>
           <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Ticketing made easy!</h2>
           <h4 class="mt-4 text-xl text-blackSecondery leading-7 font-medium">Buy tickets online hassle-free.</h4>
-          <div class="bg-white searchbar rounded-[10px] flex justify-between mt-9">
-            <div class="flex justify-between divide-x w-10/12">
-              <div class="w-1/4">x</div>
-              <div class="w-1/4">x</div>
-              <div class="w-1/4">x</div>
-              <div class="w-1/4">x</div>
-            </div>
-            <div class="px-6 py-[15px] w-2/12 flex justify-center">
-              <button
-                class="rounded-full bg-corporate text-white text-sm font-semibold leading-5 py-[13px] px-[26px]">Search
-                Ticket</button>
-            </div>
-          </div>
+          <SearchFilterForm/>
         </div>
       </div>
     </div>
@@ -192,22 +180,22 @@
           <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">How can we help you?</h2>
           <p class="text-blackLight text-sm leading-5 font-normal">Still need help? <span class="text-corporate"><NuxtLink href="https://jatri.co/contact-us">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block"></span></p>
         </div>
-        <div>
+        <div class="w-[710px]">
           <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
+            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
+            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
           </div>
           <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
+            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
+            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
           </div>
           <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
+            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
+            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
           </div>
           <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
+            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
+            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
           </div>
         </div>
       </div>
@@ -217,8 +205,11 @@
 </template>
 
 <script>
+import SearchCityFilter from '~~/components/SerachForm/SearchCityFilter.vue';
+import SearchBusFilter from '../components/SerachForm/SearchBusFilter.vue';
+import SearchFilterForm from '../components/SerachForm/SearchFilterForm.vue';
 export default {
-
+    components: { SearchCityFilter, SearchBusFilter, SearchFilterForm }
 }
 </script>
 
