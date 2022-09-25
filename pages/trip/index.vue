@@ -5,12 +5,12 @@
      </div>
 
      <!-- Available Trip Section -->
-     <!-- <div class="flex justify-start gap-x-[30px] px-[100px] py-[30px] bg-[#f7f7f7] ">
+     <div class="flex justify-start gap-x-[30px] px-[100px] py-[30px] bg-[#f7f7f7] ">
           
-
+          <!-- filter modifier -->
           <ModifyFilter/>
 
-
+          <!-- TRIPS -->
           <div class="w-full">
                <SingleTrip/>
                <SingleTrip/>
@@ -18,7 +18,8 @@
                <SingleTrip/>
                <SingleTrip/>
           </div>
-     </div> -->
+     </div>
+     <!-- error layout -->
      <div class="h-[800px] flex justify-center items-center bg-[#f7f7f7]">
           <TripNotFound/>
      </div>
