@@ -16,9 +16,9 @@
           <div>
                <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
                <div class="flex justify-between gap-[7px] mt-[10px]">
-                    <button class="flex justify-center items-center bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/acIcon.svg" alt="Ac" class="">AC</button>
-                    <button class="flex justify-center items-center bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/nonAcIcon.svg" alt="Non Ac" class="">Non AC</button>
-                    <button class="flex justify-center items-center bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/anyConditionIcon.svg" alt="any" class="">Any</button>
+                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/acIcon.svg" alt="Ac" class="">AC</button>
+                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/nonAcIcon.svg" alt="Non Ac" class="">Non AC</button>
+                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/anyConditionIcon.svg" alt="any" class="">Any</button>
                </div>
           </div>
           <hr class="my-5">

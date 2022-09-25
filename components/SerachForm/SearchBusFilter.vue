@@ -6,7 +6,7 @@
           </button>
 
           <!-- dropdown -->
-          <div v-if='optionsIsOpen' class='mt-[40px] -ml-5 xl:w-[380px] w-80 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
+          <div v-if='optionsIsOpen' class='mt-[25px] -ml-5 xl:w-[380px] w-80 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
                <div class='text-center p-4'>
                     <h2 class='font-inter text-sm xl:text-[20px] font-[400]'>
                          <span v-if='defaultOption'>{{ defaultOption }}</span>
@@ -35,6 +35,18 @@ export default {
           return {
                optionsIsOpen: false,
           }
+     },
+     watch:{
+		defaultValue(value){
+			this.selectedOption = value
+		}
+	},
+     mounted () {
+          window.addEventListener('click', this.close)
+     },
+
+     beforeDestroy () {
+          window.removeEventListener('click', this.close)
      },
 
      methods: {
