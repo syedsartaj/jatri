@@ -287,7 +287,7 @@
                               <input type="email" placeholder="Enter your name" class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 placeholder:text-blackSecondery text-blackPrimary">
                          </div>
 
-                         <button class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6">
+                         <button @click="riderectToPayment" class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6">
                               Next
                          </button>
 
@@ -315,6 +315,9 @@ export default {
                this.selected = !this.selected;
                //      return;
                // }
+          },
+          riderectToPayment() {
+               window.location.href= '/payment';
           }
      },
 }

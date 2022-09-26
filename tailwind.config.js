@@ -12,6 +12,15 @@ module.exports = {
         blackSecondery:'#676769',
         blackLight: '#4D4D4F',
       },
+      animation: {
+        animateZoom: 'animateZoom 0.6s',
+      },
+      keyframes: {
+        animateZoom: {
+          from: { transform: 'scale(0)' },
+          to: { transform: 'scale(1)' },
+        },
+      },
     },
   },
   plugins: [],

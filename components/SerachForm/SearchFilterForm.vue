@@ -7,7 +7,7 @@
               <SearchCityFilter/>
           </div>
           <div class="px-6 py-[15px] w-2/12 flex justify-center">
-              <button class="rounded-full bg-corporate text-white text-sm font-semibold leading-5 py-[13px] px-[26px]">Search Ticket</button>
+              <button @click="findTrips" class="rounded-full bg-corporate text-white text-sm font-semibold leading-5 py-[13px] px-[26px]">Search Ticket</button>
           </div>
      </div>
 </template>
@@ -16,7 +16,12 @@
 import SearchCityFilter from './SearchCityFilter.vue';
 import SearchBusFilter from './SearchBusFilter.vue';
 export default {
-    components: { SearchCityFilter, SearchBusFilter }
+    components: { SearchCityFilter, SearchBusFilter },
+    methods: {
+        findTrips(){
+            window.location.href = '/trip'
+        }
+    }
 }
 </script>
 
