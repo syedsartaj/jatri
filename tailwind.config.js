@@ -1,7 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 // const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
-  content: [],
+  content: [
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./nuxt.config.{js,ts}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -13,9 +19,9 @@ module.exports = {
         blackSecondery:'#676769',
         blackLight: '#4D4D4F',
       },
-      // fontFamily: {
-      //   inter: ['"Inter"', ...defaultTheme.fontFamily.sans]
-      // },
+      fontFamily: {
+        inter: ["Inter", "sans-serif"]
+      },
       animation: {
         animateZoom: 'animateZoom 0.6s',
       },
