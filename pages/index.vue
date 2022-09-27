@@ -181,22 +181,22 @@
           <p class="text-blackLight text-sm leading-5 font-normal">Still need help? <span class="text-corporate"><NuxtLink href="https://jatri.co/contact-us">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block"></span></p>
         </div>
         <div class="w-[710px]">
-          <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
-          </div>
-          <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
-          </div>
-          <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
-          </div>
-          <div class="border-b border-b-[#DBDBDB] last:border-b-0">
-            <h2 class="text-base text-blackPrimary font-medium leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien, sapien phasellus duis auctor imperdiet?</h2>
-            <p class="text-base text-blackPrimary font-normal leading-6 py-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.</p>
-          </div>
+          <Accordion
+            :heading="'How to buy Tickets via website!?'"
+            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+          />
+          <Accordion
+            :heading="'Payment details- bKash, Nagad, Bank Cards, Online Banking'"
+            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+          />
+          <Accordion
+            :heading="'24/7 Customer Service- 09642080808'"
+            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+          />
+          <Accordion
+            :heading="'Ticket Cancellation Procedures'"
+            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+          />
         </div>
       </div>
     </div>
@@ -210,8 +210,9 @@
 <script>
 import SearchFilterForm from '../components/SerachForm/SearchFilterForm.vue';
 import HowToBuyModal from '../components/Modal/HowToBuyModal.vue';
+import Accordion from '../components/Accordion/Accordion.vue';
 export default {
-  components: { SearchFilterForm, HowToBuyModal },
+  components: { SearchFilterForm, HowToBuyModal, Accordion },
   data(){
     return {
       howToBuyModalStatus : false,
