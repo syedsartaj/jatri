@@ -21,7 +21,11 @@
      </div>
      <!-- error layout -->
      <div class="h-[800px] flex justify-center items-center bg-[#f7f7f7]">
-          <TripNotFound/>
+          <!-- <TripNotFound/> -->
+          <OpssAlert
+               :details="'Looks llike we could not find any ticket according to your search. Try different route or date and search again.'"
+               :customStyle="'px-[92.5px]'"
+          />
      </div>
 </template>
 
@@ -29,8 +33,9 @@
 import ModifyFilter from '~~/components/TripFilter/ModifyFilter.vue';
 import SingleTrip from '~~/components/Trip/SingleTrip.vue';
 import SearchFilterForm from '~~/components/SerachForm/SearchFilterForm.vue';
+import OpssAlert from '~~/components/Alerts/OpssAlert.vue';
 export default {
-    components: { ModifyFilter, SingleTrip, SearchFilterForm }
+    components: { ModifyFilter, SingleTrip, SearchFilterForm, OpssAlert }
 }
 </script>
 

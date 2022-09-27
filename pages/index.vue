@@ -52,16 +52,14 @@
     </div>
 
     <!-- Booking ticket section -->
-    <div class="homeBanner relative overflow-hidden">
+    <div class="homeBanner relative">
       <img src="@/assets/images/home/buyTicketBanner.svg" alt="" class="w-full">
-      <div class="absolute top-[222px] left-[100px] z-40 flex justify-between items-center w-full">
+      <div class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px]  z-40">
         <div>
           <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px]">Booking ticket just got <br> more
             easier and fun <br> with Jatri.</h2>
-          <button class="bg-corporate text-white px-8 py-5 text-xl leading-7 font-semibold mt-8 rounded-full">How to buy
-            ticket</button>
+          <button @click="handleHowToBuyModal" class="bg-corporate text-white px-8 py-5 text-xl leading-7 font-semibold mt-8 rounded-full">How to buy ticket</button>
         </div>
-        <img src="@/assets/images/home/buyTicketTabletImage.svg" alt="" class="">
       </div>
     </div>
 
@@ -202,14 +200,28 @@
         </div>
       </div>
     </div>
+    <div v-if="howToBuyModalStatus">
+      <HowToBuyModal :close="handleHowToBuyModal"/>
+    </div>
   </div>
 
 </template>
 
 <script>
 import SearchFilterForm from '../components/SerachForm/SearchFilterForm.vue';
+import HowToBuyModal from '../components/Modal/HowToBuyModal.vue';
 export default {
-    components: { SearchFilterForm }
+  components: { SearchFilterForm, HowToBuyModal },
+  data(){
+    return {
+      howToBuyModalStatus : false,
+    }
+  },
+  methods: {
+    handleHowToBuyModal() {
+      this.howToBuyModalStatus = !this.howToBuyModalStatus
+    },
+  }
 }
 </script>
 
