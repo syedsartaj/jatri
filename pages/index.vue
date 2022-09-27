@@ -20,7 +20,7 @@
       <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-[72px] pb-20">
         <div>
           <div class="">
-            <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Why Choose Jatri</h2>
+            <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Why Choose us</h2>
             <img src="@/assets/images/home/curveBorder.svg" alt="" class="w-[298px]block mx-auto">
           </div>
 
@@ -69,8 +69,7 @@
         <div class="flex justify-between items-center pt-[56px] px-[60px]">
           <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Offers & Promos</h2>
 
-          <div class="flex  justify-between gap-x-4">
-              
+          <div class="flex justify-between gap-x-4">
             <button @click="scrollLeft" class="rounded-full border w-10 h-10 flex justify-center items-center" :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
              <SlideLeft
                 :fill="slideLeft ? '#151414' : '#8D8D8F'"
@@ -78,7 +77,6 @@
                 height="24"
              />
             </button>
-
             <button @click="scrollRight" class="rounded-full border w-10 h-10 flex justify-center items-center" :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
              <SlideRight
                 :fill="slideRight ? '#151414' : '#8D8D8F'"
@@ -88,7 +86,7 @@
             </button>
           </div>
         </div>
-        <div class="mt-[42px] flex justify-between gap-x-6 overflow-x-auto py-[56px] pl-[60px] sliderContainer scroll-smooth">
+        <div class="flex justify-between gap-x-6 overflow-x-auto py-[56px] pl-[60px] sliderContainer scroll-smooth">
           <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[460px]">
           <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[460px]">
           <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[460px]">
@@ -200,11 +198,11 @@
 
     <!-- Help Section -->
     <div class="p-[100px] flex justify-center">
-      <div class="flex justify-between gap-x-[103px]">
+      <div class="flex justify-between gap-x-8">
         <div>
           <img src="@/assets/images/home/helpImage.svg" alt="">
           <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">How can we help you?</h2>
-          <p class="text-blackLight text-sm leading-5 font-normal">Still need help? <span class="text-corporate"><NuxtLink href="https://jatri.co/contact-us">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block"></span></p>
+          <p class="text-blackLight text-sm leading-5 font-normal mt-4">Still need help? <span class="text-corporate underline"><NuxtLink href="https://jatri.co/contact-us" class="">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block w-[5.19px] ml-[5.48px]"></span></p>
         </div>
         <div class="w-[710px]">
           <Accordion

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import './styles.css'; */
-
 .header {
      @apply bg-white px-[100px] py-4 flex justify-between sticky top-0 z-50;
 }

@@ -1,5 +1,5 @@
 <template>
-     <div class="bg-white searchbar rounded-[10px] flex justify-between h-[76px]">
+     <div class="bg-white searchbar rounded-[10px] flex justify-between">
           <div class="flex justify-between divide-x w-10/12">
               <SearchCityFilter/>
               <SearchCityFilter/>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [],
   theme: {
@@ -12,6 +13,9 @@ module.exports = {
         blackSecondery:'#676769',
         blackLight: '#4D4D4F',
       },
+      // fontFamily: {
+      //   inter: ['"Inter"', ...defaultTheme.fontFamily.sans]
+      // },
       animation: {
         animateZoom: 'animateZoom 0.6s',
       },

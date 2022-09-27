@@ -1,6 +1,6 @@
 <template>
      <div class="w-1/4 px-6 py-4">
-          <button class="block rounded-lg bg-white p-2 focus:outline-none w-full" @click="toggleDropdown">
+          <button class="block rounded-lg bg-white focus:outline-none w-full" @click="toggleDropdown">
                <p class="text-xs font-normal text-blackSecondery text-left"> BUS TYPE </p>
                <p class="text-base font-medium text-blackPrimary text-left"> Ac/Non Ac </p>
           </button>
