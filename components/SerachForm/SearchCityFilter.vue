@@ -1,8 +1,8 @@
 <template>
      <div class="w-1/4 px-6 py-4">
           <button class="block rounded-lg bg-white p-2 focus:outline-none w-full" @click="toggleDropdown">
-               <p class="text-xs font-medium text-blackSecondery text-left"> From </p>
-               <p class="text-base font-normal text-blackPrimary text-left"> Select your Option </p>
+               <p class="text-xs font-normal text-blackSecondery text-left"> From </p>
+               <p class="text-base font-medium text-blackPrimary text-left"> Select your Option </p>
           </button>
 
           <!-- dropdown -->

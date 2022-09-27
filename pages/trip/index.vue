@@ -1,8 +1,11 @@
 <template>
      <!-- search modifier -->
-     <div class="bg-red-100 h-[140px] px-[100px] py-8">
-          <SearchFilterForm/>
-     </div>
+     <div class="relative">
+          <img src="@/assets/images/home/searchBannerImageWeb.svg" alt="" class="w-full">
+          <div class="absolute top-8 right-[100px] left-[100px] z-40">
+               <SearchFilterForm/>
+          </div>
+    </div>
 
      <!-- Available Trip Section -->
      <div class="flex justify-start gap-x-[30px] px-[100px] py-[30px] bg-[#f7f7f7] ">
