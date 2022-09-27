@@ -5,13 +5,13 @@
           </div>
           <div class="px-8 py-6">
                <div class="flex space-x-4">
-                    <button class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 0 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'" @click="selectedTab = 0;">
+                    <button @click="selectedTab = 0;" class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 0 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'">
                          Mobile Number
                     </button>
-                    <button class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 1 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'"  @click="selectedTab = 1;">
+                    <button @click="selectedTab = 1;" class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 1 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'">
                          PNR
                     </button>
-                    <button class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 2 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'" @click="selectedTab = 2;">
+                    <button @click="selectedTab = 2;" class="px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 2 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'">
                          Trx Id
                     </button>
                </div>

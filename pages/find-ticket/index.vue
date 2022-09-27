@@ -4,6 +4,14 @@
                
                <FindTicket/>
 
+               <!-- Ticket not found -->
+               <div class="flex justify-center pt-20 pb-[100px]">
+                    <OpssAlert 
+                         :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
+                         :customStyle="'px-[64.5px]'"
+                    />
+               </div>
+
                <div class="mt-10 flex justify-between items-center gap-x-4">
                     <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
                     <p class="text-base font-medium whitespace-nowrap">Active Tickets</p>
@@ -43,9 +51,10 @@
 <script>
 import FindTicket from "../../components/FindTicket/FindTicket.vue";
 import Ticket from "~~/components/Ticket/Ticket.vue";
+import OpssAlert from "~~/components/Alerts/OpssAlert.vue";
      export default {
-    components: { FindTicket, Ticket }
-}
+          components: { FindTicket, Ticket, OpssAlert }
+     }
 </script>
 
 <style>
