@@ -5,7 +5,7 @@
                <img src="@/assets/images/icons/accordionIcon.svg" alt="" :class="accordionOpen ? 'transform rotate-180 transition-all duration-300 ease-in-out': ''">
           </button>
           <div :class="accordionOpen ? 'max-h-screen transition-all duration-300 ease-in-out': 'max-h-0 overflow-hidden'">
-               <p class="text-base text-blackPrimary font-normal leading-6 py-4">{{details}}</p>
+               <p class="text-sm text-blackLight font-normal py-4" v-html="details"></p>
           </div>
      </div>
 </template>

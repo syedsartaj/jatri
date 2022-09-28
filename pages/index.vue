@@ -25,26 +25,20 @@
           </div>
 
           <div class="mt-[60px] flex justify-between gap-x-[95px]">
-            <div>
+            <div class="p-4 w-[340px]">
               <img src="@/assets/images/home/fluency-two-tickets.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Smooth Ticketing Service</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Viverra semper pharetra eu tellus mi volutpat a non augue. Faucibus nulla
-                dictum erat tristique nam habitasse nunc.</p>
+              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Ease on the move</h2>
+              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Tickets are available on the go through our platform, no more queues!</p>
             </div>
-            <div>
+            <div class="p-4 w-[340px]">
               <img src="@/assets/images/home/fluency-red-bus.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Smooth Ticketing Service</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Viverra semper pharetra eu tellus mi volutpat a non augue. Faucibus nulla
-                dictum erat tristique nam habitasse nunc.</p>
+              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Promise of convenient travel</h2>
+              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">We have an excellent system of taking service based on preference, as there is ticketing service for multiple routes via different categories of buses.</p>
             </div>
-            <div>
+            <div class="p-4 w-[340px]">
               <img src="@/assets/images/home/casual-life-sale-badge.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Smooth Ticketing Service</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Viverra semper pharetra eu tellus mi volutpat a non augue. Faucibus nulla
-                dictum erat tristique nam habitasse nunc.</p>
+              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Reliability assured</h2>
+              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Whether you are traveling for work or leisure, book your tickets through us and keep all your worries away.</p>
             </div>
           </div>
         </div>
@@ -207,19 +201,30 @@
         <div class="w-[710px]">
           <Accordion
             :heading="'How to buy Tickets via website!?'"
-            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+            :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 
+                        <br><br>Secondly, you will have to select your location, where to go, which kind of bus you need and the date of your journey. Then click the “book now” option and fill-up all the information. After making the payment process you will get your tickets.
+                      `"
           />
           <Accordion
             :heading="'Payment details- bKash, Nagad, Bank Cards, Online Banking'"
-            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+            :details="`The Payment can be done through Nagad, bKash, visa cards or master cards. If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e., there is no transaction ID or tickets booked/reserved by the mobile number of the mobile payment account, he can claim for refund in the similar procedure as above, without the ticket number. Such refunds will be given 7 business days (excluding Friday and Saturday) AFTER the event/trip has taken place. This is applicable for eid times also.
+                        <br><br>If a customer has made an excess or less payment for a ticket accidentally, he is eligible for refund but he must claim for the refund within 24 hours of making the payment. 
+                        <br><br>If a customer has reserved a ticket and made a payment, however, for some reason, the ticket purchase process was not successful and a ticket was not issued, a customer can claim refund as per the policy above. Ticket number is not required, but mobile # used for booking and other information are required. For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile payment company which will be deducted from the eligible refund amount. Similar conditions will apply if the bank charges any such additional fee. 
+                        <br><br>In case of card payments, the last 4 digits of the card type of card is also needed. It is to be noted that for reasons beyond Jatri.co’s control, card payment may sometimes require time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
+                        <br><br>In case of BKash payments, a full mobile number will be required. It is to be noted that for reasons beyond Jatri.co’s control, payment may require some time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
+                      `"
           />
           <Accordion
             :heading="'24/7 Customer Service- 09642080808'"
-            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+            :details="`The customer service team of Jatri services Ltd. is open 24/7. For any kind of help or queries or questions, you can call the custom service number 09642080808.`"
           />
           <Accordion
             :heading="'Ticket Cancellation Procedures'"
-            :details="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum arcu nullam sed diam aliquet proin sed sollicitudin. Amet, in quis sit felis consectetur quis dictumst dictumst. Consequat, imperdiet ut viverra neque. Ornare vel et quis blandit justo, nunc vel netus massa.'"
+            :details="`There are few cancellation policies. <span class='text-blackPrimary font-medium'>Auto cancellation</span> will happen if the customer fails to report at the reporting station before the departure time. If the customer <span class='text-blackPrimary font-medium'>fails to pay</span> the full amount that mentioned in the screen will not get the activated tickets. To be eligible for refund, customers need to cancel the ticket from jatri.co before the applicable time before the departure. And must report the cancelation to the support center (i.e Call 09642080808 or email to support@jatri.co) of Jatri.co.
+                        <br><br>Only <span class='text-blackPrimary font-medium'>during Eid time</span>, customers are eligible for refund ONLY if the operator cancels the trip and cannot provide an alternative arrangement. 
+                        <br><br>(<span class='text-blackPrimary font-medium'>Note</span>: Terms and conditions of refund policy might update or change from time to time without any notice).
+                        <br><br><span class='text-blackPrimary font-medium'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself. Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise. Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes. For mobile payments customers must complete payment and also verify transactions within this stipulated time. During Eid sales month, Jatri.co will not do any verification on behalf of the customers.
+                      `"
           />
         </div>
       </div>

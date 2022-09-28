@@ -1,7 +1,7 @@
 <template>
   <div class="bg-corporateBg">
     <Header/>
-    <NuxtPage />
+    <!-- <NuxtPage/> -->
     <Footer/>
   </div>
 </template>
