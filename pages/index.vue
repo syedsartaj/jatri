@@ -3,42 +3,52 @@
 
     <!-- banner section -->
     <div class="relative">
-      <img src="@/assets/images/home/bannerImageWeb.svg" alt="" class="w-full">
-      <div class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px]  z-40">
-        <div>
-          <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Ticketing made easy!</h2>
-          <h4 class="mt-4 text-xl text-blackSecondery leading-7 font-medium">Buy tickets online hassle-free.</h4>
+      <img src="@/assets/images/home/bannerImageWeb.svg" alt="" class="w-full hidden md:block">
+      <img src="@/assets/images/home/bannerImageMobile.svg" alt="" class="w-full block md:hidden">
+      
+      <div class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px] z-40 hidden md:block">
+        <div class="">
+          <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Book your Journey NOW!!!</h2>
+          <h4 class="mt-4 text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
         </div>
       </div>
+
+      <div class="absolute top-[59px] right-4 left-4 block md:hidden">
+        <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book your Journey NOW!!!</h2>
+        <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
+        <div class="mt-[59px] bg-white w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
+          <SearchFilterFormMobile/>
+        </div>
+      </div>
     </div>
 
     <!-- why choose section -->
-    <div class="pt-20 px-[100px] pb-[100px] flex justify-center">
-      <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-[72px] pb-20">
+    <div class="pt-80 md:pt-20 px-4 md:px-[100px] pb-[100px] flex justify-center">
+      <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-4 md:px-[72px] pb-20">
         <div>
           <div class="">
-            <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Why Choose us</h2>
-            <img src="@/assets/images/home/curveBorder.svg" alt="" class="w-[298px]block mx-auto">
+            <h2 class="text-2xl md:text-4xl text-blackPrimary text-center font-semibold md:leading-[44px]">Why Choose Jatri</h2>
+            <img src="@/assets/images/home/curveBorder.svg" alt="" class="w-[203px] md:w-[298px] block mx-auto">
           </div>
 
-          <div class="mt-[60px] flex justify-between gap-x-[95px]">
-            <div class="p-4 w-[340px]">
+          <div class="mt-[60px] flex flex-wrap justify-between md:gap-x-[95px]">
+            <div class="md:p-4 md:w-[340px]">
               <img src="@/assets/images/home/fluency-two-tickets.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Ease on the move</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Tickets are available on the go through our platform, no more queues!</p>
+              <h2 class="text-base md:text-2xl text-blackPrimary md:leading-8 font-medium mt-8">Ease on the move</h2>
+              <p class="text-sm md:text-base text-blackSecondery md:leading-6 font-normal mt-4">Tickets are available on the go through our platform, no more queues!</p>
             </div>
-            <div class="p-4 w-[340px]">
+            <div class="md:p-4 md:w-[340px] mt-8 md:mt-0">
               <img src="@/assets/images/home/fluency-red-bus.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Promise of convenient travel</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">We have an excellent system of taking service based on preference, as there is ticketing service for multiple routes via different categories of buses.</p>
+              <h2 class="text-base md:text-2xl text-blackPrimary md:leading-8 font-medium mt-8">Promise of convenient travel</h2>
+              <p class="text-sm md:text-base text-blackSecondery md:leading-6 font-normal mt-4">We have an excellent system of taking service based on preference, as there is ticketing service for multiple routes via different categories of buses.</p>
             </div>
-            <div class="p-4 w-[340px]">
+            <div class="md:p-4 md:w-[340px] mt-8 md:mt-0">
               <img src="@/assets/images/home/casual-life-sale-badge.svg" alt="" class="w-[66px]">
-              <h2 class="text-2xl text-blackPrimary leading-8 font-medium mt-8">Reliability assured</h2>
-              <p class="text-base text-blackSecondery leading-6 font-normal mt-4">Whether you are traveling for work or leisure, book your tickets through us and keep all your worries away.</p>
+              <h2 class="text-base md:text-2xl text-blackPrimary md:leading-8 font-medium mt-8">Reliability assured</h2>
+              <p class="text-sm md:text-base text-blackSecondery md:leading-6 font-normal mt-4">Whether you are traveling for work or leisure, book your tickets through us and keep all your worries away.</p>
             </div>
           </div>
         </div>
@@ -237,7 +247,7 @@
 </template>
 
 <script>
-import SearchFilterForm from '../components/SerachForm/SearchFilterForm.vue';
+import SearchFilterForm from '../components/SearchForm/SearchFilterForm.vue';
 import HowToBuyModal from '../components/Modal/HowToBuyModal.vue';
 import Accordion from '../components/Accordion/Accordion.vue';
 import SlideLeft from '../components/Svg/SlideLeft.vue';

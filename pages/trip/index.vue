@@ -35,7 +35,7 @@
 <script>
 import ModifyFilter from '~~/components/TripFilter/ModifyFilter.vue';
 import SingleTrip from '~~/components/Trip/SingleTrip.vue';
-import SearchFilterForm from '~~/components/SerachForm/SearchFilterForm.vue';
+import SearchFilterForm from '~~/components/SearchForm/SearchFilterForm.vue';
 import OpssAlert from '~~/components/Alerts/OpssAlert.vue';
 export default {
     components: { ModifyFilter, SingleTrip, SearchFilterForm, OpssAlert }

@@ -301,7 +301,7 @@
 </template>
 
 <script>
-import SelectOption from "../SerachForm/SelectOption.vue";
+import SelectOption from "../SearchForm/SelectOption.vue";
 export default {
     data() {
         return {

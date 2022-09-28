@@ -23,7 +23,7 @@
                          autofocus
                     />
                </div>
-               <ul class='overflow-y-auto divide-y divide-dashed h-[344px] text-sm xl:text-md text-td_text px-4'>
+               <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-[344px] text-sm xl:text-md text-td_text px-4'>
                     <li class='cursor-pointer font-inter py-[14px] font-medium text-corporate hover:text-corporate relative' @click='selectOption()'>
                          Dhaka
                          <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
