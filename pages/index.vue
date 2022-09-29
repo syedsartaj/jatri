@@ -119,77 +119,77 @@
     </div>
 
     <!-- most popular route section -->
-    <div class="bg-successLight py-[60px] px-[100px]">
-      <div class="flex flex-wrap justify-start gap-x-[103px]">
-        <div class="w-full md:w-1/2">
-          <img src="@/assets/images/home/most-popular-route.svg" alt="">
-          <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">Our most <br> popular routes</h2>
+    <div class="bg-successLight py-10 md:py-[60px] px-4 md:px-[100px]">
+      <div class="md:flex justify-start gap-x-[103px]">
+        <div class="w-full md:w-1/2 flex justify-between items-center md:block">
+          <img src="@/assets/images/home/most-popular-route.svg" alt="" class="order-last md:order-first w-16 md:w-[140px]">
+          <h2 class="text-2xl md:text-[45px] md:leading-[52px] text-blackPrimary font-medium md:font-semibold md:mt-8 order-first md:order-last">Our most <br> popular routes</h2>
         </div>
-        <div class="w-full md:w-1/2">
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Rangpur</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Rangpur</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Barishal</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Barishal</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Kuakata</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Kuakata</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Noagaon</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Noagaon</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Bogura</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Bogura</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Sunamganj</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Sunamganj</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB]">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Sylhet</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Sylhet</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Chittagong</p>
-            </div>
-          </div>
-          <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Coxs Bazar</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Khulna to Kuakata</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Chittagong</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Khulna to Barishal</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Dhaka to Coxs Bazar</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Sathkhira to Barishal</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Khulna to Kuakata</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Sathkhira to Kuakata</p>
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Khulna to Barishal</p>
+            </div>
+            <div class="flex justify-start gap-x-[10px] w-1/2">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Sathkhira to Barishal</p>
+            </div>
+          </div>
+          <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
+            <div class="flex justify-start gap-x-[10px] w-1/2">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
+              <p class="text-sm md:text-base text-blackPrimary font-normal py-4 md:py-5">Sathkhira to Kuakata</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
               <!-- <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
