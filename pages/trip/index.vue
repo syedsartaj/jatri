@@ -17,9 +17,19 @@
                          </div>
                          <p class=" text-[11px] leading-4 font-normal text-blackSecondery"><span>18 May 2022</span>, <span>4</span> People, <span>Non A/C</span></p>
                     </div>
-                    <button class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
+                    <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
                </div>
           </div>
+
+          <button @click="handleTripFilterModal" class="w-[98px] md:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-4 rounded-full">
+               <img src="@/assets/images/icons/filterIcon.svg" alt="">
+               <p>Filter</p>
+          </button>
+          
+          <div class="block md:hiddden" v-if="tripFilterModify">
+               <TripFilterModal :close="handleTripFilterModal"/>
+          </div>
+
     </div>
 
      <!-- Available Trip Section -->
@@ -39,6 +49,7 @@
                <SingleTrip/>
           </div>
      </div>
+
      <!-- error layout -->
      <div class="h-[800px] flex justify-center items-center bg-[#f7f7f7]">
           <!-- <TripNotFound/> -->
@@ -47,6 +58,8 @@
                :customStyle="'px-[92.5px]'"
           />
      </div>
+
+
 </template>
 
 <script>
@@ -54,8 +67,24 @@ import ModifyFilter from '~~/components/TripFilter/ModifyFilter.vue';
 import SingleTrip from '~~/components/Trip/SingleTrip.vue';
 import SearchFilterForm from '~~/components/SearchForm/SearchFilterForm.vue';
 import OpssAlert from '~~/components/Alerts/OpssAlert.vue';
+import TripFilterModal from '~~/components/Modal/TripFilterModal.vue';
 export default {
-    components: { ModifyFilter, SingleTrip, SearchFilterForm, OpssAlert }
+     data(){
+          return {
+               tripFilterModify : false,
+          }
+     },
+
+     components: { ModifyFilter, SingleTrip, SearchFilterForm, OpssAlert, TripFilterModal },
+
+     methods: {
+          modifySearch(){
+               window.location.href = "/";
+          },
+          handleTripFilterModal() {
+               this.tripFilterModify = !this.tripFilterModify
+          },
+     }
 }
 </script>
 
