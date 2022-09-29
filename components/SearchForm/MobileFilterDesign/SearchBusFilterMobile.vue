@@ -1,6 +1,6 @@
 <template>
      <div class="">
-          <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-[348px] px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
+          <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
                <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
                     <img src="@/assets/images/icons/searchTypeIcon.svg" alt="">
                     <p class="text-xs font-normal text-blackSecondery text-left"> BUS TYPE </p>
@@ -9,7 +9,7 @@
           </button>
 
           <!-- dropdown -->
-          <div v-if='optionsIsOpen' class='mt-2 w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2'>
+          <div v-if='optionsIsOpen' class='mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2'>
                <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-[174px] text-sm xl:text-md text-td_text px-4'>
                     <li class='cursor-pointer font-inter py-[14px] font-medium text-corporate hover:text-corporate relative' @click='selectOption()'>
                          AC

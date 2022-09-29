@@ -1,6 +1,6 @@
 <template>
      <div class="">
-          <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-[348px] px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
+          <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
                <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
                     <img src="@/assets/images/icons/fromStoppageIcon.svg" alt="">
                     <p class="text-xs font-normal text-blackSecondery text-left"> From city or your location </p>
@@ -9,7 +9,7 @@
           </button>
 
           <!-- dropdown -->
-          <div v-if='optionsIsOpen' class='mt-2 w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2'>
+          <div v-if='optionsIsOpen' class='mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2'>
                <div class='flex justify-center items-center p-2'>
                     <input
                          id="searchInput"

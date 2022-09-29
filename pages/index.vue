@@ -19,7 +19,7 @@
       <div class="absolute top-[59px] right-4 left-4 block md:hidden">
         <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book your Journey NOW!!!</h2>
         <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
-        <div class="mt-[59px] bg-white w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
+        <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
           <SearchFilterFormMobile/>
         </div>
       </div>
@@ -201,14 +201,14 @@
     </div>
 
     <!-- Help Section -->
-    <div class="p-[100px] md:flex md:justify-center">
-      <div class="flex flex-wrap justify-between gap-x-8">
+    <div class="p-4 md:p-[100px]">
+      <div class="flex flex-wrap justify-between items-start gap-x-8">
         <div>
           <img src="@/assets/images/home/helpImage.svg" alt="">
-          <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">How can we help you?</h2>
+          <h2 class="text-[32px] leading-10 md:text-[45px] md:leading-[52px] text-blackPrimary font-medium md:font-semibold mt-6 md:mt-8">How can we help you?</h2>
           <p class="text-blackLight text-sm leading-5 font-normal mt-4">Still need help? <span class="text-corporate underline"><NuxtLink href="https://jatri.co/contact-us" class="">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block w-[5.19px] ml-[5.48px]"></span></p>
         </div>
-        <div class="w-full md:w-[710px]">
+        <div class="w-full md:w-[710px] mt-6 md:mt-0">
           <Accordion
             :heading="'How to buy Tickets via website!?'"
             :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 
