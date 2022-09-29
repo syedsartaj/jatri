@@ -101,19 +101,19 @@
 
     <!-- Available Bus operatior Section -->
     <div class="p-4 md:p-[100px] pt-0 flex justify-center">
-      <div class="busOperatorbg rounded-[30px] px-[60px] py-10 w-full">
-        <p class="text-center font-normal text-xl text-blackPrimary leading-7">Plenty of options to choose</p>
-        <h2 class="text-center font-semibold text-4xl text-[#1E88E5] leading-[44px] mt-2">Available Bus Operators</h2>
+      <div class="busOperatorbg rounded-[30px] px-4 md:px-[60px] py-7 md:py-10 w-full">
+        <p class="text-center font-normal text-sm md:text-xl text-blackPrimary">Plenty of options to choose</p>
+        <h2 class="text-center font-medium md:font-semibold text-2xl md:text-4xl md:leading-[44px] text-[#1E88E5] mt-2">Available Bus Operators</h2>
 
-        <div class="grid grid-cols-4 gap-x-[77px] gap-y-4 mt-8">
-          <p class="text-base text-blackPrimary font-normal leading-6">Euro Coach</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">SB paribahan</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Greenline</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Pingky Paribahan</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Lucky Express</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Mimjaal Paribahan</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Shah Fateh Ali</p>
-          <p class="text-base text-blackPrimary font-normal leading-6">Much more to come</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-[77px] gap-y-6 md:gap-y-4 mt-8">
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Euro Coach</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">SB paribahan</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Greenline</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Pingky Paribahan</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Lucky Express</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Mimjaal Paribahan</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Shah Fateh Ali</p>
+          <p class="text-xs md:text-base md:leading-6 text-blackPrimary font-normal">Much more to come</p>
         </div>
       </div>
     </div>
