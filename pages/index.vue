@@ -26,7 +26,7 @@
     </div>
 
     <!-- why choose section -->
-    <div class="pt-80 md:pt-20 px-4 md:px-[100px] pb-[100px] flex justify-center">
+    <div class="pt-80 md:pt-20 px-4 md:px-[100px] pb-[100px]">
       <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-4 md:px-[72px] pb-20">
         <div>
           <div class="">
@@ -56,19 +56,19 @@
     </div>
 
     <!-- Booking ticket section -->
-    <div class="relative">
-      <img src="@/assets/images/home/buyTicketBannerWeb.svg" alt="" class="w-full">
-      <div class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px] z-40">
+    <div class="relative mx-4 md:px-0">
+      <img src="@/assets/images/home/buyTicketBannerWeb.svg" alt="" class="hidden md:block w-full">
+      <img src="@/assets/images/home/buyTicketBannerMobile.svg" alt="" class="block md:hidden w-full">
+      <div class="w-[296px] md:w-[515px] absolute top-10 md:top-[130px] left-6 md:left-[100px] z-40">
         <div>
-          <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px]">Booking ticket just got <br> more
-            easier and fun <br> with Jatri.</h2>
-          <button @click="handleHowToBuyModal" class="bg-corporate text-white px-8 py-5 text-xl leading-7 font-semibold mt-8 rounded-full">How to buy ticket</button>
+          <h2 class="text-[28px] md:text-[45px] leading-[36px] md:leading-[52px] text-blackPrimary font-medium md:font-semibold">Booking ticket just got more easier and fun with Jatri.</h2>
+          <button @click="handleHowToBuyModal" class="bg-corporate text-white px-6 md:px-8 py-[10px] md:py-5 text-sm md:text-xl font-semibold mt-4 md:mt-8 rounded-full">How to buy ticket</button>
         </div>
       </div>
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-[100px] flex justify-center">
+    <div class="p-4 md:p-[100px] flex justify-center">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden">
         <div class="flex justify-between items-center pt-[56px] px-[60px]">
           <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Offers & Promos</h2>
@@ -100,7 +100,7 @@
     </div>
 
     <!-- Available Bus operatior Section -->
-    <div class="p-[100px] pt-0 flex justify-center">
+    <div class="p-4 md:p-[100px] pt-0 flex justify-center">
       <div class="busOperatorbg rounded-[30px] px-[60px] py-10 w-full">
         <p class="text-center font-normal text-xl text-blackPrimary leading-7">Plenty of options to choose</p>
         <h2 class="text-center font-semibold text-4xl text-[#1E88E5] leading-[44px] mt-2">Available Bus Operators</h2>
@@ -120,75 +120,75 @@
 
     <!-- most popular route section -->
     <div class="bg-successLight py-[60px] px-[100px]">
-      <div class="flex justify-start gap-x-[103px]">
-        <div class="w-1/2">
+      <div class="flex flex-wrap justify-start gap-x-[103px]">
+        <div class="w-full md:w-1/2">
           <img src="@/assets/images/home/most-popular-route.svg" alt="">
           <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">Our most <br> popular routes</h2>
         </div>
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Rangpur</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Barishal</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Kuakata</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Noagaon</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Bogura</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Sunamganj</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB]">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Sylhet</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Chittagong</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Coxs Bazar</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Khulna to Kuakata</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Khulna to Barishal</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Sathkhira to Barishal</p>
             </div>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
             <div class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Sathkhira to Kuakata</p>
             </div>
             <div class="flex justify-start gap-x-[10px] w-1/2">
@@ -201,14 +201,14 @@
     </div>
 
     <!-- Help Section -->
-    <div class="p-[100px] flex justify-center">
-      <div class="flex justify-between gap-x-8">
+    <div class="p-[100px] md:flex md:justify-center">
+      <div class="flex flex-wrap justify-between gap-x-8">
         <div>
           <img src="@/assets/images/home/helpImage.svg" alt="">
           <h2 class="text-[45px] text-blackPrimary font-semibold leading-[52px] mt-8">How can we help you?</h2>
           <p class="text-blackLight text-sm leading-5 font-normal mt-4">Still need help? <span class="text-corporate underline"><NuxtLink href="https://jatri.co/contact-us" class="">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block w-[5.19px] ml-[5.48px]"></span></p>
         </div>
-        <div class="w-[710px]">
+        <div class="w-full md:w-[710px]">
           <Accordion
             :heading="'How to buy Tickets via website!?'"
             :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 

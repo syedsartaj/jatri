@@ -1,19 +1,19 @@
 <template>
      <div class="relative z-[1000]">
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+          <div class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"></div>
 
           <div class="fixed inset-0 z-10 overflow-y-auto">
-               <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
-                         <div class="bg-white p-6">
+               <div class="flex min-h-full items-end justify-center md:p-4 text-center sm:items-center sm:p-0">
+                    <div class="relative transform overflow-hidden md:rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
+                         <div class="bg-white p-4 md:p-6">
                               <div class="flex justify-between">
-                                   <p class="text-blackPrimary text-[28px] leading-9 font-medium">How to buy ticket</p>
+                                   <p class="text-blackPrimary text-base md:text-[28px] md:leading-9 font-medium">How to buy ticket</p>
                                    <button @click="close">
                                         <img src="@/assets/images/icons/closeIcon.svg" alt=""/>
                                    </button>
                               </div>
                               <hr class="my-4">
-                              <div class="w-[752px] h-[436px] overflow-hidden rounded-[10px]">
+                              <div class="w-[380px] md:w-[752px] h-60 md:h-[436px] overflow-hidden rounded-[10px] md:rounded-[14px]">
                                    <iframe
                                         style="height: 100%; width: 100%"
                                         src="https://www.youtube.com/embed/UnmgrByrDmU" 
