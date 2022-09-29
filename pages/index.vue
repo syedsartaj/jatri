@@ -70,31 +70,31 @@
     <!-- Offer & Promos Section -->
     <div class="p-4 md:p-[100px] flex justify-center">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden">
-        <div class="flex justify-between items-center pt-[56px] px-[60px]">
-          <h2 class="text-4xl text-blackPrimary text-center font-semibold leading-[44px]">Offers & Promos</h2>
+        <div class="flex justify-between items-center pt-6 md:pt-[56px] px-[18px] md:px-[60px]">
+          <h2 class="text-2xl md:text-4xl md:leading-[44px] text-blackPrimary text-center font-medium md:font-semibold">Offers & Promos</h2>
 
           <div class="flex justify-between gap-x-4">
-            <button @click="scrollLeft" class="rounded-full border w-10 h-10 flex justify-center items-center" :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
-             <SlideLeft
+            <button @click="scrollLeft" class="rounded-full border w-[28px] md:w-10 h-[28px] md:h-10 flex justify-center items-center" :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
+              <SlideLeft
                 :fill="slideLeft ? '#151414' : '#8D8D8F'"
                 width="10"
                 height="24"
-             />
+              />
             </button>
-            <button @click="scrollRight" class="rounded-full border w-10 h-10 flex justify-center items-center" :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
-             <SlideRight
+            <button @click="scrollRight" class="rounded-full border w-[28px] md:w-10 h-[28px] md:h-10 flex justify-center items-center" :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
+              <SlideRight
                 :fill="slideRight ? '#151414' : '#8D8D8F'"
                 width="10"
                 height="24"
-             />
+              />
             </button>
           </div>
         </div>
-        <div class="flex justify-between gap-x-6 overflow-x-auto py-[56px] pl-[60px] sliderContainer scroll-smooth">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[460px]">
-          <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[460px]">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[460px]">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[460px]">
+        <div class="flex justify-between gap-x-2 md:gap-x-6 overflow-x-auto py-5 md:py-[56px] pl-[18px] md:pl-[60px] sliderContainer scroll-smooth">
+          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] md:w-[460px]">
+          <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] md:w-[460px]">
+          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] md:w-[460px]">
+          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] md:w-[460px]">
         </div>
       </div>
     </div>
