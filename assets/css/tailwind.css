@@ -5,8 +5,8 @@
 
 @layer base{
      @font-face {
-       font-family: "Inter";
-       src: url("../fonts/Inter-Medium.otf");
+          font-family: "Inter";
+          src: url("../fonts/Inter-Medium.otf");
      }
      body {
           @apply font-inter;
@@ -14,7 +14,7 @@
 }
 
 .header {
-     @apply bg-white px-4 md:px-[100px] py-4 flex justify-between sticky top-0 z-50;
+     @apply bg-white px-4 md:px-[100px] py-[21px] md:py-4 flex justify-between sticky top-0 z-50;
 }
 
 .footer{

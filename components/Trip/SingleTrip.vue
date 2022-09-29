@@ -1,37 +1,53 @@
 <template>
      <div class="bg-white border border-[#ededed] rounded-[10px] mb-4">
-          <div class="flex justify-between gap-x-6" :class="selected ? 'border-b': 'border-0'">
-               <div class="w-4/5 py-5 pl-6 divide-y divide-dashed divide-[#DBDBDB]">
-                    <div class="flex justify-start gap-x-4 items-center pb-[15px]">
+          <div class="md:flex justify-between gap-x-6" :class="selected ? 'border-b border-[#DBDBDB]': 'border-0 border-[#DBDBDB]'">
+               <div class="w-full md:w-4/5 py-5 px-4 md:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] md:border-r md:border-[#DBDBDB]">
+                    <div class="flex justify-start gap-x-4 items-center pb-[15px] order-first">
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
                          <div>
-                              <h2 class="text-xl font-medium text-blackPrimary">Green Line Paribahan Limited</h2>
+                              <h2 class="text-xl font-medium text-blackPrimary">Green Line Paribahan</h2>
                               <p class="text-xs font-normal text-blackSecondery">AC Bus</p>
                          </div>
                     </div>
-                    <div class="flex justify-between py-[15px]">
+                    <div class="flex justify-between items-start py-[14px] order-last md:order-1">
                          <p class="text-xs font-normal text-blackSecondery">Route</p>
-                         <h2 class="text-sm font-medium text-blackPrimary">Dhaka - Comilla- Chittagong - Location - Location - Location</h2>
+                         <h2 class="text-sm font-medium text-blackPrimary text-right">Dhaka - Comilla- Chittagong - Location - Location - Location</h2>
                     </div>
-                    <div class="flex justify-between pt-[19px]">
+                    <div class="flex justify-between items-center py-4 order-1 md:order-last">
                          <p class="text-xs font-normal text-blackSecondery">Depatrure time</p>
                          <h2 class="text-base font-medium text-blackPrimary">06:45 PM</h2>
                     </div>
                </div>
-               <div class="h-[194px] w-[1px] bg-[#DBDBDB] mx-6 "></div>
-               <div class="w-1/5 py-5 pr-6">
-                    <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
-                    <h2 class="mt-[10px] text-xl font-semibold text-blackPrimary">1400 <span class="text-base">TK</span></h2>
-                    <p class="text-xs font-normal text-blackSecondery mt-1">Per ticket</p>
-                    <button @click="handleSeatView" class="w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 mt-[26px]"> {{selected ? 'Close seats' : 'View seats' }} <span><img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selected && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]"></span></button>
+               <!-- <div class="hidden md:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
+               <div class="block md:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
+
+               <div class="w-full md:w-1/5 py-4 md:py-5 px-4 md:px-0 md:pr-6 flex justify-between items-center md:items-start md:flex-col">
+                    <div class="hidden md:block">
+                         <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
+                         <h2 class="mt-[10px] text-xl font-semibold text-blackPrimary">1400 <span class="text-base">TK</span></h2>
+                         <p class="text-xs font-normal text-blackSecondery mt-1">Per ticket</p>
+                    </div>
+                    <div class="md:hidden flex justify-start gap-x-3">
+                         <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
+                         <div>
+                              <h2 class="mt-[10px] text-xl font-semibold text-blackPrimary">1400 <span class="text-base">TK</span></h2>
+                              <p class="text-xs font-normal text-blackSecondery mt-1">Per ticket</p>
+                         </div>
+                    </div>
+                    <button @click="handleSeatView" class="md:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 md:mt-[26px]"> 
+                         {{selected ? 'Close seats' : 'View seats' }} 
+                         <span>
+                              <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selected && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
+                         </span>
+                    </button>
                </div>
           </div>
 
           <!-- accordion start -->
           <div v-if="selected" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-4" :class="selected ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
-               <div class="flex justify-between">
+               <div class="flex flex-wrap justify-between">
                     <!-- Bus Design -->
-                    <div class="w-1/2 ">
+                    <div class="w-full md:w-1/2 ">
                          <div class="rounded-[10px] py-6 px-4 mr-6 bg-[#f7f7f7]">
                               <div class="flex justify-between border-t border-b border-dashed items-center p-2 mt-5 divide-x">
                               <div class="flex gap-2 justify-center items-center">
@@ -49,180 +65,182 @@
                          </div>
                          
                          <div class="p-5">
-                              <div class="flex justify-end items-end mt-2">
-                                   <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
-                              </div>
+                              <div class="pl-[31px]">
+                                   <div class="flex justify-end items-end mt-2">
+                                        <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
+                                   </div>
                               <!-- Seats here -->
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   <div class="flex justify-between gap-x-[30px] mt-6">
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button> </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                        <button>
+                                             <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
+                                        </button>
+                                   </div>
+                                   </div>
                               </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                              <div class="flex justify-between gap-x-[30px] pl-[31px] mt-6">
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button> </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                                   <button>
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                   </button>
-                              </div>
-                         </div>
                          </div>
                     </div>
 
-                    <div class="w-1/2 border-l pl-6">
+                    <div class="w-full md:w-1/2 border-l pl-6">
                          <!-- Trip Information -->
                          <div class="">
                               <SelectOption
