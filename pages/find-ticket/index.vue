@@ -1,6 +1,6 @@
 <template>
      <div class=" bg-[#f7f7f7]">
-          <div class="w-[816px] mx-auto py-[30px]">
+          <div class="w-[380px] lg:w-[816px] mx-auto py-[30px]">
                
                <FindTicket/>
 

@@ -4,10 +4,12 @@ export default defineNuxtConfig({
           title: "Jatri Ticket",
           meta: [
                { charset: "utf-8" },
-               { title: "Jatri Ticket" },
-               { name: "format-detection", content: "telephone=no" },
-               { hid: "description", name: "description", content: "" },
                { name: "viewport", content: "width=device-width, initial-scale=1" },
+               { hid: "description", name: "description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+               { hid: "keywords", name: "keywords", content: "bus ticket bd, bus ticket online, bus ticket price, bus ticket booking online" },
+               { hid: "og-title", name: "og:title", content: "Online bus tickets for everyone" },
+               { hid: "og-desc", name: "og:description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+               { name: "format-detection", content: "telephone=no" },
           ],
           link: [
                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
