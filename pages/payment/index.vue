@@ -1,72 +1,72 @@
 <template>
-     <div class="md:flex justify-between gap-x-5 py-4 md:py-8 px-4 md:px-[100px] bg-corporateBg">
-          <div class="w-full md:w-1/2">
+     <div class="lg:flex justify-between gap-x-5 py-4 lg:py-8 px-4 lg:px-[100px] bg-corporateBg">
+          <div class="w-full lg:w-1/2">
                <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
                     <div class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b">
                          <div class="bg-[#FEF2F0] rounded-full w-9 h-9 flex justify-center items-center">
                               <img src="@/assets/images/icons/ticket.svg" alt="" class="w-[15px]">
                          </div>
                          <div>
-                              <h2 class="text-corporate text-sm md:text-base font-medium">Dhaka - Chittagong</h2>
-                              <p class="text-blackLight text-xs md:text-sm font-normal mt-1">Green Line Paribahan, AC bus | Sat, 25 Sep 2022</p>
+                              <h2 class="text-corporate text-sm lg:text-base font-medium">Dhaka - Chittagong</h2>
+                              <p class="text-blackLight text-xs lg:text-sm font-normal mt-1">Green Line Paribahan, AC bus | Sat, 25 Sep 2022</p>
                          </div>
                     </div>
                     <div class="px-[14px] py-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Boarding point:</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">Amtoli Bus Stand</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Boarding point:</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">Amtoli Bus Stand</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Departure time:</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary"> 9:15 PM</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Departure time:</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary"> 9:15 PM</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Name:</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">Namzus Sakib</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Name:</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">Namzus Sakib</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Mobile number:</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">+08801708630439</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Mobile number:</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">+08801708630439</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Email address:</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">sakib.jatri@gmail.com</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Email address:</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">sakib.jatri@gmail.com</p>
                          </div>
                     </div>
                </div>
           </div>
-          <div class="w-full md:w-1/2">
+          <div class="w-full lg:w-1/2">
                <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
                     <div class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b">
                          <p class="text-base font-medium text-blackPrimary">Fare details</p>
                     </div>
                     <div class="px-[14px] pt-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Seat no</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">[D1],[D2],[D3],[D4],[E2],[J1],[H4]</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat no</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">[D1],[D2],[D3],[D4],[E2],[J1],[H4]</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Ticket price</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">5600</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Ticket price</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">5600</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Processing fee</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">240</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Processing fee</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">240</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 md:text-sm font-normal text-blackLight">Gateway fee</p>
-                              <p class="text-xs md:text-base font-medium text-blackPrimary">98</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Gateway fee</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">98</p>
                          </div>
                          <div class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed">
-                              <div class="px-4 py-[10px] bg-[#F7F7F7] w-[226px] md:w-[395px]"><span class="text-blackLight text-sm font-normal">BUS100</span></div>
+                              <div class="px-4 py-[10px] bg-[#F7F7F7] w-[226px] lg:w-[395px]"><span class="text-blackLight text-sm font-normal">BUS100</span></div>
 
                               <!-- Apply promo -->
-                              <!-- <button class="w-40 bg-[#FDF0F1] rounded-full text-xs md:text-base font-medium text-blackPrimary ">
+                              <!-- <button class="w-40 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary ">
                                    <p class="text-[#E0293B] text-xs font-medium">Apply promo</p>
                               </button> -->
 
                               <!-- removo promo -->
-                              <button class="flex justify-center items-center w-40 bg-[#FDF0F1] rounded-full text-xs md:text-base font-medium text-blackPrimary ">
+                              <button class="flex justify-center items-center gap-x-[11.76px] w-40 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary ">
                                    <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
                                    <p class="text-[#E0293B] text-xs font-medium">Remove promo</p>
                               </button>
@@ -98,14 +98,14 @@
 
                          <button @click="selectSSLGatway" class="flex justify-between items-center w-1/2 rounded-lg px-5 py-[15px] border" :class="selectSSLGatwayStatus ? 'bg-[#EFF7FD] border-[#1E88E5]' : 'bg-[#f7f7f7] border-[#f7f7f7]'">
                               <div class="flex flex-wrap justify-start items-center gap-x-3">
-                                   <div class="grid grid-cols-4 md:grid-cols-2 gap-x-[5.57px] md:gap-x-3 md:gap-y-[7px] order-last md:order-first">
+                                   <div class="grid grid-cols-4 lg:grid-cols-2 gap-x-[5.57px] lg:gap-x-3 lg:gap-y-[7px] order-last lg:order-first">
                                         <img src="@/assets/images/amex-logo.svg" alt="amex" class="w-5">
                                         <img src="@/assets/images/mastercard-logo.svg" alt="mastercard" class="w-[18px]">
                                         <img src="@/assets/images/visa-logo.svg" alt="visa" class="w-[21px]">
                                         <img src="@/assets/images/bkash-logo.svg" alt="bkash" class="w-[27px]">
                                    </div>
-                                   <div class="bg-[#D9D9D9] w-[1px] h-9 hidden md:block"></div>
-                                   <img src="@/assets/images/sslcommerz-logo.svg" alt="" class="mb-[6px] md:mb-0">
+                                   <div class="bg-[#D9D9D9] w-[1px] h-9 hidden lg:block"></div>
+                                   <img src="@/assets/images/sslcommerz-logo.svg" alt="" class="mb-[6px] lg:mb-0">
                               </div>
                               <img src="@/assets/images/icons/tik-blue.svg" alt="tik" :class="selectSSLGatwayStatus ? 'block':'hidden'">
                          </button>
@@ -120,11 +120,11 @@
                     Pay now
                </button>
 
-               <div class="text-center mt-4 md:mt-5">
+               <div class="text-center mt-4 lg:mt-5">
                     <p class="text-blackPrimary text-sm font-normal">By procedding you are agreeing with our <NuxtLink href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</NuxtLink></p>
                </div>
 
-               <div class="p-5 mt-8 border border-[#DBDBDB] rounded-lg md:hidden flex justify-start items-start gap-x-5">
+               <div class="p-5 mt-8 border border-[#DBDBDB] rounded-lg lg:hidden flex justify-start items-start gap-x-5">
                     <img src="@/assets/images/icons/phoneIconBlack.svg" alt="" class="mt-2">
                     <div>
                          <h2 class="text-base font-medium ">Having Trouble?</h2>

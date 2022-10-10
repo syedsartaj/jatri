@@ -1,94 +1,94 @@
 <template>
      <div class="border border-[#DBDBDB] rounded-md">
-          <div id="printTicket" style="width: 100%; overflow-x: auto; overflow-y: hidden; border-radius: 6px 6px 0 0;">
-               <div style="border-bottom: 1px solid #DBDBDB; background-color: #ffffff; ">
-                    <div style="background-color: #EFF7FD; padding: 15px 50px; display: flex; justify-content: start; align-items: center; column-gap: 12px;">
-                         <img src="@/assets/images/logo.svg" alt="jatri logo" style="width: 51px;">
-                         <div style="background-color: #D9D9D9; width: 1px; height: 24px;"></div>
-                         <h2 style="color: #151414; font-size: 20px; line-height: 28px; font-weight: 500;"><span>Green Line Paribahan</span></h2>
+          <div id="printTicket" class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
+               <div class="border-b border-[#DBDBDB] bg-white">
+                    <div class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]">
+                         <img src="@/assets/images/logo.svg" alt="jatri logo" class="w-10 lg:w-[51px]">
+                         <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
+                         <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">Green Line Paribahan</h2>
                     </div>
-                    <div style="padding: 24px;">
-                         <div style="display: flex; justify-content: space-between;">
-                              <div style="border-right: 1px solid #DBDBDB; width: 50%;">
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Name:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">MR FARDIN</p>
+                    <div class="p-3 lg:p-6">
+                         <div class="flex flex-col lg:flex-row justify-between divide-y lg:divide-y-0 lg:divide-x divide-[#DBDBDB]">
+                              <div class="w-full lg:w-1/2">
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">MR FARDIN</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Coach:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">[DHK-1801-B]</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Coach:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">[DHK-1801-B]</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width:50%; font-weight: 400; color: #4D4D4F; text-align: right;">Departure time:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">09:15 AM</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Departure time:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">09:15 AM</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Seat fare:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">2800 TK</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seat fare:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">2800 TK</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Seats:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">[D4], [D3]</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seats:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">[D4], [D3]</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">From:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Dhaka</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">From:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Dhaka</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Boarding:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Kalabagan</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Boarding:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Kalabagan</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Issued on:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">24 Mar 2021, 10:20 PM</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued on:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">24 Mar 2021, 10:20 PM</p>
                                    </div>
                               </div>
-                              <div style="width: 50%;">
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Req ID:</p>
-                                        <p style="width: 50%; padding-left: 10px;  font-weight: 500; color: #151414;">BX125J</p>
+                              <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Req ID:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">BX125J</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Journey date:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">20 Feb 2021</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Journey date:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">20 Feb 2021</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Reporting time</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">02:20 PM</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">02:20 PM</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">To:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Benapol</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">To:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Benapol</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Total fare:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">2800 TK</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">2800 TK</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Dropping:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Benapol</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Benapol</p>
                                    </div>
-                                   <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                                        <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Issued by:</p>
-                                        <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Jatri.co</p>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued by:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Jatri.co</p>
                                    </div>
                               </div>
                          </div>
                     </div>
                </div>
-               
           </div>
-          <div style="display: flex; justify-content: center; column-gap: 24px; background-color: #ffffff; padding: 20px; border-radius: 0 0 6px 6px;">
-               <button style="display: flex; justify-content: center; align-items: center; column-gap: 11.7px; font-size: 12px; line-height: 16px; font-weight: 500; color: #4D4D4F; background-color: #EDEDED; border-radius: 100px; width: 170px; padding: 12px;">
-                    <img src="@/assets/images/icons/cross-black.svg" alt="">
+
+          <div class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
+               <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
+                    <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
                     Cancel ticket
                </button>
-               <button style="display: flex; justify-content: center; align-items: center; column-gap: 11.7px; font-size: 12px; line-height: 16px; font-weight: 500; color: #48A43F; background-color: #F1F9F1; border-radius: 100px; width: 170px; padding: 12px;">
-                    <img src="@/assets/images/icons/download.svg" alt="">
+               <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
+                    <img src="@/assets/images/icons/download.svg" alt="" class="hidden lg:block">
                     Download ticket
                </button>
-               <button @click="printTicket('printTicket')" style="display: flex; justify-content: center; align-items: center; column-gap: 11.7px; font-size: 12px; line-height: 16px; font-weight: 500; color: #1E88E5; background-color: #EFF7FD; border-radius: 100px; width: 170px; padding: 12px;">
-                    <img src="@/assets/images/icons/print.svg" alt="">
+               <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4" @click="printTicket('printTicket')">
+                    <img src="@/assets/images/icons/print.svg" alt="" class="hidden lg:block">
                     Print ticket
                </button>
           </div>

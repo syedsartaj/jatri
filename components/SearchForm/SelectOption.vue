@@ -1,7 +1,7 @@
 <template>
   <div class="relative w-full">
     <div class="">
-      <h2 class="text-xs md:text-base font-medium text-blackPrimary"> {{ label }} </h2>
+      <h2 class="text-xs lg:text-base font-medium text-blackPrimary"> {{ label }} </h2>
       <button @click="toggleDropdown" class="z-10 block bg-[#f7f7f7] px-4 py-[13px] mt-[10px] w-full rounded focus:outline-none">
           <div class="flex justify-between items-center">
             <!-- <p v-if="selectedOption !== ''" class="text-blackPrimary text-sm font-normal">
