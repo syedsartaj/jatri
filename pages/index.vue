@@ -69,7 +69,7 @@
 
     <!-- Offer & Promos Section -->
     <div class="p-4 lg:p-[100px] flex justify-center">
-      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden">
+      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden w-[380px] lg:w-[1240px] h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
 
@@ -90,11 +90,28 @@
             </button>
           </div>
         </div>
-        <div class="flex justify-between gap-x-2 lg:gap-x-6 overflow-x-auto py-5 lg:py-[56px] pl-[18px] lg:pl-[60px] sliderContainer scroll-smooth">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-          <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-          <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
+        <!-- <div class="flex justify-between gap-x-2 lg:gap-x-6 py-5 lg:py-[56px] pl-[18px] lg:pl-[60px] sliderContainer scroll-smooth w-full">
+          <marquee behavior="alternative" direction="" class="w-full max-w-full flex flex-row">
+            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
+            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
+            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
+          </marquee>
+        </div> -->
+
+        <div class="scroll-parent my-5 lg:my-[56px] ml-[18px] lg:ml-[60px] h-full sliderContainer scroll-smooth">
+          <div class="scroll-element primary flex justify-between gap-x-2 lg:gap-x-6">
+              <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+          </div>
+          <div class="scroll-element secondary flex justify-between gap-x-2 lg:gap-x-6">
+              <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+          </div>
         </div>
       </div>
     </div>
@@ -271,12 +288,14 @@ export default {
       content.scrollLeft -= 200;
       this.slideLeft = true;
       this.slideRight = false;
+      console.log("left click", this.scrollLeft)
     },
     scrollRight() {
       let content = document.querySelector(".sliderContainer");
       content.scrollLeft += 200;
       this.slideRight = true;
       this.slideLeft = false;
+      console.log("right click", this.scrollRight)
     }
   }
 }
@@ -286,5 +305,45 @@ export default {
 .busOperatorbg {
   background-image: linear-gradient(102deg, #CFE6F9 12.78%, #E2FAFD 98.9%) !important;
   height: 100%;
+}
+
+.scroll-parent {
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.scroll-element {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+
+.primary {
+  animation: primary 10s linear infinite;
+}
+
+.secondary {
+  animation: secondary 10s linear infinite;
+}
+
+@keyframes primary {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes secondary {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0%;
+  }
 }
 </style>
