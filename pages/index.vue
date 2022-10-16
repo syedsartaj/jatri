@@ -101,16 +101,16 @@
 
         <div class="scroll-parent my-5 lg:my-[56px] ml-[18px] lg:ml-[60px] h-full sliderContainer scroll-smooth">
           <div class="scroll-element primary flex justify-between gap-x-2 lg:gap-x-6">
-              <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
           </div>
           <div class="scroll-element secondary flex justify-between gap-x-2 lg:gap-x-6">
-              <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-              <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
+            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
           </div>
         </div>
       </div>
