@@ -11,8 +11,8 @@ export default function ({ $axios, app }, inject) {
   })
 
   api.onRequest((config) => {
-    const token = process.env.DT_SECRET_KEY
-    api.setHeader('Authorization', `Bearer ${token}`)
+    const token = app.$auth.$storage.getCookie('pb_token')
+    api.setToken(token)
   })
 
   api.onError(async (error) => {

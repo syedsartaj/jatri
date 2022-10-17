@@ -121,7 +121,7 @@
                </button>
 
                <div class="text-center mt-4 lg:mt-5">
-                    <p class="text-blackPrimary text-sm font-normal">By procedding you are agreeing with our <NuxtLink href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</NuxtLink></p>
+                    <p class="text-blackPrimary text-sm font-normal">By procedding you are agreeing with our <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</a></p>
                </div>
 
                <div class="p-5 mt-8 border border-[#DBDBDB] rounded-lg lg:hidden flex justify-start items-start gap-x-5">

@@ -7,7 +7,7 @@
 </template>
    
 <script>
-import SomethingWentWrong from "./components/Alerts/SomethingWentWrong.vue";
+import SomethingWentWrong from "../components/Alerts/SomethingWentWrong.vue";
 export default {
   components: {SomethingWentWrong}
 }

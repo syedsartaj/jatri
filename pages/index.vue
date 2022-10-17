@@ -223,7 +223,7 @@
         <div>
           <img src="@/assets/images/home/helpImage.svg" alt="">
           <h2 class="text-[32px] leading-10 lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold mt-6 lg:mt-8">How can we help you?</h2>
-          <p class="text-blackLight text-sm leading-5 font-normal mt-4">Still need help? <span class="text-corporate underline"><NuxtLink href="https://jatri.co/contact-us" class="">Contact Us</NuxtLink> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block w-[5.19px] ml-[5.48px]"></span></p>
+          <p class="text-blackLight text-sm leading-5 font-normal mt-4">Still need help? <span class="text-corporate underline"><a href="https://jatri.co/contact-us" class="">Contact Us</a> <img src="@/assets/images/icons/contact-rightArrow.svg" alt="" class="inline-block w-[5.19px] ml-[5.48px]"></span></p>
         </div>
         <div class="w-full lg:w-[710px] mt-6 lg:mt-0">
           <Accordion

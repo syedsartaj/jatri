@@ -311,7 +311,7 @@
                          </button>
 
                          <div class="text-center mt-[20px]">
-                              <NuxtLink href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</NuxtLink>
+                              <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</a>
                          </div>
                     </div>
                </div>

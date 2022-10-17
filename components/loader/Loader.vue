@@ -6,7 +6,7 @@
       <!-- <p class="mt-10 text-3xl">Loading...</p> -->
 
       <div class=loader-container>
-        <img src="@/assets/images/icon/loader-icon.png" id="breathing-button" />
+        <img src="@/assets/images/icons/loader-icon.png" id="breathing-button" />
         <div class="loader"></div>
         <h5 class='loading-text'>Processing...</h5>
       </div>

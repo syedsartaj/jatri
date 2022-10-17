@@ -1,5 +1,4 @@
-import * as apis from '../helpers/apis';
-import {GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL} from '../helpers/apis';
+import * as apis from "../helpers/apis";
 
 export const state = () => ({
   gsLoading: false,
@@ -10,10 +9,6 @@ export const state = () => ({
   gsSeatArray: [],
   gsSeatBoardingPointArray: [],
   gsPaymentPendingBlockData: {},
-  ticketDetails: {},
-  searchedTicketList: {},
-  bookingInfoDetails: {},
-  promoCode: {},
 });
 
 export const getters = {
@@ -22,250 +17,193 @@ export const getters = {
   getGsCities: (state) => state.gsCities,
   getGsTrips: (state) => state.gsTrips,
   getGsSeatViewData: (state) => state.gsSeatViewData,
+  getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
   getGsPaymentPendingBlockData: (state) => state.gsPaymentPendingBlockData,
-  getTicketDetails: (state) => state.ticketDetails,
-  getSearchedTicketList: (state) => state.searchedTicketList,
-  getBookingInfoDetails: (state) => state.bookingInfoDetails,
-  getPromoCode: (state) => state.promoCode,
 };
 
 export const actions = {
-  async getPbAccessTokenAction ({ commit }, payload) {
+  async getPbAccessTokenAction({ commit }, payload) {
     try {
       const data = await this.$axios.$post(
         apis.GET_PARIBAHAN_TOKEN_URL,
         payload
       );
-      this.$auth.$storage.setCookie('pb_token', `Bearer ${data.access_token}`);
+      this.$auth.$storage.setCookie("pb_token", `Bearer ${data.access_token}`);
     } catch (error) {
       this.$errorToast({ message: error.response.data.message });
     }
   },
-  async getCitiesList ({ commit }) {
+  async getPbCityAction({ commit }) {
     try {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
-      commit('setGsCities', data);
+      // this.$successToast({
+      //   message: `${Object.values(data).length} cities found!`,
+      // });
+      commit("setGsCities", data);
     } catch (error) {
-      //this.$errorToast({ message: error.response ? error.response.data.message : error.message });
+      this.$errorToast({ message: error.response.data.message });
     }
   },
-  async getPbScheduleDataAction ({ commit }, payload) {
+  async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SCHEDULE_DATA_URL,
         payload
       );
-      if (data.trips) {
-        commit('setGsTrips', data.trips);
+      if (data) {
+        commit("setGsTrips", data);
       }
     } catch (error) {
       this.$errorToast({ message: error.response.data.message });
     }
   },
 
-  async getPbSeatViewAction ({ commit }, payload) {
+  async getPbSeatViewAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SEAT_VIEW_URL,
         payload
       );
-      commit('setGsSeatViewData', data);
-      commit('resetPromoCode');
+      commit("setGsSeatViewData", data);
     } catch (error) {
-      if(error.response && error.response.data.statusCode === 404) {
-        this.$errorToast({message: error.response.data.message})
-        window.location.reload(true)
-      }
       this.$errorToast({ message: error.response.data.message });
     }
   },
-
-  async TicketConfirmAction ({ commit }, payload) {
+  async getPbPaymentPendingBlockAction({ commit }, payload) {
     try {
-      commit('setGsLoading', true);
-      const { data } = await this.$api.$post(
-        apis.POST_CONFIRM_TICKET,
-        payload
-      );
-      commit('setGsLoading', false);
-      if(data && data.gatewayUrl) {
-        window.location.href = data.gatewayUrl;
-      }
-      return true;
-    } catch (error) {
-      commit('setGsLoading', false);
-      this.$errorToast({ message: error.response.data.message ?? 'Something went wrong' });
-      return false;
-    }
-  },
-
-  async getTicketByTnxId({commit}, payload) {
-    try {
-      const {data} = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
-      commit("setTicketDetails", data)
-    } catch (e) {
-      //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
-    }
-  },
-  async getBookingInfoByTnxId({commit}, payload) {
-    try {
-      const {data} = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
-      commit("setBookingInfoDetails", data)
-    } catch (e) {
-      //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
-    }
-  },
-
-  async getPbPaymentPendingBlockAction ({ commit }, payload) {
-    // try {
-    //   commit('setGsLoading', true);
-    //   const { data } = await this.$api.$post(
-    //     apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
-    //     payload
-    //   );
-    //   if (data) {
-    //     commit('setGsPaymentPendingBlockData', data);
-    //   } else {
-    //     this.$errorToast({ message: msg ?? 'Something went wrong!' });
-    //   }
-    //   commit('setGsLoading', false);
-    //   return true;
-    // } catch (error) {
-    //   commit('setGsLoading', false);
-    //   this.$errorToast({ message: error.response.data.message });
-    //   console.log(error.response.data)
-    //   return false;
-    // }
-
-    return new Promise((resolve, reject) => {
-      return this.$api.$post(
+      commit("setGsLoading", true);
+      const { data, flag, msg } = await this.$api.$post(
         apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
         payload
-      ).then(res => {
-        if (res.data) {
-          commit('setGsPaymentPendingBlockData', res.data);
-          resolve(res)
-        } else {
-          resolve(res)
-          this.$errorToast({ message: msg ?? 'Something went wrong!' });
-        }
-        commit('setGsLoading', false);
-      }).catch (error => {
-        commit('setGsLoading', false);
-        if (error.response) {
-          const {data} = error.response
-          resolve(data)
-        }
-        this.$errorToast({ message: error.response.data.message });
-      })
-    })
-
-  },
-  async successTicketByMailAction ({ commit }, payload) {
-    try {
-      commit('setGsLoading', true);
-      const { data } = await this.$axios.post('https://dev.sslpayment.jatri.co/ssl/ticket/success-ticket-by-mail', payload);
-      this.$successToast({ message: data.message });
-      commit('setGsLoading', false);
-      return true;
+      );
+      if (flag) {
+        commit("setGsPaymentPendingBlockData", data);
+      } else {
+        this.$errorToast({ message: msg ?? "Something went wrong!" });
+      }
+      commit("setGsLoading", false);
+      return flag;
     } catch (error) {
-      commit('setGsLoading', false);
+      commit("setGsLoading", false);
       this.$errorToast({ message: error.response.data.message });
-      return false;
+      return flag;
     }
   },
-  async searchTicketAction ({ commit }, payload) {
+  async getPbPaymentConfirmAction({ commit }, payload) {
     try {
-      commit('setGsLoading', true);
-      const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
-      commit('setSearchedTicketList', data.data)
-      this.$successToast({ message: data.message });
-      commit('setGsLoading', false);
-      return true;
-    } catch (error) {
-      commit('setGsLoading', false);
-      commit('setSearchedTicketList', [])
-      this.$errorToast({ message: error.response.data.message });
-      return false;
-    }
-  },
-  async cancelTicketAction ({ commit, state }, payload) {
-    try {
-      commit('setGsLoading', true);
-      const { data } = await this.$api.post(apis.GS_CANCEL_TICKET, payload);
-      let updatedTicketList = [];
-       updatedTicketList = state.searchedTicketList.tickets.map(ticket => {
-        if(data.data._id === ticket._id) {
-          return data.data;
-        }
-        return ticket
-      })
-      commit('setSearchedTicketList', {...state.searchedTicketList, tickets: updatedTicketList})
-      this.$successToast({ message: data.message });
-      commit('setGsLoading', false);
-      return true;
-    } catch (error) {
-      commit('setGsLoading', false);
-      this.$errorToast({ message: error.response.data.message });
-      return false;
-    }
-  },
-
-  async getPromoCodeAction({commit}, payload) {
-    // try {
-    //   const {data} = await this.$api.$post(apis.POST_PROMO_CODE_URL, payload)
-    //   commit("setPromoCode", data)
-    // } catch (e) {
-    //   //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
-    // }
-    return new Promise((resolve, reject) => {
-      return this.$api.$post(
-        apis.POST_PROMO_CODE_URL,
+      commit("setGsLoading", true);
+      const { data, flag, msg } = await this.$api.$post(
+        apis.POST_PARIBAHAN_CONFIRM_PAYMENT_URL,
         payload
-      ).then(res => {
-        if (res.data) {
-          commit('setPromoCode', res.data);
-          resolve(res)
-        } else {
-          resolve(res);
-          commit('resetPromoCode');
-          this.$errorToast({ message: msg ?? 'Something went wrong!' });
-        }
-      }).catch (error => {
-        if (error.response) {
-          const {data} = error.response
-          resolve(data)
-          this.$errorToast({ message: error.response.data.message });
-        }
-        commit('resetPromoCode');
-      })
-    })
+      );
+      if (flag) {
+        this.$successToast({ message: msg ?? "Ticket Purchase successfully!" });
+      } else {
+        this.$errorToast({ message: msg ?? "Something went wrong!" });
+      }
+      commit("setGsLoading", false);
+      return flag;
+    } catch (error) {
+      commit("setGsLoading", false);
+      this.$errorToast({ message: error.response.data.message });
+      return flag;
+    }
   },
+  async pbCancelPaymentPendingBlockAction({ commit }, payload) {
+    try {
+      commit("setGsLoadingTwo", true);
+      const { data, flag, msg } = await this.$api.$post(
+        apis.POST_PARIBAHAN_CANCEL_BOOKED_TICKET_URL,
+        payload
+      );
+      if (flag) {
+        this.$successToast({
+          message: msg ?? "Booked ticket cancel successfully!",
+        });
+      } else {
+        this.$errorToast({ message: msg ?? "Something went wrong!" });
+      }
+      commit("setGsLoadingTwo", false);
+      return flag;
+    } catch (error) {
+      commit("setGsLoadingTwo", false);
+      this.$errorToast({ message: error.response.data.message });
+      return flag;
+    }
+  },
+  async sslPaymentInitAction({ commit }, payload) {
+    try {
+      commit("setGsLoading", true);
+			const { data } = await this.$axios.post(apis.SSL_PAYMENT_INIT_URL, payload);
+			if (data.GatewayPageURL) {
+				window.location.replace(data.GatewayPageURL)
+			}
+      commit("setGsLoading", false);
+    } catch (error) {
+      commit("setGsLoading", false);
+      this.$errorToast({ message: error.response.data.message });
+    }
+	},
+	async cancelTicketRequest({ commit }, payload) {
+		try {
+      commit("setGsLoading", true);
+			const { data } = await this.$axios.post(apis.SSL_CANCEL_TICKET_REQUEST, payload);
+			this.$successToast({ message: data.message })
+			commit("setGsLoading", false);
+			return true
+    } catch (error) {
+      commit("setGsLoading", false);
+			this.$errorToast({ message: error.response.data.message });
+			return false
+    }
+	},
+	async sendMessageAction({ commit }, payload) {
+		try {
+      commit("setGsLoading", true);
+			const { data } = await this.$axios.post(apis.SSL_SMS_FOR_TICKET_SUCCESS, payload);
+			// this.$successToast({ message: data.message })
+			commit("setGsLoading", false);
+			return true
+    } catch (error) {
+      commit("setGsLoading", false);
+			this.$errorToast({ message: error.response.data.message });
+			return false
+    }
+	},
+	async successTicketByMailAction({ commit }, payload) {
+		try {
+      commit("setGsLoading", true);
+			const { data } = await this.$axios.post('https://dev.sslpayment.jatri.co/ssl/ticket/success-ticket-by-mail', payload);
+			this.$successToast({ message: data.message })
+			commit("setGsLoading", false);
+			return true
+    } catch (error) {
+      commit("setGsLoading", false);
+			this.$errorToast({ message: error.response.data.message });
+			return false
+    }
+	}
 };
 
 export const mutations = {
   setGsLoading: (state, data) => (state.gsLoading = data),
-  setSearchedTicketList: (state, data) => (state.searchedTicketList = data),
-  setTicketDetails: (state, data) => (state.ticketDetails = data),
-  setBookingInfoDetails: (state, data) => (state.bookingInfoDetails = data),
   setGsLoadingTwo: (state, data) => (state.gsLoadingTwo = data),
-  setGsCities: (state, data) => {
-    state.gsCities = data.cities.map(city => {
-      return {
-        'city_name': city
-      };
-    });
-  },
+  setGsCities: (state, data) => (state.gsCities = Object.values(data)),
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsSeatViewData: (state, data) => {
     state.gsSeatViewData = data;
-    state.gsSeatArray = data.seatPlan.seatList;
-    state.gsSeatBoardingPointArray = data.seatPlan.bordingPoints;
+    let gsSeatArray = new Array(+data.row_no)
+      .fill(null)
+      .map(() => new Array(+data.column_no).fill(null));
+
+    data.seatstructure_details.forEach((item) => {
+      gsSeatArray[item.x_axis - 1][item.y_axis - 1] = item;
+    });
+    state.gsSeatArray = gsSeatArray;
+    state.gsSeatBoardingPointArray = Object.values(data.bording_points);
   },
   setGsPaymentPendingBlockData: (state, data) =>
     (state.gsPaymentPendingBlockData = data),
-  setPromoCode: (state, data) => (state.promoCode = data),
-  resetPromoCode: (state) => (state.promoCode = {})
 };
