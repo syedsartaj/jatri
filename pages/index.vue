@@ -14,6 +14,8 @@
             <SearchFilterForm/>
           </div>
         </div>
+
+        
       </div>
 
       <div class="absolute top-[59px] right-4 left-4 block lg:hidden">
@@ -27,6 +29,8 @@
 
     <!-- why choose section -->
     <div class="pt-80 lg:pt-20 px-4 lg:px-[100px] pb-[100px]">
+      <p class="mt-10">fcsdtgdfg: {{env.PARIBAHAN_BASE_URL}}</p>
+
       <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-4 lg:px-[72px] pb-20">
         <div>
           <div class="">
@@ -269,6 +273,8 @@ import HowToBuyModal from '../components/Modal/HowToBuyModal.vue';
 import Accordion from '../components/Accordion/Accordion.vue';
 import SlideLeft from '../components/Svg/SlideLeft.vue';
 import SlideRight from '../components/Svg/SlideRight.vue';
+import { mapActions, mapGetters } from "vuex";
+import Cookies from "js-cookie";
 export default {
   components: { SearchFilterForm, HowToBuyModal, Accordion, SlideLeft, SlideRight },
   data(){
@@ -276,9 +282,21 @@ export default {
       howToBuyModalStatus : false,
       slideLeft : false,
       slideRight : false,
+      fromOption: "",
+      passengerCount: "",
+      activeTabIndex: 0,
     }
   },
+  computed: {
+    ...mapGetters("grantedseat", ["getGsLoading"]),
+  },
   methods: {
+    ...mapActions("grantedseat", [
+      "getPbAccessTokenAction",
+      "getCitiesList",
+      "successTicketByMailAction",
+    ]),
+
     handleHowToBuyModal() {
       this.howToBuyModalStatus = !this.howToBuyModalStatus
     },
@@ -296,6 +314,9 @@ export default {
       this.slideRight = true;
       this.slideLeft = false;
       console.log("right click", this.scrollRight)
+    },
+    async asyncData({store}) {
+      await store.dispatch("grantedseat/getCitiesList")
     }
   }
 }

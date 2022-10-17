@@ -1,8 +1,8 @@
 <template>
-     <div class="bg-[#f7f7f7]">
-          <Header/>
+     <div class="">
+          <!-- <Header/> -->
           <SomethingWentWrong/>
-          <Footer/>
+          <!-- <Footer/> -->
      </div>
 </template>
    

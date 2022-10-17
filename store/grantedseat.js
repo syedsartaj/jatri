@@ -41,6 +41,7 @@ export const actions = {
       // this.$successToast({
       //   message: `${Object.values(data).length} cities found!`,
       // });
+      console.log('data=>',data);
       commit("setGsCities", data);
     } catch (error) {
       this.$errorToast({ message: error.response.data.message });

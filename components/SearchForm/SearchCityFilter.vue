@@ -13,8 +13,7 @@
           <div v-if='optionsIsOpen' class='mt-[25px] -ml-5 xl:w-[380px] w-80 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
                <div class='text-center p-4'>
                     <h2 class='font-inter text-sm xl:text-[20px] font-[400]'>
-                         <span v-if='defaultOption'>{{ defaultOption }}</span>
-                         <span v-else>Select Your Location</span>
+                         <span>Select Your Location</span>
                     </h2>
                </div>
                <div class='flex justify-center items-center p-2'>
@@ -30,6 +29,10 @@
                     />
                </div>
                <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-[344px] text-sm xl:text-md text-td_text px-4'>
+                    <!-- <li class='cursor-pointer font-inter py-[14px] font-medium text-corporate hover:text-corporate relative' @click='selectOption(option)'>
+                         Dhaka
+                         <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
+                    </li> -->
                     <li 
                          v-for='(option, index) in filteredOptionsData' :key='index'
                          class='cursor-pointer font-inter py-[14px] font-normal hover:text-corporate relative'
@@ -91,7 +94,6 @@ export default {
 
      methods: {
           toggleDropdown () {
-               console.log('clicked');
                this.optionsIsOpen = !this.optionsIsOpen
                setTimeout(function(){document.getElementById('searchInput').focus()},10);
           },
@@ -112,7 +114,8 @@ export default {
      computed: {
           filteredOptionsData () {
                return this.options.filter(option => {
-               return option.city_name.toLowerCase().includes(this.searchKey.toLowerCase())
+                    console.log(option);
+                    return option.city_name.toLowerCase().includes(this.searchKey.toLowerCase())
                })
           }
      },

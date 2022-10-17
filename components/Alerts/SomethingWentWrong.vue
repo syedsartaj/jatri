@@ -1,5 +1,5 @@
 <template>
-     <div class="flex justify-center bg-[#f7f7f7] my-[75px]">
+     <div class="flex justify-center my-[75px]">
           <div class="w-[380px] lg:w-[458px]">
                <img src="@/assets/images/ErrorLayout.svg" alt="" class="w-[151.82px] lg:w-[189.78px] block mx-auto animate-animateZoom">
                <h2 class="text-center text-base lg:text-2xl font-medium text-blackPrimary mt-8">Something Went Wrong</h2>
