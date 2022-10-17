@@ -257,7 +257,7 @@
       </div>
     </div>
     <div v-if="howToBuyModalStatus">
-      <HowToBuyModal :close="handleHowToBuyModal"/>
+      <!-- <HowToBuyModal :close="handleHowToBuyModal"/> -->
     </div>
   </div>
 

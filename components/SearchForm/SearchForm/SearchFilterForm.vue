@@ -25,12 +25,12 @@
                 :allow-filter="false"
                 :options="coachTypes"
             />
-            <DatePicker
+            <!-- <DatePicker
                 v-model="departingDate"
                 :label="'Date'"
                 :default-option="'Select Date'"
                 :allow-filter="true"
-            />
+            /> -->
         </div>
         <div class="px-6 py-[15px] w-2/12 flex justify-center">
             <button

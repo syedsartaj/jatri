@@ -1,6 +1,6 @@
 <template>
      <div class="w-1/4 px-6 py-4">
-          <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
+          <button class="block rounded-lg bg-white focus:outline-none w-full" @click="toggleDropdown">
                <p v-if="label" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
                <p v-if="selectedOption !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ this.selectedOption.city_name }} </p>
                <p v-else class="text-base font-medium text-blackPrimary text-left"> 
@@ -91,7 +91,6 @@ export default {
 
      methods: {
           toggleDropdown () {
-               console.log('clicked');
                this.optionsIsOpen = !this.optionsIsOpen
                setTimeout(function(){document.getElementById('searchInput').focus()},10);
           },

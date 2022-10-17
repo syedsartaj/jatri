@@ -67,13 +67,13 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
     "primevue/nuxt",
-    [
-      "nuxt-tailvue",
-      {
-        all: true,
-        toast: { defaults: { containerClasses: ["sm:!justify-start"] } },
-      },
-    ],
+    // [
+    //   "nuxt-tailvue",
+    //   {
+    //     all: true,
+    //     toast: { defaults: { containerClasses: ["sm:!justify-start"] } },
+    //   },
+    // ],
   ],
   primevue: {
     theme: "md-light-indigo",
