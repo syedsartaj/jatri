@@ -27,8 +27,8 @@
             />
             <DatePicker
                 v-model="departingDate"
-                :label="'Date'"
-                :default-option="'Select Date'"
+                :label="'Select Date'"
+                :default-option="'Select Journey Date'"
                 :allow-filter="true"
             />
         </div>
@@ -50,6 +50,7 @@ import SearchCityFilter from './SearchCityFilter.vue';
 import SearchBusFilter from './SearchBusFilter.vue';
 import DatePicker from '../calendar/DatePicker.vue';
 import { mapGetters } from "vuex";
+import Cookies from 'js-cookie';
 export default {
     components: { SearchCityFilter, SearchBusFilter, DatePicker },
     data() {
@@ -82,8 +83,9 @@ export default {
                 date: new Date(this.departingDate).getTime(),
             };
             Cookies.remove('process-allow')
-            this.$router.push({ path: "/buslist", query });
+            this.$router.push({ path: "/trip", query });
         },
+
         // findTrips(){
         //     window.location.href = '/trip'
         // }

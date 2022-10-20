@@ -13,9 +13,7 @@
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
-        </div>
-
-        
+        </div>        
       </div>
 
       <div class="absolute top-[59px] right-4 left-4 block lg:hidden">
@@ -29,7 +27,6 @@
 
     <!-- why choose section -->
     <div class="pt-80 lg:pt-20 px-4 lg:px-[100px] pb-[100px]">
-      <p class="mt-10">fcsdtgdfg: {{env.PARIBAHAN_BASE_URL}}</p>
 
       <div class="bg-bgShade3 rounded-[30px] pt-[60px] px-4 lg:px-[72px] pb-20">
         <div>
@@ -287,6 +284,11 @@ export default {
       activeTabIndex: 0,
     }
   },
+
+  async asyncData({store}) {
+    await store.dispatch("grantedseat/getCitiesList")
+  },
+
   computed: {
     ...mapGetters("grantedseat", ["getGsLoading"]),
   },
@@ -315,9 +317,6 @@ export default {
       this.slideLeft = false;
       console.log("right click", this.scrollRight)
     },
-    async asyncData({store}) {
-      await store.dispatch("grantedseat/getCitiesList")
-    }
   }
 }
 </script>

@@ -13,7 +13,7 @@ export const ticketStepStatusLabel = {
   'APPROVED': 'Processing',
   'ACCEPTED': 'Pending Payment',
   'CONFIRMED': 'Ticket Confirmed',
-  'COMPLETED': 'Completed',
+  'COMPLETED': 'Ticket Completed',
   'CANCELLED': 'Cancelled Ticket',
   'REFUNDED': 'Refunded',
 }

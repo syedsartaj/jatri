@@ -35,6 +35,9 @@ export default function ({ $axios, redirect, store }) {
     if(error.response.status === 419) {
       return redirect('/')
     }
+    // if(error.response.status === 404) {
+    //   return redirect('/404')
+    // }
     return Promise.reject(error)
   })
 }

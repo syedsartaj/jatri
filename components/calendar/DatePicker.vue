@@ -1,61 +1,24 @@
 <template>
-  <div :class="width" class="custom-filter-element">
-    <div class="flex justify-center">
-      <div class="relative w-full">
-        <button
-          :class="customDesign"
-          class="relative z-10 block rounded-lg bg-white p-2 focus:outline-none w-full"
-          @click="toggleDropdown"
-        >
-          <div class="flex gap-1 xl:gap-x-3">
-            <div class="flex justify-center items-center">
-              <div
-                v-if="icon"
-                class="rounded-xl lg:h-[30px] xl:h-[40px] lg:w-[30px] xl:w-[40px] h-[40px] w-[40px] flex items-center justify-center"
-              >
-                <img :src="icon" alt="Icon" class="w-8" />
-              </div>
-              <div class="ml-2">
-                <p
-                  v-if="label"
-                  class="font-inter flex items-start text-xs text-secondary_p"
-                >
-                  {{ label }}
-                </p>
-                <p v-if="date !== ''">
-                  {{
-                    new Date(date).toLocaleString("es-CL", {
-                      dateStyle: "medium",
-                    })
-                  }}
-                </p>
-                <p
-                  v-else
-                  class="font-inter font-[500] text-xs lg:text-[8px] xl:text-xs text-td_text"
-                >
-                  <span v-if="defaultOption">{{ defaultOption }}</span>
-                  <span v-else>Select Date</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </button>
-        <div
-          v-show="optionsIsOpen"
-          class="mt-5 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2"
-        >
-          <v-date-picker
-            class="inline-block h-full border-none"
-            mode="date"
-            v-model="date"
-            color="teal"
-            :masks="masks"
-            :model-config="modelConfig"
-            :min-date="new Date()"
-            :max-date="maxDateAllow"
-          />
-        </div>
-      </div>
+  <div class="w-1/4 px-6 py-4">
+    <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
+      <p v-if="label" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
+      <p v-if="date !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ new Date(date).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+      <p v-else class="text-base font-medium text-blackPrimary text-left"> 
+          <span v-if='defaultOption'>{{ defaultOption }}</span>
+          <span v-else>Select Journey Date</span>     
+      </p>
+    </button>
+    <div v-if='optionsIsOpen' class='mt-10 -ml-5 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
+      <v-date-picker
+        class="inline-block h-full border-none"
+        mode="date"
+        v-model="date"
+        color="teal"
+        :masks="masks"
+        :model-config="modelConfig"
+        :min-date="new Date()"
+        :max-date="maxDateAllow"
+      />
     </div>
   </div>
 </template>

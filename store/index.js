@@ -7,7 +7,7 @@ export const actions = {
       commit('user/LOGIN_SUCCESS', cookieConst.ags_token, {root: true})
     }
     if(cookieConst.hasOwnProperty('shutdown_data_sets')) {
-      commit('agent/SET_SHUTDOWN_DATA_SETS', cookieConst.shutdown_data_sets, {root: true})
+      commit('agent/SET_SHUTDOWN_DATA_SETS', JSON.parse(cookieConst.shutdown_data_sets), {root: true})
     }
   }
 }

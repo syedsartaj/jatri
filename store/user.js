@@ -1,6 +1,7 @@
 import * as apis from "../helpers/apis";
 import { headers } from '@/helpers/headers';
 import { setToken } from '@/helpers/appStorage';
+import { USER_PROFILE } from '@/helpers/apis';
 
 const state = () => ({
   isAuth: false,
@@ -71,6 +72,7 @@ const actions = {
         .then(res => {
           setToken(res.data.token);
           context.commit("LOGIN_SUCCESS", res.data.token)
+          context.dispatch("profile")
           resolve(res.data)
         })
         .catch(error => {
@@ -78,6 +80,19 @@ const actions = {
             resolve(error.response.data)
           }
         })
+    })
+  },
+  profile() {
+    this.$fire.messaging.getToken().then(result => {
+      const device_token = result ? result : '';
+      const device_type = "web";
+      this.$axios.get(USER_PROFILE, {
+        params: {
+          device_token,
+          device_type
+        },
+        headers: headers()
+      })
     })
   },
   userRegistration(context, payload) {

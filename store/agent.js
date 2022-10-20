@@ -32,7 +32,7 @@ const mutations = {
     state.services = payload;
   },
   SET_FILTER_SERVICES_LIST(state, payload) {
-    state.filteredAvailableServiceList = payload;
+    state.filteredAvailableServiceList = payload.sort((a, b) => Number(a.fare_per_ticket) - Number(b.fare_per_ticket));
   },
   SET_LOADING(state, payload) {
     state.loading = payload;
@@ -62,7 +62,7 @@ const actions = {
   },
   servicesList(context, payload) {
     context.commit("SET_LOADING", true)
-    this.$axios.$post(AVAILABLE_BUS_SERVICES, {...payload}, {headers: headers()})
+    this.$axios.$post(AVAILABLE_BUS_SERVICES, payload, {headers: headers()})
       .then(res => {
         if (res.status === 'success') {
           context.commit("SET_AVAILABLE_SERVICES_LIST", res)
@@ -72,6 +72,8 @@ const actions = {
       })
       .catch(err => {
         if (err.response) {
+          context.commit("SET_AVAILABLE_SERVICES_LIST", [])
+          context.commit("SET_FILTER_SERVICES_LIST", [])
           const {data} = err.response
           this.$errorToast({ message: data.message });
         }

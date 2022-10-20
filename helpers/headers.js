@@ -5,7 +5,8 @@ export function headers() {
     return {
       'Accept' : 'application/json',
       "Content-Type": "application/json",
-      'Authorization': getToken()
+      'Authorization': getToken(),
+      'Cache-Control': 'no-cache'
     };
   }
   return {
