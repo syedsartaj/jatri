@@ -1,21 +1,23 @@
 <template>
-     <div class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4">
+     <div class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4" :ref="`bus-selector-${busIndex}`">
           <div class="lg:flex justify-between gap-x-6" :class="selected ? 'border-b border-[#DBDBDB]': 'border-0 border-[#DBDBDB]'">
                <div class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]">
                     <div class="flex justify-start gap-x-4 items-center pb-[15px] order-first">
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
                          <div>
-                              <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">Green Line Paribahan</h2>
-                              <p class="text-xs font-normal text-blackLight">Hundai AC Bus</p>
+                              <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
+                              <p class="text-xs font-normal text-blackLight">{{ trip.coach.name }}</p>
                          </div>
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
                          <p class="text-xs font-normal text-blackLight">Route</p>
-                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">Dhaka - Comilla- Chittagong - Location - Location - Location</h2>
+                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.boarding }} - {{ trip.dropping }}</h2>
                     </div>
                     <div class="flex justify-between items-center py-4 order-1 lg:order-last">
                          <p class="text-xs font-normal text-blackLight">Depatrure time</p>
-                         <h2 class="text-sm lg:text-base font-medium text-blackPrimary">06:45 PM</h2>
+                         <h2 class="text-sm lg:text-base font-medium text-blackPrimary">
+                              {{ new Date(`${trip.departureDate} ${trip.departureTime}`).toLocaleString('en-Us', { timeStyle: 'short' }) }}
+                         </h2>
                     </div>
                </div>
                <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
@@ -24,27 +26,29 @@
                <div class="w-full lg:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col">
                     <div class="hidden lg:block">
                          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
-                         <h2 class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary">1400 <span class="text-base">TK</span></h2>
+                         <h2 v-if="trip.seatFare[0].discountFare" class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"><span class="line-through text-corporate">{{ trip.seatFare[0].fare }}</span> {{ trip.seatFare[0].discountFare }} <span class="text-base">TK</span></h2>
+                         <h2 v-else class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary">{{ trip.seatFare[0].fare }} <span class="text-base">TK</span></h2>
                          <p class="text-xs font-normal text-blackLight mt-1">Per ticket</p>
                     </div>
                     <div class="lg:hidden flex justify-start items-center gap-x-3">
                          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
                          <div>
-                              <h2 class="text-xl font-semibold text-blackPrimary">1400 <span class="text-xs">TK</span></h2>
+                              <h2 v-if="trip.seatFare[0].discountFare" class="text-xl font-semibold text-blackPrimary"><span class="line-through text-corporate">{{  trip.seatFare[0].fare }}</span> {{ trip.seatFare[0].discountFare }} <span class="text-xs">TK</span></h2>
+                              <h2 v-else class="text-xl font-semibold text-blackPrimary">{{ trip.seatFare[0].fare }} <span class="text-xs">TK</span></h2>
                               <p class="text-xs font-normal text-blackLight mt-1">Per ticket</p>
                          </div>
                     </div>
-                    <button @click="handleSeatView" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"> 
-                         {{selected ? 'Close seats' : 'View seats' }} 
+                    <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"> 
+                         {{selectedTrip === busIndex ? 'Close seats' : 'View seats' }} 
                          <span>
-                              <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selected && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
+                              <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selectedTrip === busIndex && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
                          </span>
                     </button>
                </div>
           </div>
 
           <!-- accordion start -->
-          <div v-if="selected" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-4" :class="selected ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
+          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-4" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
                <div class="flex flex-wrap justify-between">
                     <!-- Bus Design -->
                     <div class="w-full lg:w-1/2 ">
@@ -71,170 +75,31 @@
                                              <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
                                         </div>
                                         <!-- Seats here -->
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
+                                        <div v-for='(rowSeat, rowIndex) in getGsSeatArray' :key='rowIndex' class="flex justify-between gap-x-[30px] mt-6">
+                                             <!-- <button>
                                                   <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/bookedSeats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/selected-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                        </div>
-                                        <div class="flex justify-between gap-x-[30px] mt-6">
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button> </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
-                                             <button>
-                                                  <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
-                                             </button>
+                                             </button> -->
+                                             <template v-for='(colSeat, colIndex) in rowSeat'>
+                                                  <div v-if="colSeat.seatNo !== ''" :key='colIndex' class='relative group'
+                                                       @click="colSeat && colSeat.status === 'available' && addSeatHandler(colSeat)"
+                                                  >
+                                                       <ArmChairIcon 
+                                                            :class="colSeat.status !== 'available' ? 'cursor-default' : 'cursor-pointer'"
+                                                            :fill="
+                                                                 colSeat.status !== 'available'
+                                                                 ? '#DBDBDB'
+                                                                 : selectedSeatIds.includes(colSeat.id)
+                                                                 ? '#48A43F'
+                                                                 : 'white'"
+                                                                 height='30'
+                                                                 width='30'
+                                                       />
+                                                       <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
+                                                            {{ colSeat.seatNo }}
+                                                       </p>
+                                                  </div>
+                                                  <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div>
+                                             </template>
                                         </div>
                                    </div>
                               </div>
@@ -248,14 +113,15 @@
                                    v-model="boardingPoint"
                                    :default-option="'Select Your Boarding Location'"
                                    :label="'Boarding point'"
-                                   propertyName="counter_name"
+                                   :options='getGsSeatBoardingPointArray'
+                                   propertyName="name"
                               />
                               <!-- :options="getGsSeatBoardingPointArray" -->
                          </div>
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Departure time</h2>
                               <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
-                                   <p class="text-blackPrimary text-sm font-medium">07:30 PM</p>
+                                   <p class="text-blackPrimary text-sm font-medium">{{ departureTime }}</p>
                               </div>
                          </div>
 
@@ -266,49 +132,86 @@
                                    <p class="text-sm lg:text-xs font-semibold text-blackPrimary">Fare</p>
                               </div>
                               <div class="px-[14px] py-3">
-                                   <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">A1</p>
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">1400</p>
+                                   <div v-for='seat in selectedSeatsObj' :key='seat.id' class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
+                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">{{ seat.seatNo }}</p>
+                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">{{ seat.fare }}</p>
                                    </div>
-                                   
-                                   <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">A2</p>
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">1400</p>
-                                   </div>
-                                   <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">B1</p>
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">1400</p>
-                                   </div>
-                                   <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">B2</p>
-                                        <p class="text-xs lg:text-sm font-medium text-blackPrimary">1400</p>
-                                   </div>
+                              </div>
+                              <div v-if="totalDiscountFare > 0" class='bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]'>
+                                   <p class='text-xs font-semibold text-blackLight lg:text-blackPrimary'>Discount Amount </p>
+                                   <p class='text-base lg:text-xs font-semibold text-blackPrimary'>BDT {{ totalDiscountFare }}</p>
+                              </div>
+
+                              <div v-if="totalPromoAmount > 0" class='bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]'>
+                                   <p class='text-xs font-semibold text-blackLight lg:text-blackPrimary'>Promo Amount </p>
+                                   <p class='text-base lg:text-xs font-semibold text-blackPrimary'>BDT {{ totalPromoAmount }}</p>
                               </div>
                               <div class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
                                    <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">Total fare</p>
-                                   <p class="text-base lg:text-xs font-semibold text-blackPrimary">BDT <span>5600</span></p>
+                                   <p class="text-base lg:text-xs font-semibold text-blackPrimary">BDT <span>{{ totalAmount - (totalDiscountFare + totalPromoAmount) }}</span></p>
                               </div>
                          </div>
 
                          <!-- Passenger Information -->
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Passenger name <span class="text-[#E0293B]">*</span></h2>
-                              <input type="text" placeholder="Enter your name" class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary">
+                              <input 
+                                   class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+                                   type="text" 
+                                   placeholder="Enter your name"
+                                   v-model='passengerName'
+                              />
                          </div>
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Phone no <span class="text-[#E0293B]">*</span></h2>
-                              <input type="number" placeholder="Enter your phone" class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary">
+                              <input 
+                              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
+                                   type="number" 
+                                   placeholder="Enter your phone"
+                                   v-model='passengerPhone'
+                              />
                          </div>
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email id</span> <span class="text-[#8D8D8F]">Optional</span></h2>
-                              <input type="email" placeholder="Enter your email id" class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary">
+                              <input 
+                                   class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+                                   type="email" 
+                                   placeholder="Enter your email id"
+                                   v-model='passengerEmail'
+                              />
                          </div>
 
-                         <button @click="riderectToPayment" class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6">
+                         <!-- <button @click="riderectToPayment" class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6">
                               Next
-                         </button>
+                         </button> -->
+                         <LoaderButton
+                              :class="
+                                   (moduleType == 'paribahan' && !passengerEmail) ||
+                                   !selectedSeatIds.length ||
+                                   !boardingPoint ||
+                                   !passengerName ||
+                                   !passengerPhone ||
+                                   String(passengerPhone).length < 11
+                                   ? 'bg-gray-500'
+                                   : 'bg-corporate hover:bg-[#D93E2D]'
+                              "
+                              :disabled='
+                                   (moduleType == "paribahan" && !passengerEmail) ||
+                                   getGsLoading ||
+                                   !selectedSeatIds.length ||
+                                   !boardingPoint ||
+                                   !passengerName ||
+                                   !passengerPhone ||
+                                   String(passengerPhone).length < 11
+                              '
+                              :loading='getGsLoading'
+                              class='bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6'
+                              @onClick='paymentPendingBlockHandler'
+                         >
+                              Next
+                         </LoaderButton>
 
                          <div class="text-center mt-[20px]">
                               <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</a>
@@ -321,24 +224,336 @@
 
 <script>
 import SelectOption from "../SearchForm/SelectOption.vue";
+import ArmChairIcon from "../Svg/ArmChairIcon.vue";
+import { mapActions, mapGetters } from 'vuex';
+import { timeFormat } from '@/helpers/dateTimeFormat';
+import moment from 'moment';
 export default {
-    data() {
-        return {
-            selected: false,
-        };
+     props: ['trip', 'selectedTrip', 'busIndex'],
+     data() {
+          return {
+               selected: false,
+               boardingPoint: null,
+               passengerCount: '',
+               selectedSeatIds: [],
+               selectedSeatLabels: [],
+               selectedSeatFares: [],
+               selectedSeatsObj: [],
+               totalAmount: 0,
+               totalDiscountAmount: 0,
+               totalDiscountFare: 0,
+               passengerName: '',
+               passengerPhone: '',
+               passengerEmail: '',
+               promoCode: '',
+               totalPromoAmount: 0,
+               moduleType: this.trip.moduleType,
+               emailReg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          };
      },
-     components: { SelectOption },
+     components: { SelectOption, ArmChairIcon },
+     computed: {
+          ...mapGetters('grantedseat', [
+               'getGsSeatArray',
+               'getGsSeatBoardingPointArray',
+               'getGsPaymentPendingBlockData',
+               'getGsLoading',
+               'getGsSeatViewData',
+               'getGsTrips',
+               'getPromoCode'
+          ]),
+          departureTime()  {
+               if(this.boardingPoint.scheduleTime === '') {
+               return new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
+               }
+               return new Date(`${this.boardingPoint.scheduleTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
+          },
+          reportingDateTime()  {
+               if(this.boardingPoint.scheduleTime === '') {
+               return timeFormat(moment(`${this.trip.departureDate} ${this.trip.departureTime}`).subtract({hour: 0, minute: 30}), 6, 'YYYY-MM-DD HH:mm:ss');
+               }
+               return timeFormat(moment(`${this.trip.departureDate} ${this.boardingPoint.scheduleTime}`).subtract({hour: 0, minute: 30}), 6, 'YYYY-MM-DD HH:mm:ss');
+          },
+     },
      methods: {
-          handleSeatView() {
-               // if (this.selected) {
-               this.selected = !this.selected;
-               //      return;
-               // }
+          ...mapActions('grantedseat', [
+               'getPbSeatViewAction',
+               'getPbPaymentPendingBlockAction',
+               'getPromoCodeAction'
+          ]),
+          handleSeatView (selectedTripId) {
+               this.resetPromo();
+
+               if (selectedTripId === "") {
+                    this.$emit('selectedTripId', null)
+                    this.resetForm();
+                    return;
+               }
+               this.$nextTick(async () => {
+                    this.$nuxt.$loading.start();
+                    const payload = {
+                         moduleType: this.trip.moduleType,
+                         busServiceType: this.trip.busServiceType,
+                         transportType: this.trip.transportType,
+                         transportId: this.trip.transportId,
+                         uid: this.trip.uid,
+                         fromCity: this.trip.fromCity,
+                         toCity: this.trip.toCity,
+                         busId: this.trip.busId,
+                         departureId: this.trip.departureId,
+                         departureDate: this.trip.departureDate,
+                         departureTime: this.trip.departureTime,
+                         sku: this.trip.sku,
+                         id: this.trip.id,
+                         seatPlan: this.trip.seatPlan,
+                         seatFare: this.trip.seatFare,
+                         companyId: this.trip.companyId,
+                         coachType: this.trip.coach.type,
+                         tripDateTime: this.trip.tripDateTime,
+                    };
+                    await this.getPbSeatViewAction(payload);
+                    this.$nuxt.$loading.finish();
+                    this.$emit('selectedTripId', selectedTripId)
+                    const el = this.$refs[`bus-selector-${selectedTripId}`];
+                    if (el) {
+                         el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+               });
           },
           riderectToPayment() {
                window.location.href= '/payment';
+          },
+          addSeatHandler (seat) {
+               if (this.selectedSeatIds.includes(seat.id)) {
+                    this.selectedSeatIds = this.selectedSeatIds.filter(
+                         (id) => id !== seat.id
+                    );
+                    this.selectedSeatLabels = this.selectedSeatLabels.filter(
+                         (label) => label !== seat.seatNo
+                    );
+                    this.selectedSeatFares = this.selectedSeatsObj
+                         .map((item) => {
+                              if (item.id !== seat.id) {
+                                   return item.fare;
+                              }
+                         })
+                    .filter(Boolean);
+                    this.selectedSeatsObj = this.selectedSeatsObj.filter(
+                         (item) => item.id !== seat.id
+                    );
+                    this.totalAmount -= seat.fare;
+
+                    // discount calculation on unselect
+                    seat.discountFare != null ? this.totalDiscountAmount -=  (seat.fare - seat.discountFare) : this.totalDiscountAmount -= 0;
+                    if(this.trip.offer && (this.totalDiscountAmount <= this.trip.offer.maxOfferAmount)) {
+                         seat.discountFare != null ? this.totalDiscountFare =  this.totalDiscountAmount : this.totalDiscountFare -= 0;
+                    } else if(this.trip.offer && (this.totalDiscountAmount > this.trip.offer.maxOfferAmount)) {
+                         seat.discountFare != null ? this.totalDiscountFare =  this.totalDiscountFare : this.totalDiscountFare -= 0;
+                    }
+
+                    // promo calculation on unselect
+                    if(this.getPromoCode && this.getPromoCode.minSpend > this.totalAmount){
+                         this.totalPromoAmount = 0;
+                    }
+
+               } else {
+                    if (this.selectedSeatIds.length > this.getGsSeatViewData.seatPlan.maxSeatLimit - 1) {
+                         this.$errorToast({message: `You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} tickets at a time!!`})
+                         return;
+                    }
+
+                    this.selectedSeatIds.push(seat.id);
+                    this.selectedSeatLabels.push(seat.seatNo);
+                    this.selectedSeatsObj.push(seat);
+                    this.selectedSeatFares.push(seat.fare);
+                    this.totalAmount += seat.fare;
+
+                    // discount calculation on select
+                    seat.discountFare != null ? this.totalDiscountAmount +=  (seat.fare - seat.discountFare) : this.totalDiscountAmount += 0;
+                    if(seat.discountFare != null && this.trip.offer && (this.totalDiscountAmount <= this.trip.offer.maxOfferAmount)) {
+                         this.totalDiscountFare +=  (seat.fare - seat.discountFare);
+                    }
+                    else if(seat.discountFare != null && this.trip.offer && this.totalDiscountAmount >= this.trip.offer.maxOfferAmount){
+                         this.totalDiscountFare = this.trip.offer.maxOfferAmount;
+                    }
+
+               // promo calculation on select
+                    if(this.getPromoCode && this.getPromoCode.minSpend <= this.totalAmount){
+                         this.totalPromoAmount = this.getPromoCode.amount;
+                    }
+               }
+          },
+          async paymentPendingBlockHandler () {
+               if(this.passengerEmail && !this.emailReg.test(String(this.passengerEmail).toLowerCase())) {
+                    this.$errorToast({message: 'Enter a valid email address'})
+                    return;
+               }
+               this.$nextTick(async () => {
+                    this.$nuxt.$loading.start();
+                    const payload = {
+                         moduleType: this.trip.moduleType,
+                         busServiceType: this.trip.busServiceType,
+                         transportType: this.trip.transportType,
+                         transportId: String(this.trip.transportId),
+                         uid: this.trip.uid,
+                         id: this.trip.id,
+                         seatClass: this.trip.seatClass[0].name,
+                         sku: String(this.trip.sku),
+                         fromCity: this.trip.fromCity,
+                         toCity: this.trip.toCity,
+                         route: this.trip.route.name,
+                         company: this.trip.company,
+                         busId: this.trip.busId,
+                         busName: this.trip.busId,
+                         coachName: this.trip.coach.name,
+                         coachType: this.trip.coach.type,
+                         coachNo: this.trip.coach.registrationNumber,
+                         seatLbls: this.selectedSeatLabels.join(','),
+                         seatIds: this.selectedSeatIds.join(','),
+                         ticketPrice: this.selectedSeatFares.join(','),
+                         boardingPointId: String(this.boardingPoint.id),
+                         boardingPointName: this.boardingPoint.name,
+                         droppingPointName: this.trip.dropping,
+                         departureId: this.trip.departureId,
+                         departureDate: this.trip.departureDate,
+                         departureTime: this.trip.departureTime,
+                         boardingDateTime: this.boardingPoint.scheduleTime,
+                         reportingDateTime: this.boardingPoint.reportingTime,
+                         passengerName: this.passengerName,
+                         passengerMobile: this.passengerPhone,
+                         passengerEmail: this.passengerEmail,
+                         passengerAddress: 'dhaka',
+                         passengerGender: 'male',
+                         passengerAge: '20',
+                         isTicketCancelable: 1,
+                         companyId: this.trip.companyId,
+                         tripDateTime: this.trip.tripDateTime,
+                         promoCode: this.promoCode,
+                    };
+                    await this.getPbPaymentPendingBlockAction(payload)
+                    .then(res => {
+                         if(res.statusCode === 404) {
+                              this.$errorToast({message: res.message})
+                              window.location.reload(true)
+                         }
+                         if(res.error) {
+                              const seatViewPayload = {
+                                   moduleType: this.trip.moduleType,
+                                   busServiceType: this.trip.busServiceType,
+                                   transportType: this.trip.transportType,
+                                   transportId: this.trip.transportId,
+                                   uid: this.trip.uid,
+                                   fromCity: this.trip.fromCity,
+                                   toCity: this.trip.toCity,
+                                   busId: this.trip.busId,
+                                   departureId: this.trip.departureId,
+                                   departureDate: this.trip.departureDate,
+                                   departureTime: this.trip.departureTime,
+                                   sku: this.trip.sku,
+                                   id: this.trip.id,
+                                   seatPlan: this.trip.seatPlan,
+                                   seatFare: this.trip.seatFare,
+                                   companyId: this.trip.companyId,
+                                   coachType: this.trip.coach.type,
+                                   tripDateTime: this.trip.tripDateTime,
+                              };
+                              this.resetForm();
+                              this.getPbSeatViewAction(seatViewPayload)
+                              this.$nuxt.$loading.finish();
+                         } else {
+                              // let data = {
+                              //   ...this.getGsPaymentPendingBlockData,
+                              //   from,
+                              //   to,
+                              //   type,
+                              //   date,
+                              //   companyName: this.trip.company,
+                              //   departureTime: this.trip.departureTime,
+                              //   boarding: this.boardingPoint.name,
+                              //   dropping: this.trip.dropping,
+                              //   selectedSeatsObj: this.selectedSeatsObj,
+                              //   totalAmount: this.totalAmount,
+                              //   coachNo: this.trip.coach.name,
+                              //   name: this.passengerName,
+                              //   phone: this.passengerPhone,
+                              //   email: this.passengerEmail || 'admin@jatri.co'
+                              // };
+                              // if (process.client) {
+                              //    data = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+                              // }
+                              if (res.statusCode === 200) {
+                                   this.$router.push({
+                                        path: '/payment',
+                                        query: { tnxId: this.getGsPaymentPendingBlockData.paymentInfo.transactionId }
+                                   });
+                              }
+                         }
+                         this.$nuxt.$loading.finish();
+                    })
+               })
+          },
+          resetForm() {
+               this.passengerName = ''
+               this.passengerPhone = ''
+               this.passengerEmail = ''
+               this.selectedSeatIds = []
+               this.selectedSeatLabels = []
+               this.selectedSeatFares = []
+               this.selectedSeatsObj = []
+               this.totalAmount = 0
+               this.totalDiscountAmount = 0
+               this.totalDiscountFare = 0
+               this.promoCode = ''
+               this.totalPromoAmount = 0
+          },
+
+          resetPromo() {
+               this.promoCode = ''
+               this.totalPromoAmount = 0
+          },
+
+          applyPromo () {
+               this.$nextTick(async () => {
+                    this.$nuxt.$loading.start();
+                    const payload = {
+                         promoCode: this.promoCode,
+                         companyId: this.trip.companyId,
+                         tripDateTime: this.trip.tripDateTime,
+                         coachType: this.trip.coach.type,
+                    }
+                    await this.getPromoCodeAction(payload)
+                         .then(res => {
+                              if (res.statusCode === 200 && !res.data) {
+                                   this.totalPromoAmount = 0;
+                                   this.$errorToast({ message: "Promo Code does not match!" });
+                              } else if (res.statusCode === 200 && res.data) {
+                                   this.$successToast({ message: "Promo Applied Successfully!" });
+                              }
+                         }).catch (error => {
+                              this.resetPromo();
+                         })
+                    // promo calculation
+                    if(this.getPromoCode && this.getPromoCode.minSpend <= this.totalAmount){
+                         this.totalPromoAmount = this.getPromoCode.amount;
+                    } else {
+                         this.totalPromoAmount = 0;
+                    }
+                    this.$nuxt.$loading.finish();
+               })
           }
      },
+     watch: {
+          getGsSeatBoardingPointArray (value) {
+               let findId = value.findIndex(item => item.name.toLowerCase() === this.getGsSeatViewData.seatPlan.startingPoint.toLowerCase())
+               this.boardingPoint = (findId === -1 ? value[0] : value[findId]);
+          },
+          getGsTrips: {
+               handler(value) {
+               this.resetForm()
+               },
+               deep: true,
+          }
+     }
 }
 </script>
 

@@ -43,39 +43,50 @@
 
                <!-- TRIPS -->
                <div class="w-full">
-                    <SingleTrip/>
-                    <SingleTrip/>
-                    <SingleTrip/>
-                    <SingleTrip/>
-                    <SingleTrip/>
+                    <GuaranteedSeatList />
                </div>
-          </div>
-
-          <!-- error layout -->
-          <div class="h-[800px] flex justify-center items-center bg-[#f7f7f7]">
-               <!-- <TripNotFound/> -->
-               <OpssAlert
-                    :details="'Looks llike we could not find any ticket according to your search. Try different route or date and search again.'"
-                    :customStyle="'px-[92.5px]'"
-               />
           </div>
      </div>
 </template>
 
 <script>
 import ModifyFilter from '~~/components/TripFilter/ModifyFilter.vue';
-import SingleTrip from '~~/components/Trip/SingleTrip.vue';
 import SearchFilterForm from '~~/components/SearchForm/SearchFilterForm.vue';
-import OpssAlert from '~~/components/Alerts/OpssAlert.vue';
 import TripFilterModal from '~~/components/Modal/TripFilterModal.vue';
+import GuaranteedSeatList from '../../components/buslist/GuaranteedSeatList.vue';
+import Cookies from "js-cookie";
+import { mapActions, mapGetters } from 'vuex';
 export default {
+     components: { ModifyFilter, SearchFilterForm, TripFilterModal, GuaranteedSeatList },
+     validate({query}) {
+          const {
+               from,
+               to,
+               type,
+               date,
+               // quantity
+          } = query;
+          return from && to && type && date;
+     },
+
      data(){
           return {
+               filteredData: {},
                tripFilterModify : false,
           }
      },
 
-     components: { ModifyFilter, SingleTrip, SearchFilterForm, OpssAlert, TripFilterModal },
+     computed: {
+          ...mapGetters('grantedseat', ['getGsTrips']),
+          ...mapGetters('user', ['isLoggedIn']),
+          ...mapGetters('agent', ['getFilteredAvailableServiceList']),
+          filterQueryData() {
+               const formattedDate = new Date(+this.$route.query.date).toLocaleString('en-CA', {
+               dateStyle: 'short'
+               });
+               return {...this.$route.query, 'request_date': formattedDate, 'condition': this.$route.query.type};
+          }
+     },
 
      methods: {
           modifySearch(){
@@ -84,6 +95,52 @@ export default {
           handleTripFilterModal() {
                this.tripFilterModify = !this.tripFilterModify
           },
+
+          ...mapActions('agent', ['servicesList']),
+          activeTab() {
+               if (!Cookies.get("ags_token")) {
+                    this.$router.push({path: this.$route.fullPath, query: this.$route.query, hash: '#agent'})
+                    this.authModalToggle();
+               } else {
+                    this.activeTabIndex = 1;
+               }
+          },
+          seatSelectInitial () {
+               this.selectedServices = [];
+               this.selectedBoarding = [];
+               this.selectedScheduleTime = [];
+          },
+          setFilteredData (filteredData) {
+               this.seatSelectInitial();
+               this.filteredData = filteredData;
+               this.$store.commit('agent/filterServiceList', filteredData);
+          },
+          resetFilterData () {
+               this.seatSelectInitial();
+               const {from, to, type, date, quantity} = this.$route.query;
+               const formattedDate = new Date(+date).toLocaleString('en-CA', {
+                    dateStyle: 'short'
+               });
+               const payload = { from, to, quantity, request_date: formattedDate,
+                    condition: type == 'all' ? 'Any' : type == 'non-ac' ? 'NonAC' :  type.toUpperCase()
+               };
+               this.servicesList(payload);
+          },
+          authModalToggle() {
+               this.authModalShowStatus = !this.authModalShowStatus;
+          },
+     },
+
+     async asyncData({store}){
+          await store.dispatch('grantedseat/getCitiesList');
+     },
+
+     watch: {
+          isLoggedIn(newVal) {
+               if(newVal === true && this.$route.hash === '#agent') {
+               this.activeTabIndex = 1;
+               }
+          }
      }
 }
 </script>
