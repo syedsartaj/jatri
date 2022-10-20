@@ -91,14 +91,20 @@
                                                                  : selectedSeatIds.includes(colSeat.id)
                                                                  ? '#48A43F'
                                                                  : 'white'"
-                                                                 height='30'
-                                                                 width='30'
+                                                            :stroke="
+                                                                 colSeat.status !== 'available'
+                                                                 ? '#DBDBDB'
+                                                                 : selectedSeatIds.includes(colSeat.id)
+                                                                 ? '#48A43F'
+                                                                 : '#8D8D8F'"
+                                                            height='24'
+                                                            width='24'
                                                        />
                                                        <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
                                                             {{ colSeat.seatNo }}
                                                        </p>
                                                   </div>
-                                                  <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div>
+                                                  <!-- <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div> -->
                                              </template>
                                         </div>
                                    </div>
@@ -483,7 +489,7 @@ export default {
                               // }
                               if (res.statusCode === 200) {
                                    this.$router.push({
-                                        path: '/payment',
+                                        path: '/guaranteed-seat/payment',
                                         query: { tnxId: this.getGsPaymentPendingBlockData.paymentInfo.transactionId }
                                    });
                               }
@@ -549,7 +555,7 @@ export default {
           },
           getGsTrips: {
                handler(value) {
-               this.resetForm()
+                    this.resetForm()
                },
                deep: true,
           }

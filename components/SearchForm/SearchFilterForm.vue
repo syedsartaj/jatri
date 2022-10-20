@@ -13,7 +13,7 @@
                 v-model="destination"
                 :defaultValue="destinationName"
                 :label="'To'"
-                :default-option="'Choose your location'"
+                :default-option="'Choose your destination'"
                 :allow-filter="true"
                 :options="getGsCities"
             />

@@ -1,14 +1,14 @@
 <template>
-     <div class="lg:flex justify-between gap-x-5 py-4 lg:py-8 px-4 lg:px-[100px] bg-corporateBg">
+     <div v-if='getBookingInfoDetails !== null' class="lg:flex justify-between gap-x-5 py-4 lg:py-8 px-4 lg:px-[100px] bg-corporateBg">
           <div class="w-full lg:w-1/2">
-               <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
+               <div v-if='getBookingInfoDetails !== null' class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
                     <div class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b">
                          <div class="bg-[#FEF2F0] rounded-full w-9 h-9 flex justify-center items-center">
                               <img src="@/assets/images/icons/ticket.svg" alt="" class="w-[15px]">
                          </div>
                          <div>
-                              <h2 class="text-corporate text-sm lg:text-base font-medium">Dhaka - Chittagong</h2>
-                              <p class="text-blackLight text-xs lg:text-sm font-normal mt-1">Green Line Paribahan, AC bus | Sat, 25 Sep 2022</p>
+                              <h2 class="text-corporate text-sm lg:text-base font-medium">{{ getBookingInfoDetails.invoice.fromCity }} - {{ getBookingInfoDetails.invoice.toCity }}</h2>
+                              <p class="text-blackLight text-xs lg:text-sm font-normal mt-1">{{ getBookingInfoDetails.invoice.company }}, {{ String(getBookingInfoDetails.invoice.coachType).toUpperCase() }} bus | {{ boardingDateTime }}</p>
                          </div>
                     </div>
                     <div class="px-[14px] py-3">
@@ -43,19 +43,23 @@
                     <div class="px-[14px] pt-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat no</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">[D1],[D2],[D3],[D4],[E2],[J1],[H4]</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.invoice.seatNo.join(', ') }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Ticket price</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">5600</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.payable + getBookingInfoDetails.invoice.discount }}</p>
+                         </div>
+                         <div v-if="getBookingInfoDetails.invoice.discount" class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Discount Amount</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.invoice.discount }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Processing fee</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">240</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.serviceCharge }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Gateway fee</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">98</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.paymentGatewayCommission }}</p>
                          </div>
                          <div class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed">
                               <div class="px-4 py-[10px] bg-[#F7F7F7] w-[226px] lg:w-[395px]"><span class="text-blackLight text-sm font-normal">BUS100</span></div>
@@ -78,7 +82,7 @@
                     </div>
                     <div class="flex justify-between bg-[#EFF7FD] border-t rounded-b px-4 py-[10px]">
                          <p class="text-sm font-normal text-blackLight">Total</p>
-                         <p class="text-base font-medium text-blackPrimary">BDT <span class="font-bold">10038</span></p>
+                         <p class="text-base font-medium text-blackPrimary">BDT <span class="font-bold">{{ getBookingInfoDetails.amount }}</span></p>
                     </div>
                </div>
 
@@ -87,38 +91,42 @@
                          <p class="text-base font-medium text-blackPrimary">Payment method</p>
                          <div class="flex justify-center items-center w-[139px] bg-[#FDF0F1] rounded-full text-base font-medium text-blackPrimary ">
                               <img src="@/assets/images/icons/timer.svg" alt="" class="w-[13.33px]">
-                              <p class="text-[#E0293B] text-xs font-medium py-[5px] px-4">04:00 m left</p>
+                              <p class="text-[#E0293B] text-xs font-medium py-[5px] px-4">
+                                   <CountDown :time='paymentValidateTime' @timeUp='timeUp' /> m left
+                              </p>
                          </div>
                     </div>
                     <div class="p-5 flex justify-between gap-x-5">
-                         <button @click="selectNagadGatway" class="flex justify-between items-center w-1/2 rounded-lg px-5 py-[15px] border" :class="selectNagadGatwayStatus ? 'bg-[#EFF7FD] border-[#1E88E5]' : 'bg-[#f7f7f7] border-[#f7f7f7]'">
-                              <img src="@/assets/images/nagad-logo.svg" alt="nagad" class="w-[69px]"/>
-                              <img src="@/assets/images/icons/tik-blue.svg" alt="tik" :class="selectNagadGatwayStatus ? 'block':'hidden'">
-                         </button>
-
-                         <button @click="selectSSLGatway" class="flex justify-between items-center w-1/2 rounded-lg px-5 py-[15px] border" :class="selectSSLGatwayStatus ? 'bg-[#EFF7FD] border-[#1E88E5]' : 'bg-[#f7f7f7] border-[#f7f7f7]'">
-                              <div class="flex flex-wrap justify-start items-center gap-x-3">
-                                   <div class="grid grid-cols-4 lg:grid-cols-2 gap-x-[5.57px] lg:gap-x-3 lg:gap-y-[7px] order-last lg:order-first">
-                                        <img src="@/assets/images/amex-logo.svg" alt="amex" class="w-5">
-                                        <img src="@/assets/images/mastercard-logo.svg" alt="mastercard" class="w-[18px]">
-                                        <img src="@/assets/images/visa-logo.svg" alt="visa" class="w-[21px]">
-                                        <img src="@/assets/images/bkash-logo.svg" alt="bkash" class="w-[27px]">
-                                   </div>
-                                   <div class="bg-[#D9D9D9] w-[1px] h-9 hidden lg:block"></div>
-                                   <img src="@/assets/images/sslcommerz-logo.svg" alt="" class="mb-[6px] lg:mb-0">
-                              </div>
-                              <img src="@/assets/images/icons/tik-blue.svg" alt="tik" :class="selectSSLGatwayStatus ? 'block':'hidden'">
-                         </button>
+                         <NagadOption
+                              plan-name="nagad"
+                              plan-discount="10%"
+                              v-model="activePlan"
+                         />
+                         <GateWayOption
+                              plan-name="sslcommerz"
+                              plan-discount=""
+                              v-model="activePlan"
+                         />
                     </div>
                </div>
 
-               <div class="mt-2">
-                    <AlertsPaymentTimeoutAlert/>
+               <div v-if="!paymentValidateTime" class="mt-2">
+                    <PaymentTimeoutAlert/>
                </div>
 
-               <button @click="handlePay"  class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6">
+               <!-- <button @click="handlePay"  class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6">
                     Pay now
-               </button>
+               </button> -->
+
+               <LoaderButton
+                    class='bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6'
+                    :class="getGsLoading || !paymentAllowStatus && 'bg-red-300 hover:bg-red-200 cursor-not-allowed'"
+                    :loading='getGsLoading'
+                    :disabled='getGsLoading || !paymentAllowStatus || paymentValidateTime === 0'
+                    @onClick='paymentHandler'
+               >
+                    Pay now
+               </LoaderButton>
 
                <div class="text-center mt-4 lg:mt-5">
                     <p class="text-blackPrimary text-sm font-normal">By procedding you are agreeing with our <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</a></p>
@@ -137,26 +145,62 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import moment from 'moment';
+import { dateTimeFormat } from '@/helpers/dateTimeFormat';
+import NagadOption from '../../../components/paymentMethode/NagadOption.vue';
+import GateWayOption from '../../../components/paymentMethode/GateWayOption.vue';
+import PaymentTimeoutAlert from '../../../components/Alerts/PaymentTimeoutAlert.vue';
 export default {
-     data(){
+     validate({ query }) {
+          const { tnxId } = query;
+          return tnxId;
+     },
+     data() {
           return {
-               selectNagadGatwayStatus: false,
-               selectSSLGatwayStatus: false
+               activePlan: "",
+               paymentAllowStatus: true,
+               paymentValidateTime: 0
+          };
+     },
+     async asyncData({ query, store }) {
+          await store.dispatch("grantedseat/getBookingInfoByTnxId", { "transactionId": query.tnxId });
+     },
+     created() {
+          if (this.getBookingInfoDetails) {
+               let a = moment(new Date());
+               let getActualPendingValidity = this.getBookingInfoDetails.pendingValidity.split("T")[0] + " " + this.getBookingInfoDetails.pendingValidity.split("T")[1].split(".")[0];
+               let b = moment(new Date(getActualPendingValidity));
+               if (b.diff(a, "seconds") > 0) {
+                    this.paymentValidateTime = b.diff(a, "seconds");
+               }
+          }
+          else {
+               this.paymentValidateTime = 0;
+          }
+     },
+     computed: {
+          ...mapGetters("grantedseat", ["getBookingInfoDetails", "getGsLoading"]),
+          boardingDateTime() {
+               return this.getBookingInfoDetails.invoice.departureDate && dateTimeFormat(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime, 0, "ll");
           }
      },
      methods: {
-          selectNagadGatway(){
-               this.selectNagadGatwayStatus = !this.selectNagadGatwayStatus;
-               this.selectSSLGatwayStatus = false
+          ...mapActions("grantedseat", [
+               "TicketConfirmAction"
+          ]),
+          paymentHandler() {
+               const payload = {
+                    paymentId: this.getBookingInfoDetails._id,
+                    gatewayType: this.activePlan
+               };
+               this.TicketConfirmAction(payload);
           },
-          selectSSLGatway(){
-               this.selectSSLGatwayStatus = !this.selectSSLGatwayStatus;
-               this.selectNagadGatwayStatus = false
-          },
-          handlePay(){
-               window.location.href= '/payment/success';
+          timeUp() {
+               this.paymentAllowStatus = false;
           }
-     }
+     },
+     components: { NagadOption, GateWayOption, PaymentTimeoutAlert }
 }
 </script>
 

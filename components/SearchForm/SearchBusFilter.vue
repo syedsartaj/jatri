@@ -1,7 +1,7 @@
 <template>
      <div class="w-1/4 px-6 py-4">
           <button class="block rounded-lg bg-white focus:outline-none w-full" @click="toggleDropdown">
-               <p v-if='label' class="text-xs font-normal text-blackSecondery text-left"> {{ label }} </p>
+               <p v-if='label' class="text-xs font-normal text-blackSecondery text-left uppercase"> {{ label }} </p>
                <p v-if="selectedOption !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ this.selectedOption.city_name.toUpperCase() }} </p>
 
                <p v-else class="text-base font-medium text-blackPrimary text-left"> 
