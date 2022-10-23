@@ -104,7 +104,7 @@
                                                             {{ colSeat.seatNo }}
                                                        </p>
                                                   </div>
-                                                  <!-- <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div> -->
+                                                  <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div>
                                              </template>
                                         </div>
                                    </div>
@@ -229,8 +229,6 @@
 </template>
 
 <script>
-import SelectOption from "../SearchForm/SelectOption.vue";
-import ArmChairIcon from "../Svg/ArmChairIcon.vue";
 import { mapActions, mapGetters } from 'vuex';
 import { timeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
@@ -257,7 +255,6 @@ export default {
                emailReg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           };
      },
-     components: { SelectOption, ArmChairIcon },
      computed: {
           ...mapGetters('grantedseat', [
                'getGsSeatArray',

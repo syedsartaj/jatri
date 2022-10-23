@@ -17,10 +17,8 @@
 </template>
 
 <script>
-import Ticket from '~~/components/Ticket/Ticket.vue';
 import { mapActions, mapGetters } from 'vuex';
 export default {
-     components: { Ticket },
      validate({ query }) {
           const { tranid } = query;
           return tranid;

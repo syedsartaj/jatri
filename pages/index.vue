@@ -265,15 +265,9 @@
 </template>
 
 <script>
-import SearchFilterForm from '../components/SearchForm/SearchFilterForm.vue';
-import HowToBuyModal from '../components/Modal/HowToBuyModal.vue';
-import Accordion from '../components/Accordion/Accordion.vue';
-import SlideLeft from '../components/Svg/SlideLeft.vue';
-import SlideRight from '../components/Svg/SlideRight.vue';
 import { mapActions, mapGetters } from "vuex";
 import Cookies from "js-cookie";
 export default {
-  components: { SearchFilterForm, HowToBuyModal, Accordion, SlideLeft, SlideRight },
   data(){
     return {
       howToBuyModalStatus : false,

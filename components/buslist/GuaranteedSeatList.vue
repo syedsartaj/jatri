@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import SingleTrip from '../Trip/SingleTrip.vue';
-import OpssAlert from '../Alerts/OpssAlert.vue';
 import {mapActions, mapGetters} from 'vuex';
 import Cookies from "js-cookie";
 
@@ -71,6 +69,5 @@ export default {
                deep: true,
           }
      },
-     components: { SingleTrip, OpssAlert }
 };
 </script>

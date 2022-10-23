@@ -50,14 +50,10 @@
 </template>
 
 <script>
-import ModifyFilter from '~~/components/TripFilter/ModifyFilter.vue';
-import SearchFilterForm from '~~/components/SearchForm/SearchFilterForm.vue';
-import TripFilterModal from '~~/components/Modal/TripFilterModal.vue';
-import GuaranteedSeatList from '../../components/buslist/GuaranteedSeatList.vue';
+
 import Cookies from "js-cookie";
 import { mapActions, mapGetters } from 'vuex';
 export default {
-     components: { ModifyFilter, SearchFilterForm, TripFilterModal, GuaranteedSeatList },
      validate({query}) {
           const {
                from,

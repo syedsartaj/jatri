@@ -148,9 +148,6 @@
 import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 import { dateTimeFormat } from '@/helpers/dateTimeFormat';
-import NagadOption from '../../../components/paymentMethode/NagadOption.vue';
-import GateWayOption from '../../../components/paymentMethode/GateWayOption.vue';
-import PaymentTimeoutAlert from '../../../components/Alerts/PaymentTimeoutAlert.vue';
 export default {
      validate({ query }) {
           const { tnxId } = query;
@@ -200,7 +197,6 @@ export default {
                this.paymentAllowStatus = false;
           }
      },
-     components: { NagadOption, GateWayOption, PaymentTimeoutAlert }
 }
 </script>
 

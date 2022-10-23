@@ -181,7 +181,9 @@ export const actions = {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
       commit('setSearchedTicketList', data.data)
+      console.log('data found', data.message);
       this.$successToast({ message: data.message });
+      console.log('data found');
       commit('setGsLoading', false);
       return true;
     } catch (error) {

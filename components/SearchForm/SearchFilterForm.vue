@@ -46,13 +46,9 @@
 </template>
 
 <script>
-import SearchCityFilter from './SearchCityFilter.vue';
-import SearchBusFilter from './SearchBusFilter.vue';
-import DatePicker from '../calendar/DatePicker.vue';
 import { mapGetters } from "vuex";
 import Cookies from 'js-cookie';
 export default {
-    components: { SearchCityFilter, SearchBusFilter, DatePicker },
     data() {
         return {
         departure: "",
