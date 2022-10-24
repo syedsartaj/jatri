@@ -67,7 +67,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters("grantedseat", ["getGsCities"]),
+        ...mapGetters("guarantedseat", ["getGsCities"]),
     },
     methods: {
         handleFromSubmit() {

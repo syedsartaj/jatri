@@ -98,10 +98,10 @@ export default {
           };
      },
      computed: {
-          ...mapGetters('grantedseat', ['getSearchedTicketList', 'getGsLoading'])
+          ...mapGetters('guarantedseat', ['getSearchedTicketList', 'getGsLoading'])
      },
      methods: {
-          ...mapActions('grantedseat', ['searchTicketAction']),
+          ...mapActions('guarantedseat', ['searchTicketAction']),
           handleFindTicket() {
                console.log('hitted');
                const payload = {};

@@ -29,7 +29,7 @@ export default {
           };
      },
      methods: {
-          ...mapActions("grantedseat", [
+          ...mapActions("guarantedseat", [
                "getPbPaymentConfirmAction",
                "sendMessageAction",
                "successTicketByMailAction",
@@ -37,7 +37,7 @@ export default {
           ]),
      },
      computed: {
-          ...mapGetters("grantedseat", ["getTicketDetails"])
+          ...mapGetters("guarantedseat", ["getTicketDetails"])
      },
      async created() {
           this.$nextTick(async () => {
@@ -63,7 +63,7 @@ export default {
           });
      },
      async asyncData({query, store}) {
-          await store.dispatch('grantedseat/getTicketByTnxId', {'transactionId': query.tranid})
+          await store.dispatch('guarantedseat/getTicketByTnxId', {'transactionId': query.tranid})
      }
 }
 </script>

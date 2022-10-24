@@ -28,10 +28,10 @@ export default {
           };
      },
      computed: {
-          ...mapGetters("grantedseat", ["getGsTrips", "getGsLoading"])
+          ...mapGetters("guarantedseat", ["getGsTrips", "getGsLoading"])
      },
      methods: {
-          ...mapActions("grantedseat", ["getPbScheduleDataAction"]),
+          ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
           selectTrip(tripId) {
                this.selectedBusId = tripId;
           },

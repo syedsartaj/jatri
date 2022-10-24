@@ -52,38 +52,38 @@
                     </div>
                </div>
                <!-- Ticket not found -->
-               <div class="flex justify-center pt-20 pb-[100px]">
+               <div class="flex justify-center pt-20 pb-[100px]" v-if="!getSearchedTicketList.tickets">
                     <OpssAlert
                          :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
                          :customStyle="'px-[64.5px]'"
                     />
                </div>
 
-               <div class="mt-10 flex justify-between items-center gap-x-4">
-                    <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-                    <p class="text-base font-medium whitespace-nowrap">Active Tickets</p>
-                    <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-               </div>
+               <!-- Active Tickets -->
+               <div class="mt-10" v-if="getSearchedTicketList.tickets">
+                    <div class="flex justify-between items-center gap-x-4">
+                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+                         <p class="text-base font-medium whitespace-nowrap">Active Tickets</p>
+                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+                    </div>
 
-               <div class="mt-6">
-                    get ticket = {{getSearchedTicketList}}
-                    <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id'>
-                    ticket = {{ticket}}
-                         <SingleTicketListItem
+                    <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id' class="mt-6">
+                         <SingleTicketListItem v-if="ticket.status"
                               :singlePrintTicketInfo='ticket'
                          />
                     </div>
                </div>
 
-               <div class="mt-10 flex justify-between items-center gap-x-4">
-                    <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-                    <p class="text-base font-medium whitespace-nowrap">Old Tickets</p>
-                    <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-               </div>
+               <!-- Old Tickets -->
+               <div class="mt-10" v-if="getSearchedTicketList.tickets">
+                    <div class="mt-10 flex justify-between items-center gap-x-4">
+                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+                         <p class="text-base font-medium whitespace-nowrap">Old Tickets</p>
+                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+                    </div>
 
-               <div class="mt-4">
-                    <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id'>
-                         <SingleTicketListItem
+                    <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id' class="mt-4">
+                         <SingleTicketListItem v-if="!ticket.status"
                               :singlePrintTicketInfo='ticket'
                          />
                     </div>
@@ -102,13 +102,15 @@ import { mapActions, mapGetters } from 'vuex';
                     phone: "",
                     pnr: "",
                     transactionId: "",
+                    activeTickets: [],
+                    oldTickets: [],
                };
           },
           computed: {
-               ...mapGetters('grantedseat', ['getSearchedTicketList'])
+               ...mapGetters('guarantedseat', ['getSearchedTicketList']),
           },
           methods: {
-               ...mapActions('grantedseat', ['searchTicketAction']),
+               ...mapActions('guarantedseat', ['searchTicketAction']),
                ticketData(e) {
                     console.log('hitted');
                     this.$nextTick(async () => {

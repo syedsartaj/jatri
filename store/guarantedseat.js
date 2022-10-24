@@ -181,15 +181,13 @@ export const actions = {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
       commit('setSearchedTicketList', data.data)
-      console.log('data found', data.message);
-      this.$successToast({ message: data.message });
-      console.log('data found');
+      // this.$successToast({ message: data.message });
       commit('setGsLoading', false);
       return true;
     } catch (error) {
       commit('setGsLoading', false);
       commit('setSearchedTicketList', [])
-      this.$errorToast({ message: error.response.data.message });
+      // this.$errorToast({ message: error.response.data.message });
       return false;
     }
   },
@@ -205,12 +203,12 @@ export const actions = {
         return ticket
       })
       commit('setSearchedTicketList', {...state.searchedTicketList, tickets: updatedTicketList})
-      this.$successToast({ message: data.message });
+      // this.$successToast({ message: data.message });
       commit('setGsLoading', false);
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      this.$errorToast({ message: error.response.data.message });
+      // this.$errorToast({ message: error.response.data.message });
       return false;
     }
   },

@@ -1,22 +1,22 @@
 <template>
   <div class="border border-[#DBDBDB] rounded-md">
-    <div id="printTicket" class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
+    <div :id="'printTicket-'+getTicketDetails._id" class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
       <div class="border-b border-[#DBDBDB] bg-white">
         <div class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]">
               <img src="@/assets/images/logo.svg" alt="jatri logo" class="w-10 lg:w-[51px]">
               <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
-              <!-- <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">{{ getTicketDetails.ticket.companyName }}</h2> -->
+              <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">{{ getTicketDetails.companyName }}</h2>
         </div>
         <div class="p-3 lg:p-6">
           <div class="flex flex-col lg:flex-row justify-between divide-y lg:divide-y-0 lg:divide-x divide-[#DBDBDB]">
             <div class="w-full lg:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.ticket.passenger.name }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.passenger.name }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Coach:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.ticket.coach }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.coach }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Departure time:</p>
@@ -24,23 +24,23 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seat fare:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ Math.ceil((getTicketDetails.ticket.payable + getTicketDetails.ticket.discount) / getTicketDetails.ticket.totalSeat) }} TK</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ Math.ceil((getTicketDetails.payable + getTicketDetails.discount) / getTicketDetails.totalSeat) }} TK</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seats:</p>
-                  <p v-for='seat in getTicketDetails.ticket.seatNumbers' :key='seat' class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ seat }}</p>
+                  <p v-for='seat in getTicketDetails.seatNumbers' :key='seat' class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ seat }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">From:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.ticket.fromCity }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.fromCity }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Boarding:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.ticket.boardingPlace }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.boardingPlace }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued on:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">24 Mar 2021, 10:20 PM</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{issuedOn}}</p>
               </div>
             </div>
             <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
@@ -58,15 +58,15 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">To:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.ticket.toCity }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.toCity }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.ticket.payable + getTicketDetails.ticket.discount }} TK</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.payable + getTicketDetails.discount }} TK</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.ticket.droppingPoint }}</p>
+                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.droppingPoint }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                   <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued by:</p>
@@ -79,7 +79,13 @@
     </div>
 
     <div class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
-      <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
+      <span v-if="!getTicketDetails.status" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
+        Cancelled
+      </span>
+      <span v-else-if="getTicketDetails.status && getTicketDetails.paymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST'" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
+        Requested For Cancel
+      </span>
+      <button v-if="getTicketDetails.isTicketCancelable" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
         Cancel ticket
       </button>
@@ -87,7 +93,7 @@
         <img src="@/assets/images/icons/download.svg" alt="" class="hidden lg:block">
         Download ticket
       </button>
-      <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4" @click="printTicket('printTicket')">
+      <button @click="printTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/print.svg" alt="" class="hidden lg:block">
         Print ticket
       </button>
@@ -97,7 +103,7 @@
 
 <script>
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: ['getTicketDetails'],
@@ -138,9 +144,18 @@ export default {
         printWindow.close();
       }
     },
+    ...mapActions('guarantedseat', ['cancelTicketAction']),
+    cancelTicket(ticketId) {
+      const payload = {
+        ticketId: ticketId
+      }
+      if (confirm("Are you sure to cancel this ticket?") == true) {
+        this.cancelTicketAction(payload)
+      }
+    },
   },
   computed: {
-    ...mapGetters('grantedseat', ['getSearchedTicketList']),
+    ...mapGetters('guarantedseat', ['getSearchedTicketList']),
     reportTimeWithAddTime () {
       return this.getTicketDetails && timeFormat(this.getTicketDetails.reportingDateTime, 0, 'lll');
     },
@@ -152,6 +167,9 @@ export default {
     },
     ticketDateTime () {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.ticketDateTime, 0, 'll');
+    },
+    issuedOn () {
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.createdAt, 0, 'lll');
     }
   }
 

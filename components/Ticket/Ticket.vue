@@ -40,7 +40,7 @@
                                    </div>
                                    <div class="text-xs mb-[14px] flex justify-start">
                                         <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued on:</p>
-                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">24 Mar 2021, 10:20 PM</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{issuedOn}}</p>
                                    </div>
                               </div>
                               <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
@@ -139,7 +139,7 @@ export default {
           },
      },
      computed: {
-          ...mapGetters("grantedseat", ["getTicketDetails"]),
+          ...mapGetters("guarantedseat", ["getTicketDetails"]),
           reportTimeWithAddTime() {
                return timeFormat(this.getTicketDetails.ticket.reportingDateTime, 0, 'lll');
           },
@@ -151,6 +151,9 @@ export default {
           },
           ticketDateTime() {
                return dateTimeFormat(this.getTicketDetails.ticket.ticketDateTime, 0, 'll')
+          },
+          issuedOn () {
+               return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.createdAt, 0, 'lll');
           }
      }
 }

@@ -280,14 +280,14 @@ export default {
   },
 
   async asyncData({store}) {
-    await store.dispatch("grantedseat/getCitiesList")
+    await store.dispatch("guarantedseat/getCitiesList")
   },
 
   computed: {
-    ...mapGetters("grantedseat", ["getGsLoading"]),
+    ...mapGetters("guarantedseat", ["getGsLoading"]),
   },
   methods: {
-    ...mapActions("grantedseat", [
+    ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
       "successTicketByMailAction",

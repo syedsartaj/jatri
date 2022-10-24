@@ -161,7 +161,7 @@ export default {
           };
      },
      async asyncData({ query, store }) {
-          await store.dispatch("grantedseat/getBookingInfoByTnxId", { "transactionId": query.tnxId });
+          await store.dispatch("guarantedseat/getBookingInfoByTnxId", { "transactionId": query.tnxId });
      },
      created() {
           if (this.getBookingInfoDetails) {
@@ -177,13 +177,13 @@ export default {
           }
      },
      computed: {
-          ...mapGetters("grantedseat", ["getBookingInfoDetails", "getGsLoading"]),
+          ...mapGetters("guarantedseat", ["getBookingInfoDetails", "getGsLoading"]),
           boardingDateTime() {
                return this.getBookingInfoDetails.invoice.departureDate && dateTimeFormat(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime, 0, "ll");
           }
      },
      methods: {
-          ...mapActions("grantedseat", [
+          ...mapActions("guarantedseat", [
                "TicketConfirmAction"
           ]),
           paymentHandler() {

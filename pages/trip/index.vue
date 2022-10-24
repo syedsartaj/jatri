@@ -73,7 +73,7 @@ export default {
      },
 
      computed: {
-          ...mapGetters('grantedseat', ['getGsTrips']),
+          ...mapGetters('guarantedseat', ['getGsTrips']),
           ...mapGetters('user', ['isLoggedIn']),
           ...mapGetters('agent', ['getFilteredAvailableServiceList']),
           filterQueryData() {
@@ -128,7 +128,7 @@ export default {
      },
 
      async asyncData({store}){
-          await store.dispatch('grantedseat/getCitiesList');
+          await store.dispatch('guarantedseat/getCitiesList');
      },
 
      watch: {

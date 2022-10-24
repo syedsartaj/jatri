@@ -256,7 +256,7 @@ export default {
           };
      },
      computed: {
-          ...mapGetters('grantedseat', [
+          ...mapGetters('guarantedseat', [
                'getGsSeatArray',
                'getGsSeatBoardingPointArray',
                'getGsPaymentPendingBlockData',
@@ -279,7 +279,7 @@ export default {
           },
      },
      methods: {
-          ...mapActions('grantedseat', [
+          ...mapActions('guarantedseat', [
                'getPbSeatViewAction',
                'getPbPaymentPendingBlockAction',
                'getPromoCodeAction'
