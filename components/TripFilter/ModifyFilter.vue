@@ -16,7 +16,7 @@
           <div>
                <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
                <div class="flex justify-between gap-[7px] mt-[10px]">
-                    <div class="w-[125px] h-9" v-for="busType in coachTypes" :key="busType">
+                    <div v-for="busType in coachTypes" :key="busType" class="w-[125px] h-9">
                          <input id="busType" type="checkbox" class="hidden">
                          <label for="busType">
                               <button 
@@ -40,19 +40,17 @@
           <hr class="my-5">
           <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
           <div class="mt-[10px] divide-y divide-dashed">
-               <div class="flex justify-between items-center my-2">
-                    <label for="lowToHigh" class="flex justify-start items-center gap-x-[9.52px]">
-                         <img src="@/assets/images/icons/upArrow.svg" alt="low to high">
-                         <p class="text-blackPrimary text-base font-normal">Price low to high</p>
+               <div v-for="priceDirection in priceFilter" :key="priceDirection" class="flex justify-between items-center my-2">
+                    <label :for="priceDirection" class="flex justify-start items-center gap-x-[9.52px]">
+                         <img :src="require(
+                                   priceDirection == 'l2h' ? '@/assets/images/icons/downArrow.svg':
+                                   '@/assets/images/icons/upArrow.svg'
+                              )
+                              " alt="Bus Type" class=""
+                         >
+                         <p class="text-blackPrimary text-base font-normal">{{priceDirection == 'l2h'? 'Price low to high' : 'Price high to low'}} </p>
                     </label>
-                    <input id="lowToHigh" type="checkbox" name="priceFilter" class="default:border-2 border-blackPrimary">
-               </div>
-               <div class="flex justify-between items-center my-2">
-                    <label for="highToLow" class="flex justify-start items-center gap-x-[9.52px]">
-                         <img src="@/assets/images/icons/downArrow.svg" alt="low to high">
-                         <p class="text-blackPrimary text-base font-normal">Price high to low</p>
-                    </label>
-                    <input id="highToLow" type="checkbox" name="priceFilter" class="default:border-2 border-blackPrimary">
+                    <input :id="priceDirection" type="checkbox" v-model="priceFiltrType" @click="setFiltertype(priceDirection)" name="priceFilter" class="default:border-2 border-blackPrimary">
                </div>
           </div>
      </div>
@@ -70,7 +68,9 @@ export default {
                destinationName: "",
                departingDate: new Date(),
                coachTypes: ["ac" , "non-ac", "all"],
+               priceFilter: ["l2h","h2l"],
                coachType: this.$route.query.type,
+               priceFiltrType: ''
           };
      },
      computed: {
@@ -79,15 +79,27 @@ export default {
      
      watch: {
           coachType(value) {
-                    if (value) {
+               if (value) {
                     this.handleFromSubmit();
                }
           },
+
+          priceFiltrType(value){
+               if(value){
+                    this.listFilterByPrice();
+               }
+          }
      },
 
      methods: {
           setCoachtype(type){
                this.coachType = type
+          },
+          setFiltertype(type){
+               this.priceFiltrType = type
+          },
+          listFilterByPrice(){
+               
           },
           handleFromSubmit() {
                const query = {
