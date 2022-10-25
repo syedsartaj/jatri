@@ -3,8 +3,8 @@
     <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
       <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
         <img v-if="icon" :src='icon' alt="">
-        <p v-if="label && date === ''" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
-        <p v-if="date !== ''" class="text-xs font-normal text-blackSecondery text-left"> {{ new Date(date).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+        <p v-if="label && dateUpdate === ''" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
+        <p v-if="dateUpdate !== ''" class="text-xs font-normal text-blackSecondery text-left"> {{ new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
       </div>
       <img src="@/assets/images/icons/mobileFilterDropdownIcon.svg" alt="" :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180': ''">
     </button>
@@ -14,7 +14,7 @@
       <v-date-picker
         class="inline-block h-full border-none"
         mode="date"
-        v-model="date"
+        v-model="dateUpdate"
         color="teal"
         :masks="masks"
         :model-config="modelConfig"
@@ -30,7 +30,14 @@ import { dateFormat } from "../../helpers/dateTimeFormat";
 import moment from 'moment';
 export default {
   name: "DatePicker",
+  model: {
+    prop: 'dateUpdate',
+    event: 'update:dateUpdate',
+  },
   props: {
+    dateUpdate: {
+      require: true
+    },
     icon: {
       type: String,
       required: false,
@@ -102,8 +109,8 @@ export default {
     }
   },
   watch: {
-    date() {
-      this.$emit("input", this.date);
+    dateUpdate() {
+      this.$emit("update:dateUpdate", this.dateUpdate);
       this.optionsIsOpen = false;
     },
   },

@@ -2,7 +2,7 @@
   <div class="w-1/4 px-6 py-4">
     <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
       <p v-if="label" class="text-xs font-normal text-blackSecondery text-left uppercase"> {{label}} </p>
-      <p v-if="date !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ new Date(date).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+      <p v-if="dateUpdate !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
       <p v-else class="text-base font-medium text-blackPrimary text-left"> 
           <span v-if='defaultOption'>{{ defaultOption }}</span>
           <span v-else>Select Journey Date</span>     
@@ -18,7 +18,7 @@
         <v-date-picker
           class="inline-block h-full border-none"
           mode="date"
-          v-model="date"
+          v-model="dateUpdate"
           color="teal"
           :masks="masks"
           :model-config="modelConfig"
@@ -35,7 +35,14 @@ import { dateFormat } from "../../helpers/dateTimeFormat";
 import moment from 'moment';
 export default {
   name: "DatePicker",
+  model: {
+    prop: 'dateUpdate',
+    event: 'update:dateUpdate',
+  },
   props: {
+    dateUpdate: {
+      require: true
+    },
     icon: {
       type: String,
       required: false,
@@ -107,8 +114,8 @@ export default {
     }
   },
   watch: {
-    date() {
-      this.$emit("input", this.date);
+    dateUpdate() {
+      this.$emit("update:dateUpdate", this.dateUpdate);
       this.optionsIsOpen = false;
     },
   },

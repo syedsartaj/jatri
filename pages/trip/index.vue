@@ -28,7 +28,7 @@
                </button>
                
                <div class="block lg:hiddden" v-if="tripFilterModify">
-                    <TripFilterModal :close="handleTripFilterModal"/>
+                    <TripFilterModal :close="handleTripFilterModal" @handleTripFilterModal="handleTripFilterModal"/>
                </div>
 
           </div>

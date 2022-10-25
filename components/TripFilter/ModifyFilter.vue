@@ -16,9 +16,25 @@
           <div>
                <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
                <div class="flex justify-between gap-[7px] mt-[10px]">
-                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/acIcon.svg" alt="Ac" class="">AC</button>
-                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/nonAcIcon.svg" alt="Non Ac" class="">Non AC</button>
-                    <button class="flex justify-center items-center gap-x-[10px] bg-[#ededed] w-[125px] rounded px-[6px] py-2 text-blackPrimary text-xs font-medium"><img src="@/assets/images/icons/anyConditionIcon.svg" alt="any" class="">Any</button>
+                    <div class="w-[125px] h-9" v-for="busType in coachTypes" :key="busType">
+                         <input id="busType" type="checkbox" class="hidden">
+                         <label for="busType">
+                              <button 
+                                   @click="setCoachtype(busType)"
+                                   class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
+                                   :class="coachType == busType ? 'bg-corporate text-white': 'bg-[#ededed] text-blackPrimary'"
+                              >
+                                   <img :src="require(
+                                             busType == 'ac' ? '@/assets/images/icons/acIcon.svg': 
+                                             busType == 'non-ac' ? '@/assets/images/icons/nonAcIcon.svg' : 
+                                             '@/assets/images/icons/anyConditionIcon.svg'
+                                        )
+                                        " alt="Bus Type" class=""
+                                   >
+                                   {{busType}}
+                              </button>
+                         </label>
+                    </div>
                </div>
           </div>
           <hr class="my-5">
@@ -29,22 +45,61 @@
                          <img src="@/assets/images/icons/upArrow.svg" alt="low to high">
                          <p class="text-blackPrimary text-base font-normal">Price low to high</p>
                     </label>
-                    <input id="lowToHigh" type="checkbox" class="default:border-2 border-blackPrimary">
+                    <input id="lowToHigh" type="checkbox" name="priceFilter" class="default:border-2 border-blackPrimary">
                </div>
                <div class="flex justify-between items-center my-2">
                     <label for="highToLow" class="flex justify-start items-center gap-x-[9.52px]">
                          <img src="@/assets/images/icons/downArrow.svg" alt="low to high">
                          <p class="text-blackPrimary text-base font-normal">Price high to low</p>
                     </label>
-                    <input id="highToLow" type="checkbox" class="default:border-2 border-blackPrimary">
+                    <input id="highToLow" type="checkbox" name="priceFilter" class="default:border-2 border-blackPrimary">
                </div>
           </div>
      </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import Cookies from 'js-cookie';
 export default {
+     data() {
+          return {
+               departure: "",
+               destination: "",
+               departureName: "",
+               destinationName: "",
+               departingDate: new Date(),
+               coachTypes: ["ac" , "non-ac", "all"],
+               coachType: this.$route.query.type,
+          };
+     },
+     computed: {
+          ...mapGetters("guarantedseat", ["getGsCities"]),
+     },
+     
+     watch: {
+          coachType(value) {
+                    if (value) {
+                    this.handleFromSubmit();
+               }
+          },
+     },
 
+     methods: {
+          setCoachtype(type){
+               this.coachType = type
+          },
+          handleFromSubmit() {
+               const query = {
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
+                    type: this.coachType,
+                    date: this.$route.query.date,
+               };
+               Cookies.remove('process-allow')
+               this.$router.push({ path: "/trip", query });
+          },
+     },
 }
 </script>
 

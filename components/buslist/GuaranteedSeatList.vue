@@ -43,10 +43,29 @@ export default {
                     this.activeTabIndex = 1;
                }
           },
+          test() {
+               this.$nextTick( async () => {
+                    this.$nuxt.$loading.start();
+                    const { from, to, type, date } = this.$route.query;
+                    const formattedDate = new Date(+date).toLocaleString("en-CA", {
+                         dateStyle: "short"
+                    });
+               
+                    const payload = {
+                         from: from,
+                         to: to,
+                         date: formattedDate,
+                         busType: type
+                    };
+               
+                    await this.getPbScheduleDataAction(payload);
+                    this.$nuxt.$loading.finish();
+               })
+          }
      },
      created() {
-          this.$nextTick(async () => {
-               this.$nuxt.$loading.start();
+          this.$nextTick(() => {
+               //this.$nuxt.$loading.start();
                const { from, to, type, date } = this.$route.query;
                const formattedDate = new Date(+date).toLocaleString("en-CA", {
                     dateStyle: "short"
@@ -57,8 +76,8 @@ export default {
                     date: formattedDate,
                     busType: type
                };
-               await this.getPbScheduleDataAction(payload);
-               this.$nuxt.$loading.finish();
+               //await this.getPbScheduleDataAction(payload);
+               //this.$nuxt.$loading.finish();
           });
      },
      watch: {
@@ -67,7 +86,14 @@ export default {
                     this.selectedBusId = null;
                },
                deep: true,
-          }
+          },
+          "$route.query": {
+               handler: function (value) {
+                    this.test()
+               },
+               deep: true,
+               immediate: true,
+          },
      },
 };
 </script>

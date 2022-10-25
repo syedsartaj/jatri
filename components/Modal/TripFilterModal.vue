@@ -5,7 +5,7 @@
           <div class="fixed inset-0 z-10 overflow-y-auto">
                <div class="flex min-h-full items-end justify-center lg:p-4 text-center sm:items-center sm:p-0">
                     <div class="relative transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
-                         <div class="bg-white p-4 lg:p-6">
+                         <div class="bg-white p-4 lg:p-6 w-screen" >
                               <div class="flex justify-between">
                                    <p class="text-blackPrimary text-base lg:text-[28px] lg:leading-9 font-medium">Filter</p>
                                    <button @click="close">
@@ -14,10 +14,19 @@
                               </div>
                               <hr class="my-4">
                               <div class="bg-white">
-                                   <div class="flex justify-between gap-[7px] mt-[10px]">
-                                        <button class="bg-[#ededed] hover:bg-corporate w-[125px] rounded px-[6px] py-2 text-blackPrimary hover:text-white text-xs font-medium">AC</button>
-                                        <button class="bg-[#ededed] hover:bg-corporate w-[125px] rounded px-[6px] py-2 text-blackPrimary hover:text-white text-xs font-medium">Non AC</button>
-                                        <button class="bg-[#ededed] hover:bg-corporate w-[125px] rounded px-[6px] py-2 text-blackPrimary hover:text-white text-xs font-medium">Any</button>
+                                   <div class="flex justify-start gap-x-[14px] mt-[10px]">
+                                        <div v-for="busType in coachTypes" :key="busType" class="w-[103px]">
+                                             <input id="busType" type="checkbox" class="hidden">
+                                             <label for="busType">
+                                                  <button
+                                                       @click="setCoachtype(busType)"
+                                                       class="w-full p-2 cursor-pointer rounded text-sm font-medium"
+                                                       :class="coachType == busType ? 'bg-corporate text-white': 'bg-[#ededed] text-blackPrimary'"
+                                                  >
+                                                       {{busType}}
+                                                  </button>
+                                             </label>
+                                        </div>
                                    </div>
                                    <hr class="my-4">
                                    <ul class='divide-y divide-dashed divide-[#DBDBDB]'>
@@ -44,8 +53,50 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import Cookies from 'js-cookie';
 export default {
      props: ['close'],
+     data() {
+          return {
+               departure: "",
+               destination: "",
+               departureName: "",
+               destinationName: "",
+               departingDate: new Date(),
+               coachTypes: ["ac" , "non-ac", "all"],
+               coachType: this.$route.query.type,
+          };
+     },
+     computed: {
+          ...mapGetters("guarantedseat", ["getGsCities"]),
+     },
+     
+     watch: {
+          coachType(value) {
+                    if (value) {
+                    this.handleFromSubmit();
+               }
+          },
+     },
+
+     methods: {
+          setCoachtype(type){
+               this.coachType = type
+          },
+          handleFromSubmit() {
+               const query = {
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
+                    type: this.coachType,
+                    date: this.$route.query.date,
+               };
+               Cookies.remove('process-allow')
+               this.$router.push({ path: "/trip", query });
+               this.$emit("handleTripFilterModal");
+
+          },
+     },
 }
 </script>
 
