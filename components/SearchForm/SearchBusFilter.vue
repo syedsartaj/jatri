@@ -1,7 +1,7 @@
 <template>
      <div class="w-1/4 px-6 py-4">
           <button class="block rounded-lg bg-white focus:outline-none w-full" @click="toggleDropdown">
-               <p v-if='label' class="text-xs font-normal text-blackSecondery text-left uppercase"> {{ label }} </p>
+               <p v-if="label" class="text-xs font-normal text-blackSecondery text-left uppercase"> {{ label }} </p>
                <p v-if="selectedOption !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ this.selectedOption.city_name.toUpperCase() }} </p>
 
                <p v-else class="text-base font-medium text-blackPrimary text-left"> 
@@ -14,7 +14,7 @@
           <div v-if='optionsIsOpen' class='mt-10 -ml-5 xl:w-[380px] w-80 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
                <div class='text-center p-4'>
                     <h2 class='font-inter text-sm xl:text-[20px] font-[400]'>
-                         <span>Select Bus Type</span>
+                         <span>{{defaultOption}}</span>
                     </h2>
                </div>
                <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-[344px] text-sm xl:text-md text-td_text px-4'>

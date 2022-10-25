@@ -1,31 +1,26 @@
 <template>
-  <div class="w-1/4 px-6 py-4">
-    <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
-      <p v-if="label" class="text-xs font-normal text-blackSecondery text-left uppercase"> {{label}} </p>
-      <p v-if="date !== ''" class="text-base font-medium text-blackPrimary text-left"> {{ new Date(date).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
-      <p v-else class="text-base font-medium text-blackPrimary text-left"> 
-          <span v-if='defaultOption'>{{ defaultOption }}</span>
-          <span v-else>Select Journey Date</span>     
-      </p>
+  <div class="">
+    <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
+      <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
+        <img v-if="icon" :src='icon' alt="">
+        <p v-if="label && date === ''" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
+        <p v-if="date !== ''" class="text-xs font-normal text-blackSecondery text-left"> {{ new Date(date).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+      </div>
+      <img src="@/assets/images/icons/mobileFilterDropdownIcon.svg" alt="" :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180': ''">
     </button>
-    <div v-if='optionsIsOpen' class='mt-10 -ml-5 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
-      <div class='text-center p-4'>
-        <h2 class='font-inter text-sm xl:text-[20px] font-[400]'>
-          <span>{{defaultOption}}</span>
-        </h2>
-      </div>
-      <div class="">
-        <v-date-picker
-          class="inline-block h-full border-none"
-          mode="date"
-          v-model="date"
-          color="teal"
-          :masks="masks"
-          :model-config="modelConfig"
-          :min-date="new Date()"
-          :max-date="maxDateAllow"
-        />
-      </div>
+
+    <!-- dropdown -->
+    <div v-if='optionsIsOpen' class='mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2'>
+      <v-date-picker
+        class="inline-block h-full border-none"
+        mode="date"
+        v-model="date"
+        color="teal"
+        :masks="masks"
+        :model-config="modelConfig"
+        :min-date="new Date()"
+        :max-date="maxDateAllow"
+      />
     </div>
   </div>
 </template>
