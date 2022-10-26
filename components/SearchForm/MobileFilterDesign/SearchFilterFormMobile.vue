@@ -55,7 +55,7 @@ export default {
                destination: "",
                departureName: "",
                destinationName: "",
-               departingDate: new Date(),
+               departingDate: "",
                coachType: "all",
                // passengerName: "",
                coachTypes: [
@@ -88,7 +88,7 @@ export default {
      watch: {
           "$route.query": {
                handler: function (value) {
-                    const { from, to } = value;
+                    const { from, to, date } = value;
                     if (from) {
                          this.getGsCities.filter(s => {
                          if (s.city_name.toLowerCase() === from.toLowerCase()) {
@@ -104,6 +104,9 @@ export default {
                               this.destinationName = s;
                          }
                          });
+                    }
+                    if(date) {
+                         this.departingDate = new Date(+date).toLocaleString('en-CA', {dateStyle: 'short'})
                     }
                },
                deep: true,

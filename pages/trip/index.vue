@@ -92,7 +92,8 @@ export default {
 
      methods: {
           modifySearch(){
-               window.location.href = "/";
+               console.log(this.$route.query);
+               this.$router.push({ path: '/', query: { ...this.$route.query } })
           },
           handleTripFilterModal() {
                this.tripFilterModify = !this.tripFilterModify

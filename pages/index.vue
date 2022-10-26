@@ -6,7 +6,7 @@
       <img src="@/assets/images/home/bannerImageWeb.svg" alt="" class="w-full hidden lg:block">
       <img src="@/assets/images/home/bannerImageMobile.svg" alt="" class="w-full block lg:hidden">
       
-      <div class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px] z-40 hidden lg:block">
+      <div v-if="!isMobile" class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px] z-40 hidden lg:block">
         <div class="">
           <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Book your Journey NOW!!!</h2>
           <h4 class="mt-4 text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
@@ -16,7 +16,7 @@
         </div>        
       </div>
 
-      <div class="absolute top-[59px] right-4 left-4 block lg:hidden">
+      <div v-if="isMobile" class="absolute top-[59px] right-4 left-4 block lg:hidden">
         <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book your Journey NOW!!!</h2>
         <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
         <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
@@ -276,11 +276,17 @@ export default {
       fromOption: "",
       passengerCount: "",
       activeTabIndex: 0,
+      isMobile : false,
     }
   },
 
   async asyncData({store}) {
     await store.dispatch("guarantedseat/getCitiesList")
+  },
+
+  mounted(){
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   },
 
   computed: {
@@ -311,6 +317,10 @@ export default {
       this.slideLeft = false;
       console.log("right click", this.scrollRight)
     },
+    onResize(){
+      this.isMobile = window.innerWidth < 768
+    }
+
   }
 }
 </script>
