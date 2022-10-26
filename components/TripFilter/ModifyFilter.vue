@@ -1,8 +1,20 @@
 <template>
      <div class="bg-white border border-[#ededed] rounded-[10px] px-4 py-6 w-[420px] h-[412px]">
           <div class="flex justify-between gap-x-8">
-               <button class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"><img src="@/assets/images/icons/leftArrow.svg" alt="left arrow" class="w-[5.19px] h-[8.49px]">Prev. Day</button>
-               <button class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary">Next Day<img src="@/assets/images/icons/rightArrow.svg" alt="right arrow" class="w-[5.19px] h-[8.49px]"></button>
+               <button 
+                    @click="previousDateFilter"
+                    class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
+               >
+                    <img src="@/assets/images/icons/leftArrow.svg" alt="left arrow" class="w-[5.19px] h-[8.49px]">
+                    Prev. Day
+               </button>
+               <button
+               @click="nextDateFilter"
+                    class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
+               >
+                    Next Day
+                    <img src="@/assets/images/icons/rightArrow.svg" alt="right arrow" class="w-[5.19px] h-[8.49px]">
+               </button>
           </div>
           <hr class="my-5">
           <div class="flex justify-between items-center">
@@ -58,6 +70,8 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import { timeFormat } from '@/helpers/dateTimeFormat';
+import moment from 'moment';
 import Cookies from 'js-cookie';
 export default {
      data() {
@@ -66,7 +80,7 @@ export default {
                destination: "",
                departureName: "",
                destinationName: "",
-               departingDate: new Date(),
+               departingDate: this.$route.query.date,
                coachTypes: ["ac" , "non-ac", "all"],
                coachType: this.$route.query.type,
                priceFilter: ["l2h","h2l"],
@@ -107,6 +121,30 @@ export default {
                Cookies.remove('process-allow')
                this.$router.push({ path: "/trip", query });
           },
+          previousDateFilter() {
+               const convertedDate = new Date(+this.$route.query.date).toLocaleString('en-CA', {dateStyle: 'short'})
+               const previousDate = moment(convertedDate).add(-1, 'days');
+               const query = {
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
+                    type: this.$route.query.type,
+                    date: previousDate.valueOf(),
+               };
+               Cookies.remove('process-allow')
+               this.$router.push({ path: "/trip", query });
+          },
+          nextDateFilter() {
+               const convertedDate = new Date(+this.$route.query.date).toLocaleString('en-CA', {dateStyle: 'short'})
+               const nextDate = moment(convertedDate).add(1, 'days');
+               const query = {
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
+                    type: this.$route.query.type,
+                    date: nextDate.valueOf(),
+               };
+               Cookies.remove('process-allow')
+               this.$router.push({ path: "/trip", query });
+          }
      },
 }
 </script>
