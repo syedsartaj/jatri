@@ -7,10 +7,10 @@
           <hr class="my-5">
           <div class="flex justify-between items-center">
                <h2 class="font-medium text-2xl text-blackPrimary">Filter Options</h2>
-               <button class="flex justify-between items-center gap-x-[9.33px]">
+               <!-- <button class="flex justify-between items-center gap-x-[9.33px]">
                     <img src="@/assets/images/icons/resetIcon.svg" alt="reset filter" class="w-[13.33px]">
                     <p class="text-[#E0293B] font-medium text-xs">Reset Filter</p>
-               </button>
+               </button> -->
           </div>
           <hr class="my-5">
           <div>
@@ -50,7 +50,7 @@
                          >
                          {{priceDirection == 'l2h'? 'Price low to high' : 'Price high to low'}}
                     </label>
-                    <input :id="priceDirection" type="checkbox" @click="priceFiltrType = priceDirection" :checked="priceFiltrType === priceDirection" class="default:border-2 border-blackPrimary">
+                    <input :id="priceDirection" type="checkbox" @click="priceFilterType = priceDirection" :checked="priceFilterType === priceDirection" class="default:border-2 border-blackPrimary">
                </div>
           </div>
      </div>
@@ -68,9 +68,9 @@ export default {
                destinationName: "",
                departingDate: new Date(),
                coachTypes: ["ac" , "non-ac", "all"],
-               priceFilter: ["l2h","h2l"],
                coachType: this.$route.query.type,
-               priceFiltrType: null
+               priceFilter: ["l2h","h2l"],
+               priceFilterType: null
           };
      },
      computed: {
@@ -85,8 +85,7 @@ export default {
                }
           },
 
-          priceFiltrType(value){
-          
+          priceFilterType(value){
                if(value){
                     this.sortedTrip(value);
                }
@@ -97,12 +96,6 @@ export default {
           ...mapMutations("guarantedseat", ["sortedTrip"]),
           setCoachtype(type){
                this.coachType = type
-          },
-          setFiltertype(type){
-               this.priceFiltrType = type
-          },
-          listFilterByPrice(){
-               
           },
           handleFromSubmit() {
                const query = {

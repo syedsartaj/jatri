@@ -3,9 +3,9 @@
           <div class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"></div>
 
           <div class="fixed inset-0 z-10 overflow-y-auto">
-               <div class="flex min-h-full items-end justify-center lg:p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
-                         <div class="bg-white p-4 lg:p-6 w-screen" >
+               <div class="flex min-h-full items-end justify-center lg:p-4 text-center lg:items-center sm:p-0">
+                    <div class="relative transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full md:max-w-[800px]">
+                         <div class="bg-white p-4 lg:p-6 w-full" >
                               <div class="flex justify-between">
                                    <p class="text-blackPrimary text-base lg:text-[28px] lg:leading-9 font-medium">Filter</p>
                                    <button @click="close">
@@ -29,19 +29,23 @@
                                         </div>
                                    </div>
                                    <hr class="my-4">
-                                   <ul class='divide-y divide-dashed divide-[#DBDBDB]'>
-                                        <li class='cursor-pointer text-base font-normal text-corporate hover:text-corporate relative py-[10px]' @click='selectOption()'>
-                                             Price low to high
-                                             <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
-                                        </li>
-                                        <li class='cursor-pointer text-base font-normal text-blackPrimary hover:text-corporate relative py-[10px]' @click='selectOption()'>
-                                             Price high to low
-                                        </li>
-                                   </ul>
+                                   <div class='divide-y divide-dashed divide-[#DBDBDB]'>
+                                        <ul v-for="priceDirection in priceFilter" :key="priceDirection">
+                                             <label 
+                                                  :for="priceDirection" 
+                                                  class="cursor-pointer text-base font-normal flex justify-between py-[10px]"
+                                                  :class="priceFilterType === priceDirection ? 'text-corporate ': 'text-blackPrimary hover:text-corporate'"
+                                             >
+                                                  {{priceDirection == 'l2h'? 'Price low to high' : 'Price high to low'}}
+                                                  <img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3" :class="priceFilterType === priceDirection ? 'flex' : 'hidden'">
+                                             </label>
+                                             <input :id="priceDirection" type="checkbox" @click="priceFilterType = priceDirection" :checked="priceFilterType === priceDirection" class="hidden">
+                                        </ul>
+                                   </div>
 
                                    <div class="flex justify-center gap-x-5 pb-7 pt-[14px]">
-                                        <button class="px-[70.5px] py-[10px] border border-[#808083] hover:border-corporate bg-white hover:bg-corporate text-corporate hover:text-white text-sm rounded-full">Reset</button>
-                                        <button class="px-[70.5px] py-[10px] border border-[#808083] hover:border-corporate bg-white hover:bg-corporate text-corporate hover:text-white text-sm rounded-full">Apply</button>
+                                        <!-- <button class="px-[70.5px] py-[10px] border border-[#808083] hover:border-corporate bg-white hover:bg-corporate text-corporate hover:text-white text-sm rounded-full">Reset</button> -->
+                                        <button class="px-[70.5px] py-[10px] border border-[#808083] hover:border-corporate bg-white hover:bg-corporate text-corporate hover:text-white text-sm rounded-full" @click="close">Apply</button>
                                    </div>
                               </div>
                          </div>
@@ -53,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import Cookies from 'js-cookie';
 export default {
      props: ['close'],
@@ -66,6 +70,8 @@ export default {
                departingDate: new Date(),
                coachTypes: ["ac" , "non-ac", "all"],
                coachType: this.$route.query.type,
+               priceFilter: ["l2h","h2l"],
+               priceFilterType: null
           };
      },
      computed: {
@@ -78,9 +84,15 @@ export default {
                     this.handleFromSubmit();
                }
           },
+          priceFilterType(value){
+               if(value){
+                    this.sortedTrip(value);
+               }
+          }
      },
 
      methods: {
+          ...mapMutations("guarantedseat", ["sortedTrip"]),
           setCoachtype(type){
                this.coachType = type
           },
