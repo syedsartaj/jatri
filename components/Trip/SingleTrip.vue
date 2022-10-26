@@ -100,11 +100,11 @@
                                                             height='24'
                                                             width='24'
                                                        />
-                                                       <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
+                                                       <!-- <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
                                                             {{ colSeat.seatNo }}
-                                                       </p>
+                                                       </p> -->
                                                   </div>
-                                                  <div v-else :key='colIndex' class='w-[30px] h-[30px]'></div>
+                                                  <div v-else :key='colIndex' class='w-6 h-6'></div>
                                              </template>
                                         </div>
                                    </div>

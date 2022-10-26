@@ -267,5 +267,12 @@ export const mutations = {
   setGsPaymentPendingBlockData: (state, data) =>
     (state.gsPaymentPendingBlockData = data),
   setPromoCode: (state, data) => (state.promoCode = data),
-  resetPromoCode: (state) => (state.promoCode = {})
+  resetPromoCode: (state) => (state.promoCode = {}),
+  sortedTrip: (state, data) => {
+    if(data === 'l2h') {
+      state.gsTrips.sort((a,b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
+    } else {
+      state.gsTrips.sort((a,b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
+    }
+  }
 };

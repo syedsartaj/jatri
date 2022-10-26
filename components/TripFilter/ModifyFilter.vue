@@ -7,10 +7,10 @@
           <hr class="my-5">
           <div class="flex justify-between items-center">
                <h2 class="font-medium text-2xl text-blackPrimary">Filter Options</h2>
-               <div class="flex justify-between items-center gap-x-[9.33px]">
+               <button class="flex justify-between items-center gap-x-[9.33px]">
                     <img src="@/assets/images/icons/resetIcon.svg" alt="reset filter" class="w-[13.33px]">
                     <p class="text-[#E0293B] font-medium text-xs">Reset Filter</p>
-               </div>
+               </button>
           </div>
           <hr class="my-5">
           <div>
@@ -25,7 +25,7 @@
                                    :class="coachType == busType ? 'bg-corporate text-white': 'bg-[#ededed] text-blackPrimary'"
                               >
                                    <img :src="require(
-                                             busType == 'ac' ? '@/assets/images/icons/acIcon.svg': 
+                                             busType == 'ac' ? '@/assets/images/icons/acIcon.svg':
                                              busType == 'non-ac' ? '@/assets/images/icons/nonAcIcon.svg' : 
                                              '@/assets/images/icons/anyConditionIcon.svg'
                                         )
@@ -40,24 +40,24 @@
           <hr class="my-5">
           <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
           <div class="mt-[10px] divide-y divide-dashed">
-               <div v-for="priceDirection in priceFilter" :key="priceDirection" class="flex justify-between items-center my-2">
-                    <label :for="priceDirection" class="flex justify-start items-center gap-x-[9.52px]">
+               <div v-for="priceDirection in priceFilter" :key="priceDirection" class="flex justify-between items-center my-2 last:pt-[6px]">
+                    <label :for="priceDirection" class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal">
                          <img :src="require(
                                    priceDirection == 'l2h' ? '@/assets/images/icons/downArrow.svg':
                                    '@/assets/images/icons/upArrow.svg'
                               )
-                              " alt="Bus Type" class=""
+                              " alt="Price Filter Type" class=""
                          >
-                         <p class="text-blackPrimary text-base font-normal">{{priceDirection == 'l2h'? 'Price low to high' : 'Price high to low'}} </p>
+                         {{priceDirection == 'l2h'? 'Price low to high' : 'Price high to low'}}
                     </label>
-                    <input :id="priceDirection" type="checkbox" v-model="priceFiltrType" @click="setFiltertype(priceDirection)" name="priceFilter" class="default:border-2 border-blackPrimary">
+                    <input :id="priceDirection" type="checkbox" @click="priceFiltrType = priceDirection" :checked="priceFiltrType === priceDirection" class="default:border-2 border-blackPrimary">
                </div>
           </div>
      </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import Cookies from 'js-cookie';
 export default {
      data() {
@@ -70,11 +70,12 @@ export default {
                coachTypes: ["ac" , "non-ac", "all"],
                priceFilter: ["l2h","h2l"],
                coachType: this.$route.query.type,
-               priceFiltrType: ''
+               priceFiltrType: null
           };
      },
      computed: {
           ...mapGetters("guarantedseat", ["getGsCities"]),
+          ...mapGetters("guarantedseat", ["getGsTrips", "getGsLoading"])
      },
      
      watch: {
@@ -85,13 +86,15 @@ export default {
           },
 
           priceFiltrType(value){
+          
                if(value){
-                    this.listFilterByPrice();
+                    this.sortedTrip(value);
                }
           }
      },
 
      methods: {
+          ...mapMutations("guarantedseat", ["sortedTrip"]),
           setCoachtype(type){
                this.coachType = type
           },
