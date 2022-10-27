@@ -14,23 +14,23 @@
                     <div class="px-[14px] py-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Boarding point:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">Amtoli Bus Stand</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.invoice.boardingPoint}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Departure time:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary"> 9:15 PM</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary"> {{timeFormate(getBookingInfoDetails.invoice.departureTime)}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Name:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">Namzus Sakib</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.name}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Mobile number:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">+08801708630439</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.phone}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Email address:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary">sakib.jatri@gmail.com</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.email}}</p>
                          </div>
                     </div>
                </div>
@@ -61,15 +61,15 @@
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Gateway fee</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.paymentGatewayCommission }}</p>
                          </div>
-                         <div class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed">
-                              <div class="px-4 py-[10px] bg-[#F7F7F7] w-[226px] lg:w-[395px]"><span class="text-blackLight text-sm font-normal">BUS100</span></div>
+                         <!-- <div class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed">
+                              <input v-model="promoCode" placeholder="BUS100" class="px-4 py-[10px] bg-[#F7F7F7] w-[226px] lg:w-[395px] text-blackLight focus:outline-0 text-sm font-normal">
 
-                              <!-- Apply promo -->
-                              <!-- <button class="w-40 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary ">
-                                   <p class="text-[#E0293B] text-xs font-medium">Apply promo</p>
-                              </button> -->
-
-                              <!-- removo promo -->
+                              <button
+                                   @click='applyPromo'
+                                   :disabled='!promoCode'
+                                   :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'" class="w-40 rounded-full lg:text-base text-xs font-medium">
+                                   <p class="">Apply promo</p>
+                              </button>
                               <button class="flex justify-center items-center gap-x-[11.76px] w-40 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary ">
                                    <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
                                    <p class="text-[#E0293B] text-xs font-medium">Remove promo</p>
@@ -78,7 +78,7 @@
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-sm font-normal text-blackLight">Promo</p>
                               <p class="text-base font-medium text-[#E0293B]"> -198</p>
-                         </div>
+                         </div> -->
                     </div>
                     <div class="flex justify-between bg-[#EFF7FD] border-t rounded-b px-4 py-[10px]">
                          <p class="text-sm font-normal text-blackLight">Total</p>
@@ -155,9 +155,9 @@ export default {
      },
      data() {
           return {
-               activePlan: "",
+               activePlan: "sslcommerz",
                paymentAllowStatus: true,
-               paymentValidateTime: 0
+               paymentValidateTime: 0,
           };
      },
      async asyncData({ query, store }) {
@@ -186,6 +186,9 @@ export default {
           ...mapActions("guarantedseat", [
                "TicketConfirmAction"
           ]),
+          timeFormate(time){
+               return moment(time, "hh:mm").format('LT')
+          },
           paymentHandler() {
                const payload = {
                     paymentId: this.getBookingInfoDetails._id,
@@ -195,7 +198,7 @@ export default {
           },
           timeUp() {
                this.paymentAllowStatus = false;
-          }
+          },
      },
 }
 </script>

@@ -3,74 +3,78 @@
     <div :id="'printTicket-'+getTicketDetails._id" class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
       <div class="border-b border-[#DBDBDB] bg-white">
         <div class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]">
-              <img src="@/assets/images/logo.svg" alt="jatri logo" class="w-10 lg:w-[51px]">
-              <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
-              <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">{{ getTicketDetails.companyName }}</h2>
+          <img src="@/assets/images/logo.svg" alt="jatri logo" class="w-10 lg:w-[51px]">
+          <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
+          <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">{{ getTicketDetails.companyName }}</h2>
         </div>
         <div class="p-3 lg:p-6">
           <div class="flex flex-col lg:flex-row justify-between divide-y lg:divide-y-0 lg:divide-x divide-[#DBDBDB]">
             <div class="w-full lg:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.passenger.name }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.passenger.name }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Coach:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.coach }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Coach:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.coach }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Departure time:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ departureDateTime }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Departure time:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ departureDateTime }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seat fare:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ Math.ceil((getTicketDetails.payable + getTicketDetails.discount) / getTicketDetails.totalSeat) }} TK</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seat fare:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ Math.ceil((getTicketDetails.payable + getTicketDetails.discount) / getTicketDetails.totalSeat) }} TK</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seats:</p>
-                  <p v-for='seat in getTicketDetails.seatNumbers' :key='seat' class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ seat }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seats:</p>
+                <p v-for='seat in getTicketDetails.seatNumbers' :key='seat' class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ seat }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">From:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.fromCity }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">From:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.fromCity }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Boarding:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.boardingPlace }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Boarding:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.boardingPlace }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued on:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{issuedOn}}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued on:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{issuedOn}}</p>
               </div>
             </div>
             <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Req ID:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">BX125J</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Transection ID:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{getTicketDetails.transactionId}}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Journey date:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ tripDate }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">PNR Code:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{getTicketDetails.pnrCode}}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ reportTimeWithAddTime }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Journey date:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ tripDate }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">To:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.toCity }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ reportTimeWithAddTime }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.payable + getTicketDetails.discount }} TK</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">To:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.toCity }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.droppingPoint }}</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.payable + getTicketDetails.discount }} TK</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                  <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued by:</p>
-                  <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Jatri.co</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.droppingPoint }}</p>
+              </div>
+              <div class="text-xs mb-[14px] flex justify-start">
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Issued by:</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">Jatri.co</p>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 <template>
      <div class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4" :ref="`bus-selector-${busIndex}`">
-          <div class="lg:flex justify-between gap-x-6" :class="selected ? 'border-b border-[#DBDBDB]': 'border-0 border-[#DBDBDB]'">
+          <div class="lg:flex justify-between gap-x-6" :class="selectedTrip === busIndex ? 'border-b border-[#DBDBDB]': 'border-0 border-[#DBDBDB]'">
                <div class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]">
                     <div class="flex justify-start gap-x-4 items-center pb-[15px] order-first">
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
@@ -112,7 +112,7 @@
                          </div>
                     </div>
 
-                    <div class="w-full lg:w-1/2 border-t lg:border-l lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
+                    <div class="w-full lg:w-1/2 lg:border-l lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
                          <!-- Trip Information -->
                          <div class="">
                               <SelectOption
@@ -132,7 +132,7 @@
                          </div>
 
                          <!-- Seat Fare Table -->
-                         <div class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
+                         <div v-if='selectedSeatsObj.length' class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
                               <div class="flex justify-between px-[14px] pt-[10px] pb-[6px] border-b">
                                    <p class="text-sm lg:text-xs font-semibold text-blackPrimary">Seat</p>
                                    <p class="text-sm lg:text-xs font-semibold text-blackPrimary">Fare</p>
@@ -189,9 +189,36 @@
                               />
                          </div>
 
-                         <!-- <button @click="riderectToPayment" class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6">
-                              Next
-                         </button> -->
+                         <div class="mt-4">
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Promo Code</span></h2>
+                              <div class="flex justify-between gap-x-4">
+                                   <input
+                                        type="text"
+                                        id="promo"
+                                        v-model="promoCode" 
+                                        placeholder="Enter Promo Code" 
+                                        class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+                                   />
+
+                                   <!-- Apply Promo -->
+                                   <button
+                                        @click='applyPromo'
+                                        :disabled='!promoCode'
+                                        :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'" 
+                                        class="w-1/4 mt-[10px] py-[10px] rounded-full text-xs font-medium"
+                                   >
+                                        Apply promo
+                                   </button>
+
+                                   <!-- Remove Promo -->
+                                   <!-- <button 
+                                             class="flex justify-center items-center gap-x-[11.76px] w-1/4 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary"
+                                        >
+                                        <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
+                                        <p class="text-[#E0293B] text-xs font-medium">Remove promo</p>
+                                   </button> -->
+                              </div>
+                         </div>
                          <LoaderButton
                               :class="
                                    (moduleType == 'paribahan' && !passengerEmail) ||
@@ -322,9 +349,6 @@ export default {
                          el.scrollIntoView({ behavior: "smooth", block: "start" });
                     }
                });
-          },
-          riderectToPayment() {
-               window.location.href= '/payment';
           },
           addSeatHandler (seat) {
                if (this.selectedSeatIds.includes(seat.id)) {
@@ -528,9 +552,9 @@ export default {
                          .then(res => {
                               if (res.statusCode === 200 && !res.data) {
                                    this.totalPromoAmount = 0;
-                                   this.$errorToast({ message: "Promo Code does not match!" });
+                                   //this.$errorToast({ message: "Promo Code does not match!" });
                               } else if (res.statusCode === 200 && res.data) {
-                                   this.$successToast({ message: "Promo Applied Successfully!" });
+                                   //this.$successToast({ message: "Promo Applied Successfully!" });
                               }
                          }).catch (error => {
                               this.resetPromo();

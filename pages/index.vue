@@ -69,8 +69,8 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] flex justify-center">
-      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden w-[380px] lg:w-[1240px] h-[264px] lg:h-[464px]">
+    <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
+      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden w-[380px] lg:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
 
@@ -78,41 +78,48 @@
             <button @click="scrollLeft" class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center" :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
               <SlideLeft
                 :fill="slideLeft ? '#151414' : '#8D8D8F'"
-                width="10"
-                height="24"
+                width="8.43"
+                height="13.79"
               />
             </button>
             <button @click="scrollRight" class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center" :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
               <SlideRight
                 :fill="slideRight ? '#151414' : '#8D8D8F'"
-                width="10"
-                height="24"
+                width="8.43"
+                height="13.79"
               />
             </button>
           </div>
         </div>
-        <!-- <div class="flex justify-between gap-x-2 lg:gap-x-6 py-5 lg:py-[56px] pl-[18px] lg:pl-[60px] sliderContainer scroll-smooth w-full">
-          <marquee behavior="alternative" direction="" class="w-full max-w-full flex flex-row">
-            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px]">
-          </marquee>
-        </div> -->
-
-        <div class="scroll-parent my-5 lg:my-[56px] ml-[18px] lg:ml-[60px] h-full sliderContainer scroll-smooth">
-          <div class="scroll-element primary flex justify-between gap-x-2 lg:gap-x-6">
-            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-          </div>
-          <div class="scroll-element secondary flex justify-between gap-x-2 lg:gap-x-6">
-            <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-            <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px]">
-          </div>
+        <div class="my-5 lg:my-[56px] ml-[18px] lg:ml-[60px] h-full">
+          <template>
+            <div v-if="!isMobile">
+              <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
+                <div>
+                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+                <div>
+                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+                <div>
+                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+                <div>
+                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+              </VueSlickCarousel>
+            </div>
+            <div v-if="isMobile">
+              <VueSlickCarousel v-bind="settingsForMobileDevice" ref="carousel">
+                <div>
+                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+                <div>
+                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
+              </VueSlickCarousel>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -267,6 +274,9 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import Cookies from "js-cookie";
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
   data(){
     return {
@@ -277,9 +287,33 @@ export default {
       passengerCount: "",
       activeTabIndex: 0,
       isMobile : false,
+      settingsForLargeDevice : {
+        "arrows": false,
+        "dots": false,
+        "infinite": true,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "speed": 2000,
+        "autoplaySpeed": 5000,
+        "cssEase": "linear",
+        "centerMode": true,
+      },
+      settingsForMobileDevice : {
+        "arrows": false,
+        "dots": false,
+        "infinite": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "speed": 2000,
+        "autoplaySpeed": 5000,
+        "cssEase": "linear",
+        "centerMode": true,
+      }
     }
   },
-
+  components: { VueSlickCarousel },
   async asyncData({store}) {
     await store.dispatch("guarantedseat/getCitiesList")
   },
@@ -304,18 +338,14 @@ export default {
     },
 
     scrollLeft() {
-      let content = document.querySelector(".sliderContainer");
-      content.scrollLeft -= 200;
+      this.$refs.carousel.prev()
       this.slideLeft = true;
       this.slideRight = false;
-      console.log("left click", this.scrollLeft)
     },
     scrollRight() {
-      let content = document.querySelector(".sliderContainer");
-      content.scrollLeft += 200;
+      this.$refs.carousel.next()
       this.slideRight = true;
       this.slideLeft = false;
-      console.log("right click", this.scrollRight)
     },
     onResize(){
       this.isMobile = window.innerWidth < 768
@@ -351,6 +381,16 @@ export default {
 
 .secondary {
   animation: secondary 10s linear infinite;
+}
+
+.slick-slide {
+  margin: 0 8px;
+}
+
+@media screen and (min-width:992px) {
+  .slick-slide {
+    margin: 0 24px;
+  }
 }
 
 @keyframes primary {

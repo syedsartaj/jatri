@@ -4,10 +4,10 @@
       <h2 class="text-xs lg:text-base font-medium text-blackPrimary"> {{ label }} </h2>
       <button @click="toggleDropdown" class="z-10 block bg-[#f7f7f7] px-4 py-[13px] mt-[10px] w-full rounded focus:outline-none">
           <div class="flex justify-between items-center">
-            <!-- <p v-if="selectedOption !== ''" class="text-blackPrimary text-sm font-normal">
+            <p v-if="selectedOption !== ''" class="text-blackPrimary text-sm font-normal">
               {{ propertyName ? selectedOption[propertyName] : selectedOption }}
-            </p> -->
-            <p class="text-blackSecondery text-sm font-normal">Select Boarding point</p>
+            </p>
+            <p v-else class="text-blackSecondery text-sm font-normal">Select Boarding point</p>
             <img src="@/assets/images/icons/dropdown.svg" alt="dropdown" />
           </div>
       </button>
@@ -35,21 +35,17 @@
           {{ propertyName ? option[propertyName] : option }}
           <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
         </li> -->
-        <li class='cursor-pointer font-inter py-[14px] font-medium text-corporate hover:text-corporate relative' @click='selectOption()'>
-          Dhaka
-          <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
-        </li>
-        <li class='cursor-pointer font-inter py-[14px] font-normal hover:text-blackPrimary relative' @click='selectOption()'>
-          Dhaka
-        </li>
-        <li class='cursor-pointer font-inter py-[14px] font-normal hover:text-blackPrimary relative' @click='selectOption()'>
-          Dhaka
-        </li>
-        <li class='cursor-pointer font-inter py-[14px] font-normal hover:text-blackPrimary relative' @click='selectOption()'>
-          Dhaka
-        </li>
-        <li class='cursor-pointer font-inter py-[14px] font-normal hover:text-blackPrimary relative' @click='selectOption()'>
-          Dhaka
+        <li v-for="(option, index) in options" :key="index" 
+          class='cursor-pointer font-inter py-[14px] font-medium  hover:text-corporate relative'
+          :class="propertyName && option[propertyName] === selectedOption[propertyName]
+            ? 'text-corporate'
+            : option === selectedOption
+            ? 'text-corporate'
+            : 'text-blackSecondery'
+          "
+          @click='selectOption(option)'>
+          {{ propertyName ? option[propertyName] : option }}
+          <span v-if='option === selectedOption' class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
         </li>
       </ul>
     </div>
@@ -59,6 +55,10 @@
 <script>
 export default {
   name: "SelectOption",
+  model: {
+    prop: 'boardingPoint',
+    event: 'input'
+  },
   props: {
     label: {
       type: String,
@@ -68,11 +68,12 @@ export default {
       type: String,
       required: false,
     },
-    // options: {
-    //   type: Array,
-    //   required: true,
-    // },
+    options: {
+      type: Array,
+      required: true,
+    },
     propertyName: "",
+    boardingPoint: ''
   },
   data() {
     return {

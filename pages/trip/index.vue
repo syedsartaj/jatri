@@ -92,7 +92,6 @@ export default {
 
      methods: {
           modifySearch(){
-               console.log(this.$route.query);
                this.$router.push({ path: '/', query: { ...this.$route.query } })
           },
           handleTripFilterModal() {

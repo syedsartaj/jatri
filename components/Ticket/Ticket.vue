@@ -45,8 +45,12 @@
                               </div>
                               <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
                                    <div class="text-xs mb-[14px] flex justify-start">
-                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Req ID:</p>
-                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">BX125J</p>
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Transection ID:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{getTicketDetails.ticket.transactionId}}</p>
+                                   </div>
+                                   <div class="text-xs mb-[14px] flex justify-start">
+                                        <p class="w-1/2 font-normal text-[#4D4D4F] text-right">PNR Code:</p>
+                                        <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{getTicketDetails.ticket.pnrCode}}</p>
                                    </div>
                                    <div class="text-xs mb-[14px] flex justify-start">
                                         <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Journey date:</p>
@@ -78,7 +82,7 @@
                </div>
           </div>
 
-          <div class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
+          <div v-if="!pageVind" class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
                <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
                     <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
                     Cancel ticket
@@ -100,6 +104,9 @@ import { mapGetters } from 'vuex';
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
 export default {
+     props: {
+          pageVind: String
+     },
      methods: {
           printTicket(id) {
                let divContents = window.document.getElementById(id).innerHTML;

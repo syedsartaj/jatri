@@ -112,7 +112,6 @@ import { mapActions, mapGetters } from 'vuex';
           methods: {
                ...mapActions('guarantedseat', ['searchTicketAction']),
                ticketData(e) {
-                    console.log('hitted');
                     this.$nextTick(async () => {
                          this.$nuxt.$loading.start();
                          e.preventDefault();
@@ -132,7 +131,6 @@ import { mapActions, mapGetters } from 'vuex';
                               formData.phone = "";
                               formData.pnr = "";
                          }
-                         console.log("formData: ", formData);
                          if (this.pnr || this.phone || this.transactionId) {
                               this.error = false;
                               await this.searchTicketAction(formData);

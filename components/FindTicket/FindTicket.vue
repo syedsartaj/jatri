@@ -103,7 +103,6 @@ export default {
      methods: {
           ...mapActions('guarantedseat', ['searchTicketAction']),
           handleFindTicket() {
-               console.log('hitted');
                const payload = {};
                if (this.selectedTab === 0) {
                     payload.phone = this.phone;
@@ -120,7 +119,6 @@ export default {
                     payload.phone = "";
                     payload.pnr = "";
                }
-               console.log("payload: ", payload);
 
                this.$nextTick(async (e) => {
                     this.$nuxt.$loading.start();

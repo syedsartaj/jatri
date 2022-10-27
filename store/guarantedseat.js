@@ -135,7 +135,6 @@ export const actions = {
     // } catch (error) {
     //   commit('setGsLoading', false);
     //   this.$errorToast({ message: error.response.data.message });
-    //   console.log(error.response.data)
     //   return false;
     // }
 
