@@ -40,7 +40,10 @@ export const actions = {
       );
       this.$auth.$storage.setCookie('pb_token', `Bearer ${data.access_token}`);
     } catch (error) {
-      this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
   async getCitiesList ({ commit }) {
@@ -48,7 +51,10 @@ export const actions = {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
       commit('setGsCities', data);
     } catch (error) {
-      //this.$errorToast({ message: error.response ? error.response.data.message : error.message });
+      this.$toast.error(error.response ? error.response.data.message : error.message , {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
   async getPbScheduleDataAction ({ commit }, payload) {
@@ -61,7 +67,10 @@ export const actions = {
         commit('setGsTrips', data.trips);
       }
     } catch (error) {
-      this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
 
@@ -75,10 +84,16 @@ export const actions = {
       commit('resetPromoCode');
     } catch (error) {
       if(error.response && error.response.data.statusCode === 404) {
-        this.$errorToast({message: error.response.data.message})
+        this.$toast.error(error.response.data.message, {
+          position: 'bottom-right',
+          duration: 5000,
+        })
         window.location.reload(true)
       }
-      this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
 
@@ -96,7 +111,10 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      this.$errorToast({ message: error.response.data.message ?? 'Something went wrong' });
+      this.$toast.error(error.response.data.message ?? 'Something went wrong', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       return false;
     }
   },
@@ -106,7 +124,10 @@ export const actions = {
       const {data} = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
       commit("setTicketDetails", data)
     } catch (e) {
-      //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
+      this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
   async getBookingInfoByTnxId({commit}, payload) {
@@ -114,30 +135,14 @@ export const actions = {
       const {data} = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
       commit("setBookingInfoDetails", data)
     } catch (e) {
-      //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
+      this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
     }
   },
 
   async getPbPaymentPendingBlockAction ({ commit }, payload) {
-    // try {
-    //   commit('setGsLoading', true);
-    //   const { data } = await this.$api.$post(
-    //     apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
-    //     payload
-    //   );
-    //   if (data) {
-    //     commit('setGsPaymentPendingBlockData', data);
-    //   } else {
-    //     this.$errorToast({ message: msg ?? 'Something went wrong!' });
-    //   }
-    //   commit('setGsLoading', false);
-    //   return true;
-    // } catch (error) {
-    //   commit('setGsLoading', false);
-    //   this.$errorToast({ message: error.response.data.message });
-    //   return false;
-    // }
-
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
@@ -148,7 +153,10 @@ export const actions = {
           resolve(res)
         } else {
           resolve(res)
-          this.$errorToast({ message: msg ?? 'Something went wrong!' });
+          this.$toast.error(msg ?? 'Something went wrong!', {
+            position: 'bottom-right',
+            duration: 5000,
+          })
         }
         commit('setGsLoading', false);
       }).catch (error => {
@@ -157,7 +165,10 @@ export const actions = {
           const {data} = error.response
           resolve(data)
         }
-        this.$errorToast({ message: error.response.data.message });
+        this.$toast.error(error.response.data.message, {
+          position: 'bottom-right',
+          duration: 5000,
+        })
       })
     })
 
@@ -166,12 +177,18 @@ export const actions = {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$axios.post('https://dev.sslpayment.jatri.co/ssl/ticket/success-ticket-by-mail', payload);
-      this.$successToast({ message: data.message });
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       commit('setGsLoading', false);
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       return false;
     }
   },
@@ -180,13 +197,19 @@ export const actions = {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
       commit('setSearchedTicketList', data.data)
-      // this.$successToast({ message: data.message });
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       commit('setGsLoading', false);
       return true;
     } catch (error) {
       commit('setGsLoading', false);
       commit('setSearchedTicketList', [])
-      // this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       return false;
     }
   },
@@ -202,23 +225,23 @@ export const actions = {
         return ticket
       })
       commit('setSearchedTicketList', {...state.searchedTicketList, tickets: updatedTicketList})
-      // this.$successToast({ message: data.message });
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       commit('setGsLoading', false);
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      // this.$errorToast({ message: error.response.data.message });
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
       return false;
     }
   },
 
   async getPromoCodeAction({commit}, payload) {
-    // try {
-    //   const {data} = await this.$api.$post(apis.POST_PROMO_CODE_URL, payload)
-    //   commit("setPromoCode", data)
-    // } catch (e) {
-    //   //this.$errorToast({ message: e.response.data.message ?? 'Something went wrong!' });
-    // }
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PROMO_CODE_URL,
@@ -230,13 +253,19 @@ export const actions = {
         } else {
           resolve(res);
           commit('resetPromoCode');
-          this.$errorToast({ message: msg ?? 'Something went wrong!' });
+          this.$toast.error(msg ?? 'Something went wrong!', {
+            position: 'bottom-right',
+            duration: 5000,
+          })
         }
       }).catch (error => {
         if (error.response) {
           const {data} = error.response
           resolve(data)
-          this.$errorToast({ message: error.response.data.message });
+          this.$toast.error(error.response.data.message, {
+            position: 'bottom-right',
+            duration: 5000,
+          })
         }
         commit('resetPromoCode');
       })

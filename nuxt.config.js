@@ -39,7 +39,6 @@ export default {
     "~/plugins/axios.js",
     "~/plugins/date.js",
     "~/plugins/api",
-    "~/plugins/toast.js",
     "~/plugins/vee-validate.js",
     "~/plugins/facebook-events.js",
   ],
@@ -67,14 +66,13 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
     "primevue/nuxt",
-    // [
-    //   "nuxt-tailvue",
-    //   {
-    //     all: true,
-    //     toast: { defaults: { containerClasses: ["sm:!justify-start"] } },
-    //   },
-    // ],
+    "vue-toastification/nuxt",
   ],
+  
+  toast: {
+    timeout: 2000,
+    closeOnClick: false
+  },
   primevue: {
     theme: "md-light-indigo",
     ripple: true,

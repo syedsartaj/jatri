@@ -385,7 +385,11 @@ export default {
 
                } else {
                     if (this.selectedSeatIds.length > this.getGsSeatViewData.seatPlan.maxSeatLimit - 1) {
-                         this.$errorToast({message: `You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} tickets at a time!!`})
+                         this.$toast.error(`You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} tickets at a time!!`, {
+                              position: 'bottom-right',
+                              duration: 50000,
+                              containerClass: 'padding: 100px',
+                         })
                          return;
                     }
 
@@ -412,7 +416,11 @@ export default {
           },
           async paymentPendingBlockHandler () {
                if(this.passengerEmail && !this.emailReg.test(String(this.passengerEmail).toLowerCase())) {
-                    this.$errorToast({message: 'Enter a valid email address'})
+                    this.$toast.error('Enter a valid email address', {
+                         position: 'bottom-right',
+                         duration: 50000,
+                         containerClass: 'padding: 100px',
+                    })
                     return;
                }
                this.$nextTick(async () => {
@@ -460,7 +468,11 @@ export default {
                     await this.getPbPaymentPendingBlockAction(payload)
                     .then(res => {
                          if(res.statusCode === 404) {
-                              this.$errorToast({message: res.message})
+                              this.$toast.error(res.message, {
+                                   position: 'bottom-right',
+                                   duration: 50000,
+                                   containerClass: 'padding: 100px',
+                              })
                               window.location.reload(true)
                          }
                          if(res.error) {
@@ -552,9 +564,7 @@ export default {
                          .then(res => {
                               if (res.statusCode === 200 && !res.data) {
                                    this.totalPromoAmount = 0;
-                                   //this.$errorToast({ message: "Promo Code does not match!" });
                               } else if (res.statusCode === 200 && res.data) {
-                                   //this.$successToast({ message: "Promo Applied Successfully!" });
                               }
                          }).catch (error => {
                               this.resetPromo();
