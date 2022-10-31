@@ -1,7 +1,6 @@
 <template>
   <div v-if="singlePrintTicketInfo">
-    <!-- singlePrintTicketInfo = {{singlePrintTicketInfo}} -->
-    <TicketView
+    <UserViewTicket
       :getTicketDetails="singlePrintTicketInfo"
     />
   </div>

@@ -1,6 +1,36 @@
 <template>
   <div class="border border-[#DBDBDB] rounded-md">
-    <div :id="'printTicket-'+getTicketDetails._id" class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
+    <!-- for download -->
+    <client-only>
+      <vue-html2pdf
+        class="hidden"
+        :show-layout="false"
+        :float-layout="true"
+        :enable-download="true"
+        :preview-modal="true"
+        :paginate-elements-by-height="1400"
+        filename="nightprogrammerpdf"
+        :pdf-quality="2"
+        :manual-pagination="false"
+        pdf-format="a4"
+        :pdf-margin="10"
+        pdf-orientation="portrait"
+        pdf-content-width="800px"
+        @progress="onProgress($event)"
+        ref="html2Pdf"
+      >
+        <section slot="pdf-content">
+          <PrintDownloadTicket :TicketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :id="'printTicket-'+getTicketDetails._id"/>
+        </section>
+      </vue-html2pdf>
+    </client-only>
+    <!-- for print-->
+    <div :id="'printTicket-'+getTicketDetails._id" style="width: 100%; overflow-x: auto; overflow-y: hidden; border-radius: 6px 6px 0 0;" class="hidden">
+      <PrintDownloadTicket :TicketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone"/>
+    </div>
+
+    <!-- for show to user-->
+    <div class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
       <div class="border-b border-[#DBDBDB] bg-white">
         <div class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]">
           <img src="@/assets/images/logo.svg" alt="jatri logo" class="w-10 lg:w-[51px]">
@@ -28,7 +58,7 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Seats:</p>
-                <p v-for='seat in getTicketDetails.seatNumbers' :key='seat' class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ seat }}</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.seatNumbers.join(', ') }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">From:</p>
@@ -81,19 +111,19 @@
         </div>
       </div>
     </div>
-
+<!-- {{getTicketDetails}} -->
     <div class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
-      <span v-if="!getTicketDetails.status" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
+      <span v-if="!getTicketDetails.status && !pageVind" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
         Cancelled
       </span>
-      <span v-else-if="getTicketDetails.status && getTicketDetails.paymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST'" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
+      <span v-else-if="!pageVind && getPaymentHistory && (getTicketDetails.status && getPaymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST')" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
         Requested For Cancel
       </span>
-      <button v-if="getTicketDetails.isTicketCancelable" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.isTicketCancelable && !pageVind" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
         Cancel ticket
       </button>
-      <button class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
+      <button @click="downloadTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/download.svg" alt="" class="hidden lg:block">
         Download ticket
       </button>
@@ -108,10 +138,21 @@
 <script>
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
 import { mapActions, mapGetters } from 'vuex';
-
 export default {
-  props: ['getTicketDetails'],
+  props: ['getTicketDetails', 'getPaymentHistory', 'pageVind', 'supportEmail', 'supportPhone'],
   methods: {
+    // downloadFunction
+    onProgress(event) {
+      console.log(`Processed: ${event} / 100`);
+    },
+    hasGenerated() {
+      alert("PDF generated successfully!");
+    },
+    downloadTicket(id) {
+      this.$refs.html2Pdf.generatePdf(id);
+    },
+
+    // printFunction
     printTicket(id) {
       let divContents = window.document.getElementById(id).innerHTML;
       var printWindow = window.open();

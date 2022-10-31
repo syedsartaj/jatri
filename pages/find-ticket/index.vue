@@ -68,22 +68,7 @@
                     </div>
 
                     <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id' class="mt-6">
-                         <SingleTicketListItem v-if="ticket.status"
-                              :singlePrintTicketInfo='ticket'
-                         />
-                    </div>
-               </div>
-
-               <!-- Old Tickets -->
-               <div class="mt-10" v-if="getSearchedTicketList.tickets">
-                    <div class="mt-10 flex justify-between items-center gap-x-4">
-                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-                         <p class="text-base font-medium whitespace-nowrap">Old Tickets</p>
-                         <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-                    </div>
-
-                    <div v-for='ticket in getSearchedTicketList.tickets' :key='ticket._id' class="mt-4">
-                         <SingleTicketListItem v-if="!ticket.status"
+                         <SingleTicketListItem
                               :singlePrintTicketInfo='ticket'
                          />
                     </div>
