@@ -2,7 +2,7 @@
   <div class="bg-white">
 
     <!-- banner section -->
-    <div class="relative">
+    <div class="relative bg-red-100 h-[500px]">
       <img src="@/assets/images/home/bannerImageWeb.svg" alt="" class="w-full hidden lg:block">
       <img src="@/assets/images/home/bannerImageMobile.svg" alt="" class="w-full block lg:hidden">
       
@@ -131,14 +131,14 @@
         <h2 class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2">Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Euro Coach</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">SB paribahan</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Greenline</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Pingky Paribahan</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Lucky Express</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Mimjaal Paribahan</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Shah Fateh Ali</p>
-          <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Much more to come</p>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Euro Coach</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">SB paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Greenline</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Pingky Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Lucky Express</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Mimjaal Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Shah Fateh Ali</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Much more to come</NuxtLink>
         </div>
       </div>
     </div>
@@ -152,74 +152,74 @@
         </div>
         <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Rangpur</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Barishal" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Barishal</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Kuakata" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Kuakata</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Noagaon" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Noagaon</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Bogura" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Bogura</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Sunamganj" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Sunamganj</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB]">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Sylhet</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Chittagong</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Coxs Bazar</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Khulna to Kuakata</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Khulna to Barishal</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Sathkhira to Barishal</p>
-            </div>
+            </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Sathkhira to Kuakata</p>
-            </div>
-            <div class="flex justify-start gap-x-[10px] w-1/2">
+            </NuxtLink>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Rangpur" class="flex justify-start gap-x-[10px] w-1/2">
               <!-- <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
               <p class="text-base text-blackPrimary font-normal leading-6 py-5">Chapai Nawabganj - Chapai Nawabganj</p> -->
-            </div>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -349,6 +349,7 @@ export default {
     },
     onResize(){
       this.isMobile = window.innerWidth < 768
+      console.log("check Mobile Device ==>", this.isMobile);
     }
 
   }
