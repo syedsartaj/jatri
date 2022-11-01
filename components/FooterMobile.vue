@@ -50,8 +50,21 @@
       </div>
 
       <div class="bg-white h-[1px] bg-opacity-50 mt-6"></div>
+      <div class="flex justify-between gap-x-[16.67px] items-center pt-6">
+        <nuxt-link to="/terms-and-conditions" class="flex justify-start gap-x-[6.67px] items-center">
+          <p class="text-white text-sm underline">Terms and condition</p>
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+        </nuxt-link>
+        <div class="h-6 bg-white w-[1px]"></div>
+        <nuxt-link to="/refund-and-privacy-policy" class="flex justify-start gap-x-[6.67px] items-center">
+          <p class="text-white text-sm underline">Refund and privacy policy</p>
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+        </nuxt-link>
+      </div>
 
-      <div class="flex justify-evenly gap-x-[52px] mt-[46px] mx-auto pb-[30px]">
+      <div class="bg-white h-[1px] bg-opacity-50 mt-6"></div>
+
+      <div class="flex justify-evenly gap-x-[52px] mt-[26px] mx-auto pb-[30px]">
         <a href="https://www.facebook.com/JatriApp/" target="_blank">
           <img src="@/assets/images/icons/facebook.svg" alt="facebook" class="h-[19.88px] w-[20px]"/>
         </a>
