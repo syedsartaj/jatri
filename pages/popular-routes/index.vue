@@ -15,7 +15,7 @@
                     </NuxtLink>
 
                     <div class="mt-10 divide-y-2">
-                         <div class="flex justify-between items-center py-4">
+                         <div v-if="routeData[0].distance" class="flex justify-between items-center py-4">
                               <div class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]">
                                    <img src="@/assets/images/icons/distanceIcon.svg" class="w-[16.67px] lg:w-5" alt="">
                                    <h2 class="text-blackSecondery text-base lg:text-xl font-normal">Distance</h2>
@@ -24,7 +24,7 @@
                                    <h2 class="text-blackPrimary text-base lg:text-xl font-medium"><span>{{routeData[0].distance}}</span> km</h2>
                               </div>
                          </div>
-                         <div class="flex justify-between items-center py-4">
+                         <div v-if="routeData[0].time" class="flex justify-between items-center py-4">
                               <div class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]">
                                    <img src="@/assets/images/icons/clockIcon.svg" class="w-[16.67px] lg:w-5" alt="">
                                    <h2 class="text-blackSecondery text-base lg:text-xl font-normal">Time</h2>
@@ -33,7 +33,7 @@
                                    <h2 class="text-blackPrimary text-base lg:text-xl font-medium"><span>{{routeData[0].time}}</span> hours approx.</h2>
                               </div>
                          </div>
-                         <div class="flex justify-between items-center py-4">
+                         <div v-if="routeData[0].priceStartsFrom" class="flex justify-between items-center py-4">
                               <div class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]">
                                    <img src="@/assets/images/icons/priceIcon.svg" class="w-[16.67px] lg:w-5" alt="">
                                    <h2 class="text-blackSecondery text-base lg:text-xl font-normal">Price starts from</h2>

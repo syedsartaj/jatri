@@ -4,7 +4,7 @@
 
           <div class="fixed inset-0 z-10 overflow-y-auto">
                <div class="flex min-h-full items-end justify-center lg:p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
+                    <div class="relative animate-animateZoom transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[800px]">
                          <div class="bg-white p-4 lg:p-6">
                               <div class="flex justify-between">
                                    <p class="text-blackPrimary text-base lg:text-[28px] lg:leading-9 font-medium">How to buy ticket</p>

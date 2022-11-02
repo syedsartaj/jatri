@@ -2,21 +2,22 @@
   <div class="bg-white">
 
     <!-- banner section -->
-    <div class="relative bg-red-100 h-[500px]">
-      <img src="@/assets/images/home/bannerImageWeb.svg" alt="" class="w-full hidden lg:block">
-      <img src="@/assets/images/home/bannerImageMobile.svg" alt="" class="w-full block lg:hidden">
-      
-      <div v-if="!isMobile" class="absolute top-[130px] bottom-[130px] right-[100px] left-[100px] z-40 hidden lg:block">
+    <div v-if="!isMobile" class="relative homeBanner">
+      <div class="absolute lg:top-[100px] xl:top-[130px] 2xl:top-[170px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40">
         <div class="">
-          <h2 class="text-[57px] text-blackPrimary font-bold leading-[64px]">Book your Journey NOW!!!</h2>
-          <h4 class="mt-4 text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
+          <h2 class="lg:text-5xl xl:text-[57px] text-blackPrimary font-bold leading-[64px]">Book your Journey NOW!!!</h2>
+          <h4 class="mt-4 lg:text-lg xl:text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
         </div>        
       </div>
+    </div>
 
-      <div v-if="isMobile" class="absolute top-[59px] right-4 left-4 block lg:hidden">
+    <!-- banner section -->
+    <div v-if="isMobile" class="relative">
+      <img src="@/assets/images/home/bannerImageMobile.png" alt="" class="w-full">
+      <div class="absolute top-[59px] right-4 left-4">
         <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book your Journey NOW!!!</h2>
         <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
         <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
@@ -37,17 +38,17 @@
 
           <div class="mt-[60px] flex flex-wrap justify-between lg:gap-x-[95px]">
             <div class="lg:p-4 lg:w-[340px]">
-              <img src="@/assets/images/home/fluency-two-tickets.svg" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/two-tickets.png" alt="" class="w-[66px]">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Ease on the move</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Tickets are available on the go through our platform, no more queues!</p>
             </div>
             <div class="lg:p-4 lg:w-[340px] mt-8 lg:mt-0">
-              <img src="@/assets/images/home/fluency-red-bus.svg" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/red-bus.png" alt="" class="w-[66px]">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Promise of convenient travel</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">We have an excellent system of taking service based on preference, as there is ticketing service for multiple routes via different categories of buses.</p>
             </div>
             <div class="lg:p-4 lg:w-[340px] mt-8 lg:mt-0">
-              <img src="@/assets/images/home/casual-life-sale-badge.svg" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/security-badge.png" alt="" class="w-[66px]">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Reliability assured</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Whether you are traveling for work or leisure, book your tickets through us and keep all your worries away.</p>
             </div>
@@ -57,9 +58,9 @@
     </div>
 
     <!-- Booking ticket section -->
-    <div class="relative mx-4 lg:px-0">
-      <img src="@/assets/images/home/buyTicketBannerWeb.svg" alt="" class="hidden lg:block w-full">
-      <img src="@/assets/images/home/buyTicketBannerMobile.svg" alt="" class="block lg:hidden w-full">
+    <div class="relative mx-4 lg:mx-0 lg:px-0">
+      <img v-if="!isMobile" src="@/assets/images/home/buyTicketBannerWeb.png" alt="" class="hidden lg:block w-full">
+      <img v-if="isMobile" src="@/assets/images/home/buyTicketBannerMobile.png" alt="" class="block lg:hidden w-full">
       <div class="w-[296px] lg:w-[515px] absolute top-10 lg:top-[130px] left-6 lg:left-[100px] z-40">
         <div>
           <h2 class="text-[28px] lg:text-[45px] leading-[36px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold">Booking ticket just got more easier and fun with Jatri.</h2>
@@ -69,7 +70,7 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
+    <div class="p-4 lg:p-[100px] flex justify-center">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden w-[380px] lg:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
@@ -265,7 +266,7 @@
       </div>
     </div>
     <div v-if="howToBuyModalStatus">
-      <!-- <HowToBuyModal :close="handleHowToBuyModal"/> -->
+      <HowToBuyModal :close="handleHowToBuyModal"/>
     </div>
   </div>
 
@@ -348,7 +349,7 @@ export default {
       this.slideLeft = false;
     },
     onResize(){
-      this.isMobile = window.innerWidth < 768
+      this.isMobile = window.innerWidth < 1024
       console.log("check Mobile Device ==>", this.isMobile);
     }
 
@@ -357,6 +358,42 @@ export default {
 </script>
 
 <style>
+.homeBanner {
+  background-image: url('../assets/images/home/bannerImageWeb.png');
+  background-size: 100% 100%;
+  height: 400px;
+}
+
+@media only screen and (min-width: 992px){
+  .homeBanner {
+    height: 400px;
+  }
+}
+
+/* @media only screen and (min-width: 1024px){
+  .homeBanner {
+    height: 400px;
+  }
+} */
+
+@media only screen and (min-width: 1280px){
+  .homeBanner {
+    height: 450px;
+  }
+}
+
+@media only screen and (min-width: 1536px){
+  .homeBanner {
+    height: 550px;
+  }
+}
+
+@media only screen and (min-width: 1750px){
+  .homeBanner {
+    height: 600px;
+  }
+}
+
 .busOperatorbg {
   background-image: linear-gradient(102deg, #CFE6F9 12.78%, #E2FAFD 98.9%) !important;
   height: 100%;

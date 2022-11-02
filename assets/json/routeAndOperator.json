@@ -9,9 +9,9 @@
                     "Dhaka to Rangpur is a route spread over 316 kilometers. Currently, Jatri offers SB Paribahan & Shah Fateh Ali in this route. With an average duration of 8-9 hours journey, depending on the traffic scenario. Bus ticket price for this route ranges from BDT 750. Since more and more operators are being connected, ticket prices may vary depending on the operator.",
                     "Get the best deals and renowned bus operators all in a single place on our platform - book Dhaka to Rangpur bus tickets with Jatri!"
                ],
-               "distance": "316",
+               "distance": 316,
                "time": "8-9",
-               "priceStartsFrom": "750"
+               "priceStartsFrom": 750
           },
           {
                "_id": 2,
@@ -22,9 +22,9 @@
                     "Dhaka to Barishal is a route spread over 246.8 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 7-8 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1000.",
                     "To book your Dhaka to Barisal bus ticket through Jatri, is just a few clicks away; as all major bus companies cooperate with us. Travel in the easiest way with Jatri."
                ],
-               "distance": "246.8",
+               "distance": 246.8,
                "time": "7-8",
-               "priceStartsFrom": "1000"
+               "priceStartsFrom": 1000
           },
           {
                "_id": 3,
@@ -35,9 +35,9 @@
                     "Dhaka to Kuakata is a route spread over 214 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 6-7 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1500.",
                     "The Dhaka to Kuakata bus ticket is at your door through Jatri. As all major bus companies cooperate with us, now there is no more trouble to travel with Jatri."
                ],
-               "distance": "214",
+               "distance": 214,
                "time": "6-7",
-               "priceStartsFrom": "1500"
+               "priceStartsFrom": 1500
           },
           {
                "_id": 4,
@@ -49,9 +49,9 @@
                     "The cost of a bus ticket for this route ranges from BDT 680 to BDT 1000 depending on the bus type.",
                     "Get the best deals and renowned bus operators all in our place - book Dhaka to Noagaon bus tickets with Jatri!"
                ],
-               "distance": "239",
+               "distance": 239,
                "time": "6",
-               "priceStartsFrom": "680"
+               "priceStartsFrom": 680
           },
           {
                "_id": 5,
@@ -63,9 +63,9 @@
                     "The cost of a bus ticket for this route ranges from BDT 550 to BDT 900 depending on the bus type.",
                     "Get the best deals and renowned bus operators all in our place - book Dhaka to Bogura bus tickets with Jatri!"
                ],
-               "distance": "192.2",
+               "distance": 192.2,
                "time": "8-9",
-               "priceStartsFrom": "550"
+               "priceStartsFrom": 550
           },
           {
                "_id": 6,
@@ -77,9 +77,9 @@
                     "The cost of a bus ticket for this route ranges from BDT650 depending on the bus type.",
                     "Get the best deals and renowned bus operators all in our place - book Dhaka to Sunamganj bus tickets with Jatri!"
                ],
-               "distance": "346",
+               "distance": 346,
                "time": "9-10",
-               "priceStartsFrom": "650"
+               "priceStartsFrom": 650
           }
      ],
      "operartors" : [
@@ -92,9 +92,9 @@
                     "The cost of a bus ticket for this route ranges from BDT 2100 depending on the bus type.",
                     "Get the best deals and renowned bus operators all in our place - book Dhaka to Siliguri bus tickets with Jatri!"
                ],
-               "distance": "389",
+               "distance": 389,
                "time": "11-12",
-               "priceStartsFrom": "2100"
+               "priceStartsFrom": 2100
           },
           {
                "_id": 2,
@@ -103,9 +103,9 @@
                "paragraph": [
                     "Shah Fateh Ali Paribahan buses run between Dhaka to Naogaon, Bogura, Palashbari, and Rangpur. The cost of traveling on this transport provided by the assurance of quality bus service will begin at BDT 550."
                ],
-               "distance": null,
-               "time": null,
-               "priceStartsFrom": "550"
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 550
           }
      ]
 }

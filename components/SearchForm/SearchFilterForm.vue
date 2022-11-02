@@ -32,9 +32,9 @@
                 :allow-filter="true"
             />
         </div>
-        <div class="px-6 py-[15px] w-2/12 flex justify-center">
+        <div class="lg:px-5 xl:px-6 lg:py-3 xl:py-[15px] w-2/12 flex justify-center">
             <button
-                class="rounded-full text-white text-sm font-semibold leading-5 py-[13px] px-[26px]"
+                class="rounded-full text-white text-xs xl:text-sm font-semibold leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
                 :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer border border-primary'"
                 :disabled="!departure || !destination || !coachType || !departingDate"
                 @click="handleFromSubmit"

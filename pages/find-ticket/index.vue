@@ -43,7 +43,7 @@
                                              v-model="transactionId"
                                         />
                                    </div>
-                                   <button class="px-6 lg:px-7 py-[13px] w-[120px] lg:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 lg:mt-0" type="submit">Find ticket</button>
+                                   <button type="submit" class="px-6 lg:px-7 py-[13px] w-[120px] lg:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 lg:mt-0">Find ticket</button>
                               </div>
                          </form>
                          
@@ -52,7 +52,7 @@
                     </div>
                </div>
                <!-- Ticket not found -->
-               <div class="flex justify-center pt-20 pb-[100px]" v-if="!getSearchedTicketList.tickets">
+               <div class="flex justify-center pt-20 pb-[100px]" v-if="oopsAlertStatus && !getSearchedTicketList.tickets">
                     <OpssAlert
                          :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
                          :customStyle="'px-[64.5px]'"
@@ -89,6 +89,7 @@ import { mapActions, mapGetters } from 'vuex';
                     transactionId: "",
                     activeTickets: [],
                     oldTickets: [],
+                    oopsAlertStatus: false
                };
           },
           computed: {
@@ -123,6 +124,8 @@ import { mapActions, mapGetters } from 'vuex';
                               this.error = true;
                          }
                          this.$nuxt.$loading.finish();
+
+                         this.oopsAlertStatus = true;
                     });
                },
           },
