@@ -18,6 +18,13 @@
                :allow-filter="true"
                :options="getGsCities"
           />
+          <DatePickerMobile
+               v-model="departingDate"
+               :label="'Journey date'"
+               :icon="require('@/assets/images/icons/datepickerIcon.svg')"
+               :default-option="'Select Journey Date'"
+               :allow-filter="true"
+          />
           <SearchBusFilterMobile
                v-model="coachType"
                :defaultValue="''"
@@ -27,17 +34,9 @@
                :allow-filter="false"
                :options="coachTypes"
           />
-          <DatePickerMobile
-               v-model="departingDate"
-               :label="'Journey date'"
-               :icon="require('@/assets/images/icons/datepickerIcon.svg')"
-               :default-option="'Select Journey Date'"
-               :allow-filter="true"
-          />
           <button 
                class="mt-6 w-full rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
                :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer border border-primary'"
-               :disabled="!departure || !destination || !coachType || !departingDate"
                @click="handleFromSubmit" 
           >
                Search Ticket
@@ -71,15 +70,41 @@ export default {
      },
      methods: {
           handleFromSubmit() {
-               const query = {
-                    from: this.departure,
-                    to: this.destination,
-                    type: this.coachType,
-                    quantity: this.quantity,
-                    date: new Date(this.departingDate).getTime(),
-               };
-               Cookies.remove("process-allow");
-               this.$router.push({ path: "/trip", query });
+               if (!this.departure) {
+                    this.$toast.error('Please insert your location', {
+                         position: 'bottom-right',
+                         duration: 5000,
+                    })
+               } 
+               if (!this.destination){
+                    this.$toast.error('Please insert your destination', {
+                         position: 'bottom-right',
+                         duration: 5000,
+                    })
+               } 
+               if (!this.coachType){
+                    this.$toast.error('Please insert coach type', {
+                         position: 'bottom-right',
+                         duration: 5000,
+                    })
+               } 
+               if (!this.departingDate) {
+                    this.$toast.error('Please insert departure date', {
+                         position: 'bottom-right',
+                         duration: 5000,
+                    })
+               } 
+               if(this.departure && this.destination && this.coachType && this.departingDate) {
+                    const query = {
+                         from: this.departure,
+                         to: this.destination,
+                         type: this.coachType,
+                         quantity: this.quantity,
+                         date: new Date(this.departingDate).getTime(),
+                    };
+                    Cookies.remove('process-allow')
+                    this.$router.push({ path: "/trip", query });
+               }
           },
           // findTrips(){
           //     window.location.href = '/trip'

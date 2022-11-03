@@ -36,7 +36,6 @@
             <button
                 class="rounded-full text-white text-xs xl:text-sm font-semibold leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
                 :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer border border-primary'"
-                :disabled="!departure || !destination || !coachType || !departingDate"
                 @click="handleFromSubmit"
             >
                 Search Ticket
@@ -71,15 +70,41 @@ export default {
     },
     methods: {
         handleFromSubmit() {
-            const query = {
-                from: this.departure,
-                to: this.destination,
-                type: this.coachType,
-                quantity: this.quantity,
-                date: new Date(this.departingDate).getTime(),
-            };
-            Cookies.remove('process-allow')
-            this.$router.push({ path: "/trip", query });
+            if (!this.departure) {
+                this.$toast.error('Please insert your location', {
+                    position: 'bottom-right',
+                    duration: 5000,
+                })
+            } 
+            if (!this.destination){
+                this.$toast.error('Please insert your destination', {
+                    position: 'bottom-right',
+                    duration: 5000,
+                })
+            } 
+            if (!this.coachType){
+                this.$toast.error('Please insert coach type', {
+                    position: 'bottom-right',
+                    duration: 5000,
+                })
+            } 
+            if (!this.departingDate) {
+                this.$toast.error('Please insert departure date', {
+                    position: 'bottom-right',
+                    duration: 5000,
+                })
+            } 
+            if(this.departure && this.destination && this.coachType && this.departingDate) {
+                const query = {
+                    from: this.departure,
+                    to: this.destination,
+                    type: this.coachType,
+                    quantity: this.quantity,
+                    date: new Date(this.departingDate).getTime(),
+                };
+                Cookies.remove('process-allow')
+                this.$router.push({ path: "/trip", query });
+            }
         },
 
         // findTrips(){

@@ -133,7 +133,7 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Euro Coach</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">SB paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">SB Paribahan</NuxtLink>
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Greenline</NuxtLink>
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Pingky Paribahan</NuxtLink>
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Lucky Express</NuxtLink>

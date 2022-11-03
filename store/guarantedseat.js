@@ -250,7 +250,7 @@ export const actions = {
         if (res.data) {
           commit('setPromoCode', res.data);
           resolve(res)
-          this.$toast.success('Promo applied successfull' , {
+          this.$toast.success('Promo applied successfully' , {
             position: 'bottom-right',
             duration: 5000,
           })

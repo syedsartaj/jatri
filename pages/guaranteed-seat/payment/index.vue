@@ -13,11 +13,11 @@
                     </div>
                     <div class="px-[14px] py-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Boarding point:</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Boarding Point:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.invoice.boardingPoint}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Departure time:</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Departure Time:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary"> {{timeFormate(getBookingInfoDetails.invoice.departureTime)}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
@@ -25,11 +25,11 @@
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.name}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Mobile number:</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Mobile Number:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.phone}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Email address:</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Email Address:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{getBookingInfoDetails.passenger.email}}</p>
                          </div>
                     </div>
@@ -38,27 +38,27 @@
           <div class="w-full lg:w-1/2">
                <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
                     <div class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b">
-                         <p class="text-base font-medium text-blackPrimary">Fare details</p>
+                         <p class="text-base font-medium text-blackPrimary">Fare Details</p>
                     </div>
                     <div class="px-[14px] pt-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat no</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat No.:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.invoice.seatNo.join(', ') }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Ticket price</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Ticket Price:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.payable + getBookingInfoDetails.invoice.discount }}</p>
                          </div>
                          <div v-if="getBookingInfoDetails.invoice.discount" class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Discount Amount</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Discount Amount:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.invoice.discount }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Processing fee</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Processing Fee:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.serviceCharge }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Gateway fee</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Gateway Fee:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.paymentGatewayCommission }}</p>
                          </div>
                          <!-- <div class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed">
@@ -81,14 +81,14 @@
                          </div> -->
                     </div>
                     <div class="flex justify-between bg-[#EFF7FD] border-t rounded-b px-4 py-[10px]">
-                         <p class="text-sm font-normal text-blackLight">Total</p>
+                         <p class="text-sm font-normal text-blackLight">Total:</p>
                          <p class="text-base font-medium text-blackPrimary">BDT <span class="font-bold">{{ getBookingInfoDetails.amount }}</span></p>
                     </div>
                </div>
 
                <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
                     <div class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b">
-                         <p class="text-base font-medium text-blackPrimary">Payment method</p>
+                         <p class="text-base font-medium text-blackPrimary">Payment Method</p>
                          <div class="flex justify-center items-center w-[139px] bg-[#FDF0F1] rounded-full text-base font-medium text-blackPrimary ">
                               <img src="@/assets/images/icons/timer.svg" alt="" class="w-[13.33px]">
                               <p class="text-[#E0293B] text-xs font-medium py-[5px] px-4">
@@ -125,7 +125,7 @@
                     :disabled='getGsLoading || !paymentAllowStatus || paymentValidateTime === 0'
                     @onClick='paymentHandler'
                >
-                    Pay now
+                    Pay Now
                </LoaderButton>
 
                <div class="text-center mt-4 lg:mt-5">
