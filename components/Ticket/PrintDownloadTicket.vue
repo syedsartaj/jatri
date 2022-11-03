@@ -92,8 +92,7 @@
                                         {{ ticketDetails.coach }}
                                    </p>
                               </div>
-                              <img :src="require('@/assets/images/logo.svg')" alt=''
-                                   style='width: 90px; height: 44px' />
+                              <img :src="require('@/assets/images/ticket/logo.png')" alt='' style='width: 90px; height: 44px; display: block;' />
                          </div>
                          <!-- 1st part -->
                          <div style='display: flex'>
@@ -113,10 +112,10 @@
                                         Total Booked Seats:
                                    </p>
                                    <div style='display: flex; column-gap: 8px; margin-top: 4px'>
-                                        <p v-for='seat in ticketDetails.seatNumbers' :key='seat'
-                                             style='width: 32px;height: 32px;background-color: #f04935;color: white;font-size: 14px;display: flex;align-items: center;justify-content: center;border-radius: 4px;font-weight: 700;'>
+                                        <div v-for='seat in ticketDetails.seatNumbers' :key='seat'
+                                             style='width: 32px; height: 32px; background-color: #f04935;color: white;font-size: 14px;display: flex;justify-content: center;align-items: center;border-radius: 4px;font-weight: 700;'>
                                              {{ seat }}
-                                        </p>
+                                        </div>
                                    </div>
                               </div>
                               <div style='width: 50%;background-color: #f7f7f7;padding: 8px;border-radius: 4px;'>
@@ -254,33 +253,44 @@
                                         </p>
                                    </div>
                               </div>
-                              <div style='display: flex;justify-content: space-between;margin-left: 20px;align-items: center;margin-top: 14px;'>
-                                   <div>
+                              <div style='display: flex; justify-content: space-between; margin-left: 20px;align-items: center; margin-top: 14px;'>
+                                   <div style='display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; text-align: left;'>
                                         <p style='color: #676769; font-size: 11px'>Get in touch</p>
-                                        <div
-                                             style='display: flex;align-items: center;column-gap: 10px;margin-top: 6px;'>
+                                        <div v-if="downloadTicketStatus" style='display: flex;column-gap: 10px;margin-top: 6px;align-items: center;'>
                                              <img :src="require('@/assets/images/ticket/mail.svg')" alt=''
-                                                  style='width: 17px; height: 15px' />
-                                             <span style='text-align: center;margin-bottom: 5px;font-weight: 600;'>
-                                                  {{ getSearchedTicketList && getSearchedTicketList.supportEmail || email }}
+                                                  style='width: 17px; height: 15px; display: inline-block;' />
+                                             <span style='text-align: center;margin-bottom:15px;font-weight: 600;'>
+                                                  {{ getSearchedTicketList.supportEmail || email }} {{downloadTicketStatus}}
+                                             </span>
+                                        </div>
+                                        <div v-else style='display: flex;column-gap: 10px;margin-top: 6px;align-items: center;'>
+                                             <img :src="require('@/assets/images/ticket/mail.svg')" alt=''
+                                                  style='width: 17px; height: 15px; display: inline-block;' />
+                                             <span style='text-align: center;font-weight: 600;'>
+                                                  {{ getSearchedTicketList.supportEmail || email }} {{downloadTicketStatus}}
                                              </span>
                                         </div>
                                    </div>
 
-                                   <div
-                                        style='display: flex;flex-direction: column;justify-content: center;align-items: flex-start;text-align: left;'>
+                                   <div style='display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; text-align: left;'>
                                         <p style='color: #676769; font-size: 11px'>Call us</p>
-                                        <div
-                                             style='display: flex; column-gap: 10px; margin-top: 6px; align-items: center'>
+                                        <div v-if="downloadTicketStatus" style='display: flex; column-gap: 10px; margin-top: 6px; align-items: center;'>
                                              <img :src="require('@/assets/images/ticket/phone.svg')" alt=''
-                                                  style='width: 15px; height: 15px' />
-                                             <span style='text-align: center;margin-bottom: 5px;color: #151414;font-weight: 600;'>
-                                                  {{ getSearchedTicketList && getSearchedTicketList.supportPhone || phone }}
+                                                  style='width: 15px; height: 15px; display: inline-block;' />
+                                             <span style='text-align: center;margin-bottom:15px;font-weight: 600;'>
+                                                  {{ getSearchedTicketList.supportPhone || phone }} {{downloadTicketStatus}}
+                                             </span>
+                                        </div>
+                                        <div v-else style='display: flex; column-gap: 10px; margin-top: 6px; align-items: center;'>
+                                             <img :src="require('@/assets/images/ticket/phone.svg')" alt=''
+                                                  style='width: 15px; height: 15px; display: inline-block;' />
+                                             <span style='text-align: center;font-weight: 600;'>
+                                                  {{ getSearchedTicketList.supportPhone || phone }} {{downloadTicketStatus}}
                                              </span>
                                         </div>
                                    </div>
 
-                                   <div style='display: flex;column-gap: 10px;justify-content: flex-end;align-items: center;'>
+                                   <div style='display: flex; column-gap: 10px; justify-content: flex-end; align-items: center;'>
                                         <div>
                                              <p style='color: #676769; font-size: 11px'>Download App</p>
                                              <p style='color: #151414; font-size: 11px; margin-top: 6px'>
@@ -408,7 +418,7 @@
                          <div style='display: flex; justify-content: space-between'>
                               <div style='display: flex;column-gap: 10px;justify-content: center;align-items: center;'>
                                    <p style='color: white; font-size: 12px'>Powered by:</p>
-                                   <img :src="require('@/assets/images/logo-white.svg')" alt=''
+                                   <img :src="require('@/assets/images/ticket/logo-white.png')" alt=''
                                         style='width: 50px; height: 25px' />
                               </div>
                               <p style='color: white; font-size: 14px'>www.jatri.co</p>
@@ -423,7 +433,7 @@
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
 import { mapGetters } from 'vuex';
 export default {
-     props: ['ticketDetails', 'email', 'phone'],
+     props: ['ticketDetails', 'email', 'phone', 'downloadTicketStatus'],
      computed: {
           ...mapGetters('guarantedseat', ['getSearchedTicketList']),
           reportTimeWithAddTime() {

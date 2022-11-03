@@ -20,13 +20,13 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :id="'printTicket-'+getTicketDetails._id"/>
+          <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :downloadTicketStatus="downloadTicketValue" :id="'printTicket-'+getTicketDetails._id"/>
         </section>
       </vue-html2pdf>
     </client-only>
     <!-- for print-->
     <div :id="'printTicket-'+getTicketDetails._id" style="width: 100%; overflow-x: auto; overflow-y: hidden; border-radius: 6px 6px 0 0;" class="hidden">
-      <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone"/>
+      <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :downloadTicketStatus="downloadTicketValue"/>
     </div>
 
     <!-- for show to user-->
@@ -139,6 +139,11 @@
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
 import { mapActions, mapGetters } from 'vuex';
 export default {
+  data(){
+    return{
+      downloadTicketValue: false,
+    }
+  },
   props: ['getTicketDetails', 'getPaymentHistory', 'pageVind', 'supportEmail', 'supportPhone'],
   methods: {
     // downloadFunction
@@ -149,11 +154,13 @@ export default {
       alert("PDF generated successfully!");
     },
     downloadTicket(id) {
+      this.downloadTicketValue = true;
       this.$refs.html2Pdf.generatePdf(id);
     },
 
     // printFunction
     printTicket(id) {
+      this.downloadTicketValue = false;
       let divContents = window.document.getElementById(id).innerHTML;
       var printWindow = window.open();
       var is_chrome = Boolean(window.chrome);
