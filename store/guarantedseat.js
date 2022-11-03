@@ -250,10 +250,14 @@ export const actions = {
         if (res.data) {
           commit('setPromoCode', res.data);
           resolve(res)
+          this.$toast.success('Promo applied successfull' , {
+            position: 'bottom-right',
+            duration: 5000,
+          })
         } else {
           resolve(res);
           commit('resetPromoCode');
-          this.$toast.error(msg ?? 'Something went wrong!', {
+          this.$toast.error('Something went wrong!', {
             position: 'bottom-right',
             duration: 5000,
           })

@@ -5,7 +5,7 @@
     <div v-if="!isMobile" class="relative homeBanner">
       <div class="absolute lg:top-[100px] xl:top-[130px] 2xl:top-[170px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40">
         <div class="">
-          <h2 class="lg:text-5xl xl:text-[57px] text-blackPrimary font-bold leading-[64px]">Book your Journey NOW!!!</h2>
+          <h2 class="lg:text-5xl xl:text-[57px] text-blackPrimary font-bold leading-[64px]">Book Your Journey NOW!!!</h2>
           <h4 class="mt-4 lg:text-lg xl:text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
           <div class="mt-9">
             <SearchFilterForm/>
@@ -18,7 +18,7 @@
     <div v-if="isMobile" class="relative">
       <img src="@/assets/images/home/bannerImageMobile.png" alt="" class="w-full">
       <div class="absolute top-[59px] right-4 left-4">
-        <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book your Journey NOW!!!</h2>
+        <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book Your Journey NOW!!!</h2>
         <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
         <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
           <SearchFilterFormMobile/>
@@ -50,7 +50,7 @@
             <div class="lg:p-4 lg:w-[340px] mt-8 lg:mt-0">
               <img src="@/assets/images/home/security-badge.png" alt="" class="w-[66px]">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Reliability assured</h2>
-              <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Whether you are traveling for work or leisure, book your tickets through us and keep all your worries away.</p>
+              <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Whether you are travelling for work or leisure, book your tickets through us and keep all your worries away.</p>
             </div>
           </div>
         </div>
@@ -236,7 +236,7 @@
         </div>
         <div class="w-full lg:w-[710px] mt-6 lg:mt-0">
           <Accordion
-            :heading="'How to buy Tickets via website!?'"
+            :heading="'How to buy Tickets via website?'"
             :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 
                         <br><br>Secondly, you will have to select your location, where to go, which kind of bus you need and the date of your journey. Then click the “book now” option and fill-up all the information. After making the payment process you will get your tickets.
                       `"

@@ -3,7 +3,7 @@
           <div class="text-center w-[380px] lg:w-[558px] mx-auto">
                <img src="@/assets/images/icons/success.svg" alt="" class="animate-animateZoom w-10 lg:w-[46px] block mx-auto">
                <h2 class="text-blackPrimary text-xl lg:text-[28px] lg:leading-9 font-semibold mt-5">
-                    Ticket Booked Successfullly
+                    Ticket Booked Successfully
                </h2>
                <p class="text-blackLight text-sm lg:text-base font-normal mt-[6px] lg:mt-4">
                     Your ticket has been purchased succesfully. Please check your mail/message to get your ticket and further instructions.

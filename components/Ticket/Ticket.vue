@@ -20,13 +20,13 @@
                     ref="html2Pdf"
                >
                     <section slot="pdf-content">
-                         <PrintDownloadTicket :TicketDetails="getTicketDetails.ticket" :id="'printTicket-'+getTicketDetails._id"/>
+                         <PrintDownloadTicket :ticketDetails="getTicketDetails.ticket" :id="'printTicket-'+getTicketDetails._id"/>
                     </section>
                </vue-html2pdf>
           </client-only>
           <!-- for print-->
           <div :id="'printTicket-'+getTicketDetails._id" style="width: 100%; overflow-x: auto; overflow-y: hidden; border-radius: 6px 6px 0 0;" class="hidden">
-               <PrintDownloadTicket :TicketDetails="getTicketDetails.ticket"/>
+               <PrintDownloadTicket :ticketDetails="getTicketDetails.ticket"/>
           </div>
 
           <!-- for show to user-->

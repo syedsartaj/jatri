@@ -14,7 +14,7 @@
                          <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.boarding }} - {{ trip.dropping }}</h2>
                     </div>
                     <div class="flex justify-between items-center py-4 order-1 lg:order-last">
-                         <p class="text-xs font-normal text-blackLight">Depatrure time</p>
+                         <p class="text-xs font-normal text-blackLight">Departure Time</p>
                          <h2 class="text-sm lg:text-base font-medium text-blackPrimary">
                               {{ new Date(`${trip.departureDate} ${trip.departureTime}`).toLocaleString('en-Us', { timeStyle: 'short' }) }}
                          </h2>
@@ -28,18 +28,18 @@
                          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
                          <h2 v-if="trip.seatFare[0].discountFare" class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"><span class="line-through text-corporate">{{ trip.seatFare[0].fare }}</span> {{ trip.seatFare[0].discountFare }} <span class="text-base">TK</span></h2>
                          <h2 v-else class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary">{{ trip.seatFare[0].fare }} <span class="text-base">TK</span></h2>
-                         <p class="text-xs font-normal text-blackLight mt-1">Per ticket</p>
+                         <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
                     </div>
                     <div class="lg:hidden flex justify-start items-center gap-x-3">
                          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]">
                          <div>
                               <h2 v-if="trip.seatFare[0].discountFare" class="text-xl font-semibold text-blackPrimary"><span class="line-through text-corporate">{{  trip.seatFare[0].fare }}</span> {{ trip.seatFare[0].discountFare }} <span class="text-xs">TK</span></h2>
                               <h2 v-else class="text-xl font-semibold text-blackPrimary">{{ trip.seatFare[0].fare }} <span class="text-xs">TK</span></h2>
-                              <p class="text-xs font-normal text-blackLight mt-1">Per ticket</p>
+                              <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
                          </div>
                     </div>
                     <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"> 
-                         {{selectedTrip === busIndex ? 'Close seats' : 'View seats' }} 
+                         {{selectedTrip === busIndex ? 'Close Seats' : 'View Seats' }} 
                          <span>
                               <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selectedTrip === busIndex && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
                          </span>
@@ -118,14 +118,14 @@
                               <SelectOption
                                    v-model="boardingPoint"
                                    :default-option="'Select Your Boarding Location'"
-                                   :label="'Boarding point'"
+                                   :label="'Boarding Point'"
                                    :options='getGsSeatBoardingPointArray'
                                    propertyName="name"
                               />
                               <!-- :options="getGsSeatBoardingPointArray" -->
                          </div>
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Departure time</h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Departure Time</h2>
                               <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
                                    <p class="text-blackPrimary text-sm font-medium">{{ departureTime }}</p>
                               </div>
@@ -153,14 +153,14 @@
                                    <p class='text-base lg:text-xs font-semibold text-blackPrimary'>BDT {{ totalPromoAmount }}</p>
                               </div>
                               <div class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
-                                   <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">Total fare</p>
+                                   <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">Total Fare</p>
                                    <p class="text-base lg:text-xs font-semibold text-blackPrimary">BDT <span>{{ totalAmount - (totalDiscountFare + totalPromoAmount) }}</span></p>
                               </div>
                          </div>
 
                          <!-- Passenger Information -->
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Passenger name <span class="text-[#E0293B]">*</span></h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Passenger Name <span class="text-[#E0293B]">*</span></h2>
                               <input 
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    type="text" 
@@ -170,7 +170,7 @@
                          </div>
 
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Phone no <span class="text-[#E0293B]">*</span></h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Phone No <span class="text-[#E0293B]">*</span></h2>
                               <input 
                               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
                                    type="number" 
@@ -180,7 +180,7 @@
                          </div>
 
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email id</span> <span class="text-[#8D8D8F]">Optional</span></h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email Id</span> <span class="text-[#8D8D8F]">Optional</span></h2>
                               <input 
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    type="email" 
@@ -207,7 +207,7 @@
                                         :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'" 
                                         class="w-1/4 mt-[10px] py-[10px] rounded-full text-xs font-medium"
                                    >
-                                        Apply promo
+                                        Apply Promo
                                    </button>
 
                                    <!-- Remove Promo -->
@@ -385,7 +385,7 @@ export default {
 
                } else {
                     if (this.selectedSeatIds.length > this.getGsSeatViewData.seatPlan.maxSeatLimit - 1) {
-                         this.$toast.error(`You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} tickets at a time!!`, {
+                         this.$toast.error(`You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} seats at a time!`, {
                               position: 'bottom-right',
                               duration: 50000,
                               containerClass: 'padding: 100px',

@@ -10,7 +10,7 @@
 
                <NuxtLink to="/find-ticket" class="bg-[#FEF2F0] text-corporate rounded-full px-4 py-2 flex justify-between gap-x-[10.5px]"> 
                     <img src="@/assets/images/icons/searchIcon.svg" alt=""> 
-                    <span>Find ticket</span>
+                    <span>Find Ticket</span>
                </NuxtLink>
           </div>
      </div>

@@ -46,13 +46,13 @@
                     </div>
 
                     <div class="flex justify-between gap-x-[52px] mt-[42px] absolute right-[100px]">
-                         <a href="https://jatri.co" target="_blank">
+                         <a href="https://www.facebook.com/JatriApp" target="_blank">
                               <img src="@/assets/images/icons/facebook.svg" alt="" class="w-[30px] h-[29.82px]">
                          </a>
-                         <a href="https://jatri.co" target="_blank">
+                         <a href="https://www.youtube.com/channel/UCOCwyP-pg5lJodKLvKmcWeQ" target="_blank">
                               <img src="@/assets/images/icons/youtube.svg" alt="" class="w-[30px] h-[29.82px]">
                          </a>
-                         <a href="https://jatri.co" target="_blank">
+                         <a href="https://bd.linkedin.com/company/jatri-app" target="_blank">
                               <img src="@/assets/images/icons/linkedin.svg" alt="" class="w-[30px] h-[29.82px]">
                          </a>
                     </div>

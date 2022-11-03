@@ -86,10 +86,10 @@
                          <div style='display: flex;justify-content: space-between;margin-bottom: 16px;'>
                               <div>
                                    <p style='color: black;font-size: 16px;font-weight: 500;margin-top: 20px;'>
-                                        {{ TicketDetails.companyName }}
+                                        {{ ticketDetails.companyName }}
                                    </p>
                                    <p style='color: black;font-size: 12px;font-weight: 500;'>
-                                        {{ TicketDetails.coach }}
+                                        {{ ticketDetails.coach }}
                                    </p>
                               </div>
                               <img :src="require('@/assets/images/logo.svg')" alt=''
@@ -99,21 +99,21 @@
                          <div style='display: flex'>
                               <div style='width: 50%; border-radius: 4px'>
                                    <p style='font-weight: 700;color: black;font-size: 12px;margin-top: 28px;'>
-                                        Ticket No: {{ TicketDetails.pnrCode }}
+                                        Ticket No: {{ ticketDetails.pnrCode }}
                                    </p>
                                    <p style='font-size: 12px;color: #4d4d4f;margin-top: 16px;font-weight: 400;'>
                                         Name :
-                                        <span style='font-weight: 600'>{{ TicketDetails.passenger.name }}</span>
+                                        <span style='font-weight: 600'>{{ ticketDetails.passenger.name }}</span>
                                    </p>
                                    <p style='font-size: 12px; color: #4d4d4f; margin-top: 10px'>
                                         Mobile Number:
-                                        <span style='font-weight: 600'>{{ TicketDetails.passenger.phone }}</span>
+                                        <span style='font-weight: 600'>{{ ticketDetails.passenger.phone }}</span>
                                    </p>
                                    <p style='font-size: 12px; color: #4d4d4f; margin-top: 10px'>
                                         Total Booked Seats:
                                    </p>
                                    <div style='display: flex; column-gap: 8px; margin-top: 4px'>
-                                        <p v-for='seat in TicketDetails.seatNumbers' :key='seat'
+                                        <p v-for='seat in ticketDetails.seatNumbers' :key='seat'
                                              style='width: 32px;height: 32px;background-color: #f04935;color: white;font-size: 14px;display: flex;align-items: center;justify-content: center;border-radius: 4px;font-weight: 700;'>
                                              {{ seat }}
                                         </p>
@@ -126,27 +126,27 @@
                                    <div style='display: flex; justify-content: space-between; gap: 0; color: black; font-size: 12px; margin-top: 7px;'>
                                         <p>Ticket Fare:</p>
                                         <p>
-                                             ৳ {{ Math.ceil((TicketDetails.payable + TicketDetails.discount) / TicketDetails.totalSeat) }} x {{ TicketDetails.totalSeat}}
+                                             ৳ {{ Math.ceil((ticketDetails.payable + ticketDetails.discount) / ticketDetails.totalSeat) }} x {{ ticketDetails.totalSeat}}
                                         </p>
                                    </div>
                                    <div style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Total Fare:</p>
-                                        <p>৳ {{ TicketDetails.payable + TicketDetails.discount }}</p>
+                                        <p>৳ {{ ticketDetails.payable + ticketDetails.discount }}</p>
                                    </div>
-                                   <div v-if="TicketDetails.discount"
+                                   <div v-if="ticketDetails.discount"
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Discount:</p>
-                                        <p>৳ {{ TicketDetails.discount }}</p>
+                                        <p>৳ {{ ticketDetails.discount }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Service Charge:</p>
-                                        <p>৳ {{ TicketDetails.serviceCharge }}</p>
+                                        <p>৳ {{ ticketDetails.serviceCharge }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Gateway Charge:</p>
-                                        <p>৳ {{ TicketDetails.gatewayCharge }}</p>
+                                        <p>৳ {{ ticketDetails.gatewayCharge }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: #8d8d8f;font-size: 12px;border-bottom: 1px dashed #c4c4c4;margin-top: 4px;margin-bottom: 4px;margin-bottom: 4px;'>
@@ -154,7 +154,7 @@
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: #151414;font-size: 14px;font-weight: 500;margin-top: 4px;'>
                                         <p>Subtotal</p>
-                                        <p>৳ {{ TicketDetails.totalAmount }}</p>
+                                        <p>৳ {{ ticketDetails.totalAmount }}</p>
                                    </div>
                               </div>
                          </div>
@@ -171,7 +171,7 @@
                                    <div style='margin-top: 11px'>
                                         <p style='font-size: 12px; color: #4d4d4f'>From:</p>
                                         <p style='font-size: 12px;color: black;margin-top: 4px;font-weight: 600;'>
-                                             {{ TicketDetails.fromCity }}
+                                             {{ ticketDetails.fromCity }}
                                         </p>
                                    </div>
 
@@ -180,7 +180,7 @@
                                              Boarding Counter:
                                         </p>
                                         <p style='font-size: 14px;color: black;font-weight: 600;margin-top: 4px;'>
-                                             {{ TicketDetails.boardingPlace }}
+                                             {{ ticketDetails.boardingPlace }}
                                         </p>
                                    </div>
 
@@ -203,7 +203,7 @@
                                    <div style='margin-top: 8px'>
                                         <p style='font-size: 12px; color: #4d4d4f'>To:</p>
                                         <p style='font-size: 12px;color: black;margin-top: 4px;font-weight: 600;'>
-                                             {{ TicketDetails.toCity }}
+                                             {{ ticketDetails.toCity }}
                                         </p>
                                    </div>
 
@@ -306,20 +306,20 @@
                                         <div style='width: 50%'>
                                              <p style='font-weight: 700; color: black; font-size: 12px'>
                                                   <span style='font-weight: 400'>Ticket No:</span> {{
-                                                            TicketDetails.pnrCode
+                                                            ticketDetails.pnrCode
                                                   }}
                                              </p>
                                              <p
                                                   style='font-weight: 400;color: black;font-size: 12px;margin-top: 8px;font-weight: 600;'>
                                                   <span style='font-weight: 400'> From:</span> {{
-                                                            TicketDetails.fromCity
+                                                            ticketDetails.fromCity
                                                   }}
                                              </p>
                                              <p style='font-size: 11px; color: #4d4d4f; margin-top: 8px'>
                                                   Boarding Counter:
                                              </p>
                                              <p style='color: #151414;font-weight: 600;font-size: 12px;margin-top: 1px;'>
-                                                  {{ TicketDetails.boardingPlace }}
+                                                  {{ ticketDetails.boardingPlace }}
                                              </p>
                                              <p style='font-size: 12px; margin-top: 8px; font-weight: 600'>
                                                   <span style='color: #4d4d4f; font-weight: 400'>
@@ -340,7 +340,7 @@
                                                   {{ tripDate }}
                                              </p>
                                              <p style='font-weight: 600;color: black;font-size: 12px;margin-top: 8px;'>
-                                                  <span style='font-weight: 400'>To:</span> {{ TicketDetails.toCity
+                                                  <span style='font-weight: 400'>To:</span> {{ ticketDetails.toCity
                                                   }}
                                              </p>
 
@@ -367,34 +367,34 @@
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;'>
                                         <p>Ticket Fare:</p>
                                         <p>
-                                             ৳ {{ Math.ceil((TicketDetails.payable + TicketDetails.discount) / TicketDetails.totalSeat) }} x {{ TicketDetails.totalSeat }}</p>
+                                             ৳ {{ Math.ceil((ticketDetails.payable + ticketDetails.discount) / ticketDetails.totalSeat) }} x {{ ticketDetails.totalSeat }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Total Fare:</p>
-                                        <p>৳ {{ TicketDetails.payable + TicketDetails.discount }}</p>
+                                        <p>৳ {{ ticketDetails.payable + ticketDetails.discount }}</p>
                                    </div>
-                                   <div v-if="TicketDetails.discount"
+                                   <div v-if="ticketDetails.discount"
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Discount:</p>
-                                        <p>৳ {{ TicketDetails.discount }}</p>
+                                        <p>৳ {{ ticketDetails.discount }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Service Charge:</p>
-                                        <p>৳ {{ TicketDetails.serviceCharge }}</p>
+                                        <p>৳ {{ ticketDetails.serviceCharge }}</p>
                                    </div>
                                    <div
                                         style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 12px;margin-top: 4px;'>
                                         <p>Gateway Charge:</p>
-                                        <p>৳ {{ TicketDetails.gatewayCharge }}</p>
+                                        <p>৳ {{ ticketDetails.gatewayCharge }}</p>
                                    </div>
                                    <div style='display: flex;justify-content: space-between;gap: 0;color: #8d8d8f;font-size: 12px;border-bottom: 1px dashed #c4c4c4;margin-top: 4px;margin-bottom: 4px;'>
 
                                    </div>
                                    <div style='display: flex;justify-content: space-between;gap: 0;color: black;font-size: 14px;font-weight: 500;margin-top: 4px;'>
                                         <p>Subtotal</p>
-                                        <p>৳ {{ TicketDetails.totalAmount }}</p>
+                                        <p>৳ {{ ticketDetails.totalAmount }}</p>
                                    </div>
                               </div>
                          </div>
@@ -423,23 +423,23 @@
 import { dateTimeFormat, timeFormat } from '@/helpers/dateTimeFormat';
 import { mapGetters } from 'vuex';
 export default {
-     props: ['TicketDetails', 'email', 'phone'],
+     props: ['ticketDetails', 'email', 'phone'],
      computed: {
           ...mapGetters('guarantedseat', ['getSearchedTicketList']),
           reportTimeWithAddTime() {
-               return this.TicketDetails && timeFormat(this.TicketDetails.reportingDateTime, 0, 'lll');
+               return this.ticketDetails && timeFormat(this.ticketDetails.reportingDateTime, 0, 'lll');
           },
           departureDateTime() {
-               return this.TicketDetails && dateTimeFormat(this.TicketDetails.boardingDateTime, 0, 'lll');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.boardingDateTime, 0, 'lll');
           },
           tripDate() {
-               return this.TicketDetails && dateTimeFormat(this.TicketDetails.departureDateTime, 0, 'lll');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.departureDateTime, 0, 'lll');
           },
           ticketDateTime() {
-               return this.TicketDetails && dateTimeFormat(this.TicketDetails.ticketDateTime, 0, 'll');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.ticketDateTime, 0, 'll');
           },
           issuedOn() {
-               return this.TicketDetails && dateTimeFormat(this.TicketDetails.createdAt, 0, 'lll');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.createdAt, 0, 'lll');
           }
      }
 }

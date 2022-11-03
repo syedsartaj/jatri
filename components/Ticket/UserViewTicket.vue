@@ -9,7 +9,7 @@
         :enable-download="true"
         :preview-modal="true"
         :paginate-elements-by-height="1400"
-        filename="nightprogrammerpdf"
+        :filename="getTicketDetails.companyName +'_'+ getTicketDetails.passenger.name +'_'+ getTicketDetails.pnrCode"
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
@@ -20,13 +20,13 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <PrintDownloadTicket :TicketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :id="'printTicket-'+getTicketDetails._id"/>
+          <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone" :id="'printTicket-'+getTicketDetails._id"/>
         </section>
       </vue-html2pdf>
     </client-only>
     <!-- for print-->
     <div :id="'printTicket-'+getTicketDetails._id" style="width: 100%; overflow-x: auto; overflow-y: hidden; border-radius: 6px 6px 0 0;" class="hidden">
-      <PrintDownloadTicket :TicketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone"/>
+      <PrintDownloadTicket :ticketDetails="getTicketDetails" :email="supportEmail" :phone="supportPhone"/>
     </div>
 
     <!-- for show to user-->
@@ -96,7 +96,7 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.payable + getTicketDetails.discount }} TK</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.totalAmount }} TK</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
@@ -116,7 +116,7 @@
       <span v-if="!getTicketDetails.status && !pageVind" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
         Cancelled
       </span>
-      <span v-else-if="!pageVind && getPaymentHistory && (getTicketDetails.status && getPaymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST')" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
+      <span v-else-if="!pageVind  && (getTicketDetails.status && getTicketDetails.paymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST')" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
         Requested For Cancel
       </span>
       <button v-if="getTicketDetails.isTicketCancelable && !pageVind" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
@@ -214,7 +214,7 @@ export default {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.ticketDateTime, 0, 'll');
     },
     issuedOn () {
-      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.createdAt, 0, 'lll');
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.createdAt, 6, 'lll');
     }
   }
 
