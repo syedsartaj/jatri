@@ -257,7 +257,7 @@ export const actions = {
         } else {
           resolve(res);
           commit('resetPromoCode');
-          this.$toast.error('Something went wrong!', {
+          this.$toast.error('Invalid promo applied!', {
             position: 'bottom-right',
             duration: 5000,
           })

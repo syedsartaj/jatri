@@ -111,7 +111,13 @@
                                    <p style='font-size: 12px; color: #4d4d4f; margin-top: 10px'>
                                         Total Booked Seats:
                                    </p>
-                                   <div style='display: flex; column-gap: 8px; margin-top: 4px'>
+                                   <div v-if="downloadTicketStatus" style='display: flex; column-gap: 8px; margin-top: 4px'>
+                                        <div v-for='seat in ticketDetails.seatNumbers' :key='seat'
+                                             style='width: 32px; height: 32px; background-color: #f04935;color: white;font-size: 14px;display: flex;justify-content: center;align-items: center;border-radius: 4px;font-weight: 700; padding-bottom: 15px;'>
+                                             {{ seat }}
+                                        </div>
+                                   </div>
+                                   <div v-else style='display: flex; column-gap: 8px; margin-top: 4px'>
                                         <div v-for='seat in ticketDetails.seatNumbers' :key='seat'
                                              style='width: 32px; height: 32px; background-color: #f04935;color: white;font-size: 14px;display: flex;justify-content: center;align-items: center;border-radius: 4px;font-weight: 700;'>
                                              {{ seat }}
@@ -260,14 +266,14 @@
                                              <img :src="require('@/assets/images/ticket/mail.svg')" alt=''
                                                   style='width: 17px; height: 15px; display: inline-block;' />
                                              <span style='text-align: center;margin-bottom:15px;font-weight: 600;'>
-                                                  {{ getSearchedTicketList.supportEmail || email }} {{downloadTicketStatus}}
+                                                  {{ getSearchedTicketList.supportEmail || email }}
                                              </span>
                                         </div>
                                         <div v-else style='display: flex;column-gap: 10px;margin-top: 6px;align-items: center;'>
                                              <img :src="require('@/assets/images/ticket/mail.svg')" alt=''
                                                   style='width: 17px; height: 15px; display: inline-block;' />
                                              <span style='text-align: center;font-weight: 600;'>
-                                                  {{ getSearchedTicketList.supportEmail || email }} {{downloadTicketStatus}}
+                                                  {{ getSearchedTicketList.supportEmail || email }}
                                              </span>
                                         </div>
                                    </div>
@@ -278,14 +284,14 @@
                                              <img :src="require('@/assets/images/ticket/phone.svg')" alt=''
                                                   style='width: 15px; height: 15px; display: inline-block;' />
                                              <span style='text-align: center;margin-bottom:15px;font-weight: 600;'>
-                                                  {{ getSearchedTicketList.supportPhone || phone }} {{downloadTicketStatus}}
+                                                  {{ getSearchedTicketList.supportPhone || phone }}
                                              </span>
                                         </div>
                                         <div v-else style='display: flex; column-gap: 10px; margin-top: 6px; align-items: center;'>
                                              <img :src="require('@/assets/images/ticket/phone.svg')" alt=''
                                                   style='width: 15px; height: 15px; display: inline-block;' />
                                              <span style='text-align: center;font-weight: 600;'>
-                                                  {{ getSearchedTicketList.supportPhone || phone }} {{downloadTicketStatus}}
+                                                  {{ getSearchedTicketList.supportPhone || phone }}
                                              </span>
                                         </div>
                                    </div>

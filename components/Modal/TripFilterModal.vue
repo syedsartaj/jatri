@@ -84,9 +84,13 @@ export default {
                     this.handleFromSubmit();
                }
           },
-          priceFilterType(value){
-               if(value){
-                    this.sortedTrip(value);
+          priceFilterType:{
+               immediate: true,
+               handler(value){
+                    console.log('called');
+                    if(value){
+                         this.sortedTrip(value);
+                    }
                }
           }
      },
@@ -106,7 +110,6 @@ export default {
                Cookies.remove('process-allow')
                this.$router.push({ path: "/trip", query });
                this.$emit("handleTripFilterModal");
-
           },
      },
 }

@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style>
+body{
+  position: relative;
+}
+
 .loader {
   /* border: 8px solid #f3f3f3; */
   border-radius: 50%;

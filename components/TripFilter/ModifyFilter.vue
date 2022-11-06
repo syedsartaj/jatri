@@ -99,9 +99,13 @@ export default {
                }
           },
 
-          priceFilterType(value){
-               if(value){
-                    this.sortedTrip(value);
+          priceFilterType:{
+               immediate: true,
+               handler: function(value){
+                    console.log('called');
+                    if(value){
+                         this.sortedTrip(value);
+                    }
                }
           }
      },
