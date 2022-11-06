@@ -3,9 +3,11 @@
     <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
       <p v-if="label" class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"> {{label}} </p>
       <p v-if="dateUpdate !== ''" class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> {{ new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+      <p v-else-if="defaultOption" class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> 
+        {{ defaultOption }}  
+      </p>
       <p v-else class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> 
-          <span v-if='defaultOption'>{{ defaultOption }}</span>
-          <span v-else>Select Journey Date</span>     
+        Select Journey Date    
       </p>
     </button>
     <div v-if='optionsIsOpen' class='mt-10 -ml-5 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>

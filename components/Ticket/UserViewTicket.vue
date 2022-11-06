@@ -123,11 +123,11 @@
         <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
         Cancel Ticket
       </button>
-      <button @click="downloadTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.status" @click="downloadTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/download.svg" alt="" class="hidden lg:block">
         Download Ticket
       </button>
-      <button @click="printTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.status" @click="printTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/print.svg" alt="" class="hidden lg:block">
         Print Ticket
       </button>
