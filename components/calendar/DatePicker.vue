@@ -1,6 +1,6 @@
 <template>
-  <div class="w-1/4 lg:px-5 xl:px-6 py-4">
-    <button class="block rounded-lg bg-white focus:outline-none w-full cursor-pointer" @click="toggleDropdown">
+  <div class="w-1/4 lg:px-5 xl:px-6 py-4 cursor-pointer" @click="toggleDropdown">
+    <button class="block rounded-lg bg-white focus:outline-none w-full">
       <p v-if="label" class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"> {{label}} </p>
       <p v-if="dateUpdate !== ''" class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> {{ new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
       <p v-else-if="defaultOption" class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> 

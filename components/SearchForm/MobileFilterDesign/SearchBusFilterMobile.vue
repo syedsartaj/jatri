@@ -71,7 +71,7 @@ export default {
           },
           selectOption (option) {
                this.selectedOption = option
-               // this.$emit('input', this.selectedOption.city_name)
+               this.$emit('input', this.selectedOption.city_name)
                this.optionsIsOpen = false
           },
           close (e) {

@@ -130,7 +130,7 @@
                                    <p class="text-blackPrimary text-sm font-medium">{{ departureTime }}</p>
                               </div>
                          </div>
-
+                    
                          <!-- Seat Fare Table -->
                          <div v-if='selectedSeatsObj.length' class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
                               <div class="flex justify-between px-[14px] pt-[10px] pb-[6px] border-b">
@@ -416,7 +416,7 @@ export default {
                     return;
                }
                if(!this.selectedSeatIds.length) {
-                    this.$toast.error('no seat selected', {
+                    this.$toast.error('No Seat Selected', {
                          position: 'bottom-right',
                          duration: 50000,
                          containerClass: 'padding: 100px',
@@ -451,7 +451,7 @@ export default {
                          droppingPointName: this.trip.dropping,
                          departureId: this.trip.departureId,
                          departureDate: this.trip.departureDate,
-                         departureTime: this.trip.departureTime,
+                         departureTime: this.departureTime,
                          boardingDateTime: this.boardingPoint.scheduleTime,
                          reportingDateTime: this.boardingPoint.reportingTime,
                          passengerName: this.passengerName,

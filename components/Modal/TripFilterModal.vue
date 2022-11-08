@@ -87,7 +87,6 @@ export default {
           priceFilterType:{
                immediate: true,
                handler(value){
-                    console.log('called');
                     if(value){
                          this.sortedTrip(value);
                     }

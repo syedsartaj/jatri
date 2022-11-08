@@ -52,15 +52,15 @@
                     </div>
                </div>
                <!-- Ticket not found -->
-               <div class="flex justify-center pt-20 pb-[100px]" v-if="oopsAlertStatus && !getSearchedTicketList.tickets">
-                    <OpssAlert
+               <div class="flex justify-center pt-20 pb-[100px]">
+                    <OpssAlert 
+                         v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
                          :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
                          :customStyle="'px-[64.5px]'"
                     />
                </div>
-
                <!-- Active Tickets -->
-               <div class="mt-10" v-if="getSearchedTicketList.tickets">
+               <div class="mt-10" v-if="ticketList && getSearchedTicketList.tickets">
                     <div class="flex justify-between items-center gap-x-4">
                          <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
                          <p class="text-base font-medium whitespace-nowrap">Active Tickets</p>
@@ -89,7 +89,8 @@ import { mapActions, mapGetters } from 'vuex';
                     transactionId: "",
                     activeTickets: [],
                     oldTickets: [],
-                    oopsAlertStatus: false
+                    oopsAlertStatus: false,
+                    ticketList: false
                };
           },
           computed: {
@@ -119,12 +120,12 @@ import { mapActions, mapGetters } from 'vuex';
                          }
                          if (this.pnr || this.phone || this.transactionId) {
                               this.error = false;
+                              this.ticketList = true
                               await this.searchTicketAction(formData);
                          } else {
                               this.error = true;
                          }
                          this.$nuxt.$loading.finish();
-
                          this.oopsAlertStatus = true;
                     });
                },

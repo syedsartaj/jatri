@@ -4,29 +4,29 @@
       <!--      dropdown-->
       <div class="block md:hidden bg-white">
         <button @click="toggler" class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between">Terms & Conditions
-          <img src="../assets/images/ashDropDown.svg" alt="">
+          <img src="@/assets/images/ashDropDown.svg" alt="">
         </button>
         <div v-show="dropDown" class="w-full bg-[#f7f7f7] rounded p-2">
           <p class="text-base font-medium text-blackPrimary">Table of contents</p>
+
           <hr class="mt-2 border-t border-[#DBDBDB]">
-          <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="selectedContent === 'terms-condition' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full  leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
-          <a @click="selectedContent = 'return-policy'"   href="#return-and-refund-policy" :class="selectedContent === 'return-policy'  ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
-          <a @click="selectedContent = 'privacy-policy'"  href="#privacy-policy" :class="selectedContent === 'privacy-policy' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy </a>
+          <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full  leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
+          <a @click="selectedContent = 'return-policy'"   href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'  ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
+          <a @click="selectedContent = 'privacy-policy'"  href="#privacy-policy" :class="$route.hash === '#privacy-policy' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy </a>
         </div>
       </div>
-
       <div class="md:flex md:gap-x-[32px]">
         <div class="hidden md:block w-[300px] bg-[#F7F7F7] rounded-[14px] p-6">
           <div class="sticky top-24">
             <p class="text-base font-medium text-blackPrimary">Table of contents</p>
             <hr class="mt-2 border-t border-[#DBDBDB]">
-            <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="selectedContent === 'terms-condition' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' "  class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
-            <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="selectedContent === 'return-policy'  ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
-            <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="selectedContent === 'privacy-policy' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy </a>
+            <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' "  class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
+            <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'  ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
+            <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="$route.hash === '#privacy-policy' ? 'text-white bg-[#1E88E5]' : 'text-black bg-transparent' " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy </a>
           </div>
         </div>
         <div id="terms-and-conditions" class="w-full mt-10">
-          <div class="bg-white p-4">
+          <div class="bg-white p-4" :class="$route.hash === '#terms-and-conditions' ? 'mt-20' : ' '">
             <p class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Terms & Conditions</p>
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">General Terms:</p>
             <div class="ml-4 md:ml-9">
@@ -99,8 +99,8 @@
             <p class="text-base font-normal text-blackPrimary mt-4">If purchase confirmation email/SMS gets delayed or fails because of technical reasons
               or as a result of incorrect ID / phone number provided by the user etc. a ticket will be
               considered 'purchased' as long as the ticket shows up on the confirmation page of
-              www.jatri.co If the E-mail/SMS is not received then please calls our customer case
-              or emails us to support@jatri.co for confirmation.</p>
+              www.jatri.co If the E-mail/SMS is not received then please call our customer care
+              or emails us to info@jatri.co for confirmation.</p>
             <p class="text-base font-normal text-blackPrimary mt-4">Email/SMS service will not apply to customers purchasing tickets at the respective
               bus/cruise counters. It will apply for purchase through online and our agent points and
               purchasing through call centre.</p>
@@ -120,7 +120,7 @@
               WORST TRAFFIC JAM), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION
               JATRI.CO OR HIS BUS/CRUISE OPERATORS WILL NOT BE RESPONSIBLE
               IF ANY TRIP IS CANCELLED, PASSENGER WILL GET REFUND ONLY COUNTER
-              FARE PRICE. JATRI.CO ONLINE RANSACTION FEES WILL BE DEDUCTED
+              FARE PRICE. JATRI.CO ONLINE TRANSACTION FEES WILL BE DEDUCTED
               FROM TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED.</p>
 
             <div class="mt-6">
@@ -128,9 +128,9 @@
               <p class="text-base font-normal text-blackPrimary"> Call us <span class="font-medium">@ 09642080808</span></p>
             </div>
 
-            <hr class="mt-6 border-t border-[#DBDBDB]">
+            <hr class="mt-6 border-t border-[#DBDBDB]" id="return-and-refund-policy">
 
-            <div id="return-and-refund-policy">
+            <div>
               <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Return & Refund Policies</p>
               <p class="text-base font-normal text-blackPrimary mt-4">Before buying a ticket, customers are requested to read the following
                 cancellation and refund policies carefully.</p>
@@ -277,7 +277,7 @@
 
               <hr class="mt-2 border-t border-[#DBDBDB]">
 
-              <div id="privacy-policy">
+              <div id="privacy-policy"  :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
                 <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Privacy Policy</p>
 
                 <p class="text-base font-normal text-blackPrimary">Jatri services Ltd., values the relationship with the customers. We are committed to handle

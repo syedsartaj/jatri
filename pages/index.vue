@@ -2,7 +2,7 @@
   <div class="bg-white">
 
     <!-- banner section -->
-    <div v-if="!isMobile" class="relative homeBanner">
+    <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div class="absolute lg:top-[100px] xl:top-[130px] 2xl:top-[170px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40">
         <div class="">
           <h2 class="lg:text-5xl xl:text-[57px] text-blackPrimary font-bold leading-[64px]">Book Your Journey NOW!!!</h2>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- banner section -->
-    <div v-if="isMobile" class="relative">
+    <div v-if="isMobile" class="relative block lg:hidden">
       <img src="@/assets/images/home/bannerImageMobile.png" alt="" class="w-full">
       <div class="absolute top-[59px] right-4 left-4">
         <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book Your Journey NOW!!!</h2>
@@ -273,7 +273,7 @@
             :uniqeId="4"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
-            @click="setAccordionIndex"
+            
           />
         </div>
       </div>
@@ -368,7 +368,6 @@ export default {
     },
     onResize(){
       this.isMobile = window.innerWidth < 1024
-      console.log("check Mobile Device ==>", this.isMobile);
     }
 
   }
