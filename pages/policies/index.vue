@@ -275,9 +275,9 @@
               <p class="text-base font-normal text-blackPrimary"> <span class="font-medium">Note:</span> Terms and conditions of refund policy might time to time update or
                 changed without any notice.</p>
 
-              <hr class="mt-2 border-t border-[#DBDBDB]">
+              <hr id="privacy-policy" class="mt-2 border-t border-[#DBDBDB]">
 
-              <div id="privacy-policy"  :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
+              <div  :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
                 <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Privacy Policy</p>
 
                 <p class="text-base font-normal text-blackPrimary">Jatri services Ltd., values the relationship with the customers. We are committed to handle

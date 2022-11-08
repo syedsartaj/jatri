@@ -61,17 +61,17 @@
           <div class="w-full h-[1px] bg-white mt-10"></div>
           <div class="text-center flex justify-center gap-x-12 items-center pt-6">
                <nuxt-link to="/policies#terms-and-conditions" class="flex justify-start gap-x-3 items-center">
-                    <p class="text-white text-base underline">Terms and condition</p>
+                    <p class="text-white text-base underline">Terms and Condition</p>
                     <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4">
                </nuxt-link>
                <div class="h-6 bg-white w-[1px]"></div>
                <nuxt-link to="/policies#return-and-refund-policy" class="flex justify-start gap-x-3 items-center">
-                    <p class="text-white text-base underline">Return & refund policy</p>
+                    <p class="text-white text-base underline">Return & Refund Policy</p>
                     <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4">
                </nuxt-link>
                <div class="h-6 bg-white w-[1px]"></div>
                <nuxt-link to="/policies#privacy-policy" class="flex justify-start gap-x-3 items-center">
-                    <p class="text-white text-base underline">Privacy policy</p>
+                    <p class="text-white text-base underline">Privacy Policy</p>
                     <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4">
                </nuxt-link>
           </div>
