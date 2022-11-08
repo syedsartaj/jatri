@@ -107,6 +107,12 @@ export default {
                          this.sortedTrip(value);
                     }
                }
+          },
+          '$route.query': {
+               immediate: true,
+               handler() {
+                    this.priceFilterType = null
+               }
           }
      },
 

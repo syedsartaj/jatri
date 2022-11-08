@@ -51,10 +51,10 @@ export const actions = {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
       commit('setGsCities', data);
     } catch (error) {
-      this.$toast.error(error.response ? error.response.data.message : error.message , {
-        position: 'bottom-right',
-        duration: 5000,
-      })
+      // this.$toast.error(error.response ? error.response.data.message : error.message , {
+      //   position: 'bottom-right',
+      //   duration: 5000,
+      // })
     }
   },
   async getPbScheduleDataAction ({ commit }, payload) {

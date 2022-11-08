@@ -1,5 +1,5 @@
 <template>
-  <div v-if='loading' class='absolute inset-0 bg-white z-50 overflow-hidden' style='background: #e4e4e4bd'>
+  <div v-if='loading' class='fixed inset-0 bg-white z-50 overflow-hidden' style='background: #e4e4e4bd'>
     <div class='flex flex-col justify-center items-center h-screen'>
       <!--      <FlowerSpinner   :size="100" color="#F04935" />-->
       <!--      <LoopingRhombusesSpinner class="mt-10" :size="100" color="#F04935" />-->
