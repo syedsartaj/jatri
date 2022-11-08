@@ -5,7 +5,7 @@
         <img src="@/assets/images/logo-white.svg" alt="" class="h-11 w-[89px]">
       </a>
       <div class="flex gap-x-4 items-center mt-[20px]">
-        <a href="https://goo.gl/maps/7oJip3H2v1LXvQLF7" target="_blank">
+        <a href="https://play.google.com/store/apps/details?id=com.jatri.jatriuser&pli=1" target="_blank">
           <img src="@/assets/images/google-play-badge.svg" alt="" class="h-[30px] w-[102px]">
         </a>
         <a href="https://jatri.co/" target="_blank">

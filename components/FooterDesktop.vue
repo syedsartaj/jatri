@@ -5,8 +5,12 @@
                     <img src="@/assets/images/logo-white.svg" alt="" class="h-11 w-[89px] ">
                     
                     <div class="flex gap-x-[14px] mt-[23px] mb-[35px]">
-                         <img src="@/assets/images/google-play-badge.svg" alt="" class="h-11 w-[89px]">
-                         <img src="@/assets/images/website-badge.svg" alt="" class="h-11 w-[89px]">
+                         <a href="https://play.google.com/store/apps/details?id=com.jatri.jatriuser&pli=1" target="_blank">
+                              <img src="@/assets/images/google-play-badge.svg" alt="" class="h-11 w-[89px]">
+                         </a>
+                         <a href="https:jatri.co" target="_blank">
+                              <img src="@/assets/images/website-badge.svg" alt="" class="h-11 w-[89px]">
+                         </a>
                     </div>
 
                     <div class="flex flex-col lg:gap-y-[22px]">
