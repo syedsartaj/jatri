@@ -238,8 +238,8 @@
                          </LoaderButton>
 
                          <div class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2">
-                              <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</a>
-                              <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Cancellation policy</a>
+                              <nuxt-link to="/policies#terms-and-conditions" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</nuxt-link>
+                              <nuxt-link to="/policies#return-and-refund-policy" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Cancellation policy</nuxt-link>
                          </div>
                     </div>
                </div>

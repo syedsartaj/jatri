@@ -43,21 +43,28 @@
           <p>09642080808</p>
         </a>
 
-        <a href="https://goo.gl/maps/7oJip3H2v1LXvQLF7" target="_blank" class="flex items-center text-white text-base gap-x-[9.67px]">
-          <img src="@/assets/images/icons/mapMarkupIcon.svg" alt="" class="w-[15px] h-[15px]"/>
+        <a href="https://goo.gl/maps/7oJip3H2v1LXvQLF7" target="_blank" class="flex items-start text-white text-base gap-x-[9.67px]">
+          <img src="@/assets/images/icons/mapMarkupIcon.svg" alt="" class="w-[15px] h-[15px] mt-1"/>
           <p>Road 24, House-15(2<sup>nd</sup> floor), Gulshan-02, Dhaka</p>
         </a>
       </div>
 
       <div class="bg-white h-[1px] bg-opacity-50 mt-6"></div>
-      <div class="flex justify-between gap-x-[16.67px] items-center pt-6">
-        <nuxt-link to="/terms-and-conditions" class="flex justify-start gap-x-[6.67px] items-center">
+      <div class="flex justify-center gap-x-[16.67px] items-center pt-6 pb-4">
+        <nuxt-link to="/policies#terms-and-conditions" class="flex justify-start gap-x-[6.67px] items-center">
           <p class="text-white text-sm underline">Terms and condition</p>
           <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
         </nuxt-link>
         <div class="h-6 bg-white w-[1px]"></div>
-        <nuxt-link to="/refund-and-privacy-policy" class="flex justify-start gap-x-[6.67px] items-center">
-          <p class="text-white text-sm underline">Refund and privacy policy</p>
+        <nuxt-link to="/policies#return-and-refund-policy" class="flex justify-start gap-x-[6.67px] items-center">
+          <p class="text-white text-sm underline">Return & refund policy</p>
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+        </nuxt-link>
+      </div>
+
+      <div class="flex justify-center border-t border-dashed border-white border-opacity-50 pt-4">
+        <nuxt-link to="/policies#privacy-policy" class="flex justify-start gap-x-[6.67px] items-center">
+          <p class="text-white text-sm underline">Privacy policy</p>
           <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
         </nuxt-link>
       </div>
