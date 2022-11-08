@@ -209,13 +209,13 @@ export default {
   computed: {
     ...mapGetters('guarantedseat', ['getSearchedTicketList']),
     reportTimeWithAddTime () {
-      return this.getTicketDetails && timeFormat(this.getTicketDetails.reportingDateTime, 0, 'lll');
+      return this.getTicketDetails && timeFormat(this.getTicketDetails.reportingDateTime, 0, 'hh:mm A');
     },
     departureDateTime () {
-      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.boardingDateTime, 0, 'lll') ;
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.boardingDateTime, 0, 'hh:mm A') ;
     },
     tripDate () {
-      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.departureDateTime, 0, 'lll');
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.departureDateTime, 0, 'll');
     },
     ticketDateTime () {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.ticketDateTime, 0, 'll');

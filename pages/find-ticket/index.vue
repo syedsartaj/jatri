@@ -39,11 +39,11 @@
                                         <input v-else-if="selectedTab === 2"
                                              class="w-full p-4 bg-[#F7F7F7] rounded outline-none text-sm lg:text-base placeholder:text-sm lg:placeholder:text-base font-normal text-blackPrimary placeholder:text-[#676769]"
                                              type="text"
-                                             placeholder="Tnx Id"
+                                             placeholder="Tnx ID"
                                              v-model="transactionId"
                                         />
                                    </div>
-                                   <button type="submit" class="px-6 lg:px-7 py-[13px] w-[120px] lg:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 lg:mt-0">Find Ticket</button>
+                                   <button type="submit" class="px-6 lg:px-7 py-[13px] lg:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 lg:mt-0">Find Ticket</button>
                               </div>
                          </form>
                          

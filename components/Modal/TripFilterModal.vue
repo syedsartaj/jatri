@@ -20,7 +20,7 @@
                                              <label for="busType">
                                                   <button
                                                        @click="setCoachtype(busType)"
-                                                       class="w-full p-2 cursor-pointer rounded text-sm font-medium"
+                                                       class="w-full p-2 cursor-pointer rounded text-sm font-medium capitalize"
                                                        :class="coachType == busType ? 'bg-corporate text-white': 'bg-[#ededed] text-blackPrimary'"
                                                   >
                                                        {{busType}}

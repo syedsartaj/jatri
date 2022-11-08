@@ -42,7 +42,7 @@
                     </div>
                     <div class="px-[14px] pt-3">
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
-                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat No.:</p>
+                              <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Seat No:</p>
                               <p class="text-xs lg:text-base font-medium text-blackPrimary">{{ getBookingInfoDetails.invoice.seatNo.join(', ') }}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
@@ -110,7 +110,7 @@
                     </div>
                </div>
 
-               <div v-if="!paymentValidateTime" class="mt-2">
+               <div v-if="getGsLoading || !paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
                     <PaymentTimeoutAlert/>
                </div>
 
@@ -129,7 +129,7 @@
                </LoaderButton>
 
                <div class="text-center mt-4 lg:mt-5">
-                    <p class="text-blackPrimary text-sm font-normal">By procedding you are agreeing with our <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</a></p>
+                    <p class="text-blackPrimary text-sm font-normal">By processing you are agreeing with our <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blue-500">Terms and Conditions</a></p>
                </div>
 
                <div class="p-5 mt-8 border border-[#DBDBDB] rounded-lg lg:hidden flex justify-start items-start gap-x-5">

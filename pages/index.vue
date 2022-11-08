@@ -36,19 +36,19 @@
             <img src="@/assets/images/home/curveBorder.svg" alt="" class="w-[203px] lg:w-[298px] block mx-auto">
           </div>
 
-          <div class="mt-[60px] flex flex-wrap justify-between lg:gap-x-[95px]">
+          <div class="mt-[60px] flex flex-wrap xl:flex-nowrap justify-between lg:gap-x-[95px]">
             <div class="lg:p-4 lg:w-[340px]">
-              <img src="@/assets/images/home/two-tickets.png" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/two-tickets.png" alt="" class="w-[66px] block max-sm:m-auto">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Ease on the move</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Tickets are available on the go through our platform, no more queues!</p>
             </div>
             <div class="lg:p-4 lg:w-[340px] mt-8 lg:mt-0">
-              <img src="@/assets/images/home/red-bus.png" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/red-bus.png" alt="" class="w-[66px] block max-sm:m-auto">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Promise of convenient travel</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">We have an excellent system of taking service based on preference, as there is ticketing service for multiple routes via different categories of buses.</p>
             </div>
             <div class="lg:p-4 lg:w-[340px] mt-8 lg:mt-0">
-              <img src="@/assets/images/home/security-badge.png" alt="" class="w-[66px]">
+              <img src="@/assets/images/home/security-badge.png" alt="" class="w-[66px] block max-sm:m-auto">
               <h2 class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8">Reliability assured</h2>
               <p class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4">Whether you are travelling for work or leisure, book your tickets through us and keep all your worries away.</p>
             </div>
@@ -132,14 +132,14 @@
         <h2 class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2">Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Euro Coach</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">SB Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Greenline</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Pingky Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Lucky Express</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Mimjaal Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Shah Fateh Ali</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-normal">Much more to come</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Euro Coach</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">SB Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Greenline</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Pingky Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Lucky Express</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Mimjaal Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh Ali</NuxtLink>
+          <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Much more to come</NuxtLink>
         </div>
       </div>
     </div>
@@ -240,6 +240,9 @@
             :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 
                         <br><br>Secondly, you will have to select your location, where to go, which kind of bus you need and the date of your journey. Then click the “book now” option and fill-up all the information. After making the payment process you will get your tickets.
                       `"
+            :uniqeId="1"
+            :selectedIndex="selectedAccordion"
+            @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
             :heading="'Payment details- bKash, Nagad, Bank Cards, Online Banking'"
@@ -249,10 +252,16 @@
                         <br><br>In case of card payments, the last 4 digits of the card type of card is also needed. It is to be noted that for reasons beyond Jatri.co’s control, card payment may sometimes require time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
                         <br><br>In case of BKash payments, a full mobile number will be required. It is to be noted that for reasons beyond Jatri.co’s control, payment may require some time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
                       `"
+            :uniqeId="2"
+            :selectedIndex="selectedAccordion"
+            @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
             :heading="'24/7 Customer Service- 09642080808'"
             :details="`The customer service team of Jatri services Ltd. is open 24/7. For any kind of help or queries or questions, you can call the custom service number 09642080808.`"
+            :uniqeId="3"
+            :selectedIndex="selectedAccordion"
+            @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
             :heading="'Ticket Cancellation Procedures'"
@@ -261,6 +270,10 @@
                         <br><br>(<span class='text-blackPrimary font-medium'>Note</span>: Terms and conditions of refund policy might update or change from time to time without any notice).
                         <br><br><span class='text-blackPrimary font-medium'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself. Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise. Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes. For mobile payments customers must complete payment and also verify transactions within this stipulated time. During Eid sales month, Jatri.co will not do any verification on behalf of the customers.
                       `"
+            :uniqeId="4"
+            :selectedIndex="selectedAccordion"
+            @setAccordionIndex="setAccordionIndex"
+            @click="setAccordionIndex"
           />
         </div>
       </div>
@@ -281,6 +294,7 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
   data(){
     return {
+      selectedAccordion : null,
       howToBuyModalStatus : false,
       slideLeft : false,
       slideRight : false,
@@ -333,6 +347,10 @@ export default {
       "getCitiesList",
       "successTicketByMailAction",
     ]),
+
+    setAccordionIndex(id){
+      this.selectedAccordion = id;
+    },
 
     handleHowToBuyModal() {
       this.howToBuyModalStatus = !this.howToBuyModalStatus

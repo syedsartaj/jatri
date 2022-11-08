@@ -35,6 +35,7 @@
           {{ propertyName ? option[propertyName] : option }}
           <span class='absolute right-5 top-5 bottom-0'><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"></span>
         </li> -->
+
         <li v-for="(option, index) in options" :key="index" 
           class='cursor-pointer font-inter py-[14px] font-medium  hover:text-corporate relative'
           :class="propertyName && option[propertyName] === selectedOption[propertyName]
@@ -83,12 +84,11 @@ export default {
   },
   created() {
     this.selectedOption =
-      this.options && this.options.length > 0 ? this.options[0] : "";
+      this.options && this.options.length > 0 ? this.boardingPoint : "";
   },
   mounted() {
     window.addEventListener("click", this.close);
   },
-
   beforeDestroy() {
     window.removeEventListener("click", this.close);
   },

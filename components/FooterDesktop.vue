@@ -10,9 +10,9 @@
                     </div>
 
                     <div class="flex flex-col lg:gap-y-[22px]">
-                         <a href="mailto:support@jatri.co" target="_blank" class="flex items-center text-white text-sm leading-7 gap-x-[12.5px] ">
+                         <a href="mailto:info@jatri.co" target="_blank" class="flex items-center text-white text-sm leading-7 gap-x-[12.5px] ">
                               <img src="@/assets/images/icons/supportIcon.svg" alt="" class="w-[25px] h-[25px]">
-                              <p>support@jatri.co</p>
+                              <p>info@jatri.co</p>
                          </a>
 
                          <a href="tel:09642080808" target="_blank" class="flex items-center text-white text-sm leading-7 gap-x-[12.5px] ">
@@ -22,7 +22,7 @@
 
                          <a href="https://goo.gl/maps/7oJip3H2v1LXvQLF7" target="_blank" class="flex items-center text-white text-sm leading-7 gap-x-[12.5px] ">
                               <img src="@/assets/images/icons/mapMarkupIcon.svg" alt="" class="w-[25px] h-[25px]">
-                              <p>Road 24, House-15(2<sup>nd</sup> floor), Gulshan-02</p>
+                              <p>Road 24, House-15(2<sup>nd</sup> floor), Gulshan-02, Dhaka</p>
                          </a>
                     </div>
                </div>

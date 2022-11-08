@@ -82,7 +82,7 @@ export default {
                destinationName: "",
                departingDate: this.$route.query.date,
                coachTypes: ["ac" , "non-ac", "all"],
-               coachType: this.$route.query.type,
+               coachType: "",
                priceFilter: ["l2h","h2l"],
                priceFilterType: null
           };
@@ -111,7 +111,8 @@ export default {
           '$route.query': {
                immediate: true,
                handler() {
-                    this.priceFilterType = null
+                    this.priceFilterType = null,
+                    this.coachType = this.$route.query.type
                }
           }
      },

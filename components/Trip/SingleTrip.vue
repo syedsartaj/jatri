@@ -180,7 +180,7 @@
                          </div>
 
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email Id</span> <span class="text-[#8D8D8F]">Optional</span></h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email ID</span> <span class="text-[#8D8D8F]">Optional</span></h2>
                               <input 
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    type="email" 
@@ -189,7 +189,7 @@
                               />
                          </div>
 
-                         <div class="mt-4">
+                         <div v-if="!trip.offer && moduleType == 'intercity'" class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Promo Code</span></h2>
                               <div class="flex justify-between gap-x-4">
                                    <input
@@ -222,22 +222,13 @@
                          <LoaderButton
                               :class="
                                    (moduleType == 'paribahan' && !passengerEmail) ||
-                                   !selectedSeatIds.length ||
-                                   !boardingPoint ||
-                                   !passengerName ||
-                                   !passengerPhone ||
-                                   String(passengerPhone).length < 11
-                                   ? 'bg-gray-500'
+                                   !selectedSeatIds.length || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
+                                   ? 'bg-gray-500 user cursor-not-allowed' 
                                    : 'bg-corporate hover:bg-[#D93E2D]'
                               "
                               :disabled='
                                    (moduleType == "paribahan" && !passengerEmail) ||
-                                   getGsLoading ||
-                                   !selectedSeatIds.length ||
-                                   !boardingPoint ||
-                                   !passengerName ||
-                                   !passengerPhone ||
-                                   String(passengerPhone).length < 11
+                                   getGsLoading || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
                               '
                               :loading='getGsLoading'
                               class='bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6'
@@ -246,8 +237,9 @@
                               Next
                          </LoaderButton>
 
-                         <div class="text-center mt-[20px]">
+                         <div class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2">
                               <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</a>
+                              <a href="https://jatri.co/user/term-and-condition/" target="_blank" class="w-full underline text-blackPrimary text-sm font-normal">Cancellation policy</a>
                          </div>
                     </div>
                </div>
@@ -417,6 +409,14 @@ export default {
           async paymentPendingBlockHandler () {
                if(this.passengerEmail && !this.emailReg.test(String(this.passengerEmail).toLowerCase())) {
                     this.$toast.error('Enter a valid email address', {
+                         position: 'bottom-right',
+                         duration: 50000,
+                         containerClass: 'padding: 100px',
+                    })
+                    return;
+               }
+               if(!this.selectedSeatIds.length) {
+                    this.$toast.error('no seat selected', {
                          position: 'bottom-right',
                          duration: 50000,
                          containerClass: 'padding: 100px',
