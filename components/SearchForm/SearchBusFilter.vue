@@ -1,6 +1,6 @@
 <template>
-     <div class="w-1/4 lg:px-5 xl:px-6 py-4 cursor-pointer" @click="toggleDropdown">
-          <button class="block rounded-lg bg-white focus:outline-none w-full">
+     <div class="w-1/4">
+          <button class="block rounded-lg bg-white focus:outline-none w-full lg:px-5 xl:px-6 py-4 cursor-pointer" @click="toggleDropdown">
                <p v-if="label" class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"> {{ label }} </p>
                <p v-if="selectedOption !== ''" class="lg:text-xs xl:text-base font-medium text-blackPrimary text-left"> {{ this.selectedOption.city_name.toUpperCase() }} </p>
 

@@ -14,11 +14,11 @@
                                    PNR
                               </button>
                               <button @click="selectedTab = 2;" class="px-4 lg:px-6 py-[5px] rounded border text-sm font-medium" :class="selectedTab === 2 ? 'bg-[#1E88E5] border-[#1E88E5] text-white' : 'bg-white text-blackPrimary border-[#DBDBDB]'">
-                                   Tnx Id
+                                   Tnx ID
                               </button>
                          </div>
 
-                         <p class="mt-5 lg:mt-4 mb-[10px] text-xs font-medium text-blackPrimary">{{selectedTab === 0 ? 'Mobile number' : selectedTab === 1 ? 'PNR' : selectedTab === 2 ? 'Tnx Id' : ''}}</p>
+                         <p class="mt-5 lg:mt-4 mb-[10px] text-xs font-medium text-blackPrimary">{{selectedTab === 0 ? 'Mobile Number' : selectedTab === 1 ? 'PNR' : selectedTab === 2 ? 'Tnx ID' : ''}}</p>
 
                          <form @submit='ticketData'>
                               <div class="mt-[10px] flex flex-col lg:flex-row justify-center lg:justify-between gap-x-14">
@@ -51,14 +51,7 @@
                          <TicketNotFoundAlert v-if='error'/>
                     </div>
                </div>
-               <!-- Ticket not found -->
-               <div class="flex justify-center pt-20 pb-[100px]">
-                    <OpssAlert 
-                         v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
-                         :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
-                         :customStyle="'px-[64.5px]'"
-                    />
-               </div>
+               
                <!-- Active Tickets -->
                <div class="mt-10" v-if="ticketList && getSearchedTicketList.tickets">
                     <div class="flex justify-between items-center gap-x-4">
@@ -72,6 +65,15 @@
                               :singlePrintTicketInfo='ticket'
                          />
                     </div>
+               </div>
+               
+               <!-- Ticket not found -->
+               <div class="flex justify-center pt-20 pb-[100px]">
+                    <OpssAlert 
+                         v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
+                         :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
+                         :customStyle="'px-[64.5px]'"
+                    />
                </div>
           </div>
      </div>
