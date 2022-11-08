@@ -110,7 +110,7 @@
                     </div>
                </div>
 
-               <div v-if="getGsLoading || !paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
+               <div v-if="!paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
                     <PaymentTimeoutAlert/>
                </div>
 
