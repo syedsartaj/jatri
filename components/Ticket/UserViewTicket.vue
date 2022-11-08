@@ -112,22 +112,22 @@
       </div>
     </div>
 <!-- {{getTicketDetails}} -->
-    <div class="flex justify-between lg:justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
-      <span v-if="!getTicketDetails.status && !pageVind" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
+    <div class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md">
+      <span v-if="!getTicketDetails.status && !pageVind" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-white bg-red-500 rounded-full lg:w-[170px] py-3 px-4">
         Cancelled
       </span>
-      <span v-else-if="!pageVind  && (getTicketDetails.status && getTicketDetails.paymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST')" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
+      <span v-else-if="!pageVind  && (getTicketDetails.status && getTicketDetails.paymentHistory.ticketStatus == 'PENDING_CANCEL_REQUEST')" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-black bg-yellow-300 rounded-full lg:w-[170px] py-3 px-4">
         Requested For Cancel
       </span>
-      <button v-if="getTicketDetails.isTicketCancelable && !pageVind" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.isTicketCancelable && !pageVind" @click="cancelTicket(getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/cross-black.svg" alt="" class="hidden lg:block">
         Cancel Ticket
       </button>
-      <button v-if="getTicketDetails.status" @click="downloadTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.status" @click="downloadTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-[#48A43F] bg-[#F1F9F1] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/download.svg" alt="" class="hidden lg:block">
         Download Ticket
       </button>
-      <button v-if="getTicketDetails.status" @click="printTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4">
+      <button v-if="getTicketDetails.status" @click="printTicket('printTicket-'+getTicketDetails._id)" class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-[#1E88E5] bg-[#EFF7FD] rounded-full lg:w-[170px] py-3 px-4">
         <img src="@/assets/images/icons/print.svg" alt="" class="hidden lg:block">
         Print Ticket
       </button>

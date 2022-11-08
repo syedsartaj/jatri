@@ -45,8 +45,8 @@
                     </div>
                </div>
                <div class="lg:w-1/4 mt-8 lg:mt-0">
-                    <img src="@/assets/images/popular-routes/dhaka-to-rangpur-1.png" alt="" class="mb-5 last:mb-0 w-full">
-                    <img src="@/assets/images/popular-routes/dhaka-to-rangpur-2.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.name === 'pingky-paribahan'" src="@/assets/images/bus-operator/pingky-paribahan-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.name === 'shah-fateh-ali'" src="@/assets/images/bus-operator/shah-fateh-ali-1.png" alt="" class="mb-5 last:mb-0 w-full">
                </div>
           </div>
      </div>

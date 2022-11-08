@@ -45,8 +45,13 @@
                     </div>
                </div>
                <div class="lg:w-1/4 mt-8 lg:mt-0">
-                    <img src="@/assets/images/popular-routes/dhaka-to-rangpur-1.png" alt="" class="mb-5 last:mb-0 w-full">
-                    <img src="@/assets/images/popular-routes/dhaka-to-rangpur-2.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Rangpur'" src="@/assets/images/popular-routes/dhaka-to-rangpur-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Rangpur'" src="@/assets/images/popular-routes/dhaka-to-rangpur-2.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Barishal'" src="@/assets/images/popular-routes/dhaka-to-barishal-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Kuakata'" src="@/assets/images/popular-routes/dhaka-to-kuakata-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Noagaon'" src="@/assets/images/popular-routes/dhaka-to-noagaon-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Bogura'" src="@/assets/images/popular-routes/dhaka-to-bogura-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.to === 'Sunamganj'" src="@/assets/images/popular-routes/dhaka-to-sunamganj-1.png" alt="" class="mb-5 last:mb-0 w-full">
                </div>
           </div>
      </div>
