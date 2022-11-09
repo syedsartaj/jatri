@@ -5,6 +5,7 @@ export const state = () => ({
   gsLoading: false,
   gsLoadingTwo: false,
   gsCities: [],
+  gsOfferPromoImage: [],
   gsTrips: [],
   gsSeatViewData: {},
   gsSeatArray: [],
@@ -20,6 +21,8 @@ export const getters = {
   getGsLoading: (state) => state.gsLoading,
   getGsLoadingTwo: (state) => state.gsLoadingTwo,
   getGsCities: (state) => state.gsCities,
+  getGsOfferPromoImage: (state) => {
+    return state.gsOfferPromoImage},
   getGsTrips: (state) => state.gsTrips,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
@@ -50,6 +53,17 @@ export const actions = {
     try {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
       commit('setGsCities', data);
+    } catch (error) {
+      // this.$toast.error(error.response ? error.response.data.message : error.message , {
+      //   position: 'bottom-right',
+      //   duration: 5000,
+      // })
+    }
+  },
+  async getOfferPromoImagesList ({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+      commit('setGsOfferPromoImage', data);
     } catch (error) {
       // this.$toast.error(error.response ? error.response.data.message : error.message , {
       //   position: 'bottom-right',
@@ -289,6 +303,9 @@ export const mutations = {
         'city_name': city
       };
     });
+  },
+  setGsOfferPromoImage: (state, data) => {
+    state.gsOfferPromoImage = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsSeatViewData: (state, data) => {

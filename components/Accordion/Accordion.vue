@@ -5,7 +5,7 @@
                <img src="@/assets/images/icons/accordionIcon.svg" alt="" :class="accordionOpen && (selectedIndex === uniqeId) ? 'transform rotate-180 transition-all duration-300 ease-in-out': ''">
           </button>
           <div :class="accordionOpen && (selectedIndex === uniqeId) ? 'max-h-max transition-all duration-300 ease-in-out': 'max-h-0 overflow-hidden'">
-               <p class="text-sm text-blackLight font-normal py-4" v-html="details"></p>
+               <p class="text-sm text-blackLight font-normal py-4 text-justify" v-html="details"></p>
           </div>
      </div>
 </template>

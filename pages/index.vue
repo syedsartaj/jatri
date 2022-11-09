@@ -5,8 +5,8 @@
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div class="absolute lg:top-[100px] xl:top-[130px] 2xl:top-[170px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40">
         <div class="">
-          <h2 class="lg:text-5xl xl:text-[57px] text-blackPrimary font-bold leading-[64px]">Book Your Journey NOW!!!</h2>
-          <h4 class="mt-4 lg:text-lg xl:text-xl text-blackLight leading-7 font-medium">Buy tickets online hassle-free.</h4>
+          <h2 class="lg:text-5xl xl:text-[57px] text-white font-bold leading-[64px]">Book Your Journey NOW!!!</h2>
+          <h4 class="mt-4 lg:text-lg xl:text-xl text-white leading-7 font-medium">Buy tickets online hassle-free</h4>
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
@@ -16,10 +16,10 @@
 
     <!-- banner section -->
     <div v-if="isMobile" class="relative block lg:hidden">
-      <img src="@/assets/images/home/bannerImageMobile.png" alt="" class="w-full">
+      <img src="@/assets/images/home/bannerImageMobile.jpg" alt="" class="w-full">
       <div class="absolute top-[59px] right-4 left-4">
-        <h2 class="text-[28px] text-blackPrimary font-bold leading-[36px]">Book Your Journey NOW!!!</h2>
-        <h4 class="mt-2 text-base text-blackLight font-normal">Buy tickets online hassle-free.</h4>
+        <h2 class="text-[28px] text-white font-bold leading-[36px]">Book Your Journey NOW!!!</h2>
+        <h4 class="mt-2 text-base text-white font-normal">Buy tickets online hassle-free</h4>
         <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
           <SearchFilterFormMobile/>
         </div>
@@ -63,15 +63,15 @@
       <img v-if="isMobile" src="@/assets/images/home/buyTicketBannerMobile.png" alt="" class="block lg:hidden w-full">
       <div class="w-[296px] lg:w-[515px] absolute top-10 lg:top-[130px] left-6 lg:left-[100px] z-40">
         <div>
-          <h2 class="text-[28px] lg:text-[45px] leading-[36px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold">Booking ticket just got more easier and fun with Jatri.</h2>
+          <h2 class="text-[28px] lg:text-[45px] leading-[36px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold">Booking ticket just got more easier and fun with Jatri</h2>
           <button @click="handleHowToBuyModal" class="bg-corporate text-white px-6 lg:px-8 py-[10px] lg:py-5 text-sm lg:text-xl font-semibold mt-4 lg:mt-8 rounded-full">How to buy ticket</button>
         </div>
       </div>
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] flex justify-center">
-      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden w-[380px] lg:w-full h-[264px] lg:h-[464px]">
+    <div class="p-4 lg:p-[100px] flex justify-center w-full">
+      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
 
@@ -92,9 +92,9 @@
             </button>
           </div>
         </div>
-        <div class="my-5 lg:my-[56px] ml-[18px] lg:ml-[60px] h-full">
+        <div class="my-5 lg:my-[56px] h-full">
           <template>
-            <div v-if="!isMobile">
+            <div>
               <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
                 <div>
                   <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
@@ -108,9 +108,13 @@
                 <div>
                   <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
+                <!-- <div v-for="(offerImg, index) in getGsOfferPromoImage.offerAndPromoImages" :key="index">
+                  <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  <img :src="'https://api.dt.jatriweb.team/'+offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div> -->
               </VueSlickCarousel>
             </div>
-            <div v-if="isMobile">
+            <!-- <div v-if="isMobile">
               <VueSlickCarousel v-bind="settingsForMobileDevice" ref="carousel">
                 <div>
                   <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
@@ -119,11 +123,12 @@
                   <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
               </VueSlickCarousel>
-            </div>
+            </div> -->
           </template>
         </div>
       </div>
     </div>
+  
 
     <!-- Available Bus operatior Section -->
     <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
@@ -138,8 +143,24 @@
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Pingky Paribahan</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Lucky Express</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Mimjaal Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh Ali</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Much more to come</NuxtLink>
+          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh ali Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Jubayer Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin Deep</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Romer Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Sheba line</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Zenin Service</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">GS Travels</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Islam Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Jamuna line</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin Sheba PVT. Ltd.</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Hamim Exclusive</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Econo Service</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">KR Enterprise</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Masum Classic</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Hanie Enterprise</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Ena Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Habib Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Many More to Come</NuxtLink>
         </div>
       </div>
     </div>
@@ -308,11 +329,40 @@ export default {
         "infinite": true,
         "slidesToShow": 3,
         "slidesToScroll": 1,
-        "autoplay": true,
+        "autoplay": false,
         "speed": 2000,
         "autoplaySpeed": 5000,
         "cssEase": "linear",
+        "rows": 1,
         "centerMode": true,
+        "centerPadding": "0px",
+        "initialSlide": 0,
+        "responsive": [
+    {
+      "breakpoint": 1024,
+      "settings": {
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "infinite": true,
+        "dots": true
+      }
+    },
+    {
+      "breakpoint": 600,
+      "settings": {
+        "slidesToShow": 2,
+        "slidesToScroll": 2,
+        "initialSlide": 2
+      }
+    },
+    {
+      "breakpoint": 480,
+      "settings": {
+        "slidesToShow": 1,
+        "slidesToScroll": 1
+      }
+    }
+  ]
       },
       settingsForMobileDevice : {
         "arrows": false,
@@ -331,6 +381,7 @@ export default {
   components: { VueSlickCarousel },
   async asyncData({store}) {
     await store.dispatch("guarantedseat/getCitiesList")
+    await store.dispatch("guarantedseat/getOfferPromoImagesList")
   },
 
   mounted(){
@@ -339,12 +390,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading"]),
+    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImage"]),
   },
   methods: {
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
+      "getOfferPromoImagesList",
       "successTicketByMailAction",
     ]),
 
@@ -376,7 +428,7 @@ export default {
 
 <style>
 .homeBanner {
-  background-image: url('../assets/images/home/bannerImageWeb.png');
+  background-image: url('../assets/images/home/bannerImageWeb.jpg');
   background-size: 100% 100%;
   height: 400px;
 }

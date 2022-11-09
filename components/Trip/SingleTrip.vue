@@ -251,6 +251,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import { timeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
+import { dateFormat } from '../../helpers/dateTimeFormat';
 export default {
      props: ['trip', 'selectedTrip', 'busIndex'],
      data() {
@@ -289,6 +290,12 @@ export default {
                return new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
                }
                return new Date(`${this.boardingPoint.scheduleTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
+          },
+          departureDate()  {
+               if(this.boardingPoint.scheduleTime === '') {
+                    return dateFormat(this.boardingPoint.scheduleTime, 6, 'YYYY-MM-DD');
+               }
+               return dateFormat(this.boardingPoint.scheduleTime, 6, 'YYYY-MM-DD');
           },
           reportingDateTime()  {
                if(this.boardingPoint.scheduleTime === '') {
@@ -450,7 +457,7 @@ export default {
                          boardingPointName: this.boardingPoint.name,
                          droppingPointName: this.trip.dropping,
                          departureId: this.trip.departureId,
-                         departureDate: this.trip.departureDate,
+                         departureDate: this.departureDate,
                          departureTime: this.departureTime,
                          boardingDateTime: this.boardingPoint.scheduleTime,
                          reportingDateTime: this.boardingPoint.reportingTime,

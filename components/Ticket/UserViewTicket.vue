@@ -87,7 +87,7 @@
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ tripDate }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ reportTimeWithAddTime }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">

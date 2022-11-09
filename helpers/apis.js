@@ -10,6 +10,7 @@ export const GET_TICKET_BY_TRANSACTION = `${PARIBAHAN_BASE_URL}/v1/api/intercity
 export const GET_BOOKING_INFO_BY_TRANSACTION = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-booking-info-by-txn-id`;
 export const SEARCH_TICKET = `${PARIBAHAN_BASE_URL}/v1/api/intercity/search-ticket`;
 export const GS_CANCEL_TICKET = `${PARIBAHAN_BASE_URL}/v1/api/intercity/cancel-ticket`;
+export const GS_OFFER_AND_PROMO_IMAGES = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-offer-and-promo-images`;
 export const POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/payment-pending`;
 
 export const POST_PROMO_CODE_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/check-promo-code`;
