@@ -97,16 +97,16 @@
             <div>
               <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
                 <div>
-                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
                 <div>
-                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
                 <div>
-                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
                 <div>
-                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
                 <!-- <div v-for="(offerImg, index) in getGsOfferPromoImage.offerAndPromoImages" :key="index">
                   <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
