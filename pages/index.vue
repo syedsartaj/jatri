@@ -5,8 +5,8 @@
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div class="absolute lg:top-[100px] xl:top-[130px] 2xl:top-[170px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40">
         <div class="">
-          <h2 class="lg:text-5xl xl:text-[57px] text-white font-bold leading-[64px]">Book Your Journey NOW!!!</h2>
-          <h4 class="mt-4 lg:text-lg xl:text-xl text-white leading-7 font-medium">Buy tickets online hassle-free</h4>
+          <h2 class="lg:text-5xl xl:text-[57px] text-[#fff] font-bold leading-[64px] ">Book Your Journey NOW!!!</h2>
+          <h4 class="mt-4 lg:text-lg xl:text-xl text-white leading-7 font-bold">Buy tickets online hassle-free</h4>
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
@@ -17,10 +17,10 @@
     <!-- banner section -->
     <div v-if="isMobile" class="relative block lg:hidden">
       <img src="@/assets/images/home/bannerImageMobile.jpg" alt="" class="w-full">
-      <div class="absolute top-[59px] right-4 left-4">
-        <h2 class="text-[28px] text-white font-bold leading-[36px]">Book Your Journey NOW!!!</h2>
-        <h4 class="mt-2 text-base text-white font-normal">Buy tickets online hassle-free</h4>
-        <div class="mt-[59px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
+      <div class="absolute top-[39px] right-4 left-4">
+        <h2 class="text-[28px] text-white font-bold leading-[36px]">Book Your Journey <br> NOW!!!</h2>
+        <h4 class="mt-2 text-base text-white font-normal">Buy tickets online <br> hassle-free</h4>
+        <div class="mt-[39px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
           <SearchFilterFormMobile/>
         </div>
       </div>
