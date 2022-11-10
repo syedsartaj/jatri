@@ -1,5 +1,5 @@
 <template>
-     <div class="bg-white border border-[#ededed] rounded-[10px] px-4 py-6 w-[420px] h-[412px]">
+     <div class="bg-white border border-[#ededed] rounded-[10px] px-4 py-6 w-full h-[412px]">
           <div class="flex justify-between gap-x-8">
                <button 
                     @click="previousDateFilter"

@@ -80,6 +80,20 @@
                "distance": 346,
                "time": "9-10",
                "priceStartsFrom": 650
+          },
+          {
+               "_id": 7,
+               "from": "Dhaka",
+               "to": "Siliguri",
+               "heading": "Dhaka to Siliguri",
+               "paragraph": [
+                    "Dhaka to Siliguri is a route spread over 389 kilometers. Pingky Paribahan is currently available on this route through Jatri. Depending on traffic conditions an 11-12 hour takes on average.",
+                    "The cost of a bus ticket for this route ranges from BDT 2100 depending on the bus type.",
+                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Siliguri bus tickets with Jatri! "
+               ],
+               "distance": 346,
+               "time": "9-10",
+               "priceStartsFrom": 650
           }
      ],
      "operartors" : [
@@ -88,13 +102,11 @@
                "name": "pingky-paribahan",
                "heading": "Pingky Paribahan",
                "paragraph": [
-                    "Dhaka to Siliguri is a route spread over 389 kilometers. Pingky Paribahan is currently available on this route through Jatri. Depending on traffic conditions an 11-12 hour takes on average.",
-                    "The cost of a bus ticket for this route ranges from BDT 2100 depending on the bus type.",
-                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Siliguri bus tickets with Jatri!"
+                    "Are you looking forward to traveling to Siliguri on a budget? Pingky Paribahan is the best choice for you. For the first time, Pingky Paribahan offers direct service from Dhaka to Siliguri. Dhaka-Rangpur, Dhaka-Lalmonirhat, Dhaka-Burimari, Dhaka-Siliguri, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Chilmari are the current routes available on the Jatri website. The ticket price range begins at 850 Taka. Book your journey at a pocket friendly price."
                ],
-               "distance": 389,
-               "time": "11-12",
-               "priceStartsFrom": 2100
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 850
           },
           {
                "_id": 2,
@@ -106,6 +118,61 @@
                "distance": 0,
                "time": 0,
                "priceStartsFrom": 550
+          },
+          {
+               "_id": 3,
+               "name": "euro-coach",
+               "heading": "Euro Coach",
+               "paragraph": [
+                    "Euro Coach connects Dhaka with the Southern region of Barisal through the Padma Bridge and its final destination Kuakata (also known as the daughter of the sea). Euro Coach service has come up with the most modern and advanced luxury slipper service in the country. Euro coach is the first and only luxury slipper service on the Dhaka-Barisal-Kuakata route. Ticket rent range starts from 1,000 Taka. Present available routes are Dhaka-Barisal-Patuakhali-Kuakata,  Barisal-Dhaka & Kuakata-Dhaka. What are you waiting for? Book your ticket now! "
+               ],
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 1000
+          },
+          {
+               "_id": 4,
+               "name": "sb-paribahan",
+               "heading": "SB Paribahan",
+               "paragraph": [
+                    "SB Paribahan is an up-and-coming bus company. SB Paribahan charges different rates for different destinations. Dhaka is the main starting point. The ticket price range begins at 750 Taka. Dhaka-Rangpur, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Dinajpur are the current routes available on the Jatri website. Book your ticket and travel in comfort. "
+               ],
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 750
+          },
+          {
+               "_id": 5,
+               "name": "greenline",
+               "heading": "Greenline Paribahan",
+               "paragraph": [
+                    "Greenline Paribahan has been providing the most valuable bus service in Bangladesh since 1999. It provides service to all routes in Bangladesh. Dhaka to Chittagong, Dhaka to Cox's Bazar, Dhaka to Khagrachari, Dhaka to Rangamati, and Dhaka to Sylhet are the current routes available on the Jatri website. Ticket prices begin at 1,600 Taka. Book your ticket from Jatri for your hassle free move. "
+               ],
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 1600
+          },
+          {
+               "_id": 6,
+               "name": "saintmartin-bd-express",
+               "heading": "Saintmartin BD Express",
+               "paragraph": [
+                    "Saintmartin BD Express has been operating in Bangladesh for a long time. They provide both AC and non-AC buses. The current routes available on the Jatri website are Dhaka to Chittagong and Dhaka to Cox's Bazar.Visit now and book your tickets!"
+               ],
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 0
+          },
+          {
+               "_id": 7,
+               "name": "habib-paribahan",
+               "heading": "Habib Paribahan",
+               "paragraph": [
+                    "Habib Paribahan is well-known for their service and providing tickets at a budget friendly price. Dhaka-Sirajganj-Gobindaganj-Palashbari-Rangpur-Teesta-Lalmonirhat-Hatibandha-Patgram-Burimari are the current routes available on the Jatri website.The ticket price range begins at 700 Taka. Purchase your ticket right away!"
+               ],
+               "distance": 0,
+               "time": 0,
+               "priceStartsFrom": 700 
           }
      ]
 }

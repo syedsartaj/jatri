@@ -5,7 +5,7 @@
                     <p class="text-[#8d8d8f] text-xs lg:text-sm font-medium uppercase">Popular Routes</p>
                     
                     <h2 class="text-blackPrimary text-2xl lg:text-[32px] lg:leading-10 font-medium mt-1">{{operator[0].heading}}</h2>
-                    <p v-for="paragraph in operator[0].paragraph" :key="paragraph" class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal">
+                    <p v-for="paragraph in operator[0].paragraph" :key="paragraph" class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal text-justify">
                          <span class="last:mt-5">{{paragraph}}</span>
                     </p>
 
@@ -39,14 +39,17 @@
                                    <h2 class="text-blackSecondery text-base lg:text-xl font-normal">Price starts from</h2>
                               </div>
                               <div class="w-1/2 lg:w-1/4">
-                                   <h2 class="text-blackPrimary text-base lg:text-xl font-medium"><span>{{operator[0].priceStartsFrom}}</span> bdt</h2>
+                                   <h2 class="text-blackPrimary text-base lg:text-xl font-medium"><span>{{operator[0].priceStartsFrom}}</span> BDT</h2>
                               </div>
                          </div>
                     </div>
                </div>
                <div class="lg:w-1/4 mt-8 lg:mt-0">
-                    <img v-if="$route.query.name === 'pingky-paribahan'" src="@/assets/images/bus-operator/pingky-paribahan-1.png" alt="" class="mb-5 last:mb-0 w-full">
-                    <img v-if="$route.query.name === 'shah-fateh-ali'" src="@/assets/images/bus-operator/shah-fateh-ali-1.png" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.name === 'pingky-paribahan'" src="@/assets/images/bus-operator/pinky-paribahan.jpg" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.name === 'shah-fateh-ali'" src="@/assets/images/bus-operator/shah-fateh-ali.jpg" alt="" class="mb-5 last:mb-0 w-full">
+                    <img v-if="$route.query.name === 'euro-coach'" src="@/assets/images/bus-operator/euro-coach.jpg" alt="" class="mb-5 last:mb-0 w-full">
+                    <!-- <img v-if="$route.query.name === 'sb-paribahan'" src="@/assets/images/bus-operator/shah-fateh-ali.jpg" alt="" class="mb-5 last:mb-0 w-full"> -->
+                    <!-- <img v-if="$route.query.name === 'greenline'" src="@/assets/images/bus-operator/shah-fateh-ali.jpg" alt="" class="mb-5 last:mb-0 w-full"> -->
                </div>
           </div>
      </div>

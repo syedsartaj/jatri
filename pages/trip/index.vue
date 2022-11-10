@@ -4,15 +4,30 @@
           <div class="relative">
                <!-- banner section -->
                <img src="@/assets/images/home/searchBannerImageWeb.svg" alt="" class="w-full hidden lg:block">
-               <img src="@/assets/images/home/searchBannerImageMobile.svg" alt="" class="w-full block lg:hidden">
+               <!-- <img src="@/assets/images/home/searchBannerImageMobile.svg" alt="" class="w-full block lg:hidden"> -->
                <div class="hidden lg:block absolute top-8 right-[100px] left-[100px] z-40">
                     <SearchFilterForm/>
                </div>
 
                <!-- mobile device modify search -->
-               <div class="block lg:hidden absolute w-[380px] top-2 left-4 z-40">
+               <!-- <div class="block lg:hidden absolute w-[370px] top-2 left-2 z-40">
                     <div class="bg-white h-[52px] rounded-md flex justify-between px-[14px] py-2">
-                         <div class="w-[276px]">
+                         <div class="w-[270px]">
+                              <div class="flex justify-start gap-x-[7.67px]">
+                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.from}}</h2>
+                                   <img src="@/assets/images/icons/rightArrowWithLine.svg" alt="" class="w-[6.67px]">
+                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.to}}</h2>
+                              </div>
+                              <p class=" text-[11px] leading-4 font-normal text-blackSecondery"><span>{{getHumanDate($route.query.date)}}</span>, <span class="capitalize">{{$route.query.type}}</span></p>
+                         </div>
+                         <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
+                    </div>
+               </div> -->
+               <div class="relative">
+                    <img src="@/assets/images/home/searchBannerImageMobile.svg" alt="" class="w-full block lg:hidden">
+                    <div class="block lg:hidden absolute w-[93%] top-2 left-4 z-40">
+                    <div class="bg-white h-[52px] rounded-md flex justify-between px-[14px] py-2">
+                         <div class="w-[270px]">
                               <div class="flex justify-start gap-x-[7.67px]">
                                    <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.from}}</h2>
                                    <img src="@/assets/images/icons/rightArrowWithLine.svg" alt="" class="w-[6.67px]">
@@ -23,6 +38,10 @@
                          <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
                     </div>
                </div>
+               </div>
+
+
+
 
                <!-- mobile device filter button -->
                <button @click="handleTripFilterModal" class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-4 rounded-full">
@@ -37,15 +56,15 @@
           </div>
 
           <!-- Available Trip Section -->
-          <div class="lg:flex lg:justify-start lg:gap-x-[30px] px-4 lg:px-[100px] py-4 lg:py-[30px] bg-[#f7f7f7] ">
+          <div class="lg:flex lg:justify-start gap-x-4 xl:gap-x-[30px] px-4 lg:px-[100px] py-4 lg:py-[30px] bg-[#f7f7f7] ">
                
                <!-- filter modifier for large device -->
-               <div class="hidden lg:block">
+               <div class="hidden lg:block w-full lg:w-[35%]">
                     <ModifyFilter/>
                </div>
 
                <!-- TRIPS -->
-               <div class="w-full">
+               <div class="w-full lg:w-[65%]">
                     <GuaranteedSeatList />
                </div>
           </div>
