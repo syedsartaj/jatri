@@ -30,7 +30,7 @@
             <p class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Terms & Conditions</p>
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">General Terms:</p>
             <div class="ml-4 md:ml-9">
-              <ul class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+              <ul class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify">
                 <li class="">The ticket will be treated as cancelled if passenger fails to report at the reporting
                   station before the departure schedule.</li>
                 <li>The authority reserves the rights to change schedule/seat # in case of emergency
@@ -43,7 +43,7 @@
               </ul>
             </div>
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">Other Terms:</p>
-            <p class="mt-4 leading-5 text-sm font-normal text-blackPrimary">Jatri.co is only the ticket reseller. It does not operate bus/cruise services of its own. Jatri.co advice to customers to choose bus/cruise operators they are aware of and
+            <p class="mt-4 leading-5 text-sm font-normal text-blackPrimary text-justify">Jatri.co is only the ticket reseller. It does not operate bus/cruise services of its own. Jatri.co advice to customers to choose bus/cruise operators they are aware of and
               whose service they are comfortable with.
             </p>
 
@@ -135,25 +135,25 @@
               <p class="text-base font-normal text-blackPrimary mt-4">Before buying a ticket, customers are requested to read the following
                 cancellation and refund policies carefully.</p>
               <p class="text-base font-medium text-blackPrimary mt-4">Cancellation Policy:</p>
-              <p class="text-base font-normal text-blackPrimary">Tickets bought through Jatri.co can be cancelled as per the cancellation policy below.
+              <p class="text-base font-normal text-blackPrimary text-justify">Tickets bought through Jatri.co can be cancelled as per the cancellation policy below.
                 However, as a ticket selling agent, Jatri.co is bound to comply with the terms set by the
                 operator/event organizer/vendor whose ticket it is selling. So, if the operator/event organizer
                 denies refund even though claim was made within the terms mentioned here, Jatri.co will be
                 unable to issue such refund.</p>
 
               <p class="text-base font-medium text-blackPrimary mt-4">Auto Cancellation:</p>
-              <p class="text-base font-normal text-blackPrimary">The ticket will be treated as cancelled if passenger fails to report at the reporting station
+              <p class="text-base font-normal text-blackPrimary text-justify">The ticket will be treated as cancelled if passenger fails to report at the reporting station
                 before the departure schedule.</p>
 
               <p class="text-base font-medium text-blackPrimary mt-4">Failure to Pay:</p>
               <p class="text-base font-normal text-blackPrimary">No ticket will be activated unless the customer has paid the full amount mentioned on the
                 screen.</p>
-              <p class="text-base font-normal text-blackPrimary">For mobile payments, it is the responsibility of the customer to input transaction ID (if
+              <p class="text-base font-normal text-blackPrimary text-justify">For mobile payments, it is the responsibility of the customer to input transaction ID (if
                 applicable), PIN, OTP properly within time to confirm his ticket by himself. Jatri.co
                 sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s
                 responsibility or service promise.</p>
 
-              <p class="text-base font-normal text-blackPrimary">Tickets will be automatically cancelled if customer does not confirm payment within 30
+              <p class="text-base font-normal text-blackPrimary text-justify">Tickets will be automatically cancelled if customer does not confirm payment within 30
                 minutes. For mobile payments customer must complete payment and also verify transaction
                 within this stipulated time. During Eid sales month, Jatri.co will not do any verification on
                 behalf of the customers.</p>
@@ -161,7 +161,7 @@
               <p class="text-base font-medium text-blackPrimary mt-4">Ticket cancellation eligibility:</p>
               <p class="text-base font-medium text-blackPrimary mt-4">Regular Time (Non-Eid Period):</p>
 
-              <p class="text-base font-medium text-blackPrimary mt-4">To be eligible for refund, customer needs to cancel the ticket from jatri.co before the
+              <p class="text-base font-medium text-blackPrimary mt-4 text-justify">To be eligible for refund, customer needs to cancel the ticket from jatri.co before the
                 applicable time before the departure. And must report the cancelation to the support centre
                 (i.e. Call 09642080808 or email to support@jatri.co) of Jatri.co</p>
               <!--table-->
@@ -194,7 +194,7 @@
               <p class="text-base font-medium text-blackPrimary mt-4">Refund Policy</p>
               <p class="text-base font-medium text-blackPrimary mt-4">Regular Time (Non-Eid Period):</p>
 
-              <p class="text-base font-normal text-blackPrimary">No ticket will be refunded unless it has been cancelled as per the cancellation policy above.
+              <p class="text-base font-normal text-blackPrimary text-justify">No ticket will be refunded unless it has been cancelled as per the cancellation policy above.
                 In case of technical problem or any failed transaction due to network failure, time delay on
                 complete payment, input transaction ID/validation of transaction (in case of mobile payment)
                 or any other situation where payment is successful but ticket is not generated on that case, no
@@ -203,7 +203,7 @@
 
               <p class="text-base font-medium text-blackPrimary mt-4">Refund Request Format:</p>
               <div class="ml-4 md:ml-9">
-                <ul class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+                <ul class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify">
                   <li>Ticket # (required if a ticket was issued).
                   </li>
                   <li>Mobile number used while buying the ticket.</li>
@@ -231,43 +231,43 @@
               </div>
 
               <p class="text-base font-medium text-blackPrimary mt-4">Amount of Refund:</p>
-              <p class="text-base font-normal text-blackPrimary">Fees charged by payment gateways, credit / debit cards, mobile payment gateways (e.g.
+              <p class="text-base font-normal text-blackPrimary text-justify">Fees charged by payment gateways, credit / debit cards, mobile payment gateways (e.g.
                 bKash) are non-refundable due to the policies of the respective organizations, which is
                 beyond Jatri.co's control.</p>
-              <p class="text-base font-normal text-blackPrimary">Jatri.co convenience fee is refundable only in case of trip cancellations by operators during
+              <p class="text-base font-normal text-blackPrimary text-justify">Jatri.co convenience fee is refundable only in case of trip cancellations by operators during
                 non-Eid times. For Eid tickets, convenience fee is non-refundable even if the operator has
                 cancelled the trip. This fee is also non-refundable if the passenger cancels the tickets due to a
                 change of decision to travel.</p>
-              <p class="text-base font-normal text-blackPrimary">As per policy of an operator, Jatri.co may deduct a certain percentage (%) of the ticket price
+              <p class="text-base font-normal text-blackPrimary text-justify">As per policy of an operator, Jatri.co may deduct a certain percentage (%) of the ticket price
                 towards cancellation fee, where-ever applicable.</p>
-              <p class="text-base font-normal text-blackPrimary">For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile
+              <p class="text-base font-normal text-blackPrimary text-justify">For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile
                 payment company which will be deducted from the eligible refund amount. Similar condition
                 will apply if the bank charges any such additional fee.</p>
 
               <p class="text-base font-medium text-blackPrimary mt-4">Special Circumstances:</p>
-              <p class="text-base font-normal text-blackPrimary">If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e.,
+              <p class="text-base font-normal text-blackPrimary text-justify">If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e.,
                 there is no transaction ID or tickets booked/reserved by the mobile number of the mobile
                 payment account, he can claim for refund in the similar procedure as above, without the
                 ticket number. Such refunds will be given 7 business days (excluding Friday and Saturday)
                 AFTER the event/trip has taken place. This is applicable for Eid times also.</p>
 
-              <p class="text-base font-normal text-blackPrimary">If a customer has made an excess or less payment for a ticket accidentally, he is eligible for
+              <p class="text-base font-normal text-blackPrimary text-justify">If a customer has made an excess or less payment for a ticket accidentally, he is eligible for
                 refund but he must claim for the refund within 24 hours of making the payment
                 If a customer has reserved a ticket and made a payment, however, for some reason, the ticket
                 purchase process was not successful and a ticket was not issued, a customer can claim refund
                 as per the policy above. Ticket number is not required, but mobile # used for booking and
                 other information is required.</p>
 
-              <p class="text-base font-normal text-blackPrimary">For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile
+              <p class="text-base font-normal text-blackPrimary text-justify">For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile
                 payment company which will be deducted from the eligible refund amount. Similar condition
                 will apply if the bank charges any such additional fee.</p>
 
-              <p class="text-base font-normal text-blackPrimary">In case of card payments, last 4 digits of the card, type of card is also needed. It is to be noted
+              <p class="text-base font-normal text-blackPrimary text-justify">In case of card payments, last 4 digits of the card, type of card is also needed. It is to be noted
                 that for reasons beyond Jatri.co’s control, card payment may sometimes require time to post
                 on the payment ateway’s panel which Jatri.co uses to verify payment. Jatri.co can only
                 verify payment after it has been posted on the said panel.</p>
 
-              <p class="text-base font-normal text-blackPrimary">In case of BKash payments, full mobile number will be required. It is to be noted that for
+              <p class="text-base font-normal text-blackPrimary text-justify">In case of BKash payments, full mobile number will be required. It is to be noted that for
                 reasons beyond Jatri.co’s control, payment may require some times to post on the payment
                 gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after
                 it has been posted on the said panel.</p>
@@ -280,26 +280,26 @@
               <div  :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
                 <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">Privacy Policy</p>
 
-                <p class="text-base font-normal text-blackPrimary">Jatri services Ltd., values the relationship with the customers. We are committed to handle
+                <p class="text-base font-normal text-blackPrimary text-justify">Jatri services Ltd., values the relationship with the customers. We are committed to handle
                   customer information in a professional manner. We take the issue of privacy of our customers
                   very seriously and want you to feel comfortable whenever they visit our website.</p>
 
-                <p class="text-base font-normal text-blackPrimary">We need certain information about you to accessing this Site, such as Internet protocol (IP)
+                <p class="text-base font-normal text-blackPrimary text-justify">We need certain information about you to accessing this Site, such as Internet protocol (IP)
                   addresses, navigation through the Site, the systems and programs used and the time spent,
                   along with other similar information, may be stored on our servers or 3rd party servers like
                   Google Analytics etc. Such stored information may not specifically identify you. Please be
                   informed that we for web site traffic analysis or for such other purposes may use the same as
                   we may deem appropriate.</p>
 
-                <p class="text-base font-normal text-blackPrimary">If you provide unique identifying information, such as name, address and other information
+                <p class="text-base font-normal text-blackPrimary text-justify">If you provide unique identifying information, such as name, address and other information
                   to us, such information may be used for statistical and/or other purposes. Any personally
                   identifiable information you submit while booking with Jatri.co will not be disclosed,
                   disseminated without your consent.</p>
 
-                <p class="text-base font-normal text-blackPrimary">Jatri services Ltd. may use your personal contact information such as Email, Mobile number
+                <p class="text-base font-normal text-blackPrimary text-justify">Jatri services Ltd. may use your personal contact information such as Email, Mobile number
                   to update you on any information regarding your travel or to update you on any offer(s).</p>
 
-                <p class="text-base font-normal text-blackPrimary">We want you to feel confident about using Jatri.co to plan and purchase your bus tickets.
+                <p class="text-base font-normal text-blackPrimary text-justify">We want you to feel confident about using Jatri.co to plan and purchase your bus tickets.
                   Your personal information is safe and secure with us. We have implemented appropriate
                   administrative, technical, and physical security procedures to help protect the personal
                   information you provide to us.</p>

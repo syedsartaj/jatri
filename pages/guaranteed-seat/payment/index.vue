@@ -97,14 +97,14 @@
                          </div>
                     </div>
                     <div class="p-5 flex justify-between gap-x-5">
-                         <NagadOption
-                              plan-name="nagad"
-                              plan-discount="10%"
-                              v-model="activePlan"
-                         />
                          <GateWayOption
                               plan-name="sslcommerz"
                               plan-discount=""
+                              v-model="activePlan"
+                         />
+                         <NagadOption
+                              plan-name="nagad"
+                              plan-discount="10%"
                               v-model="activePlan"
                          />
                     </div>

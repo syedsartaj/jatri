@@ -137,13 +137,13 @@
         <h2 class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2">Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Euro Coach</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">SB Paribahan</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Greenline</NuxtLink>
+          <NuxtLink to="bus-operator?name=euro-coach" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Euro Coach</NuxtLink>
+          <NuxtLink to="/bus-operator?name=sb-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">SB Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=greenline" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Greenline Paribahan</NuxtLink>
           <NuxtLink to="/bus-operator?name=pingky-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Pingky Paribahan</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Lucky Express</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Mimjaal Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh ali Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=shah-fateh-ali" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh Ali</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Jubayer Paribahan</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin Deep</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Romer Paribahan</NuxtLink>
@@ -158,8 +158,9 @@
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">KR Enterprise</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Masum Classic</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Hanie Enterprise</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Ena Paribahan</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Habib Paribahan</NuxtLink>
+          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold"> Ema Paribahan </NuxtLink>
+          <NuxtLink to="/bus-operator?name=habib-paribahan" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Habib Paribahan</NuxtLink>
+          <NuxtLink to="/bus-operator?name=saintmartin-bd-express" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin BD Express</NuxtLink>
           <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Many More to Come</NuxtLink>
         </div>
       </div>
@@ -218,9 +219,9 @@
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Dhaka to Coxs Bazar</p>
             </NuxtLink>
-            <NuxtLink to="#" class="flex justify-start gap-x-[10px] w-1/2">
-              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Khulna to Kuakata</p>
+            <NuxtLink to="/popular-routes?from=Dhaka&to=Siliguri" class="flex justify-start gap-x-[10px] w-1/2">
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
+              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Dhaka to Siliguri</p>
             </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
@@ -230,7 +231,7 @@
             </NuxtLink>
             <NuxtLink to="#" class="flex justify-start gap-x-[10px] w-1/2">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
-              <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Sathkhira to Barishal</p>
+              <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Khulna to Kuakata</p>
             </NuxtLink>
           </div>
           <div class="flex justify-start border-b border-b-[#DBDBDB] last:border-b-0">
@@ -239,8 +240,8 @@
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Sathkhira to Kuakata</p>
             </NuxtLink>
             <NuxtLink to="#" class="flex justify-start gap-x-[10px] w-1/2">
-              <!-- <img src="@/assets/images/icons/greenMapIcon.svg" alt="">
-              <p class="text-base text-blackPrimary font-normal leading-6 py-5">Chapai Nawabganj - Chapai Nawabganj</p> -->
+              <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
+              <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">Sathkhira to Barishal</p>
             </NuxtLink>
           </div>
         </div>

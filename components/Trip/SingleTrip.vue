@@ -48,29 +48,29 @@
           </div>
 
           <!-- accordion start -->
-          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-4" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
-               <div class="flex flex-wrap justify-between">
+          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-2" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
+               <div class="flex flex-wrap justify-between xl:divide-x">
                     <!-- Bus Design -->
                     <div class="w-full lg:w-1/2 ">
-                         <div class="rounded-[10px] py-4 lg:py-6 px-4 lg:mr-6 bg-[#f7f7f7]">
-                              <div class="flex justify-between lg:border-t lg:border-b border-dashed items-center py-1 lg:py-2 lg:mt-5">
+                         <div class="rounded-[10px] py-4 lg:py-6 px-1 xl:px-4 xl:mr-6 bg-[#f7f7f7]">
+                              <div class="flex lg:flex-wrap xl:flex-nowrap gap-y-2 justify-between lg:border-t lg:border-b border-dashed items-center py-1 lg:py-2 lg:mt-5">
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
-                                        <img src="@/assets/images/seats/available-seats.svg" alt="Available" class="w-[18px] lg:w-[23px] h-[15px] lg:h-5">
-                                        <p class="text-xs lg:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Available</p>
+                                        <img src="@/assets/images/seats/available-seats.svg" alt="Available" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
+                                        <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Available</p>
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
-                                        <img src="@/assets/images/seats/bookedSeats.svg" alt="Booked" class="w-[18px] lg:w-[23px] h-[15px] lg:h-5">
-                                        <p class="text-xs lg:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Booked</p>
+                                        <img src="@/assets/images/seats/bookedSeats.svg" alt="Booked" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
+                                        <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Booked</p>
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
-                                        <img src="@/assets/images/seats/selected-seats.svg" alt="Selected" class="w-[18px] lg:w-[23px] h-[15px] lg:h-5">
-                                        <p class="text-xs lg:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Selected</p>
+                                        <img src="@/assets/images/seats/selected-seats.svg" alt="Selected" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
+                                        <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Selected</p>
                                    </div>
                                    
                               </div>
                               <div class="lg:hidden border-b border-dashed border-[#DBDBDB] mt-[10px]"></div>
-                              <div class="p-5">
-                                   <div class="lg:pl-[31px]">
+                              <div class="">
+                                   <div class="pl-1 xl:pl-[31px]">
                                         <div class="flex justify-end items-end mt-2">
                                              <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
                                         </div>
@@ -112,7 +112,7 @@
                          </div>
                     </div>
 
-                    <div class="w-full lg:w-1/2 lg:border-l lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
+                    <div class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
                          <!-- Trip Information -->
                          <div class="">
                               <SelectOption
