@@ -68,9 +68,9 @@
         </div>
       </div>
     </div>
-
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{{getGsOfferPromoImageUrl}}
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] flex justify-center w-full">
+    <div class="p-4 lg:p-[100px] flex justify-center w-full" v-if="getGsOfferPromoImageUrl">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
@@ -92,11 +92,11 @@
             </button>
           </div>
         </div>
-        <div class="my-5 lg:my-[56px] h-full">
+        
           <template>
             <div>
               <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
-                <div>
+                <!-- <div>
                   <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
                 <div>
@@ -107,29 +107,22 @@
                 </div>
                 <div>
                   <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <!-- <div v-for="(offerImg, index) in getGsOfferPromoImage.offerAndPromoImages" :key="index">
-                  <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                  <img :src="'https://api.dt.jatriweb.team/'+offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div> -->
+                <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
+                <!-- {{offerImg.image}} -->
+                  <!-- <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none"> -->
+                  <!-- {{ readImageUrl(offerImg.image)}} -->
+                  <!-- {{offerImg}} -->
+                  <img :src="offerImg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                </div>
               </VueSlickCarousel>
             </div>
-            <!-- <div v-if="isMobile">
-              <VueSlickCarousel v-bind="settingsForMobileDevice" ref="carousel">
-                <div>
-                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-              </VueSlickCarousel>
-            </div> -->
           </template>
         </div>
-      </div>
+    
     </div>
   
-
+    <img src="https://api.dt.jatriweb.team/v1/api/file/get?path=DT/promo/labiba-classic-ltdqa-61ee4f5198f3a3971e51cb0e.png" />
     <!-- Available Bus operatior Section -->
     <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
       <div class="busOperatorbg rounded-[30px] px-4 lg:px-[60px] py-7 lg:py-10 w-full">
@@ -323,6 +316,7 @@ export default {
       fromOption: "",
       passengerCount: "",
       activeTabIndex: 0,
+      offerImg: '',
       isMobile : false,
       settingsForLargeDevice : {
         "arrows": false,
@@ -339,50 +333,39 @@ export default {
         "centerPadding": "0px",
         "initialSlide": 0,
         "responsive": [
-    {
-      "breakpoint": 1024,
-      "settings": {
-        "slidesToShow": 3,
-        "slidesToScroll": 1,
-        "infinite": true,
-        "dots": true
-      }
-    },
-    {
-      "breakpoint": 600,
-      "settings": {
-        "slidesToShow": 2,
-        "slidesToScroll": 2,
-        "initialSlide": 2
-      }
-    },
-    {
-      "breakpoint": 480,
-      "settings": {
-        "slidesToShow": 1,
-        "slidesToScroll": 1
-      }
-    }
-  ]
+          {
+            "breakpoint": 1024,
+            "settings": {
+              "slidesToShow": 3,
+              "slidesToScroll": 1,
+              "infinite": true,
+              "dots": true
+            }
+          },
+          {
+            "breakpoint": 600,
+            "settings": {
+              "slidesToShow": 2,
+              "slidesToScroll": 2,
+              "initialSlide": 2
+            }
+          },
+          {
+            "breakpoint": 480,
+            "settings": {
+              "slidesToShow": 1,
+              "slidesToScroll": 1
+            }
+          }
+        ]
       },
-      settingsForMobileDevice : {
-        "arrows": false,
-        "dots": false,
-        "infinite": true,
-        "slidesToShow": 1,
-        "slidesToScroll": 1,
-        "autoplay": true,
-        "speed": 2000,
-        "autoplaySpeed": 5000,
-        "cssEase": "linear",
-        "centerMode": true,
-      }
     }
   },
   components: { VueSlickCarousel },
   async asyncData({store}) {
     await store.dispatch("guarantedseat/getCitiesList")
-    await store.dispatch("guarantedseat/getOfferPromoImagesList")
+    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList")
+    await store.dispatch("guarantedseat/readOfferPromoImageUrl")
   },
 
   mounted(){
@@ -391,13 +374,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImage"]),
+    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
   },
   methods: {
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
-      "getOfferPromoImagesList",
+      "getOfferPromoImagesUrlList",
+      "readOfferPromoImageUrl",
       "successTicketByMailAction",
     ]),
 
@@ -409,6 +393,13 @@ export default {
       this.howToBuyModalStatus = !this.howToBuyModalStatus
     },
 
+    // async readImageUrl(url){
+    //   let buff = new Buffer(data);
+    //    console.log( buff. toString('base64'))
+    //   const data = await this.readOfferPromoImageUrl(url)
+    //   this.offerImg = data
+    //   // return data
+    // },
     scrollLeft() {
       this.$refs.carousel.prev()
       this.slideLeft = true;
