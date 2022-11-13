@@ -48,7 +48,7 @@
           </div>
 
           <!-- accordion start -->
-          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-2" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
+          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-2 lg:pr-6 pb-6 pl-2" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
                <div class="flex flex-wrap justify-between xl:divide-x">
                     <!-- Bus Design -->
                     <div class="w-full lg:w-1/2 ">
@@ -70,8 +70,8 @@
                               </div>
                               <div class="lg:hidden border-b border-dashed border-[#DBDBDB] mt-[10px]"></div>
                               <div class="">
-                                   <div class="pl-1 xl:pl-[31px]">
-                                        <div class="flex justify-end items-end mt-2">
+                                   <div class="p-11 lg:p-4 xl:p-8 xl:pl-[31px]">
+                                        <div class="flex w-full justify-end items-end mt-2">
                                              <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
                                         </div>
                                         <!-- Seats here -->
