@@ -6,7 +6,7 @@
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
                          <div>
                               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
-                              <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span> | <span class="font-medium text-blackPrimary" v-if="trip.available">Available: {{trip.available}}</span></p>
+                              <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span><span v-if="trip.available"> | <span class="font-medium text-blackPrimary">Available:</span> {{trip.available}} Seat<span v-if="trip.available>1">s</span></span></p>
                          </div>
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
