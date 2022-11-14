@@ -235,7 +235,7 @@
         </div>
         <div class="w-full lg:w-[710px] mt-6 lg:mt-0">
           <Accordion
-            :heading="'Payment details- bKash, Nagad, Bank Cards, Online Banking'"
+            :heading="'Payment details- bKash, Nagad, & Bank Cards'"
             :details="`The Payment can be done through Nagad, bKash, visa cards or master cards. If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e., there is no transaction ID or tickets booked/reserved by the mobile number of the mobile payment account, he can claim for refund in the similar procedure as above, without the ticket number. Such refunds will be given 7 business days (excluding Friday and Saturday) AFTER the event/trip has taken place. This is applicable for eid times also.
                         <br><br>If a customer has made an excess or less payment for a ticket accidentally, he is eligible for refund but he must claim for the refund within 24 hours of making the payment.
                         <br><br>If a customer has reserved a ticket and made a payment, however, for some reason, the ticket purchase process was not successful and a ticket was not issued, a customer can claim refund as per the policy above. Ticket number is not required, but mobile # used for booking and other information are required. For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile payment company which will be deducted from the eligible refund amount. Similar conditions will apply if the bank charges any such additional fee.
