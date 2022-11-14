@@ -45,20 +45,7 @@ export default {
     '~/plugins/gtm'
   ],
 
-  gtm: {
-    id: process.env.GTM_ID || 'GTM-MWP6J24',
-    scriptDefer: true,
-    pageTracking: true,
-    // layer: 'test',
-    variables: {
-      test: '1'
-    }
-  },
-  publicRuntimeConfig: {
-    gtm: {
-      id: 'GTM-MWP6J24&runtime'
-    }
-  },
+  
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -84,7 +71,23 @@ export default {
     "@nuxtjs/proxy",
     "primevue/nuxt",
     "vue-toastification/nuxt",
+    '@nuxtjs/gtm'
   ],
+
+  gtm: {
+    id: process.env.GTM_ID || 'GTM-MWP6J24',
+    scriptDefer: true,
+    pageTracking: true,
+    // layer: 'test',
+    variables: {
+      test: '1'
+    }
+  },
+  publicRuntimeConfig: {
+    gtm: {
+      id: process.env.GTM_ID || 'GTM-MWP6J24'
+    }
+  },
   
   toast: {
     timeout: 2000,
