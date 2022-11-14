@@ -109,20 +109,19 @@
                   <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div> -->
                 <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
+                  {{readImageUrl(offerImg.image, index)}}
                 <!-- {{offerImg.image}} -->
-                  <!-- <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none"> -->
+                  <img :id="index" src="" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                   <!-- {{ readImageUrl(offerImg.image)}} -->
                   <!-- {{offerImg}} -->
-                  <img :src="offerImg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 </div>
               </VueSlickCarousel>
             </div>
           </template>
         </div>
-    
-    </div>
-  
-    <img src="https://api.dt.jatriweb.team/v1/api/file/get?path=DT/promo/labiba-classic-ltdqa-61ee4f5198f3a3971e51cb0e.png" />
+      </div>
+      <img id="imageUrl" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+    <!-- <img src="https://api.dt.jatriweb.team/v1/api/file/get?path=DT/promo/labiba-classic-ltdqa-61ee4f5198f3a3971e51cb0e.png" /> -->
     <!-- Available Bus operatior Section -->
     <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
       <div class="busOperatorbg rounded-[30px] px-4 lg:px-[60px] py-7 lg:py-10 w-full">
@@ -393,13 +392,18 @@ export default {
       this.howToBuyModalStatus = !this.howToBuyModalStatus
     },
 
-    // async readImageUrl(url){
-    //   let buff = new Buffer(data);
-    //    console.log( buff. toString('base64'))
-    //   const data = await this.readOfferPromoImageUrl(url)
-    //   this.offerImg = data
-    //   // return data
-    // },
+    async readImageUrl(url, index){
+      console.log(index);
+      // let buff = new Buffer(data);
+      //  console.log( buff. toString('base64'))
+      const data = await this.readOfferPromoImageUrl(url)
+      console.log("data==>", data);
+      const base =  Buffer.from(data).toString('base64')
+      console.log(base);
+      // this.offerImg = data
+      document.getElementById(index).src = "data:image/png;base64," + base;
+      // return "data:image/png;base64," + data
+    },
     scrollLeft() {
       this.$refs.carousel.prev()
       this.slideLeft = true;
