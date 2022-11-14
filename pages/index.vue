@@ -95,7 +95,7 @@
         
         <template>
           <div class="mt-5 lg:mt-[42px]">
-            <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
+            <VueSlickCarousel v-bind="settings" ref="carousel">
               <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index" >
                 <img :id="index" :src="imageUrl + offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                 <!-- {{ readImageUrl(offerImg.image)}} -->
@@ -245,7 +245,7 @@
                           <li class='mt-2'>In case of BKash payments, a full mobile number will be required. It is to be noted that for reasons beyond Jatri.co’s control, payment may require some time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.</li>
                         </ul>
                       `"
-            :uniqeId="2"
+            :uniqeId="1"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
           />
@@ -259,7 +259,7 @@
                         <li class='mt-2'>After making the payment process you will get your tickets.</li>
                       </ul>
                       `"
-            :uniqeId="1"
+            :uniqeId="2"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
           />
@@ -290,7 +290,6 @@
                           <li class='mt-2'>For mobile payments customers must complete payment and also verify transactions within this stipulated time.</li>
                           <li class='mt-2'>During Eid sales month, Jatri.co will not do any verification on behalf of the customers.</li>
                         </ul>
-                       
                       `"
             :uniqeId="4"
             :selectedIndex="selectedAccordion"
@@ -329,16 +328,16 @@ export default {
       offerImg: '',
       isMobile : false,
       imageUrl: '',
-      settingsForLargeDevice : {
+      settings : {
         "arrows": false,
         "dots": false,
-        "infinite": true,
-        "slidesToShow": 2,
-        "slidesToScroll": 1,
-        "autoplay": false,
-        "speed": 2000,
-        "autoplaySpeed": 5000,
+        "autoplay": true,
         "centerMode": true,
+        "infinite": true,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "autoplaySpeed": 5000,
+        "speed": 2000,
         "row": 1,
         "responsive": [
           {
