@@ -70,7 +70,7 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] flex justify-center w-full" v-if="getGsOfferPromoImageUrl">
+    <div class="p-4 lg:p-[100px] flex justify-center w-full" v-if="getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
