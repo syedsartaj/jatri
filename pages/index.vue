@@ -515,10 +515,4 @@ export default {
     left: 0%;
   }
 }
-<<<<<<< HEAD
-
-
 </style>
-=======
-</style>
->>>>>>> saiem
