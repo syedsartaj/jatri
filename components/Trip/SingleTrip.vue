@@ -38,8 +38,8 @@
                               <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
                          </div>
                     </div>
-                    <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"> 
-                         {{selectedTrip === busIndex ? 'Close Seats' : 'View Seats' }} 
+                    <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]">
+                         {{selectedTrip === busIndex ? 'Close Seats' : 'View Seats' }}
                          <span>
                               <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selectedTrip === busIndex && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
                          </span>
@@ -66,7 +66,7 @@
                                         <img src="@/assets/images/seats/selected-seats.svg" alt="Selected" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
                                         <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Selected</p>
                                    </div>
-                                   
+
                               </div>
                               <div class="lg:hidden border-b border-dashed border-[#DBDBDB] mt-[10px]"></div>
                               <div class="">
@@ -83,7 +83,7 @@
                                                   <div v-if="colSeat.seatNo !== ''" :key='colIndex' class='relative group'
                                                        @click="colSeat && colSeat.status === 'available' && addSeatHandler(colSeat)"
                                                   >
-                                                       <ArmChairIcon 
+                                                       <ArmChairIcon
                                                             :class="colSeat.status !== 'available' ? 'cursor-default' : 'cursor-pointer'"
                                                             :fill="
                                                                  colSeat.status !== 'available'
@@ -130,7 +130,7 @@
                                    <p class="text-blackPrimary text-sm font-medium">{{ departureDateTime }}</p>
                               </div>
                          </div>
-                    
+
                          <!-- Seat Fare Table -->
                          <div v-if='selectedSeatsObj.length' class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
                               <div class="flex justify-between px-[14px] pt-[10px] pb-[6px] border-b">
@@ -161,9 +161,9 @@
                          <!-- Passenger Information -->
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Passenger Name <span class="text-[#E0293B]">*</span></h2>
-                              <input 
+                              <input
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-                                   type="text" 
+                                   type="text"
                                    placeholder="Enter your name"
                                    v-model='passengerName'
                               />
@@ -171,9 +171,9 @@
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Phone No <span class="text-[#E0293B]">*</span></h2>
-                              <input 
+                              <input
                               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
-                                   type="number" 
+                                   type="number"
                                    placeholder="Enter your phone"
                                    v-model='passengerPhone'
                               />
@@ -181,9 +181,9 @@
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email ID</span> <span class="text-[#8D8D8F]">Optional</span></h2>
-                              <input 
+                              <input
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-                                   type="email" 
+                                   type="email"
                                    placeholder="Enter your email id"
                                    v-model='passengerEmail'
                               />
@@ -195,8 +195,8 @@
                                    <input
                                         type="text"
                                         id="promo"
-                                        v-model="promoCode" 
-                                        placeholder="Enter Promo Code" 
+                                        v-model="promoCode"
+                                        placeholder="Enter Promo Code"
                                         class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    />
 
@@ -204,14 +204,14 @@
                                    <button
                                         @click='applyPromo'
                                         :disabled='!promoCode'
-                                        :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'" 
-                                        class="w-1/4 mt-[10px] py-[10px] rounded-full text-xs font-medium"
+                                        :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'"
+                                        class="w-1/2 mt-[10px] py-[10px] rounded-full text-xs font-medium overflow-hidden"
                                    >
                                         Apply Promo
                                    </button>
 
                                    <!-- Remove Promo -->
-                                   <!-- <button 
+                                   <!-- <button
                                              class="flex justify-center items-center gap-x-[11.76px] w-1/4 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary"
                                         >
                                         <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
@@ -223,7 +223,7 @@
                               :class="
                                    (moduleType == 'paribahan' && !passengerEmail) ||
                                    !selectedSeatIds.length || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
-                                   ? 'bg-gray-500 user cursor-not-allowed' 
+                                   ? 'bg-gray-500 user cursor-not-allowed'
                                    : 'bg-corporate hover:bg-[#D93E2D]'
                               "
                               :disabled='
