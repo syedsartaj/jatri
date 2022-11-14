@@ -59,6 +59,10 @@
 import routeAndOperator from '@/assets/json/routeAndOperator.json'
 export default {
 
+     middleware (ctx) {
+          ctx.$gtm.push({ event: 'ssr' })
+     },
+
      async asyncData({ route }) {
           const query = {
                name: route.query.name,

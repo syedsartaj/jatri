@@ -82,6 +82,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
      export default {
+          middleware (ctx) {
+               ctx.$gtm.push({ event: 'ssr' })
+          },
           data() {
                return {
                     error: false,

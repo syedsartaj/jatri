@@ -6,7 +6,7 @@
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
                          <div>
                               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
-                              <p class="text-xs font-normal text-blackLight">{{ trip.coach.name }}</p>
+                              <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span> | <span class="font-medium text-blackPrimary" v-if="trip.available">Available: {{trip.available}}</span></p>
                          </div>
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
@@ -127,7 +127,7 @@
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Departure Time</h2>
                               <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
-                                   <p class="text-blackPrimary text-sm font-medium">{{ departureTime }}</p>
+                                   <p class="text-blackPrimary text-sm font-medium">{{ departureDateTime }}</p>
                               </div>
                          </div>
                     
@@ -249,7 +249,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { timeFormat } from '@/helpers/dateTimeFormat';
+import { timeFormat, dateTimeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
 import { dateFormat } from '../../helpers/dateTimeFormat';
 export default {
@@ -285,6 +285,12 @@ export default {
                'getGsTrips',
                'getPromoCode'
           ]),
+          departureDateTime()  {
+               if(this.boardingPoint.scheduleTime === '') {
+                    return dateTimeFormat(new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us'), 6, 'lll');
+               }
+               return dateTimeFormat(this.boardingPoint.scheduleTime, 6, 'lll');
+          },
           departureTime()  {
                if(this.boardingPoint.scheduleTime === '') {
                return new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
@@ -459,6 +465,7 @@ export default {
                          departureId: this.trip.departureId,
                          departureDate: this.departureDate,
                          departureTime: this.departureTime,
+                         departureDateTime: this.departureDateTime,
                          boardingDateTime: this.boardingPoint.scheduleTime,
                          reportingDateTime: this.boardingPoint.reportingTime,
                          passengerName: this.passengerName,

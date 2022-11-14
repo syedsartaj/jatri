@@ -75,7 +75,6 @@ export const actions = {
   },
   
   async readOfferPromoImageUrl ({ commit }, payload) {
-    console.log("readOfferPromoImageUrl==>",payload);
     try {
       const  data  = await this.$api.$get(
         apis.READ_OFFER_PROMO_IMAGE_URL, {params: {path: payload}}

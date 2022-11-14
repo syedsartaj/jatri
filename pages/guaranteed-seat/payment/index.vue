@@ -149,6 +149,9 @@ import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 import { dateTimeFormat } from '@/helpers/dateTimeFormat';
 export default {
+     middleware (ctx) {
+          ctx.$gtm.push({ event: 'ssr' })
+     },
      validate({ query }) {
           const { tnxId } = query;
           return tnxId;
@@ -179,7 +182,7 @@ export default {
      computed: {
           ...mapGetters("guarantedseat", ["getBookingInfoDetails", "getGsLoading"]),
           boardingDateTime() {
-               return this.getBookingInfoDetails.invoice.departureDate && dateTimeFormat(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime, 0, "ll");
+               return dateTimeFormat(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime, 6, "ll");
           }
      },
      methods: {

@@ -67,6 +67,9 @@ import Cookies from "js-cookie";
 import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
 export default {
+     middleware (ctx) {
+          ctx.$gtm.push({ event: 'ssr' })
+     },
      validate({query}) {
           const {
                from,

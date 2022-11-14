@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{{getGsOfferPromoImageUrl}}
+
     <!-- Offer & Promos Section -->
     <div class="p-4 lg:p-[100px] flex justify-center w-full" v-if="getGsOfferPromoImageUrl">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
@@ -94,34 +94,17 @@
         </div>
         
           <template>
-            <div>
+            <div class="mt-5 lg:mt-[42px]">
               <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
-                <!-- <div>
-                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div> -->
-                <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
-                  {{readImageUrl(offerImg.image, index)}}
-                <!-- {{offerImg.image}} -->
-                  <img :id="index" src="" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index" >
+                  <img :id="index" :src="imageUrl + offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
                   <!-- {{ readImageUrl(offerImg.image)}} -->
-                  <!-- {{offerImg}} -->
                 </div>
               </VueSlickCarousel>
             </div>
           </template>
         </div>
       </div>
-      <img id="imageUrl" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-    <!-- <img src="https://api.dt.jatriweb.team/v1/api/file/get?path=DT/promo/labiba-classic-ltdqa-61ee4f5198f3a3971e51cb0e.png" /> -->
     <!-- Available Bus operatior Section -->
     <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
       <div class="busOperatorbg rounded-[30px] px-4 lg:px-[60px] py-7 lg:py-10 w-full">
@@ -306,6 +289,9 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
+  middleware (ctx) {
+    ctx.$gtm.push({ event: 'ssr' })
+  },
   data(){
     return {
       selectedAccordion : null,
@@ -317,20 +303,18 @@ export default {
       activeTabIndex: 0,
       offerImg: '',
       isMobile : false,
+      imageUrl: '',
       settingsForLargeDevice : {
         "arrows": false,
         "dots": false,
         "infinite": true,
-        "slidesToShow": 3,
+        "slidesToShow": 2,
         "slidesToScroll": 1,
         "autoplay": false,
         "speed": 2000,
         "autoplaySpeed": 5000,
-        "cssEase": "linear",
-        "rows": 1,
         "centerMode": true,
-        "centerPadding": "0px",
-        "initialSlide": 0,
+        "row": 1,
         "responsive": [
           {
             "breakpoint": 1024,
@@ -338,7 +322,7 @@ export default {
               "slidesToShow": 3,
               "slidesToScroll": 1,
               "infinite": true,
-              "dots": true
+              "dots": false
             }
           },
           {
@@ -370,6 +354,7 @@ export default {
   mounted(){
     this.onResize()
     window.addEventListener('resize', this.onResize)
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
   },
 
   computed: {
@@ -393,17 +378,11 @@ export default {
     },
 
     async readImageUrl(url, index){
-      console.log(index);
-      // let buff = new Buffer(data);
-      //  console.log( buff. toString('base64'))
       const data = await this.readOfferPromoImageUrl(url)
-      console.log("data==>", data);
       const base =  Buffer.from(data).toString('base64')
-      console.log(base);
-      // this.offerImg = data
-      document.getElementById(index).src = "data:image/png;base64," + base;
-      // return "data:image/png;base64," + data
+        return document.getElementById(index).src = "data:image/png;base64," + base;
     },
+
     scrollLeft() {
       this.$refs.carousel.prev()
       this.slideLeft = true;
@@ -488,6 +467,7 @@ export default {
 
 .slick-slide {
   margin: 0 8px;
+  width: auto !important;
 }
 
 @media screen and (min-width:992px) {
@@ -513,4 +493,6 @@ export default {
     left: 0%;
   }
 }
+
+
 </style>
