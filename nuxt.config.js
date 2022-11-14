@@ -42,7 +42,10 @@ export default {
     "~/plugins/api",
     "~/plugins/vee-validate.js",
     "~/plugins/facebook-events.js",
+    '~/plugins/gtm'
   ],
+
+  
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -68,7 +71,23 @@ export default {
     "@nuxtjs/proxy",
     "primevue/nuxt",
     "vue-toastification/nuxt",
+    '@nuxtjs/gtm'
   ],
+
+  gtm: {
+    id: process.env.GTM_ID || 'GTM-MWP6J24',
+    scriptDefer: true,
+    pageTracking: true,
+    // layer: 'test',
+    variables: {
+      test: '1'
+    }
+  },
+  publicRuntimeConfig: {
+    gtm: {
+      id: process.env.GTM_ID || 'GTM-MWP6J24'
+    }
+  },
   
   toast: {
     timeout: 2000,

@@ -6,7 +6,7 @@
                          <img src="@/assets/images/busDefaultImage.svg" alt="">
                          <div>
                               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
-                              <p class="text-xs font-normal text-blackLight">{{ trip.coach.name }}</p>
+                              <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span><span v-if="trip.available"> | <span class="font-medium text-blackPrimary">Available:</span> {{trip.available}} Seat<span v-if="trip.available>1">s</span></span></p>
                          </div>
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
@@ -38,8 +38,8 @@
                               <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
                          </div>
                     </div>
-                    <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"> 
-                         {{selectedTrip === busIndex ? 'Close Seats' : 'View Seats' }} 
+                    <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)" class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]">
+                         {{selectedTrip === busIndex ? 'Close Seats' : 'View Seats' }}
                          <span>
                               <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selectedTrip === busIndex && 'transition-all ease-in-out rotate-180'" class="w-[8.49px] h-[5.19px]">
                          </span>
@@ -48,7 +48,7 @@
           </div>
 
           <!-- accordion start -->
-          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-6 pb-6 pl-2" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
+          <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-2 lg:pr-6 pb-6 pl-2" :class="selectedTrip === busIndex ? 'max-h-max transition-all ease-in-out duration-700': 'h-0'">
                <div class="flex flex-wrap justify-between xl:divide-x">
                     <!-- Bus Design -->
                     <div class="w-full lg:w-1/2 ">
@@ -66,12 +66,12 @@
                                         <img src="@/assets/images/seats/selected-seats.svg" alt="Selected" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
                                         <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Selected</p>
                                    </div>
-                                   
+
                               </div>
                               <div class="lg:hidden border-b border-dashed border-[#DBDBDB] mt-[10px]"></div>
                               <div class="">
-                                   <div class="pl-1 xl:pl-[31px]">
-                                        <div class="flex justify-end items-end mt-2">
+                                   <div class="p-11 lg:p-4 xl:p-8 xl:pl-[31px]">
+                                        <div class="flex w-full justify-end items-end mt-2">
                                              <img src="@/assets/images/seats/driver.svg" alt="driver" class="w-[30px]"/>
                                         </div>
                                         <!-- Seats here -->
@@ -83,7 +83,7 @@
                                                   <div v-if="colSeat.seatNo !== ''" :key='colIndex' class='relative group'
                                                        @click="colSeat && colSeat.status === 'available' && addSeatHandler(colSeat)"
                                                   >
-                                                       <ArmChairIcon 
+                                                       <ArmChairIcon
                                                             :class="colSeat.status !== 'available' ? 'cursor-default' : 'cursor-pointer'"
                                                             :fill="
                                                                  colSeat.status !== 'available'
@@ -127,10 +127,10 @@
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Departure Time</h2>
                               <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
-                                   <p class="text-blackPrimary text-sm font-medium">{{ departureTime }}</p>
+                                   <p class="text-blackPrimary text-sm font-medium">{{ departureDateTime }}</p>
                               </div>
                          </div>
-                    
+
                          <!-- Seat Fare Table -->
                          <div v-if='selectedSeatsObj.length' class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
                               <div class="flex justify-between px-[14px] pt-[10px] pb-[6px] border-b">
@@ -161,9 +161,9 @@
                          <!-- Passenger Information -->
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Passenger Name <span class="text-[#E0293B]">*</span></h2>
-                              <input 
+                              <input
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-                                   type="text" 
+                                   type="text"
                                    placeholder="Enter your name"
                                    v-model='passengerName'
                               />
@@ -171,9 +171,9 @@
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary">Phone No <span class="text-[#E0293B]">*</span></h2>
-                              <input 
+                              <input
                               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
-                                   type="number" 
+                                   type="number"
                                    placeholder="Enter your phone"
                                    v-model='passengerPhone'
                               />
@@ -181,9 +181,9 @@
 
                          <div class="mt-4">
                               <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email ID</span> <span class="text-[#8D8D8F]">Optional</span></h2>
-                              <input 
+                              <input
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-                                   type="email" 
+                                   type="email"
                                    placeholder="Enter your email id"
                                    v-model='passengerEmail'
                               />
@@ -195,8 +195,8 @@
                                    <input
                                         type="text"
                                         id="promo"
-                                        v-model="promoCode" 
-                                        placeholder="Enter Promo Code" 
+                                        v-model="promoCode"
+                                        placeholder="Enter Promo Code"
                                         class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    />
 
@@ -204,14 +204,14 @@
                                    <button
                                         @click='applyPromo'
                                         :disabled='!promoCode'
-                                        :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'" 
-                                        class="w-1/4 mt-[10px] py-[10px] rounded-full text-xs font-medium"
+                                        :class="!promoCode ? 'bg-[#FDF0F1] text-[#E0293B]': 'bg-corporate text-successLight'"
+                                        class="w-1/2 mt-[10px] py-[10px] rounded-full text-xs font-medium overflow-hidden"
                                    >
                                         Apply Promo
                                    </button>
 
                                    <!-- Remove Promo -->
-                                   <!-- <button 
+                                   <!-- <button
                                              class="flex justify-center items-center gap-x-[11.76px] w-1/4 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary"
                                         >
                                         <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
@@ -223,7 +223,7 @@
                               :class="
                                    (moduleType == 'paribahan' && !passengerEmail) ||
                                    !selectedSeatIds.length || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
-                                   ? 'bg-gray-500 user cursor-not-allowed' 
+                                   ? 'bg-gray-500 user cursor-not-allowed'
                                    : 'bg-corporate hover:bg-[#D93E2D]'
                               "
                               :disabled='
@@ -249,7 +249,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { timeFormat } from '@/helpers/dateTimeFormat';
+import { timeFormat, dateTimeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
 import { dateFormat } from '../../helpers/dateTimeFormat';
 export default {
@@ -285,6 +285,12 @@ export default {
                'getGsTrips',
                'getPromoCode'
           ]),
+          departureDateTime()  {
+               if(this.boardingPoint.scheduleTime === '') {
+                    return dateTimeFormat(new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us'), 6, 'lll');
+               }
+               return dateTimeFormat(this.boardingPoint.scheduleTime, 6, 'lll');
+          },
           departureTime()  {
                if(this.boardingPoint.scheduleTime === '') {
                return new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
@@ -459,6 +465,7 @@ export default {
                          departureId: this.trip.departureId,
                          departureDate: this.departureDate,
                          departureTime: this.departureTime,
+                         departureDateTime: this.departureDateTime,
                          boardingDateTime: this.boardingPoint.scheduleTime,
                          reportingDateTime: this.boardingPoint.reportingTime,
                          passengerName: this.passengerName,

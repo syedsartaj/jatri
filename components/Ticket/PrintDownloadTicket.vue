@@ -167,19 +167,18 @@
                          <div
                               style='display: flex;background-color: #f7f7f7;padding: 8px;margin-top: 13px;padding-left: 10px;border-radius: 4px;'>
                               <div style='width: 50%; border-right: 1px dashed #dbdbdb'>
-                                   <div style=''>
-                                        <p style='font-size: 12px; color: #4d4d4f'>Trip Date:</p>
-                                        <p style='font-size: 12px; color: black; font-weight: 600'>
-                                             {{ tripDate }}
-                                        </p>
-                                   </div>
-                                   <div style='margin-top: 11px'>
+                                   <div>
                                         <p style='font-size: 12px; color: #4d4d4f'>From:</p>
                                         <p style='font-size: 12px;color: black;margin-top: 4px;font-weight: 600;'>
                                              {{ ticketDetails.fromCity }}
                                         </p>
                                    </div>
-
+                                   <div style='margin-top: 8px'>
+                                        <p style='font-size: 12px; color: #4d4d4f'>Reporting Date & Time:</p>
+                                        <p style='font-size: 14px; color: black;font-weight: 600;margin-top: 4px;'>
+                                             {{ reportTimeWithAddTime }}
+                                        </p>
+                                   </div>
                                    <div style='margin-top: 8px'>
                                         <p style='font-size: 12px; color: #4d4d4f'>
                                              Boarding Counter:
@@ -188,16 +187,17 @@
                                              {{ ticketDetails.boardingPlace }}
                                         </p>
                                    </div>
-
-                                   <div style='margin-top: 8px'>
-                                        <p style='font-size: 12px; color: #4d4d4f'>Reporting Time:</p>
-                                        <p style='font-size: 12px;color: black;font-weight: 600;margin-top: 4px;'>
-                                             {{ reportTimeWithAddTime }}
-                                        </p>
-                                   </div>
+                                   
                               </div>
                               <div style='width: 50%; padding-left: 10px; border-radius: 4px'>
-                                   <div style=''>
+                                   <div>
+                                        <p style='font-size: 12px; color: #4d4d4f'>To:</p>
+                                        <p style='font-size: 12px;color: black;margin-top: 4px;font-weight: 600;'>
+                                             {{ ticketDetails.toCity }}
+                                        </p>
+                                   </div>
+                                   
+                                   <div style='margin-top: 8px'>
                                         <p style='font-size: 12px; color: #4d4d4f'>
                                              Departure Date & Time:
                                         </p>
@@ -206,17 +206,9 @@
                                         </p>
                                    </div>
                                    <div style='margin-top: 8px'>
-                                        <p style='font-size: 12px; color: #4d4d4f'>To:</p>
-                                        <p style='font-size: 12px;color: black;margin-top: 4px;font-weight: 600;'>
-                                             {{ ticketDetails.toCity }}
-                                        </p>
-                                   </div>
-
-                                   <div style='margin-top: 11px'>
-                                        <p style='font-size: 12px; color: #4d4d4f'>Booking Date:</p>
+                                        <p style='font-size: 12px; color: #4d4d4f'>Booking Date & Time:</p>
                                         <p style='font-size: 14px;color: black;font-weight: 600;margin-top: 4px;'>
                                              {{ ticketDateTime }}
-
                                         </p>
                                    </div>
 
@@ -315,10 +307,10 @@
                          <!-- 4th part -->
                          <div style='display: flex;background-color: #f7f7f7;margin-top: 10px;padding-top: 2px;padding-bottom: 2px;border-radius: 4px;'>
                               <div style='width: 62%;border-radius: 4px;border-right: 1px dashed #c4c4c4;'>
-                                   <p style='padding: 10px; margin-bottom: 16px'>
+                                   <p style='padding: 10px; padding-bottom: 0; margin-bottom: 16px'>
                                         Passenger Details:
                                    </p>
-                                   <div style='display: flex;justify-content: space-between;padding: 10px;'>
+                                   <div style='display: flex;justify-content: space-between;padding: 10px; padding-top: 0;'>
                                         <div style='width: 50%'>
                                              <p style='font-weight: 700; color: black; font-size: 12px'>
                                                   <span style='font-weight: 400'>Ticket No:</span> {{
@@ -331,17 +323,20 @@
                                                             ticketDetails.fromCity
                                                   }}
                                              </p>
+                                             <p style='color: #4d4d4f; font-size: 11px; margin-top: 8px'>
+                                                  Reporting Date & Time:
+                                             </p>
+                                             <p style='font-size: 12px;color: #151414;font-weight: 600;margin-top: 1px;'>
+                                                  {{ reportTimeWithAddTime }}
+                                             </p>
                                              <p style='font-size: 11px; color: #4d4d4f; margin-top: 8px'>
                                                   Boarding Counter:
                                              </p>
                                              <p style='color: #151414;font-weight: 600;font-size: 12px;margin-top: 1px;'>
                                                   {{ ticketDetails.boardingPlace }}
                                              </p>
-                                             <p style='font-size: 12px; margin-top: 8px; font-weight: 600'>
-                                                  <span style='color: #4d4d4f; font-weight: 400'>
-                                                       Reporting time:</span>
-                                                  {{ reportTimeWithAddTime }}
-                                             </p>
+
+                                             
                                              <!-- <p style="font-size: 12px; margin-top: 8px; font-weight: 600">
                                                        <span style="color: #4d4d4f; font-weight: 400">
                                                        Issued by:</span
@@ -351,9 +346,7 @@
                                         </div>
                                         <div style='width: 50%'>
                                              <p style='font-size: 12px; color: #000; font-weight: 600'>
-                                                  <span style='color: #4d4d4f; font-weight: 400; color: #151414;'>
-                                                       Trip Date:</span>
-                                                  {{ tripDate }}
+                                                  <span style='color: #4d4d4f; font-weight: 400; color: #151414;'>&nbsp;</span>
                                              </p>
                                              <p style='font-weight: 600;color: black;font-size: 12px;margin-top: 8px;'>
                                                   <span style='font-weight: 400'>To:</span> {{ ticketDetails.toCity
@@ -363,12 +356,14 @@
                                              <p style='color: #4d4d4f; font-size: 11px; margin-top: 8px'>
                                                   Departure Date & Time:
                                              </p>
-                                             <p
-                                                  style='font-size: 12px;color: #151414;font-weight: 600;margin-top: 1px;'>
+                                             <p style='font-size: 12px;color: #151414;font-weight: 600;margin-top: 1px;'>
                                                   {{ departureDateTime }}
                                              </p>
-                                             <p style='color: #000;font-size: 12px;margin-top: 8px;font-weight: 600;'>
-                                                  <span style='font-weight: 400; color: #4d4d4f;'>Booking Date:</span>
+
+                                             <p style='color: #4d4d4f; font-size: 11px; margin-top: 8px'>
+                                                  Booking Date & Time:
+                                             </p>
+                                             <p style='font-size: 12px;color: #151414;font-weight: 600;margin-top: 1px;'>
                                                   {{ ticketDateTime }}
                                              </p>
                                         </div>
@@ -443,7 +438,7 @@ export default {
      computed: {
           ...mapGetters('guarantedseat', ['getSearchedTicketList']),
           reportTimeWithAddTime() {
-               return this.ticketDetails && timeFormat(this.ticketDetails.reportingDateTime, 0, 'hh:mm A');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.reportingDateTime, 0, 'lll');
           },
           departureDateTime() {
                return this.ticketDetails && dateTimeFormat(this.ticketDetails.boardingDateTime, 0, 'lll');
@@ -452,7 +447,7 @@ export default {
                return this.ticketDetails && dateTimeFormat(this.ticketDetails.departureDateTime, 0, 'll');
           },
           ticketDateTime() {
-               return this.ticketDetails && dateTimeFormat(this.ticketDetails.ticketDateTime, 0, 'll');
+               return this.ticketDetails && dateTimeFormat(this.ticketDetails.ticketDateTime, 0, 'lll');
           },
           issuedOn() {
                return this.ticketDetails && dateTimeFormat(this.ticketDetails.createdAt, 0, 'lll');

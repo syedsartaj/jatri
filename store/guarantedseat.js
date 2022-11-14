@@ -5,7 +5,7 @@ export const state = () => ({
   gsLoading: false,
   gsLoadingTwo: false,
   gsCities: [],
-  gsOfferPromoImage: [],
+  gsOfferPromoImageUrl: [],
   gsTrips: [],
   gsSeatViewData: {},
   gsSeatArray: [],
@@ -21,8 +21,9 @@ export const getters = {
   getGsLoading: (state) => state.gsLoading,
   getGsLoadingTwo: (state) => state.gsLoadingTwo,
   getGsCities: (state) => state.gsCities,
-  getGsOfferPromoImage: (state) => {
-    return state.gsOfferPromoImage},
+  getGsOfferPromoImageUrl: (state) => {
+    return state.gsOfferPromoImageUrl
+  },
   getGsTrips: (state) => state.gsTrips,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
@@ -60,10 +61,26 @@ export const actions = {
       // })
     }
   },
-  async getOfferPromoImagesList ({ commit }) {
+  async getOfferPromoImagesUrlList ({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-      commit('setGsOfferPromoImage', data);
+      commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
+    } catch (error) {
+      console.log(error);
+      // this.$toast.error(error.response ? error.response.data.message : error.message , {
+      //   position: 'bottom-right',
+      //   duration: 5000,
+      // })
+    }
+  },
+  
+  async readOfferPromoImageUrl ({ commit }, payload) {
+    try {
+      const  data  = await this.$api.$get(
+        apis.READ_OFFER_PROMO_IMAGE_URL, {params: {path: payload}}
+      );
+      return data;
+      // commit('setGsOfferPromoImage', data);
     } catch (error) {
       // this.$toast.error(error.response ? error.response.data.message : error.message , {
       //   position: 'bottom-right',
@@ -304,8 +321,8 @@ export const mutations = {
       };
     });
   },
-  setGsOfferPromoImage: (state, data) => {
-    state.gsOfferPromoImage = data
+  setGsOfferPromoImageUrl: (state, data) => {
+    state.gsOfferPromoImageUrl = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsSeatViewData: (state, data) => {

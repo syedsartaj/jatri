@@ -10,7 +10,7 @@
           <div class="mt-9">
             <SearchFilterForm/>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
     <div v-if="isMobile" class="relative block lg:hidden">
       <img src="@/assets/images/home/bannerImageMobile.jpg" alt="" class="w-full">
       <div class="absolute top-[39px] right-4 left-4">
-        <h2 class="text-[28px] text-white font-bold leading-[36px]">Book Your Journey <br> NOW!!!</h2>
+        <h2 class="text-[26px] text-white font-bold leading-[36px]">Book Your Journey <br> NOW!!!</h2>
         <h4 class="mt-2 text-base text-white font-normal">Buy tickets online <br> hassle-free</h4>
         <div class="mt-[39px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg">
           <SearchFilterFormMobile/>
@@ -70,7 +70,7 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="p-4 lg:p-[100px] flex justify-center w-full">
+    <div class="p-4 lg:p-[100px] flex justify-center w-full" v-if="getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">Offers & Promos</h2>
@@ -92,48 +92,25 @@
             </button>
           </div>
         </div>
-        <div class="my-5 lg:my-[56px] h-full">
-          <template>
-            <div>
-              <VueSlickCarousel v-bind="settingsForLargeDevice" ref="carousel">
-                <div>
-                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-1.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/offer-2.jpg" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <!-- <div v-for="(offerImg, index) in getGsOfferPromoImage.offerAndPromoImages" :key="index">
-                  <img :src="require(`https://api.dt.jatriweb.team/${offerImg.image}`)" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                  <img :src="'https://api.dt.jatriweb.team/'+offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div> -->
-              </VueSlickCarousel>
-            </div>
-            <!-- <div v-if="isMobile">
-              <VueSlickCarousel v-bind="settingsForMobileDevice" ref="carousel">
-                <div>
-                  <img src="@/assets/images/offer/img-1.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-                <div>
-                  <img src="@/assets/images/offer/img-2.png" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
-                </div>
-              </VueSlickCarousel>
-            </div> -->
-          </template>
-        </div>
+        
+        <template>
+          <div class="mt-5 lg:mt-[42px]">
+            <VueSlickCarousel v-bind="settings" ref="carousel">
+              <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index" >
+                <img :id="index" :src="imageUrl + offerImg.image" alt="" class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                <!-- {{ readImageUrl(offerImg.image)}} -->
+              </div>
+            </VueSlickCarousel>
+          </div>
+        </template>
       </div>
     </div>
-  
+
 
     <!-- Available Bus operatior Section -->
     <div class="p-4 lg:p-[100px] pt-0 flex justify-center">
       <div class="busOperatorbg rounded-[30px] px-4 lg:px-[60px] py-7 lg:py-10 w-full">
-        <p class="text-center font-normal text-sm lg:text-xl text-blackPrimary">Plenty of options to choose</p>
+        <p class="text-center font-normal text-sm lg:text-xl text-blackPrimary">Multiple options to choose</p>
         <h2 class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2">Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
@@ -258,44 +235,66 @@
         </div>
         <div class="w-full lg:w-[710px] mt-6 lg:mt-0">
           <Accordion
-            :heading="'How to buy Tickets via website?'"
-            :details="`The easiest way to buy bus tickets online through Jatri is at your door now. First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a> 
-                        <br><br>Secondly, you will have to select your location, where to go, which kind of bus you need and the date of your journey. Then click the “book now” option and fill-up all the information. After making the payment process you will get your tickets.
+            :heading="'Payment details- bKash, Nagad, & Bank Cards'"
+            :details="`The Payment can be done through Nagad, bKash, visa cards or master cards.
+                        <ul class='list-disc ml-5'>
+                          <li class='mt-2'>If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e., there is no transaction ID or tickets booked/reserved by the mobile number of the mobile payment account, he can claim for refund in the similar procedure as above, without the ticket number. Such refunds will be given 7 business days (excluding Friday and Saturday) AFTER the event/trip has taken place. This is applicable for eid times also.</li>
+                          <li class='mt-2'>If a customer has made an excess or less payment for a ticket accidentally, he is eligible for refund but he must claim for the refund within 24 hours of making the payment.</li>
+                          <li class='mt-2'>If a customer has reserved a ticket and made a payment, however, for some reason, the ticket purchase process was not successful and a ticket was not issued, a customer can claim refund as per the policy above. Ticket number is not required, but mobile # used for booking and other information are required. For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile payment company which will be deducted from the eligible refund amount. Similar conditions will apply if the bank charges any such additional fee.</li>
+                          <li class='mt-2'>In case of card payments, the last 4 digits of the card type of card is also needed. It is to be noted that for reasons beyond Jatri.co’s control, card payment may sometimes require time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.</li>
+                          <li class='mt-2'>In case of BKash payments, a full mobile number will be required. It is to be noted that for reasons beyond Jatri.co’s control, payment may require some time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.</li>
+                        </ul>
                       `"
             :uniqeId="1"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
-            :heading="'Payment details- bKash, Nagad, Bank Cards, Online Banking'"
-            :details="`The Payment can be done through Nagad, bKash, visa cards or master cards. If a customer has sent payment to Jatri.co but the e-ticket is not confirmed or generated, i.e., there is no transaction ID or tickets booked/reserved by the mobile number of the mobile payment account, he can claim for refund in the similar procedure as above, without the ticket number. Such refunds will be given 7 business days (excluding Friday and Saturday) AFTER the event/trip has taken place. This is applicable for eid times also.
-                        <br><br>If a customer has made an excess or less payment for a ticket accidentally, he is eligible for refund but he must claim for the refund within 24 hours of making the payment. 
-                        <br><br>If a customer has reserved a ticket and made a payment, however, for some reason, the ticket purchase process was not successful and a ticket was not issued, a customer can claim refund as per the policy above. Ticket number is not required, but mobile # used for booking and other information are required. For refunds through mobile payment gateways (e.g. bKash), a fee is charged by the mobile payment company which will be deducted from the eligible refund amount. Similar conditions will apply if the bank charges any such additional fee. 
-                        <br><br>In case of card payments, the last 4 digits of the card type of card is also needed. It is to be noted that for reasons beyond Jatri.co’s control, card payment may sometimes require time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
-                        <br><br>In case of BKash payments, a full mobile number will be required. It is to be noted that for reasons beyond Jatri.co’s control, payment may require some time to post on the payment gateway’s panel which Jatri.co uses to verify payment. Jatri.co can only verify payment after it has been posted on the said panel.
+            :heading="'How to buy Tickets via website?'"
+            :details="`The easiest way to buy bus tickets online through Jatri is at your door now. 
+                      <ul class='list-disc ml-5'>
+                        <li class='mt-2'>First, you have to go the Jatri website: <a href='https://ticket.jatri.co/' class='text-blue-500 underline'>https://ticket.jatri.co/</a></li>
+                        <li class='mt-2'>Secondly, you will have to select your location, where to go, which kind of bus you need and the date of your journey.</li>
+                        <li class='mt-2'>Then click the <span class='text-blackPrimary font-bold'>“book now”</span> option and provide all the information.</li>
+                        <li class='mt-2'>After making the payment process you will get your tickets.</li>
+                      </ul>
                       `"
             :uniqeId="2"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
-            :heading="'24/7 Customer Service- 09642080808'"
-            :details="`The customer service team of Jatri services Ltd. is open 24/7. For any kind of help or queries or questions, you can call the custom service number 09642080808.`"
+            :heading="'Customer Service'"
+            :details="`The customer service team of Jatri services Limited is open from 7am to 11:59pm. For any kind of help or queries or questions, you can call the customer service number 09642080808.`"
             :uniqeId="3"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
           />
           <Accordion
             :heading="'Ticket Cancellation Procedures'"
-            :details="`There are few cancellation policies. <span class='text-blackPrimary font-medium'>Auto cancellation</span> will happen if the customer fails to report at the reporting station before the departure time. If the customer <span class='text-blackPrimary font-medium'>fails to pay</span> the full amount that mentioned in the screen will not get the activated tickets. To be eligible for refund, customers need to cancel the ticket from jatri.co before the applicable time before the departure. And must report the cancelation to the support center (i.e Call 09642080808 or email to support@jatri.co) of Jatri.co.
-                        <br><br>Only <span class='text-blackPrimary font-medium'>during Eid time</span>, customers are eligible for refund ONLY if the operator cancels the trip and cannot provide an alternative arrangement. 
-                        <br><br>(<span class='text-blackPrimary font-medium'>Note</span>: Terms and conditions of refund policy might update or change from time to time without any notice).
-                        <br><br><span class='text-blackPrimary font-medium'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself. Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise. Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes. For mobile payments customers must complete payment and also verify transactions within this stipulated time. During Eid sales month, Jatri.co will not do any verification on behalf of the customers.
+            :details="` If you want to make a cancellation to your booking ticket, you must follow some rules: 
+                        <ul class='list-decimal ml-5'>
+                          <li class='mt-2'>First, you need to go to the search option. You need to add your phone number to search for your ticket.</li>
+                          <li class='mt-2'>Click at the cancellation option. Your request will be submitted to our team.</li>
+                          <li class='mt-2'>Your money will be refunded with following our refund & cancellation policy.</li>
+                        </ul>
+                        <br>There are few cancellation policies: <br>
+                        <ul class='list-disc ml-5'>
+                          <li class='mt-2'><span class='text-blackPrimary font-bold'>Auto cancellation</span> will happen if the customer fails to report at the reporting station before the departure time.</li>
+                          <li class='mt-2'>If the customer <span class='text-blackPrimary font-bold'>fails to pay</span> the full amount that mentioned in the screen will not get the activated tickets.</li>
+                          <li class='mt-2'>To be eligible for refund, customers need to cancel the ticket from jatri.co before the applicable time before the departure. And must report the cancelation to the support center (i.e Call 09642080808 or email to support@jatri.co) of Jatri.co</li>
+                          <li class='mt-2'>Only <span class='text-blackPrimary font-bold'>during Eid time</span> , customers are eligible for refund ONLY if the operator cancels the trip and cannot provide an alternative arrangement.<span class='text-blackPrimary font-bold'> (Note:</span> Terms and conditions of refund policy might update or change from time to time without any notice)</li>
+                          <li class='mt-2'><span class='text-blackPrimary font-bold'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself.</li>
+                          <li class='mt-2'>Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.</li>
+                          <li class='mt-2'>Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes.</li>
+                          <li class='mt-2'>For mobile payments customers must complete payment and also verify transactions within this stipulated time.</li>
+                          <li class='mt-2'>During Eid sales month, Jatri.co will not do any verification on behalf of the customers.</li>
+                        </ul>
                       `"
             :uniqeId="4"
             :selectedIndex="selectedAccordion"
             @setAccordionIndex="setAccordionIndex"
-            
+
           />
         </div>
       </div>
@@ -314,6 +313,9 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
+  middleware (ctx) {
+    ctx.$gtm.push({ event: 'ssr' })
+  },
   data(){
     return {
       selectedAccordion : null,
@@ -323,81 +325,71 @@ export default {
       fromOption: "",
       passengerCount: "",
       activeTabIndex: 0,
+      offerImg: '',
       isMobile : false,
-      settingsForLargeDevice : {
+      imageUrl: '',
+      settings : {
         "arrows": false,
         "dots": false,
-        "infinite": true,
-        "slidesToShow": 3,
-        "slidesToScroll": 1,
-        "autoplay": false,
-        "speed": 2000,
-        "autoplaySpeed": 5000,
-        "cssEase": "linear",
-        "rows": 1,
-        "centerMode": true,
-        "centerPadding": "0px",
-        "initialSlide": 0,
-        "responsive": [
-    {
-      "breakpoint": 1024,
-      "settings": {
-        "slidesToShow": 3,
-        "slidesToScroll": 1,
-        "infinite": true,
-        "dots": true
-      }
-    },
-    {
-      "breakpoint": 600,
-      "settings": {
-        "slidesToShow": 2,
-        "slidesToScroll": 2,
-        "initialSlide": 2
-      }
-    },
-    {
-      "breakpoint": 480,
-      "settings": {
-        "slidesToShow": 1,
-        "slidesToScroll": 1
-      }
-    }
-  ]
-      },
-      settingsForMobileDevice : {
-        "arrows": false,
-        "dots": false,
-        "infinite": true,
-        "slidesToShow": 1,
-        "slidesToScroll": 1,
         "autoplay": true,
-        "speed": 2000,
-        "autoplaySpeed": 5000,
-        "cssEase": "linear",
         "centerMode": true,
-      }
+        "infinite": true,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "autoplaySpeed": 5000,
+        "speed": 2000,
+        "row": 1,
+        "responsive": [
+          {
+            "breakpoint": 1024,
+            "settings": {
+              "slidesToShow": 3,
+              "slidesToScroll": 1,
+              "infinite": true,
+              "dots": false
+            }
+          },
+          {
+            "breakpoint": 600,
+            "settings": {
+              "slidesToShow": 2,
+              "slidesToScroll": 2,
+              "initialSlide": 2
+            }
+          },
+          {
+            "breakpoint": 480,
+            "settings": {
+              "slidesToShow": 1,
+              "slidesToScroll": 1
+            }
+          }
+        ]
+      },
     }
   },
   components: { VueSlickCarousel },
   async asyncData({store}) {
     await store.dispatch("guarantedseat/getCitiesList")
-    await store.dispatch("guarantedseat/getOfferPromoImagesList")
+    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList")
+    await store.dispatch("guarantedseat/readOfferPromoImageUrl")
   },
 
   mounted(){
     this.onResize()
     window.addEventListener('resize', this.onResize)
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
   },
 
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImage"]),
+    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
   },
   methods: {
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
-      "getOfferPromoImagesList",
+      "getOfferPromoImagesUrlList",
+      "readOfferPromoImageUrl",
       "successTicketByMailAction",
     ]),
 
@@ -407,6 +399,12 @@ export default {
 
     handleHowToBuyModal() {
       this.howToBuyModalStatus = !this.howToBuyModalStatus
+    },
+
+    async readImageUrl(url, index){
+      const data = await this.readOfferPromoImageUrl(url)
+      const base =  Buffer.from(data).toString('base64')
+        return document.getElementById(index).src = "data:image/png;base64," + base;
     },
 
     scrollLeft() {
@@ -493,6 +491,7 @@ export default {
 
 .slick-slide {
   margin: 0 8px;
+  width: auto !important;
 }
 
 @media screen and (min-width:992px) {

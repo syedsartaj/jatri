@@ -87,7 +87,7 @@
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ tripDate }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
-                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting time:</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting date time:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ reportTimeWithAddTime }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
@@ -209,7 +209,7 @@ export default {
   computed: {
     ...mapGetters('guarantedseat', ['getSearchedTicketList']),
     reportTimeWithAddTime () {
-      return this.getTicketDetails && timeFormat(this.getTicketDetails.reportingDateTime, 0, 'hh:mm A');
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.reportingDateTime, 0, 'lll');
     },
     departureDateTime () {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.boardingDateTime, 0, 'hh:mm A') ;

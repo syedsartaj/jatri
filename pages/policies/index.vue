@@ -319,6 +319,9 @@ html {
 </style>
 <script>
 export default {
+  middleware (ctx) {
+    ctx.$gtm.push({ event: 'ssr' })
+  },
   data(){
     return{
       selectedContent: 'terms-condition',

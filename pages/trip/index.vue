@@ -4,49 +4,39 @@
           <div class="relative">
                <!-- banner section -->
                <img src="@/assets/images/home/searchBannerImageWeb.svg" alt="" class="w-full hidden lg:block">
-               <!-- <img src="@/assets/images/home/searchBannerImageMobile.svg" alt="" class="w-full block lg:hidden"> -->
-               <div class="hidden lg:block absolute top-8 right-[100px] left-[100px] z-40">
-                    <SearchFilterForm/>
+               <div class="hidden lg:block">
+                    <div class="flex items-center justify-center absolute m-auto top-0 bottom-0 right-[100px] left-[100px] z-40">
+                         <SearchFilterForm/>
+                    </div>
                </div>
 
                <!-- mobile device modify search -->
-               <!-- <div class="block lg:hidden absolute w-[370px] top-2 left-2 z-40">
-                    <div class="bg-white h-[52px] rounded-md flex justify-between px-[14px] py-2">
-                         <div class="w-[270px]">
-                              <div class="flex justify-start gap-x-[7.67px]">
-                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.from}}</h2>
-                                   <img src="@/assets/images/icons/rightArrowWithLine.svg" alt="" class="w-[6.67px]">
-                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.to}}</h2>
-                              </div>
-                              <p class=" text-[11px] leading-4 font-normal text-blackSecondery"><span>{{getHumanDate($route.query.date)}}</span>, <span class="capitalize">{{$route.query.type}}</span></p>
-                         </div>
-                         <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
-                    </div>
-               </div> -->
                <div class="relative">
                     <img src="@/assets/images/home/searchBannerImageMobile.svg" alt="" class="w-full block lg:hidden">
-                    <div class="block lg:hidden absolute w-[93%] top-2 left-4 z-40">
-                    <div class="bg-white h-[52px] rounded-md flex justify-between px-[14px] py-2">
-                         <div class="w-[270px]">
-                              <div class="flex justify-start gap-x-[7.67px]">
-                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.from}}</h2>
-                                   <img src="@/assets/images/icons/rightArrowWithLine.svg" alt="" class="w-[6.67px]">
-                                   <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.to}}</h2>
+                    <div class="block lg:hidden">
+                         <div class="flex items-center justify-center absolute w-[93%] m-auto top-0 left-0 bottom-0 right-0 z-40">
+                              <div class="bg-white h-[52px] w-full rounded-md flex items-center justify-between px-[14px] py-2">
+                                   <div class="w-[270px]">
+                                        <div class="flex justify-start gap-x-[7.67px]">
+                                             <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.from}}</h2>
+                                             <img src="@/assets/images/icons/rightArrowWithLine.svg" alt="" class="w-[6.67px]">
+                                             <h2 class="text-xs font-medium text-blackPrimary">{{$route.query.to}}</h2>
+                                        </div>
+                                        <p class=" text-[11px] leading-4 font-normal text-blackSecondery"><span>{{getHumanDate($route.query.date)}}</span>, <span class="capitalize">{{$route.query.type}}</span></p>
+                                   </div>
+                                   <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
                               </div>
-                              <p class=" text-[11px] leading-4 font-normal text-blackSecondery"><span>{{getHumanDate($route.query.date)}}</span>, <span class="capitalize">{{$route.query.type}}</span></p>
                          </div>
-                         <button @click="modifySearch" class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none">Modify</button>
                     </div>
-               </div>
                </div>
 
 
 
 
                <!-- mobile device filter button -->
-               <button @click="handleTripFilterModal" class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-4 rounded-full">
+               <button @click="handleTripFilterModal" class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-4 z-[999999] rounded-full">
                     <img src="@/assets/images/icons/filterIcon.svg" alt="">
-                    <p>Filter</p>
+                    <span>Filter</span>
                </button>
                <!-- filter modal -->
                <div class="block lg:hiddden" v-if="tripFilterModify">
@@ -77,6 +67,9 @@ import Cookies from "js-cookie";
 import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
 export default {
+     middleware (ctx) {
+          ctx.$gtm.push({ event: 'ssr' })
+     },
      validate({query}) {
           const {
                from,
