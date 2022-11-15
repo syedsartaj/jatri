@@ -443,9 +443,6 @@ export default {
           departureDateTime() {
                return this.ticketDetails && dateTimeFormat(this.ticketDetails.boardingDateTime, 0, 'lll');
           },
-          tripDate() {
-               return this.ticketDetails && dateTimeFormat(this.ticketDetails.departureDateTime, 0, 'll');
-          },
           ticketDateTime() {
                return this.ticketDetails && dateTimeFormat(this.ticketDetails.ticketDateTime, 0, 'lll');
           },

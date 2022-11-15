@@ -84,7 +84,7 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Journey date:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ tripDate }}</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ boardingDate }}</p>
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Reporting date time:</p>
@@ -214,8 +214,8 @@ export default {
     departureDateTime () {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.boardingDateTime, 0, 'hh:mm A') ;
     },
-    tripDate () {
-      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.departureDateTime, 0, 'll');
+    boardingDate () {
+      return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.boardingDateTime, 0, 'll');
     },
     ticketDateTime () {
       return this.getTicketDetails && dateTimeFormat(this.getTicketDetails.ticketDateTime, 0, 'll');
