@@ -2,11 +2,18 @@
      <div class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4" :ref="`bus-selector-${busIndex}`">
           <div class="lg:flex justify-between gap-x-6" :class="selectedTrip === busIndex ? 'border-b border-[#DBDBDB]': 'border-0 border-[#DBDBDB]'">
                <div class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]">
-                    <div class="flex justify-start gap-x-4 items-center pb-[15px] order-first">
-                         <img src="@/assets/images/busDefaultImage.svg" alt="">
-                         <div>
-                              <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
-                              <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span><span v-if="trip.available"> | <span class="font-medium text-blackPrimary">Available:</span> {{trip.available}} Seat<span v-if="trip.available>1">s</span></span></p>
+                    <div class="flex justify-between items-center pb-[15px] order-first">
+                         <div class="flex justify-start gap-x-4 items-center w-10/12">
+                              <img src="@/assets/images/busDefaultImage.svg" alt="">
+                              <div>
+                                   <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">{{ trip.company }}</h2>
+                                   <p class="text-xs"> <span class=" font-normal text-blackLight">{{ trip.coach.name }}</span></p>
+                              </div>
+                         </div>
+
+                         <div v-if="trip.available" class="w-2/12 text-right">
+                              <p class="text-blackPrimary max-sm:text-xs"> <span>{{trip.available}}</span> Seat<span v-if="trip.available>1">s</span></p>
+                              <p class="text-xs lg:text-sm text-blackLight">Available</p>
                          </div>
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
@@ -463,9 +470,8 @@ export default {
                          boardingPointName: this.boardingPoint.name,
                          droppingPointName: this.trip.dropping,
                          departureId: this.trip.departureId,
-                         departureDate: this.departureDate,
-                         departureTime: this.departureTime,
-                         departureDateTime: this.departureDateTime,
+                         departureDate: this.trip.departureDate,
+                         departureTime: new Date(`${this.trip.departureDate} ${this.trip.departureTime}`).toLocaleString('en-Us', {timeStyle: 'short' }),
                          boardingDateTime: this.boardingPoint.scheduleTime,
                          reportingDateTime: this.boardingPoint.reportingTime,
                          passengerName: this.passengerName,

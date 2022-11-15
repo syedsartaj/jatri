@@ -18,7 +18,7 @@
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Departure Time:</p>
-                              <p class="text-xs lg:text-base font-medium text-blackPrimary"> {{getBookingInfoDetails.invoice.departureTime}}</p>
+                              <p class="text-xs lg:text-base font-medium text-blackPrimary"> {{boardingTime}}</p>
                          </div>
                          <div class="flex justify-between py-2 border-b last:border-b-0 border-dashed">
                               <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">Name:</p>
@@ -182,7 +182,10 @@ export default {
      computed: {
           ...mapGetters("guarantedseat", ["getBookingInfoDetails", "getGsLoading"]),
           boardingDateTime() {
-               return dateTimeFormat(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime, 6, "ll");
+               return dateTimeFormat(this.getBookingInfoDetails.invoice.boardingDateTime , 6, "ll");
+          },
+          boardingTime() {
+               return new Date(`${this.getBookingInfoDetails.invoice.boardingDateTime}`).toLocaleString('en-Us', {timeStyle: 'short' })
           }
      },
      methods: {
