@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
                          <p class="text-xs font-normal text-blackLight">Route</p>
-                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.boarding }} - {{ trip.dropping }}</h2>
+                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.route.name }}</h2>
                     </div>
                     <div class="flex justify-between items-center py-4 order-1 lg:order-last">
                          <p class="text-xs font-normal text-blackLight">Departure Time</p>
