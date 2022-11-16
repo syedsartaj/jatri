@@ -2,6 +2,7 @@ import * as apis from '../helpers/apis';
 import {GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL} from '../helpers/apis';
 
 export const state = () => ({
+  mobileFloatingFilter: true,
   gsLoading: false,
   gsLoadingTwo: false,
   gsCities: [],
@@ -18,6 +19,7 @@ export const state = () => ({
 });
 
 export const getters = {
+  getMobileFloatingFilter: (state) => state.mobileFloatingFilter,
   getGsLoading: (state) => state.gsLoading,
   getGsLoadingTwo: (state) => state.gsLoadingTwo,
   getGsCities: (state) => state.gsCities,
@@ -339,6 +341,11 @@ export const mutations = {
       state.gsTrips.sort((a,b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
     } else {
       state.gsTrips.sort((a,b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
+    }
+  },
+  mobileFloatingFilter: (state, data) => {
+    if (data) {
+      state.mobileFloatingFilter = !state.mobileFloatingFilter
     }
   }
 };

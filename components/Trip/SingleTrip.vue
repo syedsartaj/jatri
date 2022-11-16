@@ -255,7 +255,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { timeFormat, dateTimeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
 import { dateFormat } from '../../helpers/dateTimeFormat';
@@ -318,12 +318,14 @@ export default {
           },
      },
      methods: {
+          ...mapMutations("guarantedseat", ["mobileFloatingFilter"]),
           ...mapActions('guarantedseat', [
                'getPbSeatViewAction',
                'getPbPaymentPendingBlockAction',
                'getPromoCodeAction'
           ]),
           handleSeatView (selectedTripId) {
+               this.mobileFloatingFilter('status');
                this.resetPromo();
 
                if (selectedTripId === "") {
