@@ -1,5 +1,5 @@
 <template>
-     <div>
+     <div class="w-full">
           <div class="hidden lg:block">
                <FooterDesktop/>
           </div>
