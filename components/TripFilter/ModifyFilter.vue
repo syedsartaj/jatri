@@ -28,7 +28,7 @@
           <div>
                <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
                <div class="flex justify-between gap-[7px] mt-[10px]">
-                    <div v-for="busType in coachTypes" :key="busType" class="w-[125px] h-9">
+                    <div v-for="busType in coachTypes" :key="busType" class="w-[125px] 2xl:w-[175px] h-9">
                          <input id="busType" type="checkbox" class="hidden">
                          <label for="busType">
                               <button 

@@ -67,6 +67,13 @@
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
                                         <img src="@/assets/images/seats/bookedSeats.svg" alt="Booked" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
+                                        <!-- <ArmChairIcon
+                                             :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
+                                             :fill="'#6B7280'"
+                                             :stroke="'#6B7280'"
+                                             height='24'
+                                             width='24'
+                                        /> -->
                                         <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Booked</p>
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
