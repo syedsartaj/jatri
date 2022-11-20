@@ -98,7 +98,7 @@
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Total fare:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{ getTicketDetails.totalAmount }} TK</p>
               </div>
-              <div class="text-xs mb-[14px] flex justify-start">
+              <div v-if="getTicketDetails.moduleType != 'paribahan'" class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Dropping:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">{{  getTicketDetails.droppingPoint }}</p>
               </div>

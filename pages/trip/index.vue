@@ -34,7 +34,7 @@
 
 
                <!-- mobile device filter button -->
-               <button @click="handleTripFilterModal" class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-4 z-[999999] rounded-full">
+               <button v-if="getMobileFloatingFilter" @click="handleTripFilterModal" class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-[88px] z-[999999] rounded-full">
                     <img src="@/assets/images/icons/filterIcon.svg" alt="">
                     <span>Filter</span>
                </button>
@@ -55,7 +55,7 @@
 
                <!-- TRIPS -->
                <div class="w-full lg:w-[65%]">
-                    <GuaranteedSeatList />
+                    <GuaranteedSeatList/>
                </div>
           </div>
      </div>
@@ -90,7 +90,7 @@ export default {
      },
 
      computed: {
-          ...mapGetters('guarantedseat', ['getGsTrips']),
+          ...mapGetters('guarantedseat', ['getGsTrips', 'getMobileFloatingFilter']),
           ...mapGetters('user', ['isLoggedIn']),
           ...mapGetters('agent', ['getFilteredAvailableServiceList']),
           filterQueryData() {

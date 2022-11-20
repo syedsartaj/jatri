@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
                          <p class="text-xs font-normal text-blackLight">Route</p>
-                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.boarding }} - {{ trip.dropping }}</h2>
+                         <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">{{ trip.route.name }}</h2>
                     </div>
                     <div class="flex justify-between items-center py-4 order-1 lg:order-last">
                          <p class="text-xs font-normal text-blackLight">Departure Time</p>
@@ -67,6 +67,13 @@
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
                                         <img src="@/assets/images/seats/bookedSeats.svg" alt="Booked" class="w-[15px] lg:w-[23px] h-[15px] lg:h-5">
+                                        <!-- <ArmChairIcon
+                                             :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
+                                             :fill="'#6B7280'"
+                                             :stroke="'#6B7280'"
+                                             height='24'
+                                             width='24'
+                                        /> -->
                                         <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"> Booked</p>
                                    </div>
                                    <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
@@ -255,7 +262,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { timeFormat, dateTimeFormat } from '@/helpers/dateTimeFormat';
 import moment from 'moment';
 import { dateFormat } from '../../helpers/dateTimeFormat';
@@ -318,12 +325,14 @@ export default {
           },
      },
      methods: {
+          ...mapMutations("guarantedseat", ["mobileFloatingFilter"]),
           ...mapActions('guarantedseat', [
                'getPbSeatViewAction',
                'getPbPaymentPendingBlockAction',
                'getPromoCodeAction'
           ]),
           handleSeatView (selectedTripId) {
+               this.mobileFloatingFilter('status');
                this.resetPromo();
 
                if (selectedTripId === "") {

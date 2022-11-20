@@ -5,10 +5,10 @@
           </div>
           <div v-else>
                <!-- error layout -->
-               <div class="h-[800px] flex justify-center items-center bg-[#f7f7f7]">
+               <div class="h-[500px] flex justify-center items-center bg-[#f7f7f7]">
                <!-- <TripNotFound/> -->
                     <OpssAlert
-                         :details="'Looks llike we could not find any ticket according to your search. Try different route or date and search again.'"
+                         :details="'Looks llike we could not find any trip according to your search. Try different route or date and search again.'"
                          :customStyle="'px-[92.5px]'"
                     />
                </div>
