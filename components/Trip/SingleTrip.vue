@@ -235,13 +235,13 @@
                          </div>
                          <LoaderButton
                               :class="
-                                   (moduleType == 'paribahan' && !passengerEmail) ||
+                                   (trip.moduleType == 'paribahan' && !passengerEmail) ||
                                    !selectedSeatIds.length || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
                                    ? 'bg-gray-500 user cursor-not-allowed'
                                    : 'bg-corporate hover:bg-[#D93E2D]'
                               "
                               :disabled='
-                                   (moduleType == "paribahan" && !passengerEmail) ||
+                                   (trip.moduleType == "paribahan" && !passengerEmail) ||
                                    getGsLoading || !boardingPoint || !passengerName || !passengerPhone || String(passengerPhone).length < 11
                               '
                               :loading='getGsLoading'
