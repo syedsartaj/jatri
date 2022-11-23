@@ -3,7 +3,7 @@
           <div class="w-[380px] lg:w-[816px] mx-auto py-[30px]">
                <div class="w-full bg-white rounded-[10px] border border-[#DBDBDB]">
                     <div class="text-center p-[10px] border-b border-[#DBDBDB]">
-                         <p class="text-blackPrimary text-xl font-medium">Find Ticket</p>
+                         <p class="text-blackPrimary text-xl font-medium">Ticket History</p>
                     </div>
                     <div class="py-5 lg:py-6 px-4 lg:px-8">
                          <div class="flex space-x-4">
