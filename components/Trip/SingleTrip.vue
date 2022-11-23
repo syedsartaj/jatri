@@ -194,7 +194,7 @@
                          </div>
 
                          <div class="mt-4">
-                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email ID</span> <span class="text-[#8D8D8F]">Optional</span></h2>
+                              <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"><span>Email ID <span v-if="trip.moduleType == 'paribahan'" class="text-[#E0293B]">*</span></span> <span v-if="trip.moduleType != 'paribahan'" class="text-[#8D8D8F]">Optional</span></h2>
                               <input
                                    class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                    type="email"
