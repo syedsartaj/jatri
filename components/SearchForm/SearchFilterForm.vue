@@ -5,7 +5,7 @@
                 v-model="departure"
                 :defaultValue="departureName"
                 :label="'From'"
-                :default-option="'Choose your location'"
+                :default-option="'Choose Your Location'"
                 :allow-filter="true"
                 :options="getGsCities"
             />
@@ -13,7 +13,7 @@
                 v-model="destination"
                 :defaultValue="destinationName"
                 :label="'To'"
-                :default-option="'Choose your destination'"
+                :default-option="'Choose Your Destination'"
                 :allow-filter="true"
                 :options="getGsCities"
             />
