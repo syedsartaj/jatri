@@ -22,7 +22,7 @@ export default {
       { hid: "og-title", name: "og:title", content: "Online bus tickets for everyone" },
       { hid: "og-desc", name: "og:description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
       { name: "format-detection", content: "telephone=no" },
-      { hid: 'og-image', name: 'og:image', content: '/favicon.png' }
+      { hid: 'og-image', name: 'og:image', content: 'https://jatri.co/src/images/logo/favicon.png' }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
   },
