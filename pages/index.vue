@@ -1,5 +1,9 @@
 <template>
   <div class="bg-white">
+    <!-- Meta -->
+    <head>
+      <meta property="og:image" :content="process.eng.CLIENT_BASE_URL + '/favicon.png'">
+    </head>
 
     <!-- banner section -->
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
