@@ -1,6 +1,8 @@
 <template>
   <div class="bg-white">
 
+   <meta property="og:image" content="https://ticket.jatri.co/favicon.svg">
+
     <!-- banner section -->
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div
