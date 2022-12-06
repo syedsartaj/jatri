@@ -128,52 +128,9 @@
           Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[77px] gap-y-6 lg:gap-y-4 mt-8">
-          <NuxtLink to="bus-operator?name=euro-coach"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Euro Coach</NuxtLink>
-          <NuxtLink to="/bus-operator?name=sb-paribahan"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">SB Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=greenline"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Greenline Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=pingky-paribahan"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Pingky Paribahan</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Lucky Express
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Mimjaal Paribahan
-          </NuxtLink>
-          <NuxtLink to="/bus-operator?name=shah-fateh-ali"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Shah Fateh Ali</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Jubayer Paribahan
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin Deep
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Romer Paribahan
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Sheba line</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Zenin Service
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">GS Travels</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Islam Paribahan
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Jamuna line</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin Sheba PVT.
-            Ltd.</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Hamim Exclusive
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Econo Service
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">KR Enterprise
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Masum Classic
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Hanie Enterprise
-          </NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold"> Ema Paribahan
-          </NuxtLink>
-          <NuxtLink to="/bus-operator?name=habib-paribahan"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Habib Paribahan</NuxtLink>
-          <NuxtLink to="/bus-operator?name=saintmartin-bd-express"
-            class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Saintmartin BD Express</NuxtLink>
-          <NuxtLink to="#" class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">Many More to Come
+          <NuxtLink v-for=" (bus, index) in busOperators" :key="index" :to="bus.link" class="flex justify-start gap-x-[10px] w-full">
+              <img src="@/assets/images/home/availableRoutesIcon.svg" alt="" class="w-5 h-5">
+              <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">{{ bus.name }}</p>
           </NuxtLink>
         </div>
       </div>
@@ -312,6 +269,108 @@ export default {
       offerImg: '',
       isMobile: false,
       imageUrl: '',
+      busOperators: [
+        {
+          name: "Euro Coach",
+          link: "/bus-operator?name=euro-coach",
+        },
+        {
+          name: "SB Paribahan",
+          link: "/bus-operator?name=sb-paribahan",
+        },
+        {
+          name: "Greenline Paribahan",
+          link: "/bus-operator?name=greenline",
+        },
+        {
+          name: "Pingky Paribahan",
+          link: "/bus-operator?name=pingky-paribahan",
+        },
+        {
+          name: "Lucky Express",
+          link: "#",
+        },
+        {
+          name: "Mimjaal Paribahan",
+          link: "#",
+        },
+        {
+          name: "Shah Fateh Ali",
+          link: "/bus-operator?name=shah-fateh-ali",
+        },
+        {
+          name: "Jubayer Paribahan",
+          link: "#",
+        },
+        {
+          name: "Saintmartin Deep",
+          link: "#",
+        },
+        {
+          name: "Romer Paribahan",
+          link: "#",
+        },
+        {
+          name: "Sheba line",
+          link: "#",
+        },
+        {
+          name: "Zenin Service",
+          link: "#",
+        },
+        {
+          name: "GS Travels",
+          link: "#",
+        },
+        {
+          name: "Islam Paribahan",
+          link: "#",
+        },
+        {
+          name: "Jamuna line",
+          link: "#",
+        },
+        {
+          name: "Saintmartin Sheba PVT. Ltd.",
+          link: "#",
+        },
+        {
+          name: "Hamim Exclusive",
+          link: "#",
+        },
+        {
+          name: "Econo Service",
+          link: "#",
+        },
+        {
+          name: "KR Enterprise",
+          link: "#",
+        },
+        {
+          name: "Masum Classic",
+          link: "#",
+        },
+        {
+          name: "Hanie Enterprise",
+          link: "#",
+        },
+        {
+          name: "Ema Paribahan",
+          link: "#",
+        },
+        {
+          name: "Habib Paribahan",
+          link: "/bus-operator?name=habib-paribahan",
+        },
+        {
+          name: "Saintmartin BD Express",
+          link: "/bus-operator?name=saintmartin-bd-express",
+        },
+        {
+          name: "Many More to Come",
+          link: "#",
+        },
+      ],
       settings: {
         "arrows": false,
         "dots": false,
