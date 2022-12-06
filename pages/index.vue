@@ -14,6 +14,14 @@
       </div>
     </div>
 
+      <div v-if="showStickySearchBox" class="sticky top-[70px] z-50">
+        <div class="absolute lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px]">
+            <SearchFilterForm/>
+          </div>
+      </div>
+
+
+
     <!-- banner section -->
     <div v-if="isMobile" class="relative block lg:hidden">
       <img src="@/assets/images/home/bannerImageMobile.jpg" alt="" class="w-full">
@@ -252,6 +260,7 @@ export default {
       offerImg: '',
       isMobile : false,
       imageUrl: '',
+      showStickySearchBox: false,
       busOperators: [
         {
           name: "Euro Coach",
@@ -459,10 +468,13 @@ export default {
 
   mounted(){
     this.onResize()
+    window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.onResize)
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
   },
-
+  unmount(){
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   computed: {
     ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
   },
@@ -507,8 +519,28 @@ export default {
     },
     onResize(){
       this.isMobile = window.innerWidth < 1024
-    }
-
+    },
+    handleScroll() {
+      this.handleShowStickyBanner();
+    },
+    handleShowStickyBanner() {
+      if (!this.isMobile) {
+        const innerWidth = window.innerWidth;
+        const pageYOffset = window.pageYOffset;
+        if (innerWidth >= 1750) {
+          this.showStickySearchBox = pageYOffset >= 600;
+        } else if (innerWidth >= 1536) {
+          this.showStickySearchBox = pageYOffset >= 550;
+        } else if (innerWidth >= 1280) {
+          this.showStickySearchBox = pageYOffset >= 450;
+        } else if (innerWidth >= 992) {
+          this.showStickySearchBox = pageYOffset >= 400;
+        }
+        else {
+            this.showStickySearchBox = false;
+        }
+      }
+    },
   }
 }
 </script>
