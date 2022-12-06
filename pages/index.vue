@@ -2,7 +2,7 @@
   <div class="bg-white">
     <!-- Meta -->
     <head>
-      <meta property="og:image" content="https://ticket.jatri.co/favicon.png">
+      <meta property="og:image" :content="process.eng.CLIENT_BASE_URL + '/favicon.png'">
     </head>
 
     <!-- banner section -->
