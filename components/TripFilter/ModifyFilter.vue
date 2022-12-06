@@ -18,7 +18,7 @@
           </div>
           <hr class="my-5">
           <div class="flex justify-between items-center">
-               <h2 class="font-medium text-2xl text-blackPrimary">Filter Options</h2>
+               <h2 class="font-medium text-2xl text-blackPrimary">Filter</h2>
                <!-- <button class="flex justify-between items-center gap-x-[9.33px]">
                     <img src="@/assets/images/icons/resetIcon.svg" alt="reset filter" class="w-[13.33px]">
                     <p class="text-[#E0293B] font-medium text-xs">Reset Filter</p>
