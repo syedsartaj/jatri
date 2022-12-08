@@ -43,7 +43,7 @@
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
-          <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">
+          <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-semibold">
             Offers & Promos</h2>
 
           <div class="flex justify-between gap-x-4">
