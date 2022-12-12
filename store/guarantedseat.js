@@ -317,11 +317,16 @@ export const mutations = {
   setBookingInfoDetails: (state, data) => (state.bookingInfoDetails = data),
   setGsLoadingTwo: (state, data) => (state.gsLoadingTwo = data),
   setGsCities: (state, data) => {
-    state.gsCities = data.cities.map(city => {
-      return {
-        'city_name': city
-      };
-    });
+    let tempData = [];
+    data.cities.forEach((city) => {
+      if (city?.name) {
+        tempData.push({
+          'city_name': city.name,
+          city: city
+        })
+      }
+    })
+    state.gsCities = tempData;
   },
   setGsOfferPromoImageUrl: (state, data) => {
     state.gsOfferPromoImageUrl = data

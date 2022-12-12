@@ -28,7 +28,7 @@ export default {
           };
      },
      computed: {
-          ...mapGetters("guarantedseat", ["getGsTrips", "getGsLoading"])
+          ...mapGetters("guarantedseat", ["getGsTrips", "getGsCities", "getGsLoading"])
      },
      methods: {
           ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
@@ -51,12 +51,27 @@ export default {
                          dateStyle: "short"
                     });
                
-                    const payload = {
-                         from: from,
-                         to: to,
-                         date: formattedDate,
-                         busType: type
-                    };
+                    let payload = {};
+
+                    if (from) {
+                         this.getGsCities?.filter((s) => {
+                         if (s.city_name.toLowerCase() === from.toLowerCase()) {
+                         payload["from"] = s.city;
+                         }
+                         });
+                    }
+
+                    if (to) {
+                         this.getGsCities?.filter((s) => {
+                         if (s.city_name.toLowerCase() === to.toLowerCase()) {
+                         payload["to"] = s.city;
+                         }
+                         });
+                    }
+
+                    payload.date = formattedDate;
+                    payload.busType = type;
+
                
                     await this.getPbScheduleDataAction(payload);
                     this.$nuxt.$loading.finish();
