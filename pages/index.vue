@@ -36,10 +36,44 @@
       </div>
     </div>
 
+    <!-- Offer & Promos Section Mobile -->
+    <div
+      class="relative pt-80 mt-10 flex justify-center w-full"
+      v-if="isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length"
+    >
+      <div class="h-[324px] w-full bg-[#fef2f0]">
+        <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
+          <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-semibold">
+            Offers & Promos</h2>
+
+          <div class="flex justify-between gap-x-4">
+            <button @click="scrollLeft"
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+              :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
+              <SlideLeft :fill="slideLeft ? '#151414' : '#8D8D8F'" width="8.43" height="13.79" />
+            </button>
+            <button @click="scrollRight"
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+              :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'">
+              <SlideRight :fill="slideRight ? '#151414' : '#8D8D8F'" width="8.43" height="13.79" />
+            </button>
+          </div>
+        </div>
+          <div class="mt-10 ml-4">
+            <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
+              <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
+                <img :id="index" :src="imageUrl + offerImg.image" alt=""
+                  class="rounded-[10px] w-[300px] h-[200px] pointer-events-none">
+              </div>
+            </VueSlickCarousel>
+          </div>
+      </div>
+    </div>
+
     <!-- Offer & Promos Section -->
     <div class="pt-80 p-4 lg:mt-0 lg:p-0 lg:pb-0" v-if="!getGsOfferPromoImageUrl || !getGsOfferPromoImageUrl.length"></div>
     <div class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length">
+      v-if="!isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">
@@ -58,18 +92,16 @@
             </button>
           </div>
         </div>
-
-        <template>
-          <div class="mt-5 lg:mt-[42px]">
+          <div class="mt-5 lg:mt-[42px] p-2">
             <VueSlickCarousel v-bind="settings" ref="carousel">
               <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
                 <img :id="index" :src="imageUrl + offerImg.image" alt=""
-                  class="rounded-2xl w-[280px] lg:w-[460px] h-[164px] lg:h-[260px] pointer-events-none">
+                  class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none">
                 <!-- {{ readImageUrl(offerImg.image)}} -->
               </div>
             </VueSlickCarousel>
           </div>
-        </template>
+
       </div>
     </div>
 
@@ -276,6 +308,7 @@ export default {
       activeTabIndex: 0,
       offerImg: '',
       isMobile: false,
+      vertical: false,
       imageUrl: '',
       showStickySearchBox: false,
       busOperators: [
@@ -380,6 +413,17 @@ export default {
           link: "#",
         },
       ],
+        settingsMobile: {
+        "arrows": false,
+        "dots": false,
+        "autoplay": true,
+        "infinite": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplaySpeed": 5000,
+        "speed": 2000,
+        "rows": 1,
+      },
       settings: {
         "arrows": false,
         "dots": false,
