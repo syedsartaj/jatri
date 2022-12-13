@@ -38,7 +38,7 @@
 
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="relative pt-80 mt-10 flex justify-center w-full"
+      class="pt-80 mt-10 flex justify-center w-full"
       v-if="isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
