@@ -79,7 +79,7 @@ export default {
                required: true
           },
           errorOccured: {
-               type: String,
+               type: Boolean,
                required: true
           }
      },

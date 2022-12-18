@@ -128,7 +128,7 @@ export default {
       required: false,
     },
     errorOccured: {
-      type: String,
+      type: Boolean,
       required: true
     }
   },
