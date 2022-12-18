@@ -168,9 +168,9 @@
           Available Bus Operators</h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[72px] gap-y-6 lg:gap-y-4 mt-8">
-          <NuxtLink v-for=" (bus, index) in busOperators" :key="index" :to="bus.link" class="flex justify-start gap-x-[10px] w-full">
+          <NuxtLink v-for=" (bus, index) in busOperators" :key="index" :to="bus.link" class="flex justify-start gap-x-[10px] w-full items-center">
               <img src="@/assets/images/home/availableRoutesIcon.svg" alt="" class="w-5 h-5">
-              <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-bold">{{ bus.name }}</p>
+              <p class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-medium">{{ bus.name }}</p>
           </NuxtLink>
         </div>
       </div>
