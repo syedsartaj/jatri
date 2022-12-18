@@ -1,13 +1,48 @@
 <template>
-     <div class="w-1/4">
-          <button class="block rounded-lg bg-white focus:outline-none w-full lg:px-5 xl:px-6 py-4 cursor-pointer" @click="toggleDropdown">
+     <div class="w-1/4 p-[8px] h-15">
+          <button  v-bind:class="showErrorToolTip && 'border-[#E0293B]'" class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer" @click="toggleDropdown">
                <p v-if="label" class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"> {{label}} </p>
-               <p v-if="selectedOption !== ''" class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"> {{ this.selectedOption.city_name }} </p>
-               <p v-else class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"> 
-                    <span v-if='defaultOption'>{{ defaultOption }}</span>
-                    <span v-else>Select your Option</span>     
+               <div v-if="selectedOption !== ''" class="flex justify-between">
+               <p
+                    class="
+                    lg:text-xs
+                    xl:text-sm
+                    2xl:text-base
+                    font-medium
+                    text-blackPrimary text-left
+                    "
+               >
+                    {{ this.selectedOption.city_name }}
                </p>
+               <img
+                    src="@/assets/images/home/arrowDown.svg"
+                    alt="arrow-down"
+                    class="w-6 h-6"
+               />
+               </div>
+               <div v-else class="flex justify-between">
+               <p
+                    class="
+                    lg:text-xs
+                    xl:text-sm
+                    2xl:text-base
+                    font-medium
+                    text-blackPrimary text-left
+                    "
+               >
+                    <span v-if="defaultOption">{{ defaultOption }}</span>
+                    <span v-else>Select your Option</span>
+               </p>
+               <img
+                    src="@/assets/images/home/arrowDown.svg"
+                    alt="arrow-down"
+                    class="w-6 h-6"
+               />
+               </div>
           </button>
+
+          <!-- ErrorToolTip -->
+          <SearchErrorToolTip v-if="showErrorToolTip" :message="errorMessage"/>
 
           <!-- dropdown -->
           <div v-if='optionsIsOpen' class='mt-10 -ml-5 xl:w-[380px] w-80 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2'>
@@ -49,7 +84,11 @@
 </template>
 
 <script>
+import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 export default {
+     components: {
+      SearchErrorToolTip
+     },
      props: {
           label: {
                type: String,
@@ -68,6 +107,10 @@ export default {
                required: true
           },
           defaultValue: "",
+          errorOccured: {
+               type: String,
+               required: true
+          }
      },
      data () {
           return {
@@ -117,6 +160,12 @@ export default {
                return this.options.filter(option => {
                     return option.city_name.toLowerCase().includes(this.searchKey.toLowerCase())
                })
+          },
+          showErrorToolTip () {
+               return this.errorOccured && !this.selectedOption;
+          },
+          errorMessage () {
+               return this.label === "To" ? "Enter destination first" : "Enter location first"
           }
      },
 }
