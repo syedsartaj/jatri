@@ -55,6 +55,7 @@
 
                <!-- TRIPS -->
                <div class="w-full lg:w-[65%]">
+                    <OffferAndPromo/>
                     <GuaranteedSeatList/>
                </div>
           </div>
