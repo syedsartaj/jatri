@@ -108,7 +108,11 @@ export default {
                this.$router.push({ path: '/', query: { ...this.$route.query } })
           },
           handleTripFilterModal() {
-               this.tripFilterModify = !this.tripFilterModify
+               const body = document.getElementsByTagName("body")[0];
+               if (body) {
+                  body.style.overflow = !this.tripFilterModify ? "hidden" : "scroll";
+               }
+               this.tripFilterModify = !this.tripFilterModify;
           },
 
           ...mapActions('agent', ['servicesList']),

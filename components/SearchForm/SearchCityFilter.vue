@@ -272,11 +272,9 @@ export default {
         : "Enter location first";
     },
     isInitialView() {
-      console.log("isInitialView");
       return !this.selectedOption && !this.searchKey && !this.showInputBox;
     },
     isAnyOptionSelected() {
-      console.log("isAnyOptionSelected");
       return this.selectedOption !== "" && this.showInputBox === false;
     },
   },
