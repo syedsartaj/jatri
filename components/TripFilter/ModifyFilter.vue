@@ -255,7 +255,7 @@
           type="checkbox"
           @click="priceFilterType = priceDirection"
           :checked="priceFilterType === priceDirection"
-          class="default:border-2 border-blackPrimary"
+          class="default:border-2 border-blackPrimary cursor-pointer"
         />
       </div>
     </div>
@@ -286,7 +286,7 @@
           type="checkbox"
           @click="boardingPoint = point"
           :checked="boardingPoint === point"
-          class="default:border-2 border-blackPrimary"
+          class="default:border-2 border-blackPrimary cursor-pointer"
         />
       </div>
     </div>
@@ -317,7 +317,7 @@
           type="checkbox"
           @click="busCompany = bus"
           :checked="busCompany === bus"
-          class="default:border-2 border-blackPrimary"
+          class="default:border-2 border-blackPrimary cursor-pointer"
         />
       </div>
     </div>
