@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="callBack"
     :class="isSelected && 'border border-0 border-b-[2px] border-[#F04935]'"
     class="
       p-[13px]
@@ -22,6 +23,6 @@
 </template>
 <script>
 export default {
-  props: ["text", "isSelected"],
+  props: ["text", "isSelected", "callBack"],
 };
 </script>

@@ -78,6 +78,38 @@
             }}
           </h2>
         </div>
+        <div
+          class="
+            flex
+            justify-evenly
+            gap-[16px]
+            items-center
+            lg:order-last
+            w-full
+            pt-[15px]
+            pb-[15px]
+            lg:pb-[0px]
+          "
+        >
+          <PointPolicyButton
+            text="Boarding Point"
+            :click="() => setCurrentTab(TabData.BOARDING_POINT)"
+          />
+          <PointPolicyButton
+            text="Dropping Point"
+            :click="() => setCurrentTab(TabData.DROPPING_POINT)"
+          />
+          <PointPolicyButton
+            text="Cancellation Policy"
+            :click="() => setCurrentTab(TabData.CANCEL_POLICY)"
+          />
+          <PointAndPolicyModal
+            v-if="showPointPolicyModal"
+            :selectedTab="selectedTab"
+            :setCurrentTab="setCurrentTab"
+            :handlePointPolicyModal="handlePointPolicyModal"
+          />
+        </div>
       </div>
       <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
       <div class="block lg:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
@@ -770,7 +802,7 @@
               to="/policies#return-and-refund-policy"
               target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation policy</nuxt-link
+              >Cancellation Policy</nuxt-link
             >
           </div>
         </div>
@@ -788,6 +820,13 @@ export default {
   props: ["trip", "selectedTrip", "busIndex"],
   data() {
     return {
+      selectedTab: "",
+      TabData: {
+        BOARDING_POINT: "BOARDING_POINT",
+        DROPPING_POINT: "DROPPING_POINT",
+        CANCEL_POLICY: "CANCEL_POLICY",
+      },
+      showPointPolicyModal: false,
       selected: false,
       boardingPoint: null,
       passengerCount: "",
@@ -873,6 +912,17 @@ export default {
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
+    setCurrentTab(value) {
+      this.selectedTab = value;
+      this.showPointPolicyModal = true;
+    },
+    handlePointPolicyModal() {
+      this.showPointPolicyModal = !this.showPointPolicyModal;
+      const body = document.getElementsByTagName("body")[0];
+      if (body) {
+        body.style.overflow = !this.showPointPolicyModal ? "hidden" : "scroll";
+      }
+    },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter("status");
       this.resetPromo();

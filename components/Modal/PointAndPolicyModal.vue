@@ -35,17 +35,35 @@
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
               <div class="flex">
-                <HeaderTab text="Boarding Point" :isSelected="true" />
-                <HeaderTab text="Dropping Point" :isSelected="false" />
-                <HeaderTab text="Cancellation Policy" :isSelected="false" />
+                <HeaderTab
+                  text="Boarding Point"
+                  :isSelected="TabData.BOARDING_POINT === selectedTab"
+                  :callBack="() => setCurrentTab(TabData.BOARDING_POINT)"
+                />
+                <HeaderTab
+                  text="Dropping Point"
+                  :isSelected="TabData.DROPPING_POINT === selectedTab"
+                  :callBack="() => setCurrentTab(TabData.DROPPING_POINT)"
+                />
+                <HeaderTab
+                  text="Cancellation Policy"
+                  :isSelected="TabData.CANCEL_POLICY === selectedTab"
+                  :callBack="() => setCurrentTab(TabData.CANCEL_POLICY)"
+                />
               </div>
 
-              <button @click="close" class="pr-[6px]">
+              <button @click="() => handlePointPolicyModal()" class="pr-[6px]">
                 <img src="@/assets/images/icons/closeIcon.svg" alt="" />
               </button>
             </div>
             <hr />
-            <div class="bg-white overflow-y-auto h-[600px]"></div>
+            <div class="bg-white overflow-y-auto h-[504px]">
+              <PointsSection
+                v-if="isDroppingOrBoardingPoints"
+                :pointArray="getPointsArray"
+              />
+              <CancelPolicySection v-else />
+            </div>
           </div>
         </div>
       </div>
@@ -55,6 +73,128 @@
 
 <script>
 export default {
-  props: ["close"],
+  props: ["close", "selectedTab", "handlePointPolicyModal", "setCurrentTab"],
+  data() {
+    return {
+      TabData: {
+        BOARDING_POINT: "BOARDING_POINT",
+        DROPPING_POINT: "DROPPING_POINT",
+        CANCEL_POLICY: "CANCEL_POLICY",
+      },
+      boardingPoints: [
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+      ],
+      droppingPoints: [
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+        "Location",
+      ],
+    };
+  },
+  computed: {
+    isDroppingOrBoardingPoints() {
+      return (
+        this.TabData.BOARDING_POINT === this.selectedTab ||
+        this.TabData.DROPPING_POINT === this.selectedTab
+      );
+    },
+    getPointsArray() {
+      return this.TabData.BOARDING_POINT === this.selectedTab
+        ? this.boardingPoints
+        : this.droppingPoints;
+    },
+  },
 };
 </script>
