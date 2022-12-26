@@ -402,28 +402,13 @@ export default {
       printWindow.document.write("</html>");
       printWindow.document.close();
       printWindow.focus();
-      // if (window.print) {
-      //   printWindow.print();
-      // }
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        printWindow.print(); // change window to winPrint
-        // printWindow.close(); // change window to winPrint
-      } else if (is_chrome) {
-        printWindow.onload = function () {
-          setTimeout(function () {
-            // wait until all resources loaded
-            printWindow.print(); // change window to winPrint
-            printWindow.close(); // change window to winPrint
-          }, 500);
-        };
-      } else {
-        printWindow.print();
-        printWindow.close();
-      }
+      printWindow.onload = function () {
+        setTimeout(function () {
+          // wait until all resources loaded
+          printWindow.print(); // change window to winPrint
+          printWindow.close(); // change window to winPrint
+        }, 500);
+      };
     },
     ...mapActions("guarantedseat", ["cancelTicketAction"]),
     cancelTicket(ticketId) {
