@@ -25,7 +25,17 @@
         "
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
-          <div class="flex justify-start gap-x-4 items-center w-10/12">
+          <div
+            class="
+              flex
+              justify-start
+              gap-x-4
+              items-center
+              w-10/12
+              cursor-pointer
+            "
+            @click="handleBusImagePreviewModal"
+          >
             <img src="@/assets/images/busDefaultImage.svg" alt="" />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
@@ -78,6 +88,12 @@
             }}
           </h2>
         </div>
+
+        <BusImagePreviewModal
+          v-if="showBusImageModal"
+          :companyName="trip.company"
+          :close="handleBusImagePreviewModal"
+        />
         <div
           class="
             flex
@@ -827,6 +843,7 @@ export default {
         CANCEL_POLICY: "CANCEL_POLICY",
       },
       showPointPolicyModal: false,
+      showBusImageModal: false,
       selected: false,
       boardingPoint: null,
       passengerCount: "",
@@ -915,12 +932,21 @@ export default {
     setCurrentTab(value) {
       this.selectedTab = value;
       this.showPointPolicyModal = true;
+      this.stopBackgroundScroll(true);
     },
     handlePointPolicyModal() {
       this.showPointPolicyModal = !this.showPointPolicyModal;
+      this.stopBackgroundScroll(this.showPointPolicyModal);
+    },
+    handleBusImagePreviewModal() {
+      this.showBusImageModal = !this.showBusImageModal;
+      this.stopBackgroundScroll(this.showBusImageModal);
+    },
+    stopBackgroundScroll(value) {
+      console.log(value);
       const body = document.getElementsByTagName("body")[0];
       if (body) {
-        body.style.overflow = !this.showPointPolicyModal ? "hidden" : "scroll";
+        body.style.overflow = value ? "hidden" : "scroll";
       }
     },
     handleSeatView(selectedTripId) {
