@@ -1,5 +1,5 @@
 import * as apis from '../helpers/apis';
-import {GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL} from '../helpers/apis';
+import { GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL } from '../helpers/apis';
 
 export const state = () => ({
   mobileFloatingFilter: true,
@@ -16,6 +16,8 @@ export const state = () => ({
   searchedTicketList: {},
   bookingInfoDetails: {},
   promoCode: {},
+  isTicketPopupOpen: false,
+  selectedTicketId: null
 });
 
 export const getters = {
@@ -35,10 +37,12 @@ export const getters = {
   getSearchedTicketList: (state) => state.searchedTicketList,
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getPromoCode: (state) => state.promoCode,
+  getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
+  getSelectedTicketId: (state) => state.selectedTicketId,
 };
 
 export const actions = {
-  async getPbAccessTokenAction ({ commit }, payload) {
+  async getPbAccessTokenAction({ commit }, payload) {
     try {
       const data = await this.$axios.$post(
         apis.GET_PARIBAHAN_TOKEN_URL,
@@ -52,7 +56,7 @@ export const actions = {
       })
     }
   },
-  async getCitiesList ({ commit }) {
+  async getCitiesList({ commit }) {
     try {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
       commit('setGsCities', data);
@@ -63,7 +67,7 @@ export const actions = {
       // })
     }
   },
-  async getOfferPromoImagesUrlList ({ commit }) {
+  async getOfferPromoImagesUrlList({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
@@ -75,11 +79,11 @@ export const actions = {
       // })
     }
   },
-  
-  async readOfferPromoImageUrl ({ commit }, payload) {
+
+  async readOfferPromoImageUrl({ commit }, payload) {
     try {
-      const  data  = await this.$api.$get(
-        apis.READ_OFFER_PROMO_IMAGE_URL, {params: {path: payload}}
+      const data = await this.$api.$get(
+        apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: payload } }
       );
       return data;
       // commit('setGsOfferPromoImage', data);
@@ -90,7 +94,7 @@ export const actions = {
       // })
     }
   },
-  async getPbScheduleDataAction ({ commit }, payload) {
+  async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SCHEDULE_DATA_URL,
@@ -107,7 +111,7 @@ export const actions = {
     }
   },
 
-  async getPbSeatViewAction ({ commit }, payload) {
+  async getPbSeatViewAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SEAT_VIEW_URL,
@@ -116,7 +120,7 @@ export const actions = {
       commit('setGsSeatViewData', data);
       commit('resetPromoCode');
     } catch (error) {
-      if(error.response && error.response.data.statusCode === 404) {
+      if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
           position: 'bottom-right',
           duration: 5000,
@@ -130,7 +134,7 @@ export const actions = {
     }
   },
 
-  async TicketConfirmAction ({ commit }, payload) {
+  async TicketConfirmAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.$post(
@@ -138,7 +142,7 @@ export const actions = {
         payload
       );
       commit('setGsLoading', false);
-      if(data && data.gatewayUrl) {
+      if (data && data.gatewayUrl) {
         window.location.href = data.gatewayUrl;
       }
       return true;
@@ -152,9 +156,9 @@ export const actions = {
     }
   },
 
-  async getTicketByTnxId({commit}, payload) {
+  async getTicketByTnxId({ commit }, payload) {
     try {
-      const {data} = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
+      const { data } = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
       commit("setTicketDetails", data)
     } catch (e) {
       this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
@@ -163,9 +167,9 @@ export const actions = {
       })
     }
   },
-  async getBookingInfoByTnxId({commit}, payload) {
+  async getBookingInfoByTnxId({ commit }, payload) {
     try {
-      const {data} = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
+      const { data } = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
       commit("setBookingInfoDetails", data)
     } catch (e) {
       this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
@@ -175,7 +179,7 @@ export const actions = {
     }
   },
 
-  async getPbPaymentPendingBlockAction ({ commit }, payload) {
+  async getPbPaymentPendingBlockAction({ commit }, payload) {
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
@@ -192,10 +196,10 @@ export const actions = {
           })
         }
         commit('setGsLoading', false);
-      }).catch (error => {
+      }).catch(error => {
         commit('setGsLoading', false);
         if (error.response) {
-          const {data} = error.response
+          const { data } = error.response
           resolve(data)
         }
         this.$toast.error(error.response.data.message, {
@@ -206,7 +210,7 @@ export const actions = {
     })
 
   },
-  async successTicketByMailAction ({ commit }, payload) {
+  async successTicketByMailAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$axios.post('https://dev.sslpayment.jatri.co/ssl/ticket/success-ticket-by-mail', payload);
@@ -225,7 +229,7 @@ export const actions = {
       return false;
     }
   },
-  async searchTicketAction ({ commit }, payload) {
+  async searchTicketAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
@@ -246,18 +250,19 @@ export const actions = {
       return false;
     }
   },
-  async cancelTicketAction ({ commit, state }, payload) {
+  async cancelTicketAction({ commit, state }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.GS_CANCEL_TICKET, payload);
       let updatedTicketList = [];
-       updatedTicketList = state.searchedTicketList.tickets.map(ticket => {
-        if(data.data._id === ticket._id) {
+      updatedTicketList = state.searchedTicketList.tickets.map(ticket => {
+        if (data.data._id === ticket._id) {
           return data.data;
         }
         return ticket
       })
-      commit('setSearchedTicketList', {...state.searchedTicketList, tickets: updatedTicketList})
+      commit('setSearchedTicketList', { ...state.searchedTicketList, tickets: updatedTicketList })
+      commit('handleCancelTicketPopup');
       this.$toast.success(data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -266,6 +271,7 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
+      commit('handleCancelTicketPopup');
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -274,7 +280,7 @@ export const actions = {
     }
   },
 
-  async getPromoCodeAction({commit}, payload) {
+  async getPromoCodeAction({ commit }, payload) {
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PROMO_CODE_URL,
@@ -283,7 +289,7 @@ export const actions = {
         if (res.data) {
           commit('setPromoCode', res.data);
           resolve(res)
-          this.$toast.success('Promo applied successfully' , {
+          this.$toast.success('Promo applied successfully', {
             position: 'bottom-right',
             duration: 5000,
           })
@@ -295,9 +301,9 @@ export const actions = {
             duration: 5000,
           })
         }
-      }).catch (error => {
+      }).catch(error => {
         if (error.response) {
-          const {data} = error.response
+          const { data } = error.response
           resolve(data)
           this.$toast.error(error.response.data.message, {
             position: 'bottom-right',
@@ -342,15 +348,29 @@ export const mutations = {
   setPromoCode: (state, data) => (state.promoCode = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    if(data === 'l2h') {
-      state.gsTrips.sort((a,b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
+    if (data === 'l2h') {
+      state.gsTrips.sort((a, b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
     } else {
-      state.gsTrips.sort((a,b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
+      state.gsTrips.sort((a, b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
     }
   },
   mobileFloatingFilter: (state, data) => {
     if (data) {
       state.mobileFloatingFilter = !state.mobileFloatingFilter
     }
-  }
+  },
+  handleCancelTicketPopup: (state, data) => {
+    const body = document.getElementsByTagName("body")[0];
+    if (body) {
+      body.style.overflow = !state.isTicketPopupOpen ? "hidden" : "scroll";
+    }
+    state.isTicketPopupOpen = !state.isTicketPopupOpen;
+    if (!state.isTicketPopupOpen) {
+      state.selectedTicketId = null;
+    }
+  },
+  setCancelTicketId: (state, data) => {
+    state.selectedTicketId = data;
+  },
+
 };

@@ -354,7 +354,7 @@
 
 <script>
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -426,13 +426,16 @@ export default {
       }
     },
     ...mapActions("guarantedseat", ["cancelTicketAction"]),
+    ...mapMutations("guarantedseat", [
+      "setCancelTicketId",
+      "handleCancelTicketPopup",
+    ]),
     cancelTicket(ticketId) {
       const payload = {
-        ticketId: ticketId,
+        ticketId,
       };
-      if (confirm("Are you sure to cancel this ticket?") == true) {
-        this.cancelTicketAction(payload);
-      }
+      this.setCancelTicketId(payload);
+      this.handleCancelTicketPopup();
     },
   },
   computed: {
