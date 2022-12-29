@@ -27,8 +27,7 @@
         <span>09642080808</span>
       </a>
 
-      <NuxtLink
-        to="/find-ticket"
+      <div
         class="
           bg-[#f7f7f7]
           text-blackPrimary
@@ -39,11 +38,13 @@
           gap-x-[10.5px]
           hidden
           lg:flex
+          cursor-pointer
         "
+        @click="handleFullReserveModal"
       >
         <img src="@/assets/images/home/fullBusReserve.svg" alt="" />
         <span class="w-32">Full bus reserve</span>
-      </NuxtLink>
+      </div>
 
       <NuxtLink
         to="/find-ticket"
@@ -75,7 +76,7 @@
         </div>
       </div>
     </div>
-    <!-- <FullBusReserveModal/> -->
+    <FullBusReserveModal v-if="showFullBusReserveModal" />
   </div>
 </template>
 
@@ -86,11 +87,21 @@ export default {
   data() {
     return {
       showHamburgerMenu: false,
+      showFullBusReserveModal: false,
     };
   },
   methods: {
     handleHamburgerMenu() {
       this.showHamburgerMenu = !this.showHamburgerMenu;
+    },
+    handleFullReserveModal() {
+      const body = document.getElementsByTagName("body")[0];
+      if (body) {
+        body.style.overflow = !this.showFullBusReserveModal
+          ? "hidden"
+          : "scroll";
+      }
+      this.showFullBusReserveModal = !this.showFullBusReserveModal;
     },
   },
 };

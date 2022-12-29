@@ -45,7 +45,16 @@
                 Now you can reserve a full bus according to your need. Fill the
                 form and submit. We will check and reserve a bus for you.
               </p>
-              <div class="border border-[#DBDBDB] rounded h-[598px] mt-6 p-6">
+              <div
+                class="
+                  border border-[#DBDBDB]
+                  rounded
+                  h-full
+                  lg:h-[598px]
+                  mt-6
+                  p-6
+                "
+              >
                 <!-- First Row -->
                 <div
                   class="flex justify-evenly gap-6 mb-6 flex-col lg:flex-row"
@@ -102,22 +111,73 @@
                 </div>
 
                 <!-- Third Row -->
-                <div class="flex justify-evenly gap-6 flex-col lg:flex-row">
+                <div
+                  class="flex justify-evenly gap-6 flex-col lg:flex-row mb-6"
+                >
                   <!-- First Item -->
                   <div class="flex justify-evenly gap-6 w-full">
                     <div class="w-full">
                       <CommonInputLabel label="Approximate budget" />
-                      <EnterInput placeholder="Enter budget amount" />
+                      <EnterInput
+                        placeholder="Enter budget amount"
+                        type="number"
+                      />
                     </div>
                     <div class="w-full">
                       <CommonInputLabel label="Comment" />
-                      <EnterInput placeholder="Enter your comment" />
+                      <EnterInput
+                        placeholder="Enter your comment"
+                        type="text"
+                      />
                     </div>
                   </div>
 
                   <!-- Second Item -->
                   <div class="flex justify-evenly gap-6 w-full"></div>
                 </div>
+
+                <!-- Third Row -->
+                <div
+                  class="flex justify-evenly gap-6 mb-6 flex-col lg:flex-row"
+                >
+                  <!-- First Item -->
+                  <div class="flex justify-evenly gap-6 w-full">
+                    <div class="w-full">
+                      <CommonInputLabel label="Contact Person Name" />
+                      <EnterInput placeholder="Enter name" type="text" />
+                    </div>
+                    <div class="w-full">
+                      <CommonInputLabel label="Mobile No" />
+                      <EnterInput
+                        placeholder="Enter mobile number"
+                        type="number"
+                      />
+                    </div>
+                  </div>
+                  <!-- SEcond Item -->
+                  <div class="flex justify-evenly gap-6 w-full">
+                    <div class="w-full">
+                      <CommonInputLabel label="Email" />
+                      <EnterInput placeholder="Enter email" type="email" />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  class="
+                    flext
+                    items-center
+                    justify-center
+                    bg-corporate
+                    text-white text-sm
+                    font-medium
+                    h-[46px]
+                    w-full
+                    rounded-full
+                  "
+                >
+                  Ok
+                </button>
               </div>
             </div>
           </div>
@@ -131,7 +191,13 @@
 export default {
   props: ["close", "selectedTab", "handlePointPolicyModal", "setCurrentTab"],
   data() {
-    return {};
+    return {
+      budget: null,
+      comment: null,
+      name: null,
+      mobile: null,
+      email: null,
+    };
   },
   computed: {},
 };

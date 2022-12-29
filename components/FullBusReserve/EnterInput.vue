@@ -9,6 +9,7 @@
       rounded
       mt-[10px]
       w-full
+      h-[48px]
     "
   >
     <input
@@ -21,13 +22,13 @@
         placeholder:text-blackSecondery
         text-blackPrimary
       "
-      type="number"
+      :type="type"
       :placeholder="placeholder"
     />
   </div>
 </template>
 <script>
 export default {
-  props: ["placeholder"],
+  props: ["placeholder", "type"],
 };
 </script>
