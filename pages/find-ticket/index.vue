@@ -212,6 +212,7 @@
         />
       </div>
     </div>
+    <CancelTicketModal v-if="getIsTicketPopupOpen" />
   </div>
 </template>
 
@@ -235,7 +236,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getSearchedTicketList"]),
+    ...mapGetters("guarantedseat", [
+      "getSearchedTicketList",
+      "getIsTicketPopupOpen",
+    ]),
   },
   methods: {
     ...mapActions("guarantedseat", ["searchTicketAction"]),
