@@ -1,34 +1,46 @@
 <template>
-  <div
-    class="
-      flex
-      justify-between
-      px-2
-      py-[10px]
-      border border-[#DBDBDB]
-      rounded
-      mt-[10px]
-      w-full
-      h-[48px]
-    "
-  >
-    <input
+  <div>
+    <!-- v-bind:class="true && 'border-[#E0293B]'" -->
+    <div
       class="
-        h-full
+        flex
+        justify-between
+        px-2
+        py-[10px]
+        border border-[#DBDBDB]
+        rounded
+        mt-[10px]
         w-full
-        focus:outline-0
-        text-xs
-        focus:appearance-none
-        placeholder:text-blackSecondery
-        text-blackPrimary
+        h-[48px]
       "
-      :type="type"
-      :placeholder="placeholder"
-    />
+    >
+      <input
+        class="
+          h-full
+          w-full
+          outline-none
+          overflow-x-hidden
+          text-sm
+          font-normal
+          text-blackPrimary text-left
+        "
+        :type="type"
+        :placeholder="placeholder"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
+    </div>
+    <!-- <SearchErrorToolTip v-if="true" message="Choose bus type first"/> -->
   </div>
 </template>
 <script>
 export default {
-  props: ["placeholder", "type"],
+  props: ["placeholder", "type", "modelValue"],
+  emits: ["update:modelValue"],
+  data() {
+    return {
+      value: this.modelValue,
+    };
+  },
 };
 </script>

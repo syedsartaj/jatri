@@ -308,6 +308,26 @@ export const actions = {
       })
     })
   },
+
+  async fullBusReservationAction ({ commit }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_FULL_BUS_RESERVATION, payload);
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message[0], {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
 };
 
 export const mutations = {

@@ -76,7 +76,10 @@
         </div>
       </div>
     </div>
-    <FullBusReserveModal v-if="showFullBusReserveModal" />
+    <FullBusReserveModal
+      v-if="showFullBusReserveModal"
+      :close="handleFullReserveModal"
+    />
   </div>
 </template>
 
