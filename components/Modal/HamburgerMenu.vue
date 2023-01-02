@@ -16,7 +16,11 @@
 
       <div class="px-4 mt-5">
         <ul class="list-none">
-          <li v-for="(item, index) in menuList" :key="index">
+          <li
+            v-for="(item, index) in menuList"
+            :key="index"
+            @click="handleOnClick(index)"
+          >
             <div
               class="
                 h-[70px]
@@ -58,12 +62,18 @@
         </div>
       </div>
     </div>
+
+    <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   props: ["close"],
+  computed: {
+    ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+  },
   data() {
     return {
       menuList: [
@@ -79,6 +89,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
+    handleOnClick(index) {
+      if (index === 0) {
+        this.setBusReserveModalOpenStatus();
+      }
+    },
   },
 };
 </script>

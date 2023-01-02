@@ -1,6 +1,7 @@
 <template>
   <div>
     <div
+      v-bind:class="errorOccured && 'border-[#E0293B]'"
       class="
         flex
         justify-between
@@ -14,16 +15,8 @@
       "
       @click="handleDropDown"
     >
-      <p
-        class="
-          lg:text-xs
-          text-sm
-          2xl:text-base
-          font-medium
-          text-blackPrimary text-left
-        "
-      >
-        {{ selectedValue }}
+      <p class="text-sm font-normal text-blackPrimary text-left">
+        {{ selectedValue.toUpperCase() }}
       </p>
       <img
         src="@/assets/images/home/arrowDown.svg"
@@ -36,6 +29,7 @@
       class="
         mt-1
         w-[260px]
+        md:w-[200px]
         lg:w-[390px]
         bg-white
         rounded
@@ -61,7 +55,7 @@
         "
         @click="handleSelect(option)"
       >
-        {{ option }}
+        {{ option.toUpperCase() }}
       </div>
     </div>
   </div>

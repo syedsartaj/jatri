@@ -40,7 +40,7 @@
           lg:flex
           cursor-pointer
         "
-        @click="handleFullReserveModal"
+        @click="setBusReserveModalOpenStatus"
       >
         <img src="@/assets/images/home/fullBusReserve.svg" alt="" />
         <span class="w-32">Full bus reserve</span>
@@ -76,17 +76,18 @@
         </div>
       </div>
     </div>
-    <FullBusReserveModal
-      v-if="showFullBusReserveModal"
-      :close="handleFullReserveModal"
-    />
+    <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
   </div>
 </template>
 
 <script>
 import HamburgerMenu from "../components/Modal/HamburgerMenu.vue";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: { HamburgerMenu },
+  computed: {
+    ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+  },
   data() {
     return {
       showHamburgerMenu: false,
@@ -94,6 +95,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
     handleHamburgerMenu() {
       this.showHamburgerMenu = !this.showHamburgerMenu;
     },

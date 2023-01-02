@@ -1,6 +1,7 @@
 <template>
   <div>
     <div
+      v-bind:class="errorOccured && 'border-[#E0293B]'"
       class="
         flex
         justify-between
@@ -21,7 +22,7 @@
           font-normal
           text-blackPrimary text-left
         "
-        v-if="dateUpdate !== ''"
+        v-if="dateUpdate !== '' && inital !== 0"
       >
         {{
           new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium" })
@@ -38,6 +39,18 @@
         v-else-if="defaultOption"
       >
         Select a date
+      </p>
+      <p
+        class="
+          lg:text-xs
+          text-sm
+          2xl:text-base
+          font-normal
+          text-blackPrimary text-left
+        "
+        v-else-if="inital === 0"
+      >
+        Select Journey Date
       </p>
       <img
         src="@/assets/images/home/calendar.svg"
@@ -126,6 +139,7 @@ export default {
   data() {
     return {
       optionsIsOpen: false,
+      inital: 0,
       date: "",
       modelConfig: {
         type: "string",
@@ -171,6 +185,7 @@ export default {
   },
   watch: {
     dateUpdate() {
+      this.inital++;
       this.$emit("update:dateUpdate", this.dateUpdate);
       this.optionsIsOpen = false;
     },

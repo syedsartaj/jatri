@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- v-bind:class="true && 'border-[#E0293B]'" -->
     <div
+      v-bind:class="errorOccured && 'border-[#E0293B]'"
       class="
         flex
         justify-between
@@ -30,12 +30,11 @@
         @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
-    <!-- <SearchErrorToolTip v-if="true" message="Choose bus type first"/> -->
   </div>
 </template>
 <script>
 export default {
-  props: ["placeholder", "type", "modelValue"],
+  props: ["placeholder", "type", "modelValue", "errorOccured"],
   emits: ["update:modelValue"],
   data() {
     return {
