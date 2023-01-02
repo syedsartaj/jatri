@@ -19,6 +19,8 @@ export const state = () => ({
   promoCode: {},
   isBusReserveModalOpen: false,
   isRequestSuccessFull: false,
+  isTicketPopupOpen: false,
+  selectedTicketId: null
 });
 
 export const getters = {
@@ -40,6 +42,8 @@ export const getters = {
   getPromoCode: (state) => state.promoCode,
   getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
   getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
+  getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
+  getSelectedTicketId: (state) => state.selectedTicketId,
 };
 
 export const actions = {
@@ -263,6 +267,7 @@ export const actions = {
         return ticket
       })
       commit('setSearchedTicketList', { ...state.searchedTicketList, tickets: updatedTicketList })
+      commit('handleCancelTicketPopup');
       this.$toast.success(data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -271,6 +276,7 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
+      commit('handleCancelTicketPopup');
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -385,4 +391,18 @@ export const mutations = {
     handleScrollBehaviour(state.isRequestSuccessFull);
     state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
+  handleCancelTicketPopup: (state, data) => {
+    const body = document.getElementsByTagName("body")[0];
+    if (body) {
+      body.style.overflow = !state.isTicketPopupOpen ? "hidden" : "scroll";
+    }
+    state.isTicketPopupOpen = !state.isTicketPopupOpen;
+    if (!state.isTicketPopupOpen) {
+      state.selectedTicketId = null;
+    }
+  },
+  setCancelTicketId: (state, data) => {
+    state.selectedTicketId = data;
+  },
+
 };
