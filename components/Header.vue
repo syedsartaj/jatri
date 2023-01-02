@@ -76,18 +76,14 @@
         </div>
       </div>
     </div>
-    <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
   </div>
 </template>
 
 <script>
 import HamburgerMenu from "../components/Modal/HamburgerMenu.vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   components: { HamburgerMenu },
-  computed: {
-    ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
-  },
   data() {
     return {
       showHamburgerMenu: false,

@@ -62,8 +62,6 @@
         </div>
       </div>
     </div>
-
-    <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
   </div>
 </template>
 

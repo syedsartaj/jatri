@@ -62,7 +62,7 @@
 </template>
 <script>
 export default {
-  props: ["label", "options", "modelValue", "selectedValue"],
+  props: ["label", "options", "modelValue", "selectedValue", "errorOccured"],
   emits: ["update:modelValue"],
   data() {
     return {

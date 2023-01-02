@@ -1,5 +1,6 @@
 import * as apis from '../helpers/apis';
 import { GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL } from '../helpers/apis';
+import { handleScrollBehaviour } from '../helpers/utils';
 
 export const state = () => ({
   mobileFloatingFilter: true,
@@ -17,6 +18,7 @@ export const state = () => ({
   bookingInfoDetails: {},
   promoCode: {},
   isBusReserveModalOpen: false,
+  isRequestSuccessFull: false,
 });
 
 export const getters = {
@@ -37,6 +39,7 @@ export const getters = {
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getPromoCode: (state) => state.promoCode,
   getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
+  getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
 };
 
 export const actions = {
@@ -315,12 +318,9 @@ export const actions = {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.POST_FULL_BUS_RESERVATION, payload);
-      this.$toast.success(data.message, {
-        position: 'bottom-right',
-        duration: 5000,
-      })
       commit('setGsLoading', false);
       commit('setBusReserveModalOpenStatus');
+      commit('handleSuccessfulModal');
       return true;
     } catch (error) {
       commit('setGsLoading', false);
@@ -377,11 +377,12 @@ export const mutations = {
     }
   },
   setBusReserveModalOpenStatus: (state, data) => {
-    const body = document.getElementsByTagName("body")[0];
-    if (body) {
-      body.style.overflow = !state.isBusReserveModalOpen ? "hidden" : "scroll";
-    }
+    handleScrollBehaviour(state.isBusReserveModalOpen);
     state.isBusReserveModalOpen = !state.isBusReserveModalOpen;
 
+  },
+  handleSuccessfulModal: (state, data) => {
+    handleScrollBehaviour(state.isRequestSuccessFull);
+    state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
 };
