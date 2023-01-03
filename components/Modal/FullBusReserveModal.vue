@@ -328,7 +328,7 @@ export default {
       errorOccured: false,
       journeyDate: null,
       returnDate: null,
-      busType: "any",
+      busType: "all",
       boardingPlace: null,
       droppingPlace: null,
       numberOfSeats: null,
