@@ -1,5 +1,6 @@
 import * as apis from '../helpers/apis';
 import { GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL } from '../helpers/apis';
+import { handleScrollBehaviour } from '../helpers/utils';
 
 export const state = () => ({
   mobileFloatingFilter: true,
@@ -16,6 +17,8 @@ export const state = () => ({
   searchedTicketList: {},
   bookingInfoDetails: {},
   promoCode: {},
+  isBusReserveModalOpen: false,
+  isRequestSuccessFull: false,
   isTicketPopupOpen: false,
   selectedTicketId: null
 });
@@ -37,6 +40,8 @@ export const getters = {
   getSearchedTicketList: (state) => state.searchedTicketList,
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getPromoCode: (state) => state.promoCode,
+  getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
+  getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
 };
@@ -314,6 +319,24 @@ export const actions = {
       })
     })
   },
+
+  async fullBusReservationAction({ commit }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_FULL_BUS_RESERVATION, payload);
+      commit('setGsLoading', false);
+      commit('setBusReserveModalOpenStatus');
+      commit('handleSuccessfulModal');
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message[0], {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
 };
 
 export const mutations = {
@@ -358,6 +381,15 @@ export const mutations = {
     if (data) {
       state.mobileFloatingFilter = !state.mobileFloatingFilter
     }
+  },
+  setBusReserveModalOpenStatus: (state, data) => {
+    handleScrollBehaviour(state.isBusReserveModalOpen);
+    state.isBusReserveModalOpen = !state.isBusReserveModalOpen;
+
+  },
+  handleSuccessfulModal: (state, data) => {
+    handleScrollBehaviour(state.isRequestSuccessFull);
+    state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
   handleCancelTicketPopup: (state, data) => {
     const body = document.getElementsByTagName("body")[0];

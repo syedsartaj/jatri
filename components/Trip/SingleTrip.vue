@@ -25,7 +25,17 @@
         "
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
-          <div class="flex justify-start gap-x-4 items-center w-10/12">
+          <div
+            class="
+              flex
+              justify-start
+              gap-x-4
+              items-center
+              w-10/12
+              cursor-pointer
+            "
+            @click="handleBusImagePreviewModal"
+          >
             <img src="@/assets/images/busDefaultImage.svg" alt="" />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
@@ -77,6 +87,44 @@
               ).toLocaleString("en-Us", { timeStyle: "short" })
             }}
           </h2>
+        </div>
+
+        <BusImagePreviewModal
+          v-if="showBusImageModal"
+          :companyName="trip.company"
+          :close="handleBusImagePreviewModal"
+        />
+        <div
+          class="
+            flex
+            justify-evenly
+            gap-[16px]
+            items-center
+            lg:order-last
+            w-full
+            pt-[15px]
+            pb-[15px]
+            lg:pb-[0px]
+          "
+        >
+          <PointPolicyButton
+            text="Boarding Point"
+            :click="() => setCurrentTab(TabData.BOARDING_POINT)"
+          />
+          <PointPolicyButton
+            text="Dropping Point"
+            :click="() => setCurrentTab(TabData.DROPPING_POINT)"
+          />
+          <PointPolicyButton
+            text="Cancellation Policy"
+            :click="() => setCurrentTab(TabData.CANCEL_POLICY)"
+          />
+          <PointAndPolicyModal
+            v-if="showPointPolicyModal"
+            :selectedTab="selectedTab"
+            :setCurrentTab="setCurrentTab"
+            :handlePointPolicyModal="handlePointPolicyModal"
+          />
         </div>
       </div>
       <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
@@ -770,7 +818,7 @@
               to="/policies#return-and-refund-policy"
               target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation policy</nuxt-link
+              >Cancellation Policy</nuxt-link
             >
           </div>
         </div>
@@ -788,6 +836,14 @@ export default {
   props: ["trip", "selectedTrip", "busIndex"],
   data() {
     return {
+      selectedTab: "",
+      TabData: {
+        BOARDING_POINT: "BOARDING_POINT",
+        DROPPING_POINT: "DROPPING_POINT",
+        CANCEL_POLICY: "CANCEL_POLICY",
+      },
+      showPointPolicyModal: false,
+      showBusImageModal: false,
       selected: false,
       boardingPoint: null,
       passengerCount: "",
@@ -873,6 +929,26 @@ export default {
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
+    setCurrentTab(value) {
+      this.selectedTab = value;
+      this.showPointPolicyModal = true;
+      this.stopBackgroundScroll(true);
+    },
+    handlePointPolicyModal() {
+      this.showPointPolicyModal = !this.showPointPolicyModal;
+      this.stopBackgroundScroll(this.showPointPolicyModal);
+    },
+    handleBusImagePreviewModal() {
+      this.showBusImageModal = !this.showBusImageModal;
+      this.stopBackgroundScroll(this.showBusImageModal);
+    },
+    stopBackgroundScroll(value) {
+      console.log(value);
+      const body = document.getElementsByTagName("body")[0];
+      if (body) {
+        body.style.overflow = value ? "hidden" : "scroll";
+      }
+    },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter("status");
       this.resetPromo();

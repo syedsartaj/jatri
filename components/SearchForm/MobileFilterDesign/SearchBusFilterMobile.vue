@@ -1,6 +1,6 @@
 <template>
      <div class="">
-          <button class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
+          <button :class="optionsIsOpen && 'border border-[#4D4D4F]'" class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
                <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
                     <img v-if="icon" :src='icon' alt="">
                     <p v-if="label&& selectedOption === ''" class="text-xs font-normal text-blackSecondery text-left"> {{ label }} </p>

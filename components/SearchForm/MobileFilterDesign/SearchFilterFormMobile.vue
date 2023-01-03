@@ -69,31 +69,25 @@ export default {
           ...mapGetters("guarantedseat", ["getGsCities"]),
      },
      methods: {
+          handleToastMessage(message) {
+               this.$toast.error(message, {
+               position: "bottom-right",
+               duration: 5000,
+               });
+          },
           handleFromSubmit() {
                if (!this.departure) {
-                    this.$toast.error('Please insert your location', {
-                         position: 'bottom-right',
-                         duration: 5000,
-                    })
-               } 
-               if (!this.destination){
-                    this.$toast.error('Please insert your destination', {
-                         position: 'bottom-right',
-                         duration: 5000,
-                    })
-               } 
-               if (!this.coachType){
-                    this.$toast.error('Please insert coach type', {
-                         position: 'bottom-right',
-                         duration: 5000,
-                    })
-               } 
+               this.handleToastMessage('Please insert your location');
+               }
+               if (!this.destination) {
+               this.handleToastMessage('Please insert your destination');
+               }
+               if (!this.coachType) {
+               this.handleToastMessage('Please insert coach type');
+               }
                if (!this.departingDate) {
-                    this.$toast.error('Please insert departure date', {
-                         position: 'bottom-right',
-                         duration: 5000,
-                    })
-               } 
+               this.handleToastMessage('Please insert departure date');
+               }
                if(this.departure && this.destination && this.coachType && this.departingDate) {
                     const query = {
                          from: this.departure,
