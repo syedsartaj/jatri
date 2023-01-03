@@ -107,11 +107,11 @@
                               plan-discount="10%"
                               v-model="activePlan"
                          />
-                         <!-- <BkashOption
+                         <BkashOption
                               plan-name="bkash"
                               plan-discount="10%"
                               v-model="activePlan"
-                         /> -->
+                         />
                     </div>
                </div>
 
