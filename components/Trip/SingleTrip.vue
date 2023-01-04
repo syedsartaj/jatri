@@ -31,12 +31,16 @@
               justify-start
               gap-x-4
               items-center
-              w-10/12
+              w-9/12
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
           >
-            <img src="@/assets/images/busDefaultImage.svg" alt="" />
+            <img
+              src="@/assets/images/busDefaultImage.svg"
+              class="h-[20px] w[20px]"
+              alt=""
+            />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
                 {{ trip.company }}
@@ -49,14 +53,28 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-2/12 text-right">
-            <p class="text-blackPrimary max-sm:text-xs">
-              <span>{{ trip.available }}</span> Seat<span
-                v-if="trip.available > 1"
-                >s</span
-              >
-            </p>
-            <p class="text-xs lg:text-sm text-blackLight">Available</p>
+          <div v-if="trip.available" class="w-3/12 text-right">
+            <div
+              class="
+                h-[30px]
+                bg-[#F1F9F1]
+                flex flex-row
+                items-center
+                justify-center
+                rounded-full
+              "
+            >
+              <img
+                src="@/assets/images/ticket/seat.svg"
+                alt="seat"
+                class="mr-[10px]"
+              />
+              <p class="text-[#48A43F] text-xs">
+                <span>{{ trip.available }}</span>
+                <span v-if="trip.available > 1">Seats left</span>
+                <span v-else>Seat left</span>
+              </p>
+            </div>
           </div>
         </div>
         <div
@@ -124,6 +142,8 @@
             :selectedTab="selectedTab"
             :setCurrentTab="setCurrentTab"
             :handlePointPolicyModal="handlePointPolicyModal"
+            :boardingPoints="trip.boardingPoints"
+            :droppingPoints="trip.droppingPoints"
           />
         </div>
       </div>
@@ -411,7 +431,7 @@
                         "
                         :fill="
                           colSeat.status !== 'available'
-                            ? '#DBDBDB'
+                            ? '#8D8D8F'
                             : selectedSeatIds.includes(colSeat.id)
                             ? '#48A43F'
                             : 'white'
@@ -423,8 +443,8 @@
                             ? '#48A43F'
                             : '#8D8D8F'
                         "
-                        height="24"
-                        width="24"
+                        height="26"
+                        width="30"
                       />
                       <!-- <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
                                                             {{ colSeat.seatNo }}
@@ -873,6 +893,8 @@ export default {
       "getGsSeatViewData",
       "getGsTrips",
       "getPromoCode",
+      "getBoardingPoints",
+      "getDroppingPoints",
     ]),
     departureDateTime() {
       if (this.boardingPoint.scheduleTime === "") {
@@ -943,7 +965,6 @@ export default {
       this.stopBackgroundScroll(this.showBusImageModal);
     },
     stopBackgroundScroll(value) {
-      console.log(value);
       const body = document.getElementsByTagName("body")[0];
       if (body) {
         body.style.overflow = value ? "hidden" : "scroll";

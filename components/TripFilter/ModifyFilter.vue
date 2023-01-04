@@ -91,10 +91,8 @@
                 justify-center
                 items-center
                 gap-x-[10px]
-                capitalize
                 rounded
-                px-[6px]
-                py-2
+                px-[5px]
                 text-xs
                 font-medium
               "
