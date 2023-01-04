@@ -183,7 +183,7 @@
         <div class="w-full flex items-center justify-center"><img src="@/assets/images/home/route.svg" alt="" class="w-16 h-16 lg:w-22 lg:h-22"></div>
         <h2 class="text-2xl lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold order-first lg:order-last text-center"> Our most popular routes </h2>
 
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-y-4 mt-8">
+        <div class="grid grid-cols-2 lg:grid-cols-3 mt-8">
           <NuxtLink v-for=" (route, index) in popularRoutes" :key="index" :to="route.link" class="flex justify-start gap-x-[10px] w-full items-center border-b border-b-[#DBDBDB] last:border-b-0">
               <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-3">
               <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">{{ route.name }}</p>
