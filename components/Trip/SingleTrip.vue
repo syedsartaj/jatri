@@ -31,14 +31,15 @@
               justify-start
               gap-x-4
               items-center
-              w-9/12
+              w-7/12
+              lg:w-9/12
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
           >
             <img
               src="@/assets/images/busDefaultImage.svg"
-              class="h-[20px] w[20px]"
+              class="h-[40px] w[40px]"
               alt=""
             />
             <div>
@@ -53,7 +54,7 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-3/12 text-right">
+          <div v-if="trip.available" class="w-5/12 lg:w-3/12 text-right">
             <div
               class="
                 h-[30px]
@@ -116,7 +117,7 @@
           class="
             flex
             justify-evenly
-            gap-[16px]
+            lg:gap-[16px]
             items-center
             lg:order-last
             w-full

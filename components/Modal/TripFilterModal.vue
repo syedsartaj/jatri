@@ -119,10 +119,8 @@
                           justify-center
                           items-center
                           gap-x-[10px]
-                          capitalize
                           rounded
-                          px-[6px]
-                          py-2
+                          px-[5px]
                           text-xs
                           font-medium
                         "
@@ -143,7 +141,7 @@
                           alt="time"
                           class=""
                         />
-                        {{ time }}
+                        <!-- {{ time }} -->
                       </button>
                     </label>
                   </div>
@@ -209,7 +207,7 @@
                 </h2>
                 <div class="flex justify-evenly gap-[7px] mt-[10px]">
                   <div
-                    v-for="busClass in busClassList"
+                    v-for="busClass in getGsBusClasses"
                     :key="busClass"
                     class="w-full h-9"
                   >
@@ -299,7 +297,7 @@
               </h2>
               <div class="mt-[10px] divide-y divide-dashed">
                 <div
-                  v-for="point in boardingPointList"
+                  v-for="point in getGsBoardingPoints"
                   :key="point"
                   class="flex justify-between items-center my-2 last:pt-[6px]"
                 >
@@ -320,7 +318,7 @@
                   <input
                     :id="point"
                     type="checkbox"
-                    @click="boardingPoint = point"
+                    @click="setBoardingPoint(point)"
                     :checked="boardingPoint === point"
                     class="default:border-2 border-blackPrimary cursor-pointer"
                   />
@@ -332,7 +330,7 @@
               </h2>
               <div class="mt-[10px] divide-y divide-dashed">
                 <div
-                  v-for="bus in busCompanyList"
+                  v-for="bus in getGsBusCompanies"
                   :key="bus"
                   class="flex justify-between items-center my-2 last:pt-[6px]"
                 >
@@ -353,7 +351,7 @@
                   <input
                     :id="bus"
                     type="checkbox"
-                    @click="busCompany = bus"
+                    @click="setBusCompany(bus)"
                     :checked="busCompany === bus"
                     class="default:border-2 border-blackPrimary cursor-pointer"
                   />
@@ -374,6 +372,7 @@
                   text-sm
                   rounded-full
                 "
+                @click="resetFilter"
               >
                 Reset
               </button>
@@ -390,7 +389,7 @@
                   text-sm
                   rounded-full
                 "
-                @click="close"
+                @click="handleTripFilter"
               >
                 Apply
               </button>
@@ -403,7 +402,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import moment from "moment";
 import Cookies from "js-cookie";
 export default {
@@ -420,34 +419,21 @@ export default {
       priceFilter: ["l2h", "h2l"],
       priceFilterType: null,
       boardingPoint: "",
-      boardingPointList: [
-        "Dhaka",
-        "Mymensingh",
-        "Uttara",
-        "Banani",
-        "Gabtoli",
-        "Technical Bus Stand",
-        "Amtoli Bus Stand",
-        "Fakirapool BusStand",
-      ],
       busCompany: "",
-      busCompanyList: [
-        "Labiba Classic Ltd",
-        "Kazi Paribahan",
-        "Green Line Paribahan",
-        "Desh Travels",
-        "Tisha Group and Tubaline",
-        "Shyamoli Travels",
-      ],
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      selectedTime: "",
-      busClassList: ["Economy Class", "Business Class"],
+      selectedTime: null,
       selectedBusClass: "",
     };
   },
   computed: {
     ...mapGetters("guarantedseat", ["getGsCities"]),
-    ...mapGetters("guarantedseat", ["getGsTrips", "getGsLoading"]),
+    ...mapGetters("guarantedseat", [
+      "getGsTrips",
+      "getGsLoading",
+      "getGsBoardingPoints",
+      "getGsBusCompanies",
+      "getGsBusClasses",
+    ]),
   },
 
   watch: {
@@ -456,7 +442,6 @@ export default {
         this.handleFromSubmit();
       }
     },
-
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -476,8 +461,74 @@ export default {
 
   methods: {
     ...mapMutations("guarantedseat", ["sortedTrip"]),
+    ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       this.coachType = type;
+    },
+    setBoardingPoint(point) {
+      this.boardingPoint = point;
+    },
+    setBusCompany(bus) {
+      this.busCompany = bus;
+    },
+    async handleTripFilter() {
+      this.$nuxt.$loading.start();
+      const { from, to, type, date } = this.$route.query;
+      const formattedDate = new Date(+date).toLocaleString("en-CA", {
+        dateStyle: "short",
+      });
+
+      let payload = {};
+
+      if (from) {
+        this.getGsCities?.filter((s) => {
+          if (s.city_name.toLowerCase() === from.toLowerCase()) {
+            payload["from"] = s.city;
+          }
+        });
+      }
+
+      if (to) {
+        this.getGsCities?.filter((s) => {
+          if (s.city_name.toLowerCase() === to.toLowerCase()) {
+            payload["to"] = s.city;
+          }
+        });
+      }
+
+      payload.date = formattedDate;
+      payload.busType = type;
+
+      if (this.boardingPoint) {
+        payload.boardingPoint = this.boardingPoint;
+      }
+      if (this.busCompany) {
+        payload.company = this.busCompany;
+      }
+      if (this.selectedBusClass) {
+        payload.busClass = this.selectedBusClass;
+      }
+
+      if (this.selectedTime >= 0) {
+        payload.time =
+          this.selectedTime === 0
+            ? "morning"
+            : this.selectedTime === 1
+            ? "day"
+            : "night";
+      }
+
+      await this.getPbScheduleDataAction(payload);
+      this.close();
+      this.$nuxt.$loading.finish();
+    },
+    resetFilter() {
+      this.busCompany = null;
+      this.boardingPoint = null;
+      this.selectedTime = null;
+      this.selectedBusClass = null;
+      this.priceFilterType = null;
+      this.handleFromSubmit();
     },
     setTime(time) {
       this.selectedTime = time;

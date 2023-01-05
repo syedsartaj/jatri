@@ -9,6 +9,9 @@ export const state = () => ({
   gsCities: [],
   gsOfferPromoImageUrl: [],
   gsTrips: [],
+  gsBoardingPoints: [],
+  gsBusCompanies: [],
+  gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
   gsSeatBoardingPointArray: [],
@@ -32,6 +35,9 @@ export const getters = {
     return state.gsOfferPromoImageUrl
   },
   getGsTrips: (state) => state.gsTrips,
+  getGsBoardingPoints: (state) => state.gsBoardingPoints,
+  getGsBusCompanies: (state) => state.gsBusCompanies,
+  getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
@@ -108,6 +114,9 @@ export const actions = {
       if (data.trips) {
         commit('setGsTrips', data.trips);
       }
+      commit('setGsBoardingPoints', data.boardingPoints || []);
+      commit('setGsBusCompanies', data.companies || []);
+      commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
@@ -361,6 +370,9 @@ export const mutations = {
     state.gsOfferPromoImageUrl = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
+  setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
+  setGsBusCompanies: (state, data) => (state.gsBusCompanies = data),
+  setGsBusClasses: (state, data) => (state.gsBusClasses = data),
   setGsSeatViewData: (state, data) => {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;
