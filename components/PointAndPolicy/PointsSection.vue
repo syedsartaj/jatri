@@ -10,7 +10,7 @@
     "
   >
     <li v-for="(point, index) in pointArray" :key="index" class="ml-5">
-      {{ point }}
+      {{ point.name }}
     </li>
   </ul>
 </template>

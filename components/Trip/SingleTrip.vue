@@ -143,8 +143,8 @@
             :selectedTab="selectedTab"
             :setCurrentTab="setCurrentTab"
             :handlePointPolicyModal="handlePointPolicyModal"
-            :boardingPoints="trip.boardingPoints"
-            :droppingPoints="trip.droppingPoints"
+            :boardingPoints="getModalBoardingPoints"
+            :droppingPoints="getGsDroppingPoints"
           />
         </div>
       </div>
@@ -854,7 +854,13 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 export default {
-  props: ["trip", "selectedTrip", "busIndex"],
+  props: [
+    "trip",
+    "selectedTrip",
+    "busIndex",
+    "setSelectedBuxIndex",
+    "selectedBuxIndex",
+  ],
   data() {
     return {
       selectedTab: "",
@@ -894,8 +900,8 @@ export default {
       "getGsSeatViewData",
       "getGsTrips",
       "getPromoCode",
-      "getBoardingPoints",
-      "getDroppingPoints",
+      "getModalBoardingPoints",
+      "getGsDroppingPoints",
     ]),
     departureDateTime() {
       if (this.boardingPoint.scheduleTime === "") {
@@ -946,15 +952,33 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("guarantedseat", ["mobileFloatingFilter"]),
+    ...mapMutations("guarantedseat", [
+      "mobileFloatingFilter",
+      "setModalBoardingPoints",
+      "setGsDroppingPoints",
+    ]),
     ...mapActions("guarantedseat", [
       "getPbSeatViewAction",
+      "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
     setCurrentTab(value) {
+      if (this.selectedBuxIndex !== this.busIndex) {
+        this.setGsDroppingPoints([]);
+        this.setModalBoardingPoints([]);
+        this.$nextTick(async () => {
+          this.$nuxt.$loading.start();
+          const payload = this.getPayloadForSeatView();
+          await this.getBoardingPointForBus(payload);
+          this.$nuxt.$loading.finish();
+          this.setSelectedBuxIndex(this.busIndex);
+          this.showPointPolicyModal = true;
+        });
+      } else {
+        this.showPointPolicyModal = true;
+      }
       this.selectedTab = value;
-      this.showPointPolicyModal = true;
       this.stopBackgroundScroll(true);
     },
     handlePointPolicyModal() {
@@ -982,26 +1006,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading.start();
-        const payload = {
-          moduleType: this.trip.moduleType,
-          busServiceType: this.trip.busServiceType,
-          transportType: this.trip.transportType,
-          transportId: this.trip.transportId,
-          uid: this.trip.uid,
-          fromCity: this.trip.fromCity,
-          toCity: this.trip.toCity,
-          busId: this.trip.busId,
-          departureId: this.trip.departureId,
-          departureDate: this.trip.departureDate,
-          departureTime: this.trip.departureTime,
-          sku: this.trip.sku,
-          id: this.trip.id,
-          seatPlan: this.trip.seatPlan,
-          seatFare: this.trip.seatFare,
-          companyId: this.trip.companyId,
-          coachType: this.trip.coach.type,
-          tripDateTime: this.trip.tripDateTime,
-        };
+        const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading.finish();
         this.$emit("selectedTripId", selectedTripId);
@@ -1010,6 +1015,28 @@ export default {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
+    },
+    getPayloadForSeatView() {
+      return {
+        moduleType: this.trip.moduleType,
+        busServiceType: this.trip.busServiceType,
+        transportType: this.trip.transportType,
+        transportId: this.trip.transportId,
+        uid: this.trip.uid,
+        fromCity: this.trip.fromCity,
+        toCity: this.trip.toCity,
+        busId: this.trip.busId,
+        departureId: this.trip.departureId,
+        departureDate: this.trip.departureDate,
+        departureTime: this.trip.departureTime,
+        sku: this.trip.sku,
+        id: this.trip.id,
+        seatPlan: this.trip.seatPlan,
+        seatFare: this.trip.seatFare,
+        companyId: this.trip.companyId,
+        coachType: this.trip.coach.type,
+        tripDateTime: this.trip.tripDateTime,
+      };
     },
     addSeatHandler(seat) {
       if (this.selectedSeatIds.includes(seat.id)) {
