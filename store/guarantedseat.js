@@ -9,6 +9,11 @@ export const state = () => ({
   gsCities: [],
   gsOfferPromoImageUrl: [],
   gsTrips: [],
+  gsBoardingPoints: [],
+  modalBoardingPointList: [],
+  gsDroppingPoints: [],
+  gsBusCompanies: [],
+  gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
   gsSeatBoardingPointArray: [],
@@ -32,6 +37,11 @@ export const getters = {
     return state.gsOfferPromoImageUrl
   },
   getGsTrips: (state) => state.gsTrips,
+  getGsBoardingPoints: (state) => state.gsBoardingPoints,
+  getModalBoardingPoints: (state) => state.modalBoardingPointList,
+  getGsDroppingPoints: (state) => state.gsDroppingPoints,
+  getGsBusCompanies: (state) => state.gsBusCompanies,
+  getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
@@ -108,6 +118,9 @@ export const actions = {
       if (data.trips) {
         commit('setGsTrips', data.trips);
       }
+      commit('setGsBoardingPoints', data.boardingPoints || []);
+      commit('setGsBusCompanies', data.companies || []);
+      commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
@@ -124,6 +137,28 @@ export const actions = {
       );
       commit('setGsSeatViewData', data);
       commit('resetPromoCode');
+    } catch (error) {
+      if (error.response && error.response.data.statusCode === 404) {
+        this.$toast.error(error.response.data.message, {
+          position: 'bottom-right',
+          duration: 5000,
+        })
+        window.location.reload(true)
+      }
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+    }
+  },
+  async getBoardingPointForBus({ commit }, payload) {
+    try {
+      const { data } = await this.$api.$post(
+        apis.GET_PARIBAHAN_SEAT_VIEW_URL,
+        payload
+      );
+      commit('setGsDroppingPoints', data.seatPlan.droppingPoints);
+      commit('setModalBoardingPoints', data.seatPlan.bordingPoints);
     } catch (error) {
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
@@ -361,6 +396,11 @@ export const mutations = {
     state.gsOfferPromoImageUrl = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
+  setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
+  setGsDroppingPoints: (state, data) => (state.gsDroppingPoints = data),
+  setModalBoardingPoints: (state, data) => (state.modalBoardingPointList = data),
+  setGsBusCompanies: (state, data) => (state.gsBusCompanies = data),
+  setGsBusClasses: (state, data) => (state.gsBusClasses = data),
   setGsSeatViewData: (state, data) => {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;

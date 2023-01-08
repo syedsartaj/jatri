@@ -3,20 +3,23 @@
     @click="click"
     class="
       rounded
-      bg-[#EDEDED]
+      lg:bg-[#EDEDED]
       w-full
       font-normal
       text-xs
-      lg:text-sm
-      text-center
+      lg:text-sm lg:text-center
+      text-left
       flex
-      justify-center
+      lg:justify-center
+      justify-left
       items-center
       cursor-pointer
       py-2
+      underline
+      lg:no-underline
     "
   >
-    <p>{{ text }}</p>
+    {{ text }}
   </div>
 </template>
 

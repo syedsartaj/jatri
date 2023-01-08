@@ -31,12 +31,17 @@
               justify-start
               gap-x-4
               items-center
-              w-10/12
+              w-7/12
+              lg:w-9/12
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
           >
-            <img src="@/assets/images/busDefaultImage.svg" alt="" />
+            <img
+              src="@/assets/images/busDefaultImage.svg"
+              class="h-[40px] w[40px]"
+              alt=""
+            />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
                 {{ trip.company }}
@@ -49,14 +54,28 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-2/12 text-right">
-            <p class="text-blackPrimary max-sm:text-xs">
-              <span>{{ trip.available }}</span> Seat<span
-                v-if="trip.available > 1"
-                >s</span
-              >
-            </p>
-            <p class="text-xs lg:text-sm text-blackLight">Available</p>
+          <div v-if="trip.available" class="w-5/12 lg:w-3/12 text-right">
+            <div
+              class="
+                h-[30px]
+                bg-[#F1F9F1]
+                flex flex-row
+                items-center
+                justify-center
+                rounded-full
+              "
+            >
+              <img
+                src="@/assets/images/ticket/seat.svg"
+                alt="seat"
+                class="mr-[10px]"
+              />
+              <p class="text-[#48A43F] text-xs">
+                <span>{{ trip.available }}</span>
+                <span v-if="trip.available > 1">Seats left</span>
+                <span v-else>Seat left</span>
+              </p>
+            </div>
           </div>
         </div>
         <div
@@ -98,7 +117,7 @@
           class="
             flex
             justify-evenly
-            gap-[16px]
+            lg:gap-[16px]
             items-center
             lg:order-last
             w-full
@@ -124,6 +143,8 @@
             :selectedTab="selectedTab"
             :setCurrentTab="setCurrentTab"
             :handlePointPolicyModal="handlePointPolicyModal"
+            :boardingPoints="getModalBoardingPoints"
+            :droppingPoints="getGsDroppingPoints"
           />
         </div>
       </div>
@@ -411,7 +432,7 @@
                         "
                         :fill="
                           colSeat.status !== 'available'
-                            ? '#DBDBDB'
+                            ? '#8D8D8F'
                             : selectedSeatIds.includes(colSeat.id)
                             ? '#48A43F'
                             : 'white'
@@ -423,8 +444,8 @@
                             ? '#48A43F'
                             : '#8D8D8F'
                         "
-                        height="24"
-                        width="24"
+                        height="26"
+                        width="30"
                       />
                       <!-- <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
                                                             {{ colSeat.seatNo }}
@@ -833,7 +854,13 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 export default {
-  props: ["trip", "selectedTrip", "busIndex"],
+  props: [
+    "trip",
+    "selectedTrip",
+    "busIndex",
+    "setSelectedBuxIndex",
+    "selectedBuxIndex",
+  ],
   data() {
     return {
       selectedTab: "",
@@ -873,6 +900,8 @@ export default {
       "getGsSeatViewData",
       "getGsTrips",
       "getPromoCode",
+      "getModalBoardingPoints",
+      "getGsDroppingPoints",
     ]),
     departureDateTime() {
       if (this.boardingPoint.scheduleTime === "") {
@@ -923,15 +952,33 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("guarantedseat", ["mobileFloatingFilter"]),
+    ...mapMutations("guarantedseat", [
+      "mobileFloatingFilter",
+      "setModalBoardingPoints",
+      "setGsDroppingPoints",
+    ]),
     ...mapActions("guarantedseat", [
       "getPbSeatViewAction",
+      "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
     setCurrentTab(value) {
+      if (this.selectedBuxIndex !== this.busIndex) {
+        this.setGsDroppingPoints([]);
+        this.setModalBoardingPoints([]);
+        this.$nextTick(async () => {
+          this.$nuxt.$loading.start();
+          const payload = this.getPayloadForSeatView();
+          await this.getBoardingPointForBus(payload);
+          this.$nuxt.$loading.finish();
+          this.setSelectedBuxIndex(this.busIndex);
+          this.showPointPolicyModal = true;
+        });
+      } else {
+        this.showPointPolicyModal = true;
+      }
       this.selectedTab = value;
-      this.showPointPolicyModal = true;
       this.stopBackgroundScroll(true);
     },
     handlePointPolicyModal() {
@@ -943,7 +990,6 @@ export default {
       this.stopBackgroundScroll(this.showBusImageModal);
     },
     stopBackgroundScroll(value) {
-      console.log(value);
       const body = document.getElementsByTagName("body")[0];
       if (body) {
         body.style.overflow = value ? "hidden" : "scroll";
@@ -960,26 +1006,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading.start();
-        const payload = {
-          moduleType: this.trip.moduleType,
-          busServiceType: this.trip.busServiceType,
-          transportType: this.trip.transportType,
-          transportId: this.trip.transportId,
-          uid: this.trip.uid,
-          fromCity: this.trip.fromCity,
-          toCity: this.trip.toCity,
-          busId: this.trip.busId,
-          departureId: this.trip.departureId,
-          departureDate: this.trip.departureDate,
-          departureTime: this.trip.departureTime,
-          sku: this.trip.sku,
-          id: this.trip.id,
-          seatPlan: this.trip.seatPlan,
-          seatFare: this.trip.seatFare,
-          companyId: this.trip.companyId,
-          coachType: this.trip.coach.type,
-          tripDateTime: this.trip.tripDateTime,
-        };
+        const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading.finish();
         this.$emit("selectedTripId", selectedTripId);
@@ -988,6 +1015,28 @@ export default {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
+    },
+    getPayloadForSeatView() {
+      return {
+        moduleType: this.trip.moduleType,
+        busServiceType: this.trip.busServiceType,
+        transportType: this.trip.transportType,
+        transportId: this.trip.transportId,
+        uid: this.trip.uid,
+        fromCity: this.trip.fromCity,
+        toCity: this.trip.toCity,
+        busId: this.trip.busId,
+        departureId: this.trip.departureId,
+        departureDate: this.trip.departureDate,
+        departureTime: this.trip.departureTime,
+        sku: this.trip.sku,
+        id: this.trip.id,
+        seatPlan: this.trip.seatPlan,
+        seatFare: this.trip.seatFare,
+        companyId: this.trip.companyId,
+        coachType: this.trip.coach.type,
+        tripDateTime: this.trip.tripDateTime,
+      };
     },
     addSeatHandler(seat) {
       if (this.selectedSeatIds.includes(seat.id)) {
