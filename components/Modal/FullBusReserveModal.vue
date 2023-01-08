@@ -82,7 +82,6 @@
                         :label="'Select a Date'"
                         :default-option="'Select Journey Date'"
                         :allow-filter="true"
-                        :errorOccured="errorOccured && !returnDate"
                       />
                     </div>
                   </div>
@@ -308,7 +307,7 @@
                       rounded-full
                     "
                   >
-                    Ok
+                    Submit
                   </button>
                 </div>
               </div>
