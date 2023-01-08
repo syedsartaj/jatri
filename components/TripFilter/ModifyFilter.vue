@@ -73,8 +73,9 @@
         <p class="text-[#E0293B] font-medium text-xs">Reset Filter</p>
       </button>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="timeList.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
       <div class="flex justify-between gap-[7px] mt-[10px]">
         <div
@@ -122,8 +123,9 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="coachTypes.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
       <div class="flex justify-between gap-[7px] mt-[10px]">
         <div
@@ -173,8 +175,9 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="getGsBusClasses.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
       <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
@@ -218,108 +221,119 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="priceDirection in priceFilter"
-        :key="priceDirection"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="priceDirection"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="priceFilter.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="priceDirection in priceFilter"
+          :key="priceDirection"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          <img
-            :src="
-              require(priceDirection == 'l2h'
-                ? '@/assets/images/icons/downArrow.svg'
-                : '@/assets/images/icons/upArrow.svg')
+          <label
+            :for="priceDirection"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
             "
-            alt="Price Filter Type"
-            class=""
+          >
+            <img
+              :src="
+                require(priceDirection == 'l2h'
+                  ? '@/assets/images/icons/downArrow.svg'
+                  : '@/assets/images/icons/upArrow.svg')
+              "
+              alt="Price Filter Type"
+              class=""
+            />
+            {{
+              priceDirection == "l2h"
+                ? "Price low to high"
+                : "Price high to low"
+            }}
+          </label>
+          <input
+            :id="priceDirection"
+            type="checkbox"
+            @click="priceFilterType = priceDirection"
+            :checked="priceFilterType === priceDirection"
+            class="default:border-2 border-blackPrimary cursor-pointer"
           />
-          {{
-            priceDirection == "l2h" ? "Price low to high" : "Price high to low"
-          }}
-        </label>
-        <input
-          :id="priceDirection"
-          type="checkbox"
-          @click="priceFilterType = priceDirection"
-          :checked="priceFilterType === priceDirection"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+        </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="point in getGsBoardingPoints"
-        :key="point"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="point"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="getGsBoardingPoints.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="point in getGsBoardingPoints"
+          :key="point"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          {{ point }}
-        </label>
-        <input
-          :id="point"
-          type="checkbox"
-          @click="setBoardingPoint(point)"
-          :checked="boardingPoint === point"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+          <label
+            :for="point"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
+            "
+          >
+            {{ point }}
+          </label>
+          <input
+            :id="point"
+            type="checkbox"
+            @click="setBoardingPoint(point)"
+            :checked="boardingPoint === point"
+            class="default:border-2 border-blackPrimary cursor-pointer"
+          />
+        </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="bus in getGsBusCompanies"
-        :key="bus"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="bus"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="getGsBusCompanies.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="bus in getGsBusCompanies"
+          :key="bus"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          {{ bus }}
-        </label>
-        <input
-          :id="bus"
-          type="checkbox"
-          @click="setBusCompany(bus)"
-          :checked="busCompany === bus"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+          <label
+            :for="bus"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
+            "
+          >
+            {{ bus }}
+          </label>
+          <input
+            :id="bus"
+            type="checkbox"
+            @click="setBusCompany(bus)"
+            :checked="busCompany === bus"
+            class="default:border-2 border-blackPrimary cursor-pointer"
+          />
+        </div>
       </div>
     </div>
   </div>
