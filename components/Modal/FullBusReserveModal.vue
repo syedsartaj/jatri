@@ -33,7 +33,14 @@
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
-              <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
+              <h2
+                class="
+                  text-xl
+                  lg:text-[32px] lg:leading-[40px]
+                  font-medium
+                  text-blackPrimary
+                "
+              >
                 Full bus reserve
               </h2>
 
@@ -43,9 +50,10 @@
             </div>
 
             <div class="bg-white font-normal pt-[10px]">
-              <p class="text-base lg:text-xl text-[#4D4D4F]">
+              <p class="text-sm lg:text-xl text-[#4D4D4F]">
                 Now you can reserve a full bus according to your need. Fill the
-                form and submit. We will check and reserve a bus for you.
+                form and submit. <br />
+                We will check and reserve a bus for you.
               </p>
               <div
                 class="
@@ -82,6 +90,7 @@
                         :label="'Select a Date'"
                         :default-option="'Select Journey Date'"
                         :allow-filter="true"
+                        :errorOccured="false"
                       />
                     </div>
                   </div>
@@ -93,9 +102,6 @@
                         type="text"
                         v-model="boardingPlace"
                         :errorOccured="errorOccured && !boardingPlace"
-                        @update:modelValue="
-                          (newValue) => (boardingPlace = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
@@ -105,9 +111,6 @@
                         type="text"
                         v-model="droppingPlace"
                         :errorOccured="errorOccured && !droppingPlace"
-                        @update:modelValue="
-                          (newValue) => (droppingPlace = newValue)
-                        "
                       />
                     </div>
                   </div>
@@ -134,11 +137,10 @@
                       <EnterInput
                         placeholder="Enter number Of Buses"
                         type="number"
+                        minInput="0"
+                        maxInput="1000"
                         v-model="numberOfBuses"
                         :errorOccured="errorOccured && !numberOfBuses"
-                        @update:modelValue="
-                          (newValue) => (numberOfBuses = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
@@ -149,7 +151,6 @@
                         :options="busTypes"
                         :selectedValue="busType"
                         :errorOccured="errorOccured && !busType"
-                        @update:modelValue="(newValue) => (busType = newValue)"
                       />
                     </div>
                   </div>
@@ -170,11 +171,10 @@
                       <EnterInput
                         placeholder="Enter budget amount"
                         type="number"
+                        minInput="0"
+                        maxInput="9999999999999999999"
                         v-model="numberOfSeats"
                         :errorOccured="errorOccured && !numberOfSeats"
-                        @update:modelValue="
-                          (newValue) => (numberOfSeats = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
@@ -184,9 +184,6 @@
                         type="text"
                         v-model="prefferredBus"
                         :errorOccured="errorOccured && !prefferredBus"
-                        @update:modelValue="
-                          (newValue) => (prefferredBus = newValue)
-                        "
                       />
                     </div>
                   </div>
@@ -207,11 +204,10 @@
                     <EnterInput
                       placeholder="Enter budget amount"
                       type="number"
+                      minInput="0"
+                      maxInput="9999999999999999999"
                       v-model="approximateBudget"
                       :errorOccured="errorOccured && !approximateBudget"
-                      @update:modelValue="
-                        (newValue) => (approximateBudget = newValue)
-                      "
                     />
                   </div>
                   <div class="w-full lg:col-span-3 col-span-1">
@@ -220,7 +216,6 @@
                       placeholder="Enter your comment"
                       type="text"
                       v-model="comment"
-                      @update:modelValue="(newValue) => (comment = newValue)"
                     />
                   </div>
                 </div>
@@ -248,20 +243,22 @@
                         type="text"
                         v-model="contactName"
                         :errorOccured="errorOccured && !contactName"
-                        @update:modelValue="
-                          (newValue) => (contactName = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
                       <CommonInputLabel label="Mobile No" />
                       <EnterInput
                         placeholder="Enter mobile number"
-                        type="number"
+                        type="text"
+                        minInput="0"
+                        minlength="11"
+                        maxlength="11"
                         v-model="contactPhone"
-                        :errorOccured="errorOccured && !contactPhone"
-                        @update:modelValue="
-                          (newValue) => (contactPhone = newValue)
+                        :errorOccured="
+                          (errorOccured && !contactPhone) ||
+                          (errorOccured &&
+                            contactPhone &&
+                            contactPhone.length !== 11)
                         "
                       />
                     </div>
@@ -284,8 +281,8 @@
                         placeholder="Enter email"
                         type="email"
                         v-model="contactEmail"
-                        @update:modelValue="
-                          (newValue) => (contactEmail = newValue)
+                        :errorOccured="
+                          errorOccured && contactEmail && !isValidEmail
                         "
                       />
                     </div>
@@ -343,6 +340,9 @@ export default {
   },
   computed: {
     ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+    isValidEmail() {
+      return /^[^@]+@\w+(\.\w+)+\w$/.test(this.contactEmail);
+    },
   },
   methods: {
     ...mapActions("guarantedseat", ["fullBusReservationAction"]),
@@ -364,6 +364,8 @@ export default {
         approximateBudget,
       } = this;
 
+      console.log(contactEmail && this.isValidEmail);
+
       if (
         journeyDate &&
         returnDate &&
@@ -375,7 +377,9 @@ export default {
         prefferredBus &&
         contactName &&
         contactPhone &&
-        approximateBudget
+        contactPhone.length === 11 &&
+        approximateBudget &&
+        (!contactEmail || (contactEmail && this.isValidEmail))
       ) {
         const payload = {
           journeyDate,
