@@ -51,7 +51,7 @@
                 class="
                   lg:border lg:border-[#DBDBDB]
                   rounded
-                  h-[759px]
+                  h-[552px]
                   overflow-y-auto
                   lg:h-auto
                   mt-6
