@@ -3,6 +3,7 @@
     <!-- <Loader v-if="getLoading" /> -->
     <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
     <RequestSuccessfulModal v-if="getRequestSuccessfulStatus" />
+    <SurpriseDealShowingModal v-if="getSurpriseDealModalStatus" />
     <div class="bg-corporateBg flex flex-col justify-start items-start h-full">
       <Header />
       <div class="w-full">
@@ -23,6 +24,7 @@ export default {
     ...mapGetters("guarantedseat", [
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
+      "getSurpriseDealModalStatus",
     ]),
   },
 };

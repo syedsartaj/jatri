@@ -24,6 +24,7 @@ export const state = () => ({
   promoCode: {},
   isBusReserveModalOpen: false,
   isRequestSuccessFull: false,
+  showSurpriseDealModal: null,
   isTicketPopupOpen: false,
   selectedTicketId: null
 });
@@ -52,6 +53,7 @@ export const getters = {
   getPromoCode: (state) => state.promoCode,
   getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
   getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
+  getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
 };
@@ -380,6 +382,26 @@ export const actions = {
     }
   },
 
+  async getSurpriseDealAction({ commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_GET_SURPRISE_DEAL, payload);
+
+
+      commit('handleSurpriseDealModal', data);
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
+
   async fullBusReservationAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
@@ -455,6 +477,10 @@ export const mutations = {
   handleSuccessfulModal: (state, data) => {
     handleScrollBehaviour(state.isRequestSuccessFull);
     state.isRequestSuccessFull = !state.isRequestSuccessFull;
+  },
+  handleSurpriseDealModal: (state, data) => {
+    handleScrollBehaviour(data);
+    state.showSurpriseDealModal = data;
   },
   handleCancelTicketPopup: (state, data) => {
     const body = document.getElementsByTagName("body")[0];

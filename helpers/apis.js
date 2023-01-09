@@ -16,6 +16,7 @@ export const POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL = `${PARIBAHAN_BASE_URL}/v
 
 export const POST_PROMO_CODE_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/check-promo-code`;
 export const POST_APPLY_PROMO_CODE_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/apply-promo-code`;
+export const POST_GET_SURPRISE_DEAL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-surprise-deal`;
 export const POST_FULL_BUS_RESERVATION = `${PARIBAHAN_BASE_URL}/v1/api/intercity/bus-reservation`;
 // ------------ paribahan apis End ---------------- //
 

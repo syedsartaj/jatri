@@ -473,7 +473,7 @@
         </div>
       </div>
 
-      <DealButton />
+      <DealButton :callback="handleDealButton" />
 
       <div v-if="!paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
         <PaymentTimeoutAlert />
@@ -623,7 +623,25 @@ export default {
     ...mapActions("guarantedseat", [
       "TicketConfirmAction",
       "applyPromoCodeAction",
+      "getSurpriseDealAction",
     ]),
+    handleDealButton() {
+      this.$nextTick(async () => {
+        this.$nuxt.$loading.start();
+        const payload = {
+          companyId:
+            (this.getBookingInfoDetails.company &&
+              this.getBookingInfoDetails.company._id) ||
+            null,
+          tripDateTime: this.getBookingInfoDetails.invoice.tripDateTime,
+          coachType: this.getBookingInfoDetails.invoice.coachType,
+          paymentId: this.getBookingInfoDetails._id,
+        };
+        this.getSurpriseDealAction(payload);
+
+        this.$nuxt.$loading.finish();
+      });
+    },
     timeFormate(time) {
       return moment(time, "hh:mm").format("LT");
     },

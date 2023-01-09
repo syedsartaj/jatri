@@ -37,6 +37,7 @@
         </p>
       </div>
       <div
+        @click="callback"
         class="
           h-[36px]
           w-[100px]
@@ -60,6 +61,7 @@
 <script>
 export default {
   name: "DealButton",
+  props: ["callback"],
 };
 </script>
 
