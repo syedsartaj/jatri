@@ -333,18 +333,18 @@
                   px-[14px]
                 "
               >
-                <img
+                <!-- <img
                   src="@/assets/images/seats/bookedSeats.svg"
                   alt="Booked"
                   class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
+                /> -->
+                <ArmChairIcon
+                  :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
+                  :fill="'#8D8D8F'"
+                  :stroke="'#8D8D8F'"
+                  height="24"
+                  width="24"
                 />
-                <!-- <ArmChairIcon
-                                             :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
-                                             :fill="'#6B7280'"
-                                             :stroke="'#6B7280'"
-                                             height='24'
-                                             width='24'
-                                        /> -->
                 <p
                   class="
                     text-xs
@@ -720,70 +720,6 @@
             />
           </div>
 
-          <div v-if="!trip.offer && moduleType == 'intercity'" class="mt-4">
-            <h2
-              class="
-                text-xs
-                lg:text-base
-                font-medium
-                text-blackPrimary
-                flex
-                justify-between
-              "
-            >
-              <span>Promo Code</span>
-            </h2>
-            <div class="flex justify-between gap-x-4">
-              <input
-                type="text"
-                id="promo"
-                v-model="promoCode"
-                placeholder="Enter Promo Code"
-                class="
-                  bg-[#f7f7f7]
-                  px-4
-                  py-[13px]
-                  mt-[10px]
-                  rounded
-                  w-3/4
-                  focus:outline-0
-                  text-xs
-                  placeholder:text-blackSecondery
-                  text-blackPrimary
-                "
-              />
-
-              <!-- Apply Promo -->
-              <button
-                @click="applyPromo"
-                :disabled="!promoCode"
-                :class="
-                  !promoCode
-                    ? 'bg-[#FDF0F1] text-[#E0293B]'
-                    : 'bg-corporate text-successLight'
-                "
-                class="
-                  w-1/2
-                  mt-[10px]
-                  py-[10px]
-                  rounded-full
-                  text-xs
-                  font-medium
-                  overflow-hidden
-                "
-              >
-                Apply Promo
-              </button>
-
-              <!-- Remove Promo -->
-              <!-- <button
-                                             class="flex justify-center items-center gap-x-[11.76px] w-1/4 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary"
-                                        >
-                                        <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
-                                        <p class="text-[#E0293B] text-xs font-medium">Remove promo</p>
-                                   </button> -->
-            </div>
-          </div>
           <LoaderButton
             :class="
               (trip.moduleType == 'paribahan' && !passengerEmail) ||

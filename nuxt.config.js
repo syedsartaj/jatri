@@ -7,7 +7,7 @@ export default {
     port: process.env.PORT || 3000,
   },
   head: {
-    title: "Jatri Ticket",
+    title: "Jatri Ticket | Buy  online bus tickets",
     htmlAttrs: {
       lang: "en",
     },

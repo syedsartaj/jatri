@@ -354,6 +354,31 @@ export const actions = {
       })
     })
   },
+  async applyPromoCodeAction({ dispatch, commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_APPLY_PROMO_CODE_URL, payload);
+
+
+      dispatch('getBookingInfoByTnxId', { 'transactionId': payload.tnxId });
+
+      this.$toast.success('Promo code applied successfully', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
 
   async fullBusReservationAction({ commit }, payload) {
     try {

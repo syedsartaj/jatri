@@ -24,7 +24,7 @@
           src="@/assets/images/icons/phoneBlack.svg"
           alt=""
         />
-        <span>09642080808</span>
+        <span class="font-medium text-base font-inter">09642080808</span>
       </a>
 
       <div
@@ -43,7 +43,9 @@
         @click="setBusReserveModalOpenStatus"
       >
         <img src="@/assets/images/home/fullBusReserve.svg" alt="" />
-        <span class="w-32">Full bus reserve</span>
+        <span class="w-32 font-medium text-base font-inter"
+          >Full bus reserve</span
+        >
       </div>
 
       <NuxtLink
@@ -57,10 +59,13 @@
           flex
           justify-between
           gap-x-[10.5px]
+          items-center
         "
       >
         <img src="@/assets/images/icons/searchIcon.svg" alt="" />
-        <span class="w-15">Find ticket</span>
+        <span class="w-15 font-medium text-xs text-center font-inter"
+          >Ticket History</span
+        >
       </NuxtLink>
       <div class="flex lg:hidden">
         <div v-if="showHamburgerMenu">
