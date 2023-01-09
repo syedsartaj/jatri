@@ -52,8 +52,8 @@
             <div class="bg-white font-normal pt-[10px]">
               <p class="text-sm lg:text-xl text-[#4D4D4F]">
                 Now you can reserve a full bus according to your need. Fill the
-                form and submit. <br />
-                We will check and reserve a bus for you.
+                form and <br />
+                submit. We will check and reserve a bus for you.
               </p>
               <div
                 class="

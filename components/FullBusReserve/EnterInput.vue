@@ -16,6 +16,7 @@
     >
       <input
         class="
+          font-inter
           h-full
           w-full
           outline-none
@@ -23,6 +24,7 @@
           text-sm
           font-normal
           text-blackPrimary text-left
+          placeholder-blackSecondery-400
         "
         :type="type"
         :placeholder="placeholder"

@@ -5,6 +5,7 @@
       class="
         flex
         justify-between
+        items-center
         px-2
         py-[10px]
         border border-[#DBDBDB]
@@ -15,13 +16,7 @@
       @click="toggleDropdown"
     >
       <p
-        class="
-          lg:text-xs
-          text-sm
-          2xl:text-base
-          font-normal
-          text-blackPrimary text-left
-        "
+        class="font-inter text-sm font-normal text-blackPrimary text-left"
         v-if="dateUpdate !== '' && inital !== 0"
       >
         {{
@@ -29,25 +24,13 @@
         }}
       </p>
       <p
-        class="
-          lg:text-xs
-          text-sm
-          2xl:text-base
-          font-normal
-          text-blackPrimary text-left
-        "
+        class="font-inter text-sm font-normal text-[#676769] text-left"
         v-else-if="defaultOption"
       >
         Select a date
       </p>
       <p
-        class="
-          lg:text-xs
-          text-sm
-          2xl:text-base
-          font-normal
-          text-blackPrimary text-left
-        "
+        class="font-inter text-sm font-normal text-[#676769] text-left"
         v-else-if="inital === 0"
       >
         Select Journey Date
@@ -71,7 +54,7 @@
       "
     >
       <div class="text-center p-4">
-        <h2 class="font-inter text-sm xl:text-[20px] font-[400]">
+        <h2 class="font-inter text-sm font-[400]">
           <span>{{ defaultOption }}</span>
         </h2>
       </div>
