@@ -123,12 +123,9 @@ export default {
         this.$nuxt.$loading.start();
         const payload = {
           promoCode: this.getSurpriseDealModalStatus.code,
-          companyId:
-            (this.getBookingInfoDetails.company &&
-              this.getBookingInfoDetails.company._id) ||
-            null,
-          tripDateTime: this.getBookingInfoDetails.invoice.tripDateTime,
-          coachType: this.getBookingInfoDetails.invoice.coachType,
+          companyId: this.getBookingInfoDetails.invoice?.companyId,
+          tripDateTime: this.getBookingInfoDetails.invoice?.tripDateTime,
+          coachType: this.getBookingInfoDetails.invoice?.coachType,
           paymentId: this.getBookingInfoDetails._id,
           tnxId: this.$route.query.tnxId,
         };

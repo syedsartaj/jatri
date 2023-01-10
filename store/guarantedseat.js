@@ -89,7 +89,6 @@ export const actions = {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
     } catch (error) {
-      console.log(error);
       // this.$toast.error(error.response ? error.response.data.message : error.message , {
       //   position: 'bottom-right',
       //   duration: 5000,
@@ -292,6 +291,26 @@ export const actions = {
       return false;
     }
   },
+  async sendOtpForCancelTicketAction({ commit, state }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_SEND_OTP_BY_TICKET_ID, payload);
+      commit('handleCancelTicketPopup', data.data.phone);
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
   async cancelTicketAction({ commit, state }, payload) {
     try {
       commit('setGsLoading', true);
@@ -313,7 +332,6 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      commit('handleCancelTicketPopup');
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -482,12 +500,9 @@ export const mutations = {
     state.showSurpriseDealModal = data;
   },
   handleCancelTicketPopup: (state, data) => {
-    const body = document.getElementsByTagName("body")[0];
-    if (body) {
-      body.style.overflow = !state.isTicketPopupOpen ? "hidden" : "scroll";
-    }
-    state.isTicketPopupOpen = !state.isTicketPopupOpen;
-    if (!state.isTicketPopupOpen) {
+    handleScrollBehaviour(!data);
+    state.isTicketPopupOpen = data;
+    if (!data) {
       state.selectedTicketId = null;
     }
   },

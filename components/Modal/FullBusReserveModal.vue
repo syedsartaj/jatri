@@ -364,8 +364,6 @@ export default {
         approximateBudget,
       } = this;
 
-      console.log(contactEmail && this.isValidEmail);
-
       if (
         journeyDate &&
         returnDate &&

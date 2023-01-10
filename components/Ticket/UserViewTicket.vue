@@ -425,17 +425,14 @@ export default {
         printWindow.close();
       }
     },
-    ...mapActions("guarantedseat", ["cancelTicketAction"]),
-    ...mapMutations("guarantedseat", [
-      "setCancelTicketId",
-      "handleCancelTicketPopup",
-    ]),
+    ...mapActions("guarantedseat", ["sendOtpForCancelTicketAction"]),
+    ...mapMutations("guarantedseat", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
         ticketId,
       };
-      this.setCancelTicketId(payload);
-      this.handleCancelTicketPopup();
+      this.setCancelTicketId(ticketId);
+      this.sendOtpForCancelTicketAction(payload);
     },
   },
   computed: {
