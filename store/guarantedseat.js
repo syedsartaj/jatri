@@ -364,6 +364,7 @@ export const actions = {
 
 
       dispatch('getBookingInfoByTnxId', { 'transactionId': payload.tnxId });
+      commit('handleSurpriseDealModal', null);
 
       this.$toast.success('Promo code applied successfully', {
         position: 'bottom-right',
@@ -387,9 +388,7 @@ export const actions = {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.POST_GET_SURPRISE_DEAL, payload);
-
-
-      commit('handleSurpriseDealModal', data);
+      commit('handleSurpriseDealModal', data.data);
       commit('setGsLoading', false);
       return true;
     } catch (error) {
@@ -479,7 +478,7 @@ export const mutations = {
     state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
   handleSurpriseDealModal: (state, data) => {
-    handleScrollBehaviour(data);
+    handleScrollBehaviour(!data);
     state.showSurpriseDealModal = data;
   },
   handleCancelTicketPopup: (state, data) => {
