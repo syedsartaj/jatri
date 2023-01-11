@@ -16,6 +16,7 @@
     >
       <input
         class="
+          font-inter
           h-full
           w-full
           outline-none
@@ -23,23 +24,34 @@
           text-sm
           font-normal
           text-blackPrimary text-left
+          placeholder-blackSecondery-400
         "
         :type="type"
         :placeholder="placeholder"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        :min="minInput"
+        :minlength="minlength"
+        :maxlength="maxlength"
+        :value="value"
+        @input="updateValue"
       />
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["placeholder", "type", "modelValue", "errorOccured"],
-  emits: ["update:modelValue"],
-  data() {
-    return {
-      value: this.modelValue,
-    };
+  props: [
+    "placeholder",
+    "type",
+    "value",
+    "errorOccured",
+    "minInput",
+    "maxlength",
+    "minlength",
+  ],
+  methods: {
+    updateValue(event) {
+      this.$emit("input", event.target.value);
+    },
   },
 };
 </script>

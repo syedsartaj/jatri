@@ -4,10 +4,7 @@
 
 
 @layer base{
-     @font-face {
-          font-family: "Inter";
-          src: url("../fonts/Inter-Medium.otf");
-     }
+
      body {
           @apply font-inter;
      }

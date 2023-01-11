@@ -30,7 +30,7 @@
             />
             <DatePicker
                 v-model="departingDate"
-                :label="'Select Date'"
+                :label="'DEPARTURE DATE'"
                 :default-option="'Select Journey Date'"
                 :allow-filter="true"
                 :errorOccured="errorOccured"

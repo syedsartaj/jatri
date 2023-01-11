@@ -7,7 +7,7 @@ export default {
     port: process.env.PORT || 3000,
   },
   head: {
-    title: "Jatri Ticket",
+    title: "Jatri Ticket | Buy  online bus tickets",
     htmlAttrs: {
       lang: "en",
     },
@@ -46,7 +46,7 @@ export default {
     '~/plugins/gtm'
   ],
 
-  
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -61,8 +61,16 @@ export default {
     "@nuxt/postcss8",
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
+    "@nuxtjs/google-fonts",
   ],
-
+  googleFonts: {
+    display: "swap",
+    families: {
+      Inter: {
+        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      }
+    }
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -89,7 +97,7 @@ export default {
       id: process.env.GTM_ID || 'GTM-MWP6J24'
     }
   },
-  
+
   toast: {
     timeout: 2000,
     closeOnClick: false
