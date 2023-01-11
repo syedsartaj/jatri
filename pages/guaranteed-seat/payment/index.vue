@@ -630,7 +630,9 @@ export default {
         this.$nuxt.$loading.start();
         const payload = {
           companyId: this.getBookingInfoDetails.invoice?.companyId,
-          tripDateTime: this.getBookingInfoDetails.invoice?.tripDateTime,
+          tripDateTime:
+            this.getBookingInfoDetails.invoice?.tripDateTime ||
+            this.getBookingInfoDetails.invoice?.boardingDateTime,
           coachType: this.getBookingInfoDetails.invoice?.coachType,
           paymentId: this.getBookingInfoDetails._id,
         };
