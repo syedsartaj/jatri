@@ -411,7 +411,7 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      this.$toast.error(error.response.data.message, {
+      this.$toast.error('Sorry!! No deal found now.', {
         position: 'bottom-right',
         duration: 5000,
       })

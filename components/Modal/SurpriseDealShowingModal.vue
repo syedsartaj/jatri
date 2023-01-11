@@ -124,7 +124,9 @@ export default {
         const payload = {
           promoCode: this.getSurpriseDealModalStatus.code,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
-          tripDateTime: this.getBookingInfoDetails.invoice?.tripDateTime,
+          tripDateTime:
+            this.getBookingInfoDetails.invoice?.tripDateTime ||
+            this.getBookingInfoDetails.invoice?.boardingDateTime,
           coachType: this.getBookingInfoDetails.invoice?.coachType,
           paymentId: this.getBookingInfoDetails._id,
           tnxId: this.$route.query.tnxId,
