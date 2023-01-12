@@ -1,7 +1,10 @@
 <template>
   <div class="w-1/4 p-[8px] h-15" v-click-outside="onClickOutside">
+    <!-- Initial View -->
     <button
       v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
+      @click="handleShowInputBox(true)"
+      v-if="isInitialView"
       class="
         block
         rounded-lg
@@ -26,12 +29,7 @@
         {{ label }}
       </p>
 
-      <!-- Initial View -->
-      <div
-        v-if="isInitialView"
-        class="flex justify-between"
-        @click="handleShowInputBox(true)"
-      >
+      <div class="flex justify-between">
         <p
           class="
             lg:text-xs
@@ -50,13 +48,37 @@
           class="w-6 h-6"
         />
       </div>
+    </button>
 
-      <!-- Any option is selected -->
-      <div
-        v-if="isAnyOptionSelected"
-        class="flex justify-between"
-        @click="handleShowInputBox(true)"
+    <!-- Any option is selected -->
+    <button
+      v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
+      v-if="isAnyOptionSelected"
+      @click="handleShowInputBox(true)"
+      class="
+        block
+        rounded-lg
+        bg-white
+        focus:outline-none
+        w-full
+        lg:p-2
+        border-[1px] border-[#DBDBDB]
+        cursor-pointer
+      "
+    >
+      <p
+        v-if="label"
+        class="
+          lg:text-[10px]
+          xl:text-xs
+          font-normal
+          text-blackSecondery text-left
+          uppercase
+        "
       >
+        {{ label }}
+      </p>
+      <div class="flex justify-between">
         <p
           class="
             lg:text-xs
@@ -74,9 +96,37 @@
           class="w-6 h-6"
         />
       </div>
+    </button>
 
-      <!-- Input box open -->
-      <div v-if="showInputBox" class="flex justify-between items-center">
+    <!-- Input box open -->
+    <button
+      v-if="showInputBox"
+      @click="optionsIsOpen = true"
+      v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
+      class="
+        block
+        rounded-lg
+        bg-white
+        focus:outline-none
+        w-full
+        lg:p-2
+        border-[1px] border-[#DBDBDB]
+        cursor-pointer
+      "
+    >
+      <p
+        v-if="label"
+        class="
+          lg:text-[10px]
+          xl:text-xs
+          font-normal
+          text-blackSecondery text-left
+          uppercase
+        "
+      >
+        {{ label }}
+      </p>
+      <div class="flex justify-between items-center">
         <input
           v-if="allowFilter"
           id="searchInput"
@@ -218,7 +268,7 @@ export default {
   methods: {
     onClickOutside() {
       this.optionsIsOpen = false;
-      this.showInputBox = false;
+      this.showInputBox = this.selectedOption === "" && this.searchKey;
     },
     toggleDropdown() {
       this.optionsIsOpen = !this.optionsIsOpen;
