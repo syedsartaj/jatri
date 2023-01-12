@@ -59,6 +59,7 @@
                 class="
                   lg:border lg:border-[#DBDBDB]
                   rounded
+                  scrollbar-hide
                   h-[552px]
                   overflow-y-auto
                   lg:h-auto
@@ -137,7 +138,7 @@
                       <EnterInput
                         placeholder="Enter number Of Buses"
                         type="number"
-                        minInput="0"
+                        minInput="1"
                         maxInput="1000"
                         v-model="numberOfBuses"
                         :errorOccured="errorOccured && !numberOfBuses"
@@ -171,7 +172,7 @@
                       <EnterInput
                         placeholder="Enter budget amount"
                         type="number"
-                        minInput="0"
+                        minInput="1"
                         maxInput="9999999999999999999"
                         v-model="numberOfSeats"
                         :errorOccured="errorOccured && !numberOfSeats"
@@ -183,7 +184,7 @@
                         placeholder="Enter Preferred bus operator"
                         type="text"
                         v-model="prefferredBus"
-                        :errorOccured="errorOccured && !prefferredBus"
+                        :errorOccured="false"
                       />
                     </div>
                   </div>
@@ -204,7 +205,7 @@
                     <EnterInput
                       placeholder="Enter budget amount"
                       type="number"
-                      minInput="0"
+                      minInput="1"
                       maxInput="9999999999999999999"
                       v-model="approximateBudget"
                       :errorOccured="errorOccured && !approximateBudget"
@@ -255,10 +256,7 @@
                         maxlength="11"
                         v-model="contactPhone"
                         :errorOccured="
-                          (errorOccured && !contactPhone) ||
-                          (errorOccured &&
-                            contactPhone &&
-                            contactPhone.length !== 11)
+                          errorOccured && contactPhone.length !== 11
                         "
                       />
                     </div>
@@ -332,7 +330,7 @@ export default {
       prefferredBus: null,
       comment: null,
       contactName: null,
-      contactPhone: null,
+      contactPhone: "",
       contactEmail: null,
       approximateBudget: null,
       busTypes: ["ac", "non-ac", "all"],
@@ -366,13 +364,11 @@ export default {
 
       if (
         journeyDate &&
-        returnDate &&
         busType &&
         boardingPlace &&
         droppingPlace &&
         numberOfSeats &&
         numberOfBuses &&
-        prefferredBus &&
         contactName &&
         contactPhone &&
         contactPhone.length === 11 &&
@@ -406,3 +402,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-default {
+  -ms-overflow-style: auto; /* IE and Edge */
+  scrollbar-width: auto;
+}
+
+.scrollbar-default::-webkit-scrollbar {
+  display: block;
+}
+</style>
