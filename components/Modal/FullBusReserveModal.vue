@@ -4,31 +4,41 @@
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
 
-    <div class="fixed inset-0 z-10 p-[11px] lg:p-0">
+    <div
+      class="
+        fixed
+        inset-0
+        z-10
+        p-[11px]
+        lg:p-0
+        flex
+        items-center
+        justify-center
+      "
+    >
       <div
         class="
           flex
-          min-h-full
-          items-end
           justify-center
           lg:p-4
           text-center
           lg:items-center lg:px-[100px]
+          h-full
+          lg:h-auto
         "
       >
         <div
           class="
             relative
             transform
-            overflow-hidden
+            overflow-hidden overflow-y-auto
             rounded-lg
             bg-white
             text-left
             shadow-xl
             transition-all
             w-full
-            lg:h-auto
-            h-[96vh]
+            h-full
           "
         >
           <div class="bg-white p-4 lg:p-6 w-full">
@@ -60,8 +70,7 @@
                   lg:border lg:border-[#DBDBDB]
                   rounded
                   scrollbar-hide
-                  h-[552px]
-                  overflow-y-auto
+                  h-full
                   lg:h-auto
                   mt-6
                   lg:p-6
