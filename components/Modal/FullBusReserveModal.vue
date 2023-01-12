@@ -111,7 +111,7 @@
                         placeholder="Enter dropping place"
                         type="text"
                         v-model="droppingPlace"
-                        :errorOccured="errorOccured && !droppingPlace"
+                        :errorOccured="isDroppingError"
                       />
                     </div>
                   </div>
@@ -141,7 +141,10 @@
                         minInput="1"
                         maxInput="1000"
                         v-model="numberOfBuses"
-                        :errorOccured="errorOccured && !numberOfBuses"
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfBuses && parseInt(numberOfBuses) > 0)
+                        "
                       />
                     </div>
                     <div class="w-full">
@@ -175,7 +178,10 @@
                         minInput="1"
                         maxInput="9999999999999999999"
                         v-model="numberOfSeats"
-                        :errorOccured="errorOccured && !numberOfSeats"
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfSeats && parseInt(numberOfSeats) > 0)
+                        "
                       />
                     </div>
                     <div class="w-full">
@@ -208,7 +214,10 @@
                       minInput="1"
                       maxInput="9999999999999999999"
                       v-model="approximateBudget"
-                      :errorOccured="errorOccured && !approximateBudget"
+                      :errorOccured="
+                        errorOccured &&
+                        !(approximateBudget && parseInt(approximateBudget) > 0)
+                      "
                     />
                   </div>
                   <div class="w-full lg:col-span-3 col-span-1">
@@ -341,6 +350,9 @@ export default {
     isValidEmail() {
       return /^[^@]+@\w+(\.\w+)+\w$/.test(this.contactEmail);
     },
+    isDroppingError() {
+      return this.errorOccured && !this.droppingPlace;
+    },
   },
   methods: {
     ...mapActions("guarantedseat", ["fullBusReservationAction"]),
@@ -368,11 +380,14 @@ export default {
         boardingPlace &&
         droppingPlace &&
         numberOfSeats &&
+        parseInt(numberOfSeats) > 0 &&
         numberOfBuses &&
+        parseInt(numberOfBuses) > 0 &&
         contactName &&
         contactPhone &&
         contactPhone.length === 11 &&
         approximateBudget &&
+        parseInt(approximateBudget) > 0 &&
         (!contactEmail || (contactEmail && this.isValidEmail))
       ) {
         const payload = {

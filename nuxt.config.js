@@ -17,10 +17,10 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+      { hid: "description", name: "description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { hid: "keywords", name: "keywords", content: "bus ticket bd, bus ticket online, bus ticket price, bus ticket booking online" },
       { hid: "og-title", name: "og:title", content: "Online bus tickets for everyone" },
-      { hid: "og-desc", name: "og:description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+      { hid: "og-desc", name: "og:description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { name: "format-detection", content: "telephone=no" },
       { hid: 'og-image', name: 'og:image', content: `${process.env.CLIENT_BASE_URL}/favicon.png` }
     ],

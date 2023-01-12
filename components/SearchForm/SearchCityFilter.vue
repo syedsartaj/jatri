@@ -131,6 +131,7 @@
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
+          autocomplete="off"
           class="
             rounded-md
             outline-none
