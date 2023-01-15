@@ -4,7 +4,7 @@
       mt-6
       relative
       overflow-hidden
-      mb-[30px]
+      mb-2
       h-auto
       w-full
       overflow-hidden

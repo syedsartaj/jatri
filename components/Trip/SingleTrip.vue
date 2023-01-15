@@ -38,7 +38,11 @@
             @click="handleBusImagePreviewModal"
           >
             <img
-              src="@/assets/images/busDefaultImage.svg"
+              :src="
+                (trip.companyImages?.logo &&
+                  `${imageUrl}${trip.companyImages?.logo}`) ||
+                require(`@/assets/images/busDefaultImage.svg`)
+              "
               class="h-[40px] w[40px]"
               alt=""
             />
@@ -112,6 +116,7 @@
           v-if="showBusImageModal"
           :companyName="trip.company"
           :close="handleBusImagePreviewModal"
+          :companyImages="trip.companyImages"
         />
         <div
           class="
@@ -797,6 +802,9 @@ export default {
     "setSelectedBuxIndex",
     "selectedBuxIndex",
   ],
+  mounted() {
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+  },
   data() {
     return {
       selectedTab: "",
@@ -805,6 +813,7 @@ export default {
         DROPPING_POINT: "DROPPING_POINT",
         CANCEL_POLICY: "CANCEL_POLICY",
       },
+      imageUrl: "",
       showPointPolicyModal: false,
       showBusImageModal: false,
       selected: false,
@@ -922,8 +931,10 @@ export default {
       this.stopBackgroundScroll(this.showPointPolicyModal);
     },
     handleBusImagePreviewModal() {
-      this.showBusImageModal = !this.showBusImageModal;
-      this.stopBackgroundScroll(this.showBusImageModal);
+      if (this.trip?.companyImages?.gallery?.length) {
+        this.showBusImageModal = !this.showBusImageModal;
+        this.stopBackgroundScroll(this.showBusImageModal);
+      }
     },
     stopBackgroundScroll(value) {
       const body = document.getElementsByTagName("body")[0];

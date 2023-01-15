@@ -4,31 +4,41 @@
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
 
-    <div class="fixed inset-0 z-10 p-[11px] lg:p-0">
+    <div
+      class="
+        fixed
+        inset-0
+        z-10
+        p-[11px]
+        lg:p-0
+        flex
+        items-center
+        justify-center
+      "
+    >
       <div
         class="
           flex
-          min-h-full
-          items-end
           justify-center
           lg:p-4
           text-center
           lg:items-center lg:px-[100px]
+          h-full
+          lg:h-auto
         "
       >
         <div
           class="
             relative
             transform
-            overflow-hidden
+            overflow-hidden overflow-y-auto
             rounded-lg
             bg-white
             text-left
             shadow-xl
             transition-all
             w-full
-            lg:h-auto
-            h-[96vh]
+            h-full
           "
         >
           <div class="bg-white p-4 lg:p-6 w-full">
@@ -59,8 +69,8 @@
                 class="
                   lg:border lg:border-[#DBDBDB]
                   rounded
-                  h-[552px]
-                  overflow-y-auto
+                  scrollbar-hide
+                  h-full
                   lg:h-auto
                   mt-6
                   lg:p-6
@@ -110,7 +120,7 @@
                         placeholder="Enter dropping place"
                         type="text"
                         v-model="droppingPlace"
-                        :errorOccured="errorOccured && !droppingPlace"
+                        :errorOccured="isDroppingError"
                       />
                     </div>
                   </div>
@@ -137,10 +147,13 @@
                       <EnterInput
                         placeholder="Enter number Of Buses"
                         type="number"
-                        minInput="0"
+                        minInput="1"
                         maxInput="1000"
                         v-model="numberOfBuses"
-                        :errorOccured="errorOccured && !numberOfBuses"
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfBuses && parseInt(numberOfBuses) > 0)
+                        "
                       />
                     </div>
                     <div class="w-full">
@@ -171,10 +184,13 @@
                       <EnterInput
                         placeholder="Enter budget amount"
                         type="number"
-                        minInput="0"
+                        minInput="1"
                         maxInput="9999999999999999999"
                         v-model="numberOfSeats"
-                        :errorOccured="errorOccured && !numberOfSeats"
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfSeats && parseInt(numberOfSeats) > 0)
+                        "
                       />
                     </div>
                     <div class="w-full">
@@ -183,7 +199,7 @@
                         placeholder="Enter Preferred bus operator"
                         type="text"
                         v-model="prefferredBus"
-                        :errorOccured="errorOccured && !prefferredBus"
+                        :errorOccured="false"
                       />
                     </div>
                   </div>
@@ -204,10 +220,13 @@
                     <EnterInput
                       placeholder="Enter budget amount"
                       type="number"
-                      minInput="0"
+                      minInput="1"
                       maxInput="9999999999999999999"
                       v-model="approximateBudget"
-                      :errorOccured="errorOccured && !approximateBudget"
+                      :errorOccured="
+                        errorOccured &&
+                        !(approximateBudget && parseInt(approximateBudget) > 0)
+                      "
                     />
                   </div>
                   <div class="w-full lg:col-span-3 col-span-1">
@@ -255,10 +274,7 @@
                         maxlength="11"
                         v-model="contactPhone"
                         :errorOccured="
-                          (errorOccured && !contactPhone) ||
-                          (errorOccured &&
-                            contactPhone &&
-                            contactPhone.length !== 11)
+                          errorOccured && contactPhone.length !== 11
                         "
                       />
                     </div>
@@ -332,7 +348,7 @@ export default {
       prefferredBus: null,
       comment: null,
       contactName: null,
-      contactPhone: null,
+      contactPhone: "",
       contactEmail: null,
       approximateBudget: null,
       busTypes: ["ac", "non-ac", "all"],
@@ -342,6 +358,9 @@ export default {
     ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
     isValidEmail() {
       return /^[^@]+@\w+(\.\w+)+\w$/.test(this.contactEmail);
+    },
+    isDroppingError() {
+      return this.errorOccured && !this.droppingPlace;
     },
   },
   methods: {
@@ -366,17 +385,18 @@ export default {
 
       if (
         journeyDate &&
-        returnDate &&
         busType &&
         boardingPlace &&
         droppingPlace &&
         numberOfSeats &&
+        parseInt(numberOfSeats) > 0 &&
         numberOfBuses &&
-        prefferredBus &&
+        parseInt(numberOfBuses) > 0 &&
         contactName &&
         contactPhone &&
         contactPhone.length === 11 &&
         approximateBudget &&
+        parseInt(approximateBudget) > 0 &&
         (!contactEmail || (contactEmail && this.isValidEmail))
       ) {
         const payload = {
@@ -406,3 +426,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-default {
+  -ms-overflow-style: auto; /* IE and Edge */
+  scrollbar-width: auto;
+}
+
+.scrollbar-default::-webkit-scrollbar {
+  display: block;
+}
+</style>

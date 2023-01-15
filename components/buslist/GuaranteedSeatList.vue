@@ -12,7 +12,7 @@
         :setSelectedBuxIndex="(value) => (selectedBusIndex = value)"
       />
     </div>
-    <div v-else>
+    <div v-else-if="getGsTrips.length === 0 && isBeforeGetDataState === false">
       <!-- error layout -->
       <div class="h-[500px] flex justify-center items-center bg-[#f7f7f7]">
         <!-- <TripNotFound/> -->
@@ -35,6 +35,7 @@ export default {
     return {
       selectedBusId: null,
       selectedBusIndex: null,
+      isBeforeGetDataState: true,
     };
   },
   computed: {
@@ -87,6 +88,7 @@ export default {
 
         await this.getPbScheduleDataAction(payload);
         this.$nuxt.$loading.finish();
+        this.isBeforeGetDataState = false;
       });
     },
   },
