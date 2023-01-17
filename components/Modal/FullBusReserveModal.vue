@@ -342,7 +342,7 @@ export default {
       errorOccured: false,
       journeyDate: null,
       returnDate: null,
-      busType: "all",
+      busType: "any",
       boardingPlace: null,
       droppingPlace: null,
       numberOfSeats: null,
@@ -353,7 +353,7 @@ export default {
       contactPhone: "",
       contactEmail: null,
       approximateBudget: null,
-      busTypes: ["ac", "non-ac", "all"],
+      busTypes: ["non-ac", "economy-ac", "business-class", "sleeper", "any"],
     };
   },
   computed: {

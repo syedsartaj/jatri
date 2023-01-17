@@ -542,7 +542,9 @@
           <p class="mt-[6px] text-sm text-[#8D8D8F] font-normal">
             Reach out to us for any kind of assistance on +096776655
           </p>
-          <button
+          <a
+            href="https://jatri.co/contact-us"
+            target="_blank"
             class="
               text-xs
               font-medium
@@ -554,7 +556,7 @@
             "
           >
             Contact us
-          </button>
+          </a>
         </div>
       </div>
     </div>

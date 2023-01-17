@@ -739,6 +739,26 @@ export default {
           link: "/bus-operator?name=saintmartin-bd-express",
         },
         {
+          name: "Khulna Express",
+          link: "/bus-operator?name=khulna-express",
+        },
+        {
+          name: "Meghna Travels",
+          link: "/bus-operator?name=meghna-travels",
+        },
+        {
+          name: "Jeddah Express",
+          link: "/bus-operator?name=jeddah-express",
+        },
+        {
+          name: "TR Travels Classic",
+          link: "/bus-operator?name=tr-travels-classic",
+        },
+        {
+          name: "New Dhaka Express",
+          link: "/bus-operator?name=new-dhaka-express",
+        },
+        {
           name: "Many more to come...",
           link: "#",
         },

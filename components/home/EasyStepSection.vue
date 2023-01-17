@@ -51,7 +51,7 @@
                   mt-8
                   "
                   >
-                  Search Destination
+                  Search Destination!
                </h2>
                <p
                   class="
@@ -102,7 +102,7 @@
                   mt-8
                   "
                   >
-                  Select Ticket
+                  Select Ticket!
                </h2>
                <p
                   class="
@@ -116,10 +116,10 @@
                   >
                <ul class="list-disc ml-5">
                   <li>Click the <span class="font-semibold">View Seats</span> option</li>
-                  <li>Provide all the information</li>
                   <li>Select your seats</li>
+                  <li>Provide all the information</li>
                   <li>Select the <span class="font-semibold">Next</span> option</li>
-                  <li>Get your tickets</li>
+                  <li>By clicking on the operator name/image, you can see the entire bus image </li>
                </ul>
                </p>
             </div>
@@ -152,7 +152,7 @@
                   mt-8
                   "
                   >
-                  Pay and enjoy journey
+                  Pay and Enjoy your Journey!
                </h2>
                <p
                   class="

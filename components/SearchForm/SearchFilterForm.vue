@@ -59,7 +59,7 @@ export default {
         destination: "",
         departureName: "",
         destinationName: "",
-        departingDate: "",
+        departingDate: new Date().toLocaleString('en-CA', {dateStyle: 'short'}),
         coachType: "all",
         // passengerName: "",
         coachTypes: [

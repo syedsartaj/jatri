@@ -21,3 +21,8 @@
 .searchbar{
      box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.16)
 }
+
+.vc-highlight {
+     border-color: #F04935 !important;
+     background-color: #F04935 !important;
+}
