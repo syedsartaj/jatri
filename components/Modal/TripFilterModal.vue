@@ -48,7 +48,7 @@
               </button>
             </div>
             <hr class="my-4" />
-            <div class="bg-white overflow-y-auto h-[600px] scrollbar-hide">
+            <div class="bg-white overflow-y-auto h-[65vh] scrollbar-hide">
               <div class="flex justify-between gap-x-8">
                 <button
                   @click="previousDateFilter"
@@ -425,11 +425,11 @@
                 </div>
               </div>
             </div>
-            <div class="flex justify-center gap-x-5 pb-7 pt-[14px]">
+            <div class="flex justify-evenly gap-x-5 pb-7 pt-[14px]">
               <button
                 class="
-                  px-[70.5px]
-                  py-[10px]
+                  h-[46px]
+                  w-full
                   border border-[#808083]
                   hover:border-corporate
                   bg-white
@@ -445,14 +445,12 @@
               </button>
               <button
                 class="
-                  px-[70.5px]
-                  py-[10px]
-                  border border-[#808083]
-                  hover:border-corporate
-                  bg-white
-                  hover:bg-corporate
-                  text-corporate
-                  hover:text-white
+                  h-[46px]
+                  w-full
+                  border
+                  border-corporate
+                  bg-corporate
+                  text-white
                   text-sm
                   rounded-full
                 "

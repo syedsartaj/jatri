@@ -202,7 +202,8 @@
               text-blackPrimary
             "
           >
-            {{ trip.seatFare[0].fare }} <span class="text-base">TK</span>
+            {{ parseInt(trip.seatFare[0].fare) }}
+            <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
         </div>
