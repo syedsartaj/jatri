@@ -354,7 +354,7 @@
 
 <script>
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -402,37 +402,22 @@ export default {
       printWindow.document.write("</html>");
       printWindow.document.close();
       printWindow.focus();
-      // if (window.print) {
-      //   printWindow.print();
-      // }
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        printWindow.print(); // change window to winPrint
-        // printWindow.close(); // change window to winPrint
-      } else if (is_chrome) {
-        printWindow.onload = function () {
-          setTimeout(function () {
-            // wait until all resources loaded
-            printWindow.print(); // change window to winPrint
-            printWindow.close(); // change window to winPrint
-          }, 500);
-        };
-      } else {
-        printWindow.print();
-        printWindow.close();
-      }
+      printWindow.onload = function () {
+        setTimeout(function () {
+          // wait until all resources loaded
+          printWindow.print(); // change window to winPrint
+          printWindow.close(); // change window to winPrint
+        }, 500);
+      };
     },
-    ...mapActions("guarantedseat", ["cancelTicketAction"]),
+    ...mapActions("guarantedseat", ["sendOtpForCancelTicketAction"]),
+    ...mapMutations("guarantedseat", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
-        ticketId: ticketId,
+        ticketId,
       };
-      if (confirm("Are you sure to cancel this ticket?") == true) {
-        this.cancelTicketAction(payload);
-      }
+      this.setCancelTicketId(ticketId);
+      this.sendOtpForCancelTicketAction(payload);
     },
   },
   computed: {

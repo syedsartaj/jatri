@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white searchbar rounded-[10px] flex justify-between w-full">
-        <div class="flex justify-between divide-x w-10/12">
+        <div class="flex justify-between w-10/12">
             <SearchCityFilter
                 v-model="departure"
                 :defaultValue="departureName"
@@ -8,6 +8,7 @@
                 :default-option="'Choose Your Location'"
                 :allow-filter="true"
                 :options="getGsCities"
+                :errorOccured="errorOccured"
             />
             <SearchCityFilter
                 v-model="destination"
@@ -16,6 +17,7 @@
                 :default-option="'Choose Your Destination'"
                 :allow-filter="true"
                 :options="getGsCities"
+                :errorOccured="errorOccured"
             />
             <SearchBusFilter
                 v-model="coachType"
@@ -24,21 +26,23 @@
                 :default-option="'Choose bus type'"
                 :allow-filter="false"
                 :options="coachTypes"
+                :errorOccured="errorOccured"
             />
             <DatePicker
                 v-model="departingDate"
-                :label="'Select Date'"
+                :label="'DEPARTURE DATE'"
                 :default-option="'Select Journey Date'"
                 :allow-filter="true"
+                :errorOccured="errorOccured"
             />
         </div>
         <div class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center">
             <button
-                class="rounded-full text-white text-xs  xl:text-sm font-semibold leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
+                class="rounded-full text-white text-xs  xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
                 :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer'"
                 @click="handleFromSubmit"
             >
-                Search Ticket
+                Search ticket
             </button>
         </div>
     </div>
@@ -50,11 +54,12 @@ import Cookies from 'js-cookie';
 export default {
     data() {
         return {
+        errorOccured: false,
         departure: "",
         destination: "",
         departureName: "",
         destinationName: "",
-        departingDate: "",
+        departingDate: new Date().toLocaleString('en-CA', {dateStyle: 'short'}),
         coachType: "all",
         // passengerName: "",
         coachTypes: [
@@ -69,31 +74,25 @@ export default {
         ...mapGetters("guarantedseat", ["getGsCities"]),
     },
     methods: {
+        handleToastMessage(message) {
+        this.$toast.error(message, {
+            position: "bottom-right",
+            duration: 5000,
+        });
+        },
         handleFromSubmit() {
             if (!this.departure) {
-                this.$toast.error('Please insert your location', {
-                    position: 'bottom-right',
-                    duration: 5000,
-                })
-            } 
-            if (!this.destination){
-                this.$toast.error('Please insert your destination', {
-                    position: 'bottom-right',
-                    duration: 5000,
-                })
-            } 
-            if (!this.coachType){
-                this.$toast.error('Please insert coach type', {
-                    position: 'bottom-right',
-                    duration: 5000,
-                })
-            } 
+                this.handleToastMessage('Please insert your location');
+            }
+            if (!this.destination) {
+                this.handleToastMessage('Please insert your destination');
+            }
+            if (!this.coachType) {
+                this.handleToastMessage('Please insert coach type');
+            }
             if (!this.departingDate) {
-                this.$toast.error('Please insert departure date', {
-                    position: 'bottom-right',
-                    duration: 5000,
-                })
-            } 
+                this.handleToastMessage('Please insert departure date');
+            }
             if(this.departure && this.destination && this.coachType && this.departingDate) {
                 const query = {
                     from: this.departure,
@@ -104,6 +103,9 @@ export default {
                 };
                 Cookies.remove('process-allow')
                 this.$router.push({ path: "/trip", query });
+            }
+            else {
+                this.errorOccured = true;
             }
         },
 

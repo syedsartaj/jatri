@@ -25,8 +25,27 @@
         "
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
-          <div class="flex justify-start gap-x-4 items-center w-10/12">
-            <img src="@/assets/images/busDefaultImage.svg" alt="" />
+          <div
+            class="
+              flex
+              justify-start
+              gap-x-4
+              items-center
+              w-7/12
+              lg:w-9/12
+              cursor-pointer
+            "
+            @click="handleBusImagePreviewModal"
+          >
+            <img
+              :src="
+                (trip.companyImages?.logo &&
+                  `${imageUrl}${trip.companyImages?.logo}`) ||
+                require(`@/assets/images/busDefaultImage.svg`)
+              "
+              class="h-[40px] w[40px]"
+              alt=""
+            />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
                 {{ trip.company }}
@@ -39,14 +58,28 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-2/12 text-right">
-            <p class="text-blackPrimary max-sm:text-xs">
-              <span>{{ trip.available }}</span> Seat<span
-                v-if="trip.available > 1"
-                >s</span
-              >
-            </p>
-            <p class="text-xs lg:text-sm text-blackLight">Available</p>
+          <div v-if="trip.available" class="w-5/12 lg:w-3/12 text-right">
+            <div
+              class="
+                h-[30px]
+                bg-[#F1F9F1]
+                flex flex-row
+                items-center
+                justify-center
+                rounded-full
+              "
+            >
+              <img
+                src="@/assets/images/ticket/seat.svg"
+                alt="seat"
+                class="mr-[10px]"
+              />
+              <p class="text-[#48A43F] text-xs">
+                <span>{{ trip.available }}</span>
+                <span v-if="trip.available > 1">Seats left</span>
+                <span v-else>Seat left</span>
+              </p>
+            </div>
           </div>
         </div>
         <div
@@ -77,6 +110,47 @@
               ).toLocaleString("en-Us", { timeStyle: "short" })
             }}
           </h2>
+        </div>
+
+        <BusImagePreviewModal
+          v-if="showBusImageModal"
+          :companyName="trip.company"
+          :close="handleBusImagePreviewModal"
+          :companyImages="trip.companyImages"
+        />
+        <div
+          class="
+            flex
+            justify-evenly
+            lg:gap-[16px]
+            items-center
+            lg:order-last
+            w-full
+            pt-[15px]
+            pb-[15px]
+            lg:pb-[0px]
+          "
+        >
+          <PointPolicyButton
+            text="Boarding Point"
+            :click="() => setCurrentTab(TabData.BOARDING_POINT)"
+          />
+          <PointPolicyButton
+            text="Dropping Point"
+            :click="() => setCurrentTab(TabData.DROPPING_POINT)"
+          />
+          <PointPolicyButton
+            text="Cancellation Policy"
+            :click="() => setCurrentTab(TabData.CANCEL_POLICY)"
+          />
+          <PointAndPolicyModal
+            v-if="showPointPolicyModal"
+            :selectedTab="selectedTab"
+            :setCurrentTab="setCurrentTab"
+            :handlePointPolicyModal="handlePointPolicyModal"
+            :boardingPoints="getModalBoardingPoints"
+            :droppingPoints="getGsDroppingPoints"
+          />
         </div>
       </div>
       <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
@@ -128,7 +202,8 @@
               text-blackPrimary
             "
           >
-            {{ trip.seatFare[0].fare }} <span class="text-base">TK</span>
+            {{ parseInt(trip.seatFare[0].fare) }}
+            <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
         </div>
@@ -264,18 +339,18 @@
                   px-[14px]
                 "
               >
-                <img
+                <!-- <img
                   src="@/assets/images/seats/bookedSeats.svg"
                   alt="Booked"
                   class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
+                /> -->
+                <ArmChairIcon
+                  :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
+                  :fill="'#8D8D8F'"
+                  :stroke="'#8D8D8F'"
+                  height="24"
+                  width="24"
                 />
-                <!-- <ArmChairIcon
-                                             :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
-                                             :fill="'#6B7280'"
-                                             :stroke="'#6B7280'"
-                                             height='24'
-                                             width='24'
-                                        /> -->
                 <p
                   class="
                     text-xs
@@ -363,7 +438,7 @@
                         "
                         :fill="
                           colSeat.status !== 'available'
-                            ? '#DBDBDB'
+                            ? '#8D8D8F'
                             : selectedSeatIds.includes(colSeat.id)
                             ? '#48A43F'
                             : 'white'
@@ -375,8 +450,8 @@
                             ? '#48A43F'
                             : '#8D8D8F'
                         "
-                        height="24"
-                        width="24"
+                        height="26"
+                        width="30"
                       />
                       <!-- <p class='whitespace-nowrap rounded-md absolute hidden group-hover:block bottom-full mb-2 p-2 text-white font-bold border bg-corporate shadow-md z-50'>
                                                             {{ colSeat.seatNo }}
@@ -651,70 +726,6 @@
             />
           </div>
 
-          <div v-if="!trip.offer && moduleType == 'intercity'" class="mt-4">
-            <h2
-              class="
-                text-xs
-                lg:text-base
-                font-medium
-                text-blackPrimary
-                flex
-                justify-between
-              "
-            >
-              <span>Promo Code</span>
-            </h2>
-            <div class="flex justify-between gap-x-4">
-              <input
-                type="text"
-                id="promo"
-                v-model="promoCode"
-                placeholder="Enter Promo Code"
-                class="
-                  bg-[#f7f7f7]
-                  px-4
-                  py-[13px]
-                  mt-[10px]
-                  rounded
-                  w-3/4
-                  focus:outline-0
-                  text-xs
-                  placeholder:text-blackSecondery
-                  text-blackPrimary
-                "
-              />
-
-              <!-- Apply Promo -->
-              <button
-                @click="applyPromo"
-                :disabled="!promoCode"
-                :class="
-                  !promoCode
-                    ? 'bg-[#FDF0F1] text-[#E0293B]'
-                    : 'bg-corporate text-successLight'
-                "
-                class="
-                  w-1/2
-                  mt-[10px]
-                  py-[10px]
-                  rounded-full
-                  text-xs
-                  font-medium
-                  overflow-hidden
-                "
-              >
-                Apply Promo
-              </button>
-
-              <!-- Remove Promo -->
-              <!-- <button
-                                             class="flex justify-center items-center gap-x-[11.76px] w-1/4 bg-[#FDF0F1] rounded-full text-xs lg:text-base font-medium text-blackPrimary"
-                                        >
-                                        <img src="@/assets/images/icons/cross.svg" alt="" class="w-[8.49px]">
-                                        <p class="text-[#E0293B] text-xs font-medium">Remove promo</p>
-                                   </button> -->
-            </div>
-          </div>
           <LoaderButton
             :class="
               (trip.moduleType == 'paribahan' && !passengerEmail) ||
@@ -722,7 +733,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length < 11
+              String(passengerPhone).length != 11
                 ? 'bg-gray-500 user cursor-not-allowed'
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
@@ -732,7 +743,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length < 11
+              String(passengerPhone).length != 11
             "
             :loading="getGsLoading"
             class="
@@ -770,7 +781,7 @@
               to="/policies#return-and-refund-policy"
               target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation policy</nuxt-link
+              >Cancellation Policy</nuxt-link
             >
           </div>
         </div>
@@ -785,9 +796,27 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 export default {
-  props: ["trip", "selectedTrip", "busIndex"],
+  props: [
+    "trip",
+    "selectedTrip",
+    "busIndex",
+    "setSelectedBuxIndex",
+    "selectedBuxIndex",
+  ],
+  mounted() {
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+  },
   data() {
     return {
+      selectedTab: "",
+      TabData: {
+        BOARDING_POINT: "BOARDING_POINT",
+        DROPPING_POINT: "DROPPING_POINT",
+        CANCEL_POLICY: "CANCEL_POLICY",
+      },
+      imageUrl: "",
+      showPointPolicyModal: false,
+      showBusImageModal: false,
       selected: false,
       boardingPoint: null,
       passengerCount: "",
@@ -817,6 +846,8 @@ export default {
       "getGsSeatViewData",
       "getGsTrips",
       "getPromoCode",
+      "getModalBoardingPoints",
+      "getGsDroppingPoints",
     ]),
     departureDateTime() {
       if (this.boardingPoint.scheduleTime === "") {
@@ -867,12 +898,51 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("guarantedseat", ["mobileFloatingFilter"]),
+    ...mapMutations("guarantedseat", [
+      "mobileFloatingFilter",
+      "setModalBoardingPoints",
+      "setGsDroppingPoints",
+    ]),
     ...mapActions("guarantedseat", [
       "getPbSeatViewAction",
+      "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
+    setCurrentTab(value) {
+      if (this.selectedBuxIndex !== this.busIndex) {
+        this.setGsDroppingPoints([]);
+        this.setModalBoardingPoints([]);
+        this.$nextTick(async () => {
+          this.$nuxt.$loading.start();
+          const payload = this.getPayloadForSeatView();
+          await this.getBoardingPointForBus(payload);
+          this.$nuxt.$loading.finish();
+          this.setSelectedBuxIndex(this.busIndex);
+          this.showPointPolicyModal = true;
+        });
+      } else {
+        this.showPointPolicyModal = true;
+      }
+      this.selectedTab = value;
+      this.stopBackgroundScroll(true);
+    },
+    handlePointPolicyModal() {
+      this.showPointPolicyModal = !this.showPointPolicyModal;
+      this.stopBackgroundScroll(this.showPointPolicyModal);
+    },
+    handleBusImagePreviewModal() {
+      if (this.trip?.companyImages?.gallery?.length) {
+        this.showBusImageModal = !this.showBusImageModal;
+        this.stopBackgroundScroll(this.showBusImageModal);
+      }
+    },
+    stopBackgroundScroll(value) {
+      const body = document.getElementsByTagName("body")[0];
+      if (body) {
+        body.style.overflow = value ? "hidden" : "scroll";
+      }
+    },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter("status");
       this.resetPromo();
@@ -884,26 +954,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading.start();
-        const payload = {
-          moduleType: this.trip.moduleType,
-          busServiceType: this.trip.busServiceType,
-          transportType: this.trip.transportType,
-          transportId: this.trip.transportId,
-          uid: this.trip.uid,
-          fromCity: this.trip.fromCity,
-          toCity: this.trip.toCity,
-          busId: this.trip.busId,
-          departureId: this.trip.departureId,
-          departureDate: this.trip.departureDate,
-          departureTime: this.trip.departureTime,
-          sku: this.trip.sku,
-          id: this.trip.id,
-          seatPlan: this.trip.seatPlan,
-          seatFare: this.trip.seatFare,
-          companyId: this.trip.companyId,
-          coachType: this.trip.coach.type,
-          tripDateTime: this.trip.tripDateTime,
-        };
+        const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading.finish();
         this.$emit("selectedTripId", selectedTripId);
@@ -912,6 +963,28 @@ export default {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
+    },
+    getPayloadForSeatView() {
+      return {
+        moduleType: this.trip.moduleType,
+        busServiceType: this.trip.busServiceType,
+        transportType: this.trip.transportType,
+        transportId: this.trip.transportId,
+        uid: this.trip.uid,
+        fromCity: this.trip.fromCity,
+        toCity: this.trip.toCity,
+        busId: this.trip.busId,
+        departureId: this.trip.departureId,
+        departureDate: this.trip.departureDate,
+        departureTime: this.trip.departureTime,
+        sku: this.trip.sku,
+        id: this.trip.id,
+        seatPlan: this.trip.seatPlan,
+        seatFare: this.trip.seatFare,
+        companyId: this.trip.companyId,
+        coachType: this.trip.coach.type,
+        tripDateTime: this.trip.tripDateTime,
+      };
     },
     addSeatHandler(seat) {
       if (this.selectedSeatIds.includes(seat.id)) {

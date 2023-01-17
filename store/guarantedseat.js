@@ -1,5 +1,6 @@
 import * as apis from '../helpers/apis';
-import {GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL} from '../helpers/apis';
+import { GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL } from '../helpers/apis';
+import { handleScrollBehaviour } from '../helpers/utils';
 
 export const state = () => ({
   mobileFloatingFilter: true,
@@ -8,6 +9,11 @@ export const state = () => ({
   gsCities: [],
   gsOfferPromoImageUrl: [],
   gsTrips: [],
+  gsBoardingPoints: [],
+  modalBoardingPointList: [],
+  gsDroppingPoints: [],
+  gsBusCompanies: [],
+  gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
   gsSeatBoardingPointArray: [],
@@ -16,6 +22,11 @@ export const state = () => ({
   searchedTicketList: {},
   bookingInfoDetails: {},
   promoCode: {},
+  isBusReserveModalOpen: false,
+  isRequestSuccessFull: false,
+  showSurpriseDealModal: null,
+  isTicketPopupOpen: false,
+  selectedTicketId: null
 });
 
 export const getters = {
@@ -27,6 +38,11 @@ export const getters = {
     return state.gsOfferPromoImageUrl
   },
   getGsTrips: (state) => state.gsTrips,
+  getGsBoardingPoints: (state) => state.gsBoardingPoints,
+  getModalBoardingPoints: (state) => state.modalBoardingPointList,
+  getGsDroppingPoints: (state) => state.gsDroppingPoints,
+  getGsBusCompanies: (state) => state.gsBusCompanies,
+  getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
@@ -35,10 +51,15 @@ export const getters = {
   getSearchedTicketList: (state) => state.searchedTicketList,
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getPromoCode: (state) => state.promoCode,
+  getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
+  getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
+  getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
+  getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
+  getSelectedTicketId: (state) => state.selectedTicketId,
 };
 
 export const actions = {
-  async getPbAccessTokenAction ({ commit }, payload) {
+  async getPbAccessTokenAction({ commit }, payload) {
     try {
       const data = await this.$axios.$post(
         apis.GET_PARIBAHAN_TOKEN_URL,
@@ -52,7 +73,7 @@ export const actions = {
       })
     }
   },
-  async getCitiesList ({ commit }) {
+  async getCitiesList({ commit }) {
     try {
       const { data } = await this.$api.$post(apis.GET_PARIBAHAN_CITY_URL);
       commit('setGsCities', data);
@@ -63,23 +84,22 @@ export const actions = {
       // })
     }
   },
-  async getOfferPromoImagesUrlList ({ commit }) {
+  async getOfferPromoImagesUrlList({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
     } catch (error) {
-      console.log(error);
       // this.$toast.error(error.response ? error.response.data.message : error.message , {
       //   position: 'bottom-right',
       //   duration: 5000,
       // })
     }
   },
-  
-  async readOfferPromoImageUrl ({ commit }, payload) {
+
+  async readOfferPromoImageUrl({ commit }, payload) {
     try {
-      const  data  = await this.$api.$get(
-        apis.READ_OFFER_PROMO_IMAGE_URL, {params: {path: payload}}
+      const data = await this.$api.$get(
+        apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: payload } }
       );
       return data;
       // commit('setGsOfferPromoImage', data);
@@ -90,7 +110,7 @@ export const actions = {
       // })
     }
   },
-  async getPbScheduleDataAction ({ commit }, payload) {
+  async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SCHEDULE_DATA_URL,
@@ -99,6 +119,9 @@ export const actions = {
       if (data.trips) {
         commit('setGsTrips', data.trips);
       }
+      commit('setGsBoardingPoints', data.boardingPoints || []);
+      commit('setGsBusCompanies', data.companies || []);
+      commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
@@ -107,7 +130,7 @@ export const actions = {
     }
   },
 
-  async getPbSeatViewAction ({ commit }, payload) {
+  async getPbSeatViewAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
         apis.GET_PARIBAHAN_SEAT_VIEW_URL,
@@ -116,7 +139,29 @@ export const actions = {
       commit('setGsSeatViewData', data);
       commit('resetPromoCode');
     } catch (error) {
-      if(error.response && error.response.data.statusCode === 404) {
+      if (error.response && error.response.data.statusCode === 404) {
+        this.$toast.error(error.response.data.message, {
+          position: 'bottom-right',
+          duration: 5000,
+        })
+        window.location.reload(true)
+      }
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+    }
+  },
+  async getBoardingPointForBus({ commit }, payload) {
+    try {
+      const { data } = await this.$api.$post(
+        apis.GET_PARIBAHAN_SEAT_VIEW_URL,
+        payload
+      );
+      commit('setGsDroppingPoints', data.seatPlan.droppingPoints);
+      commit('setModalBoardingPoints', data.seatPlan.bordingPoints);
+    } catch (error) {
+      if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
           position: 'bottom-right',
           duration: 5000,
@@ -130,7 +175,7 @@ export const actions = {
     }
   },
 
-  async TicketConfirmAction ({ commit }, payload) {
+  async TicketConfirmAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.$post(
@@ -138,7 +183,7 @@ export const actions = {
         payload
       );
       commit('setGsLoading', false);
-      if(data && data.gatewayUrl) {
+      if (data && data.gatewayUrl) {
         window.location.href = data.gatewayUrl;
       }
       return true;
@@ -152,9 +197,9 @@ export const actions = {
     }
   },
 
-  async getTicketByTnxId({commit}, payload) {
+  async getTicketByTnxId({ commit }, payload) {
     try {
-      const {data} = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
+      const { data } = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
       commit("setTicketDetails", data)
     } catch (e) {
       this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
@@ -163,9 +208,9 @@ export const actions = {
       })
     }
   },
-  async getBookingInfoByTnxId({commit}, payload) {
+  async getBookingInfoByTnxId({ commit }, payload) {
     try {
-      const {data} = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
+      const { data } = await this.$api.$post(apis.GET_BOOKING_INFO_BY_TRANSACTION, payload)
       commit("setBookingInfoDetails", data)
     } catch (e) {
       this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
@@ -175,7 +220,7 @@ export const actions = {
     }
   },
 
-  async getPbPaymentPendingBlockAction ({ commit }, payload) {
+  async getPbPaymentPendingBlockAction({ commit }, payload) {
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL,
@@ -192,10 +237,10 @@ export const actions = {
           })
         }
         commit('setGsLoading', false);
-      }).catch (error => {
+      }).catch(error => {
         commit('setGsLoading', false);
         if (error.response) {
-          const {data} = error.response
+          const { data } = error.response
           resolve(data)
         }
         this.$toast.error(error.response.data.message, {
@@ -206,7 +251,7 @@ export const actions = {
     })
 
   },
-  async successTicketByMailAction ({ commit }, payload) {
+  async successTicketByMailAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$axios.post('https://dev.sslpayment.jatri.co/ssl/ticket/success-ticket-by-mail', payload);
@@ -225,7 +270,7 @@ export const actions = {
       return false;
     }
   },
-  async searchTicketAction ({ commit }, payload) {
+  async searchTicketAction({ commit }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.SEARCH_TICKET, payload);
@@ -246,18 +291,39 @@ export const actions = {
       return false;
     }
   },
-  async cancelTicketAction ({ commit, state }, payload) {
+  async sendOtpForCancelTicketAction({ commit, state }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_SEND_OTP_BY_TICKET_ID, payload);
+      commit('handleCancelTicketPopup', data.data.phone);
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
+  async cancelTicketAction({ commit, state }, payload) {
     try {
       commit('setGsLoading', true);
       const { data } = await this.$api.post(apis.GS_CANCEL_TICKET, payload);
       let updatedTicketList = [];
-       updatedTicketList = state.searchedTicketList.tickets.map(ticket => {
-        if(data.data._id === ticket._id) {
+      updatedTicketList = state.searchedTicketList.tickets.map(ticket => {
+        if (data.data._id === ticket._id) {
           return data.data;
         }
         return ticket
       })
-      commit('setSearchedTicketList', {...state.searchedTicketList, tickets: updatedTicketList})
+      commit('setSearchedTicketList', { ...state.searchedTicketList, tickets: updatedTicketList })
+      commit('handleCancelTicketPopup');
       this.$toast.success(data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -274,7 +340,7 @@ export const actions = {
     }
   },
 
-  async getPromoCodeAction({commit}, payload) {
+  async getPromoCodeAction({ commit }, payload) {
     return new Promise((resolve, reject) => {
       return this.$api.$post(
         apis.POST_PROMO_CODE_URL,
@@ -283,7 +349,7 @@ export const actions = {
         if (res.data) {
           commit('setPromoCode', res.data);
           resolve(res)
-          this.$toast.success('Promo applied successfully' , {
+          this.$toast.success('Promo applied successfully', {
             position: 'bottom-right',
             duration: 5000,
           })
@@ -295,9 +361,9 @@ export const actions = {
             duration: 5000,
           })
         }
-      }).catch (error => {
+      }).catch(error => {
         if (error.response) {
-          const {data} = error.response
+          const { data } = error.response
           resolve(data)
           this.$toast.error(error.response.data.message, {
             position: 'bottom-right',
@@ -307,6 +373,68 @@ export const actions = {
         commit('resetPromoCode');
       })
     })
+  },
+  async applyPromoCodeAction({ dispatch, commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_APPLY_PROMO_CODE_URL, payload);
+
+
+      dispatch('getBookingInfoByTnxId', { 'transactionId': payload.tnxId });
+      commit('handleSurpriseDealModal', null);
+
+      this.$toast.success('Promo code applied successfully', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
+
+  async getSurpriseDealAction({ commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_GET_SURPRISE_DEAL, payload);
+      commit('handleSurpriseDealModal', data.data);
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error('Sorry!! No deal found now.', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
+
+  async fullBusReservationAction({ commit }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_FULL_BUS_RESERVATION, payload);
+      commit('setGsLoading', false);
+      commit('setBusReserveModalOpenStatus');
+      commit('handleSuccessfulModal');
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message[0], {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
   },
 };
 
@@ -332,6 +460,11 @@ export const mutations = {
     state.gsOfferPromoImageUrl = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
+  setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
+  setGsDroppingPoints: (state, data) => (state.gsDroppingPoints = data),
+  setModalBoardingPoints: (state, data) => (state.modalBoardingPointList = data),
+  setGsBusCompanies: (state, data) => (state.gsBusCompanies = data),
+  setGsBusClasses: (state, data) => (state.gsBusClasses = data),
   setGsSeatViewData: (state, data) => {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;
@@ -342,15 +475,39 @@ export const mutations = {
   setPromoCode: (state, data) => (state.promoCode = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    if(data === 'l2h') {
-      state.gsTrips.sort((a,b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
+    if (data === 'l2h') {
+      state.gsTrips.sort((a, b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
     } else {
-      state.gsTrips.sort((a,b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
+      state.gsTrips.sort((a, b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
     }
   },
   mobileFloatingFilter: (state, data) => {
     if (data) {
       state.mobileFloatingFilter = !state.mobileFloatingFilter
     }
-  }
+  },
+  setBusReserveModalOpenStatus: (state, data) => {
+    handleScrollBehaviour(state.isBusReserveModalOpen);
+    state.isBusReserveModalOpen = !state.isBusReserveModalOpen;
+
+  },
+  handleSuccessfulModal: (state, data) => {
+    handleScrollBehaviour(state.isRequestSuccessFull);
+    state.isRequestSuccessFull = !state.isRequestSuccessFull;
+  },
+  handleSurpriseDealModal: (state, data) => {
+    handleScrollBehaviour(!data);
+    state.showSurpriseDealModal = data;
+  },
+  handleCancelTicketPopup: (state, data) => {
+    handleScrollBehaviour(!data);
+    state.isTicketPopupOpen = data;
+    if (!data) {
+      state.selectedTicketId = null;
+    }
+  },
+  setCancelTicketId: (state, data) => {
+    state.selectedTicketId = data;
+  },
+
 };
