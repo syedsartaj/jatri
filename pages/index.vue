@@ -29,10 +29,10 @@
               leading-[64px]
             "
           >
-            Book Your Journey NOW!!!
+            Ticketing made easy!
           </h2>
           <h4 class="mt-4 lg:text-lg xl:text-xl text-white leading-7 font-bold">
-            Buy tickets online hassle-free
+            Buy tickets online hassle-free.
           </h4>
           <div class="mt-9">
             <SearchFilterForm />
@@ -549,7 +549,7 @@
             <img
               src="@/assets/images/icons/greenMapIcon.svg"
               alt=""
-              class="w-3"
+              class="w-4 h-4"
             />
             <p
               class="
@@ -580,7 +580,6 @@
               lg:text-[45px] lg:leading-[52px]
               text-blackPrimary
               font-medium
-              lg:font-semibold
               mt-6
               lg:mt-8
             "
@@ -878,7 +877,7 @@ export default {
           open: false,
         },
         {
-          heading: "Ticket Cancellation Procedures'",
+          heading: "Ticket Cancellation Procedures",
           details: `If you want to make a cancellation to your booking ticket, you must follow some rules: 
                       <ul class='list-decimal ml-5'>
                         <li class='mt-2'>First, you need to go to the search option. You need to add your phone number to search for your ticket.</li>

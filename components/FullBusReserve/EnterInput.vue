@@ -47,10 +47,16 @@ export default {
     "minInput",
     "maxlength",
     "minlength",
+    "name",
   ],
   methods: {
     updateValue(event) {
-      this.$emit("input", event.target.value);
+      let currentValue = event.target.value;
+      if (this.name === "phone" || this.type === "number") {
+        currentValue = currentValue.replace(/\D/g, "");
+      }
+
+      this.$emit("input", currentValue);
     },
   },
 };

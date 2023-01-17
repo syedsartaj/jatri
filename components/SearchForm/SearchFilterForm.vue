@@ -38,11 +38,11 @@
         </div>
         <div class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center">
             <button
-                class="rounded-full text-white text-xs  xl:text-sm font-semibold leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
+                class="rounded-full text-white text-xs  xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
                 :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer'"
                 @click="handleFromSubmit"
             >
-                Search Ticket
+                Search ticket
             </button>
         </div>
     </div>

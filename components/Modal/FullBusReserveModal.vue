@@ -270,6 +270,7 @@
                       <EnterInput
                         placeholder="Enter mobile number"
                         type="text"
+                        name="phone"
                         minInput="0"
                         minlength="11"
                         maxlength="11"
