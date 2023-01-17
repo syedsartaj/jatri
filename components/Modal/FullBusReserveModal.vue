@@ -164,6 +164,7 @@
                         :options="busTypes"
                         :selectedValue="busType"
                         :errorOccured="errorOccured && !busType"
+                        @update:modelValue="(newValue) => (busType = newValue)"
                       />
                     </div>
                   </div>
@@ -269,6 +270,7 @@
                       <EnterInput
                         placeholder="Enter mobile number"
                         type="text"
+                        name="phone"
                         minInput="0"
                         minlength="11"
                         maxlength="11"

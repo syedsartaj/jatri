@@ -287,8 +287,8 @@
                       <img
                         :src="
                           require(priceDirection == 'l2h'
-                            ? '@/assets/images/icons/downArrow.svg'
-                            : '@/assets/images/icons/upArrow.svg')
+                            ? '@/assets/images/icons/upArrow.svg'
+                            : '@/assets/images/icons/downArrow.svg')
                         "
                         alt="Price Filter Type"
                         class=""
@@ -576,7 +576,7 @@ export default {
         payload.busClass = this.selectedBusClass;
       }
 
-      if (this.selectedTime >= 0) {
+      if (this.selectedTime && this.selectedTime >= 0) {
         payload.time =
           this.selectedTime === 0
             ? "morning"

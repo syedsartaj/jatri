@@ -39,7 +39,7 @@
                :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer border border-primary'"
                @click="handleFromSubmit" 
           >
-               Search Ticket
+               Search ticket
           </button>
      </div>
 </template>
