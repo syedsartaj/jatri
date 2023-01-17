@@ -164,6 +164,7 @@
                         :options="busTypes"
                         :selectedValue="busType"
                         :errorOccured="errorOccured && !busType"
+                        @update:modelValue="(newValue) => (busType = newValue)"
                       />
                     </div>
                   </div>
