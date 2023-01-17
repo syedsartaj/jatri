@@ -732,7 +732,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length < 11
+              String(passengerPhone).length != 11
                 ? 'bg-gray-500 user cursor-not-allowed'
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
@@ -742,7 +742,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length < 11
+              String(passengerPhone).length != 11
             "
             :loading="getGsLoading"
             class="
