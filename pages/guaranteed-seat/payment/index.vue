@@ -540,23 +540,23 @@
         <div>
           <h2 class="text-base font-medium">Having Trouble?</h2>
           <p class="mt-[6px] text-sm text-[#8D8D8F] font-normal">
-            Reach out to us for any kind of assistance on +096776655
+            Reach out to us for any kind of assistance on +09642080808
           </p>
-          <a
-            href="https://jatri.co/contact-us"
-            target="_blank"
-            class="
-              text-xs
-              font-medium
-              bg-[#EDEDED]
-              w-[95px]
-              py-1
-              rounded-full
-              mt-[10px]
-            "
+          <a href="https://jatri.co/contact-us" target="_blank">
+            <button
+              class="
+                text-xs
+                font-medium
+                bg-[#EDEDED]
+                w-[95px]
+                py-1
+                rounded-full
+                mt-[10px]
+              "
+            >
+              Contact us
+            </button></a
           >
-            Contact us
-          </a>
         </div>
       </div>
     </div>

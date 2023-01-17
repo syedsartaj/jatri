@@ -52,7 +52,9 @@
               </h2>
               <p class="text-xs">
                 <span class="font-normal text-blackLight">{{
-                  trip.coach.name
+                  `${trip.coach.name}${
+                    (trip.coach.type && " | " + `${trip.coach.type}`) || ""
+                  }`
                 }}</span>
               </p>
             </div>
