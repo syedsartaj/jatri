@@ -16,7 +16,7 @@
       @click="handleDropDown"
     >
       <p class="text-sm font-normal text-blackPrimary text-left">
-        {{ selectedValue.toUpperCase() }}
+        {{ selectedValue.toUpperCase().replaceAll("-", " ") }}
       </p>
       <img
         src="@/assets/images/home/arrowDown.svg"
@@ -55,7 +55,7 @@
         "
         @click="handleSelect(option)"
       >
-        {{ option.toUpperCase() }}
+        {{ option.toUpperCase().replaceAll("-", " ") }}
       </div>
     </div>
   </div>
