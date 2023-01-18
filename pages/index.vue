@@ -840,20 +840,18 @@ export default {
         speed: 2000,
         rows: 1,
         responsive: [
-          {
-            breakpoint: 1024,
+           {
+            breakpoint: 1333,
             settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              slidesToShow: 1,
+              initialSlide: 0,
             },
           },
           {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              initialSlide: 0,
             },
           },
           {
