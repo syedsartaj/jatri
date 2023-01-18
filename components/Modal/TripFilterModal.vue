@@ -104,11 +104,7 @@
                 <div
                   class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]"
                 >
-                  <div
-                    v-for="(time, index) in timeList"
-                    :key="time"
-                    class="w-full h-9"
-                  >
+                  <div v-for="time in timeList" :key="time" class="w-full h-9">
                     <input id="busType" type="button" class="hidden" />
                     <label for="busType">
                       <button
@@ -134,9 +130,9 @@
                       >
                         <img
                           :src="
-                            require(time == 'morning'
+                            require(time == '4 am - 12 pm'
                               ? '@/assets/images/icons/morning.svg'
-                              : 'day'
+                              : time == '12 pm - 06 pm'
                               ? '@/assets/images/icons/noon.svg'
                               : '@/assets/images/icons/night.svg')
                           "

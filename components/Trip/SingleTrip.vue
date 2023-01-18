@@ -416,7 +416,7 @@
                 <div
                   v-for="(rowSeat, rowIndex) in getGsSeatArray"
                   :key="rowIndex"
-                  class="flex justify-between gap-x-[30px] mt-6"
+                  class="flex justify-between mt-6"
                 >
                   <!-- <button>
                                                   <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
@@ -944,7 +944,7 @@ export default {
       }
     },
     handleSeatView(selectedTripId) {
-      this.mobileFloatingFilter("status");
+      this.mobileFloatingFilter(selectedTripId === "" ? true : false);
       this.resetPromo();
 
       if (selectedTripId === "") {
