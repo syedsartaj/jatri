@@ -482,9 +482,7 @@ export const mutations = {
     }
   },
   mobileFloatingFilter: (state, data) => {
-    if (data) {
-      state.mobileFloatingFilter = !state.mobileFloatingFilter
-    }
+      state.mobileFloatingFilter = data;
   },
   setBusReserveModalOpenStatus: (state, data) => {
     handleScrollBehaviour(state.isBusReserveModalOpen);

@@ -77,11 +77,11 @@
     <div v-if="timeList.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-      <div class="flex justify-between gap-[7px] mt-[10px]">
+      <div class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
           v-for="time in timeList"
           :key="time"
-          class="w-[125px] 2xl:w-[175px] h-9"
+          class="w-full h-9"
         >
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
@@ -108,9 +108,9 @@
             >
               <img
                 :src="
-                  require(time == 'morning'
+                  require(time == '4 am - 12 pm'
                     ? '@/assets/images/icons/morning.svg'
-                    : 'day'
+                    : time == '12 pm - 06 pm'
                     ? '@/assets/images/icons/noon.svg'
                     : '@/assets/images/icons/night.svg')
                 "
