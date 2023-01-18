@@ -79,14 +79,14 @@
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
       <div class="flex justify-between gap-[7px] mt-[10px]">
         <div
-          v-for="(time, index) in timeList"
+          v-for="time in timeList"
           :key="time"
           class="w-[125px] 2xl:w-[175px] h-9"
         >
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
             <button
-              @click="setTime(index)"
+              @click="setTime(time)"
               class="
                 group
                 w-full
@@ -101,16 +101,16 @@
                 font-medium
               "
               :class="
-                selectedTime == index
+                selectedTime == time
                   ? 'bg-corporate text-white'
                   : 'bg-[#ededed] text-blackPrimary'
               "
             >
               <img
                 :src="
-                  require(index == 0
+                  require(time == 'morning'
                     ? '@/assets/images/icons/morning.svg'
-                    : index == 1
+                    : 'day'
                     ? '@/assets/images/icons/noon.svg'
                     : '@/assets/images/icons/night.svg')
                 "
@@ -456,11 +456,11 @@ export default {
         payload.busClass = this.selectedBusClass;
       }
 
-      if (this.selectedTime && this.selectedTime >= 0) {
+      if (this.selectedTime) {
         payload.time =
-          this.selectedTime === 0
+          this.selectedTime === "4 am - 12 pm"
             ? "morning"
-            : this.selectedTime === 1
+            : this.selectedTime === "12 pm - 06 pm"
             ? "day"
             : "night";
       }
