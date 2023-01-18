@@ -32,7 +32,9 @@
               gap-x-4
               items-center
               w-7/12
-              lg:w-9/12
+              md:w-9/12
+              lg:w-7/12
+              xl:w-9/12
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
@@ -60,7 +62,7 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-5/12 lg:w-3/12 text-right">
+          <div v-if="trip.available" class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right">
             <div
               class="
                 h-[30px]
@@ -416,7 +418,7 @@
                 <div
                   v-for="(rowSeat, rowIndex) in getGsSeatArray"
                   :key="rowIndex"
-                  class="flex justify-between gap-x-[30px] mt-6"
+                  class="flex justify-between mt-6"
                 >
                   <!-- <button>
                                                   <img src="@/assets/images/seats/available-seats.svg" alt="seats" class="w-[30px]">
@@ -944,7 +946,7 @@ export default {
       }
     },
     handleSeatView(selectedTripId) {
-      this.mobileFloatingFilter("status");
+      this.mobileFloatingFilter(selectedTripId === "" ? true : false);
       this.resetPromo();
 
       if (selectedTripId === "") {
