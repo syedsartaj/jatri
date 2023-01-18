@@ -101,7 +101,7 @@
               <div>
                 <hr class="my-5" />
                 <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-                <div class="flex justify-evenly gap-[7px] mt-[10px]">
+                <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
                   <div
                     v-for="(time, index) in timeList"
                     :key="time"
@@ -141,7 +141,7 @@
                           alt="time"
                           class=""
                         />
-                        <!-- {{ time }} -->
+                        {{ time }}
                       </button>
                     </label>
                   </div>
@@ -207,7 +207,7 @@
                 <h2 class="text-blackSecondery text-base font-medium">
                   BUS CLASS:
                 </h2>
-                <div class="flex justify-evenly gap-[7px] mt-[10px]">
+                <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
                   <div
                     v-for="busClass in getGsBusClasses"
                     :key="busClass"

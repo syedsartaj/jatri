@@ -577,7 +577,7 @@ export default {
   },
   data() {
     return {
-      activePlan: "sslcommerz",
+      activePlan: "bkash",
       paymentAllowStatus: true,
       paymentValidateTime: 0,
       promoCode: "",

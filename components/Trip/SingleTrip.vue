@@ -775,13 +775,11 @@
           >
             <nuxt-link
               to="/policies#terms-and-conditions"
-              target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
               >Terms and Conditions</nuxt-link
             >
             <nuxt-link
               to="/policies#return-and-refund-policy"
-              target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
               >Cancellation Policy</nuxt-link
             >
