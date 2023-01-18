@@ -36,6 +36,8 @@
                   alt=""
                   class="
                   h-[80px]
+                  w-[98px]
+                  lg:w-[170px]
                   lg:h-[140px]
                   block
                   max-sm:m-auto
