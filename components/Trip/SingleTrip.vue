@@ -32,7 +32,9 @@
               gap-x-4
               items-center
               w-7/12
-              lg:w-9/12
+              md:w-9/12
+              lg:w-7/12
+              xl:w-9/12
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
@@ -60,7 +62,7 @@
             </div>
           </div>
 
-          <div v-if="trip.available" class="w-5/12 lg:w-3/12 text-right">
+          <div v-if="trip.available" class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right">
             <div
               class="
                 h-[30px]
