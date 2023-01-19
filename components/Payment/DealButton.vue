@@ -9,18 +9,15 @@
       w-full
       overflow-hidden
       rounded-[6px]
+      deal-button
     "
   >
-    <img src="@/assets/images/payment/deal.png" alt="" class="deal-image" />
     <div
       class="
-        absolute
         h-full
         w-full
-        py-4 
+        py-4
         px-6
-        bottom-0
-        inset-x-0
         bg-transparent
         flex
         justify-between
@@ -66,14 +63,10 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-width: 430px) {
-  .deal-image {
-    height: 100px;
-    object-fit: cover;
-  }
-
-  .left-item {
-    width: 150px;
-  }
+.deal-button {
+  background-image: url("../../assets/images/payment/deal.png");
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 </style>
