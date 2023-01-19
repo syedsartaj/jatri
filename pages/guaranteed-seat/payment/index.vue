@@ -279,9 +279,6 @@
             >
               Discount Amount
             </p>
-            <!-- <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.invoice.discount }}
-            </p> -->
             <p class="text-base font-medium text-[#E0293B]">
               {{ `-${getBookingInfoDetails.invoice.discount}` }}
             </p>
