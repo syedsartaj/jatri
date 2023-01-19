@@ -1,7 +1,11 @@
 <template>
   <div class="header">
     <NuxtLink to="/"
-      ><img src="@/assets/images/logo.svg" alt="logo" class="h-10 w-[79]"
+      ><img
+        @click="handlePageRefresh"
+        src="@/assets/images/logo.svg"
+        alt="logo"
+        class="h-10 w-[79]"
     /></NuxtLink>
 
     <div class="flex gap-x-4 h-10">
@@ -132,6 +136,11 @@ export default {
           : "scroll";
       }
       this.showFullBusReserveModal = !this.showFullBusReserveModal;
+    },
+    handlePageRefresh() {
+      if ($nuxt.$route.name === "index") {
+        window.location.reload();
+      }
     },
   },
 };

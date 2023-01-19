@@ -64,8 +64,8 @@
       />
       <div class="absolute top-[39px] right-4 left-4">
         <h2 class="text-[26px] text-white font-bold leading-[36px]">
-          Book Your Journey <br />
-          NOW!!!
+          Ticketing made <br />
+          easy!
         </h2>
         <h4 class="mt-2 text-base text-white font-normal">
           Buy tickets online <br />
@@ -840,7 +840,7 @@ export default {
         speed: 2000,
         rows: 1,
         responsive: [
-           {
+          {
             breakpoint: 1333,
             settings: {
               slidesToShow: 1,
