@@ -254,5 +254,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+input[type="text"]:focus::-webkit-input-placeholder {
+  color: #8d8d8f;
+}
 </style>
