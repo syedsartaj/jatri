@@ -223,7 +223,7 @@
                 text-blackLight
               "
             >
-              Seat No:
+              Seat No
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{ getBookingInfoDetails.invoice.seatNo.join(", ") }}
@@ -248,7 +248,7 @@
                 text-blackLight
               "
             >
-              Ticket Price:
+              Ticket Price
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{
@@ -258,7 +258,7 @@
             </p>
           </div>
           <div
-            v-if="getBookingInfoDetails.invoice.discount"
+            v-if="getBookingInfoDetails.invoice.discount && !showPromoInput"
             class="
               flex
               justify-between
@@ -277,10 +277,10 @@
                 text-blackLight
               "
             >
-              Discount Amount:
+              Discount Amount
             </p>
-            <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.invoice.discount }}
+            <p class="text-base font-medium text-[#E0293B]">
+              {{ `-${getBookingInfoDetails.invoice.discount}` }}
             </p>
           </div>
           <div
@@ -302,7 +302,7 @@
                 text-blackLight
               "
             >
-              Processing Fee:
+              Processing Fee
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{ getBookingInfoDetails.serviceCharge }}
@@ -327,7 +327,7 @@
                 text-blackLight
               "
             >
-              Gateway Fee:
+              Gateway Fee
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{ getBookingInfoDetails.paymentGatewayCommission }}
@@ -410,7 +410,7 @@
             py-[10px]
           "
         >
-          <p class="text-sm font-normal text-blackLight">Total:</p>
+          <p class="text-sm font-normal text-blackLight">Total</p>
           <p class="text-base font-medium text-blackPrimary">
             BDT
             <span class="font-bold">{{ getBookingInfoDetails.amount }}</span>
