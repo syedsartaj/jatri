@@ -38,7 +38,7 @@
             shadow-xl
             transition-all
             w-full
-            h-full
+            max-h-[100vh]
           "
         >
           <div class="bg-white p-4 lg:p-6 w-full">
