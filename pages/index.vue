@@ -1,6 +1,12 @@
 <template>
+  
   <div class="bg-white">
-
+    <div>alsdfka</div>
+    <div >
+      asdfadsf
+      <img :src="testImage" id="masudImage" alt=""/>
+      
+    </div>
     <!-- banner section -->
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div
@@ -294,6 +300,7 @@ import Cookies from "js-cookie";
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import * as apis from '../helpers/apis'
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: 'ssr' })
@@ -310,7 +317,9 @@ export default {
       isMobile: false,
       vertical: false,
       imageUrl: '',
+      offerImageUrl: '',
       showStickySearchBox: false,
+      testImage: null,
       busOperators: [
         {
           name: "Euro Coach",
@@ -525,12 +534,30 @@ export default {
     await store.dispatch("guarantedseat/getOfferPromoImagesUrlList")
     await store.dispatch("guarantedseat/readOfferPromoImageUrl")
   },
+  // async created(){
+    // this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
+    // const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+  
+    // const imageLink = data.offerAndPromoImages[0].image;
+    // const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink},responseType: "arraybuffer"})
+ 
+    //    this.blobToBase64(imageRaw);
+ 
+  // },
 
-  mounted() {
+  async mounted() {
     this.onResize()
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.onResize)
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
+    
+    //fetching offer images
+    this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
+    const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+    const imageLink = data.offerAndPromoImages[0].image;
+    const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink},responseType: "arraybuffer"});
+    this.setOfferImage(imageRaw);
+    
   },
   unmount(){
     window.removeEventListener('scroll', this.handleScroll)
@@ -539,6 +566,12 @@ export default {
     ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
   },
   methods: {
+    setOfferImage(buf){
+      const binaryString = Array.from(new Uint8Array(buf), byte => String.fromCharCode(byte)).join("");
+      const theImage = window.btoa(binaryString);
+      this.testImage = "data:image/png;base64," + theImage;
+
+    },
     toggleOpen: function (index) {
       this.accordionData = this.accordionData.map((accordion, i) => {
         if (index === i) {
