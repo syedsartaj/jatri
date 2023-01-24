@@ -882,16 +882,13 @@ export default {
     this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
     const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
     const imageLinkArr = data.offerAndPromoImages;
-    let imageRawArr =[];
-   
-    for(const imageLink of imageLinkArr){
+    this.offerImages = await Promise.all(imageLinkArr.map( async (imageLink) =>{
       const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink.image}});
-      console.log(imageRaw);
-      this.offerImages.push(imageRaw);
-    }
+      return imageRaw; 
+    }))
     
   
-    console.log(imageRawArr);
+    // console.log(this.offerImages);
     // this.setOfferImage(imageRawArr);
     
   },
