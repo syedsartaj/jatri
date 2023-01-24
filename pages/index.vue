@@ -1,12 +1,7 @@
 <template>
   
   <div class="bg-white">
-    <div>alsdfka</div>
-    <div >
-      asdfadsf
-      <img :src="testImage" id="masudImage" alt=""/>
-      
-    </div>
+    
     <!-- banner section -->
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
       <div
@@ -45,7 +40,7 @@
     <!-- Offer & Promos Section Mobile -->
     <div
       class="pt-80 mt-10 flex justify-center w-full"
-      v-if="isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length"
+      v-if="isMobile && offerImages && offerImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
@@ -65,10 +60,10 @@
             </button>
           </div>
         </div>
-          <div class="mt-10 ml-4">
+          <div  class="mt-10 ml-4">
             <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-              <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
-                <img :id="index" :src="imageUrl + offerImg.image" alt=""
+              <div v-for=" (offerImg, index) in offerImages" :key="index">
+                <img :id="index" :src="offerImg" alt=""
                   class="rounded-[10px] w-[300px] h-[200px] pointer-events-none">
               </div>
             </VueSlickCarousel>
@@ -77,9 +72,9 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div class="pt-80 p-4 lg:mt-0 lg:p-0 lg:pb-0" v-if="!getGsOfferPromoImageUrl || !getGsOfferPromoImageUrl.length"></div>
+    
     <div class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="!isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length">
+      v-if="!isMobile && offerImages && offerImages.length">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">
@@ -98,12 +93,12 @@
             </button>
           </div>
         </div>
-          <div class="mt-5 lg:mt-[42px] p-2">
+          <div  class="mt-5 lg:mt-[42px] p-2">
             <VueSlickCarousel v-bind="settings" ref="carousel">
-              <div v-for=" (offerImg, index) in getGsOfferPromoImageUrl" :key="index">
-                <img :id="index" :src="imageUrl + offerImg.image" alt=""
+              <div v-for=" (offerImg, index) in offerImages" :key="index">
+                <img :id="index" :src="offerImg" alt=""
                   class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none">
-                <!-- {{ readImageUrl(offerImg.image)}} -->
+                
               </div>
             </VueSlickCarousel>
           </div>
@@ -319,7 +314,7 @@ export default {
       imageUrl: '',
       offerImageUrl: '',
       showStickySearchBox: false,
-      testImage: null,
+      offerImages: [],
       busOperators: [
         {
           name: "Euro Coach",
@@ -534,16 +529,7 @@ export default {
     await store.dispatch("guarantedseat/getOfferPromoImagesUrlList")
     await store.dispatch("guarantedseat/readOfferPromoImageUrl")
   },
-  // async created(){
-    // this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
-    // const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
   
-    // const imageLink = data.offerAndPromoImages[0].image;
-    // const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink},responseType: "arraybuffer"})
- 
-    //    this.blobToBase64(imageRaw);
- 
-  // },
 
   async mounted() {
     this.onResize()
@@ -554,9 +540,18 @@ export default {
     //fetching offer images
     this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
     const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLink = data.offerAndPromoImages[0].image;
-    const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink},responseType: "arraybuffer"});
-    this.setOfferImage(imageRaw);
+    const imageLinkArr = data.offerAndPromoImages;
+    let imageRawArr =[];
+   
+    for(const imageLink of imageLinkArr){
+      const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink.image}});
+      console.log(imageRaw);
+      this.offerImages.push(imageRaw);
+    }
+    
+  
+    console.log(imageRawArr);
+    // this.setOfferImage(imageRawArr);
     
   },
   unmount(){
@@ -566,12 +561,15 @@ export default {
     ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
   },
   methods: {
-    setOfferImage(buf){
-      const binaryString = Array.from(new Uint8Array(buf), byte => String.fromCharCode(byte)).join("");
-      const theImage = window.btoa(binaryString);
-      this.testImage = "data:image/png;base64," + theImage;
-
-    },
+    // setOfferImage(bufferArr){
+    //   for(const buffer of bufferArr){
+    //     const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
+    //     const theImage = window.btoa(binaryString);
+    //     const properlyFormattedImage = "data:image/*;base64," + theImage;
+    //     this.offerImages.push(properlyFormattedImage)
+        
+    //   }
+    // },
     toggleOpen: function (index) {
       this.accordionData = this.accordionData.map((accordion, i) => {
         if (index === i) {
@@ -592,12 +590,6 @@ export default {
 
     handleHowToBuyModal() {
       this.howToBuyModalStatus = !this.howToBuyModalStatus
-    },
-
-    async readImageUrl(url, index) {
-      const data = await this.readOfferPromoImageUrl(url)
-      const base = Buffer.from(data).toString('base64')
-      return document.getElementById(index).src = "data:image/png;base64," + base;
     },
 
     scrollLeft() {
