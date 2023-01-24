@@ -86,7 +86,7 @@
                   class="flex justify-evenly gap-6 mb-6 flex-col md:flex-row"
                 >
                   <!-- First Item -->
-                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full">
+                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col md:flex-row">
                     <div class="w-full">
                       <CommonInputLabel label="Journey date" />
                       <SelectDate

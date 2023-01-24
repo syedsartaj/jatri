@@ -9,7 +9,7 @@
       lg:py-8
       px-4
       lg:px-[100px]
-      bg-corporateBg
+      bg-[#F7F7F7]
     "
   >
     <div class="w-full lg:w-1/2">
@@ -437,7 +437,7 @@
               justify-center
               items-center
               w-[139px]
-              bg-[#FDF0F1]
+              bg-[#F7F7F7]
               rounded-full
               text-base
               font-medium
@@ -511,16 +511,16 @@
         <p class="text-blackPrimary text-sm font-normal">
           By proceeding you are agreeing with our
           <br class="flex md:hidden" />
-          <a
-            href="https://jatri.co/user/term-and-condition/"
-            target="_blank"
-            class="w-full underline text-blue-500"
-            >Terms and Conditions</a
+          <nuxt-link
+            to="/policies#terms-and-conditions"
+            class="w-full underline text-[#1E88E5] font-medium"
+            >Terms and Conditions</nuxt-link
           >
         </p>
       </div>
 
       <div
+        v-if="!(!paymentAllowStatus || paymentValidateTime === 0)"
         class="
           p-5
           mt-8
