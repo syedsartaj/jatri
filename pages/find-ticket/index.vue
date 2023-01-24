@@ -115,7 +115,7 @@
                     minlength="11"
                     maxlength="11"
                     required=""
-                    placeholder="Mobile Number"
+                    placeholder="Enter Mobile Number"
                     v-model="phone"
                   />
                 </div>
