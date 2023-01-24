@@ -566,6 +566,7 @@ import Cookies from "js-cookie";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import * as apis from '../helpers/apis';
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
