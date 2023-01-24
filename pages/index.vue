@@ -461,12 +461,12 @@
             w-full
             items-center
             py-4
-            px-[12px]
+            px-[20px]
             rounded-[10px]
             border-[1px] border-[#DBDBDB]
           "
         >
-          <div class="flex flex-row items-center w-full gap-x-[12px]">
+          <div class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]">
             <img
               src="@/assets/images/home/availableRoutesIcon.svg"
               alt=""
@@ -489,7 +489,7 @@
           <img
             src="@/assets/images/home/arrowRight.svg"
             alt=""
-            class="h-4 w-4 cursor-pointer mr-[12px]"
+            class="h-4 w-4 cursor-pointer"
             @click="scrollLeft"
           />
         </NuxtLink>
