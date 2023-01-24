@@ -1,6 +1,8 @@
 <template>
   <div class="w-1/4 p-[8px] h-15" v-click-outside="onClickOutside">
+    <!-- Input box open -->
     <button
+      @click="handleOnClick"
       v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
       class="
         block
@@ -25,62 +27,12 @@
       >
         {{ label }}
       </p>
-
-      <!-- Initial View -->
-      <div
-        v-if="isInitialView"
-        class="flex justify-between"
-        @click="handleShowInputBox(true)"
-      >
-        <p
-          class="
-            lg:text-xs
-            xl:text-sm
-            2xl:text-base
-            font-medium
-            text-blackPrimary text-left
-          "
-        >
-          <span v-if="defaultOption">{{ defaultOption }}</span>
-          <span v-else>Select your Option</span>
-        </p>
-        <img
-          src="@/assets/images/home/arrowDown.svg"
-          alt="arrow-down"
-          class="w-6 h-6"
-        />
-      </div>
-
-      <!-- Any option is selected -->
-      <div
-        v-if="isAnyOptionSelected"
-        class="flex justify-between"
-        @click="handleShowInputBox(true)"
-      >
-        <p
-          class="
-            lg:text-xs
-            xl:text-sm
-            2xl:text-base
-            font-medium
-            text-blackPrimary text-left
-          "
-        >
-          {{ this.selectedOption.city_name }}
-        </p>
-        <img
-          src="@/assets/images/home/arrowDown.svg"
-          alt="arrow-down"
-          class="w-6 h-6"
-        />
-      </div>
-
-      <!-- Input box open -->
-      <div v-if="showInputBox" class="flex justify-between items-center">
+      <div class="flex justify-between items-center">
         <input
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
+          autocomplete="off"
           class="
             rounded-md
             outline-none
@@ -90,11 +42,13 @@
             2xl:text-base
             font-medium
             text-blackPrimary text-left
+            placeholder-blackPrimary
+            searchInput
           "
           :placeholder="defaultOption"
           type="text"
-          autofocus
           @keyup="search"
+          @focus="handleOnFocus"
         />
         <img
           src="@/assets/images/home/arrowDown.svg"
@@ -212,13 +166,11 @@ export default {
       optionsIsOpen: false,
       selectedOption: "",
       searchKey: "",
-      showInputBox: false,
     };
   },
   methods: {
     onClickOutside() {
       this.optionsIsOpen = false;
-      this.showInputBox = false;
     },
     toggleDropdown() {
       this.optionsIsOpen = !this.optionsIsOpen;
@@ -227,29 +179,53 @@ export default {
       this.selectedOption = option;
       this.searchKey = option.city_name;
       this.$emit("input", this.selectedOption.city_name);
-      this.showInputBox = false;
       this.optionsIsOpen = false;
+      let items = this.getSearchElementData();
+      if (items) {
+        if (this.label === "From" && !items[1].value) {
+          setTimeout(function () {
+            items[1].focus();
+          }, 10);
+        } else if (this.label === "To" && !items[0].value) {
+          setTimeout(function () {
+            items[0].focus();
+          }, 10);
+        }
+      }
     },
-
+    handleOnClick() {
+      this.optionsIsOpen = true;
+      let items = this.getSearchElementData();
+      if (items) {
+        let focusItem = items[this.label === "From" ? 0 : 1];
+        setTimeout(function () {
+          const end = focusItem.value.length;
+          focusItem.setSelectionRange(end, end);
+          focusItem.focus();
+        }, 10);
+      }
+    },
     search(e) {
       this.searchKey = e.target.value;
+      this.optionsIsOpen = true;
+      this.$emit("input", e.target.value);
     },
-    handleShowInputBox(value) {
-      if (value) {
-        this.showInputBox = true;
-        this.optionsIsOpen = true;
-        setTimeout(function () {
-          document.getElementById("searchInput").focus();
-        }, 10);
-      } else {
-        this.showInputBox = false;
-      }
+    handleOnFocus() {
+      this.optionsIsOpen = true;
+    },
+    getSearchElementData() {
+      return document.getElementsByClassName("searchInput");
     },
   },
   watch: {
     defaultValue: {
       handler(value) {
         this.selectedOption = value;
+        if (this.selectedOption?.city_name) {
+          this.searchKey = this.selectedOption.city_name;
+        } else {
+          this.searchKey = value;
+        }
       },
       deep: true,
       immediate: true,
@@ -264,7 +240,7 @@ export default {
       });
     },
     showErrorToolTip() {
-      return this.errorOccured && !this.selectedOption;
+      return this.errorOccured && !this.selectedOption && !this.searchKey;
     },
     errorMessage() {
       return this.label === "To"
@@ -272,14 +248,14 @@ export default {
         : "Enter location first";
     },
     isInitialView() {
-      return !this.selectedOption && !this.searchKey && !this.showInputBox;
-    },
-    isAnyOptionSelected() {
-      return this.selectedOption !== "" && this.showInputBox === false;
+      return !this.selectedOption && !this.searchKey;
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
+input[type="text"]:focus::-webkit-input-placeholder {
+  color: #8d8d8f;
+}
 </style>

@@ -2,7 +2,7 @@
      <div class="py-10 lg:py-[60px] px-4 lg:px-[100px]">
           <div class="p-4 lg:p-10 bg-white rounded-[10px] lg:flex lg:justify-between lg:gap-x-[140px]" v-if="operator.length">
                <div class="lg:w-3/4">
-                    <p class="text-[#8d8d8f] text-xs lg:text-sm font-medium uppercase">Popular Routes</p>
+                    <p class="text-[#8d8d8f] text-xs lg:text-sm font-medium uppercase">Bus Operator</p>
                     
                     <h2 class="text-blackPrimary text-2xl lg:text-[32px] lg:leading-10 font-medium mt-1">{{operator[0].heading}}</h2>
                     <p v-for="paragraph in operator[0].paragraph" :key="paragraph" class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal text-justify">

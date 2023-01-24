@@ -99,7 +99,6 @@ export default {
      methods: {
           toggleDropdown () {
                this.optionsIsOpen = !this.optionsIsOpen
-               setTimeout(function(){document.getElementById('searchInput').focus()},10);
           },
           selectOption (option) {
                this.selectedOption = option

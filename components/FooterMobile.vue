@@ -16,17 +16,17 @@
         <div class="w-1/2">
           <h2 class="text-xl font-medium text-white">Services</h2>
           <div class="flex flex-col gap-y-[14px] mt-4">
-            <a href="https://jatri.co" class="text-sm font-normal text-white">Jatri Business </a>
-            <a href="https://rental.jatri.co" class="text-sm font-normal text-white">Rentals</a>
+            <a href="https://jatri.co" class="text-sm font-normal text-white footer-text">Jatri Business </a>
+            <a href="https://rental.jatri.co" class="text-sm font-normal text-white footer-text">Rentals</a>
           </div>
         </div>
         <div class="w-1/2">
           <h2 class="text-xl font-medium text-white">About us</h2>
           <div class="flex flex-col gap-y-[14px] mt-4">
-            <a href="https://jatri.co" class="text-sm font-normal text-white">Jatri</a>
-            <a href="https://jatri.co/about-us" class="text-sm font-normal text-white">About us</a>
-            <a href="https://jatri.co/career" class="text-sm font-normal text-white">Our team</a>
-            <a href="https://jatri.co/blog" class="text-sm font-normal text-white">Blog</a>
+            <a href="https://jatri.co" class="text-sm font-normal text-white footer-text">Jatri</a>
+            <a href="https://jatri.co/about-us" class="text-sm font-normal text-white footer-text">About us</a>
+            <a href="https://jatri.co/career" class="text-sm font-normal text-white footer-text">Our team</a>
+            <a href="https://jatri.co/blog" class="text-sm font-normal text-white footer-text">Blog</a>
           </div>
         </div>
       </div>
@@ -97,3 +97,9 @@
 </script> -->
 <script>
 </script>
+
+<style scoped>
+.footer-text {
+  width: max-content;
+}
+</style>

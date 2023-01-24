@@ -4,36 +4,53 @@
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
 
-    <div class="fixed inset-0 z-10 p-[11px] lg:p-0">
+    <div
+      class="
+        fixed
+        inset-0
+        z-10
+        p-[11px]
+        lg:p-0
+        flex
+        items-center
+        justify-center
+      "
+    >
       <div
         class="
           flex
-          min-h-full
-          items-end
           justify-center
           lg:p-4
           text-center
           lg:items-center lg:px-[100px]
+          h-full
+          lg:h-auto
         "
       >
         <div
           class="
             relative
             transform
-            overflow-hidden
+            overflow-hidden overflow-y-auto
             rounded-lg
             bg-white
             text-left
             shadow-xl
             transition-all
             w-full
-            lg:h-auto
-            h-[96vh]
+            max-h-[100vh]
           "
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
-              <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
+              <h2
+                class="
+                  text-xl
+                  lg:text-[32px] lg:leading-[40px]
+                  font-medium
+                  text-blackPrimary
+                "
+              >
                 Full bus reserve
               </h2>
 
@@ -43,16 +60,17 @@
             </div>
 
             <div class="bg-white font-normal pt-[10px]">
-              <p class="text-base lg:text-xl text-[#4D4D4F]">
+              <p class="text-sm lg:text-xl text-[#4D4D4F]">
                 Now you can reserve a full bus according to your need. Fill the
-                form and submit. We will check and reserve a bus for you.
+                form and <br />
+                submit. We will check and reserve a bus for you.
               </p>
               <div
                 class="
                   lg:border lg:border-[#DBDBDB]
                   rounded
-                  h-[759px]
-                  overflow-y-auto
+                  scrollbar-hide
+                  h-full
                   lg:h-auto
                   mt-6
                   lg:p-6
@@ -82,7 +100,7 @@
                         :label="'Select a Date'"
                         :default-option="'Select Journey Date'"
                         :allow-filter="true"
-                        :errorOccured="errorOccured && !returnDate"
+                        :errorOccured="false"
                       />
                     </div>
                   </div>
@@ -94,9 +112,6 @@
                         type="text"
                         v-model="boardingPlace"
                         :errorOccured="errorOccured && !boardingPlace"
-                        @update:modelValue="
-                          (newValue) => (boardingPlace = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
@@ -105,10 +120,7 @@
                         placeholder="Enter dropping place"
                         type="text"
                         v-model="droppingPlace"
-                        :errorOccured="errorOccured && !droppingPlace"
-                        @update:modelValue="
-                          (newValue) => (droppingPlace = newValue)
-                        "
+                        :errorOccured="isDroppingError"
                       />
                     </div>
                   </div>
@@ -135,10 +147,12 @@
                       <EnterInput
                         placeholder="Enter number Of Buses"
                         type="number"
+                        minInput="1"
+                        maxInput="1000"
                         v-model="numberOfBuses"
-                        :errorOccured="errorOccured && !numberOfBuses"
-                        @update:modelValue="
-                          (newValue) => (numberOfBuses = newValue)
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfBuses && parseInt(numberOfBuses) > 0)
                         "
                       />
                     </div>
@@ -171,10 +185,12 @@
                       <EnterInput
                         placeholder="Enter budget amount"
                         type="number"
+                        minInput="1"
+                        maxInput="9999999999999999999"
                         v-model="numberOfSeats"
-                        :errorOccured="errorOccured && !numberOfSeats"
-                        @update:modelValue="
-                          (newValue) => (numberOfSeats = newValue)
+                        :errorOccured="
+                          errorOccured &&
+                          !(numberOfSeats && parseInt(numberOfSeats) > 0)
                         "
                       />
                     </div>
@@ -184,10 +200,7 @@
                         placeholder="Enter Preferred bus operator"
                         type="text"
                         v-model="prefferredBus"
-                        :errorOccured="errorOccured && !prefferredBus"
-                        @update:modelValue="
-                          (newValue) => (prefferredBus = newValue)
-                        "
+                        :errorOccured="false"
                       />
                     </div>
                   </div>
@@ -208,10 +221,12 @@
                     <EnterInput
                       placeholder="Enter budget amount"
                       type="number"
+                      minInput="1"
+                      maxInput="9999999999999999999"
                       v-model="approximateBudget"
-                      :errorOccured="errorOccured && !approximateBudget"
-                      @update:modelValue="
-                        (newValue) => (approximateBudget = newValue)
+                      :errorOccured="
+                        errorOccured &&
+                        !(approximateBudget && parseInt(approximateBudget) > 0)
                       "
                     />
                   </div>
@@ -221,7 +236,6 @@
                       placeholder="Enter your comment"
                       type="text"
                       v-model="comment"
-                      @update:modelValue="(newValue) => (comment = newValue)"
                     />
                   </div>
                 </div>
@@ -249,20 +263,20 @@
                         type="text"
                         v-model="contactName"
                         :errorOccured="errorOccured && !contactName"
-                        @update:modelValue="
-                          (newValue) => (contactName = newValue)
-                        "
                       />
                     </div>
                     <div class="w-full">
                       <CommonInputLabel label="Mobile No" />
                       <EnterInput
                         placeholder="Enter mobile number"
-                        type="number"
+                        type="text"
+                        name="phone"
+                        minInput="0"
+                        minlength="11"
+                        maxlength="11"
                         v-model="contactPhone"
-                        :errorOccured="errorOccured && !contactPhone"
-                        @update:modelValue="
-                          (newValue) => (contactPhone = newValue)
+                        :errorOccured="
+                          errorOccured && contactPhone.length !== 11
                         "
                       />
                     </div>
@@ -285,8 +299,8 @@
                         placeholder="Enter email"
                         type="email"
                         v-model="contactEmail"
-                        @update:modelValue="
-                          (newValue) => (contactEmail = newValue)
+                        :errorOccured="
+                          errorOccured && contactEmail && !isValidEmail
                         "
                       />
                     </div>
@@ -308,7 +322,7 @@
                       rounded-full
                     "
                   >
-                    Ok
+                    Submit
                   </button>
                 </div>
               </div>
@@ -336,14 +350,20 @@ export default {
       prefferredBus: null,
       comment: null,
       contactName: null,
-      contactPhone: null,
+      contactPhone: "",
       contactEmail: null,
       approximateBudget: null,
-      busTypes: ["ac", "non-ac", "all"],
+      busTypes: ["non-ac", "economy-ac", "business-class", "sleeper", "any"],
     };
   },
   computed: {
     ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+    isValidEmail() {
+      return /^[^@]+@\w+(\.\w+)+\w$/.test(this.contactEmail);
+    },
+    isDroppingError() {
+      return this.errorOccured && !this.droppingPlace;
+    },
   },
   methods: {
     ...mapActions("guarantedseat", ["fullBusReservationAction"]),
@@ -367,16 +387,19 @@ export default {
 
       if (
         journeyDate &&
-        returnDate &&
         busType &&
         boardingPlace &&
         droppingPlace &&
         numberOfSeats &&
+        parseInt(numberOfSeats) > 0 &&
         numberOfBuses &&
-        prefferredBus &&
+        parseInt(numberOfBuses) > 0 &&
         contactName &&
         contactPhone &&
-        approximateBudget
+        contactPhone.length === 11 &&
+        approximateBudget &&
+        parseInt(approximateBudget) > 0 &&
+        (!contactEmail || (contactEmail && this.isValidEmail))
       ) {
         const payload = {
           journeyDate,
@@ -405,3 +428,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-default {
+  -ms-overflow-style: auto; /* IE and Edge */
+  scrollbar-width: auto;
+}
+
+.scrollbar-default::-webkit-scrollbar {
+  display: block;
+}
+</style>

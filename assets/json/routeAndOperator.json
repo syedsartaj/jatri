@@ -96,7 +96,7 @@
                "priceStartsFrom": 650
           }
      ],
-     "operartors" : [
+     "operartors": [
           {
                "_id": 1,
                "name": "pingky-paribahan",
@@ -172,7 +172,49 @@
                ],
                "distance": 0,
                "time": 0,
-               "priceStartsFrom": 700 
+               "priceStartsFrom": 700
+          },
+          {
+               "_id": 8,
+               "name": "khulna-express",
+               "heading": "Khulna Express",
+               "paragraph": [
+                    "Benapole to Kuakata is a route spread over 304.4 kilometres. Khulna Express is currently available on this route through Jatri. Depending on traffic conditions a 7-8 hour trip takes on average.Get the best deals and renowned bus operators all in our place - book Benapole to Kuakata bus tickets with Jatri! "
+               ],
+               "distance": 304.4,
+               "time": "7-8"
+          },
+          {
+               "_id": 9,
+               "name": "meghna-travels",
+               "heading": "Meghna Travels",
+               "paragraph": [
+                    "Dhaka-Barisal-Kuakata-Patuakhali-Barguna-patharghata-Bakergonj-Subidkhali-Jhalokathi-Swarupkathi are the routes available in Jatri platform. Do not miss the chance to get the best bus service from Jatri! Go and book your tickets NOW!"
+               ]
+          },
+          {
+               "_id": 10,
+               "name": "jeddah-express",
+               "heading": "Jeddah Express",
+               "paragraph": [
+                    "We bring the best options for your journey at Dhaka- Chattagram-cox's bazar routes. Jeddah Express is here to serve you via the Jatri platform. What are you waiting for? Book your tickets and travel with the best bus."
+               ]
+          },
+          {
+               "_id": 11,
+               "name": "tr-travels-classic",
+               "heading": "TR Travels Classic",
+               "paragraph": [
+                    "Need more options for travel in Dhaka- Barisal- Kuakata, Khulna- Jessore- Benapole routes? TR Travels Classic is here to serve you the best service to travel with safety. Go and book your tickets from Jatri website!"
+               ]
+          },
+          {
+               "_id": 12,
+               "name": "new-dhaka-express",
+               "heading": "New Dhaka Express",
+               "paragraph": [
+                    "Dhaka-Rangpur-Lalmonirhat-Patgram-Burimari-Changrabandha-Saidpur-Nilphamari-Hajigonj-Deviganj-Domar-Birgonj routes are available in New Dhaka Express at Jatri website. Do not hesitate to grab your tickets from Jatri website!"
+               ]
           }
      ]
 }
