@@ -510,6 +510,7 @@
       <div class="text-center mt-4 lg:mt-5">
         <p class="text-blackPrimary text-sm font-normal">
           By proceeding you are agreeing with our
+          <br class="flex md:hidden" />
           <a
             href="https://jatri.co/user/term-and-condition/"
             target="_blank"
