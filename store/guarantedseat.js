@@ -9,6 +9,11 @@ export const state = () => ({
   gsCities: [],
   gsOfferPromoImageUrl: [],
   gsTrips: [],
+  gsBoardingPoints: [],
+  modalBoardingPointList: [],
+  gsDroppingPoints: [],
+  gsBusCompanies: [],
+  gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
   gsSeatBoardingPointArray: [],
@@ -19,6 +24,7 @@ export const state = () => ({
   promoCode: {},
   isBusReserveModalOpen: false,
   isRequestSuccessFull: false,
+  showSurpriseDealModal: null,
   isTicketPopupOpen: false,
   selectedTicketId: null
 });
@@ -32,6 +38,11 @@ export const getters = {
     return state.gsOfferPromoImageUrl
   },
   getGsTrips: (state) => state.gsTrips,
+  getGsBoardingPoints: (state) => state.gsBoardingPoints,
+  getModalBoardingPoints: (state) => state.modalBoardingPointList,
+  getGsDroppingPoints: (state) => state.gsDroppingPoints,
+  getGsBusCompanies: (state) => state.gsBusCompanies,
+  getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
@@ -42,6 +53,7 @@ export const getters = {
   getPromoCode: (state) => state.promoCode,
   getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
   getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
+  getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
 };
@@ -77,7 +89,6 @@ export const actions = {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
     } catch (error) {
-      console.log(error);
       // this.$toast.error(error.response ? error.response.data.message : error.message , {
       //   position: 'bottom-right',
       //   duration: 5000,
@@ -108,6 +119,9 @@ export const actions = {
       if (data.trips) {
         commit('setGsTrips', data.trips);
       }
+      commit('setGsBoardingPoints', data.boardingPoints || []);
+      commit('setGsBusCompanies', data.companies || []);
+      commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
@@ -124,6 +138,28 @@ export const actions = {
       );
       commit('setGsSeatViewData', data);
       commit('resetPromoCode');
+    } catch (error) {
+      if (error.response && error.response.data.statusCode === 404) {
+        this.$toast.error(error.response.data.message, {
+          position: 'bottom-right',
+          duration: 5000,
+        })
+        window.location.reload(true)
+      }
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+    }
+  },
+  async getBoardingPointForBus({ commit }, payload) {
+    try {
+      const { data } = await this.$api.$post(
+        apis.GET_PARIBAHAN_SEAT_VIEW_URL,
+        payload
+      );
+      commit('setGsDroppingPoints', data.seatPlan.droppingPoints);
+      commit('setModalBoardingPoints', data.seatPlan.bordingPoints);
     } catch (error) {
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
@@ -255,6 +291,26 @@ export const actions = {
       return false;
     }
   },
+  async sendOtpForCancelTicketAction({ commit, state }, payload) {
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_SEND_OTP_BY_TICKET_ID, payload);
+      commit('handleCancelTicketPopup', data.data.phone);
+      this.$toast.success(data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
   async cancelTicketAction({ commit, state }, payload) {
     try {
       commit('setGsLoading', true);
@@ -276,7 +332,6 @@ export const actions = {
       return true;
     } catch (error) {
       commit('setGsLoading', false);
-      commit('handleCancelTicketPopup');
       this.$toast.error(error.response.data.message, {
         position: 'bottom-right',
         duration: 5000,
@@ -318,6 +373,50 @@ export const actions = {
         commit('resetPromoCode');
       })
     })
+  },
+  async applyPromoCodeAction({ dispatch, commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_APPLY_PROMO_CODE_URL, payload);
+
+
+      dispatch('getBookingInfoByTnxId', { 'transactionId': payload.tnxId });
+      commit('handleSurpriseDealModal', null);
+
+      this.$toast.success('Promo code applied successfully', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+
+      this.$toast.error(error.response.data.message, {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
+  },
+
+  async getSurpriseDealAction({ commit }, payload) {
+
+    try {
+      commit('setGsLoading', true);
+      const { data } = await this.$api.post(apis.POST_GET_SURPRISE_DEAL, payload);
+      commit('handleSurpriseDealModal', data.data);
+      commit('setGsLoading', false);
+      return true;
+    } catch (error) {
+      commit('setGsLoading', false);
+      this.$toast.error('Sorry!! No deal found now.', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+      return false;
+    }
   },
 
   async fullBusReservationAction({ commit }, payload) {
@@ -361,6 +460,11 @@ export const mutations = {
     state.gsOfferPromoImageUrl = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
+  setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
+  setGsDroppingPoints: (state, data) => (state.gsDroppingPoints = data),
+  setModalBoardingPoints: (state, data) => (state.modalBoardingPointList = data),
+  setGsBusCompanies: (state, data) => (state.gsBusCompanies = data),
+  setGsBusClasses: (state, data) => (state.gsBusClasses = data),
   setGsSeatViewData: (state, data) => {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;
@@ -378,9 +482,7 @@ export const mutations = {
     }
   },
   mobileFloatingFilter: (state, data) => {
-    if (data) {
-      state.mobileFloatingFilter = !state.mobileFloatingFilter
-    }
+      state.mobileFloatingFilter = data;
   },
   setBusReserveModalOpenStatus: (state, data) => {
     handleScrollBehaviour(state.isBusReserveModalOpen);
@@ -391,13 +493,14 @@ export const mutations = {
     handleScrollBehaviour(state.isRequestSuccessFull);
     state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
+  handleSurpriseDealModal: (state, data) => {
+    handleScrollBehaviour(!data);
+    state.showSurpriseDealModal = data;
+  },
   handleCancelTicketPopup: (state, data) => {
-    const body = document.getElementsByTagName("body")[0];
-    if (body) {
-      body.style.overflow = !state.isTicketPopupOpen ? "hidden" : "scroll";
-    }
-    state.isTicketPopupOpen = !state.isTicketPopupOpen;
-    if (!state.isTicketPopupOpen) {
+    handleScrollBehaviour(!data);
+    state.isTicketPopupOpen = data;
+    if (!data) {
       state.selectedTicketId = null;
     }
   },

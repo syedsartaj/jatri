@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#f7f7f7]">
-    <div class="w-[380px] lg:w-[816px] mx-auto py-[30px]">
+    <div class="w-full lg:w-[816px] mx-auto py-[30px]">
       <div class="w-full bg-white rounded-[10px] border border-[#DBDBDB]">
         <div class="text-center p-[10px] border-b border-[#DBDBDB]">
           <p class="text-blackPrimary text-xl font-medium">Ticket History</p>
@@ -212,7 +212,6 @@
         />
       </div>
     </div>
-    <CancelTicketModal v-if="getIsTicketPopupOpen" />
   </div>
 </template>
 
@@ -238,7 +237,6 @@ export default {
   computed: {
     ...mapGetters("guarantedseat", [
       "getSearchedTicketList",
-      "getIsTicketPopupOpen",
     ]),
   },
   methods: {

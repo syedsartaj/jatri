@@ -49,7 +49,7 @@
           </li>
         </ul>
         <div class="h-[70px] flex justify-between items-center">
-          <div class="gap-x-4 flex">
+          <a class="gap-x-4 flex" href="tel:09642080808">
             <img
               class="w-6 h-6 cursor-pointer"
               src="@/assets/images/icons/phoneBlack.svg"
@@ -58,7 +58,7 @@
             <span class="text-[20px] text-[#151414] font-medium">
               Jatri helpline</span
             >
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -80,11 +80,11 @@ export default {
           icon: "fullBusReserve",
           url: "#",
         },
-        {
-          name: "Profile",
-          icon: "user",
-          url: "#",
-        },
+        // {
+        //   name: "Profile",
+        //   icon: "user",
+        //   url: "#",
+        // },
       ],
     };
   },

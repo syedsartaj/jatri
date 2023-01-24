@@ -18,6 +18,7 @@
                          v-model='searchKey'
                          class='border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]'
                          placeholder='Search Location'
+                         autocomplete="off"
                          type='text'
                          autofocus
                          @keyup="search"

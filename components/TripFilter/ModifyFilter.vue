@@ -61,7 +61,10 @@
     <hr class="my-5" />
     <div class="flex justify-between items-center">
       <h2 class="font-medium text-2xl text-blackPrimary">Filter Options</h2>
-      <button class="flex justify-between items-center gap-x-[9.33px]">
+      <button
+        class="flex justify-between items-center gap-x-[9.33px]"
+        @click="resetFilter"
+      >
         <img
           src="@/assets/images/icons/resetIcon.svg"
           alt="reset filter"
@@ -70,14 +73,15 @@
         <p class="text-[#E0293B] font-medium text-xs">Reset Filter</p>
       </button>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="timeList.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-      <div class="flex justify-between gap-[7px] mt-[10px]">
+      <div class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
-          v-for="(time, index) in timeList"
+          v-for="time in timeList"
           :key="time"
-          class="w-[125px] 2xl:w-[175px] h-9"
+          class="w-full h-9"
         >
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
@@ -91,10 +95,8 @@
                 justify-center
                 items-center
                 gap-x-[10px]
-                capitalize
                 rounded
-                px-[6px]
-                py-2
+                px-[5px]
                 text-xs
                 font-medium
               "
@@ -106,9 +108,9 @@
             >
               <img
                 :src="
-                  require(index == 0
+                  require(time == '4 am - 12 pm'
                     ? '@/assets/images/icons/morning.svg'
-                    : index == 1
+                    : time == '12 pm - 06 pm'
                     ? '@/assets/images/icons/noon.svg'
                     : '@/assets/images/icons/night.svg')
                 "
@@ -121,8 +123,9 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="coachTypes.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
       <div class="flex justify-between gap-[7px] mt-[10px]">
         <div
@@ -172,12 +175,13 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <div>
+
+    <div v-if="getGsBusClasses.length">
+      <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
-      <div class="flex justify-evenly gap-[7px] mt-[10px]">
+      <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
-          v-for="busClass in busClassList"
+          v-for="busClass in getGsBusClasses"
           :key="busClass"
           class="w-full h-9"
         >
@@ -217,116 +221,126 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="priceDirection in priceFilter"
-        :key="priceDirection"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="priceDirection"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="priceFilter.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="priceDirection in priceFilter"
+          :key="priceDirection"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          <img
-            :src="
-              require(priceDirection == 'l2h'
-                ? '@/assets/images/icons/downArrow.svg'
-                : '@/assets/images/icons/upArrow.svg')
+          <label
+            :for="priceDirection"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
             "
-            alt="Price Filter Type"
-            class=""
+          >
+            <img
+              :src="
+                require(priceDirection == 'l2h'
+                  ? '@/assets/images/icons/upArrow.svg'
+                  : '@/assets/images/icons/downArrow.svg')
+              "
+              alt="Price Filter Type"
+              class=""
+            />
+            {{
+              priceDirection == "l2h"
+                ? "Price low to high"
+                : "Price high to low"
+            }}
+          </label>
+          <input
+            :id="priceDirection"
+            type="checkbox"
+            @click="priceFilterType = priceDirection"
+            :checked="priceFilterType === priceDirection"
+            class="default:border-2 border-blackPrimary cursor-pointer"
           />
-          {{
-            priceDirection == "l2h" ? "Price low to high" : "Price high to low"
-          }}
-        </label>
-        <input
-          :id="priceDirection"
-          type="checkbox"
-          @click="priceFilterType = priceDirection"
-          :checked="priceFilterType === priceDirection"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+        </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="point in boardingPointList"
-        :key="point"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="point"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="getGsBoardingPoints.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="point in getGsBoardingPoints"
+          :key="point"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          {{ point }}
-        </label>
-        <input
-          :id="point"
-          type="checkbox"
-          @click="boardingPoint = point"
-          :checked="boardingPoint === point"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+          <label
+            :for="point"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
+            "
+          >
+            {{ point }}
+          </label>
+          <input
+            :id="point"
+            type="checkbox"
+            @click="setBoardingPoint(point)"
+            :checked="boardingPoint === point"
+            class="default:border-2 border-blackPrimary cursor-pointer"
+          />
+        </div>
       </div>
     </div>
-    <hr class="my-5" />
-    <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
-    <div class="mt-[10px] divide-y divide-dashed">
-      <div
-        v-for="bus in busCompanyList"
-        :key="bus"
-        class="flex justify-between items-center my-2 last:pt-[6px]"
-      >
-        <label
-          :for="bus"
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-[9.52px]
-            cursor-pointer
-            text-blackPrimary text-base
-            font-normal
-          "
+
+    <div v-if="getGsBusCompanies.length">
+      <hr class="my-5" />
+      <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
+      <div class="mt-[10px] divide-y divide-dashed">
+        <div
+          v-for="bus in getGsBusCompanies"
+          :key="bus"
+          class="flex justify-between items-center my-2 last:pt-[6px]"
         >
-          {{ bus }}
-        </label>
-        <input
-          :id="bus"
-          type="checkbox"
-          @click="busCompany = bus"
-          :checked="busCompany === bus"
-          class="default:border-2 border-blackPrimary cursor-pointer"
-        />
+          <label
+            :for="bus"
+            class="
+              flex
+              justify-start
+              items-center
+              gap-x-[9.52px]
+              cursor-pointer
+              text-blackPrimary text-base
+              font-normal
+            "
+          >
+            {{ bus }}
+          </label>
+          <input
+            :id="bus"
+            type="checkbox"
+            @click="setBusCompany(bus)"
+            :checked="busCompany === bus"
+            class="default:border-2 border-blackPrimary cursor-pointer"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
-import { timeFormat } from "@/helpers/dateTimeFormat";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import moment from "moment";
 import Cookies from "js-cookie";
 export default {
@@ -342,43 +356,39 @@ export default {
       priceFilter: ["l2h", "h2l"],
       priceFilterType: null,
       boardingPoint: "",
-      boardingPointList: [
-        "Dhaka",
-        "Mymensingh",
-        "Uttara",
-        "Banani",
-        "Gabtoli",
-        "Technical Bus Stand",
-        "Amtoli Bus Stand",
-        "Fakirapool BusStand",
-      ],
       busCompany: "",
-      busCompanyList: [
-        "Labiba Classic Ltd",
-        "Kazi Paribahan",
-        "Green Line Paribahan",
-        "Desh Travels",
-        "Tisha Group and Tubaline",
-        "Shyamoli Travels",
-      ],
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      selectedTime: "",
-      busClassList: ["Economy Class", "Business Class"],
+      selectedTime: null,
       selectedBusClass: "",
     };
   },
   computed: {
     ...mapGetters("guarantedseat", ["getGsCities"]),
-    ...mapGetters("guarantedseat", ["getGsTrips", "getGsLoading"]),
+    ...mapGetters("guarantedseat", [
+      "getGsTrips",
+      "getGsLoading",
+      "getGsBoardingPoints",
+      "getGsBusCompanies",
+      "getGsBusClasses",
+    ]),
   },
 
   watch: {
-    coachType(value) {
-      if (value) {
-        this.handleFromSubmit();
-      }
+    coachType() {
+      this.handleFromSubmit();
     },
-
+    boardingPoint() {
+      this.handleTripFilter();
+    },
+    busCompany() {
+      this.handleTripFilter();
+    },
+    selectedTime() {
+      this.handleTripFilter();
+    },
+    selectedBusClass() {
+      this.handleTripFilter();
+    },
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -398,8 +408,73 @@ export default {
 
   methods: {
     ...mapMutations("guarantedseat", ["sortedTrip"]),
+    ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       this.coachType = type;
+    },
+    setBoardingPoint(point) {
+      this.boardingPoint = point === this.boardingPoint ? null : point;
+    },
+    setBusCompany(bus) {
+      this.busCompany = bus === this.busCompany ? null : bus;
+    },
+    async handleTripFilter() {
+      this.$nuxt.$loading.start();
+      const { from, to, type, date } = this.$route.query;
+      const formattedDate = new Date(+date).toLocaleString("en-CA", {
+        dateStyle: "short",
+      });
+
+      let payload = {};
+
+      if (from) {
+        this.getGsCities?.filter((s) => {
+          if (s.city_name.toLowerCase() === from.toLowerCase()) {
+            payload["from"] = s.city;
+          }
+        });
+      }
+
+      if (to) {
+        this.getGsCities?.filter((s) => {
+          if (s.city_name.toLowerCase() === to.toLowerCase()) {
+            payload["to"] = s.city;
+          }
+        });
+      }
+
+      payload.date = formattedDate;
+      payload.busType = type;
+
+      if (this.boardingPoint) {
+        payload.boardingPoint = this.boardingPoint;
+      }
+      if (this.busCompany) {
+        payload.company = this.busCompany;
+      }
+      if (this.selectedBusClass) {
+        payload.busClass = this.selectedBusClass;
+      }
+
+      if (this.selectedTime) {
+        payload.time =
+          this.selectedTime === "4 am - 12 pm"
+            ? "morning"
+            : this.selectedTime === "12 pm - 06 pm"
+            ? "day"
+            : "night";
+      }
+
+      await this.getPbScheduleDataAction(payload);
+      this.$nuxt.$loading.finish();
+    },
+    resetFilter() {
+      this.busCompany = null;
+      this.boardingPoint = null;
+      this.selectedTime = null;
+      this.selectedBusClass = null;
+      this.priceFilterType = null;
+      this.handleFromSubmit();
     },
     setTime(time) {
       this.selectedTime = time;

@@ -39,7 +39,7 @@
                :class="!departure || !destination || !coachType || !departingDate ? 'bg-corporate' : 'bg-corporate cursor-pointer border border-primary'"
                @click="handleFromSubmit" 
           >
-               Search Ticket
+               Search ticket
           </button>
      </div>
 </template>
@@ -54,7 +54,7 @@ export default {
                destination: "",
                departureName: "",
                destinationName: "",
-               departingDate: "",
+               departingDate: new Date().toLocaleString('en-CA', {dateStyle: 'short'}),
                coachType: "all",
                // passengerName: "",
                coachTypes: [

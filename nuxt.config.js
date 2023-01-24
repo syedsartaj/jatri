@@ -7,7 +7,7 @@ export default {
     port: process.env.PORT || 3000,
   },
   head: {
-    title: "Jatri Ticket",
+    title: "Jatri Ticket | Buy  online bus tickets",
     htmlAttrs: {
       lang: "en",
     },
@@ -17,10 +17,10 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+      { hid: "description", name: "description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { hid: "keywords", name: "keywords", content: "bus ticket bd, bus ticket online, bus ticket price, bus ticket booking online" },
       { hid: "og-title", name: "og:title", content: "Online bus tickets for everyone" },
-      { hid: "og-desc", name: "og:description", content: "Buy online bus tickets from Jatri. Visit our website and book your tickets." },
+      { hid: "og-desc", name: "og:description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { name: "format-detection", content: "telephone=no" },
       { hid: 'og-image', name: 'og:image', content: `${process.env.CLIENT_BASE_URL}/favicon.png` }
     ],
@@ -46,7 +46,7 @@ export default {
     '~/plugins/gtm'
   ],
 
-  
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -61,8 +61,16 @@ export default {
     "@nuxt/postcss8",
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
+    "@nuxtjs/google-fonts",
   ],
-
+  googleFonts: {
+    display: "swap",
+    families: {
+      Inter: {
+        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      }
+    }
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -89,7 +97,7 @@ export default {
       id: process.env.GTM_ID || 'GTM-MWP6J24'
     }
   },
-  
+
   toast: {
     timeout: 2000,
     closeOnClick: false

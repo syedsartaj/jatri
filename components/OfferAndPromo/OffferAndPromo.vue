@@ -55,7 +55,7 @@ export default {
         dots: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
@@ -70,7 +70,7 @@ export default {
           {
             breakpoint: 768,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: 2,
               slidesToScroll: 1,
               initialSlide: 1,
             },
@@ -78,7 +78,7 @@ export default {
           {
             breakpoint: 600,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: 1,
               slidesToScroll: 1,
               initialSlide: 1,
             },
