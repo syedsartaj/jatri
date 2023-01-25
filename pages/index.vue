@@ -466,7 +466,9 @@
             border-[1px] border-[#DBDBDB]
           "
         >
-          <div class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]">
+          <div
+            class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]"
+          >
             <img
               src="@/assets/images/home/availableRoutesIcon.svg"
               alt=""
@@ -567,6 +569,10 @@
         </div>
       </div>
     </div>
+
+    <!-- Our most recent initiatives -->
+
+    <Blog />
 
     <!-- Help Section -->
     <div class="p-4 lg:p-[100px]">
