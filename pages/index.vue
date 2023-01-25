@@ -91,7 +91,7 @@
     <!-- Offer & Promos Section Mobile -->
     <div
       class="pt-80 mt-10 flex justify-center w-full"
-      v-if="isMobile && offerImages && offerImages.length"
+      v-if="isMobile && getOfferImages && getOfferImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div
@@ -163,7 +163,7 @@
         </div>
           <div  class="mt-10 ml-4">
             <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-              <div v-for=" (offerImg, index) in offerImages" :key="index">
+              <div v-for=" (offerImg, index) in getOfferImages" :key="index">
                 <img :id="index" :src="offerImg" alt=""
                   class="rounded-[10px] w-[300px] h-[200px] pointer-events-none">
               </div>
@@ -175,7 +175,7 @@
     <!-- Offer & Promos Section -->
     
     <div class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="!isMobile && offerImages && offerImages.length">
+      v-if="!isMobile && getOfferImages && getOfferImages.length">
       <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
         <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
           <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">
@@ -228,7 +228,7 @@
         </div>
           <div  class="mt-5 lg:mt-[42px] p-2">
             <VueSlickCarousel v-bind="settings" ref="carousel">
-              <div v-for=" (offerImg, index) in offerImages" :key="index">
+              <div v-for=" (offerImg, index) in getOfferImages" :key="index">
                 <img :id="index" :src="offerImg" alt=""
                   class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none">
                 
@@ -584,7 +584,6 @@ export default {
       vertical: false,
       imageUrl: "",
       showStickySearchBox: false,
-      offerImages: [],
       busOperators: [
         {
           name: "Euro Coach",
@@ -867,8 +866,7 @@ export default {
   components: { VueSlickCarousel },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
-    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList");
-    await store.dispatch("guarantedseat/readOfferPromoImageUrl");
+  
   },
   
 
@@ -877,37 +875,16 @@ export default {
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.onResize)
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
-    
-    //fetching offer images
-    this.offerImageUrl = process.env.PARIBAHAN_BASE_URL
-    const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLinkArr = data.offerAndPromoImages;
-    this.offerImages = await Promise.all(imageLinkArr.map( async (imageLink) =>{
-      const imageRaw = await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink.image}});
-      return imageRaw; 
-    }))
-    
-  
-    // console.log(this.offerImages);
-    // this.setOfferImage(imageRawArr);
-    
+ 
   },
   unmount() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
+    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl","getOfferImages"]),
   },
   methods: {
-    // setOfferImage(bufferArr){
-    //   for(const buffer of bufferArr){
-    //     const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
-    //     const theImage = window.btoa(binaryString);
-    //     const properlyFormattedImage = "data:image/*;base64," + theImage;
-    //     this.offerImages.push(properlyFormattedImage)
-        
-    //   }
-    // },
+    
     toggleOpen: function (index) {
       this.accordionData = this.accordionData.map((accordion, i) => {
         if (index === i) {
@@ -921,9 +898,8 @@ export default {
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
-      "getOfferPromoImagesUrlList",
-      "readOfferPromoImageUrl",
       "successTicketByMailAction",
+     
     ]),
 
     handleHowToBuyModal() {

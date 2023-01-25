@@ -1,7 +1,7 @@
 <template>
   <div
     class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex items-center mb-[20px]"
-    v-if="getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length"
+    v-if="getOfferImages && getOfferImages.length"
   >
     <img
       src="@/assets/images/arrowLeftBlack.svg"
@@ -11,16 +11,16 @@
     />
     <div class="overflow-hidden w-full h-auto">
       <VueSlickCarousel v-bind="settings" ref="carousel">
-        <div v-for="(offerImg, index) in getGsOfferPromoImageUrl" :key="index">
+        <div v-for="(offerImg, index) in getOfferImages" :key="index">
           <img
             :id="index"
-            :src="imageUrl + offerImg.image"
+            :src="offerImg"
             alt=""
             class="
               rounded-[8px]
               w-[175px]
               h-[100px]
-              pointer-events-none pointer-events-none
+              pointer-events-none 
             "
           />
         </div>
@@ -95,23 +95,17 @@ export default {
     };
   },
   components: { VueSlickCarousel },
-  async asyncData({ store }) {
-    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList");
-    await store.dispatch("guarantedseat/readOfferPromoImageUrl");
-  },
+  
   mounted() {
-    this.getOfferPromoImagesUrlList();
+   
     window.addEventListener("scroll", this.handleScroll);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
+    ...mapGetters("guarantedseat", ["getOfferImages"]),
   },
   methods: {
-    ...mapActions("guarantedseat", [
-      "getOfferPromoImagesUrlList",
-      "readOfferPromoImageUrl",
-    ]),
+   
     scrollLeft() {
       this.$refs.carousel.prev();
       this.slideLeft = true;
@@ -123,12 +117,7 @@ export default {
       this.slideLeft = false;
     },
   },
-  async readImageUrl(url, index) {
-    const data = await this.readOfferPromoImageUrl(url);
-    const base = Buffer.from(data).toString("base64");
-    return (document.getElementById(index).src =
-      "data:image/png;base64," + base);
-  },
+  
 };
 </script>
 
