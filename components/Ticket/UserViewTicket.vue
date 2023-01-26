@@ -123,7 +123,10 @@
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
                   {{
                     Math.ceil(
-                      (getTicketDetails.payable + getTicketDetails.discount) /
+                      (getTicketDetails.discountType === "PROMO"
+                        ? getTicketDetails.payable
+                        : getTicketDetails.payable +
+                          getTicketDetails.discount) /
                         getTicketDetails.totalSeat
                     )
                   }}

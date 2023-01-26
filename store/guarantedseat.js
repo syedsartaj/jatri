@@ -26,7 +26,8 @@ export const state = () => ({
   isRequestSuccessFull: false,
   showSurpriseDealModal: null,
   isTicketPopupOpen: false,
-  selectedTicketId: null
+  selectedTicketId: null,
+  blogList: [],
 });
 
 export const getters = {
@@ -56,6 +57,7 @@ export const getters = {
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
+  getBlogList: (state) => state.blogList,
 };
 
 export const actions = {
@@ -93,6 +95,14 @@ export const actions = {
       //   position: 'bottom-right',
       //   duration: 5000,
       // })
+    }
+  },
+  async getBlogListApi({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
+      commit('setBlogList', data.blogs || []);
+    } catch (error) {
+
     }
   },
 
@@ -459,6 +469,9 @@ export const mutations = {
   setGsOfferPromoImageUrl: (state, data) => {
     state.gsOfferPromoImageUrl = data
   },
+  setBlogList: (state, data) => {
+    state.blogList = data
+  },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
   setGsDroppingPoints: (state, data) => (state.gsDroppingPoints = data),
@@ -482,7 +495,7 @@ export const mutations = {
     }
   },
   mobileFloatingFilter: (state, data) => {
-      state.mobileFloatingFilter = data;
+    state.mobileFloatingFilter = data;
   },
   setBusReserveModalOpenStatus: (state, data) => {
     handleScrollBehaviour(state.isBusReserveModalOpen);
