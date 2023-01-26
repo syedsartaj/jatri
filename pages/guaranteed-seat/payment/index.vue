@@ -252,8 +252,10 @@
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{
-                getBookingInfoDetails.payable +
-                getBookingInfoDetails.invoice.discount
+                showPromoInput
+                  ? getBookingInfoDetails.payable
+                  : getBookingInfoDetails.payable +
+                    getBookingInfoDetails.invoice.discount
               }}
             </p>
           </div>
