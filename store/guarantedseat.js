@@ -27,7 +27,8 @@ export const state = () => ({
   showSurpriseDealModal: null,
   isTicketPopupOpen: false,
   selectedTicketId: null,
-  offerImages: []
+  offerImages: [],
+  blogList: [],
 });
 
 export const getters = {
@@ -55,6 +56,7 @@ export const getters = {
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
+  getBlogList: (state) => state.blogList,
   getOfferImages: (state) => state.offerImages
 };
 
@@ -86,7 +88,15 @@ export const actions = {
   },
  
 
-  
+    async getBlogListApi({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
+      commit('setBlogList', data.blogs || []);
+    } catch (error) {
+
+    }
+  },
+
   async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
@@ -451,6 +461,9 @@ export const mutations = {
     state.gsCities = tempData;
   },
  
+  setBlogList: (state, data) => {
+    state.blogList = data
+  },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
   setGsDroppingPoints: (state, data) => (state.gsDroppingPoints = data),
@@ -474,7 +487,7 @@ export const mutations = {
     }
   },
   mobileFloatingFilter: (state, data) => {
-      state.mobileFloatingFilter = data;
+    state.mobileFloatingFilter = data;
   },
   setBusReserveModalOpenStatus: (state, data) => {
     handleScrollBehaviour(state.isBusReserveModalOpen);
