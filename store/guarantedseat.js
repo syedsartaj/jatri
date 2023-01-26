@@ -7,7 +7,7 @@ export const state = () => ({
   gsLoading: false,
   gsLoadingTwo: false,
   gsCities: [],
-  gsOfferPromoImageUrl: [],
+  
   gsTrips: [],
   gsBoardingPoints: [],
   modalBoardingPointList: [],
@@ -27,6 +27,7 @@ export const state = () => ({
   showSurpriseDealModal: null,
   isTicketPopupOpen: false,
   selectedTicketId: null,
+  offerImages: [],
   blogList: [],
 });
 
@@ -35,9 +36,7 @@ export const getters = {
   getGsLoading: (state) => state.gsLoading,
   getGsLoadingTwo: (state) => state.gsLoadingTwo,
   getGsCities: (state) => state.gsCities,
-  getGsOfferPromoImageUrl: (state) => {
-    return state.gsOfferPromoImageUrl
-  },
+  
   getGsTrips: (state) => state.gsTrips,
   getGsBoardingPoints: (state) => state.gsBoardingPoints,
   getModalBoardingPoints: (state) => state.modalBoardingPointList,
@@ -58,6 +57,7 @@ export const getters = {
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
   getBlogList: (state) => state.blogList,
+  getOfferImages: (state) => state.offerImages
 };
 
 export const actions = {
@@ -86,18 +86,9 @@ export const actions = {
       // })
     }
   },
-  async getOfferPromoImagesUrlList({ commit }) {
-    try {
-      const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-      commit('setGsOfferPromoImageUrl', data.offerAndPromoImages);
-    } catch (error) {
-      // this.$toast.error(error.response ? error.response.data.message : error.message , {
-      //   position: 'bottom-right',
-      //   duration: 5000,
-      // })
-    }
-  },
-  async getBlogListApi({ commit }) {
+ 
+
+    async getBlogListApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
       commit('setBlogList', data.blogs || []);
@@ -106,20 +97,6 @@ export const actions = {
     }
   },
 
-  async readOfferPromoImageUrl({ commit }, payload) {
-    try {
-      const data = await this.$api.$get(
-        apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: payload } }
-      );
-      return data;
-      // commit('setGsOfferPromoImage', data);
-    } catch (error) {
-      // this.$toast.error(error.response ? error.response.data.message : error.message , {
-      //   position: 'bottom-right',
-      //   duration: 5000,
-      // })
-    }
-  },
   async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
@@ -446,6 +423,23 @@ export const actions = {
       return false;
     }
   },
+
+  async setOfferImages({commit}) {
+    const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+    const imageLinkArr = data.offerAndPromoImages;
+    const rawOfferImages = await Promise.all(imageLinkArr.map( async (imageLink) =>{
+      return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink.image}, responseType:'arraybuffer'}); 
+    }))
+    const tmpOfferImages = [];
+    for(const buffer of rawOfferImages){
+          const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
+          const theImage = Buffer.from(binaryString,'binary').toString('base64');
+          const properlyFormattedImage = "data:image/*;base64," + theImage;
+          tmpOfferImages.push(properlyFormattedImage)
+          
+        }
+    commit('setOfferImages', tmpOfferImages);
+  }
 };
 
 export const mutations = {
@@ -466,9 +460,7 @@ export const mutations = {
     })
     state.gsCities = tempData;
   },
-  setGsOfferPromoImageUrl: (state, data) => {
-    state.gsOfferPromoImageUrl = data
-  },
+ 
   setBlogList: (state, data) => {
     state.blogList = data
   },
@@ -520,5 +512,8 @@ export const mutations = {
   setCancelTicketId: (state, data) => {
     state.selectedTicketId = data;
   },
+  setOfferImages: (state, data) => {
+    state.offerImages = data;
+  }
 
 };
