@@ -27,7 +27,7 @@
     >
       <div class="flex flex-col justify-left left-item">
         <p class="text-sm lg:text-xl font-medium text-[#FFFFFF]">
-          Check suprise deal
+          Check surprise deal
         </p>
         <p class="text-xs lg:text-sm font-normal text-[#FFFFFF]">
           Exciting offers waiting for you, grab now.

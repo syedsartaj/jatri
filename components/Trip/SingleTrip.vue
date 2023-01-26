@@ -229,7 +229,7 @@
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
-              {{ trip.seatFare[0].fare }} <span class="text-xs">TK</span>
+              {{ parseInt(trip.seatFare[0].fare) }} <span class="text-xs">TK</span>
             </h2>
             <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
           </div>

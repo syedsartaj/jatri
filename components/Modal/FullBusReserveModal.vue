@@ -60,10 +60,14 @@
             </div>
 
             <div class="bg-white font-normal pt-[10px]">
-              <p class="text-sm lg:text-xl text-[#4D4D4F]">
+              <p class="text-sm lg:text-xl text-[#4D4D4F] hidden xl:flex">
                 Now you can reserve a full bus according to your need. Fill the
                 form and <br />
                 submit. We will check and reserve a bus for you.
+              </p>
+              <p class="text-sm lg:text-xl text-[#4D4D4F] flex xl:hidden">
+                Now you can reserve a full bus according to your need. Fill the
+                form and submit. We will check and reserve a bus for you.
               </p>
               <div
                 class="
@@ -82,7 +86,7 @@
                   class="flex justify-evenly gap-6 mb-6 flex-col md:flex-row"
                 >
                   <!-- First Item -->
-                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full">
+                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col md:flex-row">
                     <div class="w-full">
                       <CommonInputLabel label="Journey date" />
                       <SelectDate
