@@ -235,8 +235,8 @@
                     Math.ceil(
                       (ticketDetails.discountType === "PROMO"
                         ? ticketDetails.payable
-                        : (ticketDetails.payable + ticketDetails.discount) /
-                        ticketDetails.totalSeat)
+                        : ticketDetails.payable + ticketDetails.discount) /
+                        ticketDetails.totalSeat
                     )
                   }}
                   x {{ ticketDetails.totalSeat }}
