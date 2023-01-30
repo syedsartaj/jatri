@@ -9,19 +9,14 @@
       class="h-4 w-4 cursor-pointer mr-[12px]"
       @click="scrollLeft"
     />
-    <div class="overflow-hidden w-full h-auto">
+    <div class="overflow-hidden w-full h-[100px]">
       <VueSlickCarousel v-bind="settings" ref="carousel">
         <div v-for="(offerImg, index) in getOfferImages" :key="index">
           <img
             :id="index"
             :src="offerImg"
             alt=""
-            class="
-              rounded-[8px]
-              w-[175px]
-              h-[100px]
-              pointer-events-none 
-            "
+            class="rounded-[8px] w-[175px] h-[100px] pointer-events-none"
           />
         </div>
       </VueSlickCarousel>
@@ -52,35 +47,29 @@ export default {
       slideRight: false,
       imageUrl: "",
       settings: {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 2,
+        arrows: false,
+        dots: false,
+        autoplay: true,
+        centerMode: true,
+        infinite: true,
+        slidesToShow: 4,
         slidesToScroll: 1,
-        initialSlide: 0,
+        autoplaySpeed: 5000,
+        speed: 2000,
+        rows: 1,
         responsive: [
           {
-            breakpoint: 1025,
+            breakpoint: 1333,
             settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              initialSlide: 1,
-            },
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              slidesToShow: 1,
+              initialSlide: 0,
             },
           },
           {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              initialSlide: 0,
             },
           },
           {
@@ -95,9 +84,8 @@ export default {
     };
   },
   components: { VueSlickCarousel },
-  
+
   mounted() {
-   
     window.addEventListener("scroll", this.handleScroll);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
@@ -105,7 +93,6 @@ export default {
     ...mapGetters("guarantedseat", ["getOfferImages"]),
   },
   methods: {
-   
     scrollLeft() {
       this.$refs.carousel.prev();
       this.slideLeft = true;
@@ -117,12 +104,11 @@ export default {
       this.slideLeft = false;
     },
   },
-  
 };
 </script>
 
 
-<style>
+<style scoped>
 .scroll-parent {
   width: 100%;
   position: relative;
@@ -143,12 +129,6 @@ export default {
 
 .secondary {
   animation: secondary 10s linear infinite;
-}
-
-.slick-slide {
-  max-width: 100%;
-  width: 100%;
-  overflow: hidden !important;
 }
 
 @keyframes primary {
