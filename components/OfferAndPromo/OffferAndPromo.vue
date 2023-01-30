@@ -54,7 +54,7 @@ export default {
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 2000,
         speed: 2000,
         rows: 1,
         responsive: [
