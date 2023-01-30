@@ -26,3 +26,7 @@
      border-color: #F04935 !important;
      background-color: #F04935 !important;
 }
+
+.slick-slide {
+     margin: 0 8px;
+   }

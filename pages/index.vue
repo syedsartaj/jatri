@@ -226,7 +226,7 @@
             </button>
           </div>
         </div>
-          <div  class="mt-5 lg:mt-[42px] p-2">
+          <div  class="mt-5 lg:mt-[42px] p-2 h-[260px]">
             <VueSlickCarousel v-bind="settings" ref="carousel">
               <div v-for=" (offerImg, index) in getOfferImages" :key="index">
                 <img :id="index" :src="offerImg" alt=""
@@ -770,6 +770,7 @@ export default {
         arrows: false,
         dots: false,
         autoplay: true,
+        centerMode: true,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -783,7 +784,7 @@ export default {
         autoplay: true,
         centerMode: true,
         infinite: true,
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplaySpeed: 5000,
         speed: 2000,
@@ -949,7 +950,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .homeBanner {
   background-image: url("../assets/images/home/bannerImageWeb.jpg");
   background-size: 100% 100%;
@@ -1015,17 +1016,6 @@ export default {
 
 .secondary {
   animation: secondary 10s linear infinite;
-}
-
-.slick-slide {
-  margin: 0 8px;
-  width: auto !important;
-}
-
-@media screen and (min-width: 992px) {
-  .slick-slide {
-    margin: 0 24px;
-  }
 }
 
 @keyframes primary {
