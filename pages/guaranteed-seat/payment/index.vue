@@ -612,7 +612,7 @@ export default {
       return dateTimeFormat(
         this.getBookingInfoDetails.invoice.boardingDateTime,
         6,
-        "ll"
+        "ddd, DD MMM YYYY"
       );
     },
     boardingTime() {
