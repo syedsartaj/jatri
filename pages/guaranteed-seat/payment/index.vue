@@ -157,7 +157,7 @@
               Mobile Number:
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.passenger.phone }}
+              +88{{ getBookingInfoDetails.passenger.phone }}
             </p>
           </div>
           <div
