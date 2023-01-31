@@ -431,6 +431,7 @@
             </p>
           </div>
           <img
+            v-if="busOperators.length - 1 !== index"
             src="@/assets/images/home/arrowRight.svg"
             alt=""
             class="h-4 w-4 cursor-pointer"
@@ -536,7 +537,7 @@
           </h2>
           <p class="text-blackLight text-sm leading-5 font-normal mt-4">
             Still need help?
-            <span class="text-corporate underline"
+            <span class="text-corporate underline ml-[6px]"
               ><a href="https://jatri.co/contact-us" target="_blank" class=""
                 >Contact Us</a
               >
