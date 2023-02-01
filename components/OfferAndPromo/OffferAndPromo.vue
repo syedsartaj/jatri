@@ -50,7 +50,7 @@ export default {
         arrows: false,
         dots: false,
         autoplay: true,
-        centerMode: true,
+        centerMode: false,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,

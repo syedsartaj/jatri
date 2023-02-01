@@ -1,5 +1,4 @@
 <template>
-  
   <div class="bg-white">
     <!-- banner section -->
     <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
@@ -161,25 +160,59 @@
             </button>
           </div>
         </div>
-          <div  class="mt-10 ml-4">
-            <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-              <div v-for=" (offerImg, index) in getOfferImages" :key="index">
-                <img :id="index" :src="offerImg" alt=""
-                  class="rounded-[10px] w-[300px] h-[200px] pointer-events-none">
-              </div>
-            </VueSlickCarousel>
-          </div>
+        <div class="mt-10 ml-4 h-[200px] overflow-hidden">
+          <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
+            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+              <img
+                :id="index"
+                :src="offerImg"
+                alt=""
+                class="rounded-[10px] w-[300px] h-[200px] pointer-events-none"
+              />
+            </div>
+          </VueSlickCarousel>
+        </div>
       </div>
     </div>
 
     <!-- Offer & Promos Section -->
-    
-    <div class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="!isMobile && getOfferImages && getOfferImages.length">
-      <div class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-[264px] lg:h-[464px]">
-        <div class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]">
-          <h2 class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold">
-            Offers & Promos</h2>
+
+    <div
+      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
+      v-if="!isMobile && getOfferImages && getOfferImages.length"
+    >
+      <div
+        class="
+          border border-[#c8c8c8]
+          rounded-[30px]
+          overflow-hidden
+          md:w-full
+          h-[264px]
+          lg:h-[464px]
+        "
+      >
+        <div
+          class="
+            flex
+            justify-between
+            items-center
+            pt-6
+            lg:pt-[56px]
+            px-[18px]
+            lg:px-[60px]
+          "
+        >
+          <h2
+            class="
+              text-2xl
+              lg:text-4xl lg:leading-[44px]
+              text-blackPrimary text-center
+              font-medium
+              lg:font-semibold
+            "
+          >
+            Offers & Promos
+          </h2>
 
           <div class="flex justify-between gap-x-4">
             <button
@@ -226,16 +259,27 @@
             </button>
           </div>
         </div>
-          <div  class="mt-5 lg:mt-[42px] p-2 h-[260px]">
-            <VueSlickCarousel v-bind="settings" ref="carousel">
-              <div v-for=" (offerImg, index) in getOfferImages" :key="index">
-                <img :id="index" :src="offerImg" alt=""
-                  class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none">
-                
-              </div>
-            </VueSlickCarousel>
-          </div>
-
+        <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
+          <VueSlickCarousel v-bind="settings" ref="carousel">
+            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+              <img
+                :id="index"
+                :src="offerImg"
+                alt=""
+                class="
+                  rounded-2xl
+                  w-[280px]
+                  lg:w-[350px]
+                  xl:w-[460px]
+                  h-[164px]
+                  lg:h-[200px]
+                  xl:h-[260px]
+                  pointer-events-none
+                "
+              />
+            </div>
+          </VueSlickCarousel>
+        </div>
       </div>
     </div>
 
@@ -573,7 +617,7 @@ import Cookies from "js-cookie";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
-import * as apis from '../helpers/apis';
+import * as apis from "../helpers/apis";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -782,7 +826,7 @@ export default {
       settings: {
         arrows: false,
         dots: false,
-        autoplay: true,
+        autoplay: false,
         centerMode: true,
         infinite: true,
         slidesToShow: 3,
@@ -791,6 +835,13 @@ export default {
         speed: 2000,
         rows: 1,
         responsive: [
+          {
+            breakpoint: 1744,
+            settings: {
+              slidesToShow: 2,
+              initialSlide: 0,
+            },
+          },
           {
             breakpoint: 1333,
             settings: {
@@ -874,25 +925,25 @@ export default {
   components: { VueSlickCarousel },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
-  
   },
-  
 
   async mounted() {
-    this.onResize()
-    window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('resize', this.onResize)
-    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL
- 
+    this.onResize();
+    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("resize", this.onResize);
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   unmount() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl","getOfferImages"]),
+    ...mapGetters("guarantedseat", [
+      "getGsLoading",
+      "getGsOfferPromoImageUrl",
+      "getOfferImages",
+    ]),
   },
   methods: {
-    
     toggleOpen: function (index) {
       this.accordionData = this.accordionData.map((accordion, i) => {
         if (index === i) {
@@ -907,7 +958,6 @@ export default {
       "getPbAccessTokenAction",
       "getCitiesList",
       "successTicketByMailAction",
-     
     ]),
 
     handleHowToBuyModal() {

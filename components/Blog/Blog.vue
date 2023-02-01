@@ -68,7 +68,9 @@
       </div>
     </div>
 
-    <div class="mt-10 w-full h-[422px] pl-4 lg:pl-0">
+    <div
+      class="mt-10 w-full h-[325px] sm:h-[422px] pl-4 lg:pl-0 overflow-hidden"
+    >
       <VueSlickCarousel v-bind="settings" ref="videoBlogCarousel">
         <a
           v-for="(blog, index) in getBlogList"
@@ -88,13 +90,23 @@
             :id="index"
             :src="imageUrl + blog.image"
             alt=""
-            class="rounded-t-2xl w-full h-[181px] lg:h-[222px]"
+            class="
+              rounded-t-2xl
+              w-[320px]
+              sm:w-[350px]
+              xl:w-[392px]
+              h-[181px]
+              lg:h-[222px]
+            "
           />
           <div
             class="
               w-full
               flex flex-col
               items-left
+              w-[320px]
+              sm:w-[350px]
+              xl:w-[392px]
               h-[144px]
               lg:h-[196px]
               bg-[#F7F7F7]
@@ -168,33 +180,25 @@ export default {
         arrows: false,
         dots: false,
         autoplay: false,
-        centerMode: true,
+        centerMode: false,
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplaySpeed: 5000,
         speed: 2000,
-        rows: 1,
         responsive: [
           {
-            breakpoint: 1333,
+            breakpoint: 1522,
             settings: {
               slidesToShow: 2,
               initialSlide: 0,
             },
           },
           {
-            breakpoint: 600,
+            breakpoint: 1333,
             settings: {
               slidesToShow: 1,
               initialSlide: 0,
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 0,
             },
           },
         ],
