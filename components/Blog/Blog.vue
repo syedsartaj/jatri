@@ -68,9 +68,11 @@
       </div>
     </div>
 
-    <div class="mt-10 w-full h-[325px] sm:h-[422px] pl-4 lg:pl-0 overflow-hidden">
+    <div
+      class="mt-10 w-full h-[325px] sm:h-[422px] pl-4 lg:pl-0 overflow-hidden"
+    >
       <VueSlickCarousel v-bind="settings" ref="videoBlogCarousel">
-        <div
+        <a
           v-for="(blog, index) in getBlogList"
           :key="index"
           class="
@@ -81,6 +83,7 @@
             sm:w-[350px]
             xl:w-[392px]
           "
+          :href="blog.link"
           style="width: undefine"
         >
           <img
@@ -153,7 +156,7 @@
               />
             </div>
           </div>
-        </div>
+        </a>
       </VueSlickCarousel>
     </div>
   </div>
