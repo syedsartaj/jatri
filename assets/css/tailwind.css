@@ -29,4 +29,5 @@
 
 .slick-slide {
      margin: 0 8px;
-   }
+     width: max-content !important;
+}
