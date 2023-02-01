@@ -9,7 +9,7 @@
       lg:py-8
       px-4
       lg:px-[100px]
-      bg-corporateBg
+      bg-[#F7F7F7]
     "
   >
     <div class="w-full lg:w-1/2">
@@ -157,7 +157,7 @@
               Mobile Number:
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.passenger.phone }}
+              +88{{ getBookingInfoDetails.passenger.phone }}
             </p>
           </div>
           <div
@@ -252,8 +252,10 @@
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
               {{
-                getBookingInfoDetails.payable +
-                getBookingInfoDetails.invoice.discount
+                showPromoInput
+                  ? getBookingInfoDetails.payable
+                  : getBookingInfoDetails.payable +
+                    getBookingInfoDetails.invoice.discount
               }}
             </p>
           </div>
@@ -437,7 +439,7 @@
               justify-center
               items-center
               w-[139px]
-              bg-[#FDF0F1]
+              bg-[#F7F7F7]
               rounded-full
               text-base
               font-medium
@@ -510,16 +512,17 @@
       <div class="text-center mt-4 lg:mt-5">
         <p class="text-blackPrimary text-sm font-normal">
           By proceeding you are agreeing with our
-          <a
-            href="https://jatri.co/user/term-and-condition/"
-            target="_blank"
-            class="w-full underline text-blue-500"
-            >Terms and Conditions</a
+          <br class="flex md:hidden" />
+          <nuxt-link
+            to="/policies#terms-and-conditions"
+            class="w-full underline text-[#1E88E5] font-medium"
+            >Terms and Conditions</nuxt-link
           >
         </p>
       </div>
 
       <div
+        v-if="!(!paymentAllowStatus || paymentValidateTime === 0)"
         class="
           p-5
           mt-8
@@ -609,7 +612,7 @@ export default {
       return dateTimeFormat(
         this.getBookingInfoDetails.invoice.boardingDateTime,
         6,
-        "ll"
+        "ddd, DD MMM YYYY"
       );
     },
     boardingTime() {

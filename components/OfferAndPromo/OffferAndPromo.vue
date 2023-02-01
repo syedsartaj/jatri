@@ -1,7 +1,7 @@
 <template>
   <div
     class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex items-center mb-[20px]"
-    v-if="getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length"
+    v-if="getOfferImages && getOfferImages.length"
   >
     <img
       src="@/assets/images/arrowLeftBlack.svg"
@@ -9,19 +9,14 @@
       class="h-4 w-4 cursor-pointer mr-[12px]"
       @click="scrollLeft"
     />
-    <div class="overflow-hidden w-full h-auto">
+    <div class="overflow-hidden w-full h-[100px]">
       <VueSlickCarousel v-bind="settings" ref="carousel">
-        <div v-for="(offerImg, index) in getGsOfferPromoImageUrl" :key="index">
+        <div v-for="(offerImg, index) in getOfferImages" :key="index">
           <img
             :id="index"
-            :src="imageUrl + offerImg.image"
+            :src="offerImg"
             alt=""
-            class="
-              rounded-[8px]
-              w-[175px]
-              h-[100px]
-              pointer-events-none pointer-events-none
-            "
+            class="rounded-[8px] w-[175px] h-[100px] pointer-events-none"
           />
         </div>
       </VueSlickCarousel>
@@ -52,35 +47,29 @@ export default {
       slideRight: false,
       imageUrl: "",
       settings: {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 2,
+        arrows: false,
+        dots: false,
+        autoplay: true,
+        centerMode: false,
+        infinite: true,
+        slidesToShow: 4,
         slidesToScroll: 1,
-        initialSlide: 0,
+        autoplaySpeed: 2000,
+        speed: 2000,
+        rows: 1,
         responsive: [
           {
-            breakpoint: 1025,
+            breakpoint: 1333,
             settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              initialSlide: 1,
-            },
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              slidesToShow: 1,
+              initialSlide: 0,
             },
           },
           {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 1,
+              initialSlide: 0,
             },
           },
           {
@@ -95,23 +84,15 @@ export default {
     };
   },
   components: { VueSlickCarousel },
-  async asyncData({ store }) {
-    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList");
-    await store.dispatch("guarantedseat/readOfferPromoImageUrl");
-  },
+
   mounted() {
-    this.getOfferPromoImagesUrlList();
     window.addEventListener("scroll", this.handleScroll);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
+    ...mapGetters("guarantedseat", ["getOfferImages"]),
   },
   methods: {
-    ...mapActions("guarantedseat", [
-      "getOfferPromoImagesUrlList",
-      "readOfferPromoImageUrl",
-    ]),
     scrollLeft() {
       this.$refs.carousel.prev();
       this.slideLeft = true;
@@ -123,17 +104,11 @@ export default {
       this.slideLeft = false;
     },
   },
-  async readImageUrl(url, index) {
-    const data = await this.readOfferPromoImageUrl(url);
-    const base = Buffer.from(data).toString("base64");
-    return (document.getElementById(index).src =
-      "data:image/png;base64," + base);
-  },
 };
 </script>
 
 
-<style>
+<style scoped>
 .scroll-parent {
   width: 100%;
   position: relative;
@@ -154,12 +129,6 @@ export default {
 
 .secondary {
   animation: secondary 10s linear infinite;
-}
-
-.slick-slide {
-  max-width: 100%;
-  width: 100%;
-  overflow: hidden !important;
 }
 
 @keyframes primary {

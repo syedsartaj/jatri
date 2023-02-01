@@ -1,6 +1,6 @@
 <template>
      <div class="px-[100px] pt-[60px] pb-8 bg-corporate">
-          <div class="flex justify-between items-start lg:gap-x-[209px]">
+          <div class="flex justify-between items-start">
                <div>
                     <img src="@/assets/images/logo-white.svg" alt="" class="h-11 w-[89px] ">
                     

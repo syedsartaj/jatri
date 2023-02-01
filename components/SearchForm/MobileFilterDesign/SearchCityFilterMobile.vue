@@ -18,12 +18,13 @@
                          v-model='searchKey'
                          class='border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]'
                          placeholder='Search Location'
+                         autocomplete="off"
                          type='text'
                          autofocus
                          @keyup="search"
                     />
                </div>
-               <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-[344px] text-sm xl:text-md text-td_text px-4'>
+               <ul class='overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-auto text-sm xl:text-md text-td_text px-4'>
                     <li 
                          v-for='(option, index) in filteredOptionsData' :key='index' 
                          class='cursor-pointer font-inter py-[14px] font-medium hover:text-corporate relative'

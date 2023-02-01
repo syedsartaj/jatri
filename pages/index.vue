@@ -90,9 +90,7 @@
     <!-- Offer & Promos Section Mobile -->
     <div
       class="pt-80 mt-10 flex justify-center w-full"
-      v-if="
-        isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length
-      "
+      v-if="isMobile && getOfferImages && getOfferImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div
@@ -162,15 +160,12 @@
             </button>
           </div>
         </div>
-        <div class="mt-10 ml-4">
+        <div class="mt-10 ml-4 h-[200px] overflow-hidden">
           <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-            <div
-              v-for="(offerImg, index) in getGsOfferPromoImageUrl"
-              :key="index"
-            >
+            <div v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
-                :src="imageUrl + offerImg.image"
+                :src="offerImg"
                 alt=""
                 class="rounded-[10px] w-[300px] h-[200px] pointer-events-none"
               />
@@ -181,15 +176,10 @@
     </div>
 
     <!-- Offer & Promos Section -->
-    <div
-      class="pt-80 p-4 lg:mt-0 lg:p-0 lg:pb-0"
-      v-if="!getGsOfferPromoImageUrl || !getGsOfferPromoImageUrl.length"
-    ></div>
+
     <div
       class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="
-        !isMobile && getGsOfferPromoImageUrl && getGsOfferPromoImageUrl.length
-      "
+      v-if="!isMobile && getOfferImages && getOfferImages.length"
     >
       <div
         class="
@@ -269,15 +259,12 @@
             </button>
           </div>
         </div>
-        <div class="mt-5 lg:mt-[42px] p-2">
+        <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
           <VueSlickCarousel v-bind="settings" ref="carousel">
-            <div
-              v-for="(offerImg, index) in getGsOfferPromoImageUrl"
-              :key="index"
-            >
+            <div v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
-                :src="imageUrl + offerImg.image"
+                :src="offerImg"
                 alt=""
                 class="
                   rounded-2xl
@@ -290,7 +277,6 @@
                   pointer-events-none
                 "
               />
-              <!-- {{ readImageUrl(offerImg.image)}} -->
             </div>
           </VueSlickCarousel>
         </div>
@@ -461,12 +447,14 @@
             w-full
             items-center
             py-4
-            px-[12px]
+            px-[20px]
             rounded-[10px]
             border-[1px] border-[#DBDBDB]
           "
         >
-          <div class="flex flex-row items-center w-full gap-x-[12px]">
+          <div
+            class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]"
+          >
             <img
               src="@/assets/images/home/availableRoutesIcon.svg"
               alt=""
@@ -487,9 +475,10 @@
             </p>
           </div>
           <img
+            v-if="busOperators.length - 1 !== index"
             src="@/assets/images/home/arrowRight.svg"
             alt=""
-            class="h-4 w-4 cursor-pointer mr-[12px]"
+            class="h-4 w-4 cursor-pointer"
             @click="scrollLeft"
           />
         </NuxtLink>
@@ -568,6 +557,10 @@
       </div>
     </div>
 
+    <!-- Our most recent initiatives -->
+
+    <Blog />
+
     <!-- Help Section -->
     <div class="p-4 lg:p-[100px]">
       <div class="flex flex-wrap justify-between items-start gap-x-8">
@@ -588,7 +581,7 @@
           </h2>
           <p class="text-blackLight text-sm leading-5 font-normal mt-4">
             Still need help?
-            <span class="text-corporate underline"
+            <span class="text-corporate underline ml-[6px]"
               ><a href="https://jatri.co/contact-us" target="_blank" class=""
                 >Contact Us</a
               >
@@ -624,6 +617,7 @@ import Cookies from "js-cookie";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import * as apis from "../helpers/apis";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -821,25 +815,33 @@ export default {
         arrows: false,
         dots: false,
         autoplay: true,
+        centerMode: true,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 2000,
         speed: 2000,
         rows: 1,
       },
       settings: {
         arrows: false,
         dots: false,
-        autoplay: true,
+        autoplay: false,
         centerMode: true,
         infinite: true,
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 2000,
         speed: 2000,
         rows: 1,
         responsive: [
+          {
+            breakpoint: 1744,
+            settings: {
+              slidesToShow: 2,
+              initialSlide: 0,
+            },
+          },
           {
             breakpoint: 1333,
             settings: {
@@ -923,11 +925,9 @@ export default {
   components: { VueSlickCarousel },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
-    await store.dispatch("guarantedseat/getOfferPromoImagesUrlList");
-    await store.dispatch("guarantedseat/readOfferPromoImageUrl");
   },
 
-  mounted() {
+  async mounted() {
     this.onResize();
     window.addEventListener("scroll", this.handleScroll);
     window.addEventListener("resize", this.onResize);
@@ -937,7 +937,11 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsLoading", "getGsOfferPromoImageUrl"]),
+    ...mapGetters("guarantedseat", [
+      "getGsLoading",
+      "getGsOfferPromoImageUrl",
+      "getOfferImages",
+    ]),
   },
   methods: {
     toggleOpen: function (index) {
@@ -953,20 +957,11 @@ export default {
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
       "getCitiesList",
-      "getOfferPromoImagesUrlList",
-      "readOfferPromoImageUrl",
       "successTicketByMailAction",
     ]),
 
     handleHowToBuyModal() {
       this.howToBuyModalStatus = !this.howToBuyModalStatus;
-    },
-
-    async readImageUrl(url, index) {
-      const data = await this.readOfferPromoImageUrl(url);
-      const base = Buffer.from(data).toString("base64");
-      return (document.getElementById(index).src =
-        "data:image/png;base64," + base);
     },
 
     scrollLeft() {
@@ -1006,7 +1001,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .homeBanner {
   background-image: url("../assets/images/home/bannerImageWeb.jpg");
   background-size: 100% 100%;
@@ -1072,17 +1067,6 @@ export default {
 
 .secondary {
   animation: secondary 10s linear infinite;
-}
-
-.slick-slide {
-  margin: 0 8px;
-  width: auto !important;
-}
-
-@media screen and (min-width: 992px) {
-  .slick-slide {
-    margin: 0 24px;
-  }
 }
 
 @keyframes primary {
