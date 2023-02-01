@@ -826,7 +826,7 @@ export default {
       settings: {
         arrows: false,
         dots: false,
-        autoplay: false,
+        autoplay: true,
         centerMode: true,
         infinite: true,
         slidesToShow: 3,
