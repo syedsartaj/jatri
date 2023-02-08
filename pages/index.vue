@@ -654,11 +654,15 @@ export default {
         },
         {
           name: "Lucky Express",
-          link: "#",
+          link: "/bus-operator?name=lucky-express",
         },
         {
-          name: "Mimjaal Paribahan",
-          link: "#",
+          name: "Mimzal Paribahan",
+          link: "/bus-operator?name=mimzal-paribahan",
+        },
+        {
+          name: "Jamuna Line Paribahan",
+          link: "/bus-operator?name=jamuna-line-paribahan",
         },
         {
           name: "Shah Fateh Ali",
@@ -670,11 +674,11 @@ export default {
         },
         {
           name: "Saintmartin Deep",
-          link: "#",
+          link: "/bus-operator?name=saintmartin-deep",
         },
         {
-          name: "Romer Paribahan",
-          link: "#",
+          name: "Romar Paribahan",
+          link: "/bus-operator?name=romar-paribahan",
         },
         {
           name: "Sheba line",
@@ -706,7 +710,7 @@ export default {
         },
         {
           name: "Econo Service",
-          link: "#",
+          link: "/bus-operator?name=econo-service",
         },
         {
           name: "KR Enterprise",
@@ -718,11 +722,19 @@ export default {
         },
         {
           name: "Hanie Enterprise",
-          link: "#",
+          link: "/bus-operator?name=hanie-enterprise",
+        },
+        {
+          name: "London Express",
+          link: "/bus-operator?name=london-express",
         },
         {
           name: "Ema Paribahan",
-          link: "#",
+          link: "/bus-operator?name=ema-paribahan",
+        },
+        {
+          name: "Shibchar Star Deluxe",
+          link: "/bus-operator?name=shibchar-star-deluxe",
         },
         {
           name: "Habib Paribahan",
