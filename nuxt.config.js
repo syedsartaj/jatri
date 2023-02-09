@@ -142,10 +142,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS: true,
     postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
+      preset: {
+        features: {
+          "custom-properties": false,
+        },
       },
     },
     transpile: ["primevue", "vee-validate/dist/rules"],
