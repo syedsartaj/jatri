@@ -228,6 +228,18 @@
           alt=""
           class="mb-5 last:mb-0 w-full"
         />
+        <img
+          v-if="$route.query.name === 'london-express'"
+          src="@/assets/images/bus-operator/london-express.jpg"
+          alt=""
+          class="mb-5 last:mb-0 w-full"
+        />
+        <img
+          v-if="$route.query.name === 'sb-paribahan'"
+          src="@/assets/images/bus-operator/sb-paribahan.jpg"
+          alt=""
+          class="mb-5 last:mb-0 w-full"
+        />
       </div>
     </div>
   </div>
