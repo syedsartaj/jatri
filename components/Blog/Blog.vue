@@ -94,7 +94,6 @@
             />
             <div
               class="
-                w-full
                 flex flex-col
                 items-left
                 w-[320px]
