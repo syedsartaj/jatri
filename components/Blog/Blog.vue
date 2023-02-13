@@ -73,7 +73,7 @@
         <slide
           v-for="(blog, index) in getBlogList"
           :key="index"
-          class="w-[320px] sm:w-[350px] xl:w-[392px]"
+          class="w-[320px] sm:w-[350px] xl:w-[392px] overflow-hidden"
         >
           <a
             class="flex flex-col items-center cursor-pointer"
@@ -126,8 +126,6 @@
                   lg:text-base
                   line-clamp
                   font-blackLight
-                  w-[288px]
-                  sm:w-[318px]
                 "
               >
                 {{ blog.description }}
