@@ -133,6 +133,8 @@
                 lg:text-base
                 line-clamp
                 font-blackLight
+                w-full w-[320px]
+                sm:w-[350px]
               "
             >
               {{ blog.description }}
