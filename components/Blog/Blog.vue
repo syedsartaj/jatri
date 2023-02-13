@@ -245,4 +245,8 @@ export default {
     -webkit-line-clamp: 4;
   }
 }
+
+.hooper {
+  height: auto;
+}
 </style>
