@@ -117,7 +117,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="scrollLeft"
+              @click="prevSlide"
               class="
                 rounded-full
                 border
@@ -138,7 +138,7 @@
               />
             </button>
             <button
-              @click="scrollRight"
+              @click="nextSlide"
               class="
                 rounded-full
                 border
@@ -187,8 +187,8 @@
           rounded-[30px]
           overflow-hidden
           md:w-full
-          h-[264px]
-          lg:h-[464px]
+          h-auto
+          xl:h-[464px]
         "
       >
         <div
@@ -216,7 +216,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="scrollLeft"
+              @click="prevSlide"
               class="
                 rounded-full
                 border
@@ -237,7 +237,7 @@
               />
             </button>
             <button
-              @click="scrollRight"
+              @click="nextSlide"
               class="
                 rounded-full
                 border
@@ -260,8 +260,8 @@
           </div>
         </div>
         <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
-          <VueSlickCarousel v-bind="settings" ref="carousel">
-            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+          <hooper ref="hooperSlide" :settings="hooperSettings">
+            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
                 :src="offerImg"
@@ -277,8 +277,8 @@
                   pointer-events-none
                 "
               />
-            </div>
-          </VueSlickCarousel>
+            </slide>
+          </hooper>
         </div>
       </div>
     </div>
@@ -479,7 +479,7 @@
             src="@/assets/images/home/arrowRight.svg"
             alt=""
             class="h-4 w-4 cursor-pointer"
-            @click="scrollLeft"
+            @click="prevSlide"
           />
         </NuxtLink>
       </div>
@@ -618,6 +618,8 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import * as apis from "../helpers/apis";
+import { Hooper, Slide } from "hooper";
+import "hooper/dist/hooper.css";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -877,6 +879,37 @@ export default {
           },
         ],
       },
+      hooperSettings: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        itemsToShow: 5,
+        breakpoints: {
+          2300: {
+            itemsToShow: 4.2,
+          },
+          2100: {
+            itemsToShow: 4,
+          },
+          1900: {
+            itemsToShow: 3.5,
+          },
+          1700: {
+            itemsToShow: 3,
+          },
+          1440: {
+            itemsToShow: 2.5,
+          },
+          1280: {
+            itemsToShow: 2.2,
+          },
+          1024: {
+            itemsToShow: 2,
+          },
+        },
+      },
       accordionData: [
         {
           heading: "Payment details- bKash, Nagad, & Bank Cards",
@@ -934,7 +967,7 @@ export default {
       ],
     };
   },
-  components: { VueSlickCarousel },
+  components: { VueSlickCarousel, Hooper, Slide },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
   },
@@ -976,13 +1009,13 @@ export default {
       this.howToBuyModalStatus = !this.howToBuyModalStatus;
     },
 
-    scrollLeft() {
-      this.$refs.carousel.prev();
+    prevSlide() {
+      this.$refs.hooperSlide.slidePrev();
       this.slideLeft = true;
       this.slideRight = false;
     },
-    scrollRight() {
-      this.$refs.carousel.next();
+    nextSlide() {
+      this.$refs.hooperSlide.slideNext();
       this.slideRight = true;
       this.slideLeft = false;
     },
