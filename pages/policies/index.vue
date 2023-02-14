@@ -1,5 +1,5 @@
 <template>
-  <div class="py-[16px] px-[17px] md:py-[30px] md:px-[100px] h-[calc(full-112px)] ">
+  <div class="py-[16px] px-[17px] md:py-[30px] md:px-[100px] h-112">
     <div class="md:bg-white p-4 md:p-[40px]">
       <!-- mobile dropdown-->
       <div class="block md:hidden bg-white">
