@@ -89,8 +89,8 @@
 
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="pt-80 mt-10 flex justify-center w-full"
-      v-if="isMobile && getOfferImages && getOfferImages.length"
+      class="pt-80 mt-10 flex justify-center w-full lg:hidden"
+      v-if="getOfferImages && getOfferImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div
@@ -117,7 +117,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="prevSlide"
+              @click="prevSlide('mobile')"
               class="
                 rounded-full
                 border
@@ -138,7 +138,7 @@
               />
             </button>
             <button
-              @click="nextSlide"
+              @click="nextSlide('mobile')"
               class="
                 rounded-full
                 border
@@ -160,17 +160,17 @@
             </button>
           </div>
         </div>
-        <div class="mt-10 ml-4 h-[200px] overflow-hidden">
-          <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+        <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
+          <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
+            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
                 :src="offerImg"
                 alt=""
-                class="rounded-[10px] w-[300px] h-[200px] pointer-events-none"
+                class="rounded-[10px] w-[300px] h-[200px]"
               />
-            </div>
-          </VueSlickCarousel>
+            </slide>
+          </hooper>
         </div>
       </div>
     </div>
@@ -178,8 +178,16 @@
     <!-- Offer & Promos Section -->
 
     <div
-      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="!isMobile && getOfferImages && getOfferImages.length"
+      class="
+        pt-80
+        p-4
+        lg:mt-0 lg:p-[100px] lg:pb-0
+        justify-center
+        w-full
+        hidden
+        lg:flex
+      "
+      v-if="getOfferImages && getOfferImages.length"
     >
       <div
         class="
@@ -216,7 +224,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="prevSlide"
+              @click="prevSlide('large')"
               class="
                 rounded-full
                 border
@@ -237,7 +245,7 @@
               />
             </button>
             <button
-              @click="nextSlide"
+              @click="nextSlide('large')"
               class="
                 rounded-full
                 border
@@ -825,60 +833,6 @@ export default {
           link: "#",
         },
       ],
-      settingsMobile: {
-        arrows: false,
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-        speed: 2000,
-        rows: 1,
-      },
-      settings: {
-        arrows: false,
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-        speed: 2000,
-        rows: 1,
-        responsive: [
-          {
-            breakpoint: 1744,
-            settings: {
-              slidesToShow: 2,
-              initialSlide: 0,
-            },
-          },
-          {
-            breakpoint: 1333,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 0,
-            },
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 0,
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-            },
-          },
-        ],
-      },
       hooperSettings: {
         infiniteScroll: true,
         centerMode: false,
@@ -907,6 +861,37 @@ export default {
           },
           1024: {
             itemsToShow: 2,
+          },
+        },
+      },
+      hooperSettingsMobile: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        itemsToShow: 1,
+        breakpoints: {
+          950: {
+            itemsToShow: 2.5,
+          },
+          720: {
+            itemsToShow: 2.2,
+          },
+          600: {
+            itemsToShow: 1.8,
+          },
+          500: {
+            itemsToShow: 1.5,
+          },
+          420: {
+            itemsToShow: 1.3,
+          },
+          390: {
+            itemsToShow: 1.2,
+          },
+          320: {
+            itemsToShow: 1,
           },
         },
       },
@@ -1009,13 +994,23 @@ export default {
       this.howToBuyModalStatus = !this.howToBuyModalStatus;
     },
 
-    prevSlide() {
-      this.$refs.hooperSlide.slidePrev();
+    prevSlide(value) {
+      if (value === "mobile") {
+        this.$refs.hooperSlideMobile.slidePrev();
+      } else {
+        this.$refs.hooperSlide.slidePrev();
+      }
+
       this.slideLeft = true;
       this.slideRight = false;
     },
-    nextSlide() {
-      this.$refs.hooperSlide.slideNext();
+    nextSlide(value) {
+      if (value === "mobile") {
+        this.$refs.hooperSlideMobile.slideNext();
+      } else {
+        this.$refs.hooperSlide.slideNext();
+      }
+
       this.slideRight = true;
       this.slideLeft = false;
     },
