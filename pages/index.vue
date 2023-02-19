@@ -621,10 +621,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Cookies from "js-cookie";
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import * as apis from "../helpers/apis";
 import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
@@ -839,6 +835,8 @@ export default {
         autoPlay: true,
         playSpeed: 3000,
         transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
         itemsToShow: 5,
         breakpoints: {
           2300: {
@@ -853,10 +851,19 @@ export default {
           1700: {
             itemsToShow: 3,
           },
+          1520: {
+            itemsToShow: 2.7,
+          },
           1440: {
             itemsToShow: 2.5,
           },
           1280: {
+            itemsToShow: 2.2,
+          },
+          1140: {
+            itemsToShow: 2.3,
+          },
+          1060: {
             itemsToShow: 2.2,
           },
           1024: {
@@ -870,13 +877,24 @@ export default {
         autoPlay: true,
         playSpeed: 3000,
         transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
         itemsToShow: 1,
         breakpoints: {
           950: {
+            itemsToShow: 2.8,
+          },
+          890: {
+            itemsToShow: 2.7,
+          },
+          850: {
             itemsToShow: 2.5,
           },
           720: {
             itemsToShow: 2.2,
+          },
+          633: {
+            itemsToShow: 2,
           },
           600: {
             itemsToShow: 1.8,
@@ -952,7 +970,7 @@ export default {
       ],
     };
   },
-  components: { VueSlickCarousel, Hooper, Slide },
+  components: { Hooper, Slide },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
   },
