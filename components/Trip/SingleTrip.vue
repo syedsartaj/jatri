@@ -38,6 +38,8 @@
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
+            @mouseover="showToolTip = true"
+            @mouseleave="showToolTip = false"
           >
             <img
               :src="
@@ -61,8 +63,37 @@
               </p>
             </div>
           </div>
+          <div
+            class="
+              mt-[95px]
+              ml-0
+              w-auto
+              bg-[#EDEDED]
+              rounded-md
+              shadow-xl
+              z-[1000]
+              before:block
+              before:-mt-2
+              before:ml-4
+              before:bg-[#EDEDED]
+              before:h-4
+              before:w-4
+              before:rotate-45
+              absolute
+            "
+            v-if="showToolTip"
+          >
+            <div class="text-center p-[5px] pt-[0px]">
+              <h2 class="text-xs font-normal">
+                <span>Click here to view bus image</span>
+              </h2>
+            </div>
+          </div>
 
-          <div v-if="trip.available" class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right">
+          <div
+            v-if="trip.available"
+            class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right"
+          >
             <div
               class="
                 h-[30px]
@@ -229,7 +260,8 @@
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
-              {{ parseInt(trip.seatFare[0].fare) }} <span class="text-xs">TK</span>
+              {{ parseInt(trip.seatFare[0].fare) }}
+              <span class="text-xs">TK</span>
             </h2>
             <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
           </div>
@@ -835,6 +867,7 @@ export default {
       promoCode: "",
       totalPromoAmount: 0,
       moduleType: this.trip.moduleType,
+      showToolTip: false,
       emailReg:
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     };
