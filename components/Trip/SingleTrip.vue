@@ -38,7 +38,9 @@
               cursor-pointer
             "
             @click="handleBusImagePreviewModal"
-            @mouseover="showToolTip = true"
+            @mouseover="
+              showToolTip = trip.companyImages?.gallery?.length && true
+            "
             @mouseleave="showToolTip = false"
           >
             <img
