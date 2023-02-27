@@ -89,8 +89,8 @@
 
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="pt-80 mt-10 flex justify-center w-full"
-      v-if="isMobile && getOfferImages && getOfferImages.length"
+      class="pt-80 mt-10 flex justify-center w-full lg:hidden"
+      v-if="getOfferImages && getOfferImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div
@@ -117,7 +117,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="scrollLeft"
+              @click="prevSlide('mobile')"
               class="
                 rounded-full
                 border
@@ -138,7 +138,7 @@
               />
             </button>
             <button
-              @click="scrollRight"
+              @click="nextSlide('mobile')"
               class="
                 rounded-full
                 border
@@ -160,17 +160,17 @@
             </button>
           </div>
         </div>
-        <div class="mt-10 ml-4 h-[200px] overflow-hidden">
-          <VueSlickCarousel v-bind="settingsMobile" ref="carousel">
-            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+        <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
+          <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
+            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
                 :src="offerImg"
                 alt=""
-                class="rounded-[10px] w-[300px] h-[200px] pointer-events-none"
+                class="rounded-[10px] w-[300px] h-[200px]"
               />
-            </div>
-          </VueSlickCarousel>
+            </slide>
+          </hooper>
         </div>
       </div>
     </div>
@@ -178,8 +178,16 @@
     <!-- Offer & Promos Section -->
 
     <div
-      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 flex justify-center w-full"
-      v-if="!isMobile && getOfferImages && getOfferImages.length"
+      class="
+        pt-80
+        p-4
+        lg:mt-0 lg:p-[100px] lg:pb-0
+        justify-center
+        w-full
+        hidden
+        lg:flex
+      "
+      v-if="getOfferImages && getOfferImages.length"
     >
       <div
         class="
@@ -187,8 +195,8 @@
           rounded-[30px]
           overflow-hidden
           md:w-full
-          h-[264px]
-          lg:h-[464px]
+          h-auto
+          xl:h-[464px]
         "
       >
         <div
@@ -216,7 +224,7 @@
 
           <div class="flex justify-between gap-x-4">
             <button
-              @click="scrollLeft"
+              @click="prevSlide('large')"
               class="
                 rounded-full
                 border
@@ -237,7 +245,7 @@
               />
             </button>
             <button
-              @click="scrollRight"
+              @click="nextSlide('large')"
               class="
                 rounded-full
                 border
@@ -260,8 +268,8 @@
           </div>
         </div>
         <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
-          <VueSlickCarousel v-bind="settings" ref="carousel">
-            <div v-for="(offerImg, index) in getOfferImages" :key="index">
+          <hooper ref="hooperSlide" :settings="hooperSettings">
+            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
               <img
                 :id="index"
                 :src="offerImg"
@@ -277,8 +285,8 @@
                   pointer-events-none
                 "
               />
-            </div>
-          </VueSlickCarousel>
+            </slide>
+          </hooper>
         </div>
       </div>
     </div>
@@ -479,7 +487,7 @@
             src="@/assets/images/home/arrowRight.svg"
             alt=""
             class="h-4 w-4 cursor-pointer"
-            @click="scrollLeft"
+            @click="prevSlide"
           />
         </NuxtLink>
       </div>
@@ -613,11 +621,9 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Cookies from "js-cookie";
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import * as apis from "../helpers/apis";
+import { Hooper, Slide } from "hooper";
+import "hooper/dist/hooper.css";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -823,59 +829,89 @@ export default {
           link: "#",
         },
       ],
-      settingsMobile: {
-        arrows: false,
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-        speed: 2000,
-        rows: 1,
+      hooperSettings: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 5,
+        breakpoints: {
+          2300: {
+            itemsToShow: 4.2,
+          },
+          2100: {
+            itemsToShow: 4,
+          },
+          1900: {
+            itemsToShow: 3.5,
+          },
+          1700: {
+            itemsToShow: 3,
+          },
+          1520: {
+            itemsToShow: 2.7,
+          },
+          1440: {
+            itemsToShow: 2.5,
+          },
+          1280: {
+            itemsToShow: 2.2,
+          },
+          1140: {
+            itemsToShow: 2.3,
+          },
+          1060: {
+            itemsToShow: 2.2,
+          },
+          1024: {
+            itemsToShow: 2,
+          },
+        },
       },
-      settings: {
-        arrows: false,
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-        speed: 2000,
-        rows: 1,
-        responsive: [
-          {
-            breakpoint: 1744,
-            settings: {
-              slidesToShow: 2,
-              initialSlide: 0,
-            },
+      hooperSettingsMobile: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 1,
+        breakpoints: {
+          950: {
+            itemsToShow: 2.8,
           },
-          {
-            breakpoint: 1333,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 0,
-            },
+          890: {
+            itemsToShow: 2.7,
           },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1,
-              initialSlide: 0,
-            },
+          850: {
+            itemsToShow: 2.5,
           },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-            },
+          720: {
+            itemsToShow: 2.2,
           },
-        ],
+          633: {
+            itemsToShow: 2,
+          },
+          600: {
+            itemsToShow: 1.8,
+          },
+          500: {
+            itemsToShow: 1.5,
+          },
+          420: {
+            itemsToShow: 1.3,
+          },
+          390: {
+            itemsToShow: 1.2,
+          },
+          320: {
+            itemsToShow: 1,
+          },
+        },
       },
       accordionData: [
         {
@@ -912,29 +948,85 @@ export default {
           heading: "Ticket Cancellation Procedures",
           details: `If you want to make a cancellation to your booking ticket, you must follow some rules: 
                       <ul class='list-decimal ml-5'>
-                        <li class='mt-2'>First, you need to go to the search option. You need to add your phone number to search for your ticket.</li>
-                        <li class='mt-2'>Click at the cancellation option. Your request will be submitted to our team.</li>
-                        <li class='mt-2'>Your money will be refunded with following our refund & cancellation policy.</li>
+                      <li class="mt-2">
+                        First, you have to go to the ticket history option. You need to add your
+                        phone number/PNR/transaction ID to search for your ticket.
+                      </li>
+                      <li class="mt-2">
+                        Click at the cancellation option. Your request will be submitted to our
+                        team.
+                      </li>
+                      <li class="mt-2">
+                        Your money will be refunded with following our refund & cancellation
+                        policy.
+                      </li>
                       </ul>
                       <br>There are few cancellation policies: <br>
-                      <ul class='list-disc ml-5'>
-                        <li class='mt-2'><span class='text-blackPrimary font-bold'>Auto cancellation</span> will happen if the customer fails to report at the reporting station before the departure time.</li>
-                        <li class='mt-2'>If the customer <span class='text-blackPrimary font-bold'>fails to pay</span> the full amount that mentioned in the screen will not get the activated tickets.</li>
-                        <li class='mt-2'>To be eligible for refund, customers need to cancel the ticket from jatri.co before the applicable time before the departure. And must report the cancelation to the support center (i.e Call 09642080808 or email to support@jatri.co) of Jatri.co</li>
-                        <li class='mt-2'>Only <span class='text-blackPrimary font-bold'>during Eid time</span> , customers are eligible for refund ONLY if the operator cancels the trip and cannot provide an alternative arrangement.<span class='text-blackPrimary font-bold'> (Note:</span> Terms and conditions of refund policy might update or change from time to time without any notice)</li>
-                        <li class='mt-2'><span class='text-blackPrimary font-bold'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself.</li>
-                        <li class='mt-2'>Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.</li>
-                        <li class='mt-2'>Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes.</li>
-                        <li class='mt-2'>For mobile payments customers must complete payment and also verify transactions within this stipulated time.</li>
-                        <li class='mt-2'>During Eid sales month, Jatri.co will not do any verification on behalf of the customers.</li>
-                      </ul>
+                      <ul class='list-disc ml-5 mt-4'>
+                        <li>
+                          <span class="font-medium">Auto cancellation</span>
+                          will happen if the customer fails to report at the reporting station
+                          15 minutes before the bus arrives.
+                        </li>
+
+                        <li>
+                          If the customer
+                          <span class="font-medium">fails to pay</span> the full amount that
+                          mentioned in the screen will not get the activated tickets.
+                        </li>
+
+                        <li>
+                          To be eligible for refund, customers need to cancel the ticket from
+                          <span class="font-medium">‘Ticket History’</span> a day before<span
+                            class="font-medium"
+                            >(Excluding 12:00 AM to 07:00 AM)</span
+                          >
+                          the journey time. And must report the cancellation to the support
+                          center (i.e Call 09642080808 or email to
+                          <span type="email" class="text-[#0000FF] underline"
+                            >info@jatri.co</span
+                          >).
+                        </li>
+                        <li>
+                          Only <span class="font-medium">during Eid time</span>, customers are
+                          eligible for refund ONLY if the operator cancels the trip and cannot
+                          provide an alternative arrangement. (<span class="font-medium"
+                            >Note</span
+                          >: Terms and conditions of refund policy might update or change from
+                          time to time without any notice)
+                        </li>
+                        <li>
+                          <span class="font-medium">For mobile payments</span>, it is the
+                          responsibility of the customer to input transaction ID (if
+                          applicable), PIN, OTP properly within time to confirm his ticket by
+                          himself.
+                        </li>
+                        <li>
+                          Jatri.co sometimes does the verification for the customer as a
+                          courtesy, but it is not jatri.co’s responsibility or service promise.
+                        </li>
+                        <li>
+                          For mobile payments, customers must complete payment and also verify
+                          transactions.
+                        </li>
+                        <li>
+                          During Eid sales month, Jatri.co will not do any verification on
+                          behalf of the customers.
+                        </li>
+                        <li>
+                          If the customer faces any hassle at the counter after purchasing
+                          tickets from Jatri.co, then the user has to give the complaint to our
+                          customer service or give an email to info@jatri.co within 3 days(72
+                          hours) from the departure time.
+                        </li>
+                       </ul>
                     `,
           open: false,
         },
       ],
     };
   },
-  components: { VueSlickCarousel },
+  components: { Hooper, Slide },
   async asyncData({ store }) {
     await store.dispatch("guarantedseat/getCitiesList");
   },
@@ -976,13 +1068,23 @@ export default {
       this.howToBuyModalStatus = !this.howToBuyModalStatus;
     },
 
-    scrollLeft() {
-      this.$refs.carousel.prev();
+    prevSlide(value) {
+      if (value === "mobile") {
+        this.$refs.hooperSlideMobile.slidePrev();
+      } else {
+        this.$refs.hooperSlide.slidePrev();
+      }
+
       this.slideLeft = true;
       this.slideRight = false;
     },
-    scrollRight() {
-      this.$refs.carousel.next();
+    nextSlide(value) {
+      if (value === "mobile") {
+        this.$refs.hooperSlideMobile.slideNext();
+      } else {
+        this.$refs.hooperSlide.slideNext();
+      }
+
       this.slideRight = true;
       this.slideLeft = false;
     },

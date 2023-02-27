@@ -169,7 +169,9 @@ export default {
       imageUrl: "",
       hooperSettings: {
         infiniteScroll: true,
-        centerMode: true,
+        wheelControl: false,
+        keyboardControl: false,
+        centerMode: false,
         autoPlay: false,
         playSpeed: 3000,
         itemsToShow: 5,
@@ -194,6 +196,15 @@ export default {
           },
           768: {
             itemsToShow: 2,
+          },
+          700: {
+            itemsToShow: 1.8,
+          },
+          590: {
+            itemsToShow: 1.7,
+          },
+          520: {
+            itemsToShow: 1.5,
           },
           425: {
             itemsToShow: 1.2,
