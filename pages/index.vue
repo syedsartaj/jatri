@@ -948,22 +948,78 @@ export default {
           heading: "Ticket Cancellation Procedures",
           details: `If you want to make a cancellation to your booking ticket, you must follow some rules: 
                       <ul class='list-decimal ml-5'>
-                        <li class='mt-2'>First, you need to go to the search option. You need to add your phone number to search for your ticket.</li>
-                        <li class='mt-2'>Click at the cancellation option. Your request will be submitted to our team.</li>
-                        <li class='mt-2'>Your money will be refunded with following our refund & cancellation policy.</li>
+                      <li class="mt-2">
+                        First, you have to go to the ticket history option. You need to add your
+                        phone number/PNR/transaction ID to search for your ticket.
+                      </li>
+                      <li class="mt-2">
+                        Click at the cancellation option. Your request will be submitted to our
+                        team.
+                      </li>
+                      <li class="mt-2">
+                        Your money will be refunded with following our refund & cancellation
+                        policy.
+                      </li>
                       </ul>
                       <br>There are few cancellation policies: <br>
-                      <ul class='list-disc ml-5'>
-                        <li class='mt-2'><span class='text-blackPrimary font-bold'>Auto cancellation</span> will happen if the customer fails to report at the reporting station before the departure time.</li>
-                        <li class='mt-2'>If the customer <span class='text-blackPrimary font-bold'>fails to pay</span> the full amount that mentioned in the screen will not get the activated tickets.</li>
-                        <li class='mt-2'>To be eligible for refund, customers need to cancel the ticket from jatri.co before the applicable time before the departure. And must report the cancelation to the support center (i.e Call 09642080808 or email to support@jatri.co) of Jatri.co</li>
-                        <li class='mt-2'>Only <span class='text-blackPrimary font-bold'>during Eid time</span> , customers are eligible for refund ONLY if the operator cancels the trip and cannot provide an alternative arrangement.<span class='text-blackPrimary font-bold'> (Note:</span> Terms and conditions of refund policy might update or change from time to time without any notice)</li>
-                        <li class='mt-2'><span class='text-blackPrimary font-bold'>For mobile payments</span>, it is the responsibility of the customer to input transaction ID (if applicable), PIN, OTP properly within time to confirm his ticket by himself.</li>
-                        <li class='mt-2'>Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.Jatri.co sometimes does the verification for the customer as a courtesy, but it is not jatri.co’s responsibility or service promise.</li>
-                        <li class='mt-2'>Tickets will be automatically canceled if the customer does not confirm payment within 30 minutes.</li>
-                        <li class='mt-2'>For mobile payments customers must complete payment and also verify transactions within this stipulated time.</li>
-                        <li class='mt-2'>During Eid sales month, Jatri.co will not do any verification on behalf of the customers.</li>
-                      </ul>
+                      <ul class='list-disc ml-5 mt-4'>
+                        <li>
+                          <span class="font-medium">Auto cancellation</span>
+                          will happen if the customer fails to report at the reporting station
+                          15 minutes before the bus arrives.
+                        </li>
+
+                        <li>
+                          If the customer
+                          <span class="font-medium">fails to pay</span> the full amount that
+                          mentioned in the screen will not get the activated tickets.
+                        </li>
+
+                        <li>
+                          To be eligible for refund, customers need to cancel the ticket from
+                          <span class="font-medium">‘Ticket History’</span> a day before<span
+                            class="font-medium"
+                            >(Excluding 12:00 AM to 07:00 AM)</span
+                          >
+                          the journey time. And must report the cancellation to the support
+                          center (i.e Call 09642080808 or email to
+                          <span type="email" class="text-[#0000FF] underline"
+                            >info@jatri.co</span
+                          >).
+                        </li>
+                        <li>
+                          Only <span class="font-medium">during Eid time</span>, customers are
+                          eligible for refund ONLY if the operator cancels the trip and cannot
+                          provide an alternative arrangement. (<span class="font-medium"
+                            >Note</span
+                          >: Terms and conditions of refund policy might update or change from
+                          time to time without any notice)
+                        </li>
+                        <li>
+                          <span class="font-medium">For mobile payments</span>, it is the
+                          responsibility of the customer to input transaction ID (if
+                          applicable), PIN, OTP properly within time to confirm his ticket by
+                          himself.
+                        </li>
+                        <li>
+                          Jatri.co sometimes does the verification for the customer as a
+                          courtesy, but it is not jatri.co’s responsibility or service promise.
+                        </li>
+                        <li>
+                          For mobile payments, customers must complete payment and also verify
+                          transactions.
+                        </li>
+                        <li>
+                          During Eid sales month, Jatri.co will not do any verification on
+                          behalf of the customers.
+                        </li>
+                        <li>
+                          If the customer faces any hassle at the counter after purchasing
+                          tickets from Jatri.co, then the user has to give the complaint to our
+                          customer service or give an email to info@jatri.co within 3 days(72
+                          hours) from the departure time.
+                        </li>
+                       </ul>
                     `,
           open: false,
         },
