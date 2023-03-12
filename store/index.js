@@ -2,7 +2,11 @@ import cookie from 'cookie'
 
 export const actions = {
   async nuxtServerInit({commit,dispatch}, context) {
-    await dispatch('guarantedseat/setOfferImages') //to save somesince offer images are required in many place and it is almost static
+    try {
+      await dispatch('guarantedseat/setOfferImages') //to save somesince offer images are required in many place and it is almost static
+    }
+    catch (error) {
+    }    
     const cookieConst = cookie.parse(context?.req?.headers?.cookie || '')
     if (cookieConst.hasOwnProperty('ags_token')) {
       commit('user/LOGIN_SUCCESS', cookieConst.ags_token, {root: true})

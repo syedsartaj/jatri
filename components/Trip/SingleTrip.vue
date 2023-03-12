@@ -1147,6 +1147,7 @@ export default {
           transportType: this.trip.transportType,
           transportId: String(this.trip.transportId),
           uid: this.trip.uid,
+          oid: this.getGsSeatViewData?.seatPlan?.oid || null,
           id: this.trip.id,
           seatClass: this.trip.seatClass[0].name,
           sku: String(this.trip.sku),
