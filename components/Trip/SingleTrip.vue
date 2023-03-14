@@ -736,12 +736,22 @@
               <span
                 >Email ID
                 <span
-                  v-if="trip.moduleType == 'paribahan'"
+                  v-if="
+                    trip.moduleType == moduleType.PARIBAHAN ||
+                    trip.moduleType == moduleType.INTERCITY_V2
+                  "
                   class="text-[#E0293B]"
                   >*</span
                 ></span
               >
-              <span v-if="trip.moduleType != 'paribahan'" class="text-[#8D8D8F]"
+              <span
+                v-if="
+                  !(
+                    trip.moduleType == moduleType.PARIBAHAN ||
+                    trip.moduleType == moduleType.INTERCITY_V2
+                  )
+                "
+                class="text-[#8D8D8F]"
                 >Optional</span
               >
             </h2>
@@ -766,7 +776,12 @@
 
           <LoaderButton
             :class="
-              (trip.moduleType == 'paribahan' && !passengerEmail) ||
+              ((trip.moduleType == moduleType.PARIBAHAN ||
+                trip.moduleType == moduleType.INTERCITY_V2) &&
+                !(
+                  this.passengerEmail &&
+                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+                )) ||
               !selectedSeatIds.length ||
               !boardingPoint ||
               !passengerName ||
@@ -776,7 +791,12 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              (trip.moduleType == 'paribahan' && !passengerEmail) ||
+              ((trip.moduleType == moduleType.PARIBAHAN ||
+                trip.moduleType == moduleType.INTERCITY_V2) &&
+                !(
+                  this.passengerEmail &&
+                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+                )) ||
               getGsLoading ||
               !boardingPoint ||
               !passengerName ||
@@ -831,6 +851,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
+import { moduleType } from "../../helpers/utils";
 export default {
   props: [
     "trip",
@@ -841,10 +862,12 @@ export default {
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+    this.moduleType = moduleType;
   },
   data() {
     return {
       selectedTab: "",
+      moduleType: null,
       TabData: {
         BOARDING_POINT: "BOARDING_POINT",
         DROPPING_POINT: "DROPPING_POINT",
@@ -870,8 +893,7 @@ export default {
       totalPromoAmount: 0,
       moduleType: this.trip.moduleType,
       showToolTip: false,
-      emailReg:
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     };
   },
   computed: {
