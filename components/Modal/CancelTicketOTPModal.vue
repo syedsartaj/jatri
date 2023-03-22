@@ -157,6 +157,7 @@ export default {
       }
     },
     handleResendOTP() {
+      this.fieldData = ["", "", "", ""];
       const payload = {
         ticketId: this.getSelectedTicketId,
       };
