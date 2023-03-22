@@ -507,7 +507,7 @@
             <p
               class="text-base font-medium text-blackPrimary mt-4 text-justify"
             >
-              o be eligible for refund, customers need to cancel the ticket from
+              To be eligible for refund, customers need to cancel the ticket from
               jatri.co before the applicable time before the departure. And must
               report the cancelation to the support center (i.e. Call
               09642080808 or email to info@jatri.co) of Jatri.co
