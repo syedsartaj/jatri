@@ -1,5 +1,4 @@
 import * as apis from '../helpers/apis';
-import { GET_BOOKING_INFO_BY_TRANSACTION, POST_PROMO_CODE_URL } from '../helpers/apis';
 import { handleScrollBehaviour } from '../helpers/utils';
 
 export const state = () => ({
@@ -7,7 +6,6 @@ export const state = () => ({
   gsLoading: false,
   gsLoadingTwo: false,
   gsCities: [],
-  
   gsTrips: [],
   gsBoardingPoints: [],
   modalBoardingPointList: [],
@@ -36,7 +34,6 @@ export const getters = {
   getGsLoading: (state) => state.gsLoading,
   getGsLoadingTwo: (state) => state.gsLoadingTwo,
   getGsCities: (state) => state.gsCities,
-  
   getGsTrips: (state) => state.gsTrips,
   getGsBoardingPoints: (state) => state.gsBoardingPoints,
   getModalBoardingPoints: (state) => state.modalBoardingPointList,
@@ -86,9 +83,9 @@ export const actions = {
       // })
     }
   },
- 
 
-    async getBlogListApi({ commit }) {
+
+  async getBlogListApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
       commit('setBlogList', data.blogs || []);
@@ -424,20 +421,20 @@ export const actions = {
     }
   },
 
-  async setOfferImages({commit}) {
-    const {data} = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+  async setOfferImages({ commit }) {
+    const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
     const imageLinkArr = data.offerAndPromoImages;
-    const rawOfferImages = await Promise.all(imageLinkArr.map( async (imageLink) =>{
-      return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL,{params: {path: imageLink.image}, responseType:'arraybuffer'}); 
+    const rawOfferImages = await Promise.all(imageLinkArr.map(async (imageLink) => {
+      return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: imageLink.image }, responseType: 'arraybuffer' });
     }))
     const tmpOfferImages = [];
-    for(const buffer of rawOfferImages){
-          const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
-          const theImage = Buffer.from(binaryString,'binary').toString('base64');
-          const properlyFormattedImage = "data:image/*;base64," + theImage;
-          tmpOfferImages.push(properlyFormattedImage)
-          
-        }
+    for (const buffer of rawOfferImages) {
+      const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
+      const theImage = Buffer.from(binaryString, 'binary').toString('base64');
+      const properlyFormattedImage = "data:image/*;base64," + theImage;
+      tmpOfferImages.push(properlyFormattedImage)
+
+    }
     commit('setOfferImages', tmpOfferImages);
   }
 };
@@ -460,7 +457,7 @@ export const mutations = {
     })
     state.gsCities = tempData;
   },
- 
+
   setBlogList: (state, data) => {
     state.blogList = data
   },
@@ -480,11 +477,14 @@ export const mutations = {
   setPromoCode: (state, data) => (state.promoCode = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    if (data === 'l2h') {
-      state.gsTrips.sort((a, b) => (a.seatFare[0].fare > b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare > a.seatFare[0].fare) ? -1 : 0));
-    } else {
-      state.gsTrips.sort((a, b) => (a.seatFare[0].fare < b.seatFare[0].fare) ? 1 : ((b.seatFare[0].fare < a.seatFare[0].fare) ? -1 : 0));
-    }
+    const sortBy = data === 'l2h' ? 1 : -1;
+    state.gsTrips.sort((a, b) => {
+      const fareDiff = a.seatFare[0].fare - b.seatFare[0].fare;
+      if (fareDiff !== 0) {
+        return sortBy * fareDiff;
+      }
+      return sortBy * (a.seatFare[0].class < b.seatFare[0].class ? -1 : 1);
+    });
   },
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;

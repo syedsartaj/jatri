@@ -4,3 +4,11 @@ export const handleScrollBehaviour = (value) => {
         body.style.overflow = value ? "scroll" : "hidden";
     }
 }
+
+
+export const moduleType = {
+    "INTERCITY": 'intercity',
+    "INTERCITY_V2": 'intercity-v2',
+    "PARIBAHAN": 'paribahan',
+    "LONDON_EXPRESS": 'london-express'
+}

@@ -53,7 +53,7 @@
             </p>
             <p
               v-if="showResendButton"
-              @click="startTimer"
+              @click="handleResendOTP"
               class="
                 text-xs
                 font-normal
@@ -133,7 +133,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions("guarantedseat", ["cancelTicketAction"]),
+    ...mapActions("guarantedseat", [
+      "cancelTicketAction",
+      "sendOtpForCancelTicketAction",
+    ]),
     ...mapMutations("guarantedseat", ["handleCancelTicketPopup"]),
     handleOnClick() {
       const otpCode = this.fieldData.join("");
@@ -152,6 +155,14 @@ export default {
           nextEl = nextEl.nextElementSibling;
         }
       }
+    },
+    handleResendOTP() {
+      this.fieldData = ["", "", "", ""];
+      const payload = {
+        ticketId: this.getSelectedTicketId,
+      };
+      this.sendOtpForCancelTicketAction(payload);
+      this.startTimer();
     },
     handleOtpInput(e, index) {
       this.fieldData[index] = e.target.value;
