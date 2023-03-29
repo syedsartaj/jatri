@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div v-if="showStickySearchBox" class="sticky top-[70px] z-50">
+    <div v-if="showStickySearchBox" class="sticky top-[130px] z-50">
       <div
         class="
           absolute
