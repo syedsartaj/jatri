@@ -87,6 +87,11 @@
       </div>
     </div>
 
+    <div
+      class="pt-80 mt-10 flex justify-center w-full lg:hidden"
+      v-if="!(getOfferImages && getOfferImages.length)"
+    ></div>
+
     <!-- Offer & Promos Section Mobile -->
     <div
       class="pt-80 mt-10 flex justify-center w-full lg:hidden"

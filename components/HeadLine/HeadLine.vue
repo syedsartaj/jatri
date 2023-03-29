@@ -3,27 +3,42 @@
     class="
       scroll-headline
       bg-corporate
-      h-[60px]
+      h-[40px]
+      md:h-[60px]
       w-full
       flex
       items-center
       justify-center
     "
+    @mouseover="pauseAnimation"
+    @mouseleave="resumeAnimation"
   >
     <div class="scroll-headline__container" ref="container">
       <div
         class="
           scroll-headline__text
           font-medium
-          text-xl text-[#FFFFFF]
+          text-base
+          md:text-xl
+          text-[#FFFFFF]
           font-inter
         "
-        :style="{ 'animation-duration': duration }"
+        :style="{
+          'animation-duration': duration,
+          'animation-play-state': playState,
+        }"
       >
         <img
           src="@/assets/images/icons/errorWarning.svg"
           alt=""
-          class="w-[25px] h-[25px] mr-[12px]"
+          class="
+            w-[20px]
+            md:w-[25px]
+            h-[20px]
+            md:h-[25px]
+            mr-[8px]
+            md:mr-[12px]
+          "
         />
         {{ headline }}
       </div>
@@ -46,6 +61,7 @@ export default {
   data() {
     return {
       duration: "",
+      playState: "running",
     };
   },
   mounted() {
@@ -59,6 +75,14 @@ export default {
       .forEach((el) => {
         el.style.animationDuration = duration;
       });
+  },
+  methods: {
+    pauseAnimation() {
+      this.playState = "paused";
+    },
+    resumeAnimation() {
+      this.playState = "running";
+    },
   },
 };
 </script>
@@ -81,15 +105,14 @@ export default {
   vertical-align: middle;
   position: absolute;
   animation: scroll-headline linear infinite;
-  animation: scroll-headline linear infinite;
 }
 
 @keyframes scroll-headline {
   0% {
-    right: 0;
+    left: 100%;
   }
   100% {
-    right: 100%;
+    left: -50%;
   }
 }
 </style>
