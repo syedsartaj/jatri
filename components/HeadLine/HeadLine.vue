@@ -53,10 +53,7 @@ export default {
     };
   },
   mounted() {
-    const textWidth = this.$refs.container.querySelector(
-      ".scroll-headline__text"
-    ).offsetWidth;
-    const duration = textWidth / this.speed + "s";
+    const duration = this.speed + "s";
     this.duration = duration;
     this.$refs.container
       .querySelectorAll(".scroll-headline__icon, .scroll-headline__text")
