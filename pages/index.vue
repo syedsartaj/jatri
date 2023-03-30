@@ -41,7 +41,15 @@
       </div>
     </div>
 
-    <div v-if="showStickySearchBox" class="sticky top-[130px] z-50 hidden lg:block">
+    <div
+      v-if="showStickySearchBox"
+      :class="
+        getHeadLine?.length && getHeadLine[0].headline
+          ? 'top-[130px]'
+          : 'top-[70px]'
+      "
+      class="sticky z-50 hidden lg:block"
+    >
       <div
         class="
           absolute
@@ -1050,6 +1058,7 @@ export default {
       "getGsLoading",
       "getGsOfferPromoImageUrl",
       "getOfferImages",
+      "getHeadLine",
     ]),
   },
   methods: {
