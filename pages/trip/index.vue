@@ -67,6 +67,7 @@
 import Cookies from "js-cookie";
 import moment from 'moment';
 import { mapActions, mapGetters } from 'vuex';
+import { handleScrollBehaviour } from '../../helpers/utils';
 export default {
      middleware (ctx) {
           ctx.$gtm.push({ event: 'ssr' })
@@ -110,7 +111,7 @@ export default {
           handleTripFilterModal() {
                const body = document.getElementsByTagName("body")[0];
                if (body) {
-                  body.style.overflow = !this.tripFilterModify ? "hidden" : "scroll";
+                    handleScrollBehaviour(this.tripFilterModify);
                }
                this.tripFilterModify = !this.tripFilterModify;
           },

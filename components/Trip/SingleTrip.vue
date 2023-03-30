@@ -852,6 +852,7 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 import { moduleType } from "../../helpers/utils";
+import { handleScrollBehaviour } from '../../helpers/utils';
 export default {
   props: [
     "trip",
@@ -997,10 +998,7 @@ export default {
       }
     },
     stopBackgroundScroll(value) {
-      const body = document.getElementsByTagName("body")[0];
-      if (body) {
-        body.style.overflow = value ? "hidden" : "scroll";
-      }
+      handleScrollBehaviour(!value)
     },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter(selectedTripId === "" ? true : false);
