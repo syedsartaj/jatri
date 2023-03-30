@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white">
     <!-- banner section -->
-    <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
+    <div class="hidden lg:block relative homeBanner">
       <div
         class="
           absolute
@@ -41,7 +41,15 @@
       </div>
     </div>
 
-    <div v-if="showStickySearchBox" class="sticky top-[70px] z-50">
+    <div
+      v-if="showStickySearchBox"
+      :class="
+        getHeadLine?.length && getHeadLine[0].headline
+          ? 'top-[130px]'
+          : 'top-[70px]'
+      "
+      class="sticky z-50 hidden lg:block"
+    >
       <div
         class="
           absolute
@@ -55,8 +63,8 @@
       </div>
     </div>
 
-    <!-- banner section -->
-    <div v-if="isMobile" class="relative block lg:hidden">
+    <!-- banner section mobile-->
+    <div class="relative block lg:hidden">
       <img
         src="@/assets/images/home/bannerImageMobile.jpg"
         alt=""
@@ -86,6 +94,11 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="pt-80 mt-10 flex justify-center w-full lg:hidden"
+      v-if="!(getOfferImages && getOfferImages.length)"
+    ></div>
 
     <!-- Offer & Promos Section Mobile -->
     <div
@@ -1045,6 +1058,7 @@ export default {
       "getGsLoading",
       "getGsOfferPromoImageUrl",
       "getOfferImages",
+      "getHeadLine",
     ]),
   },
   methods: {

@@ -27,6 +27,7 @@ export const state = () => ({
   selectedTicketId: null,
   offerImages: [],
   blogList: [],
+  headLine: [],
 });
 
 export const getters = {
@@ -54,7 +55,8 @@ export const getters = {
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
   getBlogList: (state) => state.blogList,
-  getOfferImages: (state) => state.offerImages
+  getOfferImages: (state) => state.offerImages,
+  getHeadLine: (state) => state.headLine,
 };
 
 export const actions = {
@@ -89,6 +91,15 @@ export const actions = {
     try {
       const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
       commit('setBlogList', data.blogs || []);
+    } catch (error) {
+
+    }
+  },
+
+  async getHeadLineApi({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GET_HEAD_LINE);
+      commit('setHeadLine', data || []);
     } catch (error) {
 
     }
@@ -457,9 +468,11 @@ export const mutations = {
     })
     state.gsCities = tempData;
   },
-
   setBlogList: (state, data) => {
     state.blogList = data
+  },
+  setHeadLine: (state, data) => {
+    state.headLine = data
   },
   setGsTrips: (state, data) => (state.gsTrips = Object.values(data)),
   setGsBoardingPoints: (state, data) => (state.gsBoardingPoints = data),
