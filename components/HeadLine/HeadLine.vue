@@ -28,18 +28,6 @@
           'animation-play-state': playState,
         }"
       >
-        <img
-          src="@/assets/images/icons/errorWarning.svg"
-          alt=""
-          class="
-            w-[20px]
-            md:w-[25px]
-            h-[20px]
-            md:h-[25px]
-            mr-[8px]
-            md:mr-[12px]
-          "
-        />
         {{ headline }}
       </div>
     </div>
