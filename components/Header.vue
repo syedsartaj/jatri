@@ -1,9 +1,8 @@
 <template>
   <div class="w-full flex flex-col sticky top-0 z-50">
     <HeadLine
-      v-for="(item, index) in getHeadLine"
-      :key="index"
-      :headline="item.headline"
+      v-if="getHeadLine?.length && getHeadLine[0].headline"
+      :headline="getHeadLine[0].headline"
       speed="30"
     />
     <div
