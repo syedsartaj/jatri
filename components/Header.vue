@@ -3,12 +3,8 @@
     <HeadLine
       v-if="getHeadLine?.length && getHeadLine[0].headline"
       :headline="getHeadLine[0].headline"
-      speed="30"
+      :speed="30"
     />
-    <div
-      v-if="getHeadLine?.length && getHeadLine[0].headline"
-      class="h-[40px] md:h-[60px]"
-    ></div>
     <div
       class="
         bg-white
@@ -137,6 +133,7 @@
 <script>
 import HamburgerMenu from "../components/Modal/HamburgerMenu.vue";
 import { mapMutations, mapGetters, mapActions } from "vuex";
+import { handleScrollBehaviour } from "../helpers/utils";
 export default {
   components: { HamburgerMenu },
   data() {
@@ -152,12 +149,7 @@ export default {
       this.showHamburgerMenu = !this.showHamburgerMenu;
     },
     handleFullReserveModal() {
-      const body = document.getElementsByTagName("body")[0];
-      if (body) {
-        body.style.overflow = !this.showFullBusReserveModal
-          ? "hidden"
-          : "scroll";
-      }
+      handleScrollBehaviour(this.showFullBusReserveModal);
       this.showFullBusReserveModal = !this.showFullBusReserveModal;
     },
     handlePageRefresh() {
