@@ -6,6 +6,10 @@
       speed="30"
     />
     <div
+      v-if="getHeadLine?.length && getHeadLine[0].headline"
+      class="h-[40px] md:h-[60px]"
+    ></div>
+    <div
       class="
         bg-white
         w-full

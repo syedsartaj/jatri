@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white">
     <!-- banner section -->
-    <div v-if="!isMobile" class="hidden lg:block relative homeBanner">
+    <div class="hidden lg:block relative homeBanner">
       <div
         class="
           absolute
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div v-if="showStickySearchBox" class="sticky top-[130px] z-50">
+    <div v-if="showStickySearchBox" class="sticky top-[130px] z-50 hidden lg:block">
       <div
         class="
           absolute
@@ -55,8 +55,8 @@
       </div>
     </div>
 
-    <!-- banner section -->
-    <div v-if="isMobile" class="relative block lg:hidden">
+    <!-- banner section mobile-->
+    <div class="relative block lg:hidden">
       <img
         src="@/assets/images/home/bannerImageMobile.jpg"
         alt=""

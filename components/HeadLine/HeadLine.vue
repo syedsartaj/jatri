@@ -78,6 +78,8 @@ export default {
 <style scoped>
 .scroll-headline {
   overflow: hidden;
+  position: absolute;
+  top: 0;
   white-space: nowrap;
 }
 
