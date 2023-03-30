@@ -43,8 +43,12 @@
 
     <div
       v-if="showStickySearchBox"
-      :class="getHeadLine?.length && getHeadLine[0].headline && ' top-[130px]'"
-      class="sticky top-[70px] z-50 hidden lg:block"
+      :class="
+        getHeadLine?.length && getHeadLine[0].headline
+          ? 'top-[130px]'
+          : 'top-[70px]'
+      "
+      class="sticky z-50 hidden lg:block"
     >
       <div
         class="
