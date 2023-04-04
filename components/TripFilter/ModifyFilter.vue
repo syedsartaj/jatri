@@ -474,6 +474,7 @@ export default {
       this.selectedTime = null;
       this.selectedBusClass = null;
       this.priceFilterType = null;
+      this.coachType = "all";
       this.handleFromSubmit();
     },
     setTime(time) {
