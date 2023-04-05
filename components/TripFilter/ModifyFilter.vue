@@ -77,12 +77,15 @@
     <div v-if="timeList.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-      <div class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]">
-        <div
-          v-for="time in timeList"
-          :key="time"
-          class="w-full h-9"
-        >
+      <div
+        class="
+          grid grid-cols-2
+          2xl:grid-cols-3
+          gap-x-[7px] gap-y-[10px]
+          mt-[10px]
+        "
+      >
+        <div v-for="time in timeList" :key="time" class="w-full h-9">
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
             <button
@@ -400,8 +403,12 @@ export default {
     "$route.query": {
       immediate: true,
       handler() {
-        (this.priceFilterType = null),
-          (this.coachType = this.$route.query.type);
+        this.priceFilterType = null;
+        this.coachType = this.$route.query.type;
+        this.busCompany = null;
+        this.boardingPoint = null;
+        this.selectedTime = null;
+        this.selectedBusClass = null;
       },
     },
   },
