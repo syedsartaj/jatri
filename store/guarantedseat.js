@@ -1,6 +1,18 @@
 import * as apis from '../helpers/apis';
 import { handleScrollBehaviour } from '../helpers/utils';
 
+const mobileFilterInitialData = {
+  coachTypes: ["ac", "non-ac", "all"],
+  coachType: "",
+  priceFilter: ["l2h", "h2l"],
+  priceFilterType: null,
+  boardingPoint: "",
+  busCompany: "",
+  timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
+  selectedTime: null,
+  selectedBusClass: "",
+}
+
 export const state = () => ({
   mobileFloatingFilter: true,
   gsLoading: false,
@@ -28,6 +40,8 @@ export const state = () => ({
   offerImages: [],
   blogList: [],
   headLine: [],
+  mobileFilterInitialData: mobileFilterInitialData,
+  mobileFilterData: mobileFilterInitialData
 });
 
 export const getters = {
@@ -57,6 +71,8 @@ export const getters = {
   getBlogList: (state) => state.blogList,
   getOfferImages: (state) => state.offerImages,
   getHeadLine: (state) => state.headLine,
+  getMobileFilterData: (state) => state.mobileFilterData,
+  getMobileFilterInitialData: (state) => state.mobileFilterInitialData
 };
 
 export const actions = {
@@ -527,6 +543,9 @@ export const mutations = {
   },
   setOfferImages: (state, data) => {
     state.offerImages = data;
+  },
+  updateMobileFilterData: (state, data) => {
+    state.mobileFilterData = data;
   }
 
 };

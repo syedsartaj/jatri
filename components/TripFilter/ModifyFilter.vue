@@ -366,13 +366,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsCities"]),
     ...mapGetters("guarantedseat", [
       "getGsTrips",
       "getGsLoading",
       "getGsBoardingPoints",
       "getGsBusCompanies",
       "getGsBusClasses",
+      "getGsCities",
     ]),
   },
 

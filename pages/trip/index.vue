@@ -66,7 +66,7 @@
 
 import Cookies from "js-cookie";
 import moment from 'moment';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { handleScrollBehaviour } from '../../helpers/utils';
 export default {
      middleware (ctx) {
@@ -92,9 +92,7 @@ export default {
      },
 
      computed: {
-          ...mapGetters('guarantedseat', ['getGsTrips', 'getMobileFloatingFilter']),
-          ...mapGetters('user', ['isLoggedIn']),
-          ...mapGetters('agent', ['getFilteredAvailableServiceList']),
+          ...mapGetters('guarantedseat', ['getGsTrips', 'getMobileFloatingFilter', 'getMobileFilterInitialData']),
           filterQueryData() {
                const formattedDate = new Date(+this.$route.query.date).toLocaleString('en-CA', {
                dateStyle: 'short'
@@ -105,6 +103,8 @@ export default {
      },
 
      methods: {
+          
+    ...mapMutations("guarantedseat", ["updateMobileFilterData"]),
           modifySearch(){
                this.$router.push({ path: '/', query: { ...this.$route.query } })
           },
@@ -153,6 +153,9 @@ export default {
                return moment(new Date(+date).toLocaleString('en-CA', {dateStyle: 'short'})).format('DD MMM YYYY');
           }
      },
+  beforeDestroy() {
+    this.updateMobileFilterData(this.getMobileFilterInitialData);
+  },
 
      async asyncData({store}){
           await store.dispatch('guarantedseat/getCitiesList');
