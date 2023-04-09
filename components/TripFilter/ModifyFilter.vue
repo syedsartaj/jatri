@@ -426,7 +426,7 @@ export default {
       this.busCompany = bus === this.busCompany ? null : bus;
     },
     async handleTripFilter() {
-      this.$nuxt.$loading.start();
+      this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -473,7 +473,7 @@ export default {
       }
 
       await this.getPbScheduleDataAction(payload);
-      this.$nuxt.$loading.finish();
+      this.$nuxt.$loading?.finish();
     },
     resetFilter() {
       this.busCompany = null;

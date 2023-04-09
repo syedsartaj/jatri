@@ -243,7 +243,7 @@ export default {
     ...mapActions("guarantedseat", ["searchTicketAction"]),
     ticketData(e) {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         e.preventDefault();
         const formData = {};
         if (this.selectedTab === 0) {
@@ -266,7 +266,7 @@ export default {
         } else {
           this.error = true;
         }
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.oopsAlertStatus = true;
       });
     },

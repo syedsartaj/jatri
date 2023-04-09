@@ -974,10 +974,10 @@ export default {
         this.setGsDroppingPoints([]);
         this.setModalBoardingPoints([]);
         this.$nextTick(async () => {
-          this.$nuxt.$loading.start();
+          this.$nuxt.$loading?.start();
           const payload = this.getPayloadForSeatView();
           await this.getBoardingPointForBus(payload);
-          this.$nuxt.$loading.finish();
+          this.$nuxt.$loading?.finish();
           this.setSelectedBuxIndex(this.busIndex);
           this.showPointPolicyModal = true;
         });
@@ -1010,10 +1010,10 @@ export default {
         return;
       }
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.$emit("selectedTripId", selectedTripId);
         const el = this.$refs[`bus-selector-${selectedTripId}`];
         if (el) {
@@ -1160,7 +1160,7 @@ export default {
         return;
       }
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           moduleType: this.trip.moduleType,
           busServiceType: this.trip.busServiceType,
@@ -1236,7 +1236,7 @@ export default {
             };
             this.resetForm();
             this.getPbSeatViewAction(seatViewPayload);
-            this.$nuxt.$loading.finish();
+            this.$nuxt.$loading?.finish();
           } else {
             // let data = {
             //   ...this.getGsPaymentPendingBlockData,
@@ -1268,7 +1268,7 @@ export default {
               });
             }
           }
-          this.$nuxt.$loading.finish();
+          this.$nuxt.$loading?.finish();
         });
       });
     },
@@ -1294,7 +1294,7 @@ export default {
 
     applyPromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           promoCode: this.promoCode,
           companyId: this.trip.companyId,
@@ -1320,7 +1320,7 @@ export default {
         } else {
           this.totalPromoAmount = 0;
         }
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
   },

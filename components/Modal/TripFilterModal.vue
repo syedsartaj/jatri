@@ -571,7 +571,7 @@ export default {
       this.updateMobileFilterData(newFilterData);
     },
     async handleTripFilter() {
-      this.$nuxt.$loading.start();
+      this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -619,7 +619,7 @@ export default {
 
       await this.getPbScheduleDataAction(payload);
       this.close();
-      this.$nuxt.$loading.finish();
+      this.$nuxt.$loading?.finish();
     },
     resetFilter() {
       const newFilterData = {

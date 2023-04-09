@@ -120,7 +120,7 @@ export default {
     ...mapMutations("guarantedseat", ["handleSurpriseDealModal"]),
     applyPromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           promoCode: this.getSurpriseDealModalStatus.code,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
@@ -133,7 +133,7 @@ export default {
         };
         this.applyPromoCodeAction(payload);
 
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
   },

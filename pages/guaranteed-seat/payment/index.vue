@@ -632,7 +632,7 @@ export default {
     ]),
     handleDealButton() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           companyId: this.getBookingInfoDetails.invoice?.companyId,
           tripDateTime:
@@ -643,7 +643,7 @@ export default {
         };
         this.getSurpriseDealAction(payload);
 
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
     timeFormate(time) {
@@ -661,7 +661,7 @@ export default {
     },
     applyPromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           promoCode: this.promoCode,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
@@ -674,7 +674,7 @@ export default {
         };
         this.applyPromoCodeAction(payload);
 
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
   },
