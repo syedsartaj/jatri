@@ -733,27 +733,8 @@
                 justify-between
               "
             >
-              <span
-                >Email ID
-                <span
-                  v-if="
-                    trip.moduleType == moduleType.PARIBAHAN ||
-                    trip.moduleType == moduleType.INTERCITY_V2
-                  "
-                  class="text-[#E0293B]"
-                  >*</span
-                ></span
-              >
-              <span
-                v-if="
-                  !(
-                    trip.moduleType == moduleType.PARIBAHAN ||
-                    trip.moduleType == moduleType.INTERCITY_V2
-                  )
-                "
-                class="text-[#8D8D8F]"
-                >Optional</span
-              >
+              <span>Email ID </span>
+              <span class="text-[#8D8D8F]">Optional</span>
             </h2>
             <input
               class="
@@ -776,11 +757,9 @@
 
           <LoaderButton
             :class="
-              ((trip.moduleType == moduleType.PARIBAHAN ||
-                trip.moduleType == moduleType.INTERCITY_V2) &&
-                !(
-                  this.passengerEmail &&
-                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+              (this.passengerEmail &&
+                !this.emailReg.test(
+                  String(this.passengerEmail).toLowerCase()
                 )) ||
               !selectedSeatIds.length ||
               !boardingPoint ||
@@ -791,11 +770,9 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              ((trip.moduleType == moduleType.PARIBAHAN ||
-                trip.moduleType == moduleType.INTERCITY_V2) &&
-                !(
-                  this.passengerEmail &&
-                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+              (this.passengerEmail &&
+                !this.emailReg.test(
+                  String(this.passengerEmail).toLowerCase()
                 )) ||
               getGsLoading ||
               !boardingPoint ||
@@ -852,7 +829,7 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 import { moduleType } from "../../helpers/utils";
-import { handleScrollBehaviour } from '../../helpers/utils';
+import { handleScrollBehaviour } from "../../helpers/utils";
 export default {
   props: [
     "trip",
@@ -998,7 +975,7 @@ export default {
       }
     },
     stopBackgroundScroll(value) {
-      handleScrollBehaviour(!value)
+      handleScrollBehaviour(!value);
     },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter(selectedTripId === "" ? true : false);
