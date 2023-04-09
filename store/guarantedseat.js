@@ -486,7 +486,7 @@ export const actions = {
     const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
     imageLinkArr.forEach((item) => {
-      tmpOfferImages.push(apis.OFFER_IMAGE_BASE_URL + item.image);
+      tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
     })
     commit('setOfferImages', tmpOfferImages);
   }
