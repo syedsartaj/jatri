@@ -259,7 +259,7 @@
                   <div
                     v-for="priceDirection in priceFilter"
                     :key="priceDirection"
-                    @click="priceFilterType = priceDirection"
+                    @click="() => setPriceFilterType(priceDirection)"
                     class="
                       flex
                       justify-between
@@ -471,71 +471,107 @@ import Cookies from "js-cookie";
 export default {
   props: ["close"],
   data() {
-    return {
-      departure: "",
-      destination: "",
-      departureName: "",
-      destinationName: "",
-      departingDate: this.$route.query.date,
-      coachTypes: ["ac", "non-ac", "all"],
-      coachType: "",
-      priceFilter: ["l2h", "h2l"],
-      priceFilterType: null,
-      boardingPoint: "",
-      busCompany: "",
-      timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      selectedTime: null,
-      selectedBusClass: "",
-    };
+    return {};
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsCities"]),
     ...mapGetters("guarantedseat", [
       "getGsTrips",
       "getGsLoading",
       "getGsBoardingPoints",
       "getGsBusCompanies",
       "getGsBusClasses",
+      "getGsCities",
+      "getMobileFilterData",
     ]),
+    coachTypes() {
+      return this.getMobileFilterData.coachTypes;
+    },
+    coachType() {
+      return this.getMobileFilterData.coachType;
+    },
+    priceFilter() {
+      return this.getMobileFilterData.priceFilter;
+    },
+    priceFilterType() {
+      return this.getMobileFilterData.priceFilterType;
+    },
+    boardingPoint() {
+      return this.getMobileFilterData.boardingPoint;
+    },
+    busCompany() {
+      return this.getMobileFilterData.busCompany;
+    },
+    timeList() {
+      return this.getMobileFilterData.timeList;
+    },
+    selectedTime() {
+      return this.getMobileFilterData.selectedTime;
+    },
+    selectedBusClass() {
+      return this.getMobileFilterData.selectedBusClass;
+    },
   },
 
   watch: {
-    coachType(value) {
-      if (value) {
-        this.handleFromSubmit();
-      }
-    },
-    priceFilterType: {
-      immediate: true,
-      handler: function (value) {
-        if (value) {
-          this.sortedTrip(value);
-        }
-      },
-    },
     "$route.query": {
       immediate: true,
       handler() {
-        (this.priceFilterType = null),
-          (this.coachType = this.$route.query.type);
+        const newFilterData = {
+          ...this.getMobileFilterData,
+          coachType: this.$route.query.type,
+        };
+        this.updateMobileFilterData(newFilterData);
       },
     },
   },
 
   methods: {
-    ...mapMutations("guarantedseat", ["sortedTrip"]),
+    ...mapMutations("guarantedseat", ["sortedTrip", "updateMobileFilterData"]),
     ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
-      this.coachType = type;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        coachType: type,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     setBoardingPoint(point) {
-      this.boardingPoint = point;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        boardingPoint: point,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setPriceFilterType(type) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        priceFilterType: type,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     setBusCompany(bus) {
-      this.busCompany = bus;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        busCompany: bus,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setTime(time) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        selectedTime: time,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setBusClass(value) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        selectedBusClass: value,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     async handleTripFilter() {
-      this.$nuxt.$loading.start();
+      this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -583,22 +619,20 @@ export default {
 
       await this.getPbScheduleDataAction(payload);
       this.close();
-      this.$nuxt.$loading.finish();
+      this.$nuxt.$loading?.finish();
     },
     resetFilter() {
-      this.busCompany = null;
-      this.boardingPoint = null;
-      this.selectedTime = null;
-      this.selectedBusClass = null;
-      this.priceFilterType = null;
-      this.coachType = "all";
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        busCompany: null,
+        boardingPoint: null,
+        selectedTime: null,
+        selectedBusClass: null,
+        priceFilterType: null,
+        coachType: "all",
+      };
+      this.updateMobileFilterData(newFilterData);
       this.handleFromSubmit();
-    },
-    setTime(time) {
-      this.selectedTime = time;
-    },
-    setBusClass(value) {
-      this.selectedBusClass = value;
     },
     handleFromSubmit() {
       const query = {

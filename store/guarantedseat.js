@@ -1,6 +1,18 @@
 import * as apis from '../helpers/apis';
 import { handleScrollBehaviour } from '../helpers/utils';
 
+const mobileFilterInitialData = {
+  coachTypes: ["ac", "non-ac", "all"],
+  coachType: "",
+  priceFilter: ["l2h", "h2l"],
+  priceFilterType: null,
+  boardingPoint: "",
+  busCompany: "",
+  timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
+  selectedTime: null,
+  selectedBusClass: "",
+}
+
 export const state = () => ({
   mobileFloatingFilter: true,
   gsLoading: false,
@@ -28,6 +40,8 @@ export const state = () => ({
   offerImages: [],
   blogList: [],
   headLine: [],
+  mobileFilterInitialData: mobileFilterInitialData,
+  mobileFilterData: mobileFilterInitialData
 });
 
 export const getters = {
@@ -57,6 +71,8 @@ export const getters = {
   getBlogList: (state) => state.blogList,
   getOfferImages: (state) => state.offerImages,
   getHeadLine: (state) => state.headLine,
+  getMobileFilterData: (state) => state.mobileFilterData,
+  getMobileFilterInitialData: (state) => state.mobileFilterInitialData
 };
 
 export const actions = {
@@ -234,15 +250,29 @@ export const actions = {
         commit('setGsLoading', false);
       }).catch(error => {
         commit('setGsLoading', false);
+
         if (error.response) {
-          const { data } = error.response
-          resolve(data)
+          const { data } = error.response;
+          resolve(data);
         }
-        this.$toast.error(error.response.data.message, {
-          position: 'bottom-right',
-          duration: 5000,
-        })
-      })
+
+        const errorMessage = error.response.data.message;
+
+        if (Array.isArray(errorMessage)) {
+          errorMessage.forEach(message => {
+            this.$toast.error(message, {
+              position: 'bottom-right',
+              duration: 5000,
+            });
+          });
+        } else {
+          this.$toast.error(errorMessage, {
+            position: 'bottom-right',
+            duration: 5000,
+          });
+        }
+      });
+
     })
 
   },
@@ -432,20 +462,32 @@ export const actions = {
     }
   },
 
+  //   async setOfferImages({ commit }) {
+  //     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+  //     const imageLinkArr = data.offerAndPromoImages;
+  //     const rawOfferImages = await Promise.all(imageLinkArr.map(async (imageLink) => {
+  //       return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: imageLink.image }, responseType: 'arraybuffer' });
+  //     }))
+  //     const tmpOfferImages = [];
+  //     for (const buffer of rawOfferImages) {
+  //       const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
+  //       const theImage = Buffer.from(binaryString, 'binary').toString('base64');
+  //       const properlyFormattedImage = "data:image/*;base64," + theImage;
+  //       tmpOfferImages.push(properlyFormattedImage)
+
+  //     }
+  //     commit('setOfferImages', tmpOfferImages);
+  //   }
+  // };
+
+
   async setOfferImages({ commit }) {
     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLinkArr = data.offerAndPromoImages;
-    const rawOfferImages = await Promise.all(imageLinkArr.map(async (imageLink) => {
-      return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: imageLink.image }, responseType: 'arraybuffer' });
-    }))
+    const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
-    for (const buffer of rawOfferImages) {
-      const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
-      const theImage = Buffer.from(binaryString, 'binary').toString('base64');
-      const properlyFormattedImage = "data:image/*;base64," + theImage;
-      tmpOfferImages.push(properlyFormattedImage)
-
-    }
+    imageLinkArr.forEach((item) => {
+      tmpOfferImages.push(apis.OFFER_IMAGE_BASE_URL + item.image);
+    })
     commit('setOfferImages', tmpOfferImages);
   }
 };
@@ -527,6 +569,9 @@ export const mutations = {
   },
   setOfferImages: (state, data) => {
     state.offerImages = data;
+  },
+  updateMobileFilterData: (state, data) => {
+    state.mobileFilterData = data;
   }
 
 };
