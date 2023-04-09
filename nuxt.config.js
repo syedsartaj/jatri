@@ -132,7 +132,7 @@ export default {
   },
 
   proxy: {
-    "/api/": process.env.PARIBAHAN_FULL_URL,
+    '/api': { target: process.env.PARIBAHAN_BASE_URL, changeOrigin: true },
     "/ssl/":
       process.env.NODE_ENV === "development"
         ? process.env.DEV_SSL_BACKEND_URL
