@@ -462,20 +462,32 @@ export const actions = {
     }
   },
 
+  //   async setOfferImages({ commit }) {
+  //     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+  //     const imageLinkArr = data.offerAndPromoImages;
+  //     const rawOfferImages = await Promise.all(imageLinkArr.map(async (imageLink) => {
+  //       return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: imageLink.image }, responseType: 'arraybuffer' });
+  //     }))
+  //     const tmpOfferImages = [];
+  //     for (const buffer of rawOfferImages) {
+  //       const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
+  //       const theImage = Buffer.from(binaryString, 'binary').toString('base64');
+  //       const properlyFormattedImage = "data:image/*;base64," + theImage;
+  //       tmpOfferImages.push(properlyFormattedImage)
+
+  //     }
+  //     commit('setOfferImages', tmpOfferImages);
+  //   }
+  // };
+
+
   async setOfferImages({ commit }) {
     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLinkArr = data.offerAndPromoImages;
-    const rawOfferImages = await Promise.all(imageLinkArr.map(async (imageLink) => {
-      return await this.$api.$get(apis.READ_OFFER_PROMO_IMAGE_URL, { params: { path: imageLink.image }, responseType: 'arraybuffer' });
-    }))
+    const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
-    for (const buffer of rawOfferImages) {
-      const binaryString = Array.from(new Uint8Array(buffer), byte => String.fromCharCode(byte)).join("");
-      const theImage = Buffer.from(binaryString, 'binary').toString('base64');
-      const properlyFormattedImage = "data:image/*;base64," + theImage;
-      tmpOfferImages.push(properlyFormattedImage)
-
-    }
+    imageLinkArr.forEach((item) => {
+      tmpOfferImages.push(apis.OFFER_IMAGE_BASE_URL + item.image);
+    })
     commit('setOfferImages', tmpOfferImages);
   }
 };
