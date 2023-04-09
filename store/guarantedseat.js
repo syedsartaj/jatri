@@ -250,15 +250,29 @@ export const actions = {
         commit('setGsLoading', false);
       }).catch(error => {
         commit('setGsLoading', false);
+
         if (error.response) {
-          const { data } = error.response
-          resolve(data)
+          const { data } = error.response;
+          resolve(data);
         }
-        this.$toast.error(error.response.data.message, {
-          position: 'bottom-right',
-          duration: 5000,
-        })
-      })
+
+        const errorMessage = error.response.data.message;
+
+        if (Array.isArray(errorMessage)) {
+          errorMessage.forEach(message => {
+            this.$toast.error(message, {
+              position: 'bottom-right',
+              duration: 5000,
+            });
+          });
+        } else {
+          this.$toast.error(errorMessage, {
+            position: 'bottom-right',
+            duration: 5000,
+          });
+        }
+      });
+
     })
 
   },
