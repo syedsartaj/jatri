@@ -59,7 +59,7 @@ export default {
     },
     test() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const { from, to, type, date } = this.$route.query;
         const formattedDate = new Date(+date).toLocaleString("en-CA", {
           dateStyle: "short",
@@ -87,14 +87,14 @@ export default {
         payload.busType = type;
 
         await this.getPbScheduleDataAction(payload);
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.isBeforeGetDataState = false;
       });
     },
   },
   created() {
     this.$nextTick(() => {
-      //this.$nuxt.$loading.start();
+      //this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -106,7 +106,6 @@ export default {
         busType: type,
       };
       //await this.getPbScheduleDataAction(payload);
-      //this.$nuxt.$loading.finish();
     });
   },
   watch: {

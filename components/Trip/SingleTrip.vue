@@ -733,27 +733,8 @@
                 justify-between
               "
             >
-              <span
-                >Email ID
-                <span
-                  v-if="
-                    trip.moduleType == moduleType.PARIBAHAN ||
-                    trip.moduleType == moduleType.INTERCITY_V2
-                  "
-                  class="text-[#E0293B]"
-                  >*</span
-                ></span
-              >
-              <span
-                v-if="
-                  !(
-                    trip.moduleType == moduleType.PARIBAHAN ||
-                    trip.moduleType == moduleType.INTERCITY_V2
-                  )
-                "
-                class="text-[#8D8D8F]"
-                >Optional</span
-              >
+              <span>Email ID </span>
+              <span class="text-[#8D8D8F]">Optional</span>
             </h2>
             <input
               class="
@@ -776,11 +757,9 @@
 
           <LoaderButton
             :class="
-              ((trip.moduleType == moduleType.PARIBAHAN ||
-                trip.moduleType == moduleType.INTERCITY_V2) &&
-                !(
-                  this.passengerEmail &&
-                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+              (this.passengerEmail &&
+                !this.emailReg.test(
+                  String(this.passengerEmail).toLowerCase()
                 )) ||
               !selectedSeatIds.length ||
               !boardingPoint ||
@@ -791,11 +770,9 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              ((trip.moduleType == moduleType.PARIBAHAN ||
-                trip.moduleType == moduleType.INTERCITY_V2) &&
-                !(
-                  this.passengerEmail &&
-                  this.emailReg.test(String(this.passengerEmail).toLowerCase())
+              (this.passengerEmail &&
+                !this.emailReg.test(
+                  String(this.passengerEmail).toLowerCase()
                 )) ||
               getGsLoading ||
               !boardingPoint ||
@@ -852,7 +829,7 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../helpers/dateTimeFormat";
 import { moduleType } from "../../helpers/utils";
-import { handleScrollBehaviour } from '../../helpers/utils';
+import { handleScrollBehaviour } from "../../helpers/utils";
 export default {
   props: [
     "trip",
@@ -974,10 +951,10 @@ export default {
         this.setGsDroppingPoints([]);
         this.setModalBoardingPoints([]);
         this.$nextTick(async () => {
-          this.$nuxt.$loading.start();
+          this.$nuxt.$loading?.start();
           const payload = this.getPayloadForSeatView();
           await this.getBoardingPointForBus(payload);
-          this.$nuxt.$loading.finish();
+          this.$nuxt.$loading?.finish();
           this.setSelectedBuxIndex(this.busIndex);
           this.showPointPolicyModal = true;
         });
@@ -998,7 +975,7 @@ export default {
       }
     },
     stopBackgroundScroll(value) {
-      handleScrollBehaviour(!value)
+      handleScrollBehaviour(!value);
     },
     handleSeatView(selectedTripId) {
       this.mobileFloatingFilter(selectedTripId === "" ? true : false);
@@ -1010,10 +987,10 @@ export default {
         return;
       }
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.$emit("selectedTripId", selectedTripId);
         const el = this.$refs[`bus-selector-${selectedTripId}`];
         if (el) {
@@ -1160,7 +1137,7 @@ export default {
         return;
       }
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           moduleType: this.trip.moduleType,
           busServiceType: this.trip.busServiceType,
@@ -1236,7 +1213,7 @@ export default {
             };
             this.resetForm();
             this.getPbSeatViewAction(seatViewPayload);
-            this.$nuxt.$loading.finish();
+            this.$nuxt.$loading?.finish();
           } else {
             // let data = {
             //   ...this.getGsPaymentPendingBlockData,
@@ -1268,7 +1245,7 @@ export default {
               });
             }
           }
-          this.$nuxt.$loading.finish();
+          this.$nuxt.$loading?.finish();
         });
       });
     },
@@ -1294,7 +1271,7 @@ export default {
 
     applyPromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           promoCode: this.promoCode,
           companyId: this.trip.companyId,
@@ -1320,7 +1297,7 @@ export default {
         } else {
           this.totalPromoAmount = 0;
         }
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
   },

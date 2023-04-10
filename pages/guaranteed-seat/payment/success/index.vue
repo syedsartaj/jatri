@@ -46,7 +46,7 @@ export default {
      },
      async created() {
           this.$nextTick(async () => {
-               this.$nuxt.$loading.start();
+               this.$nuxt.$loading?.start();
                if (process.client) {
                     if (!this.getTicketDetails.ticket) {
                          this.$router.push("/");
@@ -59,12 +59,12 @@ export default {
                //       this.$router.push("/");
                //     }
                //   }
-               //   this.$nuxt.$loading.finish();
+               //   this.$nuxt.$loading?.finish();
                // } else {
-               //   this.$nuxt.$loading.finish();
+               //   this.$nuxt.$loading?.finish();
                //   this.$router.push("/");
                // }
-               this.$nuxt.$loading.finish();
+               this.$nuxt.$loading?.finish();
           });
      },
      async asyncData({query, store}) {

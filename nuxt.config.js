@@ -132,12 +132,10 @@ export default {
   },
 
   proxy: {
-    "/api/": process.env.PARIBAHAN_FULL_URL,
-    "/ssl/":
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_SSL_BACKEND_URL
-        : process.env.PROD_SSL_BACKEND_URL,
-    // "/ssl/": process.env.LOCAL_SSL_BACKEND_URL,
+    '/api': {
+      target: 'https://api.dt.jatriweb.team',
+      changeOrigin: true
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
