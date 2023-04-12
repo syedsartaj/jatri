@@ -93,7 +93,7 @@
           </div>
 
           <div
-            v-if="trip.available"
+            v-if="trip?.hasOwnProperty('available')"
             class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right"
           >
             <div
