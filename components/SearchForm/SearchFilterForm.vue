@@ -80,38 +80,48 @@ export default {
             duration: 5000,
         });
         },
-        handleFromSubmit() {
-            if (!this.departure) {
-                this.handleToastMessage('Please insert your location');
-            }
-            if (!this.destination) {
-                this.handleToastMessage('Please insert your destination');
-            }
-            if (!this.coachType) {
-                this.handleToastMessage('Please insert coach type');
-            }
-            if (!this.departingDate) {
-                this.handleToastMessage('Please insert departure date');
-            }
-            if(this.departure && this.destination && this.coachType && this.departingDate) {
-                const query = {
-                    from: this.departure,
-                    to: this.destination,
-                    type: this.coachType,
-                    quantity: this.quantity,
-                    date: new Date(this.departingDate).getTime(),
-                };
-                Cookies.remove('process-allow')
-                this.$router.push({ path: "/trip", query });
-            }
-            else {
-                this.errorOccured = true;
-            }
-        },
+    isCorrectLocationSelection(location) {
+      return this.getGsCities.some(
+        (city) => city.city_name.toLowerCase() === location.toLowerCase()
+      );
+    },
+    handleFromSubmit() {
+      const isRightLocation =
+        this.isCorrectLocationSelection(this.departure) &&
+        this.isCorrectLocationSelection(this.destination);
+      const hasRequiredFields =
+        isRightLocation && this.coachType && this.departingDate;
 
-        // findTrips(){
-        //     window.location.href = '/trip'
-        // }
+      if (hasRequiredFields) {
+        const query = {
+          from: this.departure,
+          to: this.destination,
+          type: this.coachType,
+          quantity: this.quantity,
+          date: new Date(this.departingDate).getTime(),
+        };
+        Cookies.remove("process-allow");
+        this.$router.push({ path: "/trip", query });
+      } else {
+        this.errorOccured = true;
+
+        if (
+          this.departure &&
+          !this.isCorrectLocationSelection(this.departure)
+        ) {
+          this.handleToastMessage("Please select the departure from the list");
+        }
+
+        if (
+          this.destination &&
+          !this.isCorrectLocationSelection(this.destination)
+        ) {
+          this.handleToastMessage(
+            "Please select the destination from the list"
+          );
+        }
+      }
+    },
     },
     watch: {
         "$route.query": {

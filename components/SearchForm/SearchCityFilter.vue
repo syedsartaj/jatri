@@ -64,7 +64,7 @@
 
     <!-- dropdown -->
     <div
-      v-if="optionsIsOpen"
+      v-if="optionsIsOpen && filteredOptionsData?.length"
       class="
         mt-10
         -ml-5
