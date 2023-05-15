@@ -17,7 +17,7 @@
       <div class="h-[500px] flex justify-center items-center bg-[#f7f7f7]">
         <!-- <TripNotFound/> -->
         <OpssAlert
-          :details="'Looks llike we could not find any trip according to your search. Try different route or date and search again.'"
+          :details="'Looks like we could not find any trip according to your search. Try different route or date and search again.'"
           :customStyle="'px-[92.5px]'"
         />
       </div>
