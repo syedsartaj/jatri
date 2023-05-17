@@ -94,7 +94,6 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      //this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",

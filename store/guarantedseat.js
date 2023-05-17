@@ -26,7 +26,10 @@ export const state = () => ({
   gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
+  gsUpperDeckSeatArray: [],
+  gsLowerDeckSeatArray: [],
   gsSeatBoardingPointArray: [],
+  gsSeatDroppingPointArray: [],
   gsPaymentPendingBlockData: {},
   ticketDetails: {},
   searchedTicketList: {},
@@ -57,7 +60,10 @@ export const getters = {
   getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
+  getGsLowerDeckSeatArray: (state) => state.gsLowerDeckSeatArray,
+  getGsUpperDeckSeatArray: (state) => state.gsUpperDeckSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
+  getGsSeatDroppingPointArray: (state) => state.gsSeatDroppingPointArray,
   getGsPaymentPendingBlockData: (state) => state.gsPaymentPendingBlockData,
   getTicketDetails: (state) => state.ticketDetails,
   getSearchedTicketList: (state) => state.searchedTicketList,
@@ -526,6 +532,9 @@ export const mutations = {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;
     state.gsSeatBoardingPointArray = data.seatPlan.bordingPoints;
+    state.gsSeatDroppingPointArray = data.seatPlan.droppingPoints;
+    state.gsUpperDeckSeatArray = data.seatPlan.upperDeckSeatList;
+    state.gsLowerDeckSeatArray = data.seatPlan.lowerDeckSeatList;
   },
   setGsPaymentPendingBlockData: (state, data) =>
     (state.gsPaymentPendingBlockData = data),
