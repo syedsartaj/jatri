@@ -695,7 +695,9 @@ export default {
 
       if (selectedTripId === "") {
         // Unlock all seats while close seat view
-        this.handleSeatLock(this.selectedSeatLabels.join(","), false);
+        if (this.selectedSeatLabels?.length) {
+          this.handleSeatLock(this.selectedSeatLabels.join(","), false);
+        }
         this.$emit("selectedTripId", null);
         this.resetForm();
         return;
