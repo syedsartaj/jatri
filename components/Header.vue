@@ -144,7 +144,6 @@ export default {
   },
   methods: {
     ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
-    ...mapActions("guarantedseat", ["getHeadLineApi"]),
     handleHamburgerMenu() {
       this.showHamburgerMenu = !this.showHamburgerMenu;
     },
@@ -157,9 +156,6 @@ export default {
         window.location.reload();
       }
     },
-  },
-  mounted() {
-    this.getHeadLineApi();
   },
   computed: {
     ...mapGetters("guarantedseat", ["getHeadLine"]),

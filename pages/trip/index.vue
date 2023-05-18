@@ -157,10 +157,6 @@ export default {
     this.updateMobileFilterData(this.getMobileFilterInitialData);
   },
 
-     async asyncData({store}){
-          await store.dispatch('guarantedseat/getCitiesList');
-     },
-
      watch: {
           isLoggedIn(newVal) {
                if(newVal === true && this.$route.hash === '#agent') {

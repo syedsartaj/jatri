@@ -380,18 +380,18 @@ export default {
     coachType() {
       this.handleFromSubmit();
     },
-    boardingPoint() {
-      this.handleTripFilter();
-    },
-    busCompany() {
-      this.handleTripFilter();
-    },
-    selectedTime() {
-      this.handleTripFilter();
-    },
-    selectedBusClass() {
-      this.handleTripFilter();
-    },
+    // boardingPoint() {
+    //   this.handleTripFilter();
+    // },
+    // busCompany() {
+    //   this.handleTripFilter();
+    // },
+    // selectedTime() {
+    //   this.handleTripFilter();
+    // },
+    // selectedBusClass() {
+    //   this.handleTripFilter();
+    // },
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -421,9 +421,11 @@ export default {
     },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
+       this.handleTripFilter();
     },
     setBusCompany(bus) {
       this.busCompany = bus === this.busCompany ? null : bus;
+       this.handleTripFilter();
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
@@ -486,9 +488,11 @@ export default {
     },
     setTime(time) {
       this.selectedTime = time;
+       this.handleTripFilter();
     },
     setBusClass(value) {
       this.selectedBusClass = value;
+       this.handleTripFilter();
     },
     handleFromSubmit() {
       const query = {
