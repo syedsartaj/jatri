@@ -213,7 +213,16 @@ export const actions = {
       return false;
     }
   },
-
+  async seatLockAction({ commit }, payload) {
+    try {
+      const { data } = await this.$api.$post(apis.POST_SEAT_LOCK, payload)
+    } catch (e) {
+      this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
+        position: 'bottom-right',
+        duration: 5000,
+      })
+    }
+  },
   async getTicketByTnxId({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)

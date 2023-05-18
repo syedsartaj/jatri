@@ -656,6 +656,7 @@ export default {
       "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
+      "seatLockAction",
     ]),
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
@@ -693,6 +694,8 @@ export default {
       this.resetPromo();
 
       if (selectedTripId === "") {
+        // Unlock all seats while close seat view
+        this.handleSeatLock(this.selectedSeatLabels.join(","), false);
         this.$emit("selectedTripId", null);
         this.resetForm();
         return;
@@ -846,11 +849,13 @@ export default {
     addSeatHandler(seat) {
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
+        this.handleSeatLock([seat.seatNo].join(","), false);
         this.handleSitUnSelect(seat);
         this.disCountCalculationOnSitUnselect(seat);
         this.promoCalculationOnUnSelect();
       } else {
         // Action for sit selection
+        this.handleSeatLock([seat.seatNo].join(","), true);
         if (this.isSitLimitCrossed()) {
           this.showSeatLimitCrossError();
           return;
@@ -860,6 +865,18 @@ export default {
         this.disCountCalculationOnSitselect(seat);
         this.promoCalculationOnSitSelect();
       }
+    },
+    handleSeatLock(seatLbls, action) {
+      const payload = {
+        moduleType: this.trip.moduleType,
+        fromCity: this.trip.fromCity,
+        toCity: this.trip.toCity,
+        departureDate: this.trip.departureDate,
+        locked: action,
+        uid: this.trip.uid,
+        seatLbls: seatLbls,
+      };
+      this.seatLockAction(payload);
     },
     async paymentPendingBlockHandler() {
       if (
