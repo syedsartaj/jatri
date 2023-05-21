@@ -19,7 +19,9 @@
           :key="colIndex"
           class="relative group"
           @click="
-            colSeat && colSeat.status === 'available' && addSeatHandler(colSeat)
+            colSeat &&
+              colSeat.status === 'available' &&
+              addSeatHandler(colSeat, { seatType, rowIndex, colIndex })
           "
         >
           <SleeperBedIcon
@@ -60,7 +62,13 @@
 <script>
 export default {
   name: "SeatView",
-  props: ["seatArray", "showDriver", "addSeatHandler", "selectedSeatIds"],
+  props: [
+    "seatArray",
+    "showDriver",
+    "addSeatHandler",
+    "selectedSeatIds",
+    "seatType",
+  ],
   methods: {
     handleClass: (status) =>
       status !== "available" ? "cursor-default" : "cursor-pointer",

@@ -276,6 +276,7 @@
                 :seatArray="getGsSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
+                seatType="NORMAL_DECK"
               />
             </div>
 
@@ -286,6 +287,7 @@
                 :seatArray="getGsLowerDeckSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
+                seatType="LOWER_DECK"
               />
             </div>
             <div v-if="getGsUpperDeckSeatArray?.length">
@@ -295,6 +297,7 @@
                 :seatArray="getGsUpperDeckSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
+                seatType="UPPER_DECK"
               />
             </div>
           </div>
@@ -650,6 +653,7 @@ export default {
       "mobileFloatingFilter",
       "setModalBoardingPoints",
       "setGsDroppingPoints",
+      "updateSeatStatus",
     ]),
     ...mapActions("guarantedseat", [
       "getPbSeatViewAction",
@@ -848,7 +852,7 @@ export default {
         this.totalPromoAmount = this.getPromoCode.amount;
       }
     },
-    addSeatHandler(seat) {
+    async addSeatHandler(seat, seatInfo) {
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
         this.handleSeatLock([seat.seatNo].join(","), false);
@@ -856,17 +860,55 @@ export default {
         this.disCountCalculationOnSitUnselect(seat);
         this.promoCalculationOnUnSelect();
       } else {
-        // Action for sit selection
-        this.handleSeatLock([seat.seatNo].join(","), true);
         if (this.isSitLimitCrossed()) {
           this.showSeatLimitCrossError();
           return;
         }
 
-        this.handleSitSelect(seat);
-        this.disCountCalculationOnSitselect(seat);
-        this.promoCalculationOnSitSelect();
+        const isSeatLocked = await this.isSeatLocked([seat.seatNo].join(","));
+
+        if (isSeatLocked) {
+          //update seat status here
+          this.updateSeatStatus(seatInfo);
+
+          this.$toast.error(`Seat already in progress.`, {
+            position: "bottom-right",
+            duration: 50000,
+            containerClass: "padding: 100px",
+          });
+          return;
+        } else {
+          this.handleSitSelect(seat);
+          this.disCountCalculationOnSitselect(seat);
+          this.promoCalculationOnSitSelect();
+        }
       }
+    },
+    isSeatLocked(seatLbls) {
+      return new Promise((resolve) => {
+        this.$nextTick(async () => {
+          const payload = {
+            moduleType: this.trip.moduleType,
+            fromCity: this.trip.fromCity,
+            toCity: this.trip.toCity,
+            departureDate: this.trip.departureDate,
+            locked: true,
+            uid: this.trip.uid,
+            seatLbls: seatLbls,
+          };
+
+          try {
+            const res = await this.seatLockAction(payload);
+            if (res?.data) {
+              const seatLock = res.data?.seatLock;
+              resolve(seatLock === false);
+            }
+            resolve(false);
+          } catch (error) {
+            resolve(false);
+          }
+        });
+      });
     },
     handleSeatLock(seatLbls, action) {
       const payload = {
