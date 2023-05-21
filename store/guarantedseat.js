@@ -214,14 +214,22 @@ export const actions = {
     }
   },
   async seatLockAction({ commit }, payload) {
-    try {
-      const { data } = await this.$api.$post(apis.POST_SEAT_LOCK, payload)
-    } catch (e) {
-      this.$toast.error(e.response.data.message ?? 'Something went wrong!', {
-        position: 'bottom-right',
-        duration: 5000,
-      })
-    }
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.POST_SEAT_LOCK, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
   },
   async getTicketByTnxId({ commit }, payload) {
     try {
@@ -590,6 +598,22 @@ export const mutations = {
   },
   updateMobileFilterData: (state, data) => {
     state.mobileFilterData = data;
-  }
-
+  },
+  updateSeatStatus: (state, seatInfo) => {
+    const { seatType, rowIndex, colIndex } = seatInfo;
+    switch (seatType) {
+      case "UPPER_DECK": {
+        state.gsUpperDeckSeatArray[rowIndex][colIndex].status = "booked";
+        break;
+      }
+      case "LOWER_DECK": {
+        state.gsLowerDeckSeatArray[rowIndex][colIndex].status = "booked";
+        break;
+      }
+      default: {
+        state.gsSeatArray[rowIndex][colIndex].status = "booked";
+      }
+    }
+  },
+  
 };
