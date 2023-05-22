@@ -895,6 +895,7 @@ export default {
             locked: true,
             uid: this.trip.uid,
             seatLbls: seatLbls,
+            coachName: this.trip.coach.name,
           };
 
           try {
@@ -919,6 +920,7 @@ export default {
         locked: action,
         uid: this.trip.uid,
         seatLbls: seatLbls,
+        coachName: this.trip.coach.name,
       };
       this.seatLockAction(payload);
     },
