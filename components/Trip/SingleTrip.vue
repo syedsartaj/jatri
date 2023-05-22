@@ -1155,6 +1155,16 @@ export default {
     },
   },
   watch: {
+    selectedTrip(value) {
+      if (
+        value >= 0 &&
+        value != this.busIndex &&
+        this.selectedSeatLabels?.length
+      ) {
+        this.handleSeatLock(this.selectedSeatLabels.join(","), false);
+        this.resetForm();
+      }
+    },
     getGsSeatBoardingPointArray(value) {
       const findId = value.findIndex((item) => item?.defaultBoarding === true);
       this.boardingPoint = findId === -1 ? value[0] : value[findId];

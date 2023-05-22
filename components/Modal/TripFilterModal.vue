@@ -650,6 +650,17 @@ export default {
         { dateStyle: "short" }
       );
       const previousDate = moment(convertedDate).add(-1, "days");
+
+      // Check if the previous date is earlier than today
+      const currentDate = moment();
+      if (previousDate.isBefore(currentDate, "day")) {
+        this.$toast.error("Date can not be less than current date", {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        return; // Return early, preventing further operations
+      }
+
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
