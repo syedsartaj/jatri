@@ -25,7 +25,7 @@
           "
         >
           <SleeperBedIcon
-            v-if="colSeat.class == 'Sleeper'"
+            v-if="colSeat.class.toLowerCase() == 'sleeper'"
             :class="handleClass(colSeat.status)"
             :fill="
               handleFill(colSeat.status, selectedSeatIds.includes(colSeat.id))
@@ -37,7 +37,7 @@
             width="28"
           />
           <ArmChairIcon
-            v-if="colSeat.class != 'Sleeper'"
+            v-if="colSeat.class.toLowerCase() != 'sleeper'"
             :class="
               colSeat.status !== 'available'
                 ? 'cursor-default'
