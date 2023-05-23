@@ -39,7 +39,9 @@
               <p class="text-xs">
                 <span class="font-normal text-blackLight">{{
                   `${trip.coach.name}${
-                    (trip.coach.type && " | " + `${trip.coach.type}`) || ""
+                    (trip.coach.type &&
+                      " | " + `${trip.coach?.type?.toUpperCase()}`) ||
+                    ""
                   }`
                 }}</span>
               </p>
@@ -134,7 +136,7 @@
       <div class="block lg:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
 
       <div
-        class="w-full lg:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
+        class="w-full lg:w-[30%] xl:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
       >
         <div class="hidden lg:block">
           <img
