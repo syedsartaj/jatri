@@ -345,35 +345,41 @@
             class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]"
           >
             <div
-              class="flex justify-between px-[14px] pt-[10px] pb-[6px] border-b"
+              class="grid grid-cols-3 gap-x-[14px] px-[14px] py-[10px] border-b"
             >
               <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
                 Seat
               </p>
-              <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
+              <p class="text-sm lg:text-xs font-semibold text-blackPrimary text-center">
                 Class
               </p>
-              <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
+              <p
+                class="text-sm lg:text-xs font-semibold text-blackPrimary text-right"
+              >
                 Fare
               </p>
             </div>
-            <div class="px-[14px] py-3">
+
+            <div class="px-4 py-3">
               <div
                 v-for="seat in selectedCustomizeSeatList"
                 :key="seat.id"
-                class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
+                class="grid grid-cols-3 gap-x-4 py-2 border-b last:border-b-0 border-dashed"
               >
                 <p class="text-xs lg:text-sm font-medium text-blackPrimary">
                   {{ seat.seatNo }}
                 </p>
-                <p class="text-xs lg:text-sm font-medium text-blackPrimary">
+                <p class="text-xs lg:text-sm font-medium text-blackPrimary text-center">
                   {{ seat.class }}
                 </p>
-                <p class="text-xs lg:text-sm font-medium text-blackPrimary">
+                <p
+                  class="text-xs lg:text-sm font-medium text-blackPrimary text-right"
+                >
                   {{ seat.fare }}
                 </p>
               </div>
             </div>
+
             <div
               v-if="totalDiscountFare > 0"
               class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
@@ -515,15 +521,17 @@
           <div
             class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2"
           >
-            <nuxt-link
-              to="/policies#terms-and-conditions"
+            <a
+              href="/policies#terms-and-conditions"
+              target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
-              >Terms and Conditions</nuxt-link
+              >Terms and Conditions</a
             >
-            <nuxt-link
-              to="/policies#return-and-refund-policy"
+            <a
+              href="/policies#return-and-refund-policy"
+              target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation Policy</nuxt-link
+              >Cancellation Policy</a
             >
           </div>
         </div>

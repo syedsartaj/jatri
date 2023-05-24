@@ -233,12 +233,17 @@ export default {
   },
   computed: {
     filteredOptionsData() {
-      return this.options.filter((option) => {
-        return option.city_name
-          .toLowerCase()
-          .includes(this.searchKey.toLowerCase());
+      const searchKey = this.searchKey.toLowerCase().trim();
+
+      const filteredOptions = this.options.filter((option) => {
+        return option.city_name.toLowerCase().startsWith(searchKey);
       });
+
+      return filteredOptions.sort((a, b) =>
+        a.city_name.localeCompare(b.city_name)
+      );
     },
+
     showErrorToolTip() {
       return this.errorOccured && !this.selectedOption && !this.searchKey;
     },
