@@ -229,18 +229,7 @@
                 "
               >
                 <p>Ticket Fare:</p>
-                <p>
-                  ৳
-                  {{
-                    Math.ceil(
-                      (ticketDetails.discountType === "PROMO"
-                        ? ticketDetails.payable
-                        : ticketDetails.payable + ticketDetails.discount) /
-                        ticketDetails.totalSeat
-                    )
-                  }}
-                  x {{ ticketDetails.totalSeat }}
-                </p>
+                <p>{{ ticketFareString }}</p>
               </div>
               <div
                 style="
@@ -804,18 +793,7 @@
                 "
               >
                 <p>Ticket Fare:</p>
-                <p>
-                  ৳
-                  {{
-                    Math.ceil(
-                      (ticketDetails.discountType === "PROMO"
-                        ? ticketDetails.payable
-                        : ticketDetails.payable + ticketDetails.discount) /
-                        ticketDetails.totalSeat
-                    )
-                  }}
-                  x {{ ticketDetails.totalSeat }}
-                </p>
+                <p>{{ ticketFareString }}</p>
               </div>
               <div
                 style="
@@ -957,7 +935,13 @@
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
 export default {
-  props: ["ticketDetails", "email", "phone", "downloadTicketStatus"],
+  props: [
+    "ticketDetails",
+    "email",
+    "phone",
+    "downloadTicketStatus",
+    "ticketFareString",
+  ],
   computed: {
     ...mapGetters("guarantedseat", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
@@ -988,5 +972,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
