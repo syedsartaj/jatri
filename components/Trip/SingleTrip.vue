@@ -350,7 +350,9 @@
               <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
                 Seat
               </p>
-              <p class="text-sm lg:text-xs font-semibold text-blackPrimary text-center">
+              <p
+                class="text-sm lg:text-xs font-semibold text-blackPrimary text-center"
+              >
                 Class
               </p>
               <p
@@ -369,7 +371,9 @@
                 <p class="text-xs lg:text-sm font-medium text-blackPrimary">
                   {{ seat.seatNo }}
                 </p>
-                <p class="text-xs lg:text-sm font-medium text-blackPrimary text-center">
+                <p
+                  class="text-xs lg:text-sm font-medium text-blackPrimary text-center"
+                >
                   {{ seat.class }}
                 </p>
                 <p
@@ -611,7 +615,7 @@ export default {
       "getGsDroppingPoints",
     ]),
     departureDateTime() {
-      if (this.boardingPoint.scheduleTime === "") {
+      if (this.boardingPoint?.scheduleTime === "") {
         return dateTimeFormat(
           new Date(
             `${this.trip.departureDate} ${this.trip.departureTime}`
@@ -620,7 +624,7 @@ export default {
           "lll"
         );
       }
-      return dateTimeFormat(this.boardingPoint.scheduleTime, 6, "lll");
+      return dateTimeFormat(this.boardingPoint?.scheduleTime, 6, "lll");
     },
     departureTime() {
       if (this.boardingPoint.scheduleTime === "") {
@@ -718,6 +722,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
+        this.fireGTMEventForViewSeat();
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading?.finish();
@@ -727,6 +732,18 @@ export default {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
+    },
+    fireGTMEventForViewSeat() {
+      const eventData = {
+        event: "viewSeats",
+        from: this.trip.fromCity,
+        to: this.trip.toCity,
+        coach: this.trip.coach.name,
+        company: this.trip.company,
+        journeyDate: this.departureDateTime,
+      };
+
+      this.$gtm.push(eventData);
     },
     getPayloadForSeatView() {
       return {
@@ -956,6 +973,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
+        this.fireGTMEventForInitalBooking();
         const payload = {
           moduleType: this.trip.moduleType,
           busServiceType: this.trip.busServiceType,
@@ -1068,6 +1086,20 @@ export default {
         });
       });
     },
+    fireGTMEventForInitalBooking() {
+      const eventData = {
+        event: "initalBooking",
+        from: this.trip.fromCity,
+        to: this.trip.toCity,
+        coach: this.trip.coach.name,
+        company: this.trip.company,
+        journeyDate: this.departureDateTime,
+        seatCount: this.selectedSeatIds.length
+      };
+
+      this.$gtm.push(eventData);
+    },
+
     resetForm() {
       this.passengerName = "";
       this.passengerPhone = "";

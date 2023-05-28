@@ -87,13 +87,9 @@ export default {
   ],
 
   gtm: {
-    id: process.env.GTM_ID || 'GTM-MWP6J24',
-    scriptDefer: true,
-    pageTracking: true,
-    // layer: 'test',
-    variables: {
-      test: '1'
-    }
+   id: 'GTM-MWP6J24',
+   pageTracking: true,
+   enabled: true,
   },
   publicRuntimeConfig: {
     gtm: {

@@ -116,7 +116,7 @@
                   {{ departureDateTime }}
                 </p>
               </div>
-              <div class="text-xs mb-[14px] flex justify-start">
+              <!-- <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Seat fare:
                 </p>
@@ -132,7 +132,7 @@
                   }}
                   TK
                 </p>
-              </div>
+              </div> -->
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Seats:
@@ -371,6 +371,9 @@ export default {
     "supportEmail",
     "supportPhone",
   ],
+  mounted(){
+    console.log(this.getTicketDetails)
+  },
   methods: {
     // downloadFunction
     onProgress(event) {
