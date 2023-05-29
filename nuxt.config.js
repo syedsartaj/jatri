@@ -22,27 +22,13 @@ export default {
       { hid: "keywords", name: "keywords", content: "bus ticket bd, bus ticket online, bus ticket price, bus ticket booking online" },
       { hid: "og:title", name: "og:title", content: "Online bus tickets for everyone" },
       { name: "format-detection", content: "telephone=no" },
-      { hid: 'og:image', name: 'og:image', content: `${process.env.CLIENT_BASE_URL}/favicon.png` }
+      { hid: 'og:image', name: 'og:image', content: `${process.env.CLIENT_BASE_URL}/favicon.png` },
+      {
+        name: "google-site-verification",
+        content: `${process.env.VERIFICATION_CODE}`,
+      },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
-    script: [
-      {
-        innerHTML: `
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', ${process.env.FACEBOOK_PIXEL_ID});
-          fbq('track', 'PageView');
-        `,
-        type: 'text/javascript',
-        charset: 'utf-8'
-      }
-    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -60,7 +46,6 @@ export default {
     "~/plugins/date.js",
     "~/plugins/api",
     "~/plugins/vee-validate.js",
-    "~/plugins/facebook-events.js",
     '~/plugins/gtm'
   ],
 
@@ -102,13 +87,9 @@ export default {
   ],
 
   gtm: {
-    id: process.env.GTM_ID || 'GTM-MWP6J24',
-    scriptDefer: true,
-    pageTracking: true,
-    // layer: 'test',
-    variables: {
-      test: '1'
-    }
+   id: 'GTM-MWP6J24',
+   pageTracking: true,
+   enabled: true,
   },
   publicRuntimeConfig: {
     gtm: {
