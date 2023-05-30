@@ -597,6 +597,7 @@ export default {
       moduleType: this.trip.moduleType,
       showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      requestOnGoing: false,
     };
   },
   computed: {
@@ -880,6 +881,9 @@ export default {
       }
     },
     async addSeatHandler(seat, seatInfo) {
+      // Is any request ongoing
+      if (this.requestOnGoing) return;
+
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
         this.handleSeatLock([seat.seatNo].join(","), false);
@@ -913,6 +917,7 @@ export default {
     },
     isSeatLocked(seatLbls) {
       return new Promise((resolve) => {
+        this.requestOnGoing = true;
         this.$nextTick(async () => {
           const payload = {
             moduleType: this.trip.moduleType,
@@ -931,25 +936,43 @@ export default {
               const seatLock = res.data?.seatLock;
               resolve(seatLock === false);
             }
+            this.requestOnGoing = false;
             resolve(false);
           } catch (error) {
+            this.requestOnGoing = false;
             resolve(false);
           }
         });
       });
     },
     handleSeatLock(seatLbls, action) {
-      const payload = {
-        moduleType: this.trip.moduleType,
-        fromCity: this.trip.fromCity,
-        toCity: this.trip.toCity,
-        departureDate: this.trip.departureDate,
-        locked: action,
-        uid: this.trip.uid,
-        seatLbls: seatLbls,
-        coachName: this.trip.coach.name,
-      };
-      this.seatLockAction(payload);
+      this.requestOnGoing = true;
+      this.$nextTick(async () => {
+        const payload = {
+          moduleType: this.trip.moduleType,
+          fromCity: this.trip.fromCity,
+          toCity: this.trip.toCity,
+          departureDate: this.trip.departureDate,
+          locked: action,
+          uid: this.trip.uid,
+          seatLbls: seatLbls,
+          coachName: this.trip.coach.name,
+        };
+
+        try {
+          const res = await this.seatLockAction(payload);
+          this.requestOnGoing = false;
+        } catch (error) {
+          this.requestOnGoing = false;
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        }
+      });
     },
     async paymentPendingBlockHandler() {
       if (
@@ -1094,7 +1117,7 @@ export default {
         coach: this.trip.coach.name,
         company: this.trip.company,
         journeyDate: this.departureDateTime,
-        seatCount: this.selectedSeatIds.length
+        seatCount: this.selectedSeatIds.length,
       };
 
       this.$gtm.push(eventData);

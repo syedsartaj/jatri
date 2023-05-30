@@ -2,6 +2,7 @@
   <div v-if="singlePrintTicketInfo">
     <UserViewTicket
       :getTicketDetails="singlePrintTicketInfo"
+      :getPaymentHistory="singlePrintTicketInfo.paymentHistory"
     />
   </div>
 </template>
