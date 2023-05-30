@@ -558,15 +558,29 @@ export const mutations = {
   setPromoCode: (state, data) => (state.promoCode = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    const sortBy = data === 'l2h' ? 1 : -1;
+    const sortBy = data === "l2h" ? 1 : -1;
     state.gsTrips.sort((a, b) => {
-      const fareDiff = a.seatFare[0].fare - b.seatFare[0].fare;
+      const getActualFare = (tempFare) => {
+        if (tempFare.includes("-")) {
+          let fareArray = tempFare.split("-");
+          fareArray = fareArray.map((item) => parseFloat(item.trim())); // Parse fare values as numbers
+  
+          return sortBy === 1 ? fareArray[0] : fareArray[1];
+        }
+  
+        return parseFloat(tempFare); // Parse fare value as number
+      };
+  
+      const fareDiff = getActualFare(a.seatFare[0].fare) - getActualFare(b.seatFare[0].fare);
+  
       if (fareDiff !== 0) {
         return sortBy * fareDiff;
       }
-      return sortBy * (a.seatFare[0].class < b.seatFare[0].class ? -1 : 1);
+  
+      return 0;
     });
-  },
+  }
+  ,  
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;
   },
