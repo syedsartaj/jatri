@@ -227,13 +227,11 @@ export default {
       this.slideRight = true;
       this.slideLeft = false;
     },
-    ...mapActions("guarantedseat", ["getBlogListApi"]),
   },
   computed: {
     ...mapGetters("guarantedseat", ["getBlogList"]),
   },
   mounted() {
-    this.getBlogListApi();
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
 };

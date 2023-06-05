@@ -207,7 +207,7 @@
       <div class="flex justify-center pt-20 pb-[100px]">
         <OpssAlert
           v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
-          :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
+          :details="'Looks like we could not find any ticket according to your preferance. Sorry to let you down.'"
           :customStyle="'px-[64.5px]'"
         />
       </div>

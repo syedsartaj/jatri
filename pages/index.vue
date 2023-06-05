@@ -1040,10 +1040,6 @@ export default {
     };
   },
   components: { Hooper, Slide },
-  async asyncData({ store }) {
-    await store.dispatch("guarantedseat/getCitiesList");
-  },
-
   async mounted() {
     this.onResize();
     window.addEventListener("scroll", this.handleScroll);
@@ -1074,7 +1070,6 @@ export default {
     },
     ...mapActions("guarantedseat", [
       "getPbAccessTokenAction",
-      "getCitiesList",
       "successTicketByMailAction",
     ]),
 

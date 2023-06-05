@@ -26,7 +26,10 @@ export const state = () => ({
   gsBusClasses: [],
   gsSeatViewData: {},
   gsSeatArray: [],
+  gsUpperDeckSeatArray: [],
+  gsLowerDeckSeatArray: [],
   gsSeatBoardingPointArray: [],
+  gsSeatDroppingPointArray: [],
   gsPaymentPendingBlockData: {},
   ticketDetails: {},
   searchedTicketList: {},
@@ -57,7 +60,10 @@ export const getters = {
   getGsBusClasses: (state) => state.gsBusClasses,
   getGsSeatViewData: (state) => state.gsSeatViewData,
   getGsSeatArray: (state) => state.gsSeatArray,
+  getGsLowerDeckSeatArray: (state) => state.gsLowerDeckSeatArray,
+  getGsUpperDeckSeatArray: (state) => state.gsUpperDeckSeatArray,
   getGsSeatBoardingPointArray: (state) => state.gsSeatBoardingPointArray,
+  getGsSeatDroppingPointArray: (state) => state.gsSeatDroppingPointArray,
   getGsPaymentPendingBlockData: (state) => state.gsPaymentPendingBlockData,
   getTicketDetails: (state) => state.ticketDetails,
   getSearchedTicketList: (state) => state.searchedTicketList,
@@ -207,7 +213,24 @@ export const actions = {
       return false;
     }
   },
-
+  async seatLockAction({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.POST_SEAT_LOCK, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
+  },
   async getTicketByTnxId({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(apis.GET_TICKET_BY_TRANSACTION, payload)
@@ -526,21 +549,38 @@ export const mutations = {
     state.gsSeatViewData = data;
     state.gsSeatArray = data.seatPlan.seatList;
     state.gsSeatBoardingPointArray = data.seatPlan.bordingPoints;
+    state.gsSeatDroppingPointArray = data.seatPlan.droppingPoints;
+    state.gsUpperDeckSeatArray = data.seatPlan.upperDeckSeatList;
+    state.gsLowerDeckSeatArray = data.seatPlan.lowerDeckSeatList;
   },
   setGsPaymentPendingBlockData: (state, data) =>
     (state.gsPaymentPendingBlockData = data),
   setPromoCode: (state, data) => (state.promoCode = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    const sortBy = data === 'l2h' ? 1 : -1;
+    const sortBy = data === "l2h" ? 1 : -1;
     state.gsTrips.sort((a, b) => {
-      const fareDiff = a.seatFare[0].fare - b.seatFare[0].fare;
+      const getActualFare = (tempFare) => {
+        if (tempFare.includes("-")) {
+          let fareArray = tempFare.split("-");
+          fareArray = fareArray.map((item) => parseFloat(item.trim())); // Parse fare values as numbers
+  
+          return sortBy === 1 ? fareArray[0] : fareArray[1];
+        }
+  
+        return parseFloat(tempFare); // Parse fare value as number
+      };
+  
+      const fareDiff = getActualFare(a.seatFare[0].fare) - getActualFare(b.seatFare[0].fare);
+  
       if (fareDiff !== 0) {
         return sortBy * fareDiff;
       }
-      return sortBy * (a.seatFare[0].class < b.seatFare[0].class ? -1 : 1);
+  
+      return 0;
     });
-  },
+  }
+  ,  
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;
   },
@@ -572,6 +612,22 @@ export const mutations = {
   },
   updateMobileFilterData: (state, data) => {
     state.mobileFilterData = data;
-  }
-
+  },
+  updateSeatStatus: (state, seatInfo) => {
+    const { seatType, rowIndex, colIndex } = seatInfo;
+    switch (seatType) {
+      case "UPPER_DECK": {
+        state.gsUpperDeckSeatArray[rowIndex][colIndex].status = "booked";
+        break;
+      }
+      case "LOWER_DECK": {
+        state.gsLowerDeckSeatArray[rowIndex][colIndex].status = "booked";
+        break;
+      }
+      default: {
+        state.gsSeatArray[rowIndex][colIndex].status = "booked";
+      }
+    }
+  },
+  
 };
