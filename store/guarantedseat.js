@@ -504,7 +504,7 @@ export const actions = {
   // };
 
 
-  async setOfferImages({ commit }) {
+  async getOfferImage({ commit }) {
     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
     const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
