@@ -6,10 +6,12 @@ export const actions = {
       await Promise.all([
         dispatch("guarantedseat/getHeadLineApi"),
         dispatch("guarantedseat/getCitiesList"),
-        dispatch("guarantedseat/getBlogListApi")
+        dispatch("guarantedseat/getBlogListApi"),
+        dispatch("guarantedseat/getOperatorListApi"),
+        dispatch("guarantedseat/getOfferImage")
       ]);
     } catch (error) {
-      console.log(error);
+      console.log("Error", error);
     }
     const cookieConst = cookie.parse(context?.req?.headers?.cookie || "");
     if (cookieConst.hasOwnProperty("ags_token")) {
