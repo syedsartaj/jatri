@@ -996,7 +996,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
-        this.fireGTMEventForInitalBooking();
+        this.fireGTMEventForAddToCart();
         const payload = {
           moduleType: this.trip.moduleType,
           busServiceType: this.trip.busServiceType,
@@ -1109,9 +1109,9 @@ export default {
         });
       });
     },
-    fireGTMEventForInitalBooking() {
+    fireGTMEventForAddToCart() {
       const eventData = {
-        event: "initalBooking",
+        event: "addToCart",
         from: this.trip.fromCity,
         to: this.trip.toCity,
         coach: this.trip.coach.name,
