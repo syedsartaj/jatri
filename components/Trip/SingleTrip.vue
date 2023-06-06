@@ -1118,6 +1118,8 @@ export default {
         company: this.trip.company,
         journeyDate: this.departureDateTime,
         seatCount: this.selectedSeatIds.length,
+        totalFare:
+          this.totalAmount - (this.totalDiscountFare + this.totalPromoAmount),
       };
 
       this.$gtm.push(eventData);
