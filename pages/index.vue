@@ -3,31 +3,11 @@
     <!-- banner section -->
     <div class="hidden lg:block relative homeBanner">
       <div
-        class="
-          absolute
-          lg:top-[70px]
-          xl:top-[80px]
-          2xl:top-[150px]
-          lg:bottom-[100px]
-          xl:bottom-[130px]
-          2xl:bottom-[170px]
-          lg:right-[80px]
-          xl:right-[100px]
-          lg:left-[80px]
-          xl:left-[100px]
-          z-40
-        "
+        class="absolute lg:top-[70px] xl:top-[80px] 2xl:top-[150px] lg:bottom-[100px] xl:bottom-[130px] 2xl:bottom-[170px] lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px] z-40"
       >
         <div class="">
           <h2
-            class="
-              lg:text-[44px]
-              xl:text-[56px]
-              2xl:text-[57px]
-              text-[#fff]
-              font-bold
-              leading-[64px]
-            "
+            class="lg:text-[44px] xl:text-[56px] 2xl:text-[57px] text-[#fff] font-bold leading-[64px]"
           >
             Ticketing made easy!
           </h2>
@@ -51,13 +31,7 @@
       class="sticky z-50 hidden lg:block"
     >
       <div
-        class="
-          absolute
-          lg:right-[80px]
-          xl:right-[100px]
-          lg:left-[80px]
-          xl:left-[100px]
-        "
+        class="absolute lg:right-[80px] xl:right-[100px] lg:left-[80px] xl:left-[100px]"
       >
         <SearchFilterForm />
       </div>
@@ -80,15 +54,7 @@
           hassle-free
         </h4>
         <div
-          class="
-            mt-[39px]
-            bg-white
-            max-w-[380px]
-            rounded-[14px]
-            px-4
-            py-[28px]
-            shadow-lg
-          "
+          class="mt-[39px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg"
         >
           <SearchFilterFormMobile />
         </div>
@@ -107,23 +73,10 @@
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">
         <div
-          class="
-            flex
-            justify-between
-            items-center
-            pt-6
-            lg:pt-[56px]
-            px-[18px]
-            lg:px-[60px]
-          "
+          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
         >
           <h2
-            class="
-              text-2xl
-              lg:text-4xl lg:leading-[44px]
-              text-blackPrimary text-center
-              font-semibold
-            "
+            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-semibold"
           >
             Offers & Promos
           </h2>
@@ -131,17 +84,7 @@
           <div class="flex justify-between gap-x-4">
             <button
               @click="prevSlide('mobile')"
-              class="
-                rounded-full
-                border
-                w-[28px]
-                lg:w-10
-                h-[28px]
-                lg:h-10
-                flex
-                justify-center
-                items-center
-              "
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
               :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideLeft
@@ -152,17 +95,7 @@
             </button>
             <button
               @click="nextSlide('mobile')"
-              class="
-                rounded-full
-                border
-                w-[28px]
-                lg:w-10
-                h-[28px]
-                lg:h-10
-                flex
-                justify-center
-                items-center
-              "
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
               :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideRight
@@ -191,46 +124,17 @@
     <!-- Offer & Promos Section -->
 
     <div
-      class="
-        pt-80
-        p-4
-        lg:mt-0 lg:p-[100px] lg:pb-0
-        justify-center
-        w-full
-        hidden
-        lg:flex
-      "
+      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 justify-center w-full hidden lg:flex"
       v-if="getOfferImages && getOfferImages.length"
     >
       <div
-        class="
-          border border-[#c8c8c8]
-          rounded-[30px]
-          overflow-hidden
-          md:w-full
-          h-auto
-          xl:h-[464px]
-        "
+        class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-auto xl:h-[464px]"
       >
         <div
-          class="
-            flex
-            justify-between
-            items-center
-            pt-6
-            lg:pt-[56px]
-            px-[18px]
-            lg:px-[60px]
-          "
+          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
         >
           <h2
-            class="
-              text-2xl
-              lg:text-4xl lg:leading-[44px]
-              text-blackPrimary text-center
-              font-medium
-              lg:font-semibold
-            "
+            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold"
           >
             Offers & Promos
           </h2>
@@ -238,17 +142,7 @@
           <div class="flex justify-between gap-x-4">
             <button
               @click="prevSlide('large')"
-              class="
-                rounded-full
-                border
-                w-[28px]
-                lg:w-10
-                h-[28px]
-                lg:h-10
-                flex
-                justify-center
-                items-center
-              "
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
               :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideLeft
@@ -259,17 +153,7 @@
             </button>
             <button
               @click="nextSlide('large')"
-              class="
-                rounded-full
-                border
-                w-[28px]
-                lg:w-10
-                h-[28px]
-                lg:h-10
-                flex
-                justify-center
-                items-center
-              "
+              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
               :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideRight
@@ -287,16 +171,7 @@
                 :id="index"
                 :src="offerImg"
                 alt=""
-                class="
-                  rounded-2xl
-                  w-[280px]
-                  lg:w-[350px]
-                  xl:w-[460px]
-                  h-[164px]
-                  lg:h-[200px]
-                  xl:h-[260px]
-                  pointer-events-none
-                "
+                class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none"
               />
             </slide>
           </hooper>
@@ -311,13 +186,7 @@
       <div>
         <div class="">
           <h2
-            class="
-              text-2xl
-              lg:text-4xl
-              text-blackPrimary text-center
-              font-semibold
-              lg:leading-[44px]
-            "
+            class="text-2xl lg:text-4xl text-blackPrimary text-center font-semibold lg:leading-[44px]"
           >
             Why Choose Jatri
           </h2>
@@ -329,13 +198,7 @@
         </div>
 
         <div
-          class="
-            mt-[60px]
-            flex flex-wrap
-            xl:flex-nowrap
-            justify-between
-            lg:gap-x-[32px]
-          "
+          class="mt-[60px] flex flex-wrap xl:flex-nowrap justify-between lg:gap-x-[32px]"
         >
           <div class="lg:p-4 lg:w-[392px]">
             <img
@@ -344,26 +207,12 @@
               class="w-[66px] block max-sm:m-auto"
             />
             <h2
-              class="
-                text-base
-                lg:text-2xl
-                text-blackPrimary
-                lg:leading-8
-                font-medium
-                mt-8
-              "
+              class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
             >
               Ease on the move
             </h2>
             <p
-              class="
-                text-sm
-                lg:text-base
-                text-blackSecondery
-                lg:leading-6
-                font-normal
-                mt-4
-              "
+              class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
             >
               Tickets are available on the go through our platform, no more
               queues!
@@ -376,26 +225,12 @@
               class="w-[66px] block max-sm:m-auto"
             />
             <h2
-              class="
-                text-base
-                lg:text-2xl
-                text-blackPrimary
-                lg:leading-8
-                font-medium
-                mt-8
-              "
+              class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
             >
               Promise of convenient travel
             </h2>
             <p
-              class="
-                text-sm
-                lg:text-base
-                text-blackSecondery
-                lg:leading-6
-                font-normal
-                mt-4
-              "
+              class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
             >
               We have an excellent system of taking service based on preference,
               as there is ticketing service for multiple routes via different
@@ -409,26 +244,12 @@
               class="w-[66px] block max-sm:m-auto"
             />
             <h2
-              class="
-                text-base
-                lg:text-2xl
-                text-blackPrimary
-                lg:leading-8
-                font-medium
-                mt-8
-              "
+              class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
             >
               Reliability assured
             </h2>
             <p
-              class="
-                text-sm
-                lg:text-base
-                text-blackSecondery
-                lg:leading-6
-                font-normal
-                mt-4
-              "
+              class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
             >
               Whether you are travelling for work or leisure, book your tickets
               through us and keep all your worries away.
@@ -439,39 +260,22 @@
     </div>
 
     <!-- Available Bus operatior Section -->
-    <div class="px-4 py-10 lg:p-[100px]">
+    <div class="px-4 py-10 lg:p-[100px]" v-if="getOperatorListData.length">
       <p class="text-center font-normal text-sm lg:text-xl text-blackPrimary">
         Multiple options to choose
       </p>
       <h2
-        class="
-          text-center
-          font-medium
-          lg:font-semibold
-          text-2xl
-          lg:text-4xl lg:leading-[44px]
-          text-[#1E88E5]
-          mt-2
-        "
+        class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2"
       >
         Available Bus Operators
       </h2>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
         <NuxtLink
-          v-for="(bus, index) in busOperators"
+          v-for="(operator, index) in getOperatorListData"
           :key="index"
-          :to="bus.link"
-          class="
-            flex
-            justify-between
-            w-full
-            items-center
-            py-4
-            px-[20px]
-            rounded-[10px]
-            border-[1px] border-[#DBDBDB]
-          "
+          :to="createOperatorLink(operator._id)"
+          class="flex justify-between w-full items-center py-4 px-[20px] rounded-[10px] border-[1px] border-[#DBDBDB]"
         >
           <div
             class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]"
@@ -482,21 +286,13 @@
               class="w-5 h-5"
             />
             <p
-              class="
-                text-xs
-                lg:text-base lg:leading-6
-                text-blackPrimary
-                font-medium
-                text-ellipsis
-                overflow-hidden
-                whitespace-nowrap
-              "
+              class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-medium text-ellipsis overflow-hidden whitespace-nowrap"
             >
-              {{ bus.name }}
+              {{ operator.title }}
             </p>
           </div>
           <img
-            v-if="busOperators.length - 1 !== index"
+            v-if="getOperatorListData.length - 1 !== index"
             src="@/assets/images/home/arrowRight.svg"
             alt=""
             class="h-4 w-4 cursor-pointer"
@@ -508,15 +304,7 @@
 
     <!-- most popular route section -->
     <div
-      class="
-        lg:mt-0
-        bg-successLight
-        lg:py-10 lg:py-[60px]
-        px-4
-        lg:px-[100px]
-        flex
-        justify-center
-      "
+      class="lg:mt-0 bg-successLight lg:py-10 lg:py-[60px] px-4 lg:px-[100px] flex justify-center"
     >
       <div class="lg:px-4 lg:px-[60px] py-10 w-full">
         <div class="w-full flex items-center justify-center">
@@ -527,16 +315,7 @@
           />
         </div>
         <h2
-          class="
-            text-2xl
-            lg:text-[45px] lg:leading-[52px]
-            text-blackPrimary
-            font-medium
-            lg:font-semibold
-            order-first
-            lg:order-last
-            text-center
-          "
+          class="text-2xl lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold order-first lg:order-last text-center"
         >
           Our most popular routes
         </h2>
@@ -546,15 +325,7 @@
             v-for="(route, index) in popularRoutes"
             :key="index"
             :to="route.link"
-            class="
-              flex
-              justify-start
-              gap-x-[10px]
-              w-full
-              items-center
-              border-b border-b-[#DBDBDB]
-              last:border-b-0
-            "
+            class="flex justify-start gap-x-[10px] w-full items-center border-b border-b-[#DBDBDB] last:border-b-0"
           >
             <img
               src="@/assets/images/icons/greenMapIcon.svg"
@@ -562,14 +333,7 @@
               class="w-4 h-4"
             />
             <p
-              class="
-                text-sm
-                lg:text-base
-                text-blackPrimary
-                font-normal
-                py-4
-                lg:py-5
-              "
+              class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5"
             >
               {{ route.name }}
             </p>
@@ -588,15 +352,7 @@
         <div>
           <img src="@/assets/images/home/helpImage.svg" alt="" />
           <h2
-            class="
-              text-[32px]
-              leading-10
-              lg:text-[45px] lg:leading-[52px]
-              text-blackPrimary
-              font-medium
-              mt-6
-              lg:mt-8
-            "
+            class="text-[32px] leading-10 lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium mt-6 lg:mt-8"
           >
             How can we help you?
           </h2>
@@ -1055,6 +811,7 @@ export default {
       "getGsOfferPromoImageUrl",
       "getOfferImages",
       "getHeadLine",
+      "getOperatorListData",
     ]),
   },
   methods: {
@@ -1096,6 +853,9 @@ export default {
 
       this.slideRight = true;
       this.slideLeft = false;
+    },
+    createOperatorLink(id) {
+      return `/bus-operator?id=${id}`;
     },
     onResize() {
       this.isMobile = window.innerWidth < 1024;

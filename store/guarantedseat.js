@@ -44,7 +44,8 @@ export const state = () => ({
   blogList: [],
   headLine: [],
   mobileFilterInitialData: mobileFilterInitialData,
-  mobileFilterData: mobileFilterInitialData
+  mobileFilterData: mobileFilterInitialData,
+  busOperators: [],
 });
 
 export const getters = {
@@ -78,7 +79,8 @@ export const getters = {
   getOfferImages: (state) => state.offerImages,
   getHeadLine: (state) => state.headLine,
   getMobileFilterData: (state) => state.mobileFilterData,
-  getMobileFilterInitialData: (state) => state.mobileFilterInitialData
+  getMobileFilterInitialData: (state) => state.mobileFilterInitialData,
+  getOperatorListData: (state) => state.busOperators,
 };
 
 export const actions = {
@@ -107,8 +109,32 @@ export const actions = {
       // })
     }
   },
-
-
+  async getOperatorListApi({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GET_OPERATOR_LIST_URL);
+      commit('setOperatorList', data.operators);
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async getOperatorById({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$get(`${apis.GET_OPERATOR_BY_ID_URL}?Id=${payload.Id}`)
+        .then((res) => {
+          resolve(res.data.operator);
+        })
+        .catch((e) => {
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
+  },
   async getBlogListApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GET_BLOG_LIST);
@@ -504,13 +530,15 @@ export const actions = {
   // };
 
 
-  async setOfferImages({ commit }) {
+  async getOfferImage({ commit }) {
     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+    console.log(data)
     const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
     imageLinkArr.forEach((item) => {
       tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
     })
+    console.log(tmpOfferImages)
     commit('setOfferImages', tmpOfferImages);
   }
 };
@@ -532,6 +560,9 @@ export const mutations = {
       }
     })
     state.gsCities = tempData;
+  },
+  setOperatorList: (state, data) => {
+    state.busOperators = data;
   },
   setBlogList: (state, data) => {
     state.blogList = data

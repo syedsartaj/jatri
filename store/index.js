@@ -7,6 +7,7 @@ export const actions = {
         dispatch("guarantedseat/getHeadLineApi"),
         dispatch("guarantedseat/getCitiesList"),
         dispatch("guarantedseat/getBlogListApi"),
+        dispatch("guarantedseat/getOperatorListApi"),
         dispatch("guarantedseat/getOfferImage")
       ]);
     } catch (error) {
