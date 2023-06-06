@@ -55,6 +55,20 @@ export default {
       "getTicketByTnxId",
       "searchTicketAction",
     ]),
+    fireGTMEventForConfirmTicket() {
+      const eventData = {
+        event: "confirmTicket",
+        from: this.getTicketDetails.ticket.fromCity,
+        to: this.getTicketDetails.ticket.toCity,
+        coach: this.getTicketDetails.ticket.coach,
+        company: this.getTicketDetails.ticket.companyName,
+        journeyDate: this.getTicketDetails.ticket.departureDateTime,
+        seatCount: this.getTicketDetails.ticket.seatNumbers.length,
+        totalFare: this.getTicketDetails.payment.amount,
+      };
+
+      this.$gtm.push(eventData);
+    },
   },
   computed: {
     ...mapGetters("guarantedseat", ["getTicketDetails"]),
@@ -67,6 +81,7 @@ export default {
           this.$router.push("/");
         }
       }
+      this.fireGTMEventForConfirmTicket();
       // const encodedTicket = this.$auth.$storage.getLocalStorage("ticket");
       // if (encodedTicket) {
       //   if (process.client) {

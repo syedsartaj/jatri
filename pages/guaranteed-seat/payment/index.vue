@@ -428,6 +428,7 @@ export default {
           this.getBookingInfoDetails?.invoice?.departureDate +
           this.getBookingInfoDetails?.invoice?.departureTime,
         seatCount: this.getBookingInfoDetails?.invoice?.seatIds?.length,
+        totalPrice: this.getBookingInfoDetails.amount,
       };
 
       this.$gtm.push(eventData);
