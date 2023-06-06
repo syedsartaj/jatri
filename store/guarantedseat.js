@@ -508,9 +508,12 @@ export const actions = {
     const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
     const imageLinkArr = data?.offerAndPromoImages || [];
     const tmpOfferImages = [];
+    console.log(data)
     imageLinkArr.forEach((item) => {
       tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
     })
+
+    console.log(tmpOfferImages)
     commit('setOfferImages', tmpOfferImages);
   }
 };
