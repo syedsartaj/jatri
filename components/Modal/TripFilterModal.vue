@@ -354,7 +354,7 @@ export default {
       handler() {
         const newFilterData = {
           ...this.getMobileFilterData,
-          coachType: this.$route.query.type,
+          coachType: this.coachType || this.$route.query.type,
         };
         this.updateMobileFilterData(newFilterData);
       },
@@ -370,14 +370,6 @@ export default {
         coachType: type,
       };
       this.updateMobileFilterData(newFilterData);
-      const query = {
-        from: this.$route.query.from,
-        to: this.$route.query.to,
-        type: type,
-        date: this.$route.query.date,
-      };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
     },
     setBoardingPoint(point) {
       const newFilterData = {
@@ -440,7 +432,7 @@ export default {
       }
 
       payload.date = formattedDate;
-      payload.busType = type;
+      payload.busType = this.coachType;
 
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
@@ -476,15 +468,7 @@ export default {
         coachType: "all",
       };
       this.updateMobileFilterData(newFilterData);
-      this.handleTripFilter();
-      const query = {
-        from: this.$route.query.from,
-        to: this.$route.query.to,
-        type: "all",
-        date: this.$route.query.date,
-      };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.handleFromSubmit();
     },
     handleFromSubmit() {
       const query = {
