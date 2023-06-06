@@ -484,7 +484,7 @@ export default {
       this.selectedBusClass = null;
       this.priceFilterType = null;
       this.coachType = "all";
-      this.handleFromSubmit();
+      this.handleTripFilter();
     },
     setTime(time) {
       this.selectedTime = time;
