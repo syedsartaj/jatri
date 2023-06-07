@@ -24,7 +24,7 @@ export default {
       { name: "format-detection", content: "telephone=no" },
       { hid: 'og:image', name: 'og:image', content: `${process.env.CLIENT_BASE_URL}/favicon.png` },
       {
-        name: "google-site-verification",
+        name: "facebook-domain-verification",
         content: `${process.env.VERIFICATION_CODE}`,
       },
     ],
