@@ -183,7 +183,7 @@
                   goods carried by the passenger.
                 </li>
                 <li>
-                  Passenger may cancel his/her tickets prior to 12 hours from
+                  Passenger may cancel his/her tickets prior to 24 hours from
                   the time of journey from Jatri Online.
                 </li>
               </ul>
@@ -547,7 +547,7 @@
                     <td class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Jatri Online
                     </td>
-                    <td class="p-1 md:p-4 border-r border-[#DBDBDB]">12</td>
+                    <td class="p-1 md:p-4 border-r border-[#DBDBDB]">24</td>
                     <td class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Excluding 12:00 AM to 07:00 AM
                     </td>
