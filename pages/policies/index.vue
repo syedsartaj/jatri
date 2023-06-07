@@ -183,8 +183,7 @@
                   goods carried by the passenger.
                 </li>
                 <li>
-                  Passenger may cancel his/her tickets prior to 24 hours from
-                  the time of journey from Jatri Online.
+                  Passenger may cancel his/her tickets prior to 24 hours from the time of journey.
                 </li>
               </ul>
             </div>
