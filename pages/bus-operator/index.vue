@@ -16,7 +16,7 @@
         <p
           class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal text-justify"
         >
-          <span class="last:mt-5">{{ operator?.description }}</span>
+          <span class="last:mt-5" v-html="operator?.description"></span>
         </p>
 
         <NuxtLink
@@ -32,8 +32,8 @@
         </NuxtLink>
 
         <div class="mt-10 divide-y-2">
-          <!-- <div
-            v-if="operator[0].distance"
+          <div
+            v-if="operator.distance"
             class="flex justify-between items-center py-4"
           >
             <div
@@ -50,12 +50,12 @@
             </div>
             <div class="w-1/2 lg:w-1/4">
               <h2 class="text-blackPrimary text-base lg:text-xl font-medium">
-                <span>{{ operator[0].distance }}</span> km
+                <span>{{ operator.distance }}</span> km
               </h2>
             </div>
           </div>
           <div
-            v-if="operator[0].time"
+            v-if="operator.approxTime"
             class="flex justify-between items-center py-4"
           >
             <div
@@ -72,10 +72,10 @@
             </div>
             <div class="w-1/2 lg:w-1/4">
               <h2 class="text-blackPrimary text-base lg:text-xl font-medium">
-                <span>{{ operator[0].time }}</span> hours approx.
+                <span>{{ operator.approxTime }}</span> hours approx.
               </h2>
             </div>
-          </div> -->
+          </div>
           <div
             v-if="operator?.priceStartsFrom"
             class="flex justify-between items-center py-4"
