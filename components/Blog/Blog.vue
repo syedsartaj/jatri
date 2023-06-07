@@ -1,41 +1,18 @@
 <template>
   <div
-    v-if="getBlogList?.length"
-    class="
-      w-full
-      h-auto
-      flex flex-col
-      items-center
-      mt-[60px]
-      lg:mt-[50px] lg:py-[68px] lg:px-[100px]
-    "
+    v-if="getBlogList?.length && imageUrl"
+    class="w-full h-auto flex flex-col items-center mt-[60px] lg:mt-[50px] lg:py-[68px] lg:px-[100px]"
   >
     <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0">
       <h2
-        class="
-          text-2xl
-          lg:text-4xl lg:leading-[44px]
-          text-blackPrimary text-left
-          font-medium
-          lg:font-semibold
-        "
+        class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-left font-medium lg:font-semibold"
       >
         Our most recent initiatives
       </h2>
       <div class="flex justify-between gap-x-4">
         <button
           @click="prevSlide"
-          class="
-            rounded-full
-            border
-            w-[28px]
-            lg:w-10
-            h-[28px]
-            lg:h-10
-            flex
-            justify-center
-            items-center
-          "
+          class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
           :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
         >
           <SlideLeft
@@ -46,17 +23,7 @@
         </button>
         <button
           @click="nextSlide"
-          class="
-            rounded-full
-            border
-            w-[28px]
-            lg:w-10
-            h-[28px]
-            lg:h-10
-            flex
-            justify-center
-            items-center
-          "
+          class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
           :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
         >
           <SlideRight
@@ -83,62 +50,23 @@
               :id="index"
               :src="imageUrl + blog.image"
               alt=""
-              class="
-                rounded-t-2xl
-                w-[320px]
-                sm:w-[350px]
-                xl:w-[392px]
-                h-[181px]
-                lg:h-[222px]
-              "
+              class="rounded-t-2xl w-[320px] sm:w-[350px] xl:w-[392px] h-[181px] lg:h-[222px]"
             />
             <div
-              class="
-                flex flex-col
-                items-left
-                w-[320px]
-                sm:w-[350px]
-                xl:w-[392px]
-                h-[144px]
-                lg:h-[196px]
-                bg-[#F7F7F7]
-                p-4
-                rounded-b-2xl
-              "
+              class="flex flex-col items-left w-[320px] sm:w-[350px] xl:w-[392px] h-[144px] lg:h-[196px] bg-[#F7F7F7] p-4 rounded-b-2xl"
             >
               <p
-                class="
-                  lg:mt-4
-                  mb-2
-                  font-medium
-                  text-base
-                  lg:text-2xl
-                  font-blackPrimary
-                "
+                class="lg:mt-4 mb-2 font-medium text-base lg:text-2xl font-blackPrimary"
               >
                 {{ blog.title }}
               </p>
               <p
-                class="
-                  text-sm
-                  font-normal
-                  lg:text-base
-                  line-clamp
-                  font-blackLight
-                "
+                class="text-sm font-normal lg:text-base line-clamp font-blackLight"
               >
                 {{ blog.description }}
               </p>
               <div
-                class="
-                  w-full
-                  hidden
-                  lg:flex
-                  flex-row
-                  items-left
-                  gap-x-[10px]
-                  mt-[10px]
-                "
+                class="w-full hidden lg:flex flex-row items-left gap-x-[10px] mt-[10px]"
               >
                 <p class="font-medium text-xl text-corporate">Learn more</p>
                 <img
@@ -237,8 +165,7 @@ export default {
 };
 </script>
 
-
-<style >
+<style>
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;
