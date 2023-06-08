@@ -420,6 +420,7 @@ export default {
     fireGTMEventForInitiateCheckout() {
       const eventData = {
         event: "initiateCheckout",
+        currency: "BDT",
         from: this.getBookingInfoDetails?.invoice?.fromCity,
         to: this.getBookingInfoDetails?.invoice?.toCity,
         coach: this.getBookingInfoDetails?.invoice?.coachName,
