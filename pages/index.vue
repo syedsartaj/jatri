@@ -271,34 +271,12 @@
       </h2>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-        <NuxtLink
+        <OperatorListItem
           v-for="(operator, index) in getOperatorListData"
+          :operator="operator"
           :key="index"
-          :to="createOperatorLink(operator._id)"
-          class="flex justify-between w-full items-center py-4 px-[20px] rounded-[10px] border-[1px] border-[#DBDBDB]"
-        >
-          <div
-            class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]"
-          >
-            <img
-              src="@/assets/images/home/availableRoutesIcon.svg"
-              alt=""
-              class="w-5 h-5"
-            />
-            <p
-              class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-medium text-ellipsis overflow-hidden whitespace-nowrap"
-            >
-              {{ operator.title }}
-            </p>
-          </div>
-          <img
-            v-if="getOperatorListData.length - 1 !== index"
-            src="@/assets/images/home/arrowRight.svg"
-            alt=""
-            class="h-4 w-4 cursor-pointer"
-            @click="prevSlide"
-          />
-        </NuxtLink>
+          :isLastItem="index === getOperatorListData.length - 1"
+        />
       </div>
     </div>
 
