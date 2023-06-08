@@ -116,7 +116,7 @@ export default {
         from: this.departure,
         to: this.destination,
         type: this.coachType,
-        date: new Date(this.departingDate).getTime(),
+        date: this.departingDate,
       };
 
       this.$gtm.push(eventData);
