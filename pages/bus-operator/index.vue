@@ -13,15 +13,14 @@
         >
           {{ operator?.title }}
         </h2>
-        <p
-          class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal text-justify"
-        >
-          <span class="last:mt-5" v-html="operator?.description"></span>
-        </p>
+        <div
+          class="mt-4 lg:mt-6 text-blackLight text-base lg:text-xl font-normal text-justify"
+          v-html="operator?.description"
+        ></div>
 
-        <NuxtLink
-          to="/"
-          class="w-[121px] lg:w-[132px] bg-corporate rounded-full flex justify-center gap-x-[11px] items-center text-white text-xs lg:text-sm font-medium py-3 mt-8 lg:mt-[45px]"
+        <div
+          @click="getRidrectUrl()"
+          class="w-[121px] lg:w-[132px] bg-corporate rounded-full flex justify-center gap-x-[11px] items-center text-white text-xs lg:text-sm font-medium py-3 mt-8 lg:mt-[45px] cursor-pointer"
         >
           Book now
           <img
@@ -29,7 +28,7 @@
             alt=""
             class="w-[10.67px] lg:w-3 lg:h-[11.67px]"
           />
-        </NuxtLink>
+        </div>
 
         <div class="mt-10 divide-y-2">
           <div
@@ -113,6 +112,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -121,6 +121,20 @@ export default {
     return {
       imageUrl: "",
     };
+  },
+  methods: {
+    getRidrectUrl() {
+      const query = {
+        from: this.operator.from,
+        to: this.operator.to,
+        type: "all",
+        date: new Date(
+          new Date().toLocaleString("en-CA", { dateStyle: "short" })
+        ).getTime(),
+      };
+      Cookies.remove("process-allow");
+      this.$router.push({ path: "/trip", query });
+    },
   },
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
