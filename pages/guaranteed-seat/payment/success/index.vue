@@ -58,6 +58,7 @@ export default {
     fireGTMEventForConfirmTicket() {
       const eventData = {
         event: "confirmTicket",
+        currency: "BDT",
         from: this.getTicketDetails.ticket.fromCity,
         to: this.getTicketDetails.ticket.toCity,
         coach: this.getTicketDetails.ticket.coach,

@@ -1112,6 +1112,7 @@ export default {
     fireGTMEventForAddToCart() {
       const eventData = {
         event: "addToCart",
+        currency: "BDT",
         from: this.trip.fromCity,
         to: this.trip.toCity,
         coach: this.trip.coach.name,
