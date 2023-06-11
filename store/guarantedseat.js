@@ -46,6 +46,9 @@ export const state = () => ({
   mobileFilterInitialData: mobileFilterInitialData,
   mobileFilterData: mobileFilterInitialData,
   busOperators: [],
+  mobileFilterData: mobileFilterInitialData,
+  busOperators: [],
+  popularRoutes: [],
 });
 
 export const getters = {
@@ -81,6 +84,9 @@ export const getters = {
   getMobileFilterData: (state) => state.mobileFilterData,
   getMobileFilterInitialData: (state) => state.mobileFilterInitialData,
   getOperatorListData: (state) => state.busOperators,
+  getMobileFilterInitialData: (state) => state.mobileFilterInitialData,
+  getOperatorListData: (state) => state.busOperators,
+  getPopularRouteListData: (state) => state.popularRoutes,
 };
 
 export const actions = {
@@ -123,6 +129,32 @@ export const actions = {
         .$get(`${apis.GET_OPERATOR_BY_ID_URL}?Id=${payload.Id}`)
         .then((res) => {
           resolve(res.data.operator);
+        })
+        .catch((e) => {
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
+  },
+  async getPopularRouteListApi({ commit }) {
+    try {
+      const { data } = await this.$api.$get(apis.GET_POPULAR_ROUTE_LIST_URL);
+      commit("setPopularRouteList", data.popularRoutes);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async getPopularRouteById({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$get(`${apis.GET_POPULAR_ROUTE_BY_ID_URL}?Id=${payload.Id}`)
+        .then((res) => {
+          resolve(res.data.popularRoute);
         })
         .catch((e) => {
           this.$toast.error(
@@ -579,6 +611,11 @@ export const mutations = {
         title: "Many more to come...",
       });
     }
+  },
+  setPopularRouteList: (state, data) => {
+    state.popularRoutes = data;
+
+    console.log(data)
   },
   setBlogList: (state, data) => {
     state.blogList = data;

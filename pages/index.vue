@@ -299,23 +299,11 @@
         </h2>
 
         <div class="grid grid-cols-2 lg:grid-cols-3 mt-8">
-          <NuxtLink
-            v-for="(route, index) in popularRoutes"
+          <RouteListItem
+            v-for="(route, index) in getPopularRouteListData"
+            :route="route"
             :key="index"
-            :to="route.link"
-            class="flex justify-start gap-x-[10px] w-full items-center border-b border-b-[#DBDBDB] last:border-b-0"
-          >
-            <img
-              src="@/assets/images/icons/greenMapIcon.svg"
-              alt=""
-              class="w-4 h-4"
-            />
-            <p
-              class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5"
-            >
-              {{ route.name }}
-            </p>
-          </NuxtLink>
+          />
         </div>
       </div>
     </div>
@@ -790,6 +778,8 @@ export default {
       "getOfferImages",
       "getHeadLine",
       "getOperatorListData",
+      "getOperatorListData",
+      "getPopularRouteListData",
     ]),
   },
   methods: {
