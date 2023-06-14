@@ -1,7 +1,7 @@
 <template>
   <div
     @click="bookNow()"
-    class="flex justify-start gap-x-[10px] w-full items-center border-b border-b-[#DBDBDB] last:border-b-0 cursor-pointer"
+    class="flex justify-start gap-x-[10px] w-full items-center cursor-pointer"
   >
     <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-4 h-4" />
     <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">

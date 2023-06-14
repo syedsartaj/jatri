@@ -114,6 +114,7 @@
 <script>
 import Cookies from "js-cookie";
 export default {
+  title: "OperatorAndRoute",
   props: ["sectionName", "sectionData"],
   data() {
     return {
