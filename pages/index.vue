@@ -303,6 +303,9 @@
             v-for="(route, index) in getPopularRouteListData"
             :route="route"
             :key="index"
+            :index="index"
+            :totalItem="getPopularRouteListData.length"
+            :haveBorder="haveBorder(index)"
           />
         </div>
       </div>
@@ -571,10 +574,18 @@ export default {
           open: false,
         },
       ],
+      routeItem: {
+        numberOfRow: 0,
+        numberOfItemInRow: 0,
+      },
     };
   },
   components: { Hooper, Slide },
-  async mounted() {
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
     this.onResize();
     window.addEventListener("scroll", this.handleScroll);
     window.addEventListener("resize", this.onResize);
@@ -595,6 +606,13 @@ export default {
     ]),
   },
   methods: {
+    haveBorder(index) {
+      return !(
+        Math.ceil((index + 1) / this.routeItem.numberOfItemInRow) ===
+        this.routeItem.numberOfRow
+      );
+    },
+
     toggleOpen: function (index) {
       this.accordionData = this.accordionData.map((accordion, i) => {
         if (index === i) {
@@ -638,10 +656,18 @@ export default {
       return `/bus-operator?id=${id}`;
     },
     onResize() {
-      this.isMobile = window.innerWidth < 1024;
+      const isMobile = window.innerWidth < 1024;
+      this.isMobile = isMobile;
+      this.handleRouteItemCalculation(isMobile);
     },
     handleScroll() {
       this.handleShowStickyBanner();
+    },
+    handleRouteItemCalculation(isMobile){
+      this.routeItem.numberOfItemInRow = isMobile ? 2 : 3;
+      this.routeItem.numberOfRow = Math.ceil(
+        this.getPopularRouteListData.length / this.routeItem.numberOfItemInRow
+      );
     },
     handleShowStickyBanner() {
       if (!this.isMobile) {

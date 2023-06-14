@@ -101,8 +101,9 @@
       </div>
       <div class="lg:w-1/4 mt-8 lg:mt-0">
         <img
-          v-if="sectionData.image"
-          :src="imageUrl + sectionData.image"
+          v-for="(image, index) in sectionData.imageList"
+          :key="index"
+          :src="imageUrl + image"
           alt=""
           class="mb-5 last:mb-0 w-full"
         />
