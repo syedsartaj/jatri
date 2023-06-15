@@ -140,7 +140,7 @@ export const actions = {
       commit('setGsBusCompanies', data.companies || []);
       commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
-      const errorMessage = error.response.data.message;
+      const errorMessage = error?.response?.data?.message;
 
       if (Array.isArray(errorMessage)) {
         errorMessage.forEach((message) => {
