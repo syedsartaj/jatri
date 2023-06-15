@@ -140,10 +140,21 @@ export const actions = {
       commit('setGsBusCompanies', data.companies || []);
       commit('setGsBusClasses', data.busClasses || []);
     } catch (error) {
-      this.$toast.error(error.response.data.message, {
-        position: 'bottom-right',
-        duration: 5000,
-      })
+      const errorMessage = error.response.data.message;
+
+      if (Array.isArray(errorMessage)) {
+        errorMessage.forEach((message) => {
+          this.$toast.error(message, {
+            position: "bottom-right",
+            duration: 5000,
+          });
+        });
+      } else {
+        this.$toast.error(errorMessage, {
+          position: "bottom-right",
+          duration: 5000,
+        });
+      }
     }
   },
 
@@ -505,14 +516,18 @@ export const actions = {
 
 
   async getOfferImage({ commit }) {
-    const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLinkArr = data?.offerAndPromoImages || [];
-    const tmpOfferImages = [];
-    imageLinkArr.forEach((item) => {
-      tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
-    })
-    commit('setOfferImages', tmpOfferImages);
-  }
+    try {
+      const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+      const imageLinkArr = data?.offerAndPromoImages || [];
+      const tmpOfferImages = [];
+      imageLinkArr.forEach((item) => {
+        tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
+      });
+      commit("setOfferImages", tmpOfferImages);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export const mutations = {
