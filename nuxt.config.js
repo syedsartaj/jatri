@@ -113,10 +113,9 @@ export default {
   },
 
   proxy: {
-    '/api': {
-      target: 'https://api.dt.jatriweb.team',
-      changeOrigin: true
-    }
+    "/api": {
+      target: process.env.PARIBAHAN_BASE_URL,
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

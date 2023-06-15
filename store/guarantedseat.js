@@ -516,14 +516,18 @@ export const actions = {
 
 
   async getOfferImage({ commit }) {
-    const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    const imageLinkArr = data?.offerAndPromoImages || [];
-    const tmpOfferImages = [];
-    imageLinkArr.forEach((item) => {
-      tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
-    })
-    commit('setOfferImages', tmpOfferImages);
-  }
+    try {
+      const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+      const imageLinkArr = data?.offerAndPromoImages || [];
+      const tmpOfferImages = [];
+      imageLinkArr.forEach((item) => {
+        tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
+      });
+      commit("setOfferImages", tmpOfferImages);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export const mutations = {
