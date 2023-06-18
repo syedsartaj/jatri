@@ -3,6 +3,10 @@ export const PARIBAHAN_BASE_URL = process.env.PARIBAHAN_BASE_URL;
 
 export const GET_PARIBAHAN_TOKEN_URL = `${PARIBAHAN_BASE_URL}/oauth/access_token`;
 export const GET_PARIBAHAN_CITY_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-cities`;
+export const GET_OPERATOR_LIST_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-operators`;
+export const GET_OPERATOR_BY_ID_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-operator-by-id`;
+export const GET_POPULAR_ROUTE_LIST_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-popular-routes`;
+export const GET_POPULAR_ROUTE_BY_ID_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-popular-route-by-id`;
 export const GET_PARIBAHAN_SCHEDULE_DATA_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-schedule-trips`;
 export const GET_PARIBAHAN_SEAT_VIEW_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-seat-view`;
 export const POST_CONFIRM_TICKET = `${PARIBAHAN_BASE_URL}/v1/api/intercity/confirm-ticket`;

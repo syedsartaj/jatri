@@ -4,6 +4,7 @@
       v-if="getHeadLine?.length && getHeadLine[0].headline"
       :headline="getHeadLine[0].headline"
       :speed="30"
+      direction="left" behavior="scroll"
     />
     <div
       class="
