@@ -194,7 +194,7 @@ export const actions = {
       commit("setGsBusCompanies", data.companies || []);
       commit("setGsBusClasses", data.busClasses || []);
     } catch (error) {
-      const errorMessage = error.response.data.message;
+      const errorMessage = error?.response?.data?.message;
 
       if (Array.isArray(errorMessage)) {
         errorMessage.forEach((message) => {
@@ -585,15 +585,17 @@ export const actions = {
   // };
 
   async getOfferImage({ commit }) {
-    const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-    console.log(data);
-    const imageLinkArr = data?.offerAndPromoImages || [];
-    const tmpOfferImages = [];
-    imageLinkArr.forEach((item) => {
-      tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
-    });
-    console.log(tmpOfferImages);
-    commit("setOfferImages", tmpOfferImages);
+    try {
+      const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
+      const imageLinkArr = data?.offerAndPromoImages || [];
+      const tmpOfferImages = [];
+      imageLinkArr.forEach((item) => {
+        tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
+      });
+      commit("setOfferImages", tmpOfferImages);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 
