@@ -27,3 +27,14 @@ export const POST_GET_SURPRISE_DEAL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/ge
 export const POST_FULL_BUS_RESERVATION = `${PARIBAHAN_BASE_URL}/v1/api/intercity/bus-reservation`;
 export const POST_SEAT_LOCK = `${PARIBAHAN_BASE_URL}/v1/api/intercity/seat-lock`;
 // ------------ paribahan apis End ---------------- //
+
+export const SERVICE_TYPE = {
+  BUS: {
+    GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/operators`,
+    GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/popular-routes`,
+  },
+  LAUNCH: {
+    GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/operators`,
+    GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/popular-routes`,
+  },
+};

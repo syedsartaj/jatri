@@ -1,55 +1,58 @@
 <template>
-  <div class="bg-white searchbar rounded-[10px] flex justify-between w-full">
-    <div class="flex justify-between w-10/12">
-      <SearchCityFilter
-        v-model="departure"
-        :defaultValue="departureName"
-        :label="'From'"
-        :default-option="'Choose Your Location'"
-        :allow-filter="true"
-        :options="getGsCities"
-        :errorOccured="errorOccured"
-      />
-      <SearchCityFilter
-        v-model="destination"
-        :defaultValue="destinationName"
-        :label="'To'"
-        :default-option="'Choose Your Destination'"
-        :allow-filter="true"
-        :options="getGsCities"
-        :errorOccured="errorOccured"
-      />
-      <SearchBusFilter
-        v-model="coachType"
-        :defaultValue="''"
-        :label="'Bus Type'"
-        :default-option="'Choose bus type'"
-        :allow-filter="false"
-        :options="coachTypes"
-        :errorOccured="errorOccured"
-      />
-      <DatePicker
-        v-model="departingDate"
-        :label="'DEPARTURE DATE'"
-        :default-option="'Select Journey Date'"
-        :allow-filter="true"
-        :errorOccured="errorOccured"
-      />
-    </div>
-    <div
-      class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center"
-    >
-      <button
-        class="rounded-full text-white text-xs xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
-        :class="
-          !departure || !destination || !coachType || !departingDate
-            ? 'bg-corporate'
-            : 'bg-corporate cursor-pointer'
-        "
-        @click="handleFromSubmit"
+  <div>
+    <SearchTab />
+    <div class="bg-white searchbar rounded-[10px] flex justify-between w-full">
+      <div class="flex justify-between w-10/12">
+        <SearchCityFilter
+          v-model="departure"
+          :defaultValue="departureName"
+          :label="'From'"
+          :default-option="'Choose Your Location'"
+          :allow-filter="true"
+          :options="getGsCities"
+          :errorOccured="errorOccured"
+        />
+        <SearchCityFilter
+          v-model="destination"
+          :defaultValue="destinationName"
+          :label="'To'"
+          :default-option="'Choose Your Destination'"
+          :allow-filter="true"
+          :options="getGsCities"
+          :errorOccured="errorOccured"
+        />
+        <SearchBusFilter
+          v-model="coachType"
+          :defaultValue="''"
+          :label="'Bus Type'"
+          :default-option="'Choose bus type'"
+          :allow-filter="false"
+          :options="coachTypes"
+          :errorOccured="errorOccured"
+        />
+        <DatePicker
+          v-model="departingDate"
+          :label="'DEPARTURE DATE'"
+          :default-option="'Select Journey Date'"
+          :allow-filter="true"
+          :errorOccured="errorOccured"
+        />
+      </div>
+      <div
+        class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center"
       >
-        Search ticket
-      </button>
+        <button
+          class="rounded-full text-white text-xs xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
+          :class="
+            !departure || !destination || !coachType || !departingDate
+              ? 'bg-corporate'
+              : 'bg-corporate cursor-pointer'
+          "
+          @click="handleFromSubmit"
+        >
+          Search ticket
+        </button>
+      </div>
     </div>
   </div>
 </template>
