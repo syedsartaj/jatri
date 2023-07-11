@@ -32,9 +32,11 @@ export const SERVICE_TYPE = {
   BUS: {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/operators`,
     GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/popular-routes`,
+    GET_CITY_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-cities`,
   },
   LAUNCH: {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/operators`,
     GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/popular-routes`,
+    GET_CITY_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-cities`,
   },
 };

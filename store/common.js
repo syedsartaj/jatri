@@ -2,6 +2,8 @@ import * as apis from "../helpers/apis";
 import { ServiceType } from "../helpers/utils";
 
 export const state = () => ({
+  citiesOfBus: [],
+  citiesOfLaunch: [],
   offerImages: [],
   blogList: [],
   headLine: [],
@@ -13,6 +15,10 @@ export const state = () => ({
 });
 
 export const getters = {
+  getCities: (state) =>
+    state.selectedService === ServiceType.BUS
+      ? state.citiesOfBus
+      : state.citiesOfLaunch,
   getBlogList: (state) => state.blogList,
   getOfferImages: (state) => state.offerImages,
   getHeadLine: (state) => state.headLine,
@@ -55,8 +61,17 @@ export const actions = {
       console.log(error);
     }
   },
+  async getCitiesList({ commit }, { service }) {
+    try {
+      const { data } = await this.$api.$get(
+        apis.SERVICE_TYPE[service].GET_CITY_URL
+      );
+      commit("setCities", { service, data });
+    } catch (error) {
+      console.log(error);
+    }
+  },
   async getOperatorListApi({ commit }, { service }) {
-    console.log("Service :", apis.SERVICE_TYPE[service].GET_OPERATOR_LIST_URL);
     try {
       const { data } = await this.$api.$get(
         apis.SERVICE_TYPE[service].GET_OPERATOR_LIST_URL
@@ -121,6 +136,22 @@ export const actions = {
 };
 
 export const mutations = {
+  setCities: (state, { service, data }) => {
+    let tempData = [];
+    data.cities.forEach((city) => {
+      if (city?.name) {
+        tempData.push({
+          city_name: city.name,
+          city: city,
+        });
+      }
+    });
+    if (service === ServiceType.BUS) {
+      state.citiesOfBus = tempData;
+    } else {
+      state.citiesOfLaunch = tempData;
+    }
+  },
   setBlogList: (state, data) => {
     state.blogList = data;
   },

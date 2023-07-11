@@ -1,12 +1,13 @@
 <template>
   <div
-    class="flex bg-white h-[40px] justify-between rounded-t-[10px] max-w-max ml-[10px]"
+    class="flex bg-white h-[40px] lg:h-[36px] justify-between rounded-t-[10px] max-w-max ml-[10px]"
   >
     <div
       :class="getServiceClassName(ServiceType.BUS)"
       @click="handleServiceChange(ServiceType.BUS)"
     >
       <svg
+        class="h-[20px] w-[20px] lg:h-[24px] lg:w-[24px]"
         width="20"
         height="19"
         viewBox="0 0 20 19"
@@ -23,7 +24,7 @@
         :class="
           selectedService === ServiceType.BUS ? 'text-white' : 'text-black'
         "
-        class="text-xl font-medium ml-[10px]"
+        class="text-xs lg:text-xl font-medium ml-[10px]"
         >Bus</span
       >
     </div>
@@ -32,6 +33,7 @@
       @click="handleServiceChange(ServiceType.LAUNCH)"
     >
       <svg
+        class="h-[20px] w-[20px] lg:h-[24px] lg:w-[24px]"
         width="23"
         height="21"
         viewBox="0 0 23 21"
@@ -48,7 +50,7 @@
         :class="
           selectedService === ServiceType.LAUNCH ? 'text-white' : 'text-black'
         "
-        class="text-xl font-medium ml-[10px]"
+        class="text-xs lg:text-xl font-medium ml-[10px]"
         >Launch</span
       >
     </div>
@@ -68,7 +70,6 @@ export default {
   methods: {
     ...mapMutations("common", ["setSelectedService"]),
     handleServiceChange(value) {
-      console.log(value)
       this.$router.push(`/${value.toLowerCase()}`);
     },
     getServiceClassName(service) {

@@ -1,39 +1,52 @@
 <template>
   <div>
-    <SearchCityFilterMobile
-      v-model="departure"
-      :defaultValue="departureName"
-      :label="'From city or your location'"
-      :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
-      :default-option="'Choose your location'"
-      :allow-filter="true"
-      :options="getGsCities"
-    />
-    <SearchCityFilterMobile
-      v-model="destination"
-      :defaultValue="destinationName"
-      :label="'To city or your destination'"
-      :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
-      :default-option="'Choose your destination'"
-      :allow-filter="true"
-      :options="getGsCities"
-    />
-    <DatePickerMobile
-      v-model="departingDate"
-      :label="'Journey date'"
-      :icon="require('@/assets/images/icons/datepickerIcon.svg')"
-      :default-option="'Select Journey Date'"
-      :allow-filter="true"
-    />
-    <SearchBusFilterMobile
-      v-model="coachType"
-      :defaultValue="''"
-      :label="'Bus type, Ac or Non Ac'"
-      :icon="require('@/assets/images/icons/searchTypeIcon.svg')"
-      :default-option="'Choose bus type'"
-      :allow-filter="false"
-      :options="coachTypes"
-    />
+    <div class="grid sm:grid-cols-2 gap-4">
+      <SearchCityFilterMobile
+        v-model="departure"
+        :defaultValue="departureName"
+        :label="'From city or your location'"
+        :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
+        :default-option="'Choose your location'"
+        :allow-filter="true"
+        :options="getGsCities"
+      />
+      <SearchCityFilterMobile
+        v-model="destination"
+        :defaultValue="destinationName"
+        :label="'To city or your destination'"
+        :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
+        :default-option="'Choose your destination'"
+        :allow-filter="true"
+        :options="getGsCities"
+      />
+      <DatePickerMobile
+        v-model="departingDate"
+        :label="'Journey date'"
+        :icon="require('@/assets/images/icons/datepickerIcon.svg')"
+        :default-option="'Select Journey Date'"
+        :allow-filter="true"
+      />
+      <SearchBusFilterMobile
+        v-if="getSelectedServiceType === ServiceType.BUS"
+        v-model="coachType"
+        :defaultValue="''"
+        :label="'Bus type, Ac or Non Ac'"
+        :icon="require('@/assets/images/icons/searchTypeIcon.svg')"
+        :default-option="'Choose bus type'"
+        :allow-filter="false"
+        :options="coachTypes"
+      />
+      <SearchTimeFilterMobile
+        v-if="getSelectedServiceType === ServiceType.LAUNCH"
+        v-model="selectedTime"
+        :defaultValue="''"
+        :label="'Departure time'"
+        :icon="require('@/assets/images/icons/searchTimeIcon.svg')"
+        :default-option="'Choose a time'"
+        :allow-filter="false"
+        :options="timeList"
+      />
+    </div>
     <button
       class="mt-6 w-full rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
       :class="
@@ -51,9 +64,12 @@
 <script>
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
+import { ServiceType } from "../../../helpers/utils";
 export default {
+  name: "SearchFilterFormMobile",
   data() {
     return {
+      ServiceType: ServiceType,
       departure: "",
       destination: "",
       departureName: "",
@@ -66,11 +82,14 @@ export default {
         { city_name: "non-ac" },
         { city_name: "all" },
       ],
+      selectedTime: "4 am - 12 pm",
+      timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
       //quantity: ''
     };
   },
   computed: {
     ...mapGetters("guarantedseat", ["getGsCities"]),
+    ...mapGetters("common", ["getSelectedServiceType"]),
   },
   methods: {
     handleToastMessage(message) {

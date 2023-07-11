@@ -6,7 +6,7 @@
     <h2
       class="text-center font-medium lg:font-semibold text-2xl lg:text-4xl lg:leading-[44px] text-[#1E88E5] mt-2"
     >
-      Available Bus Operators
+      Available Operators
     </h2>
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">

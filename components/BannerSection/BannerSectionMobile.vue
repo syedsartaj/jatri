@@ -14,8 +14,11 @@
         Buy tickets online <br />
         hassle-free
       </h4>
+      <div class="mt-[39px]">
+        <SearchTab />
+      </div>
       <div
-        class="mt-[39px] bg-white max-w-[380px] rounded-[14px] px-4 py-[28px] shadow-lg"
+        class="bg-white rounded-[14px] px-4 py-[28px] shadow-lg"
       >
         <SearchFilterFormMobile />
       </div>

@@ -47,6 +47,7 @@
 import { mapGetters } from "vuex";
 import { Hooper, Slide } from "hooper";
 export default {
+  name: "HomePageSection",
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
   },
