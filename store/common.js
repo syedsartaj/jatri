@@ -84,10 +84,10 @@ export const actions = {
       console.log(error);
     }
   },
-  async getOperatorById({ commit }, payload) {
+  async getOperatorById({ commit }, { service, id }) {
     return new Promise((resolve, reject) => {
       return this.$api
-        .$get(`${apis.GET_OPERATOR_BY_ID_URL}?Id=${payload.Id}`)
+        .$get(`${apis.SERVICE_TYPE[service].GET_OPERATOR_BY_ID_URL}?id=${id}`)
         .then((res) => {
           resolve(res.data.operator);
         })
@@ -115,10 +115,12 @@ export const actions = {
       console.log(error);
     }
   },
-  async getPopularRouteById({ commit }, payload) {
+  async getPopularRouteById({ commit }, { service, id }) {
     return new Promise((resolve, reject) => {
       return this.$api
-        .$get(`${apis.GET_POPULAR_ROUTE_BY_ID_URL}?Id=${payload.Id}`)
+        .$get(
+          `${apis.SERVICE_TYPE[service].GET_POPULAR_ROUTE_BY_ID_URL}?id=${id}`
+        )
         .then((res) => {
           resolve(res.data.popularRoute);
         })

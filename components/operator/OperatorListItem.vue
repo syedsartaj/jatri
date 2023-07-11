@@ -36,7 +36,13 @@ export default {
         const query = {
           id: _id,
         };
-        this.$router.push({ path: "/bus-operator", query });
+
+        const path =
+          this.$route.path === "/" || this.$route.path === "/bus"
+            ? "bus/operator"
+            : "launch/operator";
+
+        this.$router.push({ path: path, query });
       }
     },
   },

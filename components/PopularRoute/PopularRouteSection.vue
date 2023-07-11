@@ -20,7 +20,7 @@
       <div class="grid grid-cols-2 lg:grid-cols-3 mt-8">
         <RouteListItem
           v-for="(route, index) in getPopularRouteListData"
-          :route="route"
+          :routeItem="route"
           :key="index"
           :index="index"
           :totalItem="getPopularRouteListData?.length"

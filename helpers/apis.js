@@ -33,10 +33,14 @@ export const SERVICE_TYPE = {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/operators`,
     GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/popular-routes`,
     GET_CITY_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-cities`,
+    GET_OPERATOR_BY_ID_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-operator-by-id`,
+    GET_POPULAR_ROUTE_BY_ID_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-popular-route-by-id`,
   },
   LAUNCH: {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/operators`,
     GET_POPULAR_ROUTE_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/popular-routes`,
     GET_CITY_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-cities`,
+    GET_OPERATOR_BY_ID_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-operator-by-id`,
+    GET_POPULAR_ROUTE_BY_ID_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-popular-route-by-id`,
   },
 };

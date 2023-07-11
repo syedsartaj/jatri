@@ -3,16 +3,16 @@
 </template>
 
 <script>
+import { ServiceType } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
   },
   async asyncData({ query, store }) {
-    const popularRoute = await store.dispatch("guarantedseat/getPopularRouteById", {
-      Id: query.id,
+    const popularRoute = await store.dispatch("common/getPopularRouteById", {
+      id: query.id,
+      service: ServiceType.BUS,
     });
-
-    console.log("Checking working or not", popularRoute)
 
     return {
       popularRoute,
