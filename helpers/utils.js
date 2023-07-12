@@ -17,8 +17,10 @@ export const handleScrollBehaviour = (value) => {
 
 
 export const moduleType = {
-    "INTERCITY": 'intercity',
-    "INTERCITY_V2": 'intercity-v2',
-    "PARIBAHAN": 'paribahan',
-    "LONDON_EXPRESS": 'london-express'
-}
+    INTERCITY: "intercity",
+    INTERCITY_V2: "intercity-v2",
+    PARIBAHAN: "paribahan",
+    LONDON_EXPRESS: "london-express",
+    SHOHAGH: "shohagh",
+  };
+  
