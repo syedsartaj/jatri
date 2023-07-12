@@ -38,11 +38,7 @@
               </h2>
               <p class="text-xs">
                 <span class="font-normal text-blackLight">{{
-                  `${trip.coach.name}${
-                    (trip.coach.type &&
-                      " | " + `${trip.coach?.type?.toUpperCase()}`) ||
-                    ""
-                  }`
+                  getTripMeta(trip)
                 }}</span>
               </p>
             </div>
@@ -677,6 +673,16 @@ export default {
       "getPromoCodeAction",
       "seatLockAction",
     ]),
+    getTripMeta(trip) {
+      const { coach } = trip;
+      const coachType = coach?.type?.toUpperCase() || "";
+
+      if (trip.moduleType !== moduleType.SHOHAGH) {
+        return `${coach.name}${coachType ? " | " + coachType : ""}`;
+      }
+
+      return coachType || "";
+    },
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
         this.setGsDroppingPoints([]);
