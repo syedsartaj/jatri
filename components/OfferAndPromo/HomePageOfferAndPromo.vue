@@ -229,7 +229,7 @@ export default {
   },
   components: { Hooper, Slide },
   computed: {
-    ...mapGetters("guarantedseat", ["getOfferImages"]),
+    ...mapGetters("common", ["getOfferImages"]),
   },
 };
 </script>

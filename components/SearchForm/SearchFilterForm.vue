@@ -130,7 +130,11 @@ export default {
         };
         this.fireGTMEventForSearch();
         Cookies.remove("process-allow");
-        this.$router.push({ path: "/trip", query });
+        const pathName =
+          this.getSelectedServiceType === ServiceType.BUS
+            ? "/bus/trip"
+            : "/launch/trip";
+        this.$router.push({ path: pathName, query });
       } else {
         this.errorOccured = true;
 

@@ -128,7 +128,7 @@
             :setCurrentTab="setCurrentTab"
             :handlePointPolicyModal="handlePointPolicyModal"
             :boardingPoints="getModalBoardingPoints"
-            :droppingPoints="getGsDroppingPoints"
+            :droppingPoints="getDroppingPoints"
           />
         </div>
       </div>
@@ -272,31 +272,31 @@
               </div>
             </div>
 
-            <div v-if="getGsSeatArray?.length">
+            <div v-if="getSeatArray?.length">
               <SeatView
                 :showDriver="true"
-                :seatArray="getGsSeatArray"
+                :seatArray="getSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="NORMAL_DECK"
               />
             </div>
 
-            <div v-if="getGsLowerDeckSeatArray?.length">
+            <div v-if="getLowerDeckSeatArray?.length">
               <DeckName name="LOWER DECK" />
               <SeatView
                 :showDriver="true"
-                :seatArray="getGsLowerDeckSeatArray"
+                :seatArray="getLowerDeckSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="LOWER_DECK"
               />
             </div>
-            <div v-if="getGsUpperDeckSeatArray?.length">
+            <div v-if="getUpperDeckSeatArray?.length">
               <DeckName name="UPPER DECK" />
               <SeatView
                 :showDriver="false"
-                :seatArray="getGsUpperDeckSeatArray"
+                :seatArray="getUpperDeckSeatArray"
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="UPPER_DECK"
@@ -312,21 +312,21 @@
               v-model="boardingPoint"
               :default-option="'Select Your Boarding Location'"
               :label="'Boarding Point'"
-              :options="getGsSeatBoardingPointArray"
+              :options="getSeatBoardingPointArray"
               propertyName="name"
             />
-            <!-- :options="getGsSeatBoardingPointArray" -->
+            <!-- :options="getSeatBoardingPointArray" -->
           </div>
-          <div class="mt-4" v-if="getGsSeatDroppingPointArray.length">
+          <div class="mt-4" v-if="getSeatDroppingPointArray.length">
             <SelectOption
               v-model="droppingPoint"
               :default-option="'Select Your Dropping Location'"
               :label="'Dropping Point'"
-              :options="getGsSeatDroppingPointArray"
+              :options="getSeatDroppingPointArray"
               :isOptional="true"
               propertyName="name"
             />
-            <!-- :options="getGsSeatDroppingPointArray" -->
+            <!-- :options="getSeatDroppingPointArray" -->
           </div>
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
@@ -509,13 +509,13 @@
                 !this.emailReg.test(
                   String(this.passengerEmail).toLowerCase()
                 )) ||
-              getGsLoading ||
+              getLoading ||
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
               String(passengerPhone).length != 11
             "
-            :loading="getGsLoading"
+            :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
             @onClick="paymentPendingBlockHandler"
           >
@@ -548,10 +548,10 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
-import { dateFormat } from "../../helpers/dateTimeFormat";
-import { moduleType } from "../../helpers/utils";
-import { handleScrollBehaviour } from "../../helpers/utils";
-import SleeperBedIcon from "../Svg/SleeperBedIcon.vue";
+import { dateFormat } from "../../../../helpers/dateTimeFormat";
+import { moduleType } from "../../../../helpers/utils";
+import { handleScrollBehaviour } from "../../../../helpers/utils";
+import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
 export default {
   components: { SleeperBedIcon },
   props: [
@@ -601,19 +601,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", [
-      "getGsSeatArray",
-      "getGsUpperDeckSeatArray",
-      "getGsLowerDeckSeatArray",
-      "getGsSeatBoardingPointArray",
-      "getGsSeatDroppingPointArray",
-      "getGsPaymentPendingBlockData",
-      "getGsLoading",
-      "getGsSeatViewData",
-      "getGsTrips",
+    ...mapGetters("busStore", [
+      "getSeatArray",
+      "getUpperDeckSeatArray",
+      "getLowerDeckSeatArray",
+      "getSeatBoardingPointArray",
+      "getSeatDroppingPointArray",
+      "getPaymentPendingBlockData",
+      "getLoading",
+      "getSeatViewData",
+      "getTrips",
       "getPromoCode",
       "getModalBoardingPoints",
-      "getGsDroppingPoints",
+      "getDroppingPoints",
     ]),
     departureDateTime() {
       if (this.boardingPoint?.scheduleTime === "") {
@@ -664,13 +664,13 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("guarantedseat", [
+    ...mapMutations("busStore", [
       "mobileFloatingFilter",
       "setModalBoardingPoints",
-      "setGsDroppingPoints",
+      "setDroppingPoints",
       "updateSeatStatus",
     ]),
-    ...mapActions("guarantedseat", [
+    ...mapActions("busStore", [
       "getPbSeatViewAction",
       "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
@@ -679,7 +679,7 @@ export default {
     ]),
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
-        this.setGsDroppingPoints([]);
+        this.setDroppingPoints([]);
         this.setModalBoardingPoints([]);
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
@@ -821,12 +821,12 @@ export default {
     isSitLimitCrossed() {
       return (
         this.selectedSeatIds.length >
-        this.getGsSeatViewData.seatPlan.maxSeatLimit - 1
+        this.getSeatViewData.seatPlan.maxSeatLimit - 1
       );
     },
     showSeatLimitCrossError() {
       this.$toast.error(
-        `You can select ${this.getGsSeatViewData.seatPlan.maxSeatLimit} seats at a time!`,
+        `You can select ${this.getSeatViewData.seatPlan.maxSeatLimit} seats at a time!`,
         {
           position: "bottom-right",
           duration: 50000,
@@ -1003,7 +1003,7 @@ export default {
           transportType: this.trip.transportType,
           transportId: String(this.trip.transportId),
           uid: this.trip.uid,
-          oid: this.getGsSeatViewData?.seatPlan?.oid || null,
+          oid: this.getSeatViewData?.seatPlan?.oid || null,
           id: this.trip.id,
           seatClass: this.trip?.seatClass[0]?.name || null,
           sku: String(this.trip.sku),
@@ -1075,32 +1075,12 @@ export default {
             this.getPbSeatViewAction(seatViewPayload);
             this.$nuxt.$loading?.finish();
           } else {
-            // let data = {
-            //   ...this.getGsPaymentPendingBlockData,
-            //   from,
-            //   to,
-            //   type,
-            //   date,
-            //   companyName: this.trip.company,
-            //   departureTime: this.trip.departureTime,
-            //   boarding: this.boardingPoint.name,
-            //   dropping: this.trip.dropping,
-            //   selectedSeatsObj: this.selectedSeatsObj,
-            //   totalAmount: this.totalAmount,
-            //   coachNo: this.trip.coach.name,
-            //   name: this.passengerName,
-            //   phone: this.passengerPhone,
-            //   email: this.passengerEmail || 'admin@jatri.co'
-            // };
-            // if (process.client) {
-            //    data = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-            // }
             if (res.statusCode === 200) {
               this.$router.push({
-                path: "/guaranteed-seat/payment",
+                path: "/bus/payment",
                 query: {
                   tnxId:
-                    this.getGsPaymentPendingBlockData.paymentInfo.transactionId,
+                    this.getPaymentPendingBlockData.paymentInfo.transactionId,
                 },
               });
             }
@@ -1233,17 +1213,17 @@ export default {
         this.resetForm();
       }
     },
-    getGsSeatBoardingPointArray(value) {
+    getSeatBoardingPointArray(value) {
       const findId = value.findIndex((item) => item?.defaultBoarding === true);
       this.boardingPoint = findId === -1 ? value[0] : value[findId];
     },
-    getGsSeatDroppingPointArray(value) {
+    getSeatDroppingPointArray(value) {
       let findId = value.findIndex(
         (item) => item?.defaultDroppingPoint === true
       );
       this.droppingPoint = findId === -1 ? { name: "", id: "" } : value[findId];
     },
-    getGsTrips: {
+    getTrips: {
       handler(value) {
         this.resetForm();
       },

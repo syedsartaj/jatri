@@ -8,7 +8,7 @@
         :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
         :default-option="'Choose your location'"
         :allow-filter="true"
-        :options="getGsCities"
+        :options="getCities"
       />
       <SearchCityFilterMobile
         v-model="destination"
@@ -17,7 +17,7 @@
         :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
         :default-option="'Choose your destination'"
         :allow-filter="true"
-        :options="getGsCities"
+        :options="getCities"
       />
       <DatePickerMobile
         v-model="departingDate"
@@ -88,7 +88,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsCities"]),
+    ...mapGetters("common", ["getCities"]),
     ...mapGetters("common", ["getSelectedServiceType"]),
   },
   methods: {
@@ -150,7 +150,7 @@ export default {
       handler: function (value) {
         const { from, to, date } = value;
         if (from) {
-          this.getGsCities.filter((s) => {
+          this.getCities.filter((s) => {
             if (s.city_name.toLowerCase() === from.toLowerCase()) {
               this.departure = s.city_name;
               this.departureName = s;
@@ -158,7 +158,7 @@ export default {
           });
         }
         if (to) {
-          this.getGsCities.filter((s) => {
+          this.getCities.filter((s) => {
             if (s.city_name.toLowerCase() === to.toLowerCase()) {
               this.destination = s.city_name;
               this.destinationName = s;
