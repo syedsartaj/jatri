@@ -1,31 +1,11 @@
 <template>
   <div
-    class="
-      bg-white
-      border border-[#ededed]
-      rounded-[10px]
-      px-4
-      py-6
-      w-full
-      h-auto
-    "
+    class="bg-white border border-[#ededed] rounded-[10px] px-4 py-6 w-full h-auto"
   >
     <div class="flex justify-between gap-x-8">
       <button
         @click="previousDateFilter"
-        class="
-          border border-[#8d8d8f]
-          w-full
-          rounded-full
-          px-4
-          py-[10px]
-          flex
-          justify-center
-          items-center
-          gap-x-[13.5px]
-          font-medium
-          text-xs text-blackPrimary
-        "
+        class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
       >
         <img
           src="@/assets/images/icons/leftArrow.svg"
@@ -36,19 +16,7 @@
       </button>
       <button
         @click="nextDateFilter"
-        class="
-          border border-[#8d8d8f]
-          w-full
-          rounded-full
-          px-4
-          py-[10px]
-          flex
-          justify-center
-          items-center
-          gap-x-[13.5px]
-          font-medium
-          text-xs text-blackPrimary
-        "
+        class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
       >
         Next Day
         <img
@@ -78,31 +46,14 @@
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
       <div
-        class="
-          grid grid-cols-2
-          2xl:grid-cols-3
-          gap-x-[7px] gap-y-[10px]
-          mt-[10px]
-        "
+        class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]"
       >
         <div v-for="time in timeList" :key="time" class="w-full h-9">
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
             <button
               @click="setTime(time)"
-              class="
-                group
-                w-full
-                h-full
-                flex
-                justify-center
-                items-center
-                gap-x-[10px]
-                rounded
-                px-[5px]
-                text-xs
-                font-medium
-              "
+              class="group w-full h-full flex justify-center items-center gap-x-[10px] rounded px-[5px] text-xs font-medium"
               :class="
                 selectedTime == time
                   ? 'bg-corporate text-white'
@@ -140,21 +91,7 @@
           <label for="busType">
             <button
               @click="setCoachtype(busType)"
-              class="
-                group
-                w-full
-                h-full
-                flex
-                justify-center
-                items-center
-                gap-x-[10px]
-                capitalize
-                rounded
-                px-[6px]
-                py-2
-                text-xs
-                font-medium
-              "
+              class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
               :class="
                 coachType == busType
                   ? 'bg-corporate text-white'
@@ -179,12 +116,12 @@
       </div>
     </div>
 
-    <div v-if="getGsBusClasses.length">
+    <div v-if="getBusClasses.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
       <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
-          v-for="busClass in getGsBusClasses"
+          v-for="busClass in getBusClasses"
           :key="busClass"
           class="w-full h-9"
         >
@@ -192,21 +129,7 @@
           <label for="busClass">
             <button
               @click="setBusClass(busClass)"
-              class="
-                group
-                w-full
-                h-full
-                flex
-                justify-center
-                items-center
-                gap-x-[10px]
-                capitalize
-                rounded
-                px-[6px]
-                py-2
-                text-xs
-                font-medium
-              "
+              class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
               :class="
                 selectedBusClass == busClass
                   ? 'bg-corporate text-white'
@@ -236,15 +159,7 @@
         >
           <label
             :for="priceDirection"
-            class="
-              flex
-              justify-start
-              items-center
-              gap-x-[9.52px]
-              cursor-pointer
-              text-blackPrimary text-base
-              font-normal
-            "
+            class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
           >
             <img
               :src="
@@ -272,26 +187,18 @@
       </div>
     </div>
 
-    <div v-if="getGsBoardingPoints.length">
+    <div v-if="getBoardingPoints.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
-          v-for="point in getGsBoardingPoints"
+          v-for="point in getBoardingPoints"
           :key="point"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
           <label
             :for="point"
-            class="
-              flex
-              justify-start
-              items-center
-              gap-x-[9.52px]
-              cursor-pointer
-              text-blackPrimary text-base
-              font-normal
-            "
+            class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
           >
             {{ point }}
           </label>
@@ -306,26 +213,18 @@
       </div>
     </div>
 
-    <div v-if="getGsBusCompanies.length">
+    <div v-if="getBusCompanies.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
-          v-for="bus in getGsBusCompanies"
+          v-for="bus in getBusCompanies"
           :key="bus"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
           <label
             :for="bus"
-            class="
-              flex
-              justify-start
-              items-center
-              gap-x-[9.52px]
-              cursor-pointer
-              text-blackPrimary text-base
-              font-normal
-            "
+            class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
           >
             {{ bus }}
           </label>
@@ -345,7 +244,6 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import moment from "moment";
-import Cookies from "js-cookie";
 export default {
   data() {
     return {
@@ -366,32 +264,20 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", [
-      "getGsTrips",
-      "getGsLoading",
-      "getGsBoardingPoints",
-      "getGsBusCompanies",
-      "getGsBusClasses",
-      "getGsCities",
+    ...mapGetters("busStore", [
+      "getBoardingPoints",
+      "getBusCompanies",
+      "getBusClasses",
+      "getCities",
     ]),
+    ...mapGetters("common", ["getCities"]),
   },
 
   watch: {
     coachType() {
       this.handleFromSubmit();
     },
-    // boardingPoint() {
-    //   this.handleTripFilter();
-    // },
-    // busCompany() {
-    //   this.handleTripFilter();
-    // },
-    // selectedTime() {
-    //   this.handleTripFilter();
-    // },
-    // selectedBusClass() {
-    //   this.handleTripFilter();
-    // },
+
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -414,18 +300,18 @@ export default {
   },
 
   methods: {
-    ...mapMutations("guarantedseat", ["sortedTrip"]),
-    ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
+    ...mapMutations("busStore", ["sortedTrip"]),
+    ...mapActions("busStore", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       this.coachType = type;
     },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
-       this.handleTripFilter();
+      this.handleTripFilter();
     },
     setBusCompany(bus) {
       this.busCompany = bus === this.busCompany ? null : bus;
-       this.handleTripFilter();
+      this.handleTripFilter();
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
@@ -437,7 +323,7 @@ export default {
       let payload = {};
 
       if (from) {
-        this.getGsCities?.filter((s) => {
+        this.getCities?.filter((s) => {
           if (s.city_name.toLowerCase() === from.toLowerCase()) {
             payload["from"] = s.city;
           }
@@ -445,7 +331,7 @@ export default {
       }
 
       if (to) {
-        this.getGsCities?.filter((s) => {
+        this.getCities?.filter((s) => {
           if (s.city_name.toLowerCase() === to.toLowerCase()) {
             payload["to"] = s.city;
           }
@@ -488,11 +374,11 @@ export default {
     },
     setTime(time) {
       this.selectedTime = time;
-       this.handleTripFilter();
+      this.handleTripFilter();
     },
     setBusClass(value) {
       this.selectedBusClass = value;
-       this.handleTripFilter();
+      this.handleTripFilter();
     },
     handleFromSubmit() {
       const query = {
@@ -501,8 +387,7 @@ export default {
         type: this.coachType,
         date: this.$route.query.date,
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
     previousDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -527,8 +412,7 @@ export default {
         type: this.$route.query.type,
         date: previousDate.valueOf(),
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
     nextDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -542,12 +426,10 @@ export default {
         type: this.$route.query.type,
         date: nextDate.valueOf(),
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

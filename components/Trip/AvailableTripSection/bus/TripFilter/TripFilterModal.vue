@@ -125,7 +125,7 @@
                 </div>
               </div>
 
-              <div v-if="getGsBusClasses.length">
+              <div v-if="getBusClasses.length">
                 <hr class="my-5" />
                 <h2 class="text-blackSecondery text-base font-medium">
                   BUS CLASS:
@@ -134,7 +134,7 @@
                   class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]"
                 >
                   <div
-                    v-for="busClass in getGsBusClasses"
+                    v-for="busClass in getBusClasses"
                     :key="busClass"
                     class="w-full h-9"
                   >
@@ -211,14 +211,14 @@
                 </div>
               </div>
 
-              <div v-if="getGsBoardingPoints.length">
+              <div v-if="getBoardingPoints.length">
                 <hr class="my-5" />
                 <h2 class="text-blackSecondery text-base font-medium">
                   BOARDING POINT:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
                   <div
-                    v-for="point in getGsBoardingPoints"
+                    v-for="point in getBoardingPoints"
                     @click="setBoardingPoint(point)"
                     :key="point"
                     class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
@@ -245,14 +245,14 @@
                 </div>
               </div>
 
-              <div v-if="getGsBusCompanies.length">
+              <div v-if="getBusCompanies.length">
                 <hr class="my-5" />
                 <h2 class="text-blackSecondery text-base font-medium">
                   BUS COMPANY:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
                   <div
-                    v-for="bus in getGsBusCompanies"
+                    v-for="bus in getBusCompanies"
                     @click="setBusCompany(bus)"
                     :key="bus"
                     class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
@@ -310,15 +310,15 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("guarantedseat", [
-      "getGsTrips",
-      "getGsLoading",
-      "getGsBoardingPoints",
-      "getGsBusCompanies",
-      "getGsBusClasses",
-      "getGsCities",
+    ...mapGetters("busStore", [
+      "getTrips",
+      "getLoading",
+      "getBoardingPoints",
+      "getBusCompanies",
+      "getBusClasses",
       "getMobileFilterData",
     ]),
+    ...mapGetters("common", ["getCities"]),
     coachTypes() {
       return this.getMobileFilterData.coachTypes;
     },
@@ -362,8 +362,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations("guarantedseat", ["sortedTrip", "updateMobileFilterData"]),
-    ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
+    ...mapMutations("busStore", ["sortedTrip", "updateMobileFilterData"]),
+    ...mapActions("busStore", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       const newFilterData = {
         ...this.getMobileFilterData,
@@ -416,7 +416,7 @@ export default {
       let payload = {};
 
       if (from) {
-        this.getGsCities?.filter((s) => {
+        this.getCities?.filter((s) => {
           if (s.city_name.toLowerCase() === from.toLowerCase()) {
             payload["from"] = s.city;
           }
@@ -424,7 +424,7 @@ export default {
       }
 
       if (to) {
-        this.getGsCities?.filter((s) => {
+        this.getCities?.filter((s) => {
           if (s.city_name.toLowerCase() === to.toLowerCase()) {
             payload["to"] = s.city;
           }

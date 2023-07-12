@@ -133,7 +133,11 @@ export default {
         ).getTime(),
       };
       Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      const pathName = this.$route.path.toString().includes("/bus")
+        ? "/bus/trip"
+        : "/launch/trip";
+
+      this.$router.push({ path: pathName, query });
     },
   },
   mounted() {

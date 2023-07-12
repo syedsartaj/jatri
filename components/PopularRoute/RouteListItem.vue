@@ -2,7 +2,7 @@
   <div @click="bookNow()" :class="customClass">
     <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-4 h-4" />
     <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">
-      {{ route.title }}
+      {{ routeItem.title }}
     </p>
   </div>
 </template>
@@ -10,15 +10,21 @@
 <script>
 export default {
   title: "RouteListItem",
-  props: ["route", "haveBorder"],
+  props: ["routeItem", "haveBorder"],
   methods: {
     bookNow() {
-      const { _id } = this.route;
+      const { _id } = this.routeItem;
       if (_id) {
         const query = {
           id: _id,
         };
-        this.$router.push({ path: "/popular-routes", query });
+
+        const path =
+          this.$route.path === "/" || this.$route.path === "/bus"
+            ? "bus/popular-route"
+            : "launch/popular-route";
+
+        this.$router.replace({ path: path, query });
       }
     },
   },
