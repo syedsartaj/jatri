@@ -17,7 +17,7 @@
       <div class="h-[500px] flex justify-center items-center bg-[#f7f7f7]">
         <!-- <TripNotFound/> -->
         <OpssAlert
-          :details="'Looks llike we could not find any trip according to your search. Try different route or date and search again.'"
+          :details="'Looks like we could not find any trip according to your search. Try different route or date and search again.'"
           :customStyle="'px-[92.5px]'"
         />
       </div>
@@ -59,7 +59,7 @@ export default {
     },
     test() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const { from, to, type, date } = this.$route.query;
         const formattedDate = new Date(+date).toLocaleString("en-CA", {
           dateStyle: "short",
@@ -87,14 +87,13 @@ export default {
         payload.busType = type;
 
         await this.getPbScheduleDataAction(payload);
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.isBeforeGetDataState = false;
       });
     },
   },
   created() {
     this.$nextTick(() => {
-      //this.$nuxt.$loading.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -106,7 +105,6 @@ export default {
         busType: type,
       };
       //await this.getPbScheduleDataAction(payload);
-      //this.$nuxt.$loading.finish();
     });
   },
   watch: {

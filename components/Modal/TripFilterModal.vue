@@ -6,40 +6,15 @@
 
     <div class="fixed inset-0 z-10">
       <div
-        class="
-          flex
-          min-h-full
-          items-end
-          justify-center
-          lg:p-4
-          text-center
-          lg:items-center
-          sm:p-0
-        "
+        class="flex min-h-full items-end justify-center lg:p-4 text-center lg:items-center sm:p-0"
       >
         <div
-          class="
-            relative
-            transform
-            overflow-hidden
-            lg:rounded-lg
-            bg-white
-            text-left
-            shadow-xl
-            transition-all
-            lg:my-8
-            w-full
-            md:max-w-[800px]
-          "
+          class="relative transform overflow-hidden lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full md:max-w-[800px]"
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
               <p
-                class="
-                  text-blackPrimary text-base
-                  lg:text-[28px] lg:leading-9
-                  font-medium
-                "
+                class="text-blackPrimary text-base lg:text-[28px] lg:leading-9 font-medium"
               >
                 Filter
               </p>
@@ -52,19 +27,7 @@
               <div class="flex justify-between gap-x-8">
                 <button
                   @click="previousDateFilter"
-                  class="
-                    border border-[#8d8d8f]
-                    w-full
-                    rounded-full
-                    px-4
-                    py-[10px]
-                    flex
-                    justify-center
-                    items-center
-                    gap-x-[13.5px]
-                    font-medium
-                    text-xs text-blackPrimary
-                  "
+                  class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
                 >
                   <img
                     src="@/assets/images/icons/leftArrow.svg"
@@ -75,19 +38,7 @@
                 </button>
                 <button
                   @click="nextDateFilter"
-                  class="
-                    border border-[#8d8d8f]
-                    w-full
-                    rounded-full
-                    px-4
-                    py-[10px]
-                    flex
-                    justify-center
-                    items-center
-                    gap-x-[13.5px]
-                    font-medium
-                    text-xs text-blackPrimary
-                  "
+                  class="border border-[#8d8d8f] w-full rounded-full px-4 py-[10px] flex justify-center items-center gap-x-[13.5px] font-medium text-xs text-blackPrimary"
                 >
                   Next Day
                   <img
@@ -109,19 +60,7 @@
                     <label for="busType">
                       <button
                         @click="setTime(time)"
-                        class="
-                          group
-                          w-full
-                          h-full
-                          flex
-                          justify-center
-                          items-center
-                          gap-x-[10px]
-                          rounded
-                          px-[5px]
-                          text-xs
-                          font-medium
-                        "
+                        class="group w-full h-full flex justify-center items-center gap-x-[10px] rounded px-[5px] text-xs font-medium"
                         :class="
                           selectedTime == time
                             ? 'bg-corporate text-white'
@@ -161,21 +100,7 @@
                     <label for="busType">
                       <button
                         @click="setCoachtype(busType)"
-                        class="
-                          group
-                          w-full
-                          h-full
-                          flex
-                          justify-center
-                          items-center
-                          gap-x-[10px]
-                          capitalize
-                          rounded
-                          px-[6px]
-                          py-2
-                          text-xs
-                          font-medium
-                        "
+                        class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
                         :class="
                           coachType == busType
                             ? 'bg-corporate text-white'
@@ -217,21 +142,7 @@
                     <label for="busClass">
                       <button
                         @click="setBusClass(busClass)"
-                        class="
-                          group
-                          w-full
-                          h-full
-                          flex
-                          justify-center
-                          items-center
-                          gap-x-[10px]
-                          capitalize
-                          rounded
-                          px-[6px]
-                          py-2
-                          text-xs
-                          font-medium
-                        "
+                        class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
                         :class="
                           selectedBusClass == busClass
                             ? 'bg-corporate text-white'
@@ -259,30 +170,15 @@
                   <div
                     v-for="priceDirection in priceFilter"
                     :key="priceDirection"
-                    @click="priceFilterType = priceDirection"
-                    class="
-                      flex
-                      justify-between
-                      items-center
-                      my-2
-                      last:pt-[6px]
-                      cursor-pointer
-                    "
+                    @click="() => setPriceFilterType(priceDirection)"
+                    class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
                   >
                     <label
                       :for="priceDirection"
                       :class="
                         priceFilterType === priceDirection && `text-[#F04935]`
                       "
-                      class="
-                        flex
-                        justify-start
-                        items-center
-                        gap-x-[9.52px]
-                        cursor-pointer
-                        text-blackPrimary text-base
-                        font-normal
-                      "
+                      class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
                     >
                       <img
                         :src="
@@ -302,11 +198,7 @@
                     <input
                       :id="priceDirection"
                       type="button"
-                      class="
-                        default:border-2
-                        border-blackPrimary
-                        cursor-pointer
-                      "
+                      class="default:border-2 border-blackPrimary cursor-pointer"
                     />
 
                     <img
@@ -329,38 +221,19 @@
                     v-for="point in getGsBoardingPoints"
                     @click="setBoardingPoint(point)"
                     :key="point"
-                    class="
-                      flex
-                      justify-between
-                      items-center
-                      my-2
-                      last:pt-[6px]
-                      cursor-pointer
-                    "
+                    class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
                   >
                     <label
                       :for="point"
                       :class="boardingPoint === point && `text-[#F04935]`"
-                      class="
-                        flex
-                        justify-start
-                        items-center
-                        gap-x-[9.52px]
-                        cursor-pointer
-                        text-blackPrimary text-base
-                        font-normal
-                      "
+                      class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
                     >
                       {{ point }}
                     </label>
                     <input
                       :id="point"
                       type="button"
-                      class="
-                        default:border-2
-                        border-blackPrimary
-                        cursor-pointer
-                      "
+                      class="default:border-2 border-blackPrimary cursor-pointer"
                     />
                     <img
                       v-if="boardingPoint === point"
@@ -382,38 +255,19 @@
                     v-for="bus in getGsBusCompanies"
                     @click="setBusCompany(bus)"
                     :key="bus"
-                    class="
-                      flex
-                      justify-between
-                      items-center
-                      my-2
-                      last:pt-[6px]
-                      cursor-pointer
-                    "
+                    class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
                   >
                     <label
                       :for="bus"
                       :class="busCompany === bus && `text-[#F04935]`"
-                      class="
-                        flex
-                        justify-start
-                        items-center
-                        gap-x-[9.52px]
-                        cursor-pointer
-                        text-blackPrimary text-base
-                        font-normal
-                      "
+                      class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
                     >
                       {{ bus }}
                     </label>
                     <input
                       :id="bus"
                       type="button"
-                      class="
-                        default:border-2
-                        border-blackPrimary
-                        cursor-pointer
-                      "
+                      class="default:border-2 border-blackPrimary cursor-pointer"
                     />
                     <img
                       v-if="busCompany === bus"
@@ -427,31 +281,13 @@
             </div>
             <div class="flex justify-evenly gap-x-5 pb-7 pt-[14px]">
               <button
-                class="
-                  h-[46px]
-                  w-full
-                  border border-[#808083]
-                  hover:border-corporate
-                  bg-white
-                  hover:bg-corporate
-                  text-corporate
-                  hover:text-white
-                  text-sm
-                  rounded-full
-                "
+                class="h-[46px] w-full border border-[#808083] hover:border-corporate bg-white hover:bg-corporate text-corporate hover:text-white text-sm rounded-full"
                 @click="resetFilter"
               >
                 Reset
               </button>
               <button
-                class="
-                  h-[46px]
-                  w-full
-                  border border-corporate
-                  bg-corporate
-                  text-white text-sm
-                  rounded-full
-                "
+                class="h-[46px] w-full border border-corporate bg-corporate text-white text-sm rounded-full"
                 @click="handleTripFilter"
               >
                 Apply
@@ -471,71 +307,107 @@ import Cookies from "js-cookie";
 export default {
   props: ["close"],
   data() {
-    return {
-      departure: "",
-      destination: "",
-      departureName: "",
-      destinationName: "",
-      departingDate: this.$route.query.date,
-      coachTypes: ["ac", "non-ac", "all"],
-      coachType: "",
-      priceFilter: ["l2h", "h2l"],
-      priceFilterType: null,
-      boardingPoint: "",
-      busCompany: "",
-      timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      selectedTime: null,
-      selectedBusClass: "",
-    };
+    return {};
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsCities"]),
     ...mapGetters("guarantedseat", [
       "getGsTrips",
       "getGsLoading",
       "getGsBoardingPoints",
       "getGsBusCompanies",
       "getGsBusClasses",
+      "getGsCities",
+      "getMobileFilterData",
     ]),
+    coachTypes() {
+      return this.getMobileFilterData.coachTypes;
+    },
+    coachType() {
+      return this.getMobileFilterData.coachType;
+    },
+    priceFilter() {
+      return this.getMobileFilterData.priceFilter;
+    },
+    priceFilterType() {
+      return this.getMobileFilterData.priceFilterType;
+    },
+    boardingPoint() {
+      return this.getMobileFilterData.boardingPoint;
+    },
+    busCompany() {
+      return this.getMobileFilterData.busCompany;
+    },
+    timeList() {
+      return this.getMobileFilterData.timeList;
+    },
+    selectedTime() {
+      return this.getMobileFilterData.selectedTime;
+    },
+    selectedBusClass() {
+      return this.getMobileFilterData.selectedBusClass;
+    },
   },
 
   watch: {
-    coachType(value) {
-      if (value) {
-        this.handleFromSubmit();
-      }
-    },
-    priceFilterType: {
-      immediate: true,
-      handler: function (value) {
-        if (value) {
-          this.sortedTrip(value);
-        }
-      },
-    },
     "$route.query": {
       immediate: true,
       handler() {
-        (this.priceFilterType = null),
-          (this.coachType = this.$route.query.type);
+        const newFilterData = {
+          ...this.getMobileFilterData,
+          coachType: this.coachType || this.$route.query.type,
+        };
+        this.updateMobileFilterData(newFilterData);
       },
     },
   },
 
   methods: {
-    ...mapMutations("guarantedseat", ["sortedTrip"]),
+    ...mapMutations("guarantedseat", ["sortedTrip", "updateMobileFilterData"]),
     ...mapActions("guarantedseat", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
-      this.coachType = type;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        coachType: type,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     setBoardingPoint(point) {
-      this.boardingPoint = point;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        boardingPoint: point,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setPriceFilterType(type) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        priceFilterType: type,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     setBusCompany(bus) {
-      this.busCompany = bus;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        busCompany: bus,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setTime(time) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        selectedTime: time,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
+    setBusClass(value) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        selectedBusClass: value,
+      };
+      this.updateMobileFilterData(newFilterData);
     },
     async handleTripFilter() {
-      this.$nuxt.$loading.start();
+      this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -560,7 +432,7 @@ export default {
       }
 
       payload.date = formattedDate;
-      payload.busType = type;
+      payload.busType = this.coachType;
 
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
@@ -583,21 +455,20 @@ export default {
 
       await this.getPbScheduleDataAction(payload);
       this.close();
-      this.$nuxt.$loading.finish();
+      this.$nuxt.$loading?.finish();
     },
     resetFilter() {
-      this.busCompany = null;
-      this.boardingPoint = null;
-      this.selectedTime = null;
-      this.selectedBusClass = null;
-      this.priceFilterType = null;
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        busCompany: null,
+        boardingPoint: null,
+        selectedTime: null,
+        selectedBusClass: null,
+        priceFilterType: null,
+        coachType: "all",
+      };
+      this.updateMobileFilterData(newFilterData);
       this.handleFromSubmit();
-    },
-    setTime(time) {
-      this.selectedTime = time;
-    },
-    setBusClass(value) {
-      this.selectedBusClass = value;
     },
     handleFromSubmit() {
       const query = {
@@ -615,6 +486,17 @@ export default {
         { dateStyle: "short" }
       );
       const previousDate = moment(convertedDate).add(-1, "days");
+
+      // Check if the previous date is earlier than today
+      const currentDate = moment();
+      if (previousDate.isBefore(currentDate, "day")) {
+        this.$toast.error("Date can not be less than current date", {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        return; // Return early, preventing further operations
+      }
+
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,

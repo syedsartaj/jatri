@@ -21,7 +21,7 @@ var Tawk_API = Tawk_API || {},
   Tawk_LoadStart = new Date();
 export default {
   mounted() {
-    this.liveChat();
+    // this.liveChat();
   },
   data() {
     return {};

@@ -207,7 +207,7 @@
       <div class="flex justify-center pt-20 pb-[100px]">
         <OpssAlert
           v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
-          :details="'Looks llike we could not find any ticket according to your preferance. Sorry to let you down.'"
+          :details="'Looks like we could not find any ticket according to your preferance. Sorry to let you down.'"
           :customStyle="'px-[64.5px]'"
         />
       </div>
@@ -243,7 +243,7 @@ export default {
     ...mapActions("guarantedseat", ["searchTicketAction"]),
     ticketData(e) {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         e.preventDefault();
         const formData = {};
         if (this.selectedTab === 0) {
@@ -266,7 +266,7 @@ export default {
         } else {
           this.error = true;
         }
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
         this.oopsAlertStatus = true;
       });
     },

@@ -66,7 +66,8 @@
 
 import Cookies from "js-cookie";
 import moment from 'moment';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { handleScrollBehaviour } from '../../helpers/utils';
 export default {
      middleware (ctx) {
           ctx.$gtm.push({ event: 'ssr' })
@@ -91,9 +92,7 @@ export default {
      },
 
      computed: {
-          ...mapGetters('guarantedseat', ['getGsTrips', 'getMobileFloatingFilter']),
-          ...mapGetters('user', ['isLoggedIn']),
-          ...mapGetters('agent', ['getFilteredAvailableServiceList']),
+          ...mapGetters('guarantedseat', ['getGsTrips', 'getMobileFloatingFilter', 'getMobileFilterInitialData']),
           filterQueryData() {
                const formattedDate = new Date(+this.$route.query.date).toLocaleString('en-CA', {
                dateStyle: 'short'
@@ -104,13 +103,15 @@ export default {
      },
 
      methods: {
+          
+    ...mapMutations("guarantedseat", ["updateMobileFilterData"]),
           modifySearch(){
                this.$router.push({ path: '/', query: { ...this.$route.query } })
           },
           handleTripFilterModal() {
                const body = document.getElementsByTagName("body")[0];
                if (body) {
-                  body.style.overflow = !this.tripFilterModify ? "hidden" : "scroll";
+                    handleScrollBehaviour(this.tripFilterModify);
                }
                this.tripFilterModify = !this.tripFilterModify;
           },
@@ -152,10 +153,9 @@ export default {
                return moment(new Date(+date).toLocaleString('en-CA', {dateStyle: 'short'})).format('DD MMM YYYY');
           }
      },
-
-     async asyncData({store}){
-          await store.dispatch('guarantedseat/getCitiesList');
-     },
+  beforeDestroy() {
+    this.updateMobileFilterData(this.getMobileFilterInitialData);
+  },
 
      watch: {
           isLoggedIn(newVal) {

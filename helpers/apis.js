@@ -13,6 +13,7 @@ export const GS_CANCEL_TICKET = `${PARIBAHAN_BASE_URL}/v1/api/intercity/cancel-t
 export const POST_SEND_OTP_BY_TICKET_ID = `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp`;
 export const GS_OFFER_AND_PROMO_IMAGES = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-offer-and-promo-images`;
 export const GET_BLOG_LIST = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-blogs`;
+export const GET_HEAD_LINE = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-head-line`;
 export const READ_OFFER_PROMO_IMAGE_URL = `${PARIBAHAN_BASE_URL}/v1/api/file/get`;
 export const POST_PARIBAHAN_PAYMENT_PENDING_BLOCK_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/payment-pending`;
 
@@ -20,4 +21,5 @@ export const POST_PROMO_CODE_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/check
 export const POST_APPLY_PROMO_CODE_URL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/apply-promo-code`;
 export const POST_GET_SURPRISE_DEAL = `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-surprise-deal`;
 export const POST_FULL_BUS_RESERVATION = `${PARIBAHAN_BASE_URL}/v1/api/intercity/bus-reservation`;
+export const POST_SEAT_LOCK = `${PARIBAHAN_BASE_URL}/v1/api/intercity/seat-lock`;
 // ------------ paribahan apis End ---------------- //

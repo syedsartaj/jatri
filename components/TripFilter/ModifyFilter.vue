@@ -77,12 +77,15 @@
     <div v-if="timeList.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-      <div class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]">
-        <div
-          v-for="time in timeList"
-          :key="time"
-          class="w-full h-9"
-        >
+      <div
+        class="
+          grid grid-cols-2
+          2xl:grid-cols-3
+          gap-x-[7px] gap-y-[10px]
+          mt-[10px]
+        "
+      >
+        <div v-for="time in timeList" :key="time" class="w-full h-9">
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
             <button
@@ -363,13 +366,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getGsCities"]),
     ...mapGetters("guarantedseat", [
       "getGsTrips",
       "getGsLoading",
       "getGsBoardingPoints",
       "getGsBusCompanies",
       "getGsBusClasses",
+      "getGsCities",
     ]),
   },
 
@@ -377,18 +380,18 @@ export default {
     coachType() {
       this.handleFromSubmit();
     },
-    boardingPoint() {
-      this.handleTripFilter();
-    },
-    busCompany() {
-      this.handleTripFilter();
-    },
-    selectedTime() {
-      this.handleTripFilter();
-    },
-    selectedBusClass() {
-      this.handleTripFilter();
-    },
+    // boardingPoint() {
+    //   this.handleTripFilter();
+    // },
+    // busCompany() {
+    //   this.handleTripFilter();
+    // },
+    // selectedTime() {
+    //   this.handleTripFilter();
+    // },
+    // selectedBusClass() {
+    //   this.handleTripFilter();
+    // },
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -400,8 +403,12 @@ export default {
     "$route.query": {
       immediate: true,
       handler() {
-        (this.priceFilterType = null),
-          (this.coachType = this.$route.query.type);
+        this.priceFilterType = null;
+        this.coachType = this.$route.query.type;
+        this.busCompany = null;
+        this.boardingPoint = null;
+        this.selectedTime = null;
+        this.selectedBusClass = null;
       },
     },
   },
@@ -414,12 +421,14 @@ export default {
     },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
+       this.handleTripFilter();
     },
     setBusCompany(bus) {
       this.busCompany = bus === this.busCompany ? null : bus;
+       this.handleTripFilter();
     },
     async handleTripFilter() {
-      this.$nuxt.$loading.start();
+      this.$nuxt.$loading?.start();
       const { from, to, type, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
@@ -466,7 +475,7 @@ export default {
       }
 
       await this.getPbScheduleDataAction(payload);
-      this.$nuxt.$loading.finish();
+      this.$nuxt.$loading?.finish();
     },
     resetFilter() {
       this.busCompany = null;
@@ -474,13 +483,16 @@ export default {
       this.selectedTime = null;
       this.selectedBusClass = null;
       this.priceFilterType = null;
-      this.handleFromSubmit();
+      this.coachType = "all";
+      this.handleTripFilter();
     },
     setTime(time) {
       this.selectedTime = time;
+       this.handleTripFilter();
     },
     setBusClass(value) {
       this.selectedBusClass = value;
+       this.handleTripFilter();
     },
     handleFromSubmit() {
       const query = {
@@ -498,6 +510,17 @@ export default {
         { dateStyle: "short" }
       );
       const previousDate = moment(convertedDate).add(-1, "days");
+
+      // Check if the previous date is earlier than today
+      const currentDate = moment();
+      if (previousDate.isBefore(currentDate, "day")) {
+        this.$toast.error("Date can not be less than current date", {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        return; // Return early, preventing further operations
+      }
+
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,

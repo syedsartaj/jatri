@@ -1,16 +1,7 @@
 <template>
   <div
     v-if="getBookingInfoDetails !== null"
-    class="
-      lg:flex
-      justify-between
-      gap-x-5
-      py-4
-      lg:py-8
-      px-4
-      lg:px-[100px]
-      bg-[#F7F7F7]
-    "
+    class="lg:flex justify-between gap-x-5 py-4 lg:py-8 px-4 lg:px-[100px] bg-[#F7F7F7]"
   >
     <div class="w-full lg:w-1/2">
       <div
@@ -18,26 +9,10 @@
         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
       >
         <div
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-4
-            px-5
-            py-[22px]
-            border-b
-          "
+          class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
         >
           <div
-            class="
-              bg-[#FEF2F0]
-              rounded-full
-              w-9
-              h-9
-              flex
-              justify-center
-              items-center
-            "
+            class="bg-[#FEF2F0] rounded-full w-9 h-9 flex justify-center items-center"
           >
             <img
               src="@/assets/images/icons/ticket.svg"
@@ -61,23 +36,10 @@
         </div>
         <div class="px-[14px] py-3">
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Boarding Point:
             </p>
@@ -86,23 +48,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Departure Time:
             </p>
@@ -111,23 +60,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Name:
             </p>
@@ -136,23 +72,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Mobile Number:
             </p>
@@ -161,23 +84,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Email Address:
             </p>
@@ -191,37 +101,16 @@
     <div class="w-full lg:w-1/2">
       <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
         <div
-          class="
-            flex
-            justify-start
-            items-center
-            gap-x-4
-            px-5
-            py-[22px]
-            border-b
-          "
+          class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
         >
           <p class="text-base font-medium text-blackPrimary">Fare Details</p>
         </div>
         <div class="px-[14px] pt-3">
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Seat No
             </p>
@@ -230,23 +119,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Ticket Price
             </p>
@@ -261,23 +137,10 @@
           </div>
           <div
             v-if="getBookingInfoDetails.invoice.discount && !showPromoInput"
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Discount Amount
             </p>
@@ -286,23 +149,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Processing Fee
             </p>
@@ -311,23 +161,10 @@
             </p>
           </div>
           <div
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p
-              class="
-                text-[11px]
-                leading-4
-                lg:text-sm
-                font-normal
-                text-blackLight
-              "
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               Gateway Fee
             </p>
@@ -338,32 +175,14 @@
 
           <div
             v-if="!showPromoInput"
-            class="
-              flex
-              justify-between
-              gap-x-4
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed"
           >
             <input
               type="text"
               id="promo"
               v-model="promoCode"
               placeholder="Enter Promo Code"
-              class="
-                bg-[#f7f7f7]
-                px-4
-                py-[13px]
-                rounded
-                w-3/4
-                focus:outline-0
-                text-xs
-                placeholder:text-blackSecondery
-                text-blackPrimary
-              "
+              class="bg-[#f7f7f7] px-4 py-[13px] rounded w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
             />
             <button
               @click="applyPromo"
@@ -386,14 +205,7 @@
 
           <div
             v-if="showPromoInput"
-            class="
-              flex
-              justify-between
-              py-2
-              border-b
-              last:border-b-0
-              border-dashed
-            "
+            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
             <p class="text-sm font-normal text-blackLight">Promo</p>
             <p class="text-base font-medium text-[#E0293B]">
@@ -402,15 +214,7 @@
           </div>
         </div>
         <div
-          class="
-            flex
-            justify-between
-            bg-[#EFF7FD]
-            border-t
-            rounded-b
-            px-4
-            py-[10px]
-          "
+          class="flex justify-between bg-[#EFF7FD] border-t rounded-b px-4 py-[10px]"
         >
           <p class="text-sm font-normal text-blackLight">Total</p>
           <p class="text-base font-medium text-blackPrimary">
@@ -422,29 +226,11 @@
 
       <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
         <div
-          class="
-            flex
-            justify-between
-            items-center
-            gap-x-4
-            px-5
-            py-[22px]
-            border-b
-          "
+          class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
         >
           <p class="text-base font-medium text-blackPrimary">Payment Method</p>
           <div
-            class="
-              flex
-              justify-center
-              items-center
-              w-[139px]
-              bg-[#F7F7F7]
-              rounded-full
-              text-base
-              font-medium
-              text-blackPrimary
-            "
+            class="flex justify-center items-center w-[139px] bg-[#F7F7F7] rounded-full text-base font-medium text-blackPrimary"
           >
             <img
               src="@/assets/images/icons/timer.svg"
@@ -486,15 +272,7 @@
                </button> -->
 
       <LoaderButton
-        class="
-          bg-corporate
-          rounded-full
-          w-full
-          py-[13px]
-          text-white text-sm
-          font-medium
-          mt-6
-        "
+        class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6"
         :class="
           getGsLoading ||
           (!paymentAllowStatus &&
@@ -523,17 +301,7 @@
 
       <div
         v-if="!(!paymentAllowStatus || paymentValidateTime === 0)"
-        class="
-          p-5
-          mt-8
-          border border-[#DBDBDB]
-          rounded-lg
-          lg:hidden
-          flex
-          justify-start
-          items-start
-          gap-x-5
-        "
+        class="p-5 mt-8 border border-[#DBDBDB] rounded-lg lg:hidden flex justify-start items-start gap-x-5"
       >
         <img
           src="@/assets/images/icons/phoneIconBlack.svg"
@@ -547,15 +315,7 @@
           </p>
           <a href="https://jatri.co/contact-us" target="_blank">
             <button
-              class="
-                text-xs
-                font-medium
-                bg-[#EDEDED]
-                w-[95px]
-                py-1
-                rounded-full
-                mt-[10px]
-              "
+              class="text-xs font-medium bg-[#EDEDED] w-[95px] py-1 rounded-full mt-[10px]"
             >
               Contact us
             </button></a
@@ -632,7 +392,7 @@ export default {
     ]),
     handleDealButton() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           companyId: this.getBookingInfoDetails.invoice?.companyId,
           tripDateTime:
@@ -643,7 +403,7 @@ export default {
         };
         this.getSurpriseDealAction(payload);
 
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
     timeFormate(time) {
@@ -654,14 +414,32 @@ export default {
         paymentId: this.getBookingInfoDetails._id,
         gatewayType: this.activePlan,
       };
+      this.fireGTMEventForInitiateCheckout();
       this.TicketConfirmAction(payload);
+    },
+    fireGTMEventForInitiateCheckout() {
+      const eventData = {
+        event: "initiateCheckout",
+        currency: "BDT",
+        from: this.getBookingInfoDetails?.invoice?.fromCity,
+        to: this.getBookingInfoDetails?.invoice?.toCity,
+        coach: this.getBookingInfoDetails?.invoice?.coachName,
+        company: this.getBookingInfoDetails?.invoice?.company,
+        journeyDate:
+          this.getBookingInfoDetails?.invoice?.departureDate +
+          this.getBookingInfoDetails?.invoice?.departureTime,
+        seatCount: this.getBookingInfoDetails?.invoice?.seatIds?.length,
+        totalPrice: this.getBookingInfoDetails.amount,
+      };
+
+      this.$gtm.push(eventData);
     },
     timeUp() {
       this.paymentAllowStatus = false;
     },
     applyPromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading.start();
+        this.$nuxt.$loading?.start();
         const payload = {
           promoCode: this.promoCode,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
@@ -674,12 +452,11 @@ export default {
         };
         this.applyPromoCodeAction(payload);
 
-        this.$nuxt.$loading.finish();
+        this.$nuxt.$loading?.finish();
       });
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
