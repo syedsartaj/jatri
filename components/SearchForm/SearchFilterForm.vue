@@ -56,7 +56,11 @@
           class="rounded-full text-white text-xs xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
           :class="
             !departure || !destination || !coachType || !departingDate
-              ? 'bg-corporate'
+              ? isTripPage
+                ? 'bg-[#1E88E5]'
+                : 'bg-corporate'
+              : isTripPage
+              ? 'bg-[#1E88E5] cursor-pointer'
               : 'bg-corporate cursor-pointer'
           "
           @click="handleFromSubmit"
