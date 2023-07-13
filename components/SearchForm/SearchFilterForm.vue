@@ -95,7 +95,6 @@ export default {
       ],
       selectedTime: "4 am - 12 pm",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      //quantity: ''
     };
   },
   computed: {
@@ -128,10 +127,18 @@ export default {
         const query = {
           from: this.departure,
           to: this.destination,
-          type: this.coachType,
-          quantity: this.quantity,
           date: new Date(this.departingDate).getTime(),
         };
+        if (this.getSelectedServiceType === ServiceType.BUS) {
+          query.type = this.coachType;
+        } else {
+          query.time =
+            this.selectedTime === "4 am - 12 pm"
+              ? "morning"
+              : this.selectedTime === "12 pm - 06 pm"
+              ? "day"
+              : "night";
+        }
         this.fireGTMEventForSearch();
         Cookies.remove("process-allow");
         const pathName =
@@ -164,9 +171,19 @@ export default {
         event: "searchTrip",
         from: this.departure,
         to: this.destination,
-        type: this.coachType,
         date: this.departingDate,
       };
+
+      if (this.getSelectedServiceType === ServiceType.BUS) {
+        eventData.type = this.coachType;
+      } else {
+        eventData.time =
+          this.selectedTime === "4 am - 12 pm"
+            ? "morning"
+            : this.selectedTime === "12 pm - 06 pm"
+            ? "day"
+            : "night";
+      }
 
       this.$gtm.push(eventData);
     },
@@ -174,7 +191,7 @@ export default {
   watch: {
     "$route.query": {
       handler: function (value) {
-        const { from, to, date } = value;
+        const { from, to, date, time } = value;
         if (from) {
           this.getCities.filter((s) => {
             if (s.city_name.toLowerCase() === from.toLowerCase()) {
@@ -197,6 +214,15 @@ export default {
           this.departingDate = new Date(+date).toLocaleString("en-CA", {
             dateStyle: "short",
           });
+        }
+
+        if (time) {
+          this.selectedTime =
+            time === "morning"
+              ? "4 am - 12 pm"
+              : time === "day"
+              ? "12 pm - 06 pm"
+              : "06 pm - 03 am";
         }
       },
       deep: true,

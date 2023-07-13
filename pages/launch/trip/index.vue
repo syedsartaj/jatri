@@ -3,7 +3,7 @@
     <!-- Search modifier -->
     <div class="relative">
       <BannerSectionTripPage />
-      <ModifyFilterMobileBus />
+      <ModifyFilterMobileLaunch />
 
       <!-- Mobile device filter button -->
       <button
@@ -17,7 +17,7 @@
 
       <!-- Filter modal -->
       <div class="block lg:hiddden" v-if="isTripFilterModalOpen">
-        <TripFilterModal
+        <TripFilterModalLaunch
           :close="toggleTripFilterModal"
           @handleTripFilterModal="toggleTripFilterModal"
         />
@@ -44,7 +44,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("busStore", [
+    ...mapGetters("launchStore", [
       "getMobileFloatingFilter",
       "getMobileFilterInitialData",
     ]),

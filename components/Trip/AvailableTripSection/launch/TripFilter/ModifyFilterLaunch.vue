@@ -42,80 +42,6 @@
       </button>
     </div>
 
-    <div v-if="timeList.length">
-      <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-      <div
-        class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]"
-      >
-        <div v-for="time in timeList" :key="time" class="w-full h-9">
-          <input id="busType" type="checkbox" class="hidden" />
-          <label for="busType">
-            <button
-              @click="setTime(time)"
-              class="group w-full h-full flex justify-center items-center gap-x-[10px] rounded px-[5px] text-xs font-medium"
-              :class="
-                selectedTime == time
-                  ? 'bg-corporate text-white'
-                  : 'bg-[#ededed] text-blackPrimary'
-              "
-            >
-              <img
-                :src="
-                  require(time == '4 am - 12 pm'
-                    ? '@/assets/images/icons/morning.svg'
-                    : time == '12 pm - 06 pm'
-                    ? '@/assets/images/icons/noon.svg'
-                    : '@/assets/images/icons/night.svg')
-                "
-                alt="time"
-                class=""
-              />
-              {{ time }}
-            </button>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="coachTypes.length">
-      <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">BUS TYPE:</h2>
-      <div class="flex justify-between gap-[7px] mt-[10px]">
-        <div
-          v-for="busType in coachTypes"
-          :key="busType"
-          class="w-[125px] 2xl:w-[175px] h-9"
-        >
-          <input id="busType" type="checkbox" class="hidden" />
-          <label for="busType">
-            <button
-              @click="setCoachtype(busType)"
-              class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
-              :class="
-                coachType == busType
-                  ? 'bg-corporate text-white'
-                  : 'bg-[#ededed] text-blackPrimary'
-              "
-            >
-              <img
-                :src="
-                  require(busType == 'ac'
-                    ? '@/assets/images/icons/acIcon.svg'
-                    : busType == 'non-ac'
-                    ? '@/assets/images/icons/nonAcIcon.svg'
-                    : '@/assets/images/icons/anyConditionIcon.svg')
-                "
-                alt="Bus Type"
-                class=""
-              />
-              {{ busType }}
-            </button>
-          </label>
-        </div>
-      </div>
-    </div>
-
     <div v-if="getBusClasses.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
@@ -215,7 +141,7 @@
 
     <div v-if="getBusCompanies.length">
       <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">BUS COMPANY:</h2>
+      <h2 class="text-blackSecondery text-base font-medium">LAUNCH:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
           v-for="bus in getBusCompanies"
@@ -252,8 +178,6 @@ export default {
       departureName: "",
       destinationName: "",
       departingDate: this.$route.query.date,
-      coachTypes: ["ac", "non-ac", "all"],
-      coachType: "",
       priceFilter: ["l2h", "h2l"],
       priceFilterType: null,
       boardingPoint: "",
@@ -274,10 +198,6 @@ export default {
   },
 
   watch: {
-    coachType() {
-      this.handleFromSubmit();
-    },
-
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -290,7 +210,6 @@ export default {
       immediate: true,
       handler() {
         this.priceFilterType = null;
-        this.coachType = this.$route.query.type;
         this.busCompany = null;
         this.boardingPoint = null;
         this.selectedTime = null;
@@ -302,9 +221,6 @@ export default {
   methods: {
     ...mapMutations("busStore", ["sortedTrip"]),
     ...mapActions("busStore", ["getPbScheduleDataAction"]),
-    setCoachtype(type) {
-      this.coachType = type;
-    },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
       this.handleTripFilter();
@@ -315,7 +231,7 @@ export default {
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
-      const { from, to, type, date } = this.$route.query;
+      const { from, to, time, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
       });
@@ -339,7 +255,6 @@ export default {
       }
 
       payload.date = formattedDate;
-      payload.busType = type;
 
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
@@ -351,13 +266,8 @@ export default {
         payload.busClass = this.selectedBusClass;
       }
 
-      if (this.selectedTime) {
-        payload.time =
-          this.selectedTime === "4 am - 12 pm"
-            ? "morning"
-            : this.selectedTime === "12 pm - 06 pm"
-            ? "day"
-            : "night";
+      if (time) {
+        payload.time = time;
       }
 
       await this.getPbScheduleDataAction(payload);
@@ -369,7 +279,6 @@ export default {
       this.selectedTime = null;
       this.selectedBusClass = null;
       this.priceFilterType = null;
-      this.coachType = "all";
       this.handleTripFilter();
     },
     setTime(time) {
@@ -384,7 +293,7 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.coachType,
+        time: this.$route.query.time,
         date: this.$route.query.date,
       };
       this.$router.push({ path: "/launch/trip", query });
@@ -409,7 +318,7 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.$route.query.type,
+        time: this.$route.query.time,
         date: previousDate.valueOf(),
       };
       this.$router.push({ path: "/launch/trip", query });
@@ -423,7 +332,7 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.$route.query.type,
+        time: this.$route.query.time,
         date: nextDate.valueOf(),
       };
       this.$router.push({ path: "/launch/trip", query });

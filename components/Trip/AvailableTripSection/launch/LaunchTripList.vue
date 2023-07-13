@@ -1,7 +1,7 @@
 <template>
   <div class="pb-40">
     <div v-if="getTrips.length > 0">
-      <SingleTrip
+      <LaunchSingleTrip
         v-for="(trip, index) in getTrips"
         :key="index"
         :trip="trip"
@@ -29,7 +29,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "BusTripList",
+  name: "LaunchTripList",
   data() {
     return {
       selectedBusId: null,
@@ -39,17 +39,17 @@ export default {
   },
   computed: {
     ...mapGetters("common", ["getCities"]),
-    ...mapGetters("busStore", ["getTrips"]),
+    ...mapGetters("launchStore", ["getTrips"]),
   },
   methods: {
-    ...mapActions("busStore", ["getPbScheduleDataAction"]),
+    ...mapActions("launchStore", ["getPbScheduleDataAction"]),
     selectTrip(tripId) {
       this.selectedBusId = tripId;
     },
     test() {
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
-        const { from, to, type, date } = this.$route.query;
+        const { from, to, time, date } = this.$route.query;
         const formattedDate = new Date(+date).toLocaleString("en-CA", {
           dateStyle: "short",
         });
@@ -73,7 +73,7 @@ export default {
         }
 
         payload.date = formattedDate;
-        payload.busType = type;
+        payload.time = time;
 
         await this.getPbScheduleDataAction(payload);
         this.$nuxt.$loading?.finish();

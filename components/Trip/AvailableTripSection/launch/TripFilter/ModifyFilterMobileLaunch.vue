@@ -28,7 +28,10 @@
             </div>
             <p class="text-[11px] leading-4 font-normal text-blackSecondery">
               <span>{{ getHumanDate($route.query.date) }}</span
-              >, <span class="capitalize">{{ $route.query.type }}</span>
+              >,
+              <span class="capitalize">{{
+                getHumanTime($route.query.time)
+              }}</span>
             </p>
           </div>
           <button
@@ -50,6 +53,13 @@ export default {
   methods: {
     modifySearch() {
       this.$router.push({ path: "/bus", query: { ...this.$route.query } });
+    },
+    getHumanTime(time) {
+      return time === "morning"
+        ? "4 am - 12 pm"
+        : time === "day"
+        ? "12 pm - 06 pm"
+        : "06 pm - 03 am";
     },
 
     getHumanDate(date) {

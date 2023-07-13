@@ -17,7 +17,7 @@
 
       <!-- Filter modal -->
       <div class="block lg:hiddden" v-if="isTripFilterModalOpen">
-        <TripFilterModal
+        <TripFilterModalBus
           :close="toggleTripFilterModal"
           @handleTripFilterModal="toggleTripFilterModal"
         />

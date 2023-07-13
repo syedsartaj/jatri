@@ -49,42 +49,6 @@
                 </button>
               </div>
 
-              <div>
-                <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
-                <div
-                  class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]"
-                >
-                  <div v-for="time in timeList" :key="time" class="w-full h-9">
-                    <input id="busType" type="button" class="hidden" />
-                    <label for="busType">
-                      <button
-                        @click="setTime(time)"
-                        class="group w-full h-full flex justify-center items-center gap-x-[10px] rounded px-[5px] text-xs font-medium"
-                        :class="
-                          selectedTime == time
-                            ? 'bg-corporate text-white'
-                            : 'bg-[#ededed] text-blackPrimary'
-                        "
-                      >
-                        <img
-                          :src="
-                            require(time == '4 am - 12 pm'
-                              ? '@/assets/images/icons/morning.svg'
-                              : time == '12 pm - 06 pm'
-                              ? '@/assets/images/icons/noon.svg'
-                              : '@/assets/images/icons/night.svg')
-                          "
-                          alt="time"
-                          class=""
-                        />
-                        {{ time }}
-                      </button>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
               <div v-if="coachTypes.length">
                 <hr class="my-5" />
                 <h2 class="text-blackSecondery text-base font-medium">

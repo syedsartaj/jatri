@@ -12,7 +12,7 @@
       "
     >
       <div
-        class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
@@ -37,15 +37,26 @@
                 {{ trip.company }}
               </h2>
               <p class="text-xs">
-                <span class="font-normal text-blackLight">{{
-                  `${trip.coach.name}${
-                    (trip.coach.type &&
-                      " | " + `${trip.coach?.type?.toUpperCase()}`) ||
-                    ""
-                  }`
-                }}</span>
+                <span class="font-normal text-blackLight"
+                  >Trip code: {{ trip.tripCode }}</span
+                >
               </p>
             </div>
+          </div>
+          <div
+            class="flex flex-col justify-start gap-x-4 w-5/12 md:w-3/12 lg:w-5/12 xl:w-3/12 cursor-pointer"
+          >
+            <p class="text-xs font-normal text-blackLight text-right">
+              DEPARTURE TIME
+            </p>
+
+            <h2 class="text-base font-medium text-blackPrimary text-right">
+              {{
+                new Date(trip.tripDateTime).toLocaleString("en-Us", {
+                  timeStyle: "short",
+                })
+              }}
+            </h2>
           </div>
           <div
             class="mt-[95px] ml-0 w-auto bg-[#EDEDED] rounded-md shadow-xl z-[1000] before:block before:-mt-2 before:ml-4 before:bg-[#EDEDED] before:h-4 before:w-4 before:rotate-45 absolute"
@@ -145,20 +156,9 @@
             class="w-[30px]"
           />
           <h2
-            v-if="trip.seatFare[0].discountFare"
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
-            <span class="line-through text-corporate">{{
-              trip.seatFare[0].fare
-            }}</span>
-            {{ trip.seatFare[0].discountFare }}
-            <span class="text-base">TK</span>
-          </h2>
-          <h2
-            v-else
-            class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
-          >
-            {{ trip.seatFare[0].fare }}
+            {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
