@@ -4,7 +4,7 @@
     :ref="`bus-selector-${busIndex}`"
   >
     <div
-      class="lg:flex justify-between gap-x-6"
+      class="lg:flex justify-between gap-x-4"
       :class="
         selectedTrip === busIndex
           ? 'border-b border-[#DBDBDB]'
@@ -34,7 +34,7 @@
             />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
-                {{ trip.company }}
+                {{ trip.ship }}
               </h2>
               <p class="text-xs">
                 <span class="font-normal text-blackLight"
@@ -90,25 +90,13 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-start py-[14px] order-last lg:order-1"
+          class="flex flex-col justify-between items-start py-[16px] order-last lg:order-1"
         >
-          <p class="text-xs font-normal text-blackLight">Route</p>
+          <p class="text-xs font-normal text-blackLight">ROUTE</p>
           <h2
-            class="text-xs lg:text-sm font-medium text-blackPrimary text-right"
+            class="text-xs lg:text-sm font-medium text-blackPrimary text-right mt-1"
           >
-            {{ trip.route.name }}
-          </h2>
-        </div>
-        <div
-          class="flex justify-between items-center py-4 order-1 lg:order-last"
-        >
-          <p class="text-xs font-normal text-blackLight">Departure Time</p>
-          <h2 class="text-sm lg:text-base font-medium text-blackPrimary">
-            {{
-              new Date(
-                `${trip.departureDate} ${trip.departureTime}`
-              ).toLocaleString("en-Us", { timeStyle: "short" })
-            }}
+            {{ trip.route }}
           </h2>
         </div>
 
@@ -171,13 +159,10 @@
           />
           <div>
             <h2
-              v-if="trip.seatFare[0].discountFare"
+              v-if="trip.seatFare"
               class="text-xl font-semibold text-blackPrimary"
             >
-              <span class="line-through text-corporate">{{
-                trip.seatFare[0].fare
-              }}</span>
-              {{ trip.seatFare[0].discountFare }}
+              {{ trip.seatFare }}
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
@@ -187,23 +172,30 @@
             <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
           </div>
         </div>
-        <button
-          @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
-          class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"
-        >
-          {{ selectedTrip === busIndex ? "Close Seats" : "View Seats" }}
-          <span>
-            <img
-              src="@/assets/images/icons/viewSeatIcon.svg"
-              alt=""
-              :class="
-                selectedTrip === busIndex &&
-                'transition-all ease-in-out rotate-180'
-              "
-              class="w-[8.49px] h-[5.19px]"
-            />
-          </span>
-        </button>
+        <div class="w-full flex flex-row items-center lg:mt-[26px] gap-x-2">
+          <img
+            src="@/assets/images/icons/seatClassIcon.svg"
+            alt=""
+            class="w-[40px]"
+          />
+          <button
+            @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
+            class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
+          >
+            {{ selectedTrip === busIndex ? "Close Seats" : "View Seats" }}
+            <span>
+              <img
+                src="@/assets/images/icons/viewSeatIcon.svg"
+                alt=""
+                :class="
+                  selectedTrip === busIndex &&
+                  'transition-all ease-in-out rotate-180'
+                "
+                class="w-[8.49px] h-[5.19px]"
+              />
+            </span>
+          </button>
+        </div>
       </div>
     </div>
 

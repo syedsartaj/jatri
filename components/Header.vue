@@ -13,7 +13,7 @@
         flex
         justify-between
         px-4
-        lg:px-[100px]
+        xl:px-[100px]
         py-[21px]
         lg:py-4
       "

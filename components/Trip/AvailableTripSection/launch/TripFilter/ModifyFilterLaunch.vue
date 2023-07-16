@@ -42,12 +42,12 @@
       </button>
     </div>
 
-    <div v-if="getBusClasses.length">
+    <div v-if="getLaunchClasses.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
       <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
         <div
-          v-for="busClass in getBusClasses"
+          v-for="busClass in getLaunchClasses"
           :key="busClass"
           class="w-full h-9"
         >
@@ -139,12 +139,12 @@
       </div>
     </div>
 
-    <div v-if="getBusCompanies.length">
+    <div v-if="getLaunchCompanies.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">LAUNCH:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
-          v-for="bus in getBusCompanies"
+          v-for="bus in getLaunchCompanies"
           :key="bus"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
@@ -188,10 +188,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("busStore", [
+    ...mapGetters("launchStore", [
       "getBoardingPoints",
-      "getBusCompanies",
-      "getBusClasses",
+      "getLaunchCompanies",
+      "getLaunchClasses",
       "getCities",
     ]),
     ...mapGetters("common", ["getCities"]),

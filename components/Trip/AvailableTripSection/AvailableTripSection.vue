@@ -1,6 +1,6 @@
 <template>
   <div
-    class="lg:flex lg:justify-start gap-x-4 xl:gap-x-[30px] px-4 lg:px-[100px] py-4 lg:py-[30px] bg-[#f7f7f7]"
+    class="lg:flex lg:justify-start gap-x-4 xl:gap-x-[30px] px-4 xl:px-[100px] py-4 lg:py-[30px] bg-[#f7f7f7]"
   >
     <div class="hidden lg:block w-full lg:w-[35%]">
       <ModifyFilterBus v-if="ServiceType.BUS === selectedService" />
