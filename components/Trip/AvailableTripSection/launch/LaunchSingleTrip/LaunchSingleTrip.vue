@@ -5,23 +5,14 @@
   >
     <div
       class="lg:flex justify-between gap-x-4"
-      :class="
-        selectedTrip === busIndex
-          ? 'border-b border-[#DBDBDB]'
-          : 'border-0 border-[#DBDBDB]'
-      "
+      :class="true ? 'border-b border-[#DBDBDB]' : 'border-0 border-[#DBDBDB]'"
     >
       <div
-        class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        class="w-full lg:w-4/5 p-4 divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
             class="flex justify-start gap-x-4 items-center w-7/12 md:w-9/12 lg:w-7/12 xl:w-9/12 cursor-pointer"
-            @click="handleBusImagePreviewModal"
-            @mouseover="
-              showToolTip = trip.companyImages?.gallery?.length && true
-            "
-            @mouseleave="showToolTip = false"
           >
             <img
               :src="
@@ -58,16 +49,6 @@
               }}
             </h2>
           </div>
-          <div
-            class="mt-[95px] ml-0 w-auto bg-[#EDEDED] rounded-md shadow-xl z-[1000] before:block before:-mt-2 before:ml-4 before:bg-[#EDEDED] before:h-4 before:w-4 before:rotate-45 absolute"
-            v-if="showToolTip"
-          >
-            <div class="text-center p-[5px] pt-[0px]">
-              <h2 class="text-xs font-normal">
-                <span>Click here to view bus image</span>
-              </h2>
-            </div>
-          </div>
 
           <div
             v-if="trip?.hasOwnProperty('available')"
@@ -100,12 +81,6 @@
           </h2>
         </div>
 
-        <BusImagePreviewModal
-          v-if="showBusImageModal"
-          :companyName="trip.company"
-          :close="handleBusImagePreviewModal"
-          :companyImages="trip.companyImages"
-        />
         <div
           class="flex justify-evenly lg:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]"
         >
@@ -174,9 +149,10 @@
         </div>
         <div class="w-full flex flex-row items-center lg:mt-[26px] gap-x-2">
           <img
+            @click="handleSeatAvailableModal"
             src="@/assets/images/icons/seatClassIcon.svg"
             alt=""
-            class="w-[40px]"
+            class="w-[40px] cursor-pointer"
           />
           <button
             @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
@@ -201,338 +177,65 @@
 
     <!-- accordion start -->
     <div
-      v-if="selectedTrip === busIndex"
-      class="bg-white rounded-b-[10px] pt-4 pr-2 lg:pr-6 pb-6 pl-2"
+      v-if="true"
+      class="bg-white rounded-b-[10px] p-4"
       :class="
-        selectedTrip === busIndex
-          ? 'max-h-max transition-all ease-in-out duration-700'
-          : 'h-0'
+        true ? 'max-h-max transition-all ease-in-out duration-700' : 'h-0'
       "
     >
-      <div class="flex flex-wrap justify-between xl:divide-x">
-        <!-- Bus Design -->
-        <div class="w-full lg:w-1/2">
+      <div class="w-full flex flex-row items-center justify-evenly gap-4">
+        <div class="flex flex-col w-full">
+          <p class="text-xs lg:text-base font-medium text-blackPrimary">
+            Select floor<span class="text-[#E0293B] ml-1">*</span>
+          </p>
           <div
-            class="rounded-[10px] py-4 lg:py-6 px-1 xl:px-4 xl:mr-6 bg-[#f7f7f7]"
+            class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] justify-between items-center"
+            @click="handleSelectFloorModal"
           >
-            <div
-              class="flex lg:flex-wrap xl:flex-nowrap gap-y-2 justify-between lg:border-t lg:border-b border-dashed items-center py-1 lg:py-2 lg:mt-5"
-            >
+            <div class="flex flex-row">
               <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
+                class="rounded-full bg-[#EDEDED] h-6 w-6 text-sm flex items-center justify-center font-bold"
               >
-                <img
-                  src="@/assets/images/seats/available-seats.svg"
-                  alt="Available"
-                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
-                  Available
-                </p>
+                <p>5</p>
               </div>
-              <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
-              >
-                <ArmChairIcon
-                  :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
-                  :fill="'#8D8D8F'"
-                  :stroke="'#8D8D8F'"
-                  height="24"
-                  width="24"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
-                  Booked
-                </p>
-              </div>
-              <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
-              >
-                <img
-                  src="@/assets/images/seats/selected-seats.svg"
-                  alt="Selected"
-                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
-                  Selected
-                </p>
-              </div>
+              <p class="ml-3">1st floor</p>
             </div>
-
-            <div v-if="getSeatArray?.length">
-              <SeatView
-                :showDriver="true"
-                :seatArray="getSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="NORMAL_DECK"
-              />
-            </div>
-
-            <div v-if="getLowerDeckSeatArray?.length">
-              <DeckName name="LOWER DECK" />
-              <SeatView
-                :showDriver="true"
-                :seatArray="getLowerDeckSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="LOWER_DECK"
-              />
-            </div>
-            <div v-if="getUpperDeckSeatArray?.length">
-              <DeckName name="UPPER DECK" />
-              <SeatView
-                :showDriver="false"
-                :seatArray="getUpperDeckSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="UPPER_DECK"
-              />
-            </div>
+            <img
+              src="@/assets/images/home/arrowDown.svg"
+              alt="arrow-down"
+              class="w-6 h-6"
+            />
           </div>
         </div>
-
-        <div class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
-          <!-- Trip Information -->
-          <div class="">
-            <SelectOption
-              v-model="boardingPoint"
-              :default-option="'Select Your Boarding Location'"
-              :label="'Boarding Point'"
-              :options="getSeatBoardingPointArray"
-              propertyName="name"
-            />
-            <!-- :options="getSeatBoardingPointArray" -->
-          </div>
-          <div class="mt-4" v-if="getSeatDroppingPointArray.length">
-            <SelectOption
-              v-model="droppingPoint"
-              :default-option="'Select Your Dropping Location'"
-              :label="'Dropping Point'"
-              :options="getSeatDroppingPointArray"
-              :isOptional="true"
-              propertyName="name"
-            />
-            <!-- :options="getSeatDroppingPointArray" -->
-          </div>
-          <div class="mt-4">
-            <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Departure Time
-            </h2>
-            <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
-              <p class="text-blackPrimary text-sm font-medium">
-                {{ departureDateTime }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Seat Fare Table -->
+        <div class="flex flex-col w-full">
+          <p class="text-xs lg:text-base font-medium text-blackPrimary">
+            Seat class <span class="text-[#E0293B] ml-1">*</span>
+          </p>
           <div
-            v-if="selectedSeatsObj.length"
-            class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]"
+            class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] justify-between items-center"
           >
-            <div
-              class="grid grid-cols-3 gap-x-[14px] px-[14px] py-[10px] border-b"
-            >
-              <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
-                Seat
-              </p>
-              <p
-                class="text-sm lg:text-xs font-semibold text-blackPrimary text-center"
-              >
-                Class
-              </p>
-              <p
-                class="text-sm lg:text-xs font-semibold text-blackPrimary text-right"
-              >
-                Fare
-              </p>
+            <div class="flex flex-row items-center justify-center">
+              <BedIcon />
+              <p class="ml-3">Sofa</p>
             </div>
-
-            <div class="px-4 py-3">
-              <div
-                v-for="seat in selectedCustomizeSeatList"
-                :key="seat.id"
-                class="grid grid-cols-3 gap-x-4 py-2 border-b last:border-b-0 border-dashed"
-              >
-                <p class="text-xs lg:text-sm font-medium text-blackPrimary">
-                  {{ seat.seatNo }}
-                </p>
-                <p
-                  class="text-xs lg:text-sm font-medium text-blackPrimary text-center"
-                >
-                  {{ seat.class }}
-                </p>
-                <p
-                  class="text-xs lg:text-sm font-medium text-blackPrimary text-right"
-                >
-                  {{ seat.fare }}
-                </p>
-              </div>
-            </div>
-
-            <div
-              v-if="totalDiscountFare > 0"
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
-                Discount Amount
-              </p>
-              <p class="text-base lg:text-xs font-semibold text-blackPrimary">
-                BDT {{ totalDiscountFare }}
-              </p>
-            </div>
-
-            <div
-              v-if="totalPromoAmount > 0"
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
-                Promo Amount
-              </p>
-              <p class="text-base lg:text-xs font-semibold text-blackPrimary">
-                BDT {{ totalPromoAmount }}
-              </p>
-            </div>
-            <div
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
-                Total Fare
-              </p>
-              <p class="text-base lg:text-xs font-semibold text-blackPrimary">
-                BDT
-                <span>{{
-                  totalAmount - (totalDiscountFare + totalPromoAmount)
-                }}</span>
-              </p>
-            </div>
-          </div>
-
-          <!-- Passenger Information -->
-          <div class="mt-4">
-            <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Passenger Name <span class="text-[#E0293B]">*</span>
-            </h2>
-            <input
-              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-              type="text"
-              placeholder="Enter your name"
-              v-model="passengerName"
+            <img
+              src="@/assets/images/home/arrowDown.svg"
+              alt="arrow-down"
+              class="w-6 h-6"
             />
-          </div>
-
-          <div class="mt-4">
-            <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Phone No <span class="text-[#E0293B]">*</span>
-            </h2>
-            <div class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]">
-              <div class="flex items-center shrink-0">
-                <img
-                  class="w-[48px] h-[32px]"
-                  src="@/assets/images/bd-flag.svg"
-                  alt=""
-                />
-                <div
-                  class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
-                >
-                  +88
-                </div>
-                <img
-                  class="w-[2px] h-[28px] ml-[4px]"
-                  src="@/assets/images/input-separator.svg"
-                  alt=""
-                />
-              </div>
-              <input
-                class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
-                type="number"
-                minlength="11"
-                maxlength="11"
-                required=""
-                placeholder="Enter your phone"
-                v-model="passengerPhone"
-              />
-            </div>
-          </div>
-
-          <div class="mt-4">
-            <h2
-              class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
-            >
-              <span>Email ID </span>
-              <span class="text-[#8D8D8F]">Optional</span>
-            </h2>
-            <input
-              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
-              type="email"
-              placeholder="Enter your email id"
-              v-model="passengerEmail"
-            />
-          </div>
-
-          <LoaderButton
-            :class="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
-              !selectedSeatIds.length ||
-              !boardingPoint ||
-              !passengerName ||
-              !passengerPhone ||
-              String(passengerPhone).length != 11
-                ? 'bg-gray-500 user cursor-not-allowed'
-                : 'bg-corporate hover:bg-[#D93E2D]'
-            "
-            :disabled="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
-              getLoading ||
-              !boardingPoint ||
-              !passengerName ||
-              !passengerPhone ||
-              String(passengerPhone).length != 11
-            "
-            :loading="getLoading"
-            class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
-            @onClick="paymentPendingBlockHandler"
-          >
-            Next
-          </LoaderButton>
-
-          <div
-            class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2"
-          >
-            <a
-              href="/policies#terms-and-conditions"
-              target="_blank"
-              class="w-full underline text-blackPrimary text-sm font-normal"
-              >Terms and Conditions</a
-            >
-            <a
-              href="/policies#return-and-refund-policy"
-              target="_blank"
-              class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation Policy</a
-            >
           </div>
         </div>
       </div>
     </div>
+
+    <SeatAvailabilityModal
+      v-if="showSeatAvailableModal"
+      :handleSeatAvailableModal="handleSeatAvailableModal"
+    />
+    <SelectFloorModal
+      v-if="showSelectFloorModal"
+      :handleSelectFloorModal="handleSelectFloorModal"
+    />
   </div>
 </template>
 
@@ -540,12 +243,13 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
-import { dateFormat } from "../../../../helpers/dateTimeFormat";
-import { moduleType } from "../../../../helpers/utils";
-import { handleScrollBehaviour } from "../../../../helpers/utils";
-import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
+import { dateFormat } from "../../../../../helpers/dateTimeFormat";
+import { moduleType } from "../../../../../helpers/utils";
+import { handleScrollBehaviour } from "../../../../../helpers/utils";
+import SleeperBedIcon from "../../../../Svg/SleeperBedIcon.vue";
+import SeatAvailabilityModal from "./SeatAvailabilityModal.vue";
 export default {
-  components: { SleeperBedIcon },
+  components: { SleeperBedIcon, SeatAvailabilityModal },
   props: [
     "trip",
     "selectedTrip",
@@ -568,7 +272,8 @@ export default {
       },
       imageUrl: "",
       showPointPolicyModal: false,
-      showBusImageModal: false,
+      showSeatAvailableModal: false,
+      showSelectFloorModal: false,
       selected: false,
       boardingPoint: null,
       droppingPoint: null,
@@ -587,13 +292,12 @@ export default {
       promoCode: "",
       totalPromoAmount: 0,
       moduleType: this.trip.moduleType,
-      showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
     };
   },
   computed: {
-    ...mapGetters("busStore", [
+    ...mapGetters("launchStore", [
       "getSeatArray",
       "getUpperDeckSeatArray",
       "getLowerDeckSeatArray",
@@ -656,13 +360,13 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("busStore", [
+    ...mapMutations("launchStore", [
       "mobileFloatingFilter",
       "setModalBoardingPoints",
       "setDroppingPoints",
       "updateSeatStatus",
     ]),
-    ...mapActions("busStore", [
+    ...mapActions("launchStore", [
       "getPbSeatViewAction",
       "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
@@ -691,11 +395,13 @@ export default {
       this.showPointPolicyModal = !this.showPointPolicyModal;
       this.stopBackgroundScroll(this.showPointPolicyModal);
     },
-    handleBusImagePreviewModal() {
-      if (this.trip?.companyImages?.gallery?.length) {
-        this.showBusImageModal = !this.showBusImageModal;
-        this.stopBackgroundScroll(this.showBusImageModal);
-      }
+    handleSeatAvailableModal() {
+      this.showSeatAvailableModal = !this.showSeatAvailableModal;
+      this.stopBackgroundScroll(this.showSeatAvailableModal);
+    },
+    handleSelectFloorModal() {
+      this.showSelectFloorModal = !this.showSelectFloorModal;
+      this.stopBackgroundScroll(this.showSelectFloorModal);
     },
     stopBackgroundScroll(value) {
       handleScrollBehaviour(!value);
@@ -731,7 +437,7 @@ export default {
         event: "viewSeats",
         from: this.trip.fromCity,
         to: this.trip.toCity,
-        coach: this.trip.coach.name,
+        coach: this.trip.company,
         company: this.trip.company,
         journeyDate: this.departureDateTime,
       };
