@@ -5,7 +5,11 @@
   >
     <div
       class="lg:flex justify-between gap-x-4"
-      :class="true ? 'border-b border-[#DBDBDB]' : 'border-0 border-[#DBDBDB]'"
+      :class="
+        selectedTrip === busIndex
+          ? 'border-b border-[#DBDBDB]'
+          : 'border-0 border-[#DBDBDB]'
+      "
     >
       <div
         class="w-full lg:w-4/5 p-4 divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
@@ -101,7 +105,7 @@
             :selectedTab="selectedTab"
             :setCurrentTab="setCurrentTab"
             :handlePointPolicyModal="handlePointPolicyModal"
-            :boardingPoints="getModalBoardingPoints"
+            :boardingPoints="getBoardingPoints"
             :droppingPoints="getDroppingPoints"
           />
         </div>
@@ -177,14 +181,19 @@
 
     <!-- accordion start -->
     <div
-      v-if="true"
+      v-if="selectedTrip === busIndex"
       class="bg-white rounded-b-[10px] p-4"
       :class="
-        true ? 'max-h-max transition-all ease-in-out duration-700' : 'h-0'
+        selectedTrip === busIndex
+          ? 'max-h-max transition-all ease-in-out duration-700'
+          : 'h-0'
       "
     >
-      <div class="w-full flex flex-row items-center justify-evenly gap-4">
-        <div class="flex flex-col w-full">
+      <div class="grid lg:grid-cols-2 gap-4">
+        <div
+          class="flex flex-col w-full"
+          v-if="getSeatViewData?.seatPlan?.floors?.length"
+        >
           <p class="text-xs lg:text-base font-medium text-blackPrimary">
             Select floor<span class="text-[#E0293B] ml-1">*</span>
           </p>
@@ -196,9 +205,9 @@
               <div
                 class="rounded-full bg-[#EDEDED] h-6 w-6 text-sm flex items-center justify-center font-bold"
               >
-                <p>5</p>
+                <p>{{ selectedFloor?.index || 1 }}</p>
               </div>
-              <p class="ml-3">1st floor</p>
+              <p class="ml-3">{{ selectedFloor?.info?.name || "1st floor" }}</p>
             </div>
             <img
               src="@/assets/images/home/arrowDown.svg"
@@ -213,10 +222,12 @@
           </p>
           <div
             class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] justify-between items-center"
+            @click="handleSelectClassModal"
           >
             <div class="flex flex-row items-center justify-center">
-              <BedIcon />
-              <p class="ml-3">Sofa</p>
+              <BedIcon v-if="selectedClass?.info?.isCabin" />
+              <SofaIcon v-else-if="!selectedClass?.info?.isCabin" />
+              <p class="ml-3">{{ selectedClass?.info?.name }}</p>
             </div>
             <img
               src="@/assets/images/home/arrowDown.svg"
@@ -227,13 +238,23 @@
         </div>
       </div>
     </div>
-
+    <SelectClassModal
+      v-if="showSelectClassModal"
+      :classList="classList"
+      :selectedClass="selectedClass"
+      :handleSelectClassModal="handleSelectClassModal"
+    />
     <SeatAvailabilityModal
-      v-if="showSeatAvailableModal"
+      v-else-if="showSeatAvailableModal"
+      :seatAvailabilityList="
+        getSeatViewData?.seatPlan?.seatAvailabilityList || []
+      "
       :handleSeatAvailableModal="handleSeatAvailableModal"
     />
     <SelectFloorModal
-      v-if="showSelectFloorModal"
+      v-else-if="showSelectFloorModal"
+      :floorList="getSeatViewData?.seatPlan?.floors"
+      :selectedFloor="selectedFloor"
       :handleSelectFloorModal="handleSelectFloorModal"
     />
   </div>
@@ -274,6 +295,7 @@ export default {
       showPointPolicyModal: false,
       showSeatAvailableModal: false,
       showSelectFloorModal: false,
+      showSelectClassModal: false,
       selected: false,
       boardingPoint: null,
       droppingPoint: null,
@@ -294,6 +316,9 @@ export default {
       moduleType: this.trip.moduleType,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
+      selectedFloor: {},
+      selectedClass: {},
+      classList: [],
     };
   },
   computed: {
@@ -301,16 +326,20 @@ export default {
       "getSeatArray",
       "getUpperDeckSeatArray",
       "getLowerDeckSeatArray",
-      "getSeatBoardingPointArray",
-      "getSeatDroppingPointArray",
       "getPaymentPendingBlockData",
       "getLoading",
       "getSeatViewData",
       "getTrips",
       "getPromoCode",
-      "getModalBoardingPoints",
-      "getDroppingPoints",
     ]),
+    getDroppingPoints() {
+      return this.trip.droppingPoints.map((item) => ({
+        name: item,
+      }));
+    },
+    getBoardingPoints() {
+      return this.trip.boardingPoints.map((item) => ({ name: item }));
+    },
     departureDateTime() {
       if (this.boardingPoint?.scheduleTime === "") {
         return dateTimeFormat(
@@ -363,28 +392,37 @@ export default {
     ...mapMutations("launchStore", [
       "mobileFloatingFilter",
       "setModalBoardingPoints",
-      "setDroppingPoints",
       "updateSeatStatus",
     ]),
     ...mapActions("launchStore", [
       "getPbSeatViewAction",
-      "getBoardingPointForBus",
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
       "seatLockAction",
     ]),
+    getSeatClasses() {
+      const seatClassArray = [];
+      const selectedFloorId = this.selectedFloor?.info?._id;
+
+      if (selectedFloorId) {
+        const seatClasses = this.getSeatViewData?.seatPlan?.seatClasses;
+        if (seatClasses) {
+          seatClasses.forEach((item) => {
+            if (item.floorId === selectedFloorId) {
+              seatClassArray.push(item);
+            }
+          });
+        }
+      }
+
+      this.classList = seatClassArray.length
+        ? seatClassArray
+        : this.getSeatViewData?.seatPlan?.seatClasses;
+    },
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
-        this.setDroppingPoints([]);
-        this.setModalBoardingPoints([]);
-        this.$nextTick(async () => {
-          this.$nuxt.$loading?.start();
-          const payload = this.getPayloadForSeatView();
-          await this.getBoardingPointForBus(payload);
-          this.$nuxt.$loading?.finish();
-          this.setSelectedBuxIndex(this.busIndex);
-          this.showPointPolicyModal = true;
-        });
+        this.setSelectedBuxIndex(this.busIndex);
+        this.showPointPolicyModal = true;
       } else {
         this.showPointPolicyModal = true;
       }
@@ -395,13 +433,37 @@ export default {
       this.showPointPolicyModal = !this.showPointPolicyModal;
       this.stopBackgroundScroll(this.showPointPolicyModal);
     },
-    handleSeatAvailableModal() {
+    async handleSeatAvailableModal() {
+      if (!this.showSeatAvailableModal) {
+        const payload = this.getPayloadForSeatView();
+        await this.getPbSeatViewAction(payload);
+      }
       this.showSeatAvailableModal = !this.showSeatAvailableModal;
       this.stopBackgroundScroll(this.showSeatAvailableModal);
     },
-    handleSelectFloorModal() {
-      this.showSelectFloorModal = !this.showSelectFloorModal;
-      this.stopBackgroundScroll(this.showSelectFloorModal);
+    toggleFloorModalAndScroll(showModal) {
+      this.showSelectFloorModal = showModal;
+      this.stopBackgroundScroll(showModal);
+    },
+    handleSelectFloorModal(data) {
+      if (data?.payload) {
+        this.selectedFloor = data.payload;
+        this.toggleFloorModalAndScroll(!this.showSelectFloorModal);
+        this.handleSelectClassModal();
+      } else {
+        this.toggleFloorModalAndScroll(!this.showSelectFloorModal);
+      }
+    },
+    handleSelectClassModal(data) {
+      if (!this.showSelectClassModal) {
+        this.getSeatClasses();
+      }
+
+      if (data?.payload) {
+        this.selectedClass = data.payload;
+      }
+      this.showSelectClassModal = !this.showSelectClassModal;
+      this.stopBackgroundScroll(this.showSelectClassModal);
     },
     stopBackgroundScroll(value) {
       handleScrollBehaviour(!value);
@@ -446,24 +508,7 @@ export default {
     },
     getPayloadForSeatView() {
       return {
-        moduleType: this.trip.moduleType,
-        busServiceType: this.trip.busServiceType,
-        transportType: this.trip.transportType,
-        transportId: this.trip.transportId,
-        uid: this.trip.uid,
-        fromCity: this.trip.fromCity,
-        toCity: this.trip.toCity,
-        busId: this.trip.busId,
-        departureId: this.trip.departureId,
-        departureDate: this.trip.departureDate,
-        departureTime: this.trip.departureTime,
-        sku: this.trip.sku,
-        id: this.trip.id,
-        seatPlan: this.trip.seatPlan,
-        seatFare: this.trip.seatFare,
-        companyId: this.trip.companyId,
-        coachType: this.trip.coach.type,
-        tripDateTime: this.trip.tripDateTime,
+        tripId: this.trip.tripId,
       };
     },
     isSitAlreadySelected(seat) {
@@ -899,8 +944,33 @@ export default {
       this.totalDiscountAmount = tempTotalDiscountAmount;
       this.totalDiscountFare = tempTotalDiscountFare;
     },
+    setSelectedFloor(value) {
+      const floors = value?.seatPlan?.floors;
+      this.selectedFloor = floors?.length
+        ? { index: 1, info: floors[0] }
+        : null;
+    },
+
+    setClassList(value) {
+      const selectedFloorId = this.selectedFloor?.info?._id;
+      const seatClasses = value?.seatPlan?.seatClasses || [];
+      this.classList = selectedFloorId
+        ? seatClasses.filter((item) => item.floorId === selectedFloorId)
+        : seatClasses;
+    },
+
+    setSelectedClass() {
+      this.selectedClass = this.classList.length
+        ? { index: 1, info: this.classList[0] }
+        : null;
+    },
   },
   watch: {
+    getSeatViewData(value) {
+      this.setSelectedFloor(value);
+      this.setClassList(value);
+      this.setSelectedClass();
+    },
     selectedTrip(value) {
       if (
         value >= 0 &&
@@ -910,16 +980,6 @@ export default {
         this.handleSeatLock(this.selectedSeatLabels.join(","), false);
         this.resetForm();
       }
-    },
-    getSeatBoardingPointArray(value) {
-      const findId = value.findIndex((item) => item?.defaultBoarding === true);
-      this.boardingPoint = findId === -1 ? value[0] : value[findId];
-    },
-    getSeatDroppingPointArray(value) {
-      let findId = value.findIndex(
-        (item) => item?.defaultDroppingPoint === true
-      );
-      this.droppingPoint = findId === -1 ? { name: "", id: "" } : value[findId];
     },
     getTrips: {
       handler(value) {

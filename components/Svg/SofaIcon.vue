@@ -12,7 +12,7 @@
       width="13.8462"
       height="1.53846"
       rx="0.769231"
-      fill="#151414"
+      :fill="hover ? '#FFFFFF' : '#151414'"
     />
     <rect
       x="3.07715"
@@ -20,7 +20,7 @@
       width="13.8462"
       height="10.7692"
       rx="2"
-      fill="#151414"
+      :fill="hover ? '#FFFFFF' : '#151414'"
     />
     <rect
       x="2.30762"
@@ -29,7 +29,7 @@
       height="1.53846"
       rx="0.769231"
       transform="rotate(90 2.30762 6.15381)"
-      fill="#151414"
+      :fill="hover ? '#FFFFFF' : '#151414'"
     />
     <rect
       x="19.231"
@@ -38,7 +38,7 @@
       height="1.53846"
       rx="0.769231"
       transform="rotate(90 19.231 6.15381)"
-      fill="#151414"
+      :fill="hover ? '#FFFFFF' : '#151414'"
     />
   </svg>
 </template>
@@ -46,21 +46,9 @@
 <script>
 export default {
   props: {
-    width: {
-      type: String,
-      default: "30",
-    },
-    height: {
-      type: String,
-      default: "26",
-    },
-    fill: {
-      type: String,
-      default: "#DCDCDC",
-    },
-    stroke: {
-      type: String,
-      default: "#DCDCDC",
+    hover: {
+      type: Boolean,
+      default: false,
     },
   },
 };

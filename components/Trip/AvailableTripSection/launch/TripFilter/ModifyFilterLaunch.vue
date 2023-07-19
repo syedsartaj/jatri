@@ -139,12 +139,12 @@
       </div>
     </div>
 
-    <div v-if="getLaunchCompanies.length">
+    <div v-if="getLaunchList.length">
       <hr class="my-5" />
       <h2 class="text-blackSecondery text-base font-medium">LAUNCH:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
-          v-for="bus in getLaunchCompanies"
+          v-for="bus in getLaunchList"
           :key="bus"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
@@ -190,7 +190,7 @@ export default {
   computed: {
     ...mapGetters("launchStore", [
       "getBoardingPoints",
-      "getLaunchCompanies",
+      "getLaunchList",
       "getLaunchClasses",
       "getCities",
     ]),

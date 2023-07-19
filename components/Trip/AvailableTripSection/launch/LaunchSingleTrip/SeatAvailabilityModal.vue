@@ -97,7 +97,7 @@
 
 <script>
 export default {
-  props: ["handleSeatAvailableModal"],
+  props: ["handleSeatAvailableModal", "seatAvailabilityList"],
   name: "SeatAvailabilityModal",
   data() {
     return {

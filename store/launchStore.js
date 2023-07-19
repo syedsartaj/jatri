@@ -2,8 +2,6 @@ import * as apis from "../helpers/apis";
 import { handleScrollBehaviour } from "../helpers/utils";
 
 const mobileFilterInitialData = {
-  coachTypes: ["ac", "non-ac", "all"],
-  coachType: "",
   priceFilter: ["l2h", "h2l"],
   priceFilterType: null,
   boardingPoint: "",
@@ -16,20 +14,14 @@ const mobileFilterInitialData = {
 export const state = () => ({
   mobileFloatingFilter: true,
   boardingPoints: [],
-  launchCompanies: [],
+  launchList: [],
   launchClasses: [],
   trips: [],
   seatViewData: {},
   seatArray: [],
-  seatBoardingPointArray: [],
-  seatDroppingPointArray: [],
-  upperDeckSeatArray: [],
-  lowerDeckSeatArray: [],
   paymentPendingBlockData: {},
   Loading: false,
   seatViewData: {},
-  modalBoardingPointList: [],
-  droppingPoints: [],
   promoCode: {},
   mobileFilterInitialData: mobileFilterInitialData,
   mobileFilterData: mobileFilterInitialData,
@@ -41,19 +33,13 @@ export const state = () => ({
 export const getters = {
   getTrips: (state) => state.trips,
   getBoardingPoints: (state) => state.boardingPoints,
-  getLaunchCompanies: (state) => state.launchCompanies,
+  getLaunchList: (state) => state.launchList,
   getLaunchClasses: (state) => state.launchClasses,
   getSeatArray: (state) => state.seatArray,
-  getUpperDeckSeatArray: (state) => state.upperDeckSeatArray,
-  getLowerDeckSeatArray: (state) => state.lowerDeckSeatArray,
-  getSeatBoardingPointArray: (state) => state.seatBoardingPointArray,
-  getSeatDroppingPointArray: (state) => state.seatDroppingPointArray,
   getPaymentPendingBlockData: (state) => state.paymentPendingBlockData,
   getLoading: (state) => state.Loading,
   getSeatViewData: (state) => state.seatViewData,
   getPromoCode: (state) => state.promoCode,
-  getModalBoardingPoints: (state) => state.modalBoardingPointList,
-  getDroppingPoints: (state) => state.droppingPoints,
   getMobileFloatingFilter: (state) => state.mobileFloatingFilter,
   getMobileFilterData: (state) => state.mobileFilterData,
   getMobileFilterInitialData: (state) => state.mobileFilterInitialData,
@@ -69,12 +55,9 @@ export const actions = {
         apis.SERVICE_TYPE.LAUNCH.POST_SCHEDULE_TRIPS_URL,
         payload
       );
-      if (data.trips) {
-        commit("setTrips", data.trips);
-      }
+      commit("setTrips", data.trips || []);
       commit("setBoardingPoints", data.boardingPoints || []);
-      commit("setLaunchCompanies", data.ships || []);
-      // commit("setLaunchClasses", data.launchClasses || []); class have to change
+      commit("setLaunchList", data.ships || []);
     } catch (error) {
       const errorMessage = error?.response?.data?.message;
 
@@ -101,28 +84,6 @@ export const actions = {
       );
       commit("setSeatViewData", data);
       commit("resetPromoCode");
-    } catch (error) {
-      if (error.response && error.response.data.statusCode === 404) {
-        this.$toast.error(error.response.data.message, {
-          position: "bottom-right",
-          duration: 5000,
-        });
-        window.location.reload(true);
-      }
-      this.$toast.error(error.response.data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
-    }
-  },
-  async getBoardingPointForBus({ commit }, payload) {
-    try {
-      const { data } = await this.$api.$post(
-        apis.SERVICE_TYPE.LAUNCH.GET_SEAT_VIEW_URL,
-        payload
-      );
-      commit("setDroppingPoints", data.seatPlan.droppingPoints);
-      commit("setModalBoardingPoints", data.seatPlan.bordingPoints);
     } catch (error) {
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
@@ -334,24 +295,16 @@ export const mutations = {
   setLoading: (state, data) => (state.loading = data),
   setSeatViewData: (state, data) => {
     state.seatViewData = data;
-    state.seatArray = data.seatPlan.seatList;
-    state.seatBoardingPointArray = data.seatPlan.bordingPoints;
-    state.seatDroppingPointArray = data.seatPlan.droppingPoints;
-    state.upperDeckSeatArray = data.seatPlan.upperDeckSeatList;
-    state.lowerDeckSeatArray = data.seatPlan.lowerDeckSeatList;
+    state.seatArray = data.seatPlan.ClassWiseSeatPlan;
   },
   setPaymentPendingBlockData: (state, data) =>
     (state.paymentPendingBlockData = data),
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;
   },
-  setModalBoardingPoints: (state, data) =>
-    (state.modalBoardingPointList = data),
-  setDroppingPoints: (state, data) => (state.droppingPoints = data),
-
   setTrips: (state, data) => (state.trips = Object.values(data)),
   setBoardingPoints: (state, data) => (state.boardingPoints = data),
-  setLaunchCompanies: (state, data) => (state.launchCompanies = data),
+  setLaunchList: (state, data) => (state.launchList = data),
   setLaunchClasses: (state, data) => (state.launchClasses = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
@@ -380,19 +333,7 @@ export const mutations = {
   },
   updateSeatStatus: (state, seatInfo) => {
     const { seatType, rowIndex, colIndex } = seatInfo;
-    switch (seatType) {
-      case "UPPER_DECK": {
-        state.upperDeckSeatArray[rowIndex][colIndex].status = "booked";
-        break;
-      }
-      case "LOWER_DECK": {
-        state.lowerDeckSeatArray[rowIndex][colIndex].status = "booked";
-        break;
-      }
-      default: {
-        state.seatArray[rowIndex][colIndex].status = "booked";
-      }
-    }
+    state.seatArray[rowIndex][colIndex].status = "booked";
   },
   updateMobileFilterData: (state, data) => {
     state.mobileFilterData = data;

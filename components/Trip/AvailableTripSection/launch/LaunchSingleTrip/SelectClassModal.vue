@@ -13,9 +13,11 @@
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between items-center">
-              <p class="text-xl text-blackPrimary font-medium">Select floor</p>
+              <p class="text-xl text-blackPrimary font-medium">
+                Select seat class
+              </p>
               <img
-                @click="handleSelectFloorModal"
+                @click="handleSelectClassModal"
                 src="@/assets/images/icons/closeIcon.svg"
                 alt=""
                 class="cursor-pointer"
@@ -27,10 +29,10 @@
                 <div class="overflow-x-auto py-4">
                   <div class="grid lg:grid-cols-3 gap-x-3 gap-y-3 lg:gap-x-4">
                     <div
-                      v-for="(item, index) in floorList"
+                      v-for="(item, index) in classList"
                       :key="index"
                       @click="
-                        handleSelectFloorModal({
+                        handleSelectClassModal({
                           payload: {
                             index: index + 1,
                             info: item,
@@ -39,21 +41,33 @@
                       "
                       @mouseleave="hoverFloor = ''"
                       @mouseenter="hoverFloor = item"
-                      :class="hoverFloor === item && 'bg-corporate'"
-                      class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] items-center"
+                      :class="
+                        (hoverFloor === item ||
+                          item.classId === selectedClass?.info?.classId) &&
+                        'bg-corporate'
+                      "
+                      class="cursor-pointer w-full flex flex-row h-[46px] px-4 rounded-lg border border-[#EDEDED] items-center"
                     >
-                      <div
-                        :class="
-                          hoverFloor === item ? 'bg-[#FFFFFF]' : 'bg-[#EDEDED]'
+                      <BedIcon
+                        v-if="item.isCabin"
+                        :hover="
+                          hoverFloor === item ||
+                          item.classId === selectedClass?.info?.classId
                         "
-                        class="rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold"
-                      >
-                        <p :class="hoverFloor === item && 'text-corporate'">
-                          {{ index + 1 }}
-                        </p>
-                      </div>
+                      />
+                      <SofaIcon
+                        v-else-if="!item.isCabin"
+                        :hover="
+                          hoverFloor === item ||
+                          item.classId === selectedClass?.info?.classId
+                        "
+                      />
                       <p
-                        :class="hoverFloor === item && 'text-[#FFFFFF]'"
+                        :class="
+                          (hoverFloor === item ||
+                            item.classId === selectedClass?.info?.classId) &&
+                          'text-[#FFFFFF]'
+                        "
                         class="ml-3"
                       >
                         {{ item.name }}
@@ -72,8 +86,8 @@
 
 <script>
 export default {
-  props: ["handleSelectFloorModal", "floorList"],
-  name: "SelectFloorModal",
+  props: ["handleSelectClassModal", "classList", "selectedClass"],
+  name: "SelectClassModal",
   data() {
     return {
       selectedFloor: "",
