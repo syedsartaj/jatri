@@ -17,8 +17,6 @@ export const state = () => ({
   launchList: [],
   launchClasses: [],
   trips: [],
-  seatViewData: {},
-  seatArray: [],
   paymentPendingBlockData: {},
   Loading: false,
   seatViewData: {},
@@ -35,7 +33,6 @@ export const getters = {
   getBoardingPoints: (state) => state.boardingPoints,
   getLaunchList: (state) => state.launchList,
   getLaunchClasses: (state) => state.launchClasses,
-  getSeatArray: (state) => state.seatArray,
   getPaymentPendingBlockData: (state) => state.paymentPendingBlockData,
   getLoading: (state) => state.Loading,
   getSeatViewData: (state) => state.seatViewData,
@@ -295,7 +292,6 @@ export const mutations = {
   setLoading: (state, data) => (state.loading = data),
   setSeatViewData: (state, data) => {
     state.seatViewData = data;
-    state.seatArray = data.seatPlan.ClassWiseSeatPlan;
   },
   setPaymentPendingBlockData: (state, data) =>
     (state.paymentPendingBlockData = data),
@@ -330,10 +326,6 @@ export const mutations = {
 
       return 0;
     });
-  },
-  updateSeatStatus: (state, seatInfo) => {
-    const { seatType, rowIndex, colIndex } = seatInfo;
-    state.seatArray[rowIndex][colIndex].status = "booked";
   },
   updateMobileFilterData: (state, data) => {
     state.mobileFilterData = data;

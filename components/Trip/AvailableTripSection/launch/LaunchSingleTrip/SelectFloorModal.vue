@@ -39,21 +39,38 @@
                       "
                       @mouseleave="hoverFloor = ''"
                       @mouseenter="hoverFloor = item"
-                      :class="hoverFloor === item && 'bg-corporate'"
+                      :class="
+                        (hoverFloor === item ||
+                          item._id === selectedFloor?.info?._id) &&
+                        'bg-corporate'
+                      "
                       class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] items-center"
                     >
                       <div
                         :class="
-                          hoverFloor === item ? 'bg-[#FFFFFF]' : 'bg-[#EDEDED]'
+                          hoverFloor === item ||
+                          item._id === selectedFloor?.info?._id
+                            ? 'bg-[#FFFFFF]'
+                            : 'bg-[#EDEDED]'
                         "
                         class="rounded-full h-6 w-6 text-sm flex items-center justify-center font-bold"
                       >
-                        <p :class="hoverFloor === item && 'text-corporate'">
+                        <p
+                          :class="
+                            (hoverFloor === item ||
+                              item._id === selectedFloor?.info?._id) &&
+                            'text-corporate'
+                          "
+                        >
                           {{ index + 1 }}
                         </p>
                       </div>
                       <p
-                        :class="hoverFloor === item && 'text-[#FFFFFF]'"
+                        :class="
+                          (hoverFloor === item ||
+                            item._id === selectedFloor?.info?._id) &&
+                          'text-[#FFFFFF]'
+                        "
                         class="ml-3"
                       >
                         {{ item.name }}
@@ -72,11 +89,10 @@
 
 <script>
 export default {
-  props: ["handleSelectFloorModal", "floorList"],
+  props: ["handleSelectFloorModal", "floorList", "selectedFloor"],
   name: "SelectFloorModal",
   data() {
     return {
-      selectedFloor: "",
       hoverFloor: "",
     };
   },

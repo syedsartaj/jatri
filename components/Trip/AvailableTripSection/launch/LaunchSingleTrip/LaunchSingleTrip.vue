@@ -130,7 +130,7 @@
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
         </div>
-        <div class="lg:hidden flex justify-start items-center gap-x-3">
+        <div class="w-full lg:hidden flex justify-start items-center gap-x-3">
           <img
             src="@/assets/images/icons/fareIcon.svg"
             alt=""
@@ -151,7 +151,7 @@
             <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
           </div>
         </div>
-        <div class="w-full flex flex-row items-center lg:mt-[26px] gap-x-2">
+        <div class="w-full flex flex-row justify-end  items-center lg:mt-[26px] gap-x-2">
           <img
             @click="handleSeatAvailableModal"
             src="@/assets/images/icons/seatClassIcon.svg"
@@ -237,6 +237,7 @@
           </div>
         </div>
       </div>
+      <LaunchSeatView :selectedClassSeatData="getSelectedClassSeatData" />
     </div>
     <SelectClassModal
       v-if="showSelectClassModal"
@@ -270,6 +271,7 @@ import { handleScrollBehaviour } from "../../../../../helpers/utils";
 import SleeperBedIcon from "../../../../Svg/SleeperBedIcon.vue";
 import SeatAvailabilityModal from "./SeatAvailabilityModal.vue";
 export default {
+  name: "LaunchSingleTrip",
   components: { SleeperBedIcon, SeatAvailabilityModal },
   props: [
     "trip",
@@ -323,7 +325,6 @@ export default {
   },
   computed: {
     ...mapGetters("launchStore", [
-      "getSeatArray",
       "getUpperDeckSeatArray",
       "getLowerDeckSeatArray",
       "getPaymentPendingBlockData",
@@ -332,6 +333,11 @@ export default {
       "getTrips",
       "getPromoCode",
     ]),
+    getSelectedClassSeatData() {
+      return this.getSeatViewData?.seatPlan.ClassWiseSeatPlan.find(
+        (item) => item.classId === this.selectedClass.info.classId
+      );
+    },
     getDroppingPoints() {
       return this.trip.droppingPoints.map((item) => ({
         name: item,
