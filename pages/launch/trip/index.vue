@@ -3,11 +3,11 @@
     <!-- Search modifier -->
     <div class="relative">
       <BannerSectionTripPage />
-      <ModifyFilterMobileBus />
+      <ModifyFilterMobileLaunch />
 
       <!-- Mobile device filter button -->
       <button
-        v-if="isMobileFloatingFilter"
+        v-if="getMobileFloatingFilter"
         @click="toggleTripFilterModal"
         class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-[88px] z-[999999] rounded-full"
       >
@@ -16,8 +16,8 @@
       </button>
 
       <!-- Filter modal -->
-      <div class="block lg:hiddden" v-if="isTripFilterModalOpen">
-        <TripFilterModal
+      <div class="block lg:hidden" v-if="isTripFilterModalOpen">
+        <TripFilterModalLaunch
           :close="toggleTripFilterModal"
           @handleTripFilterModal="toggleTripFilterModal"
         />
@@ -44,14 +44,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters("guarantedseat", [
-      "isMobileFloatingFilter",
+    ...mapGetters("launchStore", [
+      "getMobileFloatingFilter",
       "getMobileFilterInitialData",
     ]),
   },
 
   methods: {
-    ...mapMutations("guarantedseat", ["updateMobileFilterData"]),
+    ...mapMutations("busStore", ["updateMobileFilterData"]),
     toggleTripFilterModal() {
       const body = document.getElementsByTagName("body")[0];
       if (body) {
