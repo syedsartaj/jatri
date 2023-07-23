@@ -5,10 +5,8 @@ const mobileFilterInitialData = {
   priceFilter: ["l2h", "h2l"],
   priceFilterType: null,
   boardingPoint: "",
-  busCompany: "",
   timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
   selectedTime: null,
-  selectedBusClass: "",
 };
 
 export const state = () => ({
@@ -55,6 +53,7 @@ export const actions = {
       commit("setTrips", data.trips || []);
       commit("setBoardingPoints", data.boardingPoints || []);
       commit("setLaunchList", data.ships || []);
+      commit("sortedTrip", { from: "SCHEDULE_TRIP" });
     } catch (error) {
       const errorMessage = error?.response?.data?.message;
 
@@ -304,7 +303,12 @@ export const mutations = {
   setLaunchClasses: (state, data) => (state.launchClasses = data),
   resetPromoCode: (state) => (state.promoCode = {}),
   sortedTrip: (state, data) => {
-    const sortBy = data === "l2h" ? 1 : -1;
+    const tempData =
+      data?.from === "SCHEDULE_TRIP"
+        ? state.mobileFilterData.priceFilterType
+        : data;
+
+    const sortBy = tempData === "l2h" ? 1 : -1;
     state.trips.sort((a, b) => {
       const getActualFare = (tempFare) => {
         if (tempFare.includes("-")) {
@@ -317,9 +321,7 @@ export const mutations = {
         return parseFloat(tempFare); // Parse fare value as number
       };
 
-      const fareDiff =
-        getActualFare(a.seatFare[0].fare) - getActualFare(b.seatFare[0].fare);
-
+      const fareDiff = getActualFare(a.seatFare) - getActualFare(b.seatFare);
       if (fareDiff !== 0) {
         return sortBy * fareDiff;
       }

@@ -16,7 +16,7 @@
       </button>
 
       <!-- Filter modal -->
-      <div class="block lg:hiddden" v-if="isTripFilterModalOpen">
+      <div class="block lg:hidden" v-if="isTripFilterModalOpen">
         <TripFilterModalLaunch
           :close="toggleTripFilterModal"
           @handleTripFilterModal="toggleTripFilterModal"

@@ -42,45 +42,14 @@
       </button>
     </div>
 
-    <div v-if="getLaunchClasses.length">
-      <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">BUS CLASS:</h2>
-      <div class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]">
-        <div
-          v-for="busClass in getLaunchClasses"
-          :key="busClass"
-          class="w-full h-9"
-        >
-          <input id="busClass" type="checkbox" class="hidden" />
-          <label for="busClass">
-            <button
-              @click="setBusClass(busClass)"
-              class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
-              :class="
-                selectedBusClass == busClass
-                  ? 'bg-corporate text-white'
-                  : 'bg-[#ededed] text-blackPrimary'
-              "
-            >
-              <img
-                src="@/assets/images/icons/seat.svg"
-                alt="Bus class"
-                class=""
-              />
-              {{ busClass }}
-            </button>
-          </label>
-        </div>
-      </div>
-    </div>
-
     <div v-if="priceFilter.length">
       <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">PRICE:</h2>
+      <h2 class="text-blackSecondary text-base font-medium">PRICE:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
           v-for="priceDirection in priceFilter"
           :key="priceDirection"
+          @click="() => setPriceFilterType(priceDirection)"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
           <label
@@ -115,7 +84,7 @@
 
     <div v-if="getBoardingPoints.length">
       <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">BOARDING POINT:</h2>
+      <h2 class="text-blackSecondary text-base font-medium">BOARDING POINT:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
           v-for="point in getBoardingPoints"
@@ -141,24 +110,24 @@
 
     <div v-if="getLaunchList.length">
       <hr class="my-5" />
-      <h2 class="text-blackSecondery text-base font-medium">LAUNCH:</h2>
+      <h2 class="text-blackSecondary text-base font-medium">LAUNCH:</h2>
       <div class="mt-[10px] divide-y divide-dashed">
         <div
-          v-for="bus in getLaunchList"
-          :key="bus"
+          v-for="launch in getLaunchList"
+          :key="launch"
           class="flex justify-between items-center my-2 last:pt-[6px]"
         >
           <label
-            :for="bus"
+            :for="launch"
             class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
           >
-            {{ bus }}
+            {{ launch }}
           </label>
           <input
-            :id="bus"
+            :id="launch"
             type="checkbox"
-            @click="setBusCompany(bus)"
-            :checked="busCompany === bus"
+            @click="setLaunchCompany(launch)"
+            :checked="launchCompany === launch"
             class="default:border-2 border-blackPrimary cursor-pointer"
           />
         </div>
@@ -181,10 +150,9 @@ export default {
       priceFilter: ["l2h", "h2l"],
       priceFilterType: null,
       boardingPoint: "",
-      busCompany: "",
+      launchCompany: "",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
       selectedTime: null,
-      selectedBusClass: "",
     };
   },
   computed: {
@@ -192,6 +160,7 @@ export default {
       "getBoardingPoints",
       "getLaunchList",
       "getLaunchClasses",
+      "getMobileFilterData",
       "getCities",
     ]),
     ...mapGetters("common", ["getCities"]),
@@ -210,23 +179,29 @@ export default {
       immediate: true,
       handler() {
         this.priceFilterType = null;
-        this.busCompany = null;
+        this.launchCompany = null;
         this.boardingPoint = null;
         this.selectedTime = null;
-        this.selectedBusClass = null;
       },
     },
   },
 
   methods: {
-    ...mapMutations("busStore", ["sortedTrip"]),
-    ...mapActions("busStore", ["getPbScheduleDataAction"]),
+    ...mapMutations("launchStore", ["sortedTrip", "updateMobileFilterData"]),
+    ...mapActions("launchStore", ["getPbScheduleDataAction"]),
+    setPriceFilterType(type) {
+      const newFilterData = {
+        ...this.getMobileFilterData,
+        priceFilterType: type,
+      };
+      this.updateMobileFilterData(newFilterData);
+    },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
       this.handleTripFilter();
     },
-    setBusCompany(bus) {
-      this.busCompany = bus === this.busCompany ? null : bus;
+    setLaunchCompany(bus) {
+      this.launchCompany = bus === this.launchCompany ? null : bus;
       this.handleTripFilter();
     },
     async handleTripFilter() {
@@ -259,34 +234,27 @@ export default {
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
       }
-      if (this.busCompany) {
-        payload.company = this.busCompany;
-      }
-      if (this.selectedBusClass) {
-        payload.busClass = this.selectedBusClass;
-      }
 
       if (time) {
         payload.time = time;
+      }
+
+      if (this.launchCompany) {
+        payload.ship = this.launchCompany;
       }
 
       await this.getPbScheduleDataAction(payload);
       this.$nuxt.$loading?.finish();
     },
     resetFilter() {
-      this.busCompany = null;
+      this.launchCompany = null;
       this.boardingPoint = null;
       this.selectedTime = null;
-      this.selectedBusClass = null;
       this.priceFilterType = null;
       this.handleTripFilter();
     },
     setTime(time) {
       this.selectedTime = time;
-      this.handleTripFilter();
-    },
-    setBusClass(value) {
-      this.selectedBusClass = value;
       this.handleTripFilter();
     },
     handleFromSubmit() {

@@ -49,85 +49,9 @@
                 </button>
               </div>
 
-              <div v-if="coachTypes.length">
-                <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
-                  BUS TYPE:
-                </h2>
-                <div class="flex justify-evenly gap-[7px] mt-[10px]">
-                  <div
-                    v-for="busType in coachTypes"
-                    :key="busType"
-                    class="w-full h-9"
-                  >
-                    <input id="busType" type="button" class="hidden" />
-                    <label for="busType">
-                      <button
-                        @click="setCoachtype(busType)"
-                        class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
-                        :class="
-                          coachType == busType
-                            ? 'bg-corporate text-white'
-                            : 'bg-[#ededed] text-blackPrimary'
-                        "
-                      >
-                        <img
-                          :src="
-                            require(busType == 'ac'
-                              ? '@/assets/images/icons/acIcon.svg'
-                              : busType == 'non-ac'
-                              ? '@/assets/images/icons/nonAcIcon.svg'
-                              : '@/assets/images/icons/anyConditionIcon.svg')
-                          "
-                          alt="Bus Type"
-                          class=""
-                        />
-                        {{ busType }}
-                      </button>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div v-if="getBusClasses.length">
-                <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
-                  BUS CLASS:
-                </h2>
-                <div
-                  class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]"
-                >
-                  <div
-                    v-for="busClass in getBusClasses"
-                    :key="busClass"
-                    class="w-full h-9"
-                  >
-                    <input id="busClass" type="button" class="hidden" />
-                    <label for="busClass">
-                      <button
-                        @click="setBusClass(busClass)"
-                        class="group w-full h-full flex justify-center items-center gap-x-[10px] capitalize rounded px-[6px] py-2 text-xs font-medium"
-                        :class="
-                          selectedBusClass == busClass
-                            ? 'bg-corporate text-white'
-                            : 'bg-[#ededed] text-blackPrimary'
-                        "
-                      >
-                        <img
-                          src="@/assets/images/icons/seat.svg"
-                          alt="Bus class"
-                          class=""
-                        />
-                        {{ busClass }}
-                      </button>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
               <div v-if="priceFilter.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   PRICE:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
@@ -177,7 +101,7 @@
 
               <div v-if="getBoardingPoints.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   BOARDING POINT:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
@@ -209,32 +133,32 @@
                 </div>
               </div>
 
-              <div v-if="getBusCompanies.length">
+              <div v-if="getLaunchList.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
-                  BUS COMPANY:
+                <h2 class="text-blackSecondary text-base font-medium">
+                  Launch:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
                   <div
-                    v-for="bus in getBusCompanies"
-                    @click="setBusCompany(bus)"
-                    :key="bus"
+                    v-for="launch in getLaunchList"
+                    @click="setLaunchCompany(launch)"
+                    :key="launch"
                     class="flex justify-between items-center my-2 last:pt-[6px] cursor-pointer"
                   >
                     <label
-                      :for="bus"
-                      :class="busCompany === bus && `text-[#F04935]`"
+                      :for="launch"
+                      :class="launchCompany === launch && `text-[#F04935]`"
                       class="flex justify-start items-center gap-x-[9.52px] cursor-pointer text-blackPrimary text-base font-normal"
                     >
-                      {{ bus }}
+                      {{ launch }}
                     </label>
                     <input
-                      :id="bus"
+                      :id="launch"
                       type="button"
                       class="default:border-2 border-blackPrimary cursor-pointer"
                     />
                     <img
-                      v-if="busCompany === bus"
+                      v-if="launchCompany === launch"
                       src="@/assets/images/icons/redTick.svg"
                       alt="time"
                       class="h-6 w-6"
@@ -274,12 +198,12 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("busStore", [
+    ...mapGetters("launchStore", [
       "getTrips",
       "getLoading",
       "getBoardingPoints",
-      "getBusCompanies",
-      "getBusClasses",
+      "getLaunchList",
+      "getLaunchClasses",
       "getMobileFilterData",
     ]),
     ...mapGetters("common", ["getCities"]),
@@ -298,8 +222,8 @@ export default {
     boardingPoint() {
       return this.getMobileFilterData.boardingPoint;
     },
-    busCompany() {
-      return this.getMobileFilterData.busCompany;
+    launchCompany() {
+      return this.getMobileFilterData.launchCompany;
     },
     timeList() {
       return this.getMobileFilterData.timeList;
@@ -326,15 +250,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations("busStore", ["sortedTrip", "updateMobileFilterData"]),
-    ...mapActions("busStore", ["getPbScheduleDataAction"]),
-    setCoachtype(type) {
-      const newFilterData = {
-        ...this.getMobileFilterData,
-        coachType: type,
-      };
-      this.updateMobileFilterData(newFilterData);
-    },
+    ...mapMutations("launchStore", ["sortedTrip", "updateMobileFilterData"]),
+    ...mapActions("launchStore", ["getPbScheduleDataAction"]),
     setBoardingPoint(point) {
       const newFilterData = {
         ...this.getMobileFilterData,
@@ -349,30 +266,16 @@ export default {
       };
       this.updateMobileFilterData(newFilterData);
     },
-    setBusCompany(bus) {
+    setLaunchCompany(bus) {
       const newFilterData = {
         ...this.getMobileFilterData,
-        busCompany: bus,
-      };
-      this.updateMobileFilterData(newFilterData);
-    },
-    setTime(time) {
-      const newFilterData = {
-        ...this.getMobileFilterData,
-        selectedTime: time,
-      };
-      this.updateMobileFilterData(newFilterData);
-    },
-    setBusClass(value) {
-      const newFilterData = {
-        ...this.getMobileFilterData,
-        selectedBusClass: value,
+        launchCompany: bus,
       };
       this.updateMobileFilterData(newFilterData);
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
-      const { from, to, type, date } = this.$route.query;
+      const { from, to, time, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
       });
@@ -396,25 +299,17 @@ export default {
       }
 
       payload.date = formattedDate;
-      payload.busType = this.coachType;
 
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
       }
-      if (this.busCompany) {
-        payload.company = this.busCompany;
-      }
-      if (this.selectedBusClass) {
-        payload.busClass = this.selectedBusClass;
+
+      if (time) {
+        payload.time = time;
       }
 
-      if (this.selectedTime) {
-        payload.time =
-          this.selectedTime === "4 am - 12 pm"
-            ? "morning"
-            : this.selectedTime === "12 pm - 06 pm"
-            ? "day"
-            : "night";
+      if (this.launchCompany) {
+        payload.ship = this.launchCompany;
       }
 
       await this.getPbScheduleDataAction(payload);
@@ -424,12 +319,9 @@ export default {
     resetFilter() {
       const newFilterData = {
         ...this.getMobileFilterData,
-        busCompany: null,
+        launchCompany: null,
         boardingPoint: null,
-        selectedTime: null,
-        selectedBusClass: null,
         priceFilterType: null,
-        coachType: "all",
       };
       this.updateMobileFilterData(newFilterData);
       this.handleFromSubmit();
@@ -438,11 +330,10 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.coachType,
+        time: this.$route.query.time,
         date: this.$route.query.date,
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/launch/trip", query });
     },
     previousDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -464,11 +355,10 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.$route.query.type,
+        time: this.$route.query.time,
         date: previousDate.valueOf(),
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/launch/trip", query });
     },
     nextDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -479,11 +369,10 @@ export default {
       const query = {
         from: this.$route.query.from,
         to: this.$route.query.to,
-        type: this.$route.query.type,
+        time: this.$route.query.time,
         date: nextDate.valueOf(),
       };
-      Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/launch/trip", query });
     },
   },
 };
