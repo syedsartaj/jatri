@@ -42,7 +42,7 @@
         </p>
       </div>
     </div>
-    <div class="scroll-container p-4">
+    <div class="seat-section-large p-4 invisible lg:visible">
       <div class="grid grid-cols-[repeat(auto-fill, minmax(30px, 1fr))] gap-6">
         <div
           v-for="(row, rowIndex) in getSeatArray"
@@ -73,6 +73,49 @@
         </div>
       </div>
     </div>
+
+    <div class="seat-section-mobile visible lg:invisible">
+      <div
+        class="w-full flex flex-row items-center p-2 bg-[#FFF] rounded-lg mb-4"
+      >
+        <img
+          src="@/assets/images/icons/information.svg"
+          alt="information"
+          class="w-[16px] h-[16px] mr-2"
+        />
+        <p class="text-xs text-blackPrimary font-normal">
+          Each box represents a new row.
+        </p>
+      </div>
+
+      <div
+        v-for="(row, rowIndex) in getSeatArray"
+        :key="rowIndex"
+        class="p-2 bg-[#FFF] rounded-lg mb-4 flex gap-6 row-section"
+      >
+        <div
+          v-for="(item, colIndex) in row"
+          :key="colIndex"
+          :class="
+            isCabin
+              ? 'h-[32px] w-[32px] lg:h-[40px] lg:w-[40px]'
+              : 'h-[30px] w-[30px]'
+          "
+        >
+          <SeatViewBedIcon
+            v-if="isCabin"
+            :addSeat="() => addSeatHandler({ rowIndex, colIndex })"
+            :seatCondition="getSeatCondition({ rowIndex, colIndex })"
+          />
+          <SeatViewSofaIcon
+            v-else
+            :addSeat="() => addSeatHandler({ rowIndex, colIndex })"
+            :seatCondition="getSeatCondition({ rowIndex, colIndex })"
+          />
+        </div>
+      </div>
+    </div>
+
     <SelectSeatsSection
       v-if="this.selectedSeatArray.length"
       :selectedSeatsTitleAndPrice="getSelectedSeatsTitleAndPrice"
@@ -178,10 +221,11 @@ export default {
 };
 </script>
 <style>
-.scroll-container {
+.seat-section-large {
   width: 100%;
-  max-height: 383px;
+  max-height: 597px;
   overflow: auto;
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -203,9 +247,28 @@ export default {
   width: 4px;
 }
 
+.seat-section-mobile {
+  height: 386px;
+  width: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  overflow-y: scroll;
+}
+
+.row-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media only screen and (min-width: 992px) {
-  .scroll-container {
-    max-height: 597px;
+  .seat-section-large {
+    display: block;
+  }
+
+  .seat-section-mobile {
+    display: none;
   }
 }
 </style>
