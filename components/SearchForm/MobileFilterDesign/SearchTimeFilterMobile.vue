@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       optionsIsOpen: false,
-      selectedOption: "4 am - 12 pm",
+      selectedOption: "",
       searchKey: "",
     };
   },

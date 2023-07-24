@@ -93,7 +93,7 @@ export default {
         { city_name: "non-ac" },
         { city_name: "all" },
       ],
-      selectedTime: "4 am - 12 pm",
+      selectedTime: "",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
     };
   },
@@ -131,7 +131,7 @@ export default {
         };
         if (this.getSelectedServiceType === ServiceType.BUS) {
           query.type = this.coachType;
-        } else {
+        } else if (this.selectedTime) {
           query.time =
             this.selectedTime === "4 am - 12 pm"
               ? "morning"

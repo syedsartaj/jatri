@@ -1,7 +1,6 @@
 <template>
   <div class="w-1/4 p-[8px]">
     <button
-      v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
       class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer"
       @click="toggleDropdown"
     >
@@ -32,12 +31,6 @@
         <span v-else>Select your Option</span>
       </p>
     </button>
-
-    <!-- ErrorToolTip -->
-    <SearchErrorToolTip
-      v-if="showErrorToolTip"
-      message="Choose bus type first"
-    />
 
     <!-- dropdown -->
     <div
@@ -103,7 +96,7 @@ export default {
   data() {
     return {
       optionsIsOpen: false,
-      selectedOption: "4 am - 12 pm",
+      selectedOption: "",
       searchKey: "",
     };
   },
