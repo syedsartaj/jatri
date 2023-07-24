@@ -52,7 +52,7 @@ import moment from "moment";
 export default {
   methods: {
     modifySearch() {
-      this.$router.push({ path: "/bus", query: { ...this.$route.query } });
+      this.$router.push({ path: "/launch", query: { ...this.$route.query } });
     },
     getHumanTime(time) {
       return time === "morning"

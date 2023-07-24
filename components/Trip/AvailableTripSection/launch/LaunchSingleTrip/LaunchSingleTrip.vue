@@ -4,7 +4,7 @@
     :ref="`bus-selector-${busIndex}`"
   >
     <div
-      class="lg:flex justify-between gap-x-4"
+      class="lg:flex justify-between gap-x-6"
       :class="
         selectedTrip === busIndex
           ? 'border-b border-[#DBDBDB]'
@@ -12,7 +12,7 @@
       "
     >
       <div
-        class="w-full lg:w-4/5 p-4 divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        class="w-full lg:w-[72%] py-[20px] px-[24px] divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
@@ -24,7 +24,7 @@
                   `${imageUrl}${trip.companyImages?.logo}`) ||
                 require(`@/assets/images/busDefaultImage.svg`)
               "
-              class="h-[40px] w[40px]"
+              class="h-[40px] w-[40px]"
               alt=""
             />
             <div>
@@ -114,7 +114,7 @@
       <div class="block lg:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
 
       <div
-        class="w-full lg:w-[30%] xl:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
+        class="w-full lg:w-[28%] py-[20px] px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
       >
         <div class="hidden lg:block">
           <img
@@ -151,7 +151,9 @@
             <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
           </div>
         </div>
-        <div class="w-full flex flex-row justify-end  items-center lg:mt-[26px] gap-x-2">
+        <div
+          class="w-full flex flex-row justify-end items-center lg:mt-[26px] gap-x-2"
+        >
           <img
             @click="handleSeatAvailableModal"
             src="@/assets/images/icons/seatClassIcon.svg"
@@ -171,7 +173,6 @@
                   selectedTrip === busIndex &&
                   'transition-all ease-in-out rotate-180'
                 "
-                class="w-[8.49px] h-[5.19px]"
               />
             </span>
           </button>

@@ -40,7 +40,7 @@
         v-if="getSelectedServiceType === ServiceType.LAUNCH"
         v-model="selectedTime"
         :defaultValue="''"
-        :label="'Departure time'"
+        :label="'Choose a time'"
         :icon="require('@/assets/images/icons/searchTimeIcon.svg')"
         :default-option="'Choose a time'"
         :allow-filter="false"
@@ -82,7 +82,7 @@ export default {
         { city_name: "non-ac" },
         { city_name: "all" },
       ],
-      selectedTime: "4 am - 12 pm",
+      selectedTime: "",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
       //quantity: ''
     };
@@ -98,35 +98,66 @@ export default {
         duration: 5000,
       });
     },
+    isCorrectLocationSelection(location) {
+      return this.getCities.some(
+        (city) => city.city_name.toLowerCase() === location.toLowerCase()
+      );
+    },
     handleFromSubmit() {
-      if (!this.departure) {
-        this.handleToastMessage("Please insert your location");
+      const isRightLocation =
+        this.isCorrectLocationSelection(this.departure) &&
+        this.isCorrectLocationSelection(this.destination);
+      const hasRequiredFields =
+        isRightLocation && this.coachType && this.departingDate;
+
+      if (hasRequiredFields) {
+        const query = {
+          from: this.departure,
+          to: this.destination,
+          date: new Date(this.departingDate).getTime(),
+        };
+        if (this.getSelectedServiceType === ServiceType.BUS) {
+          query.type = this.coachType;
+        } else if (this.selectedTime) {
+          query.time =
+            this.selectedTime === "4 am - 12 pm"
+              ? "morning"
+              : this.selectedTime === "12 pm - 06 pm"
+              ? "day"
+              : "night";
+        }
+        this.fireGTMEventForSearch();
+        Cookies.remove("process-allow");
+        const pathName =
+          this.getSelectedServiceType === ServiceType.BUS
+            ? "/bus/trip"
+            : "/launch/trip";
+        this.$router.push({ path: pathName, query });
+      } else {
+        this.errorOccured = true;
+
+        if (
+          this.departure &&
+          !this.isCorrectLocationSelection(this.departure)
+        ) {
+          this.handleToastMessage("Please select the departure from the list");
+        }
+
+        if (
+          this.destination &&
+          !this.isCorrectLocationSelection(this.destination)
+        ) {
+          this.handleToastMessage(
+            "Please select the destination from the list"
+          );
+        }
       }
-      if (!this.destination) {
-        this.handleToastMessage("Please insert your destination");
-      }
+
       if (!this.coachType) {
         this.handleToastMessage("Please insert coach type");
       }
       if (!this.departingDate) {
         this.handleToastMessage("Please insert departure date");
-      }
-      if (
-        this.departure &&
-        this.destination &&
-        this.coachType &&
-        this.departingDate
-      ) {
-        const query = {
-          from: this.departure,
-          to: this.destination,
-          type: this.coachType,
-          quantity: this.quantity,
-          date: new Date(this.departingDate).getTime(),
-        };
-        this.fireGTMEventForSearch();
-        Cookies.remove("process-allow");
-        this.$router.push({ path: "/trip", query });
       }
     },
     fireGTMEventForSearch() {
