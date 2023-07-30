@@ -892,8 +892,7 @@
               margin-top: 10px;
             "
           >
-            N.B: Please carry print out or soft copy to collect your counter
-            ticket copy.
+            N.B: Please carry a print out copy to make your journey.
           </p>
         </div>
         <!-- Footer part -->
