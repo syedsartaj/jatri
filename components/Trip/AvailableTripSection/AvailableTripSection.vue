@@ -11,7 +11,7 @@
     <div class="w-full lg:w-[72%]">
       <OffferAndPromo />
       <BusTripList v-if="ServiceType.BUS === selectedService" />
-      <LaunchTripList else />
+      <LaunchTripList v-if="ServiceType.LAUNCH === selectedService" />
     </div>
   </div>
 </template>
