@@ -19,9 +19,11 @@ export const moduleType = {
   INTERCITY_V2: "intercity-v2",
   PARIBAHAN: "paribahan",
   LONDON_EXPRESS: "london-express",
+  SHOHAGH: "shohagh",
 };
 
 export const ServiceType = {
   BUS: "BUS",
   LAUNCH: "LAUNCH",
 };
+ 

@@ -590,6 +590,14 @@
               successful but ticket is not generated in that case.
             </p>
 
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2"
+            >
+              Incase of refunding the money, it will take 7 business days for
+              MFS(bKash, Nagad) and 12/15 business days for SSL Commerz/ Bank
+              payment.
+            </p>
+
             <p class="text-base font-bold text-blackPrimary mt-4">
               Amount of Refund:
             </p>
