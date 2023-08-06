@@ -1,13 +1,7 @@
 <template>
   <div class="py-10 lg:py-[60px] px-4 lg:px-[100px]">
     <div
-      class="
-        p-4
-        lg:p-10
-        bg-white
-        rounded-[10px]
-        lg:flex lg:justify-between lg:gap-x-[140px]
-      "
+      class="p-4 lg:p-10 bg-white rounded-[10px] lg:flex lg:justify-between lg:gap-x-[140px]"
       v-if="operator.length"
     >
       <div class="lg:w-3/4">
@@ -16,48 +10,21 @@
         </p>
 
         <h2
-          class="
-            text-blackPrimary text-2xl
-            lg:text-[32px] lg:leading-10
-            font-medium
-            mt-1
-          "
+          class="text-blackPrimary text-2xl lg:text-[32px] lg:leading-10 font-medium mt-1"
         >
           {{ operator[0].heading }}
         </h2>
         <p
           v-for="paragraph in operator[0].paragraph"
           :key="paragraph"
-          class="
-            mt-4
-            lg:mt-6
-            text-blackLight text-sm
-            lg:text-xl
-            font-normal
-            text-justify
-          "
+          class="mt-4 lg:mt-6 text-blackLight text-sm lg:text-xl font-normal text-justify"
         >
           <span class="last:mt-5">{{ paragraph }}</span>
         </p>
 
         <NuxtLink
           to="/"
-          class="
-            w-[121px]
-            lg:w-[132px]
-            bg-corporate
-            rounded-full
-            flex
-            justify-center
-            gap-x-[11px]
-            items-center
-            text-white text-xs
-            lg:text-sm
-            font-medium
-            py-3
-            mt-8
-            lg:mt-[45px]
-          "
+          class="w-[121px] lg:w-[132px] bg-corporate rounded-full flex justify-center gap-x-[11px] items-center text-white text-xs lg:text-sm font-medium py-3 mt-8 lg:mt-[45px]"
         >
           Book now
           <img
@@ -73,14 +40,7 @@
             class="flex justify-between items-center py-4"
           >
             <div
-              class="
-                w-1/2
-                lg:w-3/4
-                flex
-                justify-start
-                items-center
-                gap-x-[18px]
-              "
+              class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]"
             >
               <img
                 src="@/assets/images/icons/distanceIcon.svg"
@@ -102,14 +62,7 @@
             class="flex justify-between items-center py-4"
           >
             <div
-              class="
-                w-1/2
-                lg:w-3/4
-                flex
-                justify-start
-                items-center
-                gap-x-[18px]
-              "
+              class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]"
             >
               <img
                 src="@/assets/images/icons/clockIcon.svg"
@@ -131,14 +84,7 @@
             class="flex justify-between items-center py-4"
           >
             <div
-              class="
-                w-1/2
-                lg:w-3/4
-                flex
-                justify-start
-                items-center
-                gap-x-[18px]
-              "
+              class="w-1/2 lg:w-3/4 flex justify-start items-center gap-x-[18px]"
             >
               <img
                 src="@/assets/images/icons/priceIcon.svg"
@@ -240,6 +186,12 @@
           alt=""
           class="mb-5 last:mb-0 w-full"
         />
+        <img
+          v-if="$route.query.name === 'shohagh-paribahan'"
+          src="@/assets/images/bus-operator/shohagh-paribahan.jpg"
+          alt=""
+          class="mb-5 last:mb-0 w-full"
+        />
       </div>
     </div>
   </div>
@@ -259,6 +211,7 @@ export default {
     const operator = routeAndOperator.operartors.filter((item) => {
       return item.name.toLowerCase() == query.name.toLowerCase();
     });
+
     return {
       operator,
     };
@@ -266,5 +219,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

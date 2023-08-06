@@ -302,6 +302,15 @@
                "paragraph": [
                     "Shibchar Star Deluxe is a luxurious bus available in Dhaka -Narail, Dhaka - Jessore, Dhaka - Benapole, Dhaka - Narail, Dhaka - Jessore, Dhaka -Satkhira, Dhaka - Shyamnagar, Dhaka - Barishal, Dhaka - Bakerganj(Barisal), Dhaka - Patuakhali, Dhaka - Amtali (Barguna), Dhaka - Patuakhali (Kalapara), Dhaka - Kuakata routes. Dhaka is the main starting point. You can get the tickets at a reasonable price. Book your tickets Now!"
                ]
+          },
+          {
+               "_id": 23,
+               "name": "shohagh-paribahan",
+               "heading": "Shohagh Paribahan",
+               "paragraph": [
+                    "If you are planning to travel comfortably, then Shohagh Paribahan is one of the best choices. Recently, Shohagh Paribahan is available in Dhaka-Chittagong-Cox’s Bazar, Dhaka-Barisal and Dhaka-Khulna routes through Jatri ticket Website. Dhaka is the main starting point and the ticket price range starts from 800 BDT. So, what are you waiting for? Book your bus tickets NOW from Jatri!"
+               ],
+               "priceStartsFrom": 800
           }
      ]
 }
