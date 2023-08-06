@@ -656,6 +656,10 @@ export default {
       showStickySearchBox: false,
       busOperators: [
         {
+          name: "Shohagh Paribahan",
+          link: "/bus-operator?name=shohagh-paribahan",
+        },
+        {
           name: "Euro Coach",
           link: "/bus-operator?name=euro-coach",
         },
