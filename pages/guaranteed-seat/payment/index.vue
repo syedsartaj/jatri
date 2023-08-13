@@ -267,9 +267,6 @@
         <PaymentTimeoutAlert />
       </div>
 
-      <!-- <button @click="handlePay"  class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6">
-                    Pay now
-               </button> -->
 
       <LoaderButton
         class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6"

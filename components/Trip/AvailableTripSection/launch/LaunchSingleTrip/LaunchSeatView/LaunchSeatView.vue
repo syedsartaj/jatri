@@ -118,12 +118,14 @@
 
     <SelectSeatsSection
       v-if="this.selectedSeatArray.length"
+      :handlePaymentPending="paymentPendingHandler"
       :selectedSeatsTitleAndPrice="getSelectedSeatsTitleAndPrice"
     />
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 const seatCondition = {
   AVAILABLE: "AVAILABLE",
   BOOKED: "BOOKED",
@@ -132,13 +134,86 @@ const seatCondition = {
 
 export default {
   name: "LaunchSeatView",
-  props: ["selectedClassSeatData"],
+  props: [
+    "selectedClassSeatData",
+    "trip",
+    "selectedClass",
+    "selectedFloor",
+    "seatViewData",
+  ],
   data() {
     return {
       selectedSeatArray: [],
     };
   },
   methods: {
+    ...mapActions("launchStore", ["paymentPending"]),
+    async paymentPendingHandler() {
+      this.$nextTick(async () => {
+        const reportingDateTime =
+          this.seatViewData.seatPlan.boardingPoints[0].reportingDateTime;
+        const { from, to } = this.$route.query;
+
+        const {
+          moduleType,
+          companyId,
+          company,
+          shipId,
+          ship,
+          tripId,
+          tripCode,
+          tripDateTime,
+          departureDate,
+          departureTime,
+          route,
+        } = this.trip;
+
+        const selectedSeatsData = this.getSelectedSeatsTitleAndPrice;
+        const seatPrice = selectedSeatsData.price;
+        const seatCount = selectedSeatsData.titleArray.length;
+
+        const totalFare = seatPrice * seatCount;
+        const seatNumbers = selectedSeatsData.titleArray.join(", ");
+        const seatFaresString = Array(seatCount).fill(seatPrice).join(",");
+
+        console.log(selectedSeatsData);
+
+        const payload = {
+          moduleType,
+          companyId,
+          companyName: company,
+          shipId,
+          shipName: ship,
+          tripId,
+          tripCode,
+          tripDateTime,
+          departureDate,
+          departureTime,
+          boardingDateTime: `${departureDate} ${departureTime}`,
+          reportingDateTime,
+          route,
+          fromCity: from,
+          toCity: to,
+          seatNumbers,
+          seatFares: seatFaresString,
+          totalFare,
+          seatClassId: this.selectedClass?.info?.classId,
+          seatClass: this.selectedClass?.info?.name,
+          floorId: this.selectedFloor?.info?._id,
+          floor: this.selectedFloor?.info?.name,
+          isTicketCancelable: true,
+        };
+        await this.paymentPending({
+          payload,
+          selectedSeatInfo: {
+            price: selectedSeatsData.price,
+            seatArray: selectedSeatsData.titleArray,
+            selectedClass: this.selectedClass,
+            selectedFloor: this.selectedFloor,
+          },
+        });
+      });
+    },
     getSeatCondition(seat) {
       return this.isAlreadySelected(seat)
         ? seatCondition.SELECTED
