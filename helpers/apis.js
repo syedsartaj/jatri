@@ -62,5 +62,6 @@ export const SERVICE_TYPE = {
     POST_CONFIRM_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/confirm-ticket`,
     POST_APPLY_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/apply-promo-code`,
     POST_GET_SURPRISE_DEAL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-surprise-deal`,
+    POST_PAYMENT_PENDING: `${PARIBAHAN_BASE_URL}/v1/api/water/payment-pending`
   },
 };

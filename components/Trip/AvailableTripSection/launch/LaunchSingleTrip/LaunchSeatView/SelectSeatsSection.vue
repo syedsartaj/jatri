@@ -8,6 +8,7 @@
       </p>
     </div>
     <button
+      @click="handlePaymentPending"
       class="bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
     >
       Continue
@@ -23,6 +24,6 @@
 <script>
 export default {
   name: "SelectSeatsSection",
-  props: ["selectedSeatsTitleAndPrice"],
+  props: ["selectedSeatsTitleAndPrice", "handlePaymentPending"],
 };
 </script>

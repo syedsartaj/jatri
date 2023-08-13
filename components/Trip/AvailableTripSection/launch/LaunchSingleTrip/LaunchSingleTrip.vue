@@ -238,8 +238,18 @@
           </div>
         </div>
       </div>
-      <LaunchSeatView :selectedClassSeatData="getSelectedClassSeatData" />
+      <LaunchSeatView
+        :selectedClassSeatData="getSelectedClassSeatData"
+        :trip="trip"
+        :selectedFloor="selectedFloor"
+        :selectedClass="selectedClass"
+        :seatViewData="getSeatViewData"
+      />
     </div>
+    <BookingDetails
+      v-if="getIsBookingDetailsOpen"
+      :handleBookingDetailModal="handleBookingDetailModal"
+    />
     <SelectClassModal
       v-if="showSelectClassModal"
       :classList="classList"
@@ -322,17 +332,16 @@ export default {
       selectedFloor: {},
       selectedClass: {},
       classList: [],
+      showBookingDetailsModal: false,
     };
   },
   computed: {
     ...mapGetters("launchStore", [
-      "getUpperDeckSeatArray",
-      "getLowerDeckSeatArray",
-      "getPaymentPendingBlockData",
       "getLoading",
       "getSeatViewData",
       "getTrips",
       "getPromoCode",
+      "getIsBookingDetailsOpen",
     ]),
     getSelectedClassSeatData() {
       return this.getSeatViewData?.seatPlan.ClassWiseSeatPlan.find(
@@ -436,6 +445,10 @@ export default {
       this.selectedTab = value;
       this.stopBackgroundScroll(true);
     },
+    handleBookingDetailModal() {
+      this.showBookingDetailsModal = !this.showBookingDetailsModal;
+      this.stopBackgroundScroll(this.showBookingDetailsModal);
+    },
     handlePointPolicyModal() {
       this.showPointPolicyModal = !this.showPointPolicyModal;
       this.stopBackgroundScroll(this.showPointPolicyModal);
@@ -516,6 +529,8 @@ export default {
     getPayloadForSeatView() {
       return {
         tripId: this.trip.tripId,
+        shipId: this.trip.shipId,
+        companyId: this.trip.companyId,
       };
     },
     isSitAlreadySelected(seat) {
@@ -724,6 +739,7 @@ export default {
         }
       });
     },
+
     async paymentPendingBlockHandler() {
       if (
         this.passengerEmail &&
