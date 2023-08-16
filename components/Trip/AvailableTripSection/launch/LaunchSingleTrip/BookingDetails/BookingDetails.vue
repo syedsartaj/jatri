@@ -16,16 +16,18 @@
               <p class="text-xl text-blackPrimary font-medium">
                 Booking Details
               </p>
-              <button @click="handleBookingDetailModal" class="pr-[6px]">
+              <button @click="() => {}" class="pr-[6px]">
                 <img src="@/assets/images/icons/closeIcon.svg" alt="" />
               </button>
             </div>
             <hr />
             <div class="overflow-y-auto h-[94vh] xl:h-auto">
-              <div class="my-4 px-4">
+              <div class="mb-4 xl:my-4 px-4">
                 <div class="flex flex-col">
                   <div class="w-full flex flex-col xl:flex-row gap-x-4">
-                    <FareDetails />
+                    <div class="w-full hidden xl:block">
+                      <FareDetails :passengerMobile="passengerMobile" />
+                    </div>
                     <div class="flex flex-col mt-4 xl:mt-0">
                       <!-- BookingDetailsOfUser -->
                       <div
@@ -46,6 +48,7 @@
                                 :default-option="'Select Your Boarding Location'"
                                 :label="'Boarding Point'"
                                 :options="boardingPoints"
+                                :errorMessage="errorOccurred && !boardingPoint"
                               />
                             </div>
                             <div class="w-full mt-4">
@@ -56,16 +59,32 @@
                                 <span class="text-[#E0293B]">*</span>
                               </h2>
                               <input
+                                :class="
+                                  errorOccurred &&
+                                  !passengerName &&
+                                  'bg-[#FDF0F1] border border-[#E0293B]'
+                                "
                                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full h-[48px] focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
                                 type="text"
                                 placeholder="Enter your name"
                                 v-model="passengerName"
                               />
+                              <div
+                                v-if="errorOccurred && !passengerName"
+                                class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
+                              >
+                                <img
+                                  src="@/assets/images/icons/warningRed.svg"
+                                  class="h-4 w-4"
+                                  alt="error"
+                                />
+                                <div>Please enter your name.</div>
+                              </div>
                             </div>
                           </div>
 
                           <div
-                            class="w-full flex  flex-col xl:flex-row justify-evenly gap-x-4"
+                            class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4"
                           >
                             <div class="mt-4 w-full">
                               <h2
@@ -91,40 +110,46 @@
                                 Phone <span class="text-[#E0293B]">*</span>
                               </h2>
                               <div
+                                :class="
+                                  errorOccurred &&
+                                  !isValidPassengerNumber &&
+                                  'bg-[#FDF0F1] border border-[#E0293B]'
+                                "
                                 class="flex h-[48px] mt-[10px] bg-[#F7F7F7] rounded pl-[16px]"
                               >
                                 <div class="flex items-center shrink-0">
-                                  <img
-                                    class="w-[48px] h-[32px]"
-                                    src="@/assets/images/bd-flag.svg"
-                                    alt=""
-                                  />
                                   <div
-                                    class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
+                                    class="text-s font-Inter font-medium tracking-wide text-[#151414]"
                                   >
                                     +88
                                   </div>
-                                  <img
-                                    class="w-[2px] h-[28px] ml-[4px]"
-                                    src="@/assets/images/input-separator.svg"
-                                    alt=""
-                                  />
                                 </div>
                                 <input
-                                  class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
+                                  class="bg-[#f7f7f7] pl-1 px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 focus:appearance-none placeholder:text-blackSecondary text-[#151414] text-sm"
                                   type="number"
                                   minlength="11"
                                   maxlength="11"
                                   required=""
-                                  placeholder="Enter your phone"
+                                  placeholder=""
                                   v-model="passengerMobile"
                                 />
+                              </div>
+                              <div
+                                v-if="errorOccurred && !isValidPassengerNumber"
+                                class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
+                              >
+                                <img
+                                  src="@/assets/images/icons/warningRed.svg"
+                                  class="h-4 w-4"
+                                  alt="error"
+                                />
+                                <div>Please enter a valid phone number.</div>
                               </div>
                             </div>
                           </div>
 
                           <div
-                            class="w-full flex  flex-col xl:flex-row justify-evenly gap-x-4 pb-4"
+                            class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4 pb-4"
                           >
                             <div class="w-full mt-4">
                               <SelectOption
@@ -145,14 +170,33 @@
                                 >
                               </h2>
                               <input
-                                class="bg-[#f7f7f7] h-[48px] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+                                :class="
+                                  passengerEmail &&
+                                  !isValidPassengerEmail &&
+                                  'bg-[#FDF0F1] border border-[#E0293B]'
+                                "
+                                class="bg-[#f7f7f7] h-[48px] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 placeholder:text-blackSecondary text-[#151414] text-sm"
                                 type="email"
                                 placeholder="Enter your email"
                                 v-model="passengerEmail"
                               />
+                              <div
+                                v-if="passengerEmail && !isValidPassengerEmail"
+                                class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
+                              >
+                                <img
+                                  src="@/assets/images/icons/warningRed.svg"
+                                  class="h-4 w-4"
+                                  alt="error"
+                                />
+                                <div>Please enter a valid email.</div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="w-full block xl:hidden mt-4">
+                        <FareDetails :passengerMobile="passengerMobile" />
                       </div>
                       <div
                         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
@@ -206,20 +250,25 @@
               </div>
               <hr />
               <div
-                class="w-full flex  flex-col-reverse xl:flex-row justify-between items-center px-4"
+                class="w-full flex flex-col-reverse xl:flex-row justify-between px-4"
               >
                 <div
-                  class="w-full xl:max-w-max px-8 py-4 my-4 xl:my-0 text-center xl:underline rounded-[8px] border-[1px] border-[#DBDBDB] text-sm font-normal text-blackPrimary"
+                  class="w-full h-[44px] xl:max-w-max px-8 my-4 xl:mb-0 underline flex items-center justify-center rounded-[8px] border-[1px] border-[#DBDBDB] text-sm font-normal text-blackPrimary"
                 >
-                  Cancellation Policy
+                  <a href="/policies#return-and-refund-policy" target="_blank"
+                    >Cancellation Policy</a
+                  >
                 </div>
-                <div class="w-full xl:w-[460px] flex flex-col pt-4 px-4 xl:px-0">
+                <div
+                  class="w-full xl:w-[460px] flex flex-col pt-4 px-4 xl:px-0"
+                >
                   <div
                     v-if="!paymentAllowStatus || paymentValidateTime === 0"
                     class="my-2"
                   >
                     <PaymentTimeoutAlert />
                   </div>
+
                   <LoaderButton
                     class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium"
                     :class="
@@ -262,8 +311,11 @@
 <script>
 import moment from "moment";
 import { mapActions, mapGetters } from "vuex";
+import {
+  isValidPhoneNumber,
+  isValidEmail,
+} from "../../../../../../helpers/utils";
 export default {
-  props: ["handleBookingDetailModal", "seatViewData"],
   name: "BookingDetails",
   data() {
     return {
@@ -276,6 +328,7 @@ export default {
       passengerName: "",
       passengerMobile: "",
       passengerEmail: "",
+      errorOccurred: false,
     };
   },
   computed: {
@@ -295,16 +348,32 @@ export default {
         (item) => item.name
       );
     },
+    isValidPassengerNumber() {
+      return isValidPhoneNumber(this.passengerMobile);
+    },
+    isValidPassengerEmail() {
+      return isValidEmail(this.passengerEmail);
+    },
+  },
+  watch: {
+    getSeatViewData: {
+      immediate: true,
+      handler() {
+        if (this.getSeatViewData?.seatPlan?.droppingPoints) {
+          this.droppingPoint =
+            this.getSeatViewData?.seatPlan?.droppingPoints[0].name;
+        }
+      },
+    },
   },
   created() {
-    const paymentInfo =
-      this.getLaunchBookingData.paymentPendingData.paymentInfo;
-    if (paymentInfo) {
+    const bookingData = this.getLaunchBookingData;
+    if (bookingData) {
       let a = moment(new Date());
       let getActualPendingValidity =
-        paymentInfo.pendingValidity.split("T")[0] +
+        bookingData.pendingValidity.split("T")[0] +
         " " +
-        paymentInfo.pendingValidity.split("T")[1].split(".")[0];
+        bookingData.pendingValidity.split("T")[1].split(".")[0];
       let b = moment(new Date(getActualPendingValidity));
       if (b.diff(a, "seconds") > 0) {
         this.paymentValidateTime = b.diff(a, "seconds");
@@ -319,22 +388,40 @@ export default {
       this.paymentAllowStatus = false;
     },
     async paymentHandler() {
-      this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
-        const payload = {
-          boardingPoint: this.boardingPoint,
-          droppingPoint: this.droppingPoint,
-          passengerName: this.passengerName,
-          passengerMobile: this.passengerMobile,
-          passengerEmail: this.passengerEmail,
-          paymentId:
-            this.getLaunchBookingData.paymentPendingData.paymentInfo._id,
-          gatewayType: this.gatewayType,
-        };
-        await this.ticketConfirmAction(payload);
+      const {
+        boardingPoint,
+        droppingPoint,
+        passengerName,
+        passengerMobile,
+        passengerEmail,
+        getLaunchBookingData,
+        gatewayType,
+      } = this;
 
-        this.$nuxt.$loading?.finish();
-      });
+      if (
+        !boardingPoint ||
+        !passengerName ||
+        !isValidPhoneNumber(passengerMobile) ||
+        !getLaunchBookingData
+      ) {
+        this.errorOccurred = true;
+      } else {
+        this.$nextTick(async () => {
+          this.$nuxt.$loading?.start();
+          const payload = {
+            boardingPoint,
+            droppingPoint,
+            passengerName,
+            passengerMobile,
+            passengerEmail,
+            paymentId: getLaunchBookingData._id,
+            gatewayType,
+          };
+          await this.ticketConfirmAction(payload);
+
+          this.$nuxt.$loading?.finish();
+        });
+      }
     },
   },
 };

@@ -300,6 +300,7 @@ export default {
     "pageVind",
     "supportEmail",
     "supportPhone",
+    "serviceType",
   ],
   mounted() {
     this.getPaymentHistory?.seatFares?.forEach((seatFare) => {
@@ -352,18 +353,21 @@ export default {
         }, 500);
       };
     },
-    ...mapActions("guarantedseat", ["sendOtpForCancelTicketAction"]),
-    ...mapMutations("guarantedseat", ["setCancelTicketId"]),
+    ...mapActions("common", ["sendOtpForCancelTicketAction"]),
+    ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
         ticketId,
       };
       this.setCancelTicketId(ticketId);
-      this.sendOtpForCancelTicketAction(payload);
+      this.sendOtpForCancelTicketAction({
+        payload,
+        service: this.serviceType,
+      });
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getSearchedTicketList"]),
+    ...mapGetters("common", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
       return (
         this.getTicketDetails &&

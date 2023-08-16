@@ -246,10 +246,6 @@
         :seatViewData="getSeatViewData"
       />
     </div>
-    <BookingDetails
-      v-if="getIsBookingDetailsOpen"
-      :handleBookingDetailModal="handleBookingDetailModal"
-    />
     <SelectClassModal
       v-if="showSelectClassModal"
       :classList="classList"
@@ -444,10 +440,6 @@ export default {
       }
       this.selectedTab = value;
       this.stopBackgroundScroll(true);
-    },
-    handleBookingDetailModal() {
-      this.showBookingDetailsModal = !this.showBookingDetailsModal;
-      this.stopBackgroundScroll(this.showBookingDetailsModal);
     },
     handlePointPolicyModal() {
       this.showPointPolicyModal = !this.showPointPolicyModal;

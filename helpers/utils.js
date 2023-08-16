@@ -26,4 +26,15 @@ export const ServiceType = {
   BUS: "BUS",
   LAUNCH: "LAUNCH",
 };
- 
+
+export const isValidPhoneNumber = (phoneNumber) => {
+  // Remove any non-digit characters from the input
+  const cleanNumber = phoneNumber?.replace(/\D/g, "");
+
+  return cleanNumber?.length === 11 && cleanNumber?.startsWith("01");
+};
+
+export const isValidEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailRegex.test(email);
+};

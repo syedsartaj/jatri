@@ -1,5 +1,5 @@
 import * as apis from "../helpers/apis";
-import { ServiceType } from "../helpers/utils";
+import { ServiceType, handleScrollBehaviour } from "../helpers/utils";
 
 export const state = () => ({
   citiesOfBus: [],
@@ -12,6 +12,10 @@ export const state = () => ({
   busPopularRoutes: [],
   launchPopularRoutes: [],
   selectedService: ServiceType.BUS,
+  loading: false,
+  searchedTicketList: [],
+  selectedTicketId: "",
+  isTicketPopupOpen: false,
 });
 
 export const getters = {
@@ -31,6 +35,9 @@ export const getters = {
       ? state.busPopularRoutes
       : state.launchPopularRoutes,
   getSelectedServiceType: (state) => state.selectedService,
+  getSearchedTicketList: (state) => state.searchedTicketList,
+  getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
+  getSelectedTicketId: (state) => state.selectedTicketId,
 };
 
 export const actions = {
@@ -48,7 +55,7 @@ export const actions = {
     } catch (error) {}
   },
 
-  async getOfferImage({ commit }) {
+  async getOfferImageApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       const imageLinkArr = data?.offerAndPromoImages || [];
@@ -135,6 +142,91 @@ export const actions = {
         });
     });
   },
+  async searchTicketAction({ commit }, payloadData) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE[payloadData.service].POST_SEARCH_TICKET,
+        payloadData.payload
+      );
+      commit("setSearchedTicketList", data.data);
+      this.$toast.success(data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      commit("setSearchedTicketList", []);
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      return false;
+    }
+  },
+  async sendOtpForCancelTicketAction({ commit, state }, payloadData) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE[payloadData.service].POST_SEND_OTP_BY_TICKET_ID,
+        payloadData.payload
+      );
+      commit("setSelectedService", payloadData.service);
+      commit("handleCancelTicketPopup", data.data.phone);
+      this.$toast.success(data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      return false;
+    }
+  },
+  async cancelTicketAction({ commit, state }, payload) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE[state.selectedService].POST_CANCEL_TICKET,
+        payload
+      );
+      let updatedTicketList = [];
+      updatedTicketList = state.searchedTicketList.tickets.map((ticket) => {
+        if (data.data._id === ticket._id) {
+          return {
+            ...ticket,
+            ticketStatus: data.data.ticketStatus,
+          };
+        }
+        return ticket;
+      });
+      commit("setSearchedTicketList", {
+        ...state.searchedTicketList,
+        tickets: updatedTicketList,
+      });
+      commit("handleCancelTicketPopup");
+      this.$toast.success(data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      return false;
+    }
+  },
 };
 
 export const mutations = {
@@ -185,5 +277,19 @@ export const mutations = {
   },
   setSelectedService: (state, data) => {
     state.selectedService = data;
+  },
+  setLoading: (state, data) => {
+    state.loading = data;
+  },
+  setCancelTicketId: (state, data) => {
+    state.selectedTicketId = data;
+  },
+  setSearchedTicketList: (state, data) => (state.searchedTicketList = data),
+  handleCancelTicketPopup: (state, data) => {
+    handleScrollBehaviour(!data);
+    state.isTicketPopupOpen = data;
+    if (!data) {
+      state.selectedTicketId = null;
+    }
   },
 };

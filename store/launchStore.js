@@ -24,11 +24,7 @@ export const state = () => ({
   ticketDetails: {},
   bookingInfoDetails: {},
   showSurpriseDealModal: null,
-  launchBookingData: {
-    paymentPendingData: {},
-    showBookingDetailsModal: false,
-    selectedSeatInfo: {},
-  },
+  launchBookingData: {},
 });
 
 export const getters = {
@@ -47,8 +43,6 @@ export const getters = {
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getTicketDetails: (state) => state.ticketDetails,
   getLaunchBookingData: (state) => state.launchBookingData,
-  getIsBookingDetailsOpen: (state) =>
-    state.launchBookingData.showBookingDetailsModal,
 };
 
 export const actions = {
@@ -87,7 +81,6 @@ export const actions = {
         payload
       );
       commit("setSeatViewData", data);
-      commit("resetPromoCode");
     } catch (error) {
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(error.response.data.message, {
@@ -203,12 +196,7 @@ export const actions = {
         apis.SERVICE_TYPE.LAUNCH.POST_PAYMENT_PENDING,
         payload
       );
-      handleScrollBehaviour(false)
-      commit("setBookingDetailsData", {
-        paymentPendingData: data,
-        showBookingDetailsModal: true,
-        selectedSeatInfo,
-      });
+      window.location.href = `/launch/payment?tnxId=${data.paymentInfo.transactionId}`;
     } catch (e) {
       this.$toast.error(e.response.data.message ?? "Something went wrong!", {
         position: "bottom-right",
@@ -236,7 +224,22 @@ export const actions = {
         apis.SERVICE_TYPE.LAUNCH.GET_BOOKING_INFO_BY_TRANSACTION,
         payload
       );
-      commit("setBookingInfoDetails", data);
+      commit("setBookingDetailsData", data);
+
+      if (data?.invoice) {
+        const payload = {
+          tripId: data.invoice.trip,
+          shipId: data.invoice.shipId,
+          companyId: data.invoice.companyId,
+        };
+
+        const response = await this.$api.$post(
+          apis.SERVICE_TYPE.LAUNCH.GET_SEAT_VIEW_URL,
+          payload
+        );
+
+        commit("setSeatViewData", response.data);
+      }
     } catch (e) {
       this.$toast.error(e.response.data.message ?? "Something went wrong!", {
         position: "bottom-right",
@@ -257,7 +260,7 @@ export const actions = {
         showBookingDetailsModal: false,
         selectedSeatInfo: {},
       });
-      if (data && data.gatewayUrl) {
+      if (data && data?.gatewayUrl) {
         window.location.href = data.gatewayUrl;
       }
       return true;
@@ -271,31 +274,22 @@ export const actions = {
     }
   },
   async applyPromoCodeAction({ dispatch, commit }, payload) {
-    try {
-      commit("setLoading", true);
-      await this.$api.post(
-        apis.SERVICE_TYPE.LAUNCH.POST_APPLY_PROMO_CODE_URL,
-        payload
-      );
-
-      dispatch("getBookingInfoByTnxId", { transactionId: payload.tnxId });
-      commit("handleSurpriseDealModal", null);
-
-      this.$toast.success("Promo code applied successfully", {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      commit("setLoading", false);
-      return true;
-    } catch (error) {
-      commit("setLoading", false);
-
-      this.$toast.error(error.response.data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.LAUNCH.POST_APPLY_PROMO_CODE_URL, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
   },
   async getSurpriseDealAction({ commit }, payload) {
     try {
@@ -371,9 +365,6 @@ export const mutations = {
     state.showSurpriseDealModal = data;
   },
   setBookingDetailsData: (state, data) => {
-    state.launchBookingData.paymentPendingData = data.paymentPendingData;
-    state.launchBookingData.showBookingDetailsModal =
-      data.showBookingDetailsModal;
-    state.launchBookingData.selectedSeatInfo = data.selectedSeatInfo;
+    state.launchBookingData = data;
   },
 };

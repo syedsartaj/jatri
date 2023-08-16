@@ -133,16 +133,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions("guarantedseat", [
+    ...mapActions("common", [
       "cancelTicketAction",
       "sendOtpForCancelTicketAction",
     ]),
-    ...mapMutations("guarantedseat", ["handleCancelTicketPopup"]),
+    ...mapMutations("common", ["handleCancelTicketPopup"]),
     handleOnClick() {
       const otpCode = this.fieldData.join("");
       this.cancelTicketAction({
         ticketId: this.getSelectedTicketId,
         otpCode: otpCode,
+        phone: this.getIsTicketPopupOpen
       });
     },
 
@@ -196,7 +197,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", [
+    ...mapGetters("common", [
       "getSelectedTicketId",
       "getIsTicketPopupOpen",
     ]),

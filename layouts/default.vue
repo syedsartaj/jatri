@@ -31,6 +31,8 @@ export default {
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
       "getSurpriseDealModalStatus",
+    ]),
+    ...mapGetters("common", [
       "getIsTicketPopupOpen",
     ]),
   },
