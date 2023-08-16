@@ -1,43 +1,49 @@
 <template>
-  <div v-if='loading' class='fixed inset-0 bg-white z-50 overflow-hidden' style='background: #e4e4e4bd'>
-    <div class='flex flex-col justify-center items-center h-screen'>
-      <!--      <FlowerSpinner   :size="100" color="#F04935" />-->
-      <!--      <LoopingRhombusesSpinner class="mt-10" :size="100" color="#F04935" />-->
-      <!-- <p class="mt-10 text-3xl">Loading...</p> -->
-
-      <div class=loader-container>
-        <img src="@/assets/images/icons/loader-icon.png" id="breathing-button" />
+  <div
+    v-if="loading"
+    class="fixed inset-0 bg-white z-[999999999] overflow-hidden"
+    style="background: #e4e4e4bd"
+  >
+    <div class="flex flex-col justify-center items-center h-screen">
+      <div class="loader-container">
+        <img
+          src="@/assets/images/icons/loader-icon.png"
+          id="breathing-button"
+        />
         <div class="loader"></div>
-        <h5 class='loading-text'>Processing...</h5>
+        <h5 class="loading-text">Processing...</h5>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { FlowerSpinner, LoopingRhombusesSpinner } from 'epic-spinners/dist/lib/epic-spinners.min.js';
+import {
+  FlowerSpinner,
+  LoopingRhombusesSpinner,
+} from "epic-spinners/dist/lib/epic-spinners.min.js";
 
 export default {
   components: {
     FlowerSpinner,
-    LoopingRhombusesSpinner
+    LoopingRhombusesSpinner,
   },
   data: () => ({
-    loading: false
+    loading: false,
   }),
   methods: {
-    start () {
+    start() {
       this.loading = true;
     },
-    finish () {
+    finish() {
       this.loading = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-body{
+body {
   position: relative;
 }
 
@@ -117,4 +123,5 @@ body{
     transform: scale(0.9);
   }
 }
-</style>>
+</style>
+>

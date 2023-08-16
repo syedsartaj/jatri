@@ -150,6 +150,7 @@ export default {
     ...mapActions("launchStore", ["paymentPending"]),
     async paymentPendingHandler() {
       this.$nextTick(async () => {
+        this.$nuxt.$loading?.start();
         const reportingDateTime =
           this.seatViewData.seatPlan.boardingPoints[0].reportingDateTime;
         const { from, to } = this.$route.query;
@@ -173,11 +174,8 @@ export default {
         const seatCount = selectedSeatsData.titleArray.length;
 
         const totalFare = seatPrice * seatCount;
-        const seatNumbers = selectedSeatsData.titleArray.join(", ");
+        const seatNumbers = selectedSeatsData.titleArray.join(",");
         const seatFaresString = Array(seatCount).fill(seatPrice).join(",");
-
-        console.log(selectedSeatsData);
-
         const payload = {
           moduleType,
           companyId,
@@ -212,6 +210,7 @@ export default {
             selectedFloor: this.selectedFloor,
           },
         });
+        this.$nuxt.$loading?.finish();
       });
     },
     getSeatCondition(seat) {

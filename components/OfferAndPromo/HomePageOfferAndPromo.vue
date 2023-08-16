@@ -125,6 +125,7 @@ import { mapGetters } from "vuex";
 import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
 export default {
+  name: "HomePageOfferAndPromo",
   data() {
     return {
       slideLeft: false,

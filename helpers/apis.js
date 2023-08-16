@@ -45,6 +45,9 @@ export const SERVICE_TYPE = {
     POST_CONFIRM_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/confirm-ticket`,
     POST_APPLY_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/apply-promo-code`,
     POST_GET_SURPRISE_DEAL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-surprise-deal`,
+    POST_SEARCH_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/search-ticket`,
+    POST_SEND_OTP_BY_TICKET_ID: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp`,
+    POST_CANCEL_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/cancel-ticket`,
   },
   LAUNCH: {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/operators`,
@@ -62,6 +65,9 @@ export const SERVICE_TYPE = {
     POST_CONFIRM_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/confirm-ticket`,
     POST_APPLY_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/apply-promo-code`,
     POST_GET_SURPRISE_DEAL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-surprise-deal`,
-    POST_PAYMENT_PENDING: `${PARIBAHAN_BASE_URL}/v1/api/water/payment-pending`
+    POST_PAYMENT_PENDING: `${PARIBAHAN_BASE_URL}/v1/api/water/payment-pending`,
+    POST_SEARCH_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/search-ticket`,
+    POST_SEND_OTP_BY_TICKET_ID: `${PARIBAHAN_BASE_URL}/v1/api/water/send-otp`,
+    POST_CANCEL_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/cancel-ticket`,
   },
 };

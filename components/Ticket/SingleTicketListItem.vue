@@ -3,18 +3,19 @@
     <UserViewTicket
       :getTicketDetails="singlePrintTicketInfo"
       :getPaymentHistory="singlePrintTicketInfo.paymentHistory"
+      :serviceType="serviceType"
     />
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-    props: ["singlePrintTicketInfo"],
-    computed: {
-      ...mapGetters(["getPrintTicketInfo"]),
-    },
-}
-</script>
-<style scoped>
+  name: "SingleTicketListItem",
 
-</style>
+  props: ["singlePrintTicketInfo", "serviceType"],
+  computed: {
+    ...mapGetters(["getPrintTicketInfo"]),
+  },
+};
+</script>
+<style scoped></style>
