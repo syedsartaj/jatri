@@ -367,4 +367,20 @@ export const mutations = {
   setBookingDetailsData: (state, data) => {
     state.launchBookingData = data;
   },
+  updateSeatStatus: (state, seatInfo) => {
+    const { classId, floorId, rowIndex, colIndex, available } = seatInfo;
+
+    const matchingClass = state.seatViewData.seatPlan.ClassWiseSeatPlan.find(
+      (classItem) =>
+        classItem.classId === classId &&
+        (classItem.floorId === floorId || !classItem.floorId)
+    );
+
+    if (matchingClass) {
+      const seatRow = matchingClass.seats[rowIndex];
+      if (seatRow && seatRow[colIndex]) {
+        seatRow[colIndex].available = available;
+      }
+    }
+  },
 };
