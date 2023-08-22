@@ -179,7 +179,7 @@ export default {
   watch: {
     "$route.query": {
       handler: function (value) {
-        const { from, to, date } = value;
+        const { from, to, date, time } = value;
         if (from) {
           this.getCities.filter((s) => {
             if (s.city_name.toLowerCase() === from.toLowerCase()) {
@@ -200,6 +200,15 @@ export default {
           this.departingDate = new Date(+date).toLocaleString("en-CA", {
             dateStyle: "short",
           });
+        }
+
+        if (time) {
+          this.selectedTime =
+            time === "morning"
+              ? "4 am - 12 pm"
+              : time === "day"
+              ? "12 pm - 06 pm"
+              : "06 pm - 03 am";
         }
       },
       deep: true,

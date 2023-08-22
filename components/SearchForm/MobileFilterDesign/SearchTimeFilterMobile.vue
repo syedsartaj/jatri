@@ -116,13 +116,14 @@ export default {
   watch: {
     "$route.query": {
       handler: function (value) {
-        const { type } = value;
-        if (type) {
-          this.options.filter((s) => {
-            if (s.toLowerCase() === type.toLowerCase()) {
-              this.selectedOption = s;
-            }
-          });
+        const { time } = value;
+        if (time) {
+          this.selectedOption =
+            time === "morning"
+              ? "4 am - 12 pm"
+              : time === "day"
+              ? "12 pm - 06 pm"
+              : "06 pm - 03 am";
         }
       },
       deep: true,
