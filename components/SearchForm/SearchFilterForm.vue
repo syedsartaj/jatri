@@ -10,7 +10,7 @@
           v-model="departure"
           :defaultValue="departureName"
           :label="'From'"
-          :default-option="'Choose Your Location'"
+          :default-option="'Choose a location'"
           :allow-filter="true"
           :options="getCities"
           :errorOccured="errorOccured"
@@ -19,7 +19,7 @@
           v-model="destination"
           :defaultValue="destinationName"
           :label="'To'"
-          :default-option="'Choose Your Destination'"
+          :default-option="'Choose a location'"
           :allow-filter="true"
           :options="getCities"
           :errorOccured="errorOccured"
@@ -56,7 +56,7 @@
         class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center"
       >
         <button
-          class="rounded-full text-white text-xs xl:text-sm font-medium leading-3 lg:leading-5 lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
+          class="rounded-full text-white text-base font-medium lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
           :class="
             !departure || !destination || !coachType || !departingDate
               ? isTripPage

@@ -5,9 +5,9 @@ export const actions = {
   async nuxtServerInit({ commit, dispatch }, context) {
     try {
       await Promise.all([
-        dispatch("guarantedseat/getHeadLineApi"),
-        dispatch("guarantedseat/getBlogListApi"),
-        dispatch("guarantedseat/getOfferImage"),
+        dispatch("common/getHeadLineApi"),
+        dispatch("common/getBlogListApi"),
+        dispatch("common/getOfferImageApi"),
         dispatch("common/getCitiesList", { service: ServiceType.BUS }),
         dispatch("common/getCitiesList", { service: ServiceType.LAUNCH }),
         dispatch("common/getOperatorListApi", { service: ServiceType.BUS }),

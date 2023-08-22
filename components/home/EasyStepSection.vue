@@ -53,7 +53,7 @@
                   mt-8
                   "
                   >
-                  Search Destination!
+                  Search destination!
                </h2>
                <p
                   class="
@@ -104,7 +104,7 @@
                   mt-8
                   "
                   >
-                  Select Ticket!
+                  Select ticket!
                </h2>
                <p
                   class="
@@ -154,7 +154,7 @@
                   mt-8
                   "
                   >
-                  Pay and Enjoy your Journey!
+                  Pay and enjoy journey!
                </h2>
                <p
                   class="
