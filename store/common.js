@@ -11,7 +11,7 @@ export const state = () => ({
   launchOperators: [],
   busPopularRoutes: [],
   launchPopularRoutes: [],
-  selectedService: ServiceType.BUS,
+  selectedService: '',
   loading: false,
   searchedTicketList: [],
   selectedTicketId: "",

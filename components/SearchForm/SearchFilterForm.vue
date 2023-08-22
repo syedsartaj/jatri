@@ -1,7 +1,10 @@
 <template>
   <div class="w-full">
     <SearchTab v-if="!isTripPage" />
-    <div class="bg-white searchbar rounded-[10px] flex justify-between w-full">
+    <div
+      v-if="getSelectedServiceType != ''"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full"
+    >
       <div class="flex justify-between w-10/12">
         <SearchCityFilter
           v-model="departure"

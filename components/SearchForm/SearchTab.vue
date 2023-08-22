@@ -80,7 +80,6 @@ export default {
     },
     checkRoutePath() {
       const path = this.$route.path.toString();
-
       if (path === "/launch") {
         this.setSelectedService(ServiceType.LAUNCH);
       } else if (path === "/bus" || path === "/") {
@@ -94,15 +93,12 @@ export default {
       return this.getSelectedServiceType;
     },
   },
-  created() {
+  mounted() {
     this.checkRoutePath();
   },
   watch: {
-    "$route.query": {
-      immediate: true,
-      handler() {
-        this.checkRoutePath();
-      },
+    $route(to, from) {
+      this.checkRoutePath();
     },
   },
 };

@@ -41,15 +41,12 @@ export default {
       return this.getSelectedServiceType;
     },
   },
-  created() {
+  mounted() {
     this.checkRoutePath();
   },
   watch: {
-    "$route.query": {
-      immediate: true,
-      handler() {
-        this.checkRoutePath();
-      },
+    $route(to, from) {
+      this.checkRoutePath();
     },
   },
 };
