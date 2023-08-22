@@ -157,7 +157,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getBlogList"]),
+    ...mapGetters("common", ["getBlogList"]),
   },
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;

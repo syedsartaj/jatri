@@ -75,7 +75,7 @@ export default {
     getServiceClassName(service) {
       return {
         "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,
-        "rounded-t-[10px] bg-[#1E88E5]": this.selectedService === service,
+        "rounded-t-[8px] bg-[#1E88E5]": this.selectedService === service,
       };
     },
     checkRoutePath() {

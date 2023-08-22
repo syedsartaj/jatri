@@ -72,7 +72,7 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getHeadLine"]),
+    ...mapGetters("common", ["getHeadLine"]),
   },
   methods: {
     handleHowToBuyModal() {

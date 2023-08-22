@@ -23,13 +23,19 @@
         />
       </div>
 
-      <p
-        v-else
-        class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
-      >
-        <span v-if="defaultOption">{{ defaultOption }}</span>
-        <span v-else>Select your Option</span>
-      </p>
+      <div class="flex justify-between" v-else>
+        <p
+          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
+        >
+          <span v-if="defaultOption">{{ defaultOption }}</span>
+          <span v-else>Select your Option</span>
+        </p>
+        <img
+          src="@/assets/images/home/arrowDown.svg"
+          alt="arrow-down"
+          class="w-6 h-6"
+        />
+      </div>
     </button>
 
     <!-- dropdown -->
