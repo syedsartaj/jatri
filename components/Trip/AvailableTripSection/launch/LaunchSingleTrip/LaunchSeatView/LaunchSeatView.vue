@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 const seatCondition = {
   AVAILABLE: "AVAILABLE",
   BOOKED: "BOOKED",
@@ -144,10 +144,12 @@ export default {
   data() {
     return {
       selectedSeatArray: [],
+      requestOnGoing: false,
     };
   },
   methods: {
-    ...mapActions("launchStore", ["paymentPending"]),
+    ...mapActions("launchStore", ["paymentPending", "seatLockAction"]),
+    ...mapMutations("launchStore", ["updateSeatStatus"]),
     async paymentPendingHandler() {
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
@@ -210,6 +212,7 @@ export default {
             selectedFloor: this.selectedFloor,
           },
         });
+        this.selectedSeatArray = [];
         this.$nuxt.$loading?.finish();
       });
     },
@@ -243,19 +246,105 @@ export default {
       return this.getSeatArray[rowIndex][colIndex].available;
     },
 
-    addSeatHandler(selectedSeat) {
+    async addSeatHandler(selectedSeat) {
+      // Is any request ongoing
+      if (this.requestOnGoing) return;
+
+      const seatNumbers =
+        this.getSeatArray[selectedSeat.rowIndex][selectedSeat.colIndex].seat;
+
       if (this.isAlreadySelected(selectedSeat)) {
+        // Action for sit unselect
+        this.handleSeatLock(seatNumbers, false);
+
         this.removeSeatFromTheArray(selectedSeat);
       } else {
         if (
           this.isSeatAvailable(selectedSeat) &&
           this.selectedSeatArray.length <= 3
         ) {
-          this.selectedSeatArray.push(selectedSeat);
+          const isSeatLocked = await this.isSeatLocked(seatNumbers);
+
+          if (isSeatLocked) {
+            //update seat status here
+            this.updateSeatStatus({
+              classId: this.selectedClass?.info?.classId,
+              floorId: this.selectedFloor?.info?._id,
+              rowIndex: selectedSeat.rowIndex,
+              colIndex: selectedSeat.colIndex,
+              available: 0,
+            });
+
+            this.$toast.error(`Seat already in progress.`, {
+              position: "bottom-right",
+              duration: 50000,
+              containerClass: "padding: 100px",
+            });
+            return;
+          } else {
+            this.selectedSeatArray.push(selectedSeat);
+          }
         } else if (this.selectedSeatArray.length === 4) {
           this.showSeatLimitCrossError();
         }
       }
+    },
+
+    isSeatLocked(seatNumbers) {
+      return new Promise((resolve) => {
+        this.requestOnGoing = true;
+        this.$nextTick(async () => {
+          const { moduleType, tripId } = this.trip;
+          const payload = {
+            moduleType: moduleType,
+            tripId: tripId,
+            seatNumbers: seatNumbers,
+            locked: true,
+            seatClassId: this.selectedClass?.info?.classId,
+          };
+
+          try {
+            const res = await this.seatLockAction(payload);
+            if (res?.data) {
+              const seatLock = res.data?.seatLock;
+              resolve(seatLock === false);
+            }
+            this.requestOnGoing = false;
+            resolve(false);
+          } catch (error) {
+            this.requestOnGoing = false;
+            resolve(false);
+          }
+        });
+      });
+    },
+
+    handleSeatLock(seatNumbers, action) {
+      this.requestOnGoing = true;
+      this.$nextTick(async () => {
+        const { moduleType, tripId } = this.trip;
+        const payload = {
+          moduleType: moduleType,
+          tripId: tripId,
+          seatNumbers: seatNumbers,
+          locked: action,
+          seatClassId: this.selectedClass?.info?.classId,
+        };
+
+        try {
+          const res = await this.seatLockAction(payload);
+          this.requestOnGoing = false;
+        } catch (error) {
+          this.requestOnGoing = false;
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        }
+      });
     },
 
     showSeatLimitCrossError() {
@@ -286,6 +375,14 @@ export default {
         price: this.selectedSeatArray.length * this.selectedClassSeatData?.fare,
       };
     },
+  },
+  beforeDestroy() {
+    if (this.selectedSeatArray.length) {
+      const seatNumbers =
+        this.getSelectedSeatsTitleAndPrice.titleArray.join(",");
+
+      this.handleSeatLock(seatNumbers, false);
+    }
   },
   watch: {
     selectedClassSeatData() {
