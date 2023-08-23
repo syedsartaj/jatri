@@ -51,7 +51,7 @@
 
               <div>
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">TIME:</h2>
+                <h2 class="text-blackSecondary text-base font-medium">TIME:</h2>
                 <div
                   class="grid grid-cols-2 gap-x-[7px] gap-y-[10px] mt-[10px]"
                 >
@@ -87,7 +87,7 @@
 
               <div v-if="coachTypes.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   BUS TYPE:
                 </h2>
                 <div class="flex justify-evenly gap-[7px] mt-[10px]">
@@ -127,7 +127,7 @@
 
               <div v-if="getBusClasses.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   BUS CLASS:
                 </h2>
                 <div
@@ -163,7 +163,7 @@
 
               <div v-if="priceFilter.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   PRICE:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
@@ -213,7 +213,7 @@
 
               <div v-if="getBoardingPoints.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   BOARDING POINT:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">
@@ -247,7 +247,7 @@
 
               <div v-if="getBusCompanies.length">
                 <hr class="my-5" />
-                <h2 class="text-blackSecondery text-base font-medium">
+                <h2 class="text-blackSecondary text-base font-medium">
                   BUS COMPANY:
                 </h2>
                 <div class="mt-[10px] divide-y divide-dashed">

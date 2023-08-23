@@ -9,13 +9,13 @@
         <img v-if="icon" :src="icon" alt="" />
         <p
           v-if="label && selectedOption === ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left"
         >
           {{ label }}
         </p>
         <p
           v-if="selectedOption !== ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left"
         >
           {{ this.selectedOption.toUpperCase() }}
         </p>

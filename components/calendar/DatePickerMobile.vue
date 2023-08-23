@@ -9,13 +9,13 @@
         <img v-if="icon" :src="icon" alt="" />
         <p
           v-if="label && dateUpdate === ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left"
         >
           {{ label }}
         </p>
         <p
           v-if="dateUpdate !== ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left"
         >
           {{
             new Date(dateUpdate).toLocaleString("es-CL", {

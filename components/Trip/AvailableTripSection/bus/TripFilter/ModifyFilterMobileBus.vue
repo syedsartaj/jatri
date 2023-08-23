@@ -26,7 +26,7 @@
                 {{ $route.query.to }}
               </h2>
             </div>
-            <p class="text-[11px] leading-4 font-normal text-blackSecondery">
+            <p class="text-[11px] leading-4 font-normal text-blackSecondary">
               <span>{{ getHumanDate($route.query.date) }}</span
               >, <span class="capitalize">{{ $route.query.type }}</span>
             </p>

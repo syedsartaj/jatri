@@ -24,7 +24,7 @@
           text-sm
           font-normal
           text-blackPrimary text-left
-          placeholder-blackSecondery-400
+          placeholder-blackSecondary-400
         "
         :type="type"
         :placeholder="placeholder"

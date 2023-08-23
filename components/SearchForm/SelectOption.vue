@@ -18,7 +18,7 @@
           >
             {{ propertyName ? selectedOption[propertyName] : selectedOption }}
           </p>
-          <p v-else class="text-blackSecondery text-sm font-normal">
+          <p v-else class="text-blackSecondary text-sm font-normal">
             Select Boarding point
           </p>
           <img src="@/assets/images/icons/dropdown.svg" alt="dropdown" />
@@ -59,7 +59,7 @@
               ? 'text-corporate'
               : option === selectedOption
               ? 'text-corporate'
-              : 'text-blackSecondery'
+              : 'text-blackSecondary'
           "
           @click="selectOption(option)"
         >

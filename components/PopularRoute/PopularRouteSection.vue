@@ -8,11 +8,11 @@
         <img
           src="@/assets/images/home/route.svg"
           alt=""
-          class="w-16 h-16 lg:w-22 lg:h-22"
+          class="w-[64px] h-[64px] lg:w-[88px] lg:h-[88px]"
         />
       </div>
       <h2
-        class="text-2xl lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium lg:font-semibold order-first lg:order-last text-center"
+        class="text-[24px] leading-[32px] md:text-[32px] md:leading-[40px] lg:text-[36px] lg:leading-[44px] text-blackPrimary font-semibold order-first lg:order-last text-center"
       >
         Our most popular routes
       </h2>

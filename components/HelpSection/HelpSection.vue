@@ -4,13 +4,14 @@
       <div>
         <img src="@/assets/images/home/helpImage.svg" alt="" />
         <h2
-          class="text-[32px] leading-10 lg:text-[45px] lg:leading-[52px] text-blackPrimary font-medium mt-6 lg:mt-8"
+          class="text-[32px] leading-10 text-blackPrimary font-medium mt-6 lg:mt-8"
         >
           How can we help you?
         </h2>
         <p class="text-blackLight text-sm leading-5 font-normal mt-4">
           Still need help?
-          <span class="text-corporate underline ml-[6px]"
+          <span
+            class="text-corporate underline ml-[6px] text-xs lg:text-base font-medium"
             ><a href="https://jatri.co/contact-us" target="_blank" class=""
               >Contact Us</a
             >

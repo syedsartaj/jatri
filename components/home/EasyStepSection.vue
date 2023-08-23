@@ -59,7 +59,7 @@
                   class="
                   text-sm
                   lg:text-base
-                  text-blackSecondery
+                  text-blackSecondary
                   lg:leading-6
                   font-normal
                   mt-4
@@ -110,7 +110,7 @@
                   class="
                   text-sm
                   lg:text-base
-                  text-blackSecondery
+                  text-blackSecondary
                   lg:leading-6
                   font-normal
                   mt-4
@@ -160,7 +160,7 @@
                   class="
                   text-sm
                   lg:text-base
-                  text-blackSecondery
+                  text-blackSecondary
                   lg:leading-6
                   font-normal
                   mt-4

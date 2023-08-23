@@ -64,7 +64,7 @@
                                   !passengerName &&
                                   'bg-[#FDF0F1] border border-[#E0293B]'
                                 "
-                                class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full h-[48px] focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+                                class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full h-[48px] focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
                                 type="text"
                                 placeholder="Enter your name"
                                 v-model="passengerName"

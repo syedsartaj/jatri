@@ -29,7 +29,7 @@
             Ease on the move
           </h2>
           <p
-            class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
+            class="text-sm lg:text-base text-blackSecondary lg:leading-6 font-normal mt-4"
           >
             Tickets are available on the go through our platform, no more
             queues!
@@ -47,7 +47,7 @@
             Promise of convenient travel
           </h2>
           <p
-            class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
+            class="text-sm lg:text-base text-blackSecondary lg:leading-6 font-normal mt-4"
           >
             We have an excellent system of taking service based on preference,
             as there is ticketing service for multiple routes via different
@@ -66,7 +66,7 @@
             Reliability assured
           </h2>
           <p
-            class="text-sm lg:text-base text-blackSecondery lg:leading-6 font-normal mt-4"
+            class="text-sm lg:text-base text-blackSecondary lg:leading-6 font-normal mt-4"
           >
             Whether you are travelling for work or leisure, book your tickets
             through us and keep all your worries away.

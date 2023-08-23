@@ -7,14 +7,12 @@
     >
       <p
         v-if="label"
-        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"
+        class="text-xs font-normal text-blackSecondary text-left uppercase"
       >
         {{ label }}
       </p>
       <div v-if="dateUpdate !== ''" class="flex justify-between">
-        <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
-        >
+        <p class="text-sm xl:text-base font-medium text-blackPrimary text-left">
           {{
             new Date(dateUpdate).toLocaleString("es-CL", {
               dateStyle: "medium",
@@ -28,9 +26,7 @@
         />
       </div>
       <div v-else-if="defaultOption" class="flex justify-between">
-        <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
-        >
+        <p class="text-sm xl:text-base font-medium text-blackPrimary text-left">
           {{ defaultOption }}
         </p>
         <img
@@ -40,9 +36,7 @@
         />
       </div>
       <div v-else class="flex justify-between">
-        <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
-        >
+        <p class="text-sm xl:text-base font-medium text-blackPrimary text-left">
           Select Journey Date
         </p>
         <img
