@@ -5,7 +5,7 @@
     >
       <div class="">
         <h2
-          class="lg:text-[44px] xl:text-[56px] 2xl:text-[57px] text-[#fff] font-bold leading-[64px]"
+          class="text-[28px] md:text-[45px] xl:text-[57px] text-[#fff] font-bold"
         >
           Ticketing made easy!
         </h2>

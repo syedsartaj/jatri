@@ -758,9 +758,16 @@ export default {
     setClassList(value) {
       const selectedFloorId = this.selectedFloor?.info?._id;
       const seatClasses = value?.seatPlan?.seatClasses || [];
-      this.classList = selectedFloorId
-        ? seatClasses.filter((item) => item.floorId === selectedFloorId)
-        : seatClasses;
+
+      const selectedFloorSeatClassAvailability = seatClasses.filter(
+        (item) => item.floorId === selectedFloorId
+      );
+
+      this.classList =
+        (selectedFloorId &&
+          selectedFloorSeatClassAvailability.length &&
+          selectedFloorSeatClassAvailability) ||
+        seatClasses;
     },
 
     setSelectedClass() {
