@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/4 p-[8px]">
+  <div class="w-1/4">
     <button
       class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer"
       @click="toggleDropdown"

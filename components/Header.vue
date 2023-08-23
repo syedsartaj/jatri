@@ -77,7 +77,7 @@
               fill="#F04935"
             />
           </svg>
-          <span class="w-15 font-medium text-xs text-center font-inter"
+          <span class="w-15 font-medium text-sm text-center font-inter text-[#F04935]"
             >History</span
           >
         </NuxtLink>

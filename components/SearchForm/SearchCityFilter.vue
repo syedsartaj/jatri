@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/4 p-[8px] h-15" v-click-outside="onClickOutside">
+  <div class="w-1/4" v-click-outside="onClickOutside">
     <!-- Input box open -->
     <button
       @click="handleOnClick"
