@@ -3,9 +3,9 @@
     <SearchTab v-if="!isTripPage" />
     <div
       v-if="getSelectedServiceType != ''"
-      class="bg-white searchbar rounded-[10px] flex justify-between w-full"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px]"
     >
-      <div class="flex justify-between w-10/12">
+      <div class="flex justify-between w-[86%] gap-x-4">
         <SearchCityFilter
           v-model="departure"
           :defaultValue="departureName"
@@ -46,17 +46,15 @@
           v-model="selectedTime"
           :defaultValue="''"
           :label="'DEPARTURE TIME'"
-          :default-option="'Choose a time'"
+          :default-option="'Select time'"
           :allow-filter="false"
           :options="timeList"
           :errorOccured="errorOccured"
         />
       </div>
-      <div
-        class="lg:px-1 xl:px-2 2xl:px-6 lg:py-2 xl:py-[15px] w-2/12 flex justify-center"
-      >
+      <div class="w-[14%] flex justify-end items-center">
         <button
-          class="rounded-full text-white text-base font-medium lg:px-[22px] xl:px-[26px] lg:py-1 xl:py-[13px]"
+          class="rounded-full text-white text-base font-medium lg:px-[24px] h-[46px]"
           :class="
             !departure || !destination || !coachType || !departingDate
               ? isTripPage
@@ -80,6 +78,7 @@ import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
 import { ServiceType } from "../../helpers/utils";
 export default {
+  name: "SearchFilterForm",
   data() {
     return {
       ServiceType: ServiceType,

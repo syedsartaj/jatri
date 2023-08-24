@@ -1,18 +1,18 @@
 <template>
-  <div class="w-1/4 p-[8px]">
+  <div class="w-1/4">
     <button
       class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer"
       @click="toggleDropdown"
     >
       <p
         v-if="label"
-        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondery text-left uppercase"
+        class="text-xs font-normal text-blackSecondary text-left uppercase"
       >
         {{ label }}
       </p>
       <div v-if="selectedOption !== ''" class="flex justify-between">
         <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
+          class="text-sm xl:text-base font-medium text-blackPrimary text-left"
         >
           {{ this.selectedOption.toUpperCase() }}
         </p>
@@ -25,7 +25,7 @@
 
       <div class="flex justify-between" v-else>
         <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
+          class="text-sm xl:text-base font-medium text-blackPrimary text-left"
         >
           <span v-if="defaultOption">{{ defaultOption }}</span>
           <span v-else>Select your Option</span>

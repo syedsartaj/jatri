@@ -45,7 +45,7 @@
                   </h2>
                 </div>
                 <p
-                  class="text-[11px] leading-4 font-normal text-blackSecondery"
+                  class="text-[11px] leading-4 font-normal text-blackSecondary"
                 >
                   <span>{{ getHumanDate($route.query.date) }}</span
                   >, <span class="capitalize">{{ $route.query.type }}</span>

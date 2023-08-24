@@ -1,7 +1,7 @@
 <template>
   <div @click="bookNow()" :class="customClass">
     <img src="@/assets/images/icons/greenMapIcon.svg" alt="" class="w-4 h-4" />
-    <p class="text-sm lg:text-base text-blackPrimary font-normal py-4 lg:py-5">
+    <p class="text-sm lg:text-base text-blackPrimary font-normal lg:font-medium py-4 lg:py-5">
       {{ routeItem.title }}
     </p>
   </div>

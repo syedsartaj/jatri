@@ -40,24 +40,26 @@
         v-if="getSelectedServiceType === ServiceType.LAUNCH"
         v-model="selectedTime"
         :defaultValue="''"
-        :label="'Choose a time'"
+        :label="'Departure time'"
         :icon="require('@/assets/images/icons/searchTimeIcon.svg')"
-        :default-option="'Choose a time'"
+        :default-option="'Departure time'"
         :allow-filter="false"
         :options="timeList"
       />
     </div>
-    <button
-      class="mt-6 w-full rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
-      :class="
-        !departure || !destination || !coachType || !departingDate
-          ? 'bg-corporate'
-          : 'bg-corporate cursor-pointer border border-primary'
-      "
-      @click="handleFromSubmit"
-    >
-      Search ticket
-    </button>
+    <div class="w-full flex items-center mt-[32px] justify-center">
+      <button
+        class=" w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
+        :class="
+          !departure || !destination || !coachType || !departingDate
+            ? 'bg-corporate'
+            : 'bg-corporate cursor-pointer border border-primary'
+        "
+        @click="handleFromSubmit"
+      >
+        Search Ticket
+      </button>
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex bg-white h-[40px] lg:h-[36px] justify-between rounded-t-[10px] max-w-max ml-[10px]"
+    class="flex bg-white h-[40px] lg:h-[36px] justify-between rounded-t-[10px] max-w-max ml-[16px]"
   >
     <div
       :class="getServiceClassName(ServiceType.BUS)"

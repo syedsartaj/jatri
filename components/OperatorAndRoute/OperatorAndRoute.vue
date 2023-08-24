@@ -43,7 +43,7 @@
                 class="w-[16.67px] lg:w-5"
                 alt=""
               />
-              <h2 class="text-blackSecondery text-base lg:text-xl font-normal">
+              <h2 class="text-blackSecondary text-base lg:text-xl font-normal">
                 Distance
               </h2>
             </div>
@@ -65,7 +65,7 @@
                 class="w-[16.67px] lg:w-5"
                 alt=""
               />
-              <h2 class="text-blackSecondery text-base lg:text-xl font-normal">
+              <h2 class="text-blackSecondary text-base lg:text-xl font-normal">
                 Time
               </h2>
             </div>
@@ -87,7 +87,7 @@
                 class="w-[16.67px] lg:w-5"
                 alt=""
               />
-              <h2 class="text-blackSecondery text-base lg:text-xl font-normal">
+              <h2 class="text-blackSecondary text-base lg:text-xl font-normal">
                 Price starts from
               </h2>
             </div>

@@ -430,7 +430,7 @@
               Passenger Name <span class="text-[#E0293B]">*</span>
             </h2>
             <input
-              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
               type="text"
               placeholder="Enter your name"
               v-model="passengerName"
@@ -460,7 +460,7 @@
                 />
               </div>
               <input
-                class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondery text-blackPrimary"
+                class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondary text-blackPrimary"
                 type="number"
                 minlength="11"
                 maxlength="11"
@@ -479,7 +479,7 @@
               <span class="text-[#8D8D8F] text-xs">Optional</span>
             </h2>
             <input
-              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondery text-blackPrimary"
+              class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
               type="email"
               placeholder="Enter your email id"
               v-model="passengerEmail"

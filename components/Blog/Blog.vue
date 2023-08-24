@@ -5,7 +5,7 @@
   >
     <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0">
       <h2
-        class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-left font-medium lg:font-semibold"
+        class="text-2xl md:text-[32px] md:leading-[40px] lg:text-[36px] md:leading-[44px] text-blackPrimary text-left font-semibold"
       >
         Our most recent initiatives
       </h2>
