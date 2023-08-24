@@ -46,7 +46,7 @@
           v-model="selectedTime"
           :defaultValue="''"
           :label="'DEPARTURE TIME'"
-          :default-option="'Choose a time'"
+          :default-option="'Select time'"
           :allow-filter="false"
           :options="timeList"
           :errorOccured="errorOccured"

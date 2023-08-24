@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="getPopularRouteListData?.length"
-    class="lg:mt-0 bg-successLight lg:py-10 lg:py-[60px] px-4 lg:px-[100px] flex justify-center"
+    class="bg-successLight py-10 lg:py-[100px] px-4 lg:px-[100px] flex justify-center"
   >
-    <div class="lg:px-4 lg:px-[60px] py-10 w-full">
+    <div class="w-full">
       <div class="w-full flex items-center justify-center">
         <img
           src="@/assets/images/home/route.svg"
@@ -12,12 +12,12 @@
         />
       </div>
       <h2
-        class="text-[24px] leading-[32px] md:text-[32px] md:leading-[40px] lg:text-[36px] lg:leading-[44px] text-blackPrimary font-semibold order-first lg:order-last text-center"
+        class="font-semibold text-2xl md:text-[32px] md:leading-[40px] lg:text-[36px] lg:leading-[44px] text-blackPrimary text-center mt-4 lg:mt-6"
       >
         Our most popular routes
       </h2>
 
-      <div class="grid grid-cols-2 lg:grid-cols-3 mt-8">
+      <div class="grid grid-cols-2 lg:grid-cols-3 mt-8 lg:mt-[60px]">
         <RouteListItem
           v-for="(route, index) in getPopularRouteListData"
           :routeItem="route"
