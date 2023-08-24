@@ -30,7 +30,7 @@
     <!-- dropdown -->
     <div
       v-if="optionsIsOpen"
-      class="mt-2 w-full bg-white rounded shadow-xl z-[1000] leading-6"
+      class="mt-2 w-full bg-white rounded shadow-xl z-[1000] leading-6 absolute left-0 max-h-[307px] overflow-y-scroll"
     >
       <div class="flex justify-center items-center p-2">
         <input
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { handleScrollBehaviour } from "../../../helpers/utils";
 export default {
   props: {
     label: {
@@ -117,12 +118,14 @@ export default {
   },
 
   beforeDestroy() {
+    handleScrollBehaviour(true);
     window.removeEventListener("click", this.close);
   },
 
   methods: {
     toggleDropdown() {
       this.optionsIsOpen = !this.optionsIsOpen;
+      handleScrollBehaviour(!this.optionsIsOpen);
       setTimeout(function () {
         document.getElementById("searchInput").focus();
       }, 10);
@@ -130,10 +133,14 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.$emit("input", this.selectedOption.city_name);
+      handleScrollBehaviour(true);
       this.optionsIsOpen = false;
     },
     close(e) {
       if (!this.$el.contains(e.target)) {
+        if (this.optionsIsOpen) {
+          handleScrollBehaviour(true);
+        }
         this.optionsIsOpen = false;
       }
     },

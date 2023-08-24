@@ -58,7 +58,7 @@
           </a>
 
           <a
-            href="https://goo.gl/maps/7oJip3H2v1LXvQLF7"
+            href="https://goo.gl/maps/X134AtkH5fVhfw538"
             target="_blank"
             class="flex items-center text-white text-base lg:text-xl gap-x-2 lg:gap-x-[10px]"
           >
