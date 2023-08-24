@@ -3,7 +3,7 @@
     v-if="getBlogList?.length && imageUrl"
     class="w-full h-auto flex flex-col items-center mt-[60px] lg:mt-[50px] lg:py-[68px] lg:px-[100px]"
   >
-    <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0">
+    <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0 gap-x-[30px]">
       <h2
         class="text-2xl md:text-[32px] md:leading-[40px] lg:text-[36px] md:leading-[44px] text-blackPrimary text-left font-semibold"
       >

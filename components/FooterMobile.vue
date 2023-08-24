@@ -43,7 +43,7 @@
           <p>09642080808</p>
         </a>
 
-        <a href="https://goo.gl/maps/7oJip3H2v1LXvQLF7" target="_blank" class="flex items-start text-white text-base gap-x-[9.67px]">
+        <a href="https://goo.gl/maps/X134AtkH5fVhfw538" target="_blank" class="flex items-start text-white text-base gap-x-[9.67px]">
           <img src="@/assets/images/icons/mapMarkupIcon.svg" alt="" class="w-[15px] h-[15px] mt-1"/>
           <p>Road 24, House-15(2<sup>nd</sup> floor), Gulshan-02, Dhaka</p>
         </a>

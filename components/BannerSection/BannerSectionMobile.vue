@@ -7,11 +7,11 @@
     />
     <div class="absolute top-[59px] md:top-[100px] right-4 left-4">
       <h2
-        class="text-[28px] leading-[36px] md:text-[45px] md:leading-[52px] text-white font-bold text-center"
+        class="text-[28px] leading-[36px] md:text-[45px] md:leading-[52px] text-white font-bold text-start md:text-center"
       >
         Ticketing made easy!
       </h2>
-      <h4 class="mt-2 text-base text-white font-normal text-center">
+      <h4 class="mt-2 text-base text-white font-normal text-start md:text-center">
         Buy tickets online hassle-free
       </h4>
       <div class="mt-[48px] md:mt-[100px]">

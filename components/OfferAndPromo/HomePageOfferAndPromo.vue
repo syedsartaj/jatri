@@ -217,13 +217,21 @@ export default {
     };
   },
   methods: {
-    prevSlide() {
-      this.$refs.hooperSlide.slidePrev();
+    prevSlide(action) {
+      if (action === "large") {
+        this.$refs.hooperSlide.slidePrev();
+      } else {
+        this.$refs.hooperSlideMobile.slidePrev();
+      }
       this.slideLeft = true;
       this.slideRight = false;
     },
-    nextSlide() {
-      this.$refs.hooperSlide.slideNext();
+    nextSlide(action) {
+      if (action === "large") {
+        this.$refs.hooperSlide.slideNext();
+      } else {
+        this.$refs.hooperSlideMobile.slideNext();
+      }
       this.slideRight = true;
       this.slideLeft = false;
     },

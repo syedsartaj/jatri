@@ -10,8 +10,7 @@
         </h2>
         <p class="text-blackLight text-sm leading-5 font-normal mt-4">
           Still need help?
-          <span
-            class="text-corporate underline ml-[6px] text-xs lg:text-base font-medium"
+          <span class="text-corporate underline ml-[6px] text-xs font-medium"
             ><a href="https://jatri.co/contact-us" target="_blank" class=""
               >Contact Us</a
             >
