@@ -5,18 +5,7 @@
       <div class="block md:hidden bg-white">
         <button
           @click="toggler"
-          class="
-            w-full
-            py-3
-            px-2
-            leading-5
-            text-sm
-            font-medium
-            text-blackPrimary
-            rounded
-            flex
-            justify-between
-          "
+          class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between"
         >
           Terms & Conditions
           <img src="@/assets/images/ashDropDown.svg" alt="" />
@@ -78,16 +67,7 @@
                   ? 'text-white bg-[#1E88E5]'
                   : 'text-black bg-transparent'
               "
-              class="
-                mt-4
-                block
-                w-full
-                leading-5
-                text-sm
-                font-medium
-                p-2
-                rounded
-              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
               >Terms & Conditions</a
             >
             <a
@@ -98,16 +78,7 @@
                   ? 'text-white bg-[#1E88E5]'
                   : 'text-black bg-transparent'
               "
-              class="
-                mt-4
-                block
-                w-full
-                leading-5
-                text-sm
-                font-medium
-                p-2
-                rounded
-              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
               >Return & Refund Policies</a
             >
             <a
@@ -118,16 +89,7 @@
                   ? 'text-white bg-[#1E88E5]'
                   : 'text-black bg-transparent'
               "
-              class="
-                mt-4
-                block
-                w-full
-                leading-5
-                text-sm
-                font-medium
-                p-2
-                rounded
-              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
               >Privacy Policy
             </a>
           </div>
@@ -139,15 +101,7 @@
           <!-- Terms and Condition -->
           <div :class="$route.hash === '#terms-and-conditions' ? 'mt-20' : ' '">
             <p
-              class="
-                text-blackPrimary
-                leading-8
-                md:leading-9
-                text-2xl
-                md:text-[28px]
-                font-medium
-                md:font-semibold
-              "
+              class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
             >
               Terms & Conditions
             </p>
@@ -156,18 +110,7 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="
-                  list-disc
-                  mt-2
-                  md:mt-4
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                  text-justify
-                "
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify"
               >
                 <li class="">
                   The ticket will be treated as canceled if the passenger fails
@@ -183,7 +126,8 @@
                   goods carried by the passenger.
                 </li>
                 <li>
-                  Passenger may cancel his/her tickets prior to 24 hours from the time of journey.
+                  Passenger may cancel his/her tickets prior to 24 hours from
+                  the time of journey.
                 </li>
               </ul>
             </div>
@@ -200,18 +144,7 @@
             </p>
             <div class="md:ml-9">
               <ul
-                class="
-                  list-disc
-                  dash-type
-                  mt-2
-                  md:mt-4
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc dash-type mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li class="">
                   Issuing a valid e-ticket (a ticket that will be accepted by
@@ -229,17 +162,7 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="
-                  list-disc
-                  mt-2
-                  md:mt-4
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>The bus/cruise operator changes ticket price.</li>
                 <li>The bus/cruise not departing/ reaching on time.</li>
@@ -286,17 +209,7 @@
 
             <div class="ml-4 md:ml-9">
               <ul
-                class="
-                  list-disc
-                  mt-2
-                  md:mt-4
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li class="">
                   <p class="text-blackPrimary text-xl font-medium">
@@ -385,16 +298,7 @@
             :class="$route.hash === '#return-and-refund-policy' ? 'mt-20' : ' '"
           >
             <p
-              class="
-                mt-6
-                text-blackPrimary
-                leading-8
-                md:leading-9
-                text-2xl
-                md:text-[28px]
-                font-medium
-                md:font-semibold
-              "
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
             >
               Return & Refund Policies
             </p>
@@ -407,28 +311,14 @@
               Cancellation Policy:
             </p>
             <p
-              class="
-                text-base
-                font-normal
-                text-blackPrimary text-justify
-                mt-2
-                md:mt-4
-              "
+              class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4"
             >
               Tickets bought through Jatri.co can be canceled as per the
               cancellation policy below:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="
-                  list-disc
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
                   <span class="font-medium"> Jatri.co</span>
@@ -446,15 +336,7 @@
             </p>
             <div class="ml-4 md:ml-9 mt=4">
               <ul
-                class="
-                  list-disc
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
                   The ticket will be treated as canceled if the passenger fails
@@ -469,15 +351,7 @@
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="
-                  list-disc
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
                   No ticket will be activated unless the customer has paid the
@@ -506,9 +380,9 @@
             <p
               class="text-base font-medium text-blackPrimary mt-4 text-justify"
             >
-              To be eligible for refund, customers need to cancel the ticket from
-              jatri.co before the applicable time before the departure. And must
-              report the cancelation to the support center (i.e. Call
+              To be eligible for refund, customers need to cancel the ticket
+              from jatri.co before the applicable time before the departure. And
+              must report the cancelation to the support center (i.e. Call
               09642080808 or email to info@jatri.co) of Jatri.co
             </p>
             <!--table-->
@@ -516,15 +390,7 @@
               <table class="min-w-full text-center">
                 <thead>
                   <tr
-                    class="
-                      bg-[#F7F7F7]
-                      p-1
-                      leading-[16px]
-                      md:leading-6
-                      text-[12px]
-                      md:text-[16px]
-                      font-medium
-                    "
+                    class="bg-[#F7F7F7] p-1 leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
                   >
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]"></th>
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]">
@@ -535,13 +401,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    class="
-                      leading-[16px]
-                      md:leading-6
-                      text-[12px]
-                      md:text-[16px]
-                      font-medium
-                    "
+                    class="leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
                   >
                     <td class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Jatri Online
@@ -582,12 +442,65 @@
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-4"
             >
-              No ticket will be refunded unless it has been canceled as per the
-              cancellation policy above. In case of technical problems or any
-              failed transaction due to network failure, time delay on complete
-              payment, input transaction ID/validation of transaction (in case
-              of mobile payment) or any other situation where payment is
-              successful but ticket is not generated in that case.
+              No ticket will be refunded unless it has been cancelled as per the
+              cancellation/refund policy.
+
+              <br />
+              <br />
+
+              Customer must need to call from the mobile number used while
+              buying the ticket. Cancellation/refund request from other
+              non-buying number will not be accepted.
+
+              <br />
+              <br />
+
+              No refunds will be processed without a written request in the
+              correct format (as outlined below) sent to info@jatri.co within
+              the timeframe requirement given above
+
+              <br />
+              <br />
+              Refund Request Format
+              <br />
+              <br />
+
+              Ticket PNR (required if a ticket was issued)
+              <br />
+
+              Mobile number used while buying the ticket
+              <br />
+
+              Category (e.g Bus/Launch)
+              <br />
+
+              Date of payment
+              <br />
+
+              Method of Payment (e.g., bkash, COD, card)
+              <br />
+
+              Mobile payment trxID (for mobile payments)
+              <br />
+
+              Card type (e.g. Visa) and last 4 digits (for card payments)
+              <br />
+              <br />
+
+              Where refund should be given to:
+              <br />
+              <br />
+
+              Personal bKash Number (If paid through bkash) OR
+              <br />
+              OR Bank details (if paid through card/online baking/DBBL mobile
+              banking) with Account Number, Bank Account Name, Bank Name, Branch
+              Name and Routing Code.
+              <br />
+              No cash refund given
+              <br />
+              For cards, refund will be given only to the card used for
+              purchases
             </p>
 
             <p
@@ -633,15 +546,7 @@
 
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="
-                  list-disc
-                  leading-6
-                  md:leading-5
-                  text-[16px]
-                  md:text-sm
-                  text-blackPrimary
-                  font-[300] font-inter
-                "
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
                   If a customer has sent payment to Jatri.co but the e-ticket is
@@ -703,16 +608,7 @@
           <!-- privacy policy data -->
           <div :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
             <p
-              class="
-                mt-6
-                text-blackPrimary
-                leading-8
-                md:leading-9
-                text-2xl
-                md:text-[28px]
-                font-medium
-                md:font-semibold
-              "
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
             >
               Privacy Policy
             </p>
@@ -761,15 +657,7 @@
           </p>
           <div class="ml-4 md:ml-9">
             <ul
-              class="
-                list-disc
-                leading-6
-                md:leading-5
-                text-[16px]
-                md:text-sm
-                text-blackPrimary
-                font-[300] font-inter
-              "
+              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
             >
               <li>
                 First, you have to go to the ticket history option. You need to
@@ -795,15 +683,7 @@
 
           <div class="ml-4 md:ml-9">
             <ul
-              class="
-                list-disc
-                leading-6
-                md:leading-5
-                text-[16px]
-                md:text-sm
-                text-blackPrimary
-                font-[300] font-inter
-              "
+              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
             >
               <li>
                 <span class="font-medium">Auto cancellation</span>
@@ -894,10 +774,8 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .dash-type {
   list-style-type: "- ";
 }
 </style>
-
-
