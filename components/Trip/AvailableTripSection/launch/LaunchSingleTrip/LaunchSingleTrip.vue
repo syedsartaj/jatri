@@ -200,7 +200,9 @@
           </p>
           <div
             class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] justify-between items-center"
-            @click="handleSelectFloorModal"
+            @click="
+              handleFloorOrClassSelection({ data: null, action: 'FLOOR' })
+            "
           >
             <div class="flex flex-row">
               <div
@@ -223,7 +225,9 @@
           </p>
           <div
             class="cursor-pointer w-full flex flex-row h-[46px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] justify-between items-center"
-            @click="handleSelectClassModal"
+            @click="
+              handleFloorOrClassSelection({ data: null, action: 'CLASS' })
+            "
           >
             <div class="flex flex-row items-center justify-center">
               <BedIcon v-if="selectedClass?.info?.isCabin" />
@@ -244,13 +248,16 @@
         :selectedFloor="selectedFloor"
         :selectedClass="selectedClass"
         :seatViewData="getSeatViewData"
+        :setSeatViewData="(data) => this.handleSeatSelection(data)"
       />
     </div>
     <SelectClassModal
       v-if="showSelectClassModal"
       :classList="classList"
       :selectedClass="selectedClass"
-      :handleSelectClassModal="handleSelectClassModal"
+      :handleSelectClassModal="
+        (data) => handleFloorOrClassSelection({ data, action: 'CLASS' })
+      "
     />
     <SeatAvailabilityModal
       v-else-if="showSeatAvailableModal"
@@ -263,7 +270,15 @@
       v-else-if="showSelectFloorModal"
       :floorList="getSeatViewData?.seatPlan?.floors"
       :selectedFloor="selectedFloor"
-      :handleSelectFloorModal="handleSelectFloorModal"
+      :handleSelectFloorModal="
+        (data) => handleFloorOrClassSelection({ data, action: 'FLOOR' })
+      "
+    />
+
+    <ChangeFloorOrClassModal
+      v-if="showFloorOrClassChangeAlert"
+      :change="() => handleConfirmFloorOrClassChange()"
+      :continueSelection="() => (showFloorOrClassChangeAlert = false)"
     />
   </div>
 </template>
@@ -329,6 +344,9 @@ export default {
       selectedClass: {},
       classList: [],
       showBookingDetailsModal: false,
+      selectedSeatArray: [],
+      showFloorOrClassChangeAlert: false,
+      intermediateDataSaver: {},
     };
   },
   computed: {
@@ -411,6 +429,32 @@ export default {
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
+    handleFloorOrClassSelection({ data, action }) {
+      // action - FLOOR / CLASS
+      this.intermediateDataSaver = { data, action };
+
+      if (this.selectedSeatArray.length) {
+        this.showFloorOrClassChangeAlert = true;
+      } else {
+        if (action === "FLOOR") {
+          this.handleSelectFloorModal(data);
+        } else {
+          this.handleSelectClassModal(data);
+        }
+      }
+    },
+    handleConfirmFloorOrClassChange() {
+      this.showFloorOrClassChangeAlert = false;
+      this.selectedSeatArray = [];
+      if (this.intermediateDataSaver?.action === "FLOOR") {
+        this.handleSelectFloorModal(this.intermediateDataSaver.data);
+      } else {
+        this.handleSelectClassModal(this.intermediateDataSaver.data);
+      }
+    },
+    handleSeatSelection(data) {
+      this.selectedSeatArray = data;
+    },
     getSeatClasses() {
       const seatClassArray = [];
       const selectedFloorId = this.selectedFloor?.info?._id;
