@@ -46,7 +46,7 @@
                           item.classId === selectedClass?.info?.classId) &&
                         'bg-corporate'
                       "
-                      class="cursor-pointer w-full flex flex-row h-[46px] px-4 rounded-lg border border-[#EDEDED] items-center"
+                      class="cursor-pointer w-full flex flex-row h-[44px] px-4 rounded-lg border border-[#EDEDED] items-center"
                     >
                       <BedIcon
                         v-if="item.isCabin"
