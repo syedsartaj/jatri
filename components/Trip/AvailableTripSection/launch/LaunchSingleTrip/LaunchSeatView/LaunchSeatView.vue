@@ -122,6 +122,15 @@
       :handlePaymentPending="paymentPendingHandler"
       :selectedSeatsTitleAndPrice="getSelectedSeatsTitleAndPrice"
     />
+
+    <SeatAlreadySoldModal
+      v-if="isSeatAlreadySelected"
+      :handleOnClick="
+        () => {
+          isSeatAlreadySelected = false;
+        }
+      "
+    />
   </div>
 </template>
 
@@ -141,11 +150,13 @@ export default {
     "selectedClass",
     "selectedFloor",
     "seatViewData",
+    "setSeatViewData",
   ],
   data() {
     return {
       selectedSeatArray: [],
       requestOnGoing: false,
+      isSeatAlreadySelected: false,
     };
   },
   methods: {
@@ -268,6 +279,7 @@ export default {
 
           if (isSeatLocked) {
             //update seat status here
+            this.isSeatAlreadySelected = true;
             this.updateSeatStatus({
               classId: this.selectedClass?.info?.classId,
               floorId: this.selectedFloor?.info?._id,
@@ -388,6 +400,9 @@ export default {
   watch: {
     selectedClassSeatData() {
       this.selectedSeatArray = [];
+    },
+    selectedSeatArray() {
+      this.setSeatViewData(this.selectedSeatArray);
     },
   },
 };
