@@ -4,7 +4,7 @@
     :ref="`bus-selector-${busIndex}`"
   >
     <div
-      class="lg:flex justify-between gap-x-6"
+      class="md:flex justify-between gap-x-6"
       :class="
         selectedTrip === busIndex
           ? 'border-b border-[#DBDBDB]'
@@ -12,7 +12,7 @@
       "
     >
       <div
-        class="w-full lg:w-[72%] py-[20px] px-[24px] divide-y grid grid-cols-1 divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        class="w-full md:w-[72%] py-[20px] px-[24px] divide-y grid grid-cols-1 divide-[#DBDBDB] md:border-r md:border-[#DBDBDB]"
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
@@ -86,7 +86,7 @@
         </div>
 
         <div
-          class="flex justify-evenly lg:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]"
+          class="flex justify-evenly md:gap-[16px] items-center md:order-last w-full pt-[15px] pb-[15px] md:pb-[0px]"
         >
           <PointPolicyButton
             text="Boarding Point"
@@ -111,12 +111,12 @@
         </div>
       </div>
       <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
-      <div class="block lg:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
+      <div class="block md:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
 
       <div
-        class="w-full lg:w-[28%] py-[20px] px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
+        class="w-full md:w-[28%] py-[20px] px-4 md:px-0 md:pr-6 flex justify-between items-center md:items-start md:flex-col"
       >
-        <div class="hidden lg:block">
+        <div class="hidden md:block">
           <img
             src="@/assets/images/icons/fareIcon.svg"
             alt=""
@@ -130,7 +130,7 @@
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
         </div>
-        <div class="w-full lg:hidden flex justify-start items-center gap-x-3">
+        <div class="w-full md:hidden flex justify-start items-center gap-x-3">
           <img
             src="@/assets/images/icons/fareIcon.svg"
             alt=""
@@ -190,7 +190,7 @@
           : 'h-0'
       "
     >
-      <div class="grid lg:grid-cols-2 gap-4">
+      <div class="grid md:grid-cols-2 gap-4">
         <div
           class="flex flex-col w-full"
           v-if="getSeatViewData?.seatPlan?.floors?.length"
