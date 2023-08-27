@@ -11,6 +11,7 @@
         :selectedBuxIndex="selectedBusIndex"
         :setSelectedBuxIndex="(value) => (selectedBusIndex = value)"
       />
+      <div class="text-[#676769] text-sm font-normal text-center">End of result</div>
     </div>
     <div v-else-if="getTrips.length === 0 && isBeforeGetDataState === false">
       <!-- error layout -->

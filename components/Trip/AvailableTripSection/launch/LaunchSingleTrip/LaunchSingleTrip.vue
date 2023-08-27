@@ -24,7 +24,7 @@
                   `${imageUrl}${trip.companyImages?.logo}`) ||
                 require(`@/assets/images/busDefaultImage.svg`)
               "
-              class="h-[40px] w-[40px]"
+              class="h-[40px] w-[40px] rounded-full"
               alt=""
             />
             <div>
