@@ -114,7 +114,7 @@
       <div class="block md:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
 
       <div
-        class="w-full md:w-[28%] py-[20px] px-4 md:px-0 md:pr-6 flex justify-between items-center md:items-start md:flex-col"
+        class="w-full md:w-[28%] py-[20px] px-4 md:px-0 md:pr-4 lg:pr-6 flex justify-between items-center md:items-start md:flex-col"
       >
         <div class="hidden md:block">
           <img
