@@ -14,6 +14,7 @@
         v-for="(operator, index) in getOperatorListData"
         :operator="operator"
         :key="index"
+        :service="service"
         :isLastItem="index === getOperatorListData.length - 1"
       />
     </div>

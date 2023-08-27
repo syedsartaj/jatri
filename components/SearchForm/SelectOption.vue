@@ -2,10 +2,12 @@
   <div class="relative w-full">
     <div class="">
       <h2
-        class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
+        :class="isRequired ? '' : 'justify-between'"
+        class="text-xs lg:text-base font-medium text-blackPrimary flex"
       >
         <span>{{ label }} </span>
         <span v-if="isOptional" class="text-[#8D8D8F] text-xs">Optional</span>
+        <span v-if="isRequired" class="text-[#E0293B] ml-1">*</span>
       </h2>
       <button
         @click="toggleDropdown"
@@ -96,6 +98,10 @@ export default {
       required: true,
     },
     isOptional: {
+      type: Boolean,
+      required: false,
+    },
+    isRequired: {
       type: Boolean,
       required: false,
     },

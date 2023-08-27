@@ -16,7 +16,7 @@
               <p class="text-xl text-blackPrimary font-medium">
                 Booking Details
               </p>
-              <button @click="() => {}" class="pr-[6px]">
+              <button @click="() => goBack()" class="pr-[6px]">
                 <img src="@/assets/images/icons/closeIcon.svg" alt="" />
               </button>
             </div>
@@ -48,6 +48,7 @@
                                 :default-option="'Select Your Boarding Location'"
                                 :label="'Boarding Point'"
                                 :options="boardingPoints"
+                                :isRequired="true"
                                 :errorMessage="errorOccurred && !boardingPoint"
                               />
                             </div>
@@ -132,6 +133,7 @@
                                   required=""
                                   placeholder=""
                                   v-model="passengerMobile"
+                                  @wheel="$event.target.blur()"
                                 />
                               </div>
                               <div
@@ -384,6 +386,9 @@ export default {
   },
   methods: {
     ...mapActions("launchStore", ["ticketConfirmAction"]),
+    goBack() {
+      window.history.back();
+    },
     timeUp() {
       this.paymentAllowStatus = false;
     },
@@ -443,5 +448,17 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
   width: 6px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>

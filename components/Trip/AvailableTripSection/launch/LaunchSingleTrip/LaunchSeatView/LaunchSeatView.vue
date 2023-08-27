@@ -76,6 +76,7 @@
 
     <div class="seat-section-mobile visible lg:invisible">
       <div
+        v-if="getSeatArray?.length"
         class="w-full flex flex-row items-center p-2 bg-[#FFF] rounded-lg mb-4"
       >
         <img

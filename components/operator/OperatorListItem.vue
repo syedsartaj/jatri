@@ -6,7 +6,14 @@
   >
     <div class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]">
       <img
+        v-if="service === 'bus'"
         src="@/assets/images/home/availableRoutesIcon.svg"
+        alt=""
+        class="w-5 h-5"
+      />
+      <img
+        else
+        src="@/assets/images/icons/launchOperatorIcon.svg"
         alt=""
         class="w-5 h-5"
       />
@@ -28,7 +35,7 @@
 <script>
 export default {
   title: "OperatorListItem",
-  props: ["operator", "isLastItem"],
+  props: ["operator", "isLastItem", "service"],
   methods: {
     bookNow() {
       const { _id } = this.operator;

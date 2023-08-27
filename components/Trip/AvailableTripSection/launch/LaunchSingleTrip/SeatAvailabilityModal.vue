@@ -76,7 +76,7 @@
                           <td
                             class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-[#EDEDED]"
                           >
-                            {{ item.fare }}
+                            {{ item.fare }} TK
                           </td>
                           <td class="whitespace-nowrap px-4 py-2">
                             {{ item.availableSeats }}

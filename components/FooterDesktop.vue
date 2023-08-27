@@ -4,11 +4,13 @@
   >
     <div class="flex justify-between items-start">
       <div>
-        <img
-          src="@/assets/images/logo-white.svg"
-          alt=""
-          class="h-11 w-[89px]"
-        />
+        <NuxtLink to="/"
+          ><img
+            @click="handlePageRefresh"
+            src="@/assets/images/logo-white.svg"
+            alt="logo"
+            class="h-11 w-[89px]"
+        /></NuxtLink>
 
         <div class="flex gap-x-[14px] mt-[23px] mb-[35px]">
           <a
@@ -215,3 +217,14 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    handlePageRefresh() {
+      if ($nuxt.$route.name === "index") {
+        window.location.reload();
+      }
+    },
+  },
+};
+</script>
