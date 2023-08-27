@@ -7,26 +7,26 @@
     />
     <div class="block lg:hidden">
       <div
-        class="flex items-center justify-center absolute w-[93%] m-auto top-0 left-0 bottom-0 right-0 z-40"
+        class="flex items-center justify-center absolute w-full px-4 m-auto top-0 left-0 bottom-0 right-0 z-40"
       >
         <div
-          class="bg-white h-[52px] w-full rounded-md flex items-center justify-between px-[14px] py-2"
+          class="bg-white h-[56px] w-full rounded-md flex items-center justify-between px-[14px] py-2"
         >
           <div class="w-[270px]">
             <div class="flex justify-start gap-x-[7.67px]">
-              <h2 class="text-xs font-medium text-blackPrimary">
+              <h2 class="text-sm font-medium text-blackPrimary">
                 {{ $route.query.from }}
               </h2>
               <img
                 src="@/assets/images/icons/rightArrowWithLine.svg"
                 alt=""
-                class="w-[6.67px]"
+                class="w-[10px]"
               />
-              <h2 class="text-xs font-medium text-blackPrimary">
+              <h2 class="text-sm font-medium text-blackPrimary">
                 {{ $route.query.to }}
               </h2>
             </div>
-            <p class="text-[11px] leading-4 font-normal text-blackSecondary">
+            <p class="text-xs font-normal text-blackSecondary">
               <span>{{ getHumanDate($route.query.date) }}</span
               >,
               <span class="capitalize">{{
@@ -36,7 +36,7 @@
           </div>
           <button
             @click="modifySearch"
-            class="bg-[#1E88E5] rounded-full py-1 px-[10px] text-xs font-medium text-white border-none"
+            class="bg-[#1E88E5] h-[24px] rounded-full px-[10px] text-xs font-medium text-white border-none"
           >
             Modify
           </button>
