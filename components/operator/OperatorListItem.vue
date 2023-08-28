@@ -12,7 +12,7 @@
         class="w-5 h-5"
       />
       <img
-        else
+        v-else
         src="@/assets/images/icons/launchOperatorIcon.svg"
         alt=""
         class="w-5 h-5"
