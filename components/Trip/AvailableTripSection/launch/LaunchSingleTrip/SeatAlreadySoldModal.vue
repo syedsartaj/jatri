@@ -14,10 +14,10 @@
               class="mt-6"
             />
             <p class="text-xl ont-semibold mt-8 text-blackPrimary text-center">
-              Seat is already sold
+              Seat is already booked
             </p>
             <p class="text-base font-normal mt-2 text-blackLight text-center">
-              The seat you selected is already sold. Please select another seat
+              The seat you selected is already booked. Please select another seat
               to continue.
             </p>
           </div>

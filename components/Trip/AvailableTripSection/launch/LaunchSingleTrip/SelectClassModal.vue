@@ -24,7 +24,7 @@
               />
             </div>
             <hr />
-            <div class="bg-white overflow-y-auto h-[504px]">
+            <div class="bg-white overflow-y-auto max-h-[504px]">
               <div class="flex flex-col">
                 <div class="overflow-x-auto py-4">
                   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-3 lg:gap-x-4">
