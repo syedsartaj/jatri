@@ -70,6 +70,30 @@
       </div>
 
       <div
+        v-if="mobileErrorOccurred && !isPromoApplied"
+        class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mb-2"
+      >
+        <img
+          src="@/assets/images/icons/warningRed.svg"
+          class="h-4 w-4"
+          alt="error"
+        />
+        <div>Please enter a valid phone number first.</div>
+      </div>
+
+      <div
+        v-if="promoError && !isPromoApplied"
+        class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mb-2"
+      >
+        <img
+          src="@/assets/images/icons/warningRed.svg"
+          class="h-4 w-4"
+          alt="error"
+        />
+        <div>Promo not found.</div>
+      </div>
+
+      <div
         class="w-full flex flex-row justify-between p-[10px]"
         v-if="isPromoApplied"
       >
@@ -99,6 +123,8 @@ export default {
       promoCode: "",
       isPromoApplied: false,
       promoAmount: 0,
+      mobileErrorOccurred: false,
+      promoError: false,
     };
   },
   computed: {
@@ -143,7 +169,6 @@ export default {
     },
     handlePromo() {
       this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
         if (isValidPhoneNumber(this.passengerMobile)) {
           const payload = {
             promoCode: this.promoCode,
@@ -154,21 +179,34 @@ export default {
           };
 
           try {
+            this.$nuxt.$loading?.start();
             const response = await this.applyPromoCodeAction(payload);
             if (response?.data?.amount) {
               this.isPromoApplied = true;
               this.promoAmount = response?.data?.amount;
             }
-          } catch (error) {}
+            this.$nuxt.$loading?.finish();
+          } catch (error) {
+            this.promoError = true;
+            this.isPromoApplied = false;
+            this.$nuxt.$loading?.finish();
+          }
         } else {
+          this.mobileErrorOccurred = true;
           this.$toast.error("Enter your valid phone number", {
             position: "bottom-right",
             duration: 5000,
           });
         }
-
-        this.$nuxt.$loading?.finish();
       });
+    },
+  },
+  watch: {
+    promoCode() {
+      if (this.mobileErrorOccurred) {
+        this.mobileErrorOccurred = false;
+        this.promoError = false;
+      }
     },
   },
 };
