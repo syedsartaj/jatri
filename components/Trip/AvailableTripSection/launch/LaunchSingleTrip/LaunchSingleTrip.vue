@@ -167,7 +167,7 @@
           />
           <button
             @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
-            class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
+            class="md:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
           >
             {{ selectedTrip === busIndex ? "Close Seats" : "View Seats" }}
             <span>

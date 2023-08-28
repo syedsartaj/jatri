@@ -23,7 +23,7 @@
           <div class="flex justify-between gap-x-4">
             <button
               @click="prevSlide('mobile')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
               :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideLeft
@@ -34,7 +34,7 @@
             </button>
             <button
               @click="nextSlide('mobile')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
               :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
             >
               <SlideRight
