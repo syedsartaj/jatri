@@ -158,6 +158,7 @@
                       required=""
                       placeholder="Enter Mobile Number"
                       v-model="phone"
+                      @wheel="$event.target.blur()"
                     />
                   </div>
                   <input
@@ -184,6 +185,20 @@
               </div>
             </form>
           </div>
+          <!-- Ticket not found -->
+          <div class="flex justify-center mt-[10px]">
+            <div
+              v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
+              class="w-full flex flex-row gap-x-2 items-center text-xs md:text-sm font-normal text-[#E0293B]"
+            >
+              <img
+                src="@/assets/images/icons/warningRed.svg"
+                class="h-[16px] w-[16px] md:h-6 nd:w-6"
+                alt="error"
+              />
+              <div>We could not find any ticket according to your search</div>
+            </div>
+          </div>
         </div>
 
         <TicketNotFoundAlert v-if="error" />
@@ -207,15 +222,6 @@
             :serviceType="selectedService"
           />
         </div>
-      </div>
-
-      <!-- Ticket not found -->
-      <div class="flex justify-center pt-20 pb-[100px]">
-        <OpssAlert
-          v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
-          :details="'Looks like we could not find any ticket according to your preferance. Sorry to let you down.'"
-          :customStyle="'px-[64.5px]'"
-        />
       </div>
     </div>
   </div>
@@ -250,8 +256,8 @@ export default {
     ...mapActions("common", ["searchTicketAction"]),
     getServiceClassName(service) {
       return {
-        "w-full p-4 flex justify-between items-center flex-row cursor-pointer bg-[#f7f7f7] rounded-t-[10px]": true,
-        "bg-[#1E88E5]": this.selectedService === service,
+        "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,
+        "rounded-t-[8px] bg-[#1E88E5]": this.selectedService === service,
       };
     },
     handleServiceChange(service) {
@@ -293,4 +299,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>

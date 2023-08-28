@@ -56,7 +56,7 @@
           type="text"
           id="promo"
           v-model="promoCode"
-          placeholder="Enter Promo Code"
+          placeholder="Enter promo code"
           class="bg-[#f7f7f7] px-4 py-[13px] rounded-[4px] w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
         />
         <button
@@ -107,7 +107,7 @@
       class="w-full px-4 py-[14px] w-full flex flex-row justify-between items-center bg-[#F7F7F7] rounded-b-lg border-t-[1px] border-[#DBDBDB]"
     >
       <div class="text-sm text-blackPrimary font-normal">Total</div>
-      <div class="text-base text-blackPrimary font-semibold">
+      <div class="text-base text-blackPrimary font-semibold" v-if="totalPrice">
         BDT {{ totalPrice }}
       </div>
     </div>
