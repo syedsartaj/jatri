@@ -130,7 +130,9 @@
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
         </div>
-        <div class="max-w-max md:w-full md:hidden flex justify-start items-center gap-x-[10px] md:gap-x-3">
+        <div
+          class="w-full md:hidden flex justify-start items-center gap-x-[10px] md:gap-x-3"
+        >
           <img
             src="@/assets/images/icons/fareIcon.svg"
             alt=""
@@ -144,7 +146,10 @@
               {{ trip.seatFare }}
               <span class="text-xs">TK</span>
             </h2>
-            <h2 v-else class="text-base lg:text-xl font-semibold text-blackPrimary">
+            <h2
+              v-else
+              class="text-base lg:text-xl font-semibold text-blackPrimary"
+            >
               {{ trip.seatFare[0].fare }}
               <span class="text-xs">TK</span>
             </h2>
@@ -152,7 +157,7 @@
           </div>
         </div>
         <div
-          class="max-w-max md:w-full flex flex-row justify-end items-center lg:mt-[26px] gap-x-2"
+          class="w-full flex flex-row justify-end md:justify-start items-center lg:mt-[26px] gap-x-2"
         >
           <img
             @click="handleSeatAvailableModal"
@@ -162,7 +167,7 @@
           />
           <button
             @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
-            class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[8px] items-center text-white text-sm font-medium px-4 py-[10px]"
+            class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
           >
             {{ selectedTrip === busIndex ? "Close Seats" : "View Seats" }}
             <span>
