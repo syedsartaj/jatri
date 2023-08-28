@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium"
+    class="bg-corporate rounded-full py-[13px] w-full text-white text-base font-medium"
     :type="type"
     @click="handleClick"
   >

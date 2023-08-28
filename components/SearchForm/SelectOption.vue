@@ -21,7 +21,7 @@
             {{ propertyName ? selectedOption[propertyName] : selectedOption }}
           </p>
           <p v-else class="text-blackSecondary text-sm font-normal">
-            Select Boarding point
+            Select boarding point
           </p>
           <img src="@/assets/images/icons/dropdown.svg" alt="dropdown" />
         </div>

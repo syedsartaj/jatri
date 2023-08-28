@@ -45,8 +45,8 @@
                             <div class="w-full mt-4">
                               <SelectOption
                                 v-model="boardingPoint"
-                                :default-option="'Select Your Boarding Location'"
-                                :label="'Boarding Point'"
+                                :default-option="'Select boarding point'"
+                                :label="'Boarding point'"
                                 :options="boardingPoints"
                                 :isRequired="true"
                                 :errorMessage="errorOccurred && !boardingPoint"
@@ -56,7 +56,7 @@
                               <h2
                                 class="text-xs lg:text-base font-medium text-blackPrimary"
                               >
-                                Passenger Name
+                                Passenger name
                                 <span class="text-[#E0293B]">*</span>
                               </h2>
                               <input
@@ -91,7 +91,7 @@
                               <h2
                                 class="text-xs lg:text-base font-medium text-blackPrimary"
                               >
-                                Departure Time
+                                Departure time
                               </h2>
 
                               <div
@@ -100,7 +100,7 @@
                                 <h2
                                   class="text-sm lg:text-base font-medium text-blackPrimary"
                                 >
-                                  06:45 PM
+                                  {{ departureTime || "" }}
                                 </h2>
                               </div>
                             </div>
@@ -156,8 +156,8 @@
                             <div class="w-full mt-4">
                               <SelectOption
                                 v-model="droppingPoint"
-                                :default-option="'Select Your Dropping Location'"
-                                :label="'Dropping Point'"
+                                :default-option="'Select dropping point'"
+                                :label="'Dropping point'"
                                 :options="droppingPoints"
                                 :isOptional="true"
                               />
@@ -272,7 +272,7 @@
                   </div>
 
                   <LoaderButton
-                    class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium"
+                    class="bg-corporate rounded-full w-full py-[11px] lg:py-[13px] text-white text-base font-medium"
                     :class="
                       getLoading ||
                       (!paymentAllowStatus &&
@@ -331,6 +331,7 @@ export default {
       passengerMobile: "",
       passengerEmail: "",
       errorOccurred: false,
+      departureTime: "",
     };
   },
   computed: {
@@ -341,6 +342,7 @@ export default {
       "getLoading",
     ]),
     boardingPoints() {
+      console.log(this.getSeatViewData.seatPlan.boardingPoints);
       return this.getSeatViewData.seatPlan.boardingPoints.map(
         (item) => item.name
       );
@@ -367,6 +369,13 @@ export default {
         }
       },
     },
+    boardingPoint() {
+      this.departureTime = this.formatTimeTo12Hour(
+        this.getSeatViewData.seatPlan.boardingPoints.find(
+          (item) => item.name === this.boardingPoint
+        ).boardingDateTime
+      );
+    },
   },
   created() {
     const bookingData = this.getLaunchBookingData;
@@ -386,6 +395,15 @@ export default {
   },
   methods: {
     ...mapActions("launchStore", ["ticketConfirmAction"]),
+    formatTimeTo12Hour(timeString) {
+      const date = new Date(timeString);
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const ampm = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+
+      return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    },
     goBack() {
       window.history.back();
     },
