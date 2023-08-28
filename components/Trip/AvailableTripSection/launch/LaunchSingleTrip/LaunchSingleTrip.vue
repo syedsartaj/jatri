@@ -46,11 +46,7 @@
             </p>
 
             <h2 class="text-base font-medium text-blackPrimary text-right">
-              {{
-                new Date(trip.tripDateTime).toLocaleString("en-Us", {
-                  timeStyle: "short",
-                })
-              }}
+              {{ formatTimeTo12Hour(trip.tripDateTime) }}
             </h2>
           </div>
 
@@ -434,6 +430,15 @@ export default {
       "getPbPaymentPendingBlockAction",
       "getPromoCodeAction",
     ]),
+    formatTimeTo12Hour(timeString) {
+      const date = new Date(timeString);
+      const hours = date.getUTCHours();
+      const minutes = date.getUTCMinutes();
+      const ampm = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+
+      return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    },
     handleFloorOrClassSelection({ data, action }) {
       // action - FLOOR / CLASS
       this.intermediateDataSaver = { data, action };

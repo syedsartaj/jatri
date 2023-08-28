@@ -281,6 +281,7 @@ export const actions = {
           resolve(res);
         })
         .catch((e) => {
+          reject();
           this.$toast.error(
             e.response.data.message ?? "Something went wrong!",
             {
@@ -333,6 +334,10 @@ export const mutations = {
       data?.from === "SCHEDULE_TRIP"
         ? state.mobileFilterData.priceFilterType
         : data;
+
+    if (!(tempData === "l2h" || tempData === "h2l")) {
+      return;
+    }
 
     const sortBy = tempData === "l2h" ? 1 : -1;
     state.trips.sort((a, b) => {

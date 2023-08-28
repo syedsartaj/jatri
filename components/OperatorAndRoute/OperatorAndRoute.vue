@@ -124,20 +124,26 @@ export default {
   },
   methods: {
     getRidrectUrl() {
-      const query = {
+      const isBusPath = this.$route.path.includes("/bus");
+      const date = new Date().toLocaleDateString("en-CA", {
+        dateStyle: "short",
+      });
+      const timestamp = new Date(date).getTime();
+      const commonQuery = {
         from: this.sectionData.from,
         to: this.sectionData.to,
-        type: "all",
-        date: new Date(
-          new Date().toLocaleString("en-CA", { dateStyle: "short" })
-        ).getTime(),
+        date: timestamp,
       };
-      Cookies.remove("process-allow");
-      const pathName = this.$route.path.toString().includes("/bus")
-        ? "/bus/trip"
-        : "/launch/trip";
 
-      this.$router.push({ path: pathName, query });
+      if (isBusPath) {
+        const busQuery = {
+          ...commonQuery,
+          type: "all",
+        };
+        this.$router.push({ path: "/bus/trip", query: busQuery });
+      } else {
+        this.$router.push({ path: "/launch/trip", query: commonQuery });
+      }
     },
   },
   mounted() {
