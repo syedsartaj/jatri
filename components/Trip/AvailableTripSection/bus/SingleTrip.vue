@@ -104,7 +104,7 @@
           :companyImages="trip.companyImages"
         />
         <div
-          class="flex justify-evenly lg:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]"
+          class="flex justify-evenly md:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]"
         >
           <PointPolicyButton
             text="Boarding Point"
