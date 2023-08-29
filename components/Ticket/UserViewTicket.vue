@@ -72,11 +72,11 @@
             {{ getTicketDetails.companyName }}
           </h2>
         </div>
-        <div class="p-3 lg:p-6">
+        <div class="p-3 md:py-5 lg:p-4">
           <div
-            class="flex flex-col lg:flex-row justify-between divide-y lg:divide-y-0 lg:divide-x divide-[#DBDBDB]"
+            class="flex flex-col md:flex-row justify-between divide-y md:divide-y-0 md:divide-x divide-[#DBDBDB]"
           >
-            <div class="w-full lg:w-1/2">
+            <div class="w-full md:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
@@ -150,7 +150,7 @@
                 </p>
               </div>
             </div>
-            <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
+            <div class="w-full md:w-1/2 pt-[10px] md:pt-0">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Transection ID:

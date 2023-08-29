@@ -73,13 +73,13 @@
 
       <div class="flex justify-evenly gap-x-[52px] mt-[26px] mx-auto pb-[30px]">
         <a href="https://www.facebook.com/JatriApp/" target="_blank">
-          <img src="@/assets/images/icons/facebook.svg" alt="facebook" class="h-[19.88px] w-[20px]"/>
+          <img src="@/assets/images/icons/facebook.svg" alt="facebook" class="h-6 w-6"/>
         </a>
         <a href="https://www.youtube.com/channel/UCOCwyP-pg5lJodKLvKmcWeQ" target="_blank">
-          <img src="@/assets/images/icons/youtube.svg" alt="youtube" class="h-[19.88px] w-[20px]"/>
+          <img src="@/assets/images/icons/youtube.svg" alt="youtube" class="h-6 w-6"/>
         </a>
         <a href="https://bd.linkedin.com/company/jatri-app" target="_blank">
-          <img src="@/assets/images/icons/linkedin.svg" alt="linkedin" class="h-[19.88px] w-[20px]"/>
+          <img src="@/assets/images/icons/linkedin.svg" alt="linkedin" class="h-6 w-6"/>
         </a>
       </div>
 

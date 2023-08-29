@@ -77,7 +77,8 @@
               fill="#F04935"
             />
           </svg>
-          <span class="w-15 font-medium text-sm text-center font-inter text-[#F04935]"
+          <span
+            class="w-15 font-medium text-sm text-center font-inter text-[#F04935]"
             >History</span
           >
         </NuxtLink>
@@ -85,9 +86,9 @@
           <div v-if="showHamburgerMenu">
             <HamburgerMenu :close="handleHamburgerMenu" />
           </div>
-          <div v-else class="py-2">
+          <div v-else>
             <img
-              class="h-6 w-6 cursor-pointer"
+              class="h-11 w-11 cursor-pointer"
               @click="handleHamburgerMenu"
               src="@/assets/images/home/hamburger.svg"
               alt=""
