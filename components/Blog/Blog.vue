@@ -134,7 +134,7 @@ export default {
           520: {
             itemsToShow: 1.5,
           },
-          425: {
+          400: {
             itemsToShow: 1.2,
           },
           0: {
