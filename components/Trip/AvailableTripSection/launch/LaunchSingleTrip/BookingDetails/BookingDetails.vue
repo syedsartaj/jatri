@@ -262,7 +262,7 @@
                   >
                 </div>
                 <div
-                  class="w-full xl:w-[460px] flex flex-col pt-4 px-4 xl:px-0"
+                  class="w-full xl:w-[460px] flex flex-col pt-4 px-0"
                 >
                   <div
                     v-if="!paymentAllowStatus || paymentValidateTime === 0"
