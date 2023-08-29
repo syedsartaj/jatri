@@ -4,7 +4,7 @@
       <div>
         <img src="@/assets/images/home/helpImage.svg" alt="" />
         <h2
-          class="text-[32px] leading-10 text-blackPrimary font-medium mt-6 lg:mt-8"
+          class="text-[32px] md:text-2xl leading-10 text-blackPrimary font-medium mt-6 lg:mt-8"
         >
           How can we help you?
         </h2>
