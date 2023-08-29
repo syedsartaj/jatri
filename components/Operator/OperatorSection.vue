@@ -4,7 +4,7 @@
       Plenty of options to choose
     </p>
     <h2
-      class="text-center font-semibold text-2xl lg:text-[32px] lg:leading-[40px] text-[#1E88E5] mt-4"
+      class="text-center font-semibold text-2xl md:text-[32px] lg:text-4xl text-[#1E88E5] mt-4"
     >
       Available {{ service }} operators
     </h2>

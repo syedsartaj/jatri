@@ -53,19 +53,19 @@
       <div class="flex justify-center gap-x-[16.67px] items-center pt-6 pb-4">
         <nuxt-link to="/policies#terms-and-conditions" class="flex justify-start gap-x-[6.67px] items-center">
           <p class="text-white text-sm underline">Terms and Condition</p>
-          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4 h-4">
         </nuxt-link>
         <div class="h-6 bg-white w-[1px]"></div>
         <nuxt-link to="/policies#return-and-refund-policy" class="flex justify-start gap-x-[6.67px] items-center">
           <p class="text-white text-sm underline">Return & Refund Policy</p>
-          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4 h-4">
         </nuxt-link>
       </div>
 
       <div class="flex justify-center border-t border-dashed border-white border-opacity-50 pt-4">
         <nuxt-link to="/policies#privacy-policy" class="flex justify-start gap-x-[6.67px] items-center">
           <p class="text-white text-sm underline">Privacy Policy</p>
-          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-[10.67px]">
+          <img src="@/assets/images/icons/rightArrowWhite.svg" alt="" class="w-4 h-4">
         </nuxt-link>
       </div>
 

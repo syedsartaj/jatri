@@ -123,7 +123,7 @@
             <img
               src="@/assets/images/icons/facebook.svg"
               alt=""
-              class="w-[30px] h-[29.82px]"
+              class="w-9 h-9"
             />
           </a>
           <a
@@ -133,14 +133,14 @@
             <img
               src="@/assets/images/icons/youtube.svg"
               alt=""
-              class="w-[30px] h-[29.82px]"
+              class="w-9 h-9"
             />
           </a>
           <a href="https://bd.linkedin.com/company/jatri-app" target="_blank">
             <img
               src="@/assets/images/icons/linkedin.svg"
               alt=""
-              class="w-[30px] h-[29.82px]"
+              class="w-9 h-9"
             />
           </a>
         </div>
@@ -156,7 +156,7 @@
         <img
           src="@/assets/images/icons/rightArrowWhite.svg"
           alt=""
-          class="w-4"
+          class="w-6 h-6"
         />
       </nuxt-link>
       <div class="h-6 bg-white w-[1px]"></div>
@@ -168,7 +168,7 @@
         <img
           src="@/assets/images/icons/rightArrowWhite.svg"
           alt=""
-          class="w-4"
+          class="w-6 h-6"
         />
       </nuxt-link>
       <div class="h-6 bg-white w-[1px]"></div>
@@ -180,7 +180,7 @@
         <img
           src="@/assets/images/icons/rightArrowWhite.svg"
           alt=""
-          class="w-4"
+          class="w-6 h-6"
         />
       </nuxt-link>
     </div>
