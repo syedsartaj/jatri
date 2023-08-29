@@ -40,7 +40,7 @@
     </div>
     <div
       v-show="optionsIsOpen"
-      class="border mt-5 w-11/12 bg-white rounded-md shadow-xl z-[1000] leading-6 before:grid before:-mt-2 before:ml-10 before:bg-white before:-skew-y-3 before:bg-red before:h-5 before:w-5 before:rotate-45 absolute divide-y-2"
+      class="border mt-4 w-11/12 bg-white rounded-md shadow-xl z-[1000] leading-6 before:grid  absolute divide-y-2"
     >
       <div class="text-center p-4">
         <h2 class="font-inter text-xs xl:text-[16px] font-[600] text-td_text">

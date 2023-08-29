@@ -147,7 +147,8 @@ export default {
       return (
         this.getTotalSeatFare() +
         this.paymentGatewayCommission +
-        this.serviceCharge
+        this.serviceCharge -
+        this.promoAmount
       );
     },
     paymentGatewayCommission() {
@@ -200,6 +201,16 @@ export default {
         }
       });
     },
+  },
+  created() {
+    const bookingData = this.getLaunchBookingData;
+    if (bookingData) {
+      if (bookingData?.invoice?.promo) {
+        this.isPromoApplied = true;
+        this.promoAmount = bookingData?.invoice?.promo?.amount || 0;
+        this.passengerMobile = bookingData?.invoice?.promo?.phone || '';
+      }
+    }
   },
   watch: {
     promoCode() {
