@@ -288,11 +288,11 @@ export default {
               available: 0,
             });
 
-            this.$toast.error(`Seat already in progress.`, {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
+            // this.$toast.error(`Seat already in progress.`, {
+            //   position: "bottom-right",
+            //   duration: 50000,
+            //   containerClass: "padding: 100px",
+            // });
             return;
           } else {
             this.selectedSeatArray.push(selectedSeat);
