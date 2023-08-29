@@ -29,7 +29,7 @@
             <p class="text-xs font-normal text-blackSecondary">
               <span>{{ getHumanDate($route.query.date) }}</span
               >,
-              <span class="capitalize">{{
+              <span class="uppercase">{{
                 getHumanTime($route.query.time)
               }}</span>
             </p>

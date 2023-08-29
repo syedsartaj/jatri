@@ -71,7 +71,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col justify-between items-start py-[16px] order-last lg:order-1"
+          class="flex flex-col justify-between items-start py-[16px]"
         >
           <p class="text-xs font-normal text-blackLight">ROUTE</p>
           <h2
@@ -132,7 +132,7 @@
           <img
             src="@/assets/images/icons/fareIcon.svg"
             alt=""
-            class="w-[16px] md:w-[30px]"
+            class="w-[26px] md:w-[30px]"
           />
           <div>
             <h2
