@@ -262,33 +262,58 @@
         <PaymentTimeoutAlert />
       </div>
 
+      <div class="text-center mt-4 lg:mt-5 flex flex-row items-center">
+        <img
+          v-if="!agreePrivacyPolicy"
+          src="@/assets/images/icons/unCheckCircle.svg"
+          alt=""
+          class="cursor-pointer"
+          @click="() => handleCheckBox()"
+        />
+        <img
+          v-if="agreePrivacyPolicy"
+          src="@/assets/images/icons/checkBoxCircle.svg"
+          alt=""
+          class="cursor-pointer"
+          @click="() => handleCheckBox()"
+        />
+        <p class="text-blackPrimary text-sm font-medium text-left ml-2">
+          By proceeding you are agreeing with our
+
+          <span>
+            <nuxt-link
+              to="/policies#terms-and-conditions"
+              class="w-full underline text-[#1E88E5] font-medium"
+              >Terms and Conditions</nuxt-link
+            >
+            and
+            <nuxt-link
+              to="/policies#return-and-refund-policy"
+              class="w-full underline text-[#1E88E5] font-medium"
+              >Cancellation Policy</nuxt-link
+            >
+          </span>
+        </p>
+      </div>
+
       <LoaderButton
         class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6"
         :class="
-          getLoading ||
-          (!paymentAllowStatus &&
+          getGsLoading ||
+          ((!agreePrivacyPolicy || !paymentAllowStatus) &&
             'bg-red-300 hover:bg-red-200 cursor-not-allowed')
         "
-        :loading="getLoading"
+        :loading="getGsLoading"
         :disabled="
-          getLoading || !paymentAllowStatus || paymentValidateTime === 0
+          getGsLoading ||
+          !paymentAllowStatus ||
+          paymentValidateTime === 0 ||
+          !agreePrivacyPolicy
         "
         @onClick="paymentHandler"
       >
         Pay Now
       </LoaderButton>
-
-      <div class="text-center mt-4 lg:mt-5">
-        <p class="text-blackPrimary text-sm font-normal">
-          By proceeding you are agreeing with our
-          <br class="flex md:hidden" />
-          <nuxt-link
-            to="/policies#terms-and-conditions"
-            class="w-full underline text-[#1E88E5] font-medium"
-            >Terms and Conditions</nuxt-link
-          >
-        </p>
-      </div>
 
       <div
         v-if="!(!paymentAllowStatus || paymentValidateTime === 0)"
@@ -335,6 +360,7 @@ export default {
       paymentAllowStatus: true,
       paymentValidateTime: 0,
       promoCode: "",
+      agreePrivacyPolicy: true,
     };
   },
   async asyncData({ query, store }) {
@@ -381,6 +407,9 @@ export default {
       "applyPromoCodeAction",
       "getSurpriseDealAction",
     ]),
+    handleCheckBox() {
+      this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
+    },
     handleDealButton() {
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
