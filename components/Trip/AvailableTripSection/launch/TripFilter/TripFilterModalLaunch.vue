@@ -13,17 +13,13 @@
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
-              <p
-                class="text-blackPrimary text-base lg:text-[28px] lg:leading-9 font-medium"
-              >
-                Filter
-              </p>
+              <p class="text-blackPrimary text-xl font-medium">Filter</p>
               <button @click="close">
                 <img src="@/assets/images/icons/closeIcon.svg" alt="" />
               </button>
             </div>
             <hr class="my-4" />
-            <div class="bg-white overflow-y-auto h-[65vh] scrollbar-hide">
+            <div class="bg-white overflow-y-auto max-h-[65vh] scrollbar-hide">
               <div class="flex justify-between gap-x-8">
                 <button
                   @click="previousDateFilter"
