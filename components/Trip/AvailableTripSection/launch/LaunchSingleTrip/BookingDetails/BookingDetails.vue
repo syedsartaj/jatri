@@ -133,6 +133,7 @@
                                   required=""
                                   placeholder=""
                                   v-model="passengerMobile"
+                                  @input="limitInputLength"
                                   @wheel="$event.target.blur()"
                                 />
                               </div>
@@ -310,7 +311,7 @@
                   <LoaderButton
                     class="bg-corporate rounded-full w-full py-[11px] lg:py-[13px] text-white text-base font-medium"
                     :class="
-                      getGsLoading ||
+                      getLoading ||
                       ((!agreePrivacyPolicy || !paymentAllowStatus) &&
                         'bg-red-300 hover:bg-red-200 cursor-not-allowed')
                     "
@@ -368,7 +369,6 @@ export default {
       "getLoading",
     ]),
     boardingPoints() {
-      console.log(this.getSeatViewData.seatPlan.boardingPoints);
       return this.getSeatViewData.seatPlan.boardingPoints.map(
         (item) => item.name
       );
@@ -415,6 +415,17 @@ export default {
       if (b.diff(a, "seconds") > 0) {
         this.paymentValidateTime = b.diff(a, "seconds");
       }
+
+      this.boardingPoint = bookingData?.invoice?.boardingPoint || "";
+      if (bookingData?.invoice?.droppingPoint) {
+        this.droppingPoint = bookingData?.invoice?.droppingPoint || "";
+      }
+      this.passengerName = bookingData?.passenger?.name || "";
+      this.passengerEmail = bookingData?.passenger?.email || "";
+      this.passengerMobile =
+        bookingData?.passenger?.phone ||
+        bookingData?.invoice?.promo?.phone ||
+        "";
     } else {
       this.paymentValidateTime = 0;
     }
@@ -429,6 +440,11 @@ export default {
       const formattedHours = hours % 12 || 12; // Convert to 12-hour format
 
       return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    },
+    limitInputLength() {
+      if (this.passengerMobile.length > 11) {
+        this.passengerMobile = this.passengerMobile.slice(0, 11); // Truncate input to max length
+      }
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
