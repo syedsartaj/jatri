@@ -3,7 +3,7 @@
     <div>
       <div class="">
         <h2
-          class="text-2xl lg:text-4xl text-blackPrimary text-center font-semibold lg:leading-[44px]"
+          class="text-2xl md:text-[32px] lg:text-4xl text-blackPrimary text-center font-semibold lg:leading-[44px]"
         >
           Why Choose Jatri
         </h2>
@@ -24,7 +24,7 @@
             class="w-[66px] block max-sm:m-auto"
           />
           <h2
-            class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
+            class="text-base md:text-xl lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
           >
             Ease on the move
           </h2>
@@ -42,7 +42,7 @@
             class="w-[66px] block max-sm:m-auto"
           />
           <h2
-            class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
+            class="text-base md:text-xl lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
           >
             Promise of convenient travel
           </h2>
@@ -61,7 +61,7 @@
             class="w-[66px] block max-sm:m-auto"
           />
           <h2
-            class="text-base lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
+            class="text-base md:text-xl lg:text-2xl text-blackPrimary lg:leading-8 font-medium mt-8"
           >
             Reliability assured
           </h2>
