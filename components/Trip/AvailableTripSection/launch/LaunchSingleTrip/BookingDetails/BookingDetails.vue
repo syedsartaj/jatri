@@ -261,9 +261,7 @@
                     >Cancellation Policy</a
                   >
                 </div>
-                <div
-                  class="w-full xl:w-[460px] flex flex-col pt-4 px-4 xl:px-0"
-                >
+                <div class="w-full xl:w-[460px] flex flex-col pt-4 px-0">
                   <div
                     v-if="!paymentAllowStatus || paymentValidateTime === 0"
                     class="my-2"
@@ -271,35 +269,62 @@
                     <PaymentTimeoutAlert />
                   </div>
 
+                  <div
+                    class="text-center my-4 lg:my-5 flex flex-row items-center"
+                  >
+                    <img
+                      v-if="!agreePrivacyPolicy"
+                      src="@/assets/images/icons/unCheckCircle.svg"
+                      alt=""
+                      class="cursor-pointer"
+                      @click="() => handleCheckBox()"
+                    />
+                    <img
+                      v-if="agreePrivacyPolicy"
+                      src="@/assets/images/icons/checkBoxCircle.svg"
+                      alt=""
+                      class="cursor-pointer"
+                      @click="() => handleCheckBox()"
+                    />
+                    <p
+                      class="text-blackPrimary text-sm font-medium text-left ml-2"
+                    >
+                      By proceeding you are agreeing with our
+
+                      <span>
+                        <nuxt-link
+                          to="/policies#terms-and-conditions"
+                          class="w-full underline text-[#1E88E5] font-medium"
+                          >Terms and Conditions</nuxt-link
+                        >
+                        and
+                        <nuxt-link
+                          to="/policies#return-and-refund-policy"
+                          class="w-full underline text-[#1E88E5] font-medium"
+                          >Cancellation Policy</nuxt-link
+                        >
+                      </span>
+                    </p>
+                  </div>
+
                   <LoaderButton
                     class="bg-corporate rounded-full w-full py-[11px] lg:py-[13px] text-white text-base font-medium"
                     :class="
-                      getLoading ||
-                      (!paymentAllowStatus &&
+                      getGsLoading ||
+                      ((!agreePrivacyPolicy || !paymentAllowStatus) &&
                         'bg-red-300 hover:bg-red-200 cursor-not-allowed')
                     "
                     :loading="getLoading"
                     :disabled="
                       getLoading ||
                       !paymentAllowStatus ||
-                      paymentValidateTime === 0
+                      paymentValidateTime === 0 ||
+                      !agreePrivacyPolicy
                     "
                     @onClick="paymentHandler"
                   >
                     Pay Now
                   </LoaderButton>
-
-                  <div class="text-center mt-4">
-                    <p class="text-blackPrimary text-sm font-normal">
-                      By proceeding you are agreeing with our
-                      <br class="flex md:hidden" />
-                      <nuxt-link
-                        to="/policies#terms-and-conditions"
-                        class="w-full underline text-[#1E88E5] font-medium"
-                        >Terms and Conditions</nuxt-link
-                      >
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -332,6 +357,7 @@ export default {
       passengerEmail: "",
       errorOccurred: false,
       departureTime: "",
+      agreePrivacyPolicy: true,
     };
   },
   computed: {
@@ -403,6 +429,9 @@ export default {
       const formattedHours = hours % 12 || 12; // Convert to 12-hour format
 
       return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    },
+    handleCheckBox() {
+      this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
     },
     goBack() {
       window.history.back();

@@ -1,6 +1,6 @@
 <template>
   <div v-if="getTicketDetails.ticket" class="py-10 bg-[#f7f7f7]">
-    <div class="text-center w-[380px] lg:w-[558px] mx-auto">
+    <div class="text-center max-w-[380px] px-4 md:max-w-[558px] mx-auto">
       <img
         src="@/assets/images/icons/success.svg"
         alt=""
@@ -19,7 +19,9 @@
       </p>
     </div>
 
-    <div class="w-[380px] lg:w-[880px] mx-auto mt-[17px] lg:mt-10">
+    <div
+      class="md:w-full px-4 lg:px-0 lg:max-w-[816px] mx-auto mt-[17px] lg:mt-10"
+    >
       <UserViewTicket
         :getTicketDetails="getTicketDetails.ticket"
         :getPaymentHistory="getTicketDetails.payment"
