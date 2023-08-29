@@ -21,7 +21,7 @@
       <div class="flex gap-x-4 h-10">
         <a
           href="tel:09642080808"
-          class="border-[1px] border-[#DBDBDB] text-blackPrimary rounded-full px-4 py-2 justify-between gap-x-[10.5px] hidden lg:flex items-center justify-center"
+          class="border-[1px] border-[#DBDBDB] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 hidden lg:flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
         </a>
 
         <div
-          class="bg-[#f7f7f7] text-blackPrimary rounded-full px-4 py-2 justify-between gap-x-[10.5px] hidden lg:flex cursor-pointer items-center justify-center"
+          class="bg-[#f7f7f7] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 hidden lg:flex cursor-pointer items-center justify-center"
           @click="setBusReserveModalOpenStatus"
         >
           <svg
@@ -56,14 +56,12 @@
             />
           </svg>
 
-          <span class="w-32 font-medium text-sm font-inter"
-            >Full bus reserve</span
-          >
+          <span class="font-medium text-sm font-inter">Full bus reserve</span>
         </div>
 
         <NuxtLink
           to="/find-ticket"
-          class="bg-[#FEF2F0] text-corporate rounded-full px-4 py-2 flex justify-between gap-x-[10.5px] items-center"
+          class="bg-[#FEF2F0] text-corporate rounded-full pl-4 pr-6 py-[10px] flex justify-between gap-x-2 items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +76,7 @@
             />
           </svg>
           <span
-            class="w-15 font-medium text-sm text-center font-inter text-[#F04935]"
+            class="font-medium text-sm text-center font-inter text-[#F04935]"
             >History</span
           >
         </NuxtLink>
