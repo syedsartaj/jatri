@@ -9,13 +9,13 @@
         v-if="service === 'bus'"
         src="@/assets/images/home/availableRoutesIcon.svg"
         alt=""
-        class="w-5 h-5"
+        class="w-6 h-6"
       />
       <img
         v-else
         src="@/assets/images/icons/launchOperatorIcon.svg"
         alt=""
-        class="w-5 h-5"
+        class="w-6 h-6"
       />
       <p
         class="text-xs lg:text-base lg:leading-6 text-blackPrimary font-medium text-ellipsis overflow-hidden whitespace-nowrap"
