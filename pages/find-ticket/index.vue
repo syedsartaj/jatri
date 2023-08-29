@@ -153,11 +153,10 @@
                     <input
                       class="w-full p-4 bg-[#F7F7F7] rounded outline-none text-sm lg:text-base placeholder:text-sm lg:placeholder:text-base font-normal text-blackPrimary placeholder:text-[#676769]"
                       type="number"
-                      minlength="11"
-                      maxlength="11"
                       required=""
                       placeholder="Enter Mobile Number"
                       v-model="phone"
+                      @input="limitInputLength"
                       @wheel="$event.target.blur()"
                     />
                   </div>
@@ -254,6 +253,11 @@ export default {
   },
   methods: {
     ...mapActions("common", ["searchTicketAction"]),
+    limitInputLength() {
+      if (this.phone.length > 11) {
+        this.phone = this.phone.slice(0, 11); // Truncate input to max length
+      }
+    },
     getServiceClassName(service) {
       return {
         "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,

@@ -194,7 +194,7 @@
         <img
           src="@/assets/images/icons/facebook.svg"
           alt="facebook"
-          class="h-[19.88px] w-[20px]"
+          class="h-9 w-9"
         />
       </a>
       <a
@@ -204,14 +204,14 @@
         <img
           src="@/assets/images/icons/youtube.svg"
           alt="youtube"
-          class="h-[19.88px] w-[20px]"
+          class="h-9 w-9"
         />
       </a>
       <a href="https://bd.linkedin.com/company/jatri-app" target="_blank">
         <img
           src="@/assets/images/icons/linkedin.svg"
           alt="linkedin"
-          class="h-[19.88px] w-[20px]"
+          class="h-9 w-9"
         />
       </a>
     </div>
