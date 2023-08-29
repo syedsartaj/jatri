@@ -3,7 +3,7 @@
     <div class="w-full lg:w-[816px] mx-auto py-[30px]">
       <div class="w-full bg-white rounded-[10px] border border-[#DBDBDB]">
         <div class="text-center p-[10px] border-b border-[#DBDBDB]">
-          <p class="text-blackPrimary text-xl font-medium">Ticket History</p>
+          <p class="text-blackPrimary text-xl font-medium">Find Ticket</p>
         </div>
 
         <div class="w-full mt-6 p-4">
@@ -126,9 +126,9 @@
 
             <form @submit="ticketData">
               <div
-                class="mt-[10px] flex flex-col lg:flex-row justify-center lg:justify-between gap-x-14"
+                class="mt-[10px] flex flex-col md:flex-row justify-center md:justify-between gap-x-14"
               >
-                <div class="w-full lg:w-9/12">
+                <div class="w-full md:w-9/12">
                   <div
                     v-if="selectedTab === 0"
                     class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]"
@@ -178,7 +178,7 @@
                 </div>
                 <button
                   type="submit"
-                  class="px-6 lg:px-7 py-[13px] lg:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 lg:mt-0"
+                  class="px-6 md:px-7 py-[13px] md:w-3/12 rounded-full bg-corporate text-white text-sm font-medium mx-auto mt-6 md:mt-0"
                 >
                   Find Ticket
                 </button>
