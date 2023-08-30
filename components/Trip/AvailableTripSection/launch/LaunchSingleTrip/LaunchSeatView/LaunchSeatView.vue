@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mt-4 flex flex-col border border-[#ededed] rounded-[10px]">
+  <div class="w-full mt-4 flex flex-col border border-[#ededed] rounded-[10px] overflow-hidden">
     <div class="grid grid-cols-3 h-[44px] text-sm border-b border-[#ededed]">
       <div
         class="flex flex-row items-center justify-center border-r dark:border-neutral-[#EDEDED]"

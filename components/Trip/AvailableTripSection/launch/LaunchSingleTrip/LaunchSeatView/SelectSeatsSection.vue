@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-[76px] px-6 py-4 flex justify-between items-center">
+  <div
+    class="w-full h-[76px] px-6 py-4 flex justify-between items-center selected-seat"
+  >
     <div class="flex flex-col">
       <p class="text-xs text-[#676769] font-medium">Selected seats</p>
       <p class="black-Primary text-base font-medium">
@@ -27,3 +29,10 @@ export default {
   props: ["selectedSeatsTitleAndPrice", "handlePaymentPending"],
 };
 </script>
+
+<style scoped>
+.selected-seat {
+  border-top: 1px solid var(--gray-shade-1, #ededed);
+  box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.07);
+}
+</style>
