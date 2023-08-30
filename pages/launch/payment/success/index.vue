@@ -28,6 +28,7 @@
         :pageVind="true"
         :supportEmail="getTicketDetails.supportEmail"
         :supportPhone="getTicketDetails.supportPhone"
+        :serviceType="'LAUNCH'"
       />
     </div>
   </div>

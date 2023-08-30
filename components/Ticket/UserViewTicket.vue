@@ -83,26 +83,19 @@
                   {{ getTicketDetails.passenger.name }}
                 </p>
               </div>
-              <div
-                class="text-xs mb-[14px] flex justify-start"
-                v-if="!isLaunchPage"
-              >
+              <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
-                  Coach:
+                  {{ serviceType === "BUS" ? "Coach:" : "Ship:" }}
                 </p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
-                  {{ isLaunchPage }}
+                  {{
+                    serviceType === "BUS"
+                      ? getTicketDetails.coach
+                      : getTicketDetails.ship
+                  }}
                 </p>
               </div>
-              <div
-                class="text-xs mb-[14px] flex justify-start"
-                v-if="isLaunchPage"
-              >
-                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Ship:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
-                  {{ getTicketDetails.ship }}
-                </p>
-              </div>
+
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Departure time:
