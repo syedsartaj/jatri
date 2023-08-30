@@ -227,7 +227,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ServiceType } from "../../helpers/utils";
 export default {
   middleware(ctx) {
@@ -253,6 +253,7 @@ export default {
   },
   methods: {
     ...mapActions("common", ["searchTicketAction"]),
+    ...mapMutations("common", ["setSearchedTicketList"]),
     limitInputLength() {
       if (this.phone.length > 11) {
         this.phone = this.phone.slice(0, 11); // Truncate input to max length
@@ -266,6 +267,8 @@ export default {
     },
     handleServiceChange(service) {
       this.selectedService = service;
+      this.oopsAlertStatus = false;
+      this.setSearchedTicketList([]);
     },
     ticketData(e) {
       this.$nextTick(async () => {
