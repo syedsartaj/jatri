@@ -203,23 +203,42 @@
         <TicketNotFoundAlert v-if="error" />
       </div>
 
-      <!-- Active Tickets -->
+      <!--  Tickets -->
       <div class="mt-10" v-if="ticketList && getSearchedTicketList.tickets">
-        <div class="flex justify-between items-center gap-x-4">
-          <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
-          <p class="text-base font-medium whitespace-nowrap">Active Tickets</p>
-          <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+        <div class="w-full flex flex-col" v-if="getActiveTickets?.length">
+          <div class="flex justify-between items-center gap-x-4">
+            <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+            <p class="text-base font-medium whitespace-nowrap">
+              Active Tickets
+            </p>
+            <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+          </div>
+
+          <div
+            v-for="ticket in getActiveTickets"
+            :key="ticket._id"
+            class="mt-6"
+          >
+            <SingleTicketListItem
+              :singlePrintTicketInfo="ticket"
+              :serviceType="selectedService"
+            />
+          </div>
         </div>
 
-        <div
-          v-for="ticket in getSearchedTicketList.tickets"
-          :key="ticket._id"
-          class="mt-6"
-        >
-          <SingleTicketListItem
-            :singlePrintTicketInfo="ticket"
-            :serviceType="selectedService"
-          />
+        <div class="w-full flex flex-col" v-if="getOldTickets?.length">
+          <div class="flex justify-between items-center gap-x-4 mt-4 lg:mt-10">
+            <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+            <p class="text-base font-medium whitespace-nowrap">Old Tickets</p>
+            <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
+          </div>
+
+          <div v-for="ticket in getOldTickets" :key="ticket._id" class="mt-6">
+            <SingleTicketListItem
+              :singlePrintTicketInfo="ticket"
+              :serviceType="selectedService"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -250,10 +269,25 @@ export default {
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
+    getActiveTickets() {
+      return this.getFilteredTickets(true);
+    },
+    getOldTickets() {
+      return this.getFilteredTickets(false);
+    },
   },
   methods: {
     ...mapActions("common", ["searchTicketAction"]),
     ...mapMutations("common", ["setSearchedTicketList"]),
+    getFilteredTickets(isActive) {
+      const currentTime = new Date();
+      return this.getSearchedTicketList.tickets.filter((item) => {
+        const boardingTime = new Date(item.boardingDateTime);
+        return isActive
+          ? boardingTime >= currentTime
+          : boardingTime < currentTime;
+      });
+    },
     limitInputLength() {
       if (this.phone.length > 11) {
         this.phone = this.phone.slice(0, 11); // Truncate input to max length
