@@ -184,7 +184,7 @@ export default {
         } = this.trip;
 
         const selectedSeatsData = this.getSelectedSeatsTitleAndPrice;
-        const seatPrice = selectedSeatsData.price;
+        const seatPrice = selectedSeatsData.singlePrice;
         const seatCount = selectedSeatsData.titleArray.length;
 
         const totalFare = seatPrice * seatCount;
@@ -386,6 +386,7 @@ export default {
       return {
         titleArray,
         price: this.selectedSeatArray.length * this.selectedClassSeatData?.fare,
+        singlePrice: this.selectedClassSeatData?.fare
       };
     },
   },
