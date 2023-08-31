@@ -111,7 +111,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
+    ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
     handleHamburgerMenu() {
       this.showHamburgerMenu = !this.showHamburgerMenu;
     },

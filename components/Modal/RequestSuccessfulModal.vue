@@ -63,7 +63,7 @@
 import { mapMutations } from "vuex";
 export default {
   methods: {
-    ...mapMutations("guarantedseat", ["handleSuccessfulModal"]),
+    ...mapMutations("common", ["handleSuccessfulModal"]),
   },
 };
 </script>

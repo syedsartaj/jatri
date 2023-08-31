@@ -1,4 +1,3 @@
-import cookie from "cookie";
 import { ServiceType } from "../helpers/utils";
 
 export const actions = {

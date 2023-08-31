@@ -11,11 +11,13 @@ export const state = () => ({
   launchOperators: [],
   busPopularRoutes: [],
   launchPopularRoutes: [],
-  selectedService: '',
+  selectedService: "",
   loading: false,
   searchedTicketList: [],
   selectedTicketId: "",
   isTicketPopupOpen: false,
+  isBusReserveModalOpen: false,
+  isRequestSuccessFull: false,
 });
 
 export const getters = {
@@ -38,6 +40,8 @@ export const getters = {
   getSearchedTicketList: (state) => state.searchedTicketList,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
+  getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
+  getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
 };
 
 export const actions = {
@@ -190,6 +194,26 @@ export const actions = {
       return false;
     }
   },
+  async fullBusReservationAction({ commit }, payload) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.POST_FULL_BUS_RESERVATION,
+        payload
+      );
+      commit("setLoading", false);
+      commit("setBusReserveModalOpenStatus");
+      commit("handleSuccessfulModal");
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(error.response.data.message[0], {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      return false;
+    }
+  },
   async cancelTicketAction({ commit, state }, payload) {
     try {
       commit("setLoading", true);
@@ -291,5 +315,13 @@ export const mutations = {
     if (!data) {
       state.selectedTicketId = null;
     }
+  },
+  setBusReserveModalOpenStatus: (state, data) => {
+    handleScrollBehaviour(state.isBusReserveModalOpen);
+    state.isBusReserveModalOpen = !state.isBusReserveModalOpen;
+  },
+  handleSuccessfulModal: (state, data) => {
+    handleScrollBehaviour(state.isRequestSuccessFull);
+    state.isRequestSuccessFull = !state.isRequestSuccessFull;
   },
 };
