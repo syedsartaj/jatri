@@ -236,7 +236,12 @@
         Requested For Cancel
       </span>
       <button
-        v-if="getTicketDetails.isTicketCancelable && !pageVind"
+        v-if="
+          getTicketDetails.isTicketCancelable &&
+          !pageVind &&
+          getTicketDetails?.paymentHistory?.ticketStatus !==
+            'PENDING_CANCEL_REQUEST'
+        "
         @click="cancelTicket(getTicketDetails._id)"
         class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4"
       >

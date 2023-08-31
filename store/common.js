@@ -226,7 +226,10 @@ export const actions = {
         if (data.data._id === ticket._id) {
           return {
             ...ticket,
-            ticketStatus: data.data.ticketStatus,
+            paymentHistory: {
+              ...ticket.paymentHistory,
+              ticketStatus: data.data.ticketStatus,
+            },
           };
         }
         return ticket;
