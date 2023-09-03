@@ -60,11 +60,9 @@ export const actions = {
       const errorMessage = error?.response?.data?.message;
 
       if (Array.isArray(errorMessage)) {
-        errorMessage.forEach((message) => {
-          this.$toast.error(message, {
-            position: "bottom-right",
-            duration: 5000,
-          });
+        this.$toast.error(errorMessage[0], {
+          position: "bottom-right",
+          duration: 5000,
         });
       } else {
         this.$toast.error(errorMessage, {

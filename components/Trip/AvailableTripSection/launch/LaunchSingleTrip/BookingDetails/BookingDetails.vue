@@ -409,7 +409,7 @@ export default {
       },
     },
   },
-  beforeMount() {
+  created() {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
       let a = moment(new Date());
