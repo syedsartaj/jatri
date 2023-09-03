@@ -9,7 +9,7 @@
         class="flex min-h-full items-end justify-center max-w-max mx-auto text-center lg:items-center"
       >
         <div
-          class="relative transform overflow-hidden rounded-t-2xl lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full"
+          class="relative transform overflow-hidden rounded-t-2xl lg:rounded-lg bg-white text-left shadow-xl transition-all w-full"
         >
           <div class="bg-white py-4 w-full">
             <div class="flex justify-between items-center px-4">
@@ -21,7 +21,7 @@
               </button>
             </div>
             <hr />
-            <div class="overflow-y-auto h-[94vh] xl:h-auto">
+            <div class="overflow-y-auto max-h-[90vh]">
               <div class="mb-4 xl:my-4 px-4">
                 <div class="flex flex-col">
                   <div class="w-full flex flex-col xl:flex-row gap-x-4">
@@ -62,7 +62,7 @@
                               <input
                                 :class="
                                   errorOccurred &&
-                                  !passengerName &&
+                                  passengerName.length < 3 &&
                                   'bg-[#FDF0F1] border border-[#E0293B]'
                                 "
                                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full h-[48px] focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
@@ -71,7 +71,7 @@
                                 v-model="passengerName"
                               />
                               <div
-                                v-if="errorOccurred && !passengerName"
+                                v-if="errorOccurred && passengerName.length < 3"
                                 class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
                               >
                                 <img
@@ -79,7 +79,7 @@
                                   class="h-4 w-4"
                                   alt="error"
                                 />
-                                <div>Please enter your name.</div>
+                                <div>Length must be at least 3 characters.</div>
                               </div>
                             </div>
                           </div>
@@ -402,8 +402,14 @@ export default {
         ).boardingDateTime
       );
     },
+    watch: {
+      $route(to, from) {
+        // Perform actions when the route changes
+        console.log(`Navigating from ${from.path} to ${to.path}`);
+      },
+    },
   },
-  created() {
+  beforeMount() {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
       let a = moment(new Date());
@@ -468,7 +474,7 @@ export default {
 
       if (
         !boardingPoint ||
-        !passengerName ||
+        passengerName.length < 3 ||
         !isValidPhoneNumber(passengerMobile) ||
         !getLaunchBookingData
       ) {
