@@ -70,7 +70,7 @@
       </div>
 
       <div
-        v-if="mobileErrorOccurred && !isPromoApplied"
+        v-if="mobileErrorOccurred && !isPromoApplied && !isPhoneValid"
         class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mb-2"
       >
         <img
@@ -143,6 +143,9 @@ export default {
       return this.getLaunchBookingData?.selectedSeatInfo?.selectedClass?.info
         ?.name;
     },
+    isPhoneValid() {
+      return isValidPhoneNumber(this.passengerMobile);
+    },
     totalPrice() {
       return (
         this.getTotalSeatFare() +
@@ -208,7 +211,7 @@ export default {
       if (bookingData?.invoice?.promo) {
         this.isPromoApplied = true;
         this.promoAmount = bookingData?.invoice?.promo?.amount || 0;
-        this.passengerMobile = bookingData?.invoice?.promo?.phone || '';
+        this.passengerMobile = bookingData?.invoice?.promo?.phone || "";
       }
     }
   },

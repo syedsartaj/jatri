@@ -299,13 +299,13 @@
       <LoaderButton
         class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6"
         :class="
-          getGsLoading ||
+          getLoading ||
           ((!agreePrivacyPolicy || !paymentAllowStatus) &&
             'bg-red-300 hover:bg-red-200 cursor-not-allowed')
         "
-        :loading="getGsLoading"
+        :loading="getLoading"
         :disabled="
-          getGsLoading ||
+          getLoading ||
           !paymentAllowStatus ||
           paymentValidateTime === 0 ||
           !agreePrivacyPolicy
