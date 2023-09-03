@@ -75,7 +75,10 @@ export default {
         payload.date = formattedDate;
         payload.busType = type;
 
-        await this.getPbScheduleDataAction(payload);
+        if (payload.from && payload.to) {
+          await this.getPbScheduleDataAction(payload);
+        }
+
         this.$nuxt.$loading?.finish();
         this.isBeforeGetDataState = false;
       });

@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full mt-4 flex flex-col border border-[#ededed] rounded-[10px] overflow-hidden">
+  <div
+    class="w-full mt-4 flex flex-col border border-[#ededed] rounded-[10px] overflow-hidden"
+  >
     <div class="grid grid-cols-3 h-[44px] text-sm border-b border-[#ededed]">
       <div
         class="flex flex-row items-center justify-center border-r dark:border-neutral-[#EDEDED]"
@@ -215,17 +217,33 @@ export default {
           floor: this.selectedFloor?.info?.name,
           isTicketCancelable: true,
         };
-        await this.paymentPending({
-          payload,
-          selectedSeatInfo: {
-            price: selectedSeatsData.price,
-            seatArray: selectedSeatsData.titleArray,
-            selectedClass: this.selectedClass,
-            selectedFloor: this.selectedFloor,
-          },
-        });
-        this.selectedSeatArray = [];
-        this.$nuxt.$loading?.finish();
+
+        try {
+          const { data } = await this.paymentPending({
+            payload,
+            selectedSeatInfo: {
+              price: selectedSeatsData.price,
+              seatArray: selectedSeatsData.titleArray,
+              selectedClass: this.selectedClass,
+              selectedFloor: this.selectedFloor,
+            },
+          });
+
+          this.$router.push(
+            `/launch/payment?tnxId=${data.paymentInfo.transactionId}`,
+            () => {
+              this.$nuxt.$loading?.finish();
+            }
+          );
+        } catch (err) {
+          this.$toast.error(err, {
+            position: "bottom-right",
+            duration: 50000,
+            containerClass: "padding: 100px",
+          });
+          this.selectedSeatArray = [];
+          this.$nuxt.$loading?.finish();
+        }
       });
     },
     getSeatCondition(seat) {
@@ -386,7 +404,7 @@ export default {
       return {
         titleArray,
         price: this.selectedSeatArray.length * this.selectedClassSeatData?.fare,
-        singlePrice: this.selectedClassSeatData?.fare
+        singlePrice: this.selectedClassSeatData?.fare,
       };
     },
   },
