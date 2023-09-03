@@ -188,19 +188,17 @@ export const actions = {
         });
     });
   },
-  async paymentPending({ commit }, { payload, selectedSeatInfo }) {
-    try {
-      const { data } = await this.$api.$post(
-        apis.SERVICE_TYPE.LAUNCH.POST_PAYMENT_PENDING,
-        payload
-      );
-      window.location.href = `/launch/payment?tnxId=${data.paymentInfo.transactionId}`;
-    } catch (e) {
-      this.$toast.error(e.response.data.message ?? "Something went wrong!", {
-        position: "bottom-right",
-        duration: 5000,
-      });
-    }
+  async paymentPending({ commit }, { payload }) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.LAUNCH.POST_PAYMENT_PENDING, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          reject(e.response.data.message ?? "Something went wrong!");
+        });
+    });
   },
   async getTicketByTnxId({ commit }, payload) {
     try {
