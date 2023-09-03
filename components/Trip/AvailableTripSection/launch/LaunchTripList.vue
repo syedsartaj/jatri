@@ -11,7 +11,9 @@
         :selectedBuxIndex="selectedBusIndex"
         :setSelectedBuxIndex="(value) => (selectedBusIndex = value)"
       />
-      <div class="text-[#676769] text-sm font-normal text-center">End of result</div>
+      <div class="text-[#676769] text-sm font-normal text-center">
+        End of result
+      </div>
     </div>
     <div v-else-if="getTrips.length === 0 && isBeforeGetDataState === false">
       <!-- error layout -->
@@ -76,7 +78,9 @@ export default {
         payload.date = formattedDate;
         payload.time = time;
 
-        await this.getPbScheduleDataAction(payload);
+        if (payload.from && payload.to) {
+          await this.getPbScheduleDataAction(payload);
+        }
         this.$nuxt.$loading?.finish();
         this.isBeforeGetDataState = false;
       });

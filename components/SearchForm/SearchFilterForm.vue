@@ -226,6 +226,9 @@ export default {
               ? "12 pm - 06 pm"
               : "06 pm - 03 am";
         }
+        if (this.$route?.fullPath?.includes("/trip")) {
+          this.handleFromSubmit();
+        }
       },
       deep: true,
       immediate: true,
