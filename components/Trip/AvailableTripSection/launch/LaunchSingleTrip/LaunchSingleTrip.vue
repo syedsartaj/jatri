@@ -70,9 +70,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="flex flex-col justify-between items-start py-[16px]"
-        >
+        <div class="flex flex-col justify-between items-start py-[16px]">
           <p class="text-xs font-normal text-blackLight">ROUTE</p>
           <h2
             class="text-xs lg:text-sm font-medium text-blackPrimary text-right mt-1"
@@ -499,7 +497,7 @@ export default {
       this.stopBackgroundScroll(this.showPointPolicyModal);
     },
     async handleSeatAvailableModal() {
-      if (!this.showSeatAvailableModal) {
+      if (!this.showSeatAvailableModal && !this.selectedSeatArray.length) {
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
       }
