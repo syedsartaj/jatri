@@ -338,11 +338,12 @@
 
 <script>
 import moment from "moment";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
   isValidPhoneNumber,
   isValidEmail,
 } from "../../../../../../helpers/utils";
+import { dateTimeFormat } from '../../../../../../helpers/dateTimeFormat';
 export default {
   name: "BookingDetails",
   data() {
@@ -396,10 +397,14 @@ export default {
       },
     },
     boardingPoint() {
-      this.departureTime = this.formatTimeTo12Hour(
+      const boardingDateTime =
         this.getSeatViewData.seatPlan.boardingPoints.find(
           (item) => item.name === this.boardingPoint
-        ).boardingDateTime
+        ).boardingDateTime;
+      this.departureTime = dateTimeFormat(
+        new Date(boardingDateTime).toLocaleString("en-Us"),
+        6,
+        "lll"
       );
     },
     watch: {
@@ -436,17 +441,20 @@ export default {
       this.paymentValidateTime = 0;
     }
   },
-  methods: {
-    ...mapActions("launchStore", ["ticketConfirmAction"]),
-    formatTimeTo12Hour(timeString) {
-      const date = new Date(timeString);
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const ampm = hours >= 12 ? "PM" : "AM";
-      const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+  beforeMount() {
+    const tnxId = localStorage.getItem("tnxId");
 
-      return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
-    },
+    if (tnxId === this.$route?.query?.tnxId) {
+      localStorage.removeItem("tnxId");
+      window.location.reload();
+    }
+  },
+  methods: {
+    ...mapActions("launchStore", [
+      "ticketConfirmAction",
+      "getBookingInfoByTnxId",
+    ]),
+    ...mapMutations("launchStore", ["setBookingDetailsData"]),
     limitInputLength() {
       if (this.passengerMobile.length > 11) {
         this.passengerMobile = this.passengerMobile.slice(0, 11); // Truncate input to max length
@@ -491,9 +499,29 @@ export default {
             paymentId: getLaunchBookingData._id,
             gatewayType,
           };
-          await this.ticketConfirmAction(payload);
 
-          this.$nuxt.$loading?.finish();
+          try {
+            const { data } = await this.ticketConfirmAction(payload);
+            this.setBookingDetailsData({
+              paymentPendingData: {},
+              showBookingDetailsModal: false,
+              selectedSeatInfo: {},
+            });
+
+            localStorage.setItem("tnxId", this.$route?.query?.tnxId || "");
+
+            if (data?.gatewayUrl) {
+              window.location.href = data.gatewayUrl;
+              this.$nuxt.$loading?.finish();
+            }
+          } catch (err) {
+            this.$toast.error(err, {
+              position: "bottom-right",
+              duration: 50000,
+              containerClass: "padding: 100px",
+            });
+            this.$nuxt.$loading?.finish();
+          }
         });
       }
     },

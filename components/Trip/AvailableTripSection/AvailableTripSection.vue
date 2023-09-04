@@ -4,7 +4,7 @@
   >
     <div class="hidden lg:block w-full lg:w-[28%]">
       <ModifyFilterBus v-if="ServiceType.BUS === selectedService" />
-      <ModifyFilterLaunch />
+      <ModifyFilterLaunch v-if="ServiceType.LAUNCH === selectedService" />
     </div>
 
     <!-- TRIPS -->
