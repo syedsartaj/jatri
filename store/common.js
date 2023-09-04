@@ -163,10 +163,10 @@ export const actions = {
     } catch (error) {
       commit("setLoading", false);
       commit("setSearchedTicketList", []);
-      this.$toast.error(error.response.data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
+      // this.$toast.error(error.response.data.message, {
+      //   position: "bottom-right",
+      //   duration: 5000,
+      // });
       return false;
     }
   },
