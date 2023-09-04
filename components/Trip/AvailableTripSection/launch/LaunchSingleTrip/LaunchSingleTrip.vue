@@ -497,7 +497,13 @@ export default {
       this.stopBackgroundScroll(this.showPointPolicyModal);
     },
     async handleSeatAvailableModal() {
-      if (!this.showSeatAvailableModal && !this.selectedSeatArray.length) {
+      if (
+        !this.showSeatAvailableModal &&
+        this.getSeatViewData?.seatPlan?.tripId !== this.trip.tripId
+      ) {
+        if (this.selectedTrip !== this.busIndex) {
+          this.handleSeatView("");
+        }
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
       }
