@@ -108,7 +108,11 @@
                 {{ ticketDetails.companyName }}
               </p>
               <p style="color: black; font-size: 12px; font-weight: 500">
-                {{ ticketDetails.coach }}
+                {{
+                  serviceType === "BUS"
+                    ? ticketDetails.coach
+                    : ticketDetails.ship
+                }}
               </p>
             </div>
             <img
@@ -952,6 +956,7 @@ export default {
     "phone",
     "downloadTicketStatus",
     "ticketFareString",
+    "serviceType",
   ],
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),

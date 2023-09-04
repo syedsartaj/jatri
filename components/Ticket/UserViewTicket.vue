@@ -33,6 +33,7 @@
             :downloadTicketStatus="downloadTicketValue"
             :id="'printTicket-' + getTicketDetails._id"
             :ticketFareString="ticketFareString"
+            :serviceType="serviceType"
           />
         </section>
       </vue-html2pdf>
@@ -53,6 +54,7 @@
         :email="supportEmail"
         :phone="supportPhone"
         :downloadTicketStatus="downloadTicketValue"
+        :serviceType="serviceType"
       />
     </div>
 
