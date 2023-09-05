@@ -343,7 +343,7 @@ import {
   isValidPhoneNumber,
   isValidEmail,
 } from "../../../../../../helpers/utils";
-import { dateTimeFormat } from '../../../../../../helpers/dateTimeFormat';
+import { dateTimeFormat } from "../../../../../../helpers/dateTimeFormat";
 export default {
   name: "BookingDetails",
   data() {
@@ -502,11 +502,6 @@ export default {
 
           try {
             const { data } = await this.ticketConfirmAction(payload);
-            this.setBookingDetailsData({
-              paymentPendingData: {},
-              showBookingDetailsModal: false,
-              selectedSeatInfo: {},
-            });
 
             localStorage.setItem("tnxId", this.$route?.query?.tnxId || "");
 
