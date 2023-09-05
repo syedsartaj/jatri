@@ -11,8 +11,8 @@
         <div
           class="relative transform overflow-hidden rounded-t-2xl lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full md:max-w-[724px]"
         >
-          <div class="bg-white p-4 lg:p-6 w-full">
-            <div class="flex justify-between items-center">
+          <div class="bg-white p-4 w-full">
+            <div class="flex justify-between items-center mb-2">
               <p class="text-xl text-blackPrimary font-medium">Select floor</p>
               <img
                 @click="handleSelectFloorModal"
@@ -24,7 +24,7 @@
             <hr />
             <div class="bg-white overflow-y-auto max-h-[504px]">
               <div class="flex flex-col">
-                <div class="overflow-x-auto py-4">
+                <div class="overflow-x-auto pt-4">
                   <div
                     class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-3 lg:gap-x-4"
                   >
@@ -46,7 +46,7 @@
                           item._id === selectedFloor?.info?._id) &&
                         'bg-corporate'
                       "
-                      class="cursor-pointer w-full flex flex-row h-[48px] mt-[10px] px-4 rounded-lg border border-[#EDEDED] items-center"
+                      class="cursor-pointer w-full flex flex-row h-[48px] px-4 rounded-lg border border-[#EDEDED] items-center"
                     >
                       <div
                         :class="
