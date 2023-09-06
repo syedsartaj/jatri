@@ -303,7 +303,6 @@ export default {
     },
     ticketData(e) {
       this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
         e.preventDefault();
         const formData = {};
         if (this.selectedTab === 0) {
@@ -321,6 +320,7 @@ export default {
         }
         if (this.pnr || this.phone || this.transactionId) {
           this.alertMessage = null;
+          this.$nuxt.$loading?.start();
 
           try {
             const responseData = await this.searchTicketAction({
