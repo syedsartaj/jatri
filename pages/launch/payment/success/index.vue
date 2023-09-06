@@ -14,7 +14,7 @@
       <p
         class="text-blackLight text-sm lg:text-base font-normal mt-[6px] lg:mt-4"
       >
-        Your ticket has been purchased succesfully. Please check your
+        Your ticket has been purchased successfully. Please check your
         mail/message to get your ticket and further instructions.
       </p>
     </div>

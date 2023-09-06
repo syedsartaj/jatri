@@ -187,7 +187,7 @@
           <!-- Ticket not found -->
           <div class="flex justify-center mt-[10px]">
             <div
-              v-if="oopsAlertStatus && !getSearchedTicketList.tickets"
+              v-if="alertMessage && !getSearchedTicketList.tickets"
               class="w-full flex flex-row gap-x-2 items-center text-xs md:text-sm font-normal text-[#E0293B]"
             >
               <img
@@ -195,18 +195,16 @@
                 class="h-[16px] w-[16px] md:h-6 nd:w-6"
                 alt="error"
               />
-              <div>We could not find any ticket according to your search</div>
+              <div>{{ alertMessage }}</div>
             </div>
           </div>
         </div>
-
-        <TicketNotFoundAlert v-if="error" />
       </div>
 
       <!--  Tickets -->
-      <div class="mt-10" v-if="ticketList && getSearchedTicketList.tickets">
+      <div v-if="getSearchedTicketList.tickets">
         <div class="w-full flex flex-col" v-if="getActiveTickets?.length">
-          <div class="flex justify-between items-center gap-x-4">
+          <div class="flex justify-between items-center gap-x-4 mt-4 lg:mt-10">
             <div class="h-[2px] bg-[#DBDBDB] w-full"></div>
             <p class="text-base font-medium whitespace-nowrap">
               Active Tickets
@@ -261,8 +259,7 @@ export default {
       transactionId: "",
       activeTickets: [],
       oldTickets: [],
-      oopsAlertStatus: false,
-      ticketList: false,
+      alertMessage: null,
       ServiceType: ServiceType,
       selectedService: ServiceType.BUS,
     };
@@ -323,17 +320,22 @@ export default {
           formData.pnr = "";
         }
         if (this.pnr || this.phone || this.transactionId) {
-          this.error = false;
-          this.ticketList = true;
-          await this.searchTicketAction({
-            payload: formData,
-            service: this.selectedService,
-          });
-        } else {
-          this.error = true;
+          this.alertMessage = null;
+
+          try {
+            const responseData = await this.searchTicketAction({
+              payload: formData,
+              service: this.selectedService,
+            });
+
+            this.setSearchedTicketList(responseData);
+            this.$nuxt.$loading?.finish();
+          } catch (err) {
+            this.setSearchedTicketList([]);
+            this.alertMessage = err;
+            this.$nuxt.$loading?.finish();
+          }
         }
-        this.$nuxt.$loading?.finish();
-        this.oopsAlertStatus = true;
       });
     },
   },
