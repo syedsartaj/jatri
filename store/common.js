@@ -147,28 +147,19 @@ export const actions = {
     });
   },
   async searchTicketAction({ commit }, payloadData) {
-    try {
-      commit("setLoading", true);
-      const { data } = await this.$api.post(
-        apis.SERVICE_TYPE[payloadData.service].POST_SEARCH_TICKET,
-        payloadData.payload
-      );
-      commit("setSearchedTicketList", data.data);
-      this.$toast.success(data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      commit("setLoading", false);
-      return true;
-    } catch (error) {
-      commit("setLoading", false);
-      commit("setSearchedTicketList", []);
-      // this.$toast.error(error.response.data.message, {
-      //   position: "bottom-right",
-      //   duration: 5000,
-      // });
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .post(
+          apis.SERVICE_TYPE[payloadData.service].POST_SEARCH_TICKET,
+          payloadData.payload
+        )
+        .then((res) => {
+          resolve(res.data.data);
+        })
+        .catch((e) => {
+          reject(e.response.data.message ?? "Something went wrong!");
+        });
+    });
   },
   async sendOtpForCancelTicketAction({ commit, state }, payloadData) {
     try {
