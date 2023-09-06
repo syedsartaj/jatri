@@ -26,7 +26,10 @@
                 <div class="flex flex-col">
                   <div class="w-full flex flex-col xl:flex-row gap-x-4">
                     <div class="w-full hidden xl:block">
-                      <FareDetails :passengerMobile="passengerMobile" />
+                      <FareDetails
+                        :passengerMobile="passengerMobile"
+                        :handlePromoApplied="handlePromoApplied"
+                      />
                     </div>
                     <div class="flex flex-col mt-4 xl:mt-0">
                       <!-- BookingDetailsOfUser -->
@@ -128,6 +131,7 @@
                                 <input
                                   class="bg-[#f7f7f7] pl-1 px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 focus:appearance-none placeholder:text-blackSecondary text-[#151414] text-sm"
                                   type="number"
+                                  :disabled="isPromoApplied"
                                   minlength="11"
                                   maxlength="11"
                                   required=""
@@ -199,7 +203,10 @@
                         </div>
                       </div>
                       <div class="w-full block xl:hidden mt-4">
-                        <FareDetails :passengerMobile="passengerMobile" />
+                        <FareDetails
+                          :passengerMobile="passengerMobile"
+                          :handlePromoApplied="handlePromoApplied"
+                        />
                       </div>
                       <div
                         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
@@ -360,6 +367,7 @@ export default {
       errorOccurred: false,
       departureTime: "",
       agreePrivacyPolicy: true,
+      isPromoApplied: false,
     };
   },
   computed: {
@@ -455,6 +463,9 @@ export default {
       "getBookingInfoByTnxId",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
+    handlePromoApplied() {
+      this.isPromoApplied = true;
+    },
     limitInputLength() {
       if (this.passengerMobile.length > 11) {
         this.passengerMobile = this.passengerMobile.slice(0, 11); // Truncate input to max length

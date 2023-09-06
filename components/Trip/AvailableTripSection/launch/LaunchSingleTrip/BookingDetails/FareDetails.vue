@@ -117,7 +117,7 @@
 import { mapActions, mapGetters } from "vuex";
 import { isValidPhoneNumber } from "../../../../../../helpers/utils";
 export default {
-  props: ["passengerMobile"],
+  props: ["passengerMobile", "handlePromoApplied"],
   data() {
     return {
       promoCode: "",
@@ -187,6 +187,7 @@ export default {
             const response = await this.applyPromoCodeAction(payload);
             if (response?.data?.amount) {
               this.isPromoApplied = true;
+              this.handlePromoApplied();
               this.promoAmount = response?.data?.amount;
             }
             this.$nuxt.$loading?.finish();
@@ -210,6 +211,7 @@ export default {
     if (bookingData) {
       if (bookingData?.invoice?.promo) {
         this.isPromoApplied = true;
+        this.handlePromoApplied();
         this.promoAmount = bookingData?.invoice?.promo?.amount || 0;
         this.passengerMobile = bookingData?.invoice?.promo?.phone || "";
       }
