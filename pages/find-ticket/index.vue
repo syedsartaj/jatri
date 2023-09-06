@@ -164,11 +164,13 @@
                     v-else-if="selectedTab === 1"
                     class="w-full p-4 bg-[#F7F7F7] rounded outline-none text-sm lg:text-base placeholder:text-sm lg:placeholder:text-base font-normal text-blackPrimary placeholder:text-[#676769]"
                     type="text"
+                    required=""
                     placeholder="PNR"
                     v-model="pnr"
                   />
                   <input
                     v-else-if="selectedTab === 2"
+                    required=""
                     class="w-full p-4 bg-[#F7F7F7] rounded outline-none text-sm lg:text-base placeholder:text-sm lg:placeholder:text-base font-normal text-blackPrimary placeholder:text-[#676769]"
                     type="text"
                     placeholder="Tnx ID"
