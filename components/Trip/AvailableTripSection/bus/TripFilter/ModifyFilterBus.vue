@@ -46,14 +46,14 @@
       <hr class="my-5" />
       <h2 class="text-blackSecondary text-base font-medium">TIME:</h2>
       <div
-        class="grid grid-cols-2 2xl:grid-cols-3 gap-x-[7px] gap-y-[10px] mt-[10px]"
+        class="grid grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-[10px] mt-[10px]"
       >
         <div v-for="time in timeList" :key="time" class="w-full h-9">
           <input id="busType" type="checkbox" class="hidden" />
           <label for="busType">
             <button
               @click="setTime(time)"
-              class="group w-full h-full flex justify-center items-center gap-x-[10px] rounded px-[5px] text-xs font-medium"
+              class="group w-full h-full flex justify-center items-center gap-x-[4px] rounded px-[4px] text-xs font-medium"
               :class="
                 selectedTime == time
                   ? 'bg-corporate text-white'
@@ -69,7 +69,7 @@
                     : '@/assets/images/icons/night.svg')
                 "
                 alt="time"
-                class=""
+                class="w-4 h-4"
               />
               {{ time }}
             </button>
