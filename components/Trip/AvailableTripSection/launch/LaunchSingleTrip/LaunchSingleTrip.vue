@@ -218,7 +218,7 @@
             />
           </div>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full" v-if="classList.length">
           <p class="text-xs lg:text-base font-medium text-blackPrimary">
             Seat class <span class="text-[#E0293B] ml-1">*</span>
           </p>
@@ -231,7 +231,7 @@
             <div class="flex flex-row items-center justify-center">
               <BedIcon v-if="selectedClass?.info?.isCabin" />
               <SofaIcon v-else-if="!selectedClass?.info?.isCabin" />
-              <p class="ml-3">{{ selectedClass?.info?.name }}</p>
+              <p class="ml-3">{{ selectedClass?.info?.name || "Select a seat class" }}</p>
             </div>
             <img
               src="@/assets/images/home/arrowDown.svg"
@@ -251,7 +251,7 @@
       />
     </div>
     <SelectClassModal
-      v-if="showSelectClassModal"
+      v-if="showSelectClassModal && classList.length"
       :classList="classList"
       :selectedClass="selectedClass"
       :handleSelectClassModal="
@@ -358,7 +358,7 @@ export default {
     ]),
     getSelectedClassSeatData() {
       return this.getSeatViewData?.seatPlan.ClassWiseSeatPlan.find(
-        (item) => item.classId === this.selectedClass.info.classId
+        (item) => item.classId === this.selectedClass?.info?.classId
       );
     },
     getDroppingPoints() {
@@ -478,9 +478,7 @@ export default {
         }
       }
 
-      this.classList = seatClassArray.length
-        ? seatClassArray
-        : this.getSeatViewData?.seatPlan?.seatClasses;
+      this.classList = seatClassArray.length ? seatClassArray : [];
     },
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
@@ -517,6 +515,7 @@ export default {
     handleSelectFloorModal(data) {
       if (data?.payload) {
         this.selectedFloor = data.payload;
+        this.selectedClass = {};
         this.toggleFloorModalAndScroll(!this.showSelectFloorModal);
         this.handleSelectClassModal();
       } else {
@@ -531,8 +530,13 @@ export default {
       if (data?.payload) {
         this.selectedClass = data.payload;
       }
-      this.showSelectClassModal = !this.showSelectClassModal;
-      this.stopBackgroundScroll(this.showSelectClassModal);
+
+      if (this.classList.length) {
+        this.showSelectClassModal = !this.showSelectClassModal;
+        this.stopBackgroundScroll(this.showSelectClassModal);
+      } else {
+        this.selectedClass = {};
+      }
     },
     stopBackgroundScroll(value) {
       handleScrollBehaviour(!value);

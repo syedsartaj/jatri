@@ -415,12 +415,6 @@ export default {
         "lll"
       );
     },
-    watch: {
-      $route(to, from) {
-        // Perform actions when the route changes
-        console.log(`Navigating from ${from.path} to ${to.path}`);
-      },
-    },
   },
   created() {
     const bookingData = this.getLaunchBookingData;

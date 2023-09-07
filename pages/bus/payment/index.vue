@@ -429,13 +429,31 @@ export default {
     timeFormate(time) {
       return moment(time, "hh:mm").format("LT");
     },
-    paymentHandler() {
+    async paymentHandler() {
       const payload = {
         paymentId: this.getBookingInfoDetails._id,
         gatewayType: this.activePlan,
       };
       this.fireGTMEventForInitiateCheckout();
-      this.ticketConfirmAction(payload);
+
+      this.$nextTick(async () => {
+        try {
+          this.$nuxt.$loading?.start();
+          const { data } = await this.ticketConfirmAction(payload);
+
+          if (data?.gatewayUrl) {
+            window.location.href = data.gatewayUrl;
+            this.$nuxt.$loading?.finish();
+          }
+        } catch (err) {
+          this.$toast.error(err, {
+            position: "bottom-right",
+            duration: 50000,
+            containerClass: "padding: 100px",
+          });
+          this.$nuxt.$loading?.finish();
+        }
+      });
     },
     fireGTMEventForInitiateCheckout() {
       const eventData = {

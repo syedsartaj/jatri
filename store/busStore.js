@@ -259,25 +259,16 @@ export const actions = {
     }
   },
   async ticketConfirmAction({ commit }, payload) {
-    try {
-      commit("setLoading", true);
-      const { data } = await this.$api.$post(
-        apis.SERVICE_TYPE.BUS.POST_CONFIRM_TICKET,
-        payload
-      );
-      commit("setLoading", false);
-      if (data && data.gatewayUrl) {
-        window.location.href = data.gatewayUrl;
-      }
-      return true;
-    } catch (error) {
-      commit("setLoading", false);
-      this.$toast.error(error.response.data.message ?? "Something went wrong", {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.BUS.POST_CONFIRM_TICKET, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          reject(e.response.data.message ?? "Something went wrong!");
+        });
+    });
   },
   async applyPromoCodeAction({ dispatch, commit }, payload) {
     try {

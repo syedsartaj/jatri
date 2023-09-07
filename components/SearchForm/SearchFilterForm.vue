@@ -142,7 +142,6 @@ export default {
               : "night";
         }
         this.fireGTMEventForSearch();
-        Cookies.remove("process-allow");
         const pathName =
           this.getSelectedServiceType === ServiceType.BUS
             ? "/bus/trip"

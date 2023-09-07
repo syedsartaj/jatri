@@ -237,7 +237,7 @@ export const actions = {
         commit("setSeatViewData", response.data);
       }
     } catch (e) {
-      this.$toast.error(e.response.data.message ?? "Something went wrong!", {
+      this.$toast.error(e?.response?.data?.message ?? "Something went wrong!", {
         position: "bottom-right",
         duration: 5000,
       });
