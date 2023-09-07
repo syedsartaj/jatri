@@ -227,7 +227,15 @@ export default {
               : "06 pm - 03 am";
         }
         if (this.$route?.fullPath?.includes("/trip")) {
-          this.handleFromSubmit();
+          const isRightLocation =
+            from &&
+            to &&
+            this.isCorrectLocationSelection(from) &&
+            this.isCorrectLocationSelection(to);
+
+          if (!isRightLocation) {
+            this.errorOccured = true;
+          }
         }
       },
       deep: true,
