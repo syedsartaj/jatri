@@ -7,13 +7,13 @@
     >
       <p
         v-if="label"
-        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondary text-left uppercase"
+        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondary text-left uppercase mb-[2px]"
       >
         {{ label }}
       </p>
       <div v-if="selectedOption !== ''" class="flex justify-between">
         <p
-          class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
+          class="text-base font-medium text-blackPrimary text-left"
         >
           {{ this.selectedOption.city_name.toUpperCase() }}
         </p>
@@ -26,7 +26,7 @@
 
       <p
         v-else
-        class="lg:text-xs xl:text-sm 2xl:text-base font-medium text-blackPrimary text-left"
+        class="text-base font-medium text-blackPrimary text-left"
       >
         <span v-if="defaultOption">{{ defaultOption }}</span>
         <span v-else>Select your Option</span>

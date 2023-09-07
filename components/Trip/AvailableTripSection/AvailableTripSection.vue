@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 import { ServiceType } from "../../../helpers/utils";
 export default {
   name: "AvailableTripSection",
@@ -25,28 +25,10 @@ export default {
       ServiceType: ServiceType,
     };
   },
-  methods: {
-    ...mapMutations("common", ["setSelectedService"]),
-    checkRoutePath() {
-      const path = this.$route.path.toString();
-
-      this.setSelectedService(
-        path.startsWith("/launch/trip") ? ServiceType.LAUNCH : ServiceType.BUS
-      );
-    },
-  },
   computed: {
     ...mapGetters("common", ["getSelectedServiceType"]),
     selectedService() {
       return this.getSelectedServiceType;
-    },
-  },
-  mounted() {
-    this.checkRoutePath();
-  },
-  watch: {
-    $route(to, from) {
-      this.checkRoutePath();
     },
   },
 };
