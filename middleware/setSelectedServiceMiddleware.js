@@ -1,10 +1,13 @@
 import { ServiceType } from "../helpers/utils";
 
 export default function ({ route, store }) {
-  const path = route.path.toString();
+  const path = route?.path?.toString();
 
-  store.commit(
-    "common/setSelectedService",
-    path.startsWith("/launch/trip") ? ServiceType.LAUNCH : ServiceType.BUS
-  );
+  const isLaunchTrip = path?.startsWith("/launch/trip");
+  const isBusTrip = path?.startsWith("/bus/trip");
+
+  if (isLaunchTrip || isBusTrip) {
+    const selectedService = isLaunchTrip ? ServiceType.LAUNCH : ServiceType.BUS;
+    store.commit("common/setSelectedService", selectedService);
+  }
 }

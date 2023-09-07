@@ -228,9 +228,13 @@ export default {
               selectedFloor: this.selectedFloor,
             },
           });
-
           this.$router.push(
-            `/launch/payment?tnxId=${data.paymentInfo.transactionId}`,
+            {
+              path: "/launch/payment",
+              query: {
+                tnxId: data.paymentInfo.transactionId,
+              },
+            },
             () => {
               this.$nuxt.$loading?.finish();
             }
