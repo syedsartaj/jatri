@@ -3,7 +3,7 @@
     <SearchTab v-if="!isTripPage" />
     <div
       v-if="getSelectedServiceType != ''"
-      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px]"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px] gap-x-4"
     >
       <div class="flex justify-between w-[86%] gap-x-4">
         <SearchCityFilter
@@ -52,9 +52,9 @@
           :errorOccured="errorOccured"
         />
       </div>
-      <div class="w-[14%] flex justify-end items-center">
+      <div class="flex justify-end items-center">
         <button
-          class="rounded-full text-white text-base font-medium lg:px-[24px] h-[46px]"
+          class="rounded-full text-white text-base font-medium lg:px-[24px] h-[46px] whitespace-nowrap"
           :class="
             !departure || !destination || !coachType || !departingDate
               ? isTripPage
@@ -114,11 +114,8 @@ export default {
       });
     },
     isCorrectLocationSelection(location) {
-      const normalize = (str) => str.toLowerCase().replace(/\s+/g, ""); // Helper function to normalize and remove spaces
-      const normalizedLocation = normalize(location);
-
       return this.getCities.some(
-        (city) => normalize(city.city_name) === normalizedLocation
+        (city) => city.city_name.toLowerCase() === location.toLowerCase()
       );
     },
     handleFromSubmit() {
