@@ -7,7 +7,7 @@
     >
       <p
         v-if="label"
-        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondary text-left uppercase"
+        class="lg:text-[10px] xl:text-xs font-normal text-blackSecondary text-left uppercase mb-[2px]"
       >
         {{ label }}
       </p>
