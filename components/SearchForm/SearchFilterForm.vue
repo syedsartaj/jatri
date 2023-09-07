@@ -114,8 +114,11 @@ export default {
       });
     },
     isCorrectLocationSelection(location) {
+      const normalize = (str) => str.toLowerCase().replace(/\s+/g, ""); // Helper function to normalize and remove spaces
+      const normalizedLocation = normalize(location);
+
       return this.getCities.some(
-        (city) => city.city_name.toLowerCase() === location.toLowerCase()
+        (city) => normalize(city.city_name) === normalizedLocation
       );
     },
     handleFromSubmit() {
