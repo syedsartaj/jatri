@@ -395,7 +395,7 @@ export default {
     issuedOn() {
       return (
         this.getTicketDetails &&
-        dateTimeFormat(this.getTicketDetails.createdAt, 6, "lll")
+        dateTimeFormat(this.getTicketDetails.ticketDateTime, 6, "lll")
       );
     },
     isLaunchPage() {
