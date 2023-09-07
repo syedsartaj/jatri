@@ -632,22 +632,6 @@ export default {
         this.totalPromoAmount = 0;
       }
     },
-    isSitLimitCrossed() {
-      return (
-        this.selectedSeatIds.length >
-        this.getSeatViewData.seatPlan.maxSeatLimit - 1
-      );
-    },
-    showSeatLimitCrossError() {
-      this.$toast.error(
-        `You can select ${this.getSeatViewData.seatPlan.maxSeatLimit} seats at a time!`,
-        {
-          position: "bottom-right",
-          duration: 50000,
-          containerClass: "padding: 100px",
-        }
-      );
-    },
     handleSitSelect(seat) {
       this.selectedSeatIds.push(seat.id);
       this.selectedSeatLabels.push(seat.seatNo);

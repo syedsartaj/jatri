@@ -291,7 +291,8 @@ export default {
       } else {
         if (
           this.isSeatAvailable(selectedSeat) &&
-          this.selectedSeatArray.length <= 3
+          this.selectedSeatArray.length <=
+            this.selectedClassSeatData?.maxSeatLimit - 1
         ) {
           const isSeatLocked = await this.isSeatLocked(seatNumbers);
 
@@ -315,7 +316,10 @@ export default {
           } else {
             this.selectedSeatArray.push(selectedSeat);
           }
-        } else if (this.selectedSeatArray.length === 4) {
+        } else if (
+          this.selectedSeatArray.length ===
+          this.selectedClassSeatData?.maxSeatLimit
+        ) {
           this.showSeatLimitCrossError();
         }
       }
@@ -379,11 +383,14 @@ export default {
     },
 
     showSeatLimitCrossError() {
-      this.$toast.error(`You can select 4 seats at a time!`, {
-        position: "bottom-right",
-        duration: 50000,
-        containerClass: "padding: 100px",
-      });
+      this.$toast.error(
+        `You can select ${this.selectedClassSeatData?.maxSeatLimit} seats at a time!`,
+        {
+          position: "bottom-right",
+          duration: 50000,
+          containerClass: "padding: 100px",
+        }
+      );
     },
   },
   computed: {
