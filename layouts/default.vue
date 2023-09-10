@@ -27,11 +27,11 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("guarantedseat", [
+    ...mapGetters("busStore", ["getSurpriseDealModalStatus"]),
+    ...mapGetters("common", [
+      "getIsTicketPopupOpen",
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
-      "getSurpriseDealModalStatus",
-      "getIsTicketPopupOpen",
     ]),
   },
   methods: {

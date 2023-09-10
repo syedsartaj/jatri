@@ -27,7 +27,7 @@
           <div class="bg-white px-10 w-full flex items-center flex-col">
             <img src="@/assets/images/checkboxCircle.svg" alt="check" />
             <h1 class="text-xl font-medium mt-8 text-blackPrimary text-center">
-              Request submitted succesfully
+              Request submitted successfully
             </h1>
             <p class="text-base font-normal mt-2 text-blackLight text-center">
               We successfully got your request. We will get in touch with you
@@ -63,7 +63,7 @@
 import { mapMutations } from "vuex";
 export default {
   methods: {
-    ...mapMutations("guarantedseat", ["handleSuccessfulModal"]),
+    ...mapMutations("common", ["handleSuccessfulModal"]),
   },
 };
 </script>

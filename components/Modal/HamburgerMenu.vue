@@ -70,7 +70,7 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   props: ["close"],
   computed: {
-    ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+    ...mapGetters("common", ["getBusReserveModalOpenStatus"]),
   },
   data() {
     return {
@@ -89,7 +89,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
+    ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
     handleOnClick(index) {
       if (index === 0) {
         this.setBusReserveModalOpenStatus();

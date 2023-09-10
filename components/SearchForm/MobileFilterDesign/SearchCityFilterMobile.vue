@@ -2,20 +2,20 @@
   <div class="">
     <button
       :class="optionsIsOpen && 'border border-[#4D4D4F]'"
-      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]"
+      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[16px] py-[11px]"
       @click="toggleDropdown"
     >
-      <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
+      <div class="flex justify-start gap-x-4 items-center w-10/12">
         <img v-if="icon" :src="icon" alt="" />
         <p
           v-if="label && selectedOption === ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left mb-[2px]"
         >
           {{ label }}
         </p>
         <p
           v-if="selectedOption !== ''"
-          class="text-xs font-normal text-blackSecondery text-left"
+          class="text-xs font-normal text-blackSecondary text-left mb-[2px]"
         >
           {{ this.selectedOption.city_name.toUpperCase() }}
         </p>
@@ -30,14 +30,14 @@
     <!-- dropdown -->
     <div
       v-if="optionsIsOpen"
-      class="mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2 left-1/2 transform -translate-x-1/2"
+      class="mt-2 w-full bg-white rounded shadow-xl z-[1000] leading-6 absolute left-0 max-h-[307px] overflow-y-scroll"
     >
       <div class="flex justify-center items-center p-2">
         <input
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
-          class="border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]"
+          class="w-full border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]"
           placeholder="Search Location"
           autocomplete="off"
           type="text"
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { handleScrollBehaviour } from "../../../helpers/utils";
 export default {
   props: {
     label: {
@@ -117,12 +118,14 @@ export default {
   },
 
   beforeDestroy() {
+    handleScrollBehaviour(true);
     window.removeEventListener("click", this.close);
   },
 
   methods: {
     toggleDropdown() {
       this.optionsIsOpen = !this.optionsIsOpen;
+      handleScrollBehaviour(!this.optionsIsOpen);
       setTimeout(function () {
         document.getElementById("searchInput").focus();
       }, 10);
@@ -130,10 +133,14 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.$emit("input", this.selectedOption.city_name);
+      handleScrollBehaviour(true);
       this.optionsIsOpen = false;
     },
     close(e) {
       if (!this.$el.contains(e.target)) {
+        if (this.optionsIsOpen) {
+          handleScrollBehaviour(true);
+        }
         this.optionsIsOpen = false;
       }
     },

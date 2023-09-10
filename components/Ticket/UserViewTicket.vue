@@ -33,6 +33,7 @@
             :downloadTicketStatus="downloadTicketValue"
             :id="'printTicket-' + getTicketDetails._id"
             :ticketFareString="ticketFareString"
+            :serviceType="serviceType"
           />
         </section>
       </vue-html2pdf>
@@ -53,6 +54,7 @@
         :email="supportEmail"
         :phone="supportPhone"
         :downloadTicketStatus="downloadTicketValue"
+        :serviceType="serviceType"
       />
     </div>
 
@@ -72,11 +74,11 @@
             {{ getTicketDetails.companyName }}
           </h2>
         </div>
-        <div class="p-3 lg:p-6">
+        <div class="p-3 md:py-5 lg:p-4">
           <div
-            class="flex flex-col lg:flex-row justify-between divide-y lg:divide-y-0 lg:divide-x divide-[#DBDBDB]"
+            class="flex flex-col md:flex-row justify-between divide-y md:divide-y-0 md:divide-x divide-[#DBDBDB]"
           >
-            <div class="w-full lg:w-1/2">
+            <div class="w-full md:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
@@ -85,12 +87,17 @@
               </div>
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
-                  Coach:
+                  {{ serviceType === "BUS" ? "Coach:" : "Ship:" }}
                 </p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
-                  {{ getTicketDetails.coach }}
+                  {{
+                    serviceType === "BUS"
+                      ? getTicketDetails.coach
+                      : getTicketDetails.ship
+                  }}
                 </p>
               </div>
+
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Departure time:
@@ -138,7 +145,7 @@
                 </p>
               </div>
             </div>
-            <div class="w-full lg:w-1/2 pt-[10px] lg:pt-0">
+            <div class="w-full md:w-1/2 pt-[10px] md:pt-0">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">
                   Transection ID:
@@ -231,7 +238,12 @@
         Requested For Cancel
       </span>
       <button
-        v-if="getTicketDetails.isTicketCancelable && !pageVind"
+        v-if="
+          getTicketDetails.isTicketCancelable &&
+          !pageVind &&
+          getTicketDetails?.paymentHistory?.ticketStatus !==
+            'PENDING_CANCEL_REQUEST'
+        "
         @click="cancelTicket(getTicketDetails._id)"
         class="lg:flex lg:justify-center lg:items-center lg:gap-x-[11.7px] text-center text-xs font-medium text-[#4D4D4F] bg-[#EDEDED] rounded-full lg:w-[170px] py-3 px-4"
       >
@@ -274,6 +286,7 @@
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
+  name: "UserViewTicket",
   data() {
     return {
       downloadTicketValue: false,
@@ -287,6 +300,7 @@ export default {
     "pageVind",
     "supportEmail",
     "supportPhone",
+    "serviceType",
   ],
   mounted() {
     this.getPaymentHistory?.seatFares?.forEach((seatFare) => {
@@ -339,18 +353,21 @@ export default {
         }, 500);
       };
     },
-    ...mapActions("guarantedseat", ["sendOtpForCancelTicketAction"]),
-    ...mapMutations("guarantedseat", ["setCancelTicketId"]),
+    ...mapActions("common", ["sendOtpForCancelTicketAction"]),
+    ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
         ticketId,
       };
       this.setCancelTicketId(ticketId);
-      this.sendOtpForCancelTicketAction(payload);
+      this.sendOtpForCancelTicketAction({
+        payload,
+        service: this.serviceType,
+      });
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getSearchedTicketList"]),
+    ...mapGetters("common", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
       return (
         this.getTicketDetails &&
@@ -378,8 +395,11 @@ export default {
     issuedOn() {
       return (
         this.getTicketDetails &&
-        dateTimeFormat(this.getTicketDetails.createdAt, 6, "lll")
+        dateTimeFormat(this.getTicketDetails.ticketDateTime, 6, "lll")
       );
+    },
+    isLaunchPage() {
+      return this.$route?.fullPath?.includes("launch");
     },
   },
 };
