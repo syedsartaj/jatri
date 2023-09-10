@@ -296,40 +296,6 @@
         </p>
       </div>
 
-      <div class="text-center mt-4 lg:mt-5 flex flex-row items-center">
-        <img
-          v-if="!agreePrivacyPolicy"
-          src="@/assets/images/icons/unCheckCircle.svg"
-          alt=""
-          class="cursor-pointer"
-          @click="() => handleCheckBox()"
-        />
-        <img
-          v-if="agreePrivacyPolicy"
-          src="@/assets/images/icons/checkBoxCircle.svg"
-          alt=""
-          class="cursor-pointer"
-          @click="() => handleCheckBox()"
-        />
-        <p class="text-blackPrimary text-sm font-medium text-left ml-2">
-          By proceeding you are agreeing with our
-
-          <span>
-            <nuxt-link
-              to="/policies#terms-and-conditions"
-              class="w-full underline text-[#1E88E5] font-medium"
-              >Terms and Conditions</nuxt-link
-            >
-            and
-            <nuxt-link
-              to="/policies#return-and-refund-policy"
-              class="w-full underline text-[#1E88E5] font-medium"
-              >Cancellation Policy</nuxt-link
-            >
-          </span>
-        </p>
-      </div>
-
       <LoaderButton
         class="bg-corporate rounded-full w-full py-[13px] text-white text-sm font-medium mt-6"
         :class="
