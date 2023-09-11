@@ -1,9 +1,9 @@
 <template>
      <div class="w-full">
-          <div class="hidden lg:block">
+          <div class="hidden md:block">
                <FooterDesktop/>
           </div>
-          <div class="block lg:hidden">
+          <div class="block md:hidden">
                <FooterMobile/>
           </div>
      </div>

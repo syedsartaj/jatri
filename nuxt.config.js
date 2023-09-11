@@ -132,7 +132,7 @@ export default {
     transpile: ["primevue", "vee-validate/dist/rules"],
   },
   loading: "~/components/loader/Loader.vue",
-  // server: {
-  //   port: 5000, // default: 3000
-  // },
+  router: {
+    middleware: ["setSelectedServiceMiddleware"],
+  },
 };

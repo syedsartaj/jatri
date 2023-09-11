@@ -36,7 +36,7 @@
     </div>
     <hr />
 
-    <div class="ml-4 mt-4">
+    <div class="ml-[20px] mt-4">
       <ul
         class="
           list-disc

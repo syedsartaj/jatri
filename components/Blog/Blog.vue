@@ -3,16 +3,16 @@
     v-if="getBlogList?.length && imageUrl"
     class="w-full h-auto flex flex-col items-center mt-[60px] lg:mt-[50px] lg:py-[68px] lg:px-[100px]"
   >
-    <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0">
+    <div class="w-full flex flex-row items-center justify-between px-4 lg:px-0 gap-x-[30px]">
       <h2
-        class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-left font-medium lg:font-semibold"
+        class="text-2xl md:text-[32px] md:leading-[40px] lg:text-[36px] md:leading-[44px] text-blackPrimary text-left font-semibold"
       >
         Our most recent initiatives
       </h2>
       <div class="flex justify-between gap-x-4">
         <button
           @click="prevSlide"
-          class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+          class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
           :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
         >
           <SlideLeft
@@ -23,7 +23,7 @@
         </button>
         <button
           @click="nextSlide"
-          class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
+          class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
           :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
         >
           <SlideRight
@@ -134,7 +134,7 @@ export default {
           520: {
             itemsToShow: 1.5,
           },
-          425: {
+          400: {
             itemsToShow: 1.2,
           },
           0: {
@@ -157,7 +157,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getBlogList"]),
+    ...mapGetters("common", ["getBlogList"]),
   },
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;

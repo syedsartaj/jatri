@@ -361,7 +361,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getBusReserveModalOpenStatus"]),
+    ...mapGetters("common", ["getBusReserveModalOpenStatus"]),
     isValidEmail() {
       return /^[^@]+@\w+(\.\w+)+\w$/.test(this.contactEmail);
     },
@@ -370,8 +370,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions("guarantedseat", ["fullBusReservationAction"]),
-    ...mapMutations("guarantedseat", ["setBusReserveModalOpenStatus"]),
+    ...mapActions("common", ["fullBusReservationAction"]),
+    ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
     handleSumbit() {
       const {
         journeyDate,

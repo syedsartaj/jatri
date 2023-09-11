@@ -5,16 +5,7 @@
     <div class="fixed inset-0 z-10">
       <div class="flex justify-center items-center pt-10 px-4 lg:px-0">
         <div
-          class="
-            relative
-            transform
-            overflow-hidden
-            rounded-lg
-            bg-white
-            transition-all
-            w-[380px]
-            pb-6
-          "
+          class="relative transform overflow-hidden rounded-lg bg-white transition-all w-[380px] pb-6"
         >
           <div class="flex justify-between w-full pt-6 pr-4">
             <p class="w-6"></p>
@@ -36,26 +27,10 @@
               Time left to claim the offer:
             </p>
             <div
-              class="
-                h-20
-                w-20
-                rounded-full
-                border-[#48A43F] border-[2px]
-                mt-2
-                flex
-                items-center
-                justify-center
-              "
+              class="h-20 w-20 rounded-full border-[#48A43F] border-[2px] mt-2 flex items-center justify-center"
             >
               <p
-                class="
-                  text-base
-                  font-medium
-                  text-[#151414]
-                  flex flex-row
-                  items-center
-                  gap-[2px]
-                "
+                class="text-base font-medium text-[#151414] flex flex-row items-center gap-[2px]"
               >
                 {{ second }}
                 <span>Sec</span>
@@ -66,18 +41,7 @@
             <button
               :class="disableInput && `opacity-60`"
               @click="!disableInput && applyPromo()"
-              class="
-                flex
-                items-center
-                justify-center
-                bg-corporate
-                text-white text-sm
-                font-medium
-                h-[46px]
-                w-[295px]
-                rounded-full
-                cursor-pointer
-              "
+              class="flex items-center justify-center bg-corporate text-white text-sm font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
               Claim deal
             </button>
@@ -116,8 +80,8 @@ export default {
     clearInterval(this.t);
   },
   methods: {
-    ...mapActions("guarantedseat", ["applyPromoCodeAction"]),
-    ...mapMutations("guarantedseat", ["handleSurpriseDealModal"]),
+    ...mapActions("busStore", ["applyPromoCodeAction"]),
+    ...mapMutations("busStore", ["handleSurpriseDealModal"]),
     applyPromo() {
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
@@ -138,8 +102,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("guarantedseat", [
-      ,
+    ...mapGetters("busStore", [
       "getSurpriseDealModalStatus",
       "getBookingInfoDetails",
     ]),

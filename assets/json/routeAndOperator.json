@@ -1,320 +1,307 @@
 {
-     "routes": [
-          {
-               "_id": 1,
-               "from": "Dhaka",
-               "to": "Rangpur",
-               "heading": "Dhaka to Rangpur",
-               "paragraph": [
-                    "Dhaka to Rangpur is a route spread over 316 kilometers. Currently, Jatri offers SB Paribahan & Shah Fateh Ali in this route. With an average duration of 8-9 hours journey, depending on the traffic scenario. Bus ticket price for this route ranges from BDT 750. Since more and more operators are being connected, ticket prices may vary depending on the operator.",
-                    "Get the best deals and renowned bus operators all in a single place on our platform - book Dhaka to Rangpur bus tickets with Jatri!"
-               ],
-               "distance": 316,
-               "time": "8-9",
-               "priceStartsFrom": 750
-          },
-          {
-               "_id": 2,
-               "from": "Dhaka",
-               "to": "Barishal",
-               "heading": "Dhaka to Barishal",
-               "paragraph": [
-                    "Dhaka to Barishal is a route spread over 246.8 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 7-8 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1000.",
-                    "To book your Dhaka to Barisal bus ticket through Jatri, is just a few clicks away; as all major bus companies cooperate with us. Travel in the easiest way with Jatri."
-               ],
-               "distance": 246.8,
-               "time": "7-8",
-               "priceStartsFrom": 1000
-          },
-          {
-               "_id": 3,
-               "from": "Dhaka",
-               "to": "Kuakata",
-               "heading": "Dhaka to Kuakata",
-               "paragraph": [
-                    "Dhaka to Kuakata is a route spread over 214 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 6-7 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1500.",
-                    "The Dhaka to Kuakata bus ticket is at your door through Jatri. As all major bus companies cooperate with us, now there is no more trouble to travel with Jatri."
-               ],
-               "distance": 214,
-               "time": "6-7",
-               "priceStartsFrom": 1500
-          },
-          {
-               "_id": 4,
-               "from": "Dhaka",
-               "to": "Noagaon",
-               "heading": "Dhaka to Noagaon",
-               "paragraph": [
-                    "The distance from Dhaka to Noagaon is 239.8 kilometers. Shah Fateh Ali is currently available on this route through Jatri. Depending on traffic conditions, a 6-hour trip takes on average.",
-                    "The cost of a bus ticket for this route ranges from BDT 680 to BDT 1000 depending on the bus type.",
-                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Noagaon bus tickets with Jatri!"
-               ],
-               "distance": 239,
-               "time": "6",
-               "priceStartsFrom": 680
-          },
-          {
-               "_id": 5,
-               "from": "Dhaka",
-               "to": "Bogura",
-               "heading": "Dhaka to Bogura",
-               "paragraph": [
-                    "The distance from Dhaka to Bogura is 192.2 kilometers. Shah Fateh Ali is currently available on this route through Jatri. Depending on traffic conditions, an 8-9 hour trip takes on average.",
-                    "The cost of a bus ticket for this route ranges from BDT 550 to BDT 900 depending on the bus type.",
-                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Bogura bus tickets with Jatri!"
-               ],
-               "distance": 192.2,
-               "time": "8-9",
-               "priceStartsFrom": 550
-          },
-          {
-               "_id": 6,
-               "from": "Dhaka",
-               "to": "Sunamganj",
-               "heading": "Dhaka to Sunamganj",
-               "paragraph": [
-                    "Dhaka to Sunamganj is a route spread over 346 kilometers. Lucky Express Ltd is currently available on this route through Jatri. Depending on traffic conditions a 9-10 hour travel takes on average.",
-                    "The cost of a bus ticket for this route ranges from BDT650 depending on the bus type.",
-                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Sunamganj bus tickets with Jatri!"
-               ],
-               "distance": 346,
-               "time": "9-10",
-               "priceStartsFrom": 650
-          },
-          {
-               "_id": 7,
-               "from": "Dhaka",
-               "to": "Siliguri",
-               "heading": "Dhaka to Siliguri",
-               "paragraph": [
-                    "Dhaka to Siliguri is a route spread over 389 kilometers. Pingky Paribahan is currently available on this route through Jatri. Depending on traffic conditions an 11-12 hour takes on average.",
-                    "The cost of a bus ticket for this route ranges from BDT 2100 depending on the bus type.",
-                    "Get the best deals and renowned bus operators all in our place - book Dhaka to Siliguri bus tickets with Jatri! "
-               ],
-               "distance": 346,
-               "time": "9-10",
-               "priceStartsFrom": 650
-          }
-     ],
-     "operartors": [
-          {
-               "_id": 1,
-               "name": "pingky-paribahan",
-               "heading": "Pingky Paribahan",
-               "paragraph": [
-                    "Are you looking forward to traveling to Siliguri on a budget? Pingky Paribahan is the best choice for you. For the first time, Pingky Paribahan offers direct service from Dhaka to Siliguri. Dhaka-Rangpur, Dhaka-Lalmonirhat, Dhaka-Burimari, Dhaka-Siliguri, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Chilmari are the current routes available on the Jatri website. The ticket price range begins at 850 Taka. Book your journey at a pocket friendly price."
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 850
-          },
-          {
-               "_id": 2,
-               "name": "shah-fateh-ali",
-               "heading": "Shah Fateh Ali",
-               "paragraph": [
-                    "Shah Fateh Ali Paribahan buses run between Dhaka to Naogaon, Bogura, Palashbari, and Rangpur. The cost of traveling on this transport provided by the assurance of quality bus service will begin at BDT 550."
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 550
-          },
-          {
-               "_id": 3,
-               "name": "euro-coach",
-               "heading": "Euro Coach",
-               "paragraph": [
-                    "Euro Coach connects Dhaka with the Southern region of Barisal through the Padma Bridge and its final destination Kuakata (also known as the daughter of the sea). Euro Coach service has come up with the most modern and advanced luxury slipper service in the country. Euro coach is the first and only luxury slipper service on the Dhaka-Barisal-Kuakata route. Ticket rent range starts from 1,000 Taka. Present available routes are Dhaka-Barisal-Patuakhali-Kuakata,  Barisal-Dhaka & Kuakata-Dhaka. What are you waiting for? Book your ticket now! "
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 1000
-          },
-          {
-               "_id": 4,
-               "name": "sb-paribahan",
-               "heading": "SB Paribahan",
-               "paragraph": [
-                    "SB Paribahan is an up-and-coming bus company. SB Paribahan charges different rates for different destinations. Dhaka is the main starting point. The ticket price range begins at 750 Taka. Dhaka-Rangpur, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Dinajpur are the current routes available on the Jatri website. Book your ticket and travel in comfort. "
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 750
-          },
-          {
-               "_id": 5,
-               "name": "greenline",
-               "heading": "Greenline Paribahan",
-               "paragraph": [
-                    "Greenline Paribahan has been providing the most valuable bus service in Bangladesh since 1999. It provides service to all routes in Bangladesh. Dhaka to Chittagong, Dhaka to Cox's Bazar, Dhaka to Khagrachari, Dhaka to Rangamati, and Dhaka to Sylhet are the current routes available on the Jatri website. Ticket prices begin at 1,600 Taka. Book your ticket from Jatri for your hassle free move. "
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 1600
-          },
-          {
-               "_id": 6,
-               "name": "saintmartin-bd-express",
-               "heading": "Saintmartin BD Express",
-               "paragraph": [
-                    "Saintmartin BD Express has been operating in Bangladesh for a long time. They provide both AC and non-AC buses. The current routes available on the Jatri website are Dhaka to Chittagong and Dhaka to Cox's Bazar.Visit now and book your tickets!"
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 0
-          },
-          {
-               "_id": 7,
-               "name": "habib-paribahan",
-               "heading": "Habib Paribahan",
-               "paragraph": [
-                    "Habib Paribahan is well-known for their service and providing tickets at a budget friendly price. Dhaka-Sirajganj-Gobindaganj-Palashbari-Rangpur-Teesta-Lalmonirhat-Hatibandha-Patgram-Burimari are the current routes available on the Jatri website.The ticket price range begins at 700 Taka. Purchase your ticket right away!"
-               ],
-               "distance": 0,
-               "time": 0,
-               "priceStartsFrom": 700
-          },
-          {
-               "_id": 8,
-               "name": "khulna-express",
-               "heading": "Khulna Express",
-               "paragraph": [
-                    "Benapole to Kuakata is a route spread over 304.4 kilometres. Khulna Express is currently available on this route through Jatri. Depending on traffic conditions a 7-8 hour trip takes on average.Get the best deals and renowned bus operators all in our place - book Benapole to Kuakata bus tickets with Jatri! "
-               ],
-               "distance": 304.4,
-               "time": "7-8"
-          },
-          {
-               "_id": 9,
-               "name": "meghna-travels",
-               "heading": "Meghna Travels",
-               "paragraph": [
-                    "Dhaka-Barisal-Kuakata-Patuakhali-Barguna-patharghata-Bakergonj-Subidkhali-Jhalokathi-Swarupkathi are the routes available in Jatri platform. Do not miss the chance to get the best bus service from Jatri! Go and book your tickets NOW!"
-               ]
-          },
-          {
-               "_id": 10,
-               "name": "jeddah-express",
-               "heading": "Jeddah Express",
-               "paragraph": [
-                    "We bring the best options for your journey at Dhaka- Chattagram-cox's bazar routes. Jeddah Express is here to serve you via the Jatri platform. What are you waiting for? Book your tickets and travel with the best bus."
-               ]
-          },
-          {
-               "_id": 11,
-               "name": "tr-travels-classic",
-               "heading": "TR Travels Classic",
-               "paragraph": [
-                    "Need more options for travel in Dhaka- Barisal- Kuakata, Khulna- Jessore- Benapole routes? TR Travels Classic is here to serve you the best service to travel with safety. Go and book your tickets from Jatri website!"
-               ]
-          },
-          {
-               "_id": 12,
-               "name": "new-dhaka-express",
-               "heading": "New Dhaka Express",
-               "paragraph": [
-                    "Dhaka-Rangpur-Lalmonirhat-Patgram-Burimari-Changrabandha-Saidpur-Nilphamari-Hajigonj-Deviganj-Domar-Birgonj routes are available in New Dhaka Express at Jatri website. Do not hesitate to grab your tickets from Jatri website!"
-               ]
-          },
-          {
-               "_id": 13,
-               "name": "london-express",
-               "heading": "London Express",
-               "paragraph": [
-                    "London Express Limited started operation from 2017 with ambition to build an international standard transport network in Bangladesh.They have started domestic and international services with providing the latest model of world class fully Air-conditioned MAN brand of Germany and also are keeping sharp focus to add the latest vehicle on time to time. Dhaka to Sylhet, Dhaka to Chattagram to Cox's Bazar, Dhaka to Benapole to Kolkata current routes available on the Jatri website. Ticket fare starts from 1,200 Taka.",
-                    "Book your ticket from Jatri for your hassle free move!"
-               ],
-               "priceStartsFrom": 1200
-          },
-          {
-               "_id": 14,
-               "name": "lucky-express",
-               "heading": "Lucky Express",
-               "priceStartsFrom": 500,
-               "from": "Dhaka",
-               "to": "Sunamganj",
-               "paragraph": [
-                    "Lucky Express Ltd. is a growing-up bus company. The service of this bus company is way better in Dhaka to Sunamganj route. It charges different rates for different destinations and Dhaka is the main starting point. Dhaka-Habiganj, Dhaka-Ajmiriganj, Dhaka-Jagannathpur, Dhaka-Sunamganj are the current routes available on the Jatri website. The ticket price range starts from 500 Taka only. Then what are you waiting for? Book your tickets NOW!"
-               ]
-          },
-          {
-               "_id": 15,
-               "name": "mimzal-paribahan",
-               "heading": "Mimzal Paribahan",
-               "priceStartsFrom": 500,
-               "paragraph": [
-                    "Mimzal Paribahan is giving the best service Khulna -Barisal, Khulna -Bakerganj, Khulna -Patuakhali, Khulna -Kuakata routes.  It charges different rates for different destinations and Kuakata is the main starting point. The ticket fare starts from BDT 500. Hurry up! Book your Tickets Now from Jatri Website!"
-               ]
-          },
-          {
-               "_id": 16,
-               "name": "saintmartin-deep",
-               "heading": "Saintmartin Deep",
-               "paragraph": [
-                    "Saintmartin Deep is providing a comfortable service in Dhaka-Chittagong-Cox’s Bazar route. These routes are available on the Jatri Website too. You can get the tickets easily by some clicks. The ticket fare starts from BDT 690. Get your tickets NOW! "
-               ],
-               "priceStartsFrom": 690
-          },
-          {
-               "_id": 17,
-               "name": "romar-paribahan",
-               "heading": "Romar Paribahan",
-               "paragraph": [
-                    "Romar Paribahan is a popular bus in Bangladesh. It is giving the most comfortable service in the Dhaka-Barisal-Kuakata routes. This is an AC / non-AC bus service. Travel on this bus at a low cost.",
-                    "What are you waiting for? Book your tickets NOW!"
-               ]
-          },
-          {
-               "_id": 18,
-               "name": "jamuna-line-paribahan",
-               "heading": "Jamuna Line Paribahan",
-               "paragraph": [
-                    "Want to get Dhaka-Barisal-Barguna, Dhaka-Kuakata, Dhaka -Pirojpur (MATHBARIA) route tickets? Jamuna Line Paribahan is available for giving their best service in this route. The ticket fare starts from BDT 600. You can easily get the tickets on the Jatri website!"
-               ],
-               "priceStartsFrom": 600
-          },
-          {
-               "_id": 19,
-               "name": "econo-service",
-               "heading": "Econo service",
-               "paragraph": [
-                    "Econo service is a famous bus company. It has been giving their service on the Dhaka-Lakshmipur-Noakhali route for a long time! Econo service is available for giving their best service in this route. The ticket fare starts from BDT 500. Get the tickets on the Jatri website!"
-               ],
-               "priceStartsFrom": 500
-          },
-          {
-               "_id": 20,
-               "name": "hanie-enterprise",
-               "heading": "Hanie Enterprise",
-               "paragraph": [
-                    "Hanie Enterprise is a growing-up bus company. The service of this bus company is way better. It charges different rates for different destinations and Raypyr is the main starting point. Raypur(Lakshmipur)-Naogaon, Raypur (Lakshmipur) -Naogaon, Noakhali -Naogaon, Cumilla -Naogaon Dhaka - Naogaon, Noakhali -Bogura, Cumilla -Bogura, Dhaka -Bogura, Raypur (Lakshmipur) -Dhaka, Lakshmipur -Dhaka, Noakhali-Dhaka, Cumilla -Dhaka and Naogaon-Raypur(Lakshmipur) are the current routes available on the Jatri website. The ticket price range starts from 500 Taka only. Book your tickets NOW!"
-               ],
-               "priceStartsFrom": 500
-          },
-          {
-               "_id": 21,
-               "name": "ema-paribahan",
-               "heading": "Ema Paribahan",
-               "paragraph": [
-                    "Ema Paribahan is giving its exclusive service on Dhaka-Khulna-Bagerhat (Rayenda) routes. Ema Paribahan is available for giving their best service in these routes. You can get the tickets at a low price. Get the tickets on the Jatri website!"
-               ]
-          },
-          {
-               "_id": 22,
-               "name": "shibchar-star-deluxe",
-               "heading": "Shibchar Star Deluxe",
-               "paragraph": [
-                    "Shibchar Star Deluxe is a luxurious bus available in Dhaka -Narail, Dhaka - Jessore, Dhaka - Benapole, Dhaka - Narail, Dhaka - Jessore, Dhaka -Satkhira, Dhaka - Shyamnagar, Dhaka - Barishal, Dhaka - Bakerganj(Barisal), Dhaka - Patuakhali, Dhaka - Amtali (Barguna), Dhaka - Patuakhali (Kalapara), Dhaka - Kuakata routes. Dhaka is the main starting point. You can get the tickets at a reasonable price. Book your tickets Now!"
-               ]
-          },
-          {
-               "_id": 23,
-               "name": "shohagh-paribahan",
-               "heading": "Shohagh Paribahan",
-               "paragraph": [
-                    "If you are planning to travel comfortably, then Shohagh Paribahan is one of the best choices. Recently, Shohagh Paribahan is available in Dhaka-Chittagong-Cox’s Bazar, Dhaka-Barisal and Dhaka-Khulna routes through Jatri ticket Website. Dhaka is the main starting point and the ticket price range starts from 800 BDT. So, what are you waiting for? Book your bus tickets NOW from Jatri!"
-               ],
-               "priceStartsFrom": 800
-          }
-     ]
+  "routes": [
+    {
+      "_id": 1,
+      "from": "Dhaka",
+      "to": "Rangpur",
+      "heading": "Dhaka to Rangpur",
+      "paragraph": [
+        "Dhaka to Rangpur is a route spread over 316 kilometers. Currently, Jatri offers SB Paribahan & Shah Fateh Ali in this route. With an average duration of 8-9 hours journey, depending on the traffic scenario. Bus ticket price for this route ranges from BDT 750. Since more and more operators are being connected, ticket prices may vary depending on the operator.",
+        "Get the best deals and renowned bus operators all in a single place on our platform - book Dhaka to Rangpur bus tickets with Jatri!"
+      ],
+      "distance": 316,
+      "time": "8-9",
+      "priceStartsFrom": 750
+    },
+    {
+      "_id": 2,
+      "from": "Dhaka",
+      "to": "Barishal",
+      "heading": "Dhaka to Barishal",
+      "paragraph": [
+        "Dhaka to Barishal is a route spread over 246.8 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 7-8 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1000.",
+        "To book your Dhaka to Barisal bus ticket through Jatri, is just a few clicks away; as all major bus companies cooperate with us. Travel in the easiest way with Jatri."
+      ],
+      "distance": 246.8,
+      "time": "7-8",
+      "priceStartsFrom": 1000
+    },
+    {
+      "_id": 3,
+      "from": "Dhaka",
+      "to": "Kuakata",
+      "heading": "Dhaka to Kuakata",
+      "paragraph": [
+        "Dhaka to Kuakata is a route spread over 214 kilometers. Currently, Jatri offers Euro coach bus services on this route. Euro coach is the 1st ever Sleeping coach service on this route. With an average duration of 6-7 hours journey, depending on the traffic scenario. Bus ticket price for this route is BDT 1500.",
+        "The Dhaka to Kuakata bus ticket is at your door through Jatri. As all major bus companies cooperate with us, now there is no more trouble to travel with Jatri."
+      ],
+      "distance": 214,
+      "time": "6-7",
+      "priceStartsFrom": 1500
+    },
+    {
+      "_id": 4,
+      "from": "Dhaka",
+      "to": "Noagaon",
+      "heading": "Dhaka to Noagaon",
+      "paragraph": [
+        "The distance from Dhaka to Noagaon is 239.8 kilometers. Shah Fateh Ali is currently available on this route through Jatri. Depending on traffic conditions, a 6-hour trip takes on average.",
+        "The cost of a bus ticket for this route ranges from BDT 680 to BDT 1000 depending on the bus type.",
+        "Get the best deals and renowned bus operators all in our place - book Dhaka to Noagaon bus tickets with Jatri!"
+      ],
+      "distance": 239,
+      "time": "6",
+      "priceStartsFrom": 680
+    },
+    {
+      "_id": 5,
+      "from": "Dhaka",
+      "to": "Bogura",
+      "heading": "Dhaka to Bogura",
+      "paragraph": [
+        "The distance from Dhaka to Bogura is 192.2 kilometers. Shah Fateh Ali is currently available on this route through Jatri. Depending on traffic conditions, an 8-9 hour trip takes on average.",
+        "The cost of a bus ticket for this route ranges from BDT 550 to BDT 900 depending on the bus type.",
+        "Get the best deals and renowned bus operators all in our place - book Dhaka to Bogura bus tickets with Jatri!"
+      ],
+      "distance": 192.2,
+      "time": "8-9",
+      "priceStartsFrom": 550
+    },
+    {
+      "_id": 6,
+      "from": "Dhaka",
+      "to": "Sunamganj",
+      "heading": "Dhaka to Sunamganj",
+      "paragraph": [
+        "Dhaka to Sunamganj is a route spread over 346 kilometers. Lucky Express Ltd is currently available on this route through Jatri. Depending on traffic conditions a 9-10 hour travel takes on average.",
+        "The cost of a bus ticket for this route ranges from BDT650 depending on the bus type.",
+        "Get the best deals and renowned bus operators all in our place - book Dhaka to Sunamganj bus tickets with Jatri!"
+      ],
+      "distance": 346,
+      "time": "9-10",
+      "priceStartsFrom": 650
+    },
+    {
+      "_id": 7,
+      "from": "Dhaka",
+      "to": "Siliguri",
+      "heading": "Dhaka to Siliguri",
+      "paragraph": [
+        "Dhaka to Siliguri is a route spread over 389 kilometers. Pingky Paribahan is currently available on this route through Jatri. Depending on traffic conditions an 11-12 hour takes on average.",
+        "The cost of a bus ticket for this route ranges from BDT 2100 depending on the bus type.",
+        "Get the best deals and renowned bus operators all in our place - book Dhaka to Siliguri bus tickets with Jatri! "
+      ],
+      "distance": 346,
+      "time": "9-10",
+      "priceStartsFrom": 650
+    }
+  ],
+  "operartors": [
+    {
+      "_id": 1,
+      "name": "pingky-paribahan",
+      "heading": "Pingky Paribahan",
+      "paragraph": [
+        "Are you looking forward to traveling to Siliguri on a budget? Pingky Paribahan is the best choice for you. For the first time, Pingky Paribahan offers direct service from Dhaka to Siliguri. Dhaka-Rangpur, Dhaka-Lalmonirhat, Dhaka-Burimari, Dhaka-Siliguri, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Chilmari are the current routes available on the Jatri website. The ticket price range begins at 850 Taka. Book your journey at a pocket friendly price."
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 850
+    },
+    {
+      "_id": 2,
+      "name": "shah-fateh-ali",
+      "heading": "Shah Fateh Ali",
+      "paragraph": [
+        "Shah Fateh Ali Paribahan buses run between Dhaka to Naogaon, Bogura, Palashbari, and Rangpur. The cost of traveling on this transport provided by the assurance of quality bus service will begin at BDT 550."
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 550
+    },
+    {
+      "_id": 3,
+      "name": "euro-coach",
+      "heading": "Euro Coach",
+      "paragraph": [
+        "Euro Coach connects Dhaka with the Southern region of Barisal through the Padma Bridge and its final destination Kuakata (also known as the daughter of the sea). Euro Coach service has come up with the most modern and advanced luxury slipper service in the country. Euro coach is the first and only luxury slipper service on the Dhaka-Barisal-Kuakata route. Ticket rent range starts from 1,000 Taka. Present available routes are Dhaka-Barisal-Patuakhali-Kuakata,  Barisal-Dhaka & Kuakata-Dhaka. What are you waiting for? Book your ticket now! "
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 1000
+    },
+    {
+      "_id": 4,
+      "name": "sb-paribahan",
+      "heading": "SB Paribahan",
+      "paragraph": [
+        "SB Paribahan is an up-and-coming bus company. SB Paribahan charges different rates for different destinations. Dhaka is the main starting point. The ticket price range begins at 750 Taka. Dhaka-Rangpur, Dhaka-Kurigram, Dhaka-Bhurungamari, and Dhaka-Dinajpur are the current routes available on the Jatri website. Book your ticket and travel in comfort. "
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 750
+    },
+    {
+      "_id": 5,
+      "name": "greenline",
+      "heading": "Greenline Paribahan",
+      "paragraph": [
+        "Greenline Paribahan has been providing the most valuable bus service in Bangladesh since 1999. It provides service to all routes in Bangladesh. Dhaka to Chittagong, Dhaka to Cox's Bazar, Dhaka to Khagrachari, Dhaka to Rangamati, and Dhaka to Sylhet are the current routes available on the Jatri website. Ticket prices begin at 1,600 Taka. Book your ticket from Jatri for your hassle free move. "
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 1600
+    },
+    {
+      "_id": 6,
+      "name": "saintmartin-bd-express",
+      "heading": "Saintmartin BD Express",
+      "paragraph": [
+        "Saintmartin BD Express has been operating in Bangladesh for a long time. They provide both AC and non-AC buses. The current routes available on the Jatri website are Dhaka to Chittagong and Dhaka to Cox's Bazar.Visit now and book your tickets!"
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 0
+    },
+    {
+      "_id": 7,
+      "name": "habib-paribahan",
+      "heading": "Habib Paribahan",
+      "paragraph": [
+        "Habib Paribahan is well-known for their service and providing tickets at a budget friendly price. Dhaka-Sirajganj-Gobindaganj-Palashbari-Rangpur-Teesta-Lalmonirhat-Hatibandha-Patgram-Burimari are the current routes available on the Jatri website.The ticket price range begins at 700 Taka. Purchase your ticket right away!"
+      ],
+      "distance": 0,
+      "time": 0,
+      "priceStartsFrom": 700
+    },
+    {
+      "_id": 8,
+      "name": "khulna-express",
+      "heading": "Khulna Express",
+      "paragraph": [
+        "Benapole to Kuakata is a route spread over 304.4 kilometres. Khulna Express is currently available on this route through Jatri. Depending on traffic conditions a 7-8 hour trip takes on average.Get the best deals and renowned bus operators all in our place - book Benapole to Kuakata bus tickets with Jatri! "
+      ],
+      "distance": 304.4,
+      "time": "7-8"
+    },
+    {
+      "_id": 9,
+      "name": "meghna-travels",
+      "heading": "Meghna Travels",
+      "paragraph": [
+        "Dhaka-Barisal-Kuakata-Patuakhali-Barguna-patharghata-Bakergonj-Subidkhali-Jhalokathi-Swarupkathi are the routes available in Jatri platform. Do not miss the chance to get the best bus service from Jatri! Go and book your tickets NOW!"
+      ]
+    },
+    {
+      "_id": 10,
+      "name": "jeddah-express",
+      "heading": "Jeddah Express",
+      "paragraph": [
+        "We bring the best options for your journey at Dhaka- Chattagram-cox's bazar routes. Jeddah Express is here to serve you via the Jatri platform. What are you waiting for? Book your tickets and travel with the best bus."
+      ]
+    },
+    {
+      "_id": 11,
+      "name": "tr-travels-classic",
+      "heading": "TR Travels Classic",
+      "paragraph": [
+        "Need more options for travel in Dhaka- Barisal- Kuakata, Khulna- Jessore- Benapole routes? TR Travels Classic is here to serve you the best service to travel with safety. Go and book your tickets from Jatri website!"
+      ]
+    },
+    {
+      "_id": 12,
+      "name": "new-dhaka-express",
+      "heading": "New Dhaka Express",
+      "paragraph": [
+        "Dhaka-Rangpur-Lalmonirhat-Patgram-Burimari-Changrabandha-Saidpur-Nilphamari-Hajigonj-Deviganj-Domar-Birgonj routes are available in New Dhaka Express at Jatri website. Do not hesitate to grab your tickets from Jatri website!"
+      ]
+    },
+    {
+      "_id": 13,
+      "name": "london-express",
+      "heading": "London Express",
+      "paragraph": [
+        "London Express Limited started operation from 2017 with ambition to build an international standard transport network in Bangladesh.They have started domestic and international services with providing the latest model of world class fully Air-conditioned MAN brand of Germany and also are keeping sharp focus to add the latest vehicle on time to time. Dhaka to Sylhet, Dhaka to Chattagram to Cox's Bazar, Dhaka to Benapole to Kolkata current routes available on the Jatri website. Ticket fare starts from 1,200 Taka.",
+        "Book your ticket from Jatri for your hassle free move!"
+      ],
+      "priceStartsFrom": 1200
+    },
+    {
+      "_id": 14,
+      "name": "lucky-express",
+      "heading": "Lucky Express",
+      "paragraph": [
+        "Lucky Express Ltd. is a growing-up bus company. The service of this bus company is way better in Dhaka to Sunamganj route. It charges different rates for different destinations and Dhaka is the main starting point. Dhaka-Habiganj, Dhaka-Ajmiriganj, Dhaka-Jagannathpur, Dhaka-Sunamganj are the current routes available on the Jatri website. The ticket price range starts from 500 Taka only. Then what are you waiting for? Book your tickets NOW!"
+      ]
+    },
+    {
+      "_id": 15,
+      "name": "mimzal-paribahan",
+      "heading": "Mimzal Paribahan",
+      "paragraph": [
+        "Mimzal Paribahan is giving the best service Khulna -Barisal, Khulna -Bakerganj, Khulna -Patuakhali, Khulna -Kuakata routes.  It charges different rates for different destinations and Kuakata is the main starting point. The ticket fare starts from BDT 500. Hurry up! Book your Tickets Now from Jatri Website!"
+      ]
+    },
+    {
+      "_id": 16,
+      "name": "saintmartin-deep",
+      "heading": "Saintmartin Deep",
+      "paragraph": [
+        "Saintmartin Deep is providing a comfortable service in Dhaka-Chittagong-Cox’s Bazar route. These routes are available on the Jatri Website too. You can get the tickets easily by some clicks. The ticket fare starts from BDT 690. Get your tickets NOW! "
+      ],
+      "priceStartsFrom": 690
+    },
+    {
+      "_id": 17,
+      "name": "romar-paribahan",
+      "heading": "Romar Paribahan",
+      "paragraph": [
+        "Romar Paribahan is a popular bus in Bangladesh. It is giving the most comfortable service in the Dhaka-Barisal-Kuakata routes. This is an AC / non-AC bus service. Travel on this bus at a low cost.",
+        "What are you waiting for? Book your tickets NOW!"
+      ]
+    },
+    {
+      "_id": 18,
+      "name": "jamuna-line-paribahan",
+      "heading": "Jamuna Line Paribahan",
+      "paragraph": [
+        "Want to get Dhaka-Barisal-Barguna, Dhaka-Kuakata, Dhaka -Pirojpur (MATHBARIA) route tickets? Jamuna Line Paribahan is available for giving their best service in this route. The ticket fare starts from BDT 600. You can easily get the tickets on the Jatri website!"
+      ],
+      "priceStartsFrom": 600
+    },
+    {
+      "_id": 19,
+      "name": "econo-service",
+      "heading": "Econo service",
+      "paragraph": [
+        "Econo service is a famous bus company. It has been giving their service on the Dhaka-Lakshmipur-Noakhali route for a long time! Econo service is available for giving their best service in this route. The ticket fare starts from BDT 500. Get the tickets on the Jatri website!"
+      ],
+      "priceStartsFrom": 500
+    },
+    {
+      "_id": 20,
+      "name": "hanie-enterprise",
+      "heading": "Hanie Enterprise",
+      "paragraph": [
+        "Hanie Enterprise is a growing-up bus company. The service of this bus company is way better. It charges different rates for different destinations and Raypyr is the main starting point. Raypur(Lakshmipur)-Naogaon, Raypur (Lakshmipur) -Naogaon, Noakhali -Naogaon, Cumilla -Naogaon Dhaka - Naogaon, Noakhali -Bogura, Cumilla -Bogura, Dhaka -Bogura, Raypur (Lakshmipur) -Dhaka, Lakshmipur -Dhaka, Noakhali-Dhaka, Cumilla -Dhaka and Naogaon-Raypur(Lakshmipur) are the current routes available on the Jatri website. The ticket price range starts from 500 Taka only. Book your tickets NOW!"
+      ],
+      "priceStartsFrom": 500
+    },
+    {
+      "_id": 21,
+      "name": "ema-paribahan",
+      "heading": "Ema Paribahan",
+      "paragraph": [
+        "Ema Paribahan is giving its exclusive service on Dhaka-Khulna-Bagerhat (Rayenda) routes. Ema Paribahan is available for giving their best service in these routes. You can get the tickets at a low price. Get the tickets on the Jatri website!"
+      ]
+    },
+    {
+      "_id": 22,
+      "name": "shibchar-star-deluxe",
+      "heading": "Shibchar Star Deluxe",
+      "paragraph": [
+        "Shibchar Star Deluxe is a luxurious bus available in Dhaka -Narail, Dhaka - Jessore, Dhaka - Benapole, Dhaka - Narail, Dhaka - Jessore, Dhaka -Satkhira, Dhaka - Shyamnagar, Dhaka - Barishal, Dhaka - Bakerganj(Barisal), Dhaka - Patuakhali, Dhaka - Amtali (Barguna), Dhaka - Patuakhali (Kalapara), Dhaka - Kuakata routes. Dhaka is the main starting point. You can get the tickets at a reasonable price. Book your tickets Now!"
+      ]
+    }
+  ]
 }
