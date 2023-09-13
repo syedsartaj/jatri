@@ -451,7 +451,7 @@
                 <div
                   class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
                 >
-                  +88
+                  +880
                 </div>
                 <img
                   class="w-[2px] h-[28px] ml-[4px]"
@@ -467,6 +467,9 @@
                 required=""
                 placeholder="Enter your phone"
                 v-model="passengerPhone"
+                @input="handleInput"
+                @paste="handlePaste"
+                @wheel="$event.target.blur()"
               />
             </div>
           </div>
@@ -496,7 +499,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length != 11
+              String(`0${this.passengerPhone}`).length != 11
                 ? 'bg-gray-500 user cursor-not-allowed'
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
@@ -509,7 +512,7 @@
               !boardingPoint ||
               !passengerName ||
               !passengerPhone ||
-              String(passengerPhone).length != 11
+              String(`0${this.passengerPhone}`).length != 11
             "
             :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
@@ -673,6 +676,23 @@ export default {
       "getPromoCodeAction",
       "seatLockAction",
     ]),
+    handleInput() {
+      if (this.passengerPhone.length === 1 && this.passengerPhone[0] === "0") {
+        this.passengerPhone = "";
+      }
+      if (this.passengerPhone.length > 10) {
+        this.passengerPhone = this.passengerPhone.slice(0, 10);
+      }
+    },
+    handlePaste(event) {
+      event.preventDefault();
+      // Get the pasted text
+      const pastedText = event.clipboardData.getData("text/plain");
+      // Remove any leading zeros
+      const cleanedText = pastedText.replace(/^0+/, "");
+      const truncatedText = cleanedText.slice(0, 10);
+      this.passengerPhone = truncatedText;
+    },
     getTripMeta(trip) {
       const { coach } = trip;
       const coachType = coach?.type?.toUpperCase() || "";
@@ -1037,7 +1057,7 @@ export default {
           boardingDateTime: this.boardingPoint.scheduleTime,
           reportingDateTime: this.boardingPoint.reportingTime,
           passengerName: this.passengerName,
-          passengerMobile: this.passengerPhone,
+          passengerMobile: `0${this.passengerPhone}`,
           passengerEmail: this.passengerEmail,
           passengerAddress: "dhaka",
           passengerGender: "male",
