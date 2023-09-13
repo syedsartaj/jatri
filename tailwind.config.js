@@ -17,7 +17,7 @@ module.exports = {
         bgShade3: '#F4F8FB',
         successLight: '#F1F9F1',
         blackPrimary: '#151414',
-        blackSecondery:'#676769',
+        blackSecondary:'#676769',
         blackLight: '#4D4D4F',
       },
       fontFamily: {

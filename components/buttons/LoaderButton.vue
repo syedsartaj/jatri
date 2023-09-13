@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
+    class="bg-corporate rounded-full py-[13px] w-full text-white text-base font-medium"
     :type="type"
     @click="handleClick"
   >
@@ -27,15 +27,16 @@
 
 <script>
 export default {
+  name: "LoaderButton",
   props: {
     loading: {
       type: Boolean,
       default: false,
     },
-		type:{
-			type: String,
-			default: "button"
-		}
+    type: {
+      type: String,
+      default: "button",
+    },
   },
   methods: {
     handleClick() {

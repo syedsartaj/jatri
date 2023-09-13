@@ -7,7 +7,7 @@
       :behavior="behavior"
       class="font-medium text-base md:text-xl text-[#FFFFFF] font-inter"
     >
-      {{ headline }}
+      <div v-html="headline"></div>
     </marquee>
   </div>
 </template>
