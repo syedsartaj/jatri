@@ -125,7 +125,7 @@
                                   <div
                                     class="text-s font-Inter font-medium tracking-wide text-[#151414]"
                                   >
-                                    +88
+                                    +880
                                   </div>
                                 </div>
                                 <input
@@ -137,7 +137,8 @@
                                   required=""
                                   placeholder=""
                                   v-model="passengerMobile"
-                                  @input="limitInputLength"
+                                  @input="handleInput"
+                                  @paste="handlePaste"
                                   @wheel="$event.target.blur()"
                                 />
                               </div>
@@ -388,7 +389,7 @@ export default {
       );
     },
     isValidPassengerNumber() {
-      return isValidPhoneNumber(this.passengerMobile);
+      return isValidPhoneNumber(`0${this.passengerMobile}`);
     },
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
@@ -436,8 +437,8 @@ export default {
       this.passengerName = bookingData?.passenger?.name || "";
       this.passengerEmail = bookingData?.passenger?.email || "";
       this.passengerMobile =
-        bookingData?.passenger?.phone ||
-        bookingData?.invoice?.promo?.phone ||
+        bookingData?.passenger?.phone?.replace(/^0+/, "") ||
+        bookingData?.invoice?.promo?.phone?.replace(/^0+/, "") ||
         "";
     } else {
       this.paymentValidateTime = 0;
@@ -460,10 +461,25 @@ export default {
     handlePromoApplied() {
       this.isPromoApplied = true;
     },
-    limitInputLength() {
-      if (this.passengerMobile.length > 11) {
-        this.passengerMobile = this.passengerMobile.slice(0, 11); // Truncate input to max length
+    handleInput() {
+      if (
+        this.passengerMobile.length === 1 &&
+        this.passengerMobile[0] === "0"
+      ) {
+        this.passengerMobile = "";
       }
+      if (this.passengerMobile.length > 10) {
+        this.passengerMobile = this.passengerMobile.slice(0, 10);
+      }
+    },
+    handlePaste(event) {
+      event.preventDefault();
+      // Get the pasted text
+      const pastedText = event.clipboardData.getData("text/plain");
+      // Remove any leading zeros
+      const cleanedText = pastedText.replace(/^0+/, "");
+      const truncatedText = cleanedText.slice(0, 10);
+      this.passengerMobile = truncatedText;
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
@@ -488,7 +504,7 @@ export default {
       if (
         !boardingPoint ||
         passengerName.length < 3 ||
-        !isValidPhoneNumber(passengerMobile) ||
+        !isValidPhoneNumber(`0${passengerMobile}`) ||
         !getLaunchBookingData
       ) {
         this.errorOccurred = true;
@@ -499,7 +515,7 @@ export default {
             boardingPoint,
             droppingPoint,
             passengerName,
-            passengerMobile,
+            passengerMobile: `0${passengerMobile}`,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
             gatewayType,

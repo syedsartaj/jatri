@@ -142,7 +142,7 @@
                       <div
                         class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
                       >
-                        +88
+                        +880
                       </div>
                       <img
                         class="w-[2px] h-[28px] ml-[4px]"
@@ -156,7 +156,8 @@
                       required=""
                       placeholder="Enter Mobile Number"
                       v-model="phone"
-                      @input="limitInputLength"
+                      @input="handleInput"
+                      @paste="handlePaste"
                       @wheel="$event.target.blur()"
                     />
                   </div>
@@ -287,11 +288,24 @@ export default {
           : boardingTime < currentTime;
       });
     },
-    limitInputLength() {
-      if (this.phone.length > 11) {
-        this.phone = this.phone.slice(0, 11); // Truncate input to max length
+    handleInput() {
+      if (this.phone.length === 1 && this.phone[0] === "0") {
+        this.phone = "";
+      }
+      if (this.phone.length > 10) {
+        this.phone = this.phone.slice(0, 10);
       }
     },
+    handlePaste(event) {
+      event.preventDefault();
+      // Get the pasted text
+      const pastedText = event.clipboardData.getData("text/plain");
+      // Remove any leading zeros
+      const cleanedText = pastedText.replace(/^0+/, "");
+      const truncatedText = cleanedText.slice(0, 10);
+      this.phone = truncatedText;
+    },
+
     getServiceClassName(service) {
       return {
         "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,
@@ -308,7 +322,7 @@ export default {
         e.preventDefault();
         const formData = {};
         if (this.selectedTab === 0) {
-          formData.phone = this.phone;
+          formData.phone = `0${this.phone}`;
           formData.pnr = "";
           formData.transactionId = "";
         } else if (this.selectedTab === 1) {
