@@ -173,10 +173,6 @@ export default {
 
       this.$gtm.push(eventData);
     },
-
-    // findTrips(){
-    //     window.location.href = '/trip'
-    // }
   },
   watch: {
     "$route.query": {
