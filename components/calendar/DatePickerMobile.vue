@@ -1,16 +1,41 @@
 <template>
   <div class="">
-    <button :class="optionsIsOpen && 'border border-[#4D4D4F]'" class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[17.67px] py-[13px] mb-[14px]" @click="toggleDropdown">
-      <div class="flex justify-start gap-x-[17.67px] items-center w-10/12">
-        <img v-if="icon" :src='icon' alt="">
-        <p v-if="label && dateUpdate === ''" class="text-xs font-normal text-blackSecondery text-left"> {{label}} </p>
-        <p v-if="dateUpdate !== ''" class="text-xs font-normal text-blackSecondery text-left"> {{ new Date(dateUpdate).toLocaleString("es-CL", { dateStyle: "medium", }) }} </p>
+    <button
+      :class="optionsIsOpen && 'border border-[#4D4D4F]'"
+      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[16px] py-[11px]"
+      @click="toggleDropdown"
+    >
+      <div class="flex justify-start gap-x-4 items-center w-10/12">
+        <img v-if="icon" :src="icon" alt="" />
+        <p
+          v-if="label && dateUpdate === ''"
+          class="text-xs font-normal text-blackSecondary text-left"
+        >
+          {{ label }}
+        </p>
+        <p
+          v-if="dateUpdate !== ''"
+          class="text-xs font-normal text-blackSecondary text-left"
+        >
+          {{
+            new Date(dateUpdate).toLocaleString("es-CL", {
+              dateStyle: "medium",
+            })
+          }}
+        </p>
       </div>
-      <img src="@/assets/images/icons/mobileFilterDropdownIcon.svg" alt="" :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180': ''">
+      <img
+        src="@/assets/images/icons/mobileFilterDropdownIcon.svg"
+        alt=""
+        :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
+      />
     </button>
 
     <!-- dropdown -->
-    <div v-if='optionsIsOpen' class='mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2 left-1/2 transform -translate-x-1/2'>
+    <div
+      v-if="optionsIsOpen"
+      class="mt-2 max-w-[348px] bg-white rounded shadow-xl z-[1000] leading-6 absolute divide-y-2 left-1/2 transform -translate-x-1/2"
+    >
       <v-date-picker
         class="inline-block h-full border-none"
         mode="date"
@@ -27,16 +52,16 @@
 
 <script>
 import { dateFormat } from "../../helpers/dateTimeFormat";
-import moment from 'moment';
+import moment from "moment";
 export default {
   name: "DatePicker",
   model: {
-    prop: 'dateUpdate',
-    event: 'update:dateUpdate',
+    prop: "dateUpdate",
+    event: "update:dateUpdate",
   },
   props: {
     dateUpdate: {
-      require: true
+      require: true,
     },
     icon: {
       type: String,
@@ -45,7 +70,7 @@ export default {
     width: {
       type: String,
       required: false,
-      default: 'lg:w-1/5 w-full'
+      default: "lg:w-1/5 w-full",
     },
     customDesign: {
       type: String,
@@ -70,7 +95,7 @@ export default {
   data() {
     return {
       optionsIsOpen: false,
-      date: '',
+      date: "",
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD",
@@ -81,7 +106,7 @@ export default {
     };
   },
   mounted() {
-    if(this.defaultValue) {
+    if (this.defaultValue) {
       this.date = this.defaultValue;
     }
     window.addEventListener("click", this.close);
@@ -103,10 +128,12 @@ export default {
   },
   computed: {
     maxDateAllow() {
-      if(this.maxAllowDate) {
-        return moment(new Date()).add(this.maxAllowDate, 'd').format('YYYY-MM-DD HH:mm:ss')
+      if (this.maxAllowDate) {
+        return moment(new Date())
+          .add(this.maxAllowDate, "d")
+          .format("YYYY-MM-DD HH:mm:ss");
       }
-    }
+    },
   },
   watch: {
     dateUpdate() {

@@ -108,7 +108,11 @@
                 {{ ticketDetails.companyName }}
               </p>
               <p style="color: black; font-size: 12px; font-weight: 500">
-                {{ ticketDetails.coach }}
+                {{
+                  serviceType === "BUS"
+                    ? ticketDetails.coach
+                    : ticketDetails.ship
+                }}
               </p>
             </div>
             <img
@@ -459,7 +463,13 @@
                   "
                 >
                   Please check the Terms and Conditions from <br />
-                  <span style="font-weight: 600">https://cutt.ly/RF2DHfY</span>
+                  <a
+                    style="font-weight: 600"
+                    href="https://cutt.ly/XwkEW0iU"
+                    target="_blank"
+                    rel="noopener"
+                    >https://cutt.ly/XwkEW0iU</a
+                  >
                 </p>
               </div>
 
@@ -476,7 +486,13 @@
                   "
                 >
                   Please check the Cancellation Policy from <br />
-                  <span style="font-weight: 600"> https://cutt.ly/KF2DPJH</span>
+                  <a
+                    style="font-weight: 600"
+                    href="https://cutt.ly/XwkEW0iU"
+                    target="_blank"
+                    rel="noopener"
+                    >https://cutt.ly/XwkEW0iU</a
+                  >
                 </p>
               </div>
             </div>
@@ -940,9 +956,10 @@ export default {
     "phone",
     "downloadTicketStatus",
     "ticketFareString",
+    "serviceType",
   ],
   computed: {
-    ...mapGetters("guarantedseat", ["getSearchedTicketList"]),
+    ...mapGetters("common", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
       return (
         this.ticketDetails &&

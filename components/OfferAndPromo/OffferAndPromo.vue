@@ -140,7 +140,7 @@ export default {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   computed: {
-    ...mapGetters("guarantedseat", ["getOfferImages"]),
+    ...mapGetters("common", ["getOfferImages"]),
   },
   methods: {
     scrollLeft() {
@@ -156,7 +156,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .scroll-parent {
