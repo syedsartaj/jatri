@@ -478,7 +478,7 @@ export default {
         date: this.$route.query.date,
       };
       Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
     previousDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -504,7 +504,7 @@ export default {
         date: previousDate.valueOf(),
       };
       Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
     nextDateFilter() {
       const convertedDate = new Date(+this.$route.query.date).toLocaleString(
@@ -519,7 +519,7 @@ export default {
         date: nextDate.valueOf(),
       };
       Cookies.remove("process-allow");
-      this.$router.push({ path: "/trip", query });
+      this.$router.push({ path: "/bus/trip", query });
     },
   },
 };
