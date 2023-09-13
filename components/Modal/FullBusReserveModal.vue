@@ -423,10 +423,6 @@ export default {
         this.fullBusReservationAction(payload);
       } else {
         this.errorOccured = true;
-        this.$toast.error("Fillup all the required field", {
-          position: "bottom-right",
-          duration: 5000,
-        });
       }
     },
   },
