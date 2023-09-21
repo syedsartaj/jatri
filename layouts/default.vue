@@ -5,12 +5,12 @@
     <RequestSuccessfulModal v-if="getRequestSuccessfulStatus" />
     <SurpriseDealShowingModal v-if="getSurpriseDealModalStatus" />
     <CancelTicketOTPModal v-if="getIsTicketPopupOpen" />
-    <div class="bg-corporateBg flex flex-col justify-start items-start h-full">
-      <Header />
+    <div class="bg-corporateBg flex flex-col h-full w-full">
+      <GlobalHeader />
       <div class="w-full">
         <Nuxt />
       </div>
-      <Footer />
+      <GlobalFooter />
     </div>
   </div>
 </template>
