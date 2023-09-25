@@ -165,7 +165,7 @@
           </div>
           <div
             v-if="
-              getBookingInfoDetails?.invoice?.offer?.amount ||
+              getBookingInfoDetails?.invoice?.offer?.totalAmount ||
               getBookingInfoDetails?.invoice?.promo?.amount
             "
             class="flex justify-between py-2"
@@ -174,7 +174,7 @@
               class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
               {{
-                getBookingInfoDetails?.invoice?.offer?.amount
+                getBookingInfoDetails?.invoice?.offer?.totalAmount
                   ? "Offer"
                   : "Promo"
               }}
@@ -185,7 +185,7 @@
               <p class="text-xs font-medium text-[#F04935]">
                 {{
                   `-${
-                    getBookingInfoDetails?.invoice?.offer?.amount ||
+                    getBookingInfoDetails?.invoice?.offer?.totalAmount ||
                     getBookingInfoDetails?.invoice?.promo?.amount
                   }`
                 }}
@@ -227,7 +227,7 @@
 
       <div
         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
-        v-if="!getBookingInfoDetails?.invoice?.offer?.amount"
+        v-if="!getBookingInfoDetails?.invoice?.offer?.totalAmount"
       >
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
