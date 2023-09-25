@@ -184,7 +184,7 @@
             >
               <p class="text-xs font-medium text-[#F04935]">
                 {{
-                  `-${
+                  `- BDT ${
                     getBookingInfoDetails?.invoice?.offer?.totalAmount ||
                     getBookingInfoDetails?.invoice?.promo?.amount
                   }`
