@@ -210,7 +210,7 @@
                 class="mr-[4px]"
               />
               <p class="text-xs font-medium text-[#FFF]">
-                You save
+                You save BDT
                 <span class="text-sm">{{
                   getBookingInfoDetails.invoice.discount
                 }}</span>
