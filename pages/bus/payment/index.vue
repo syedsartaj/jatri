@@ -164,19 +164,31 @@
             </p>
           </div>
           <div
-            v-if="getBookingInfoDetails?.invoice?.promo?.amount"
+            v-if="
+              getBookingInfoDetails?.invoice?.offer?.amount ||
+              getBookingInfoDetails?.invoice?.promo?.amount
+            "
             class="flex justify-between py-2"
           >
             <p
               class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
             >
-              Promo
+              {{
+                getBookingInfoDetails?.invoice?.offer?.amount
+                  ? "Offer"
+                  : "Promo"
+              }}
             </p>
             <div
               class="border border-[#F04935] h-6 px-2 rounded-full flex items-center"
             >
               <p class="text-xs font-medium text-[#F04935]">
-                {{ `-${getBookingInfoDetails.invoice.promo.amount}` }}
+                {{
+                  `-${
+                    getBookingInfoDetails?.invoice?.offer?.amount ||
+                    getBookingInfoDetails?.invoice?.promo?.amount
+                  }`
+                }}
               </p>
             </div>
           </div>
@@ -213,7 +225,10 @@
         </div>
       </div>
 
-      <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
+      <div
+        class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
+        v-if="!getBookingInfoDetails?.invoice?.offer?.amount"
+      >
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
         >
