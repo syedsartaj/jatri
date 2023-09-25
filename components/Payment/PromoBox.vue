@@ -2,10 +2,10 @@
   <div
     :class="promo?.code === activePromo?.code && 'bg-[#F1F9F1]'"
     class="flex flex-col w-[260px] h-[124px] bg-[#F7F7F7] rounded-lg p-4"
-    @click="handlePromoBox()"
   >
     <div class="w-full flex flex-row items-center gap-x-2">
       <img
+        @click="handlePromoBox()"
         v-if="promo?.code !== activePromo?.code"
         src="@/assets/images/icons/unCheckCircle.svg"
         alt=""
