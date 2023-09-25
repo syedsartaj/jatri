@@ -273,13 +273,12 @@ export const actions = {
   async applyPromoCodeAction({ dispatch, commit }, payload) {
     try {
       commit("setLoading", true);
-      await this.$api.post(
+      const { data } = await this.$api.post(
         apis.SERVICE_TYPE.BUS.POST_APPLY_PROMO_CODE_URL,
         payload
       );
 
-      dispatch("getBookingInfoByTnxId", { transactionId: payload.tnxId });
-      commit("handleSurpriseDealModal", null);
+      commit("updateBookingInfoForApplyPromo", data.data);
 
       this.$toast.success("Promo code applied successfully", {
         position: "bottom-right",
@@ -296,6 +295,58 @@ export const actions = {
       });
       return false;
     }
+  },
+  async updateGatewayAction({ dispatch, commit }, payload) {
+    commit("setLoading", true);
+
+    return new Promise((resolve, reject) => {
+      this.$api
+        .$post(apis.SERVICE_TYPE.BUS.POST_UPDATE_GATEWAY_URL, payload)
+        .then((res) => {
+          commit("updateBookingInfoForUpdateGateway", data.data);
+          commit("setLoading", false);
+          resolve(res);
+        })
+        .catch((error) => {
+          commit("setLoading", false);
+
+          this.$toast.error(
+            error.response?.data?.message || "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+
+          reject(error);
+        });
+    });
+  },
+  async removePromoCodeAction({ commit }, payload) {
+    commit("setLoading", true);
+
+    return new Promise((resolve, reject) => {
+      this.$api
+        .$post(apis.SERVICE_TYPE.BUS.POST_REMOVE_PROMO_CODE_URL, payload)
+        .then((res) => {
+          commit("updateBookingInfoForRemovePromo", res.data);
+          commit("setLoading", false);
+          resolve(res);
+        })
+        .catch((error) => {
+          commit("setLoading", false);
+
+          this.$toast.error(
+            error.response?.data?.message || "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+
+          reject(error);
+        });
+    });
   },
   async getSurpriseDealAction({ commit }, payload) {
     try {
@@ -391,5 +442,33 @@ export const mutations = {
   handleSurpriseDealModal: (state, data) => {
     handleScrollBehaviour(!data);
     state.showSurpriseDealModal = data;
+  },
+  updateBookingInfoForApplyPromo: (state, data) => {
+    state.bookingInfoDetails = {
+      ...state.bookingInfoDetails,
+      amount: data.amount,
+      invoice: {
+        ...state.bookingInfoDetails.invoice,
+        discount: data.invoice.discount,
+        promo: data.invoice.promo,
+      },
+    };
+  },
+  updateBookingInfoForRemovePromo: (state, data) => {
+    state.bookingInfoDetails = {
+      ...state.bookingInfoDetails,
+      amount: data.amount,
+      invoice: {
+        ...state.bookingInfoDetails.invoice,
+        discount: data.invoice.discount,
+        promo: null,
+      },
+    };
+  },
+  updateBookingInfoForUpdateGateway: (state, data) => {
+    state.bookingInfoDetails = {
+      ...state.bookingInfoDetails,
+      ...data,
+    };
   },
 };
