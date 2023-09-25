@@ -303,7 +303,7 @@ export const actions = {
       this.$api
         .$post(apis.SERVICE_TYPE.BUS.POST_UPDATE_GATEWAY_URL, payload)
         .then((res) => {
-          commit("updateBookingInfoForUpdateGateway", data.data);
+          commit("updateBookingInfoForUpdateGateway", res.data);
           commit("setLoading", false);
           resolve(res);
         })

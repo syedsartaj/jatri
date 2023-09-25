@@ -270,16 +270,10 @@
               <p class="text-sm font-medium">Remove promo</p>
             </button>
           </div>
-          <div
-            class="px-4"
-            v-if="getBookingInfoDetails?.availablePromos?.length"
-          >
+          <div class="px-4" v-if="availablePromos?.length">
             <div class="w-full h-[1px] bg-[#EDEDED]" />
           </div>
-          <div
-            v-if="getBookingInfoDetails?.availablePromos?.length"
-            class="p-4 pr-0"
-          >
+          <div v-if="availablePromos?.length" class="p-4 pr-0">
             <p class="text-base font-medium text-blackPrimary pb-4">
               Available promo
             </p>
@@ -289,7 +283,9 @@
             >
               <div class="gap-x-5 flex flex-row">
                 <PromoBox
-                  v-for="promo in getBookingInfoDetails?.availablePromos"
+                  v-for="promo in availablePromos.filter(
+                    (item) => item?.title && item.description
+                  )"
                   :key="promo.code"
                   :promo="promo"
                   :activePromo="activePromo"
@@ -450,21 +446,22 @@ export default {
     };
   },
   watch: {
-    // async gatewayType() {
-    //   const payload = {
-    //     paymentId: this.getBookingInfoDetails._id,
-    //     gatewayType: this.gatewayType,
-    //   };
-    //   if (this.getBookingInfoDetails?.gatewayType !== this.gatewayType) {
-    //    await this.updateGatewayAction(payload);
-    //   }
-    // },
+    async gatewayType() {
+      const payload = {
+        paymentId: this.getBookingInfoDetails._id,
+        gatewayType: this.gatewayType,
+      };
+      if (this.getBookingInfoDetails?.gatewayType !== this.gatewayType) {
+        try {
+          await this.updateGatewayAction(payload);
+        } catch (err) {
+          this.gatewayType = this.getBookingInfoDetails.gatewayType;
+        }
+      }
+    },
   },
   mounted() {
-    if (
-      this.getBookingInfoDetails?.availablePromos?.length &&
-      this?.$refs?.promoSlider
-    ) {
+    if (this.availablePromos?.length && this?.$refs?.promoSlider) {
       const slider = this.$refs.promoSlider;
 
       slider.addEventListener("mousedown", (e) => {
@@ -532,6 +529,11 @@ export default {
         this.getBookingInfoDetails.invoice.boardingDateTime,
         6,
         "ddd, DD MMM YYYY"
+      );
+    },
+    availablePromos() {
+      return this.getBookingInfoDetails.availablePromos.filter(
+        (promo) => promo.title && promo.description && promo.code
       );
     },
     boardingTime() {
