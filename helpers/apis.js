@@ -44,6 +44,8 @@ export const SERVICE_TYPE = {
     GET_BOOKING_INFO_BY_TRANSACTION: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-booking-info-by-txn-id`,
     POST_CONFIRM_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/confirm-ticket`,
     POST_APPLY_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/apply-promo-code`,
+    POST_REMOVE_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/remove-promo-code`,
+    POST_UPDATE_GATEWAY_URL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/update-gateway`,
     POST_GET_SURPRISE_DEAL: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-surprise-deal`,
     POST_SEARCH_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/search-ticket`,
     POST_SEND_OTP_BY_TICKET_ID: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp`,
