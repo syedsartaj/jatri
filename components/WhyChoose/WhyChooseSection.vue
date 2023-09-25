@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-bgShade3 py-[40px] lg:py-[60px] px-8 md:px-12 lg:px-[100px] mt-10 md:mt-[48px] lg:mt-[100px]">
+  <div class="mt-[40px] md:mt-[48px] lg:mt-[100px] px-4 lg:px-[100px]">
     <div>
       <div class="">
         <h2

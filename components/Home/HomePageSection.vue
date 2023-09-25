@@ -25,13 +25,13 @@
 
     <HomePageOfferAndPromo />
 
+    <WhyChooseSection />
+
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />
 
     <div v-if="howToBuyModalStatus">
       <HowToBuyModal :close="handleHowToBuyModal" />
     </div>
-
-    <WhyChooseSection />
 
     <OperatorSection />
 
