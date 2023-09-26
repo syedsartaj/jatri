@@ -356,7 +356,7 @@ export default {
   name: "BookingDetails",
   data() {
     return {
-      gatewayType: "bkash",
+      gatewayType: "",
       paymentAllowStatus: true,
       paymentValidateTime: 0,
       promoCode: "",
@@ -396,6 +396,19 @@ export default {
     },
   },
   watch: {
+    async gatewayType() {
+      const payload = {
+        paymentId: this.getLaunchBookingData._id,
+        gatewayType: this.gatewayType,
+      };
+      if (this.getLaunchBookingData?.gatewayType !== this.gatewayType) {
+        try {
+          await this.updateGatewayAction(payload);
+        } catch (err) {
+          this.gatewayType = this.getLaunchBookingData.gatewayType;
+        }
+      }
+    },
     getSeatViewData: {
       immediate: true,
       handler() {
@@ -440,6 +453,7 @@ export default {
         bookingData?.passenger?.phone?.replace(/^0+/, "") ||
         bookingData?.invoice?.promo?.phone?.replace(/^0+/, "") ||
         "";
+      this.gatewayType = this.getLaunchBookingData?.gatewayType || "";
     } else {
       this.paymentValidateTime = 0;
     }
@@ -456,6 +470,7 @@ export default {
     ...mapActions("launchStore", [
       "ticketConfirmAction",
       "getBookingInfoByTnxId",
+      "updateGatewayAction",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
     handlePromoApplied() {
