@@ -6,7 +6,7 @@
     <div class="w-full lg:w-1/2">
       <div
         v-if="getBookingInfoDetails !== null"
-        class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
+        class="mt-4 bg-white rounded-[10px] border border-[#EDEDED] overflow-hidden"
       >
         <div
           class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
@@ -99,7 +99,9 @@
       </div>
     </div>
     <div class="w-full lg:w-1/2">
-      <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
+      <div
+        class="mt-4 bg-white rounded-[10px] border border-[#EDEDED] overflow-hidden"
+      >
         <div
           class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
         >
@@ -127,6 +129,7 @@
               Ticket Price
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
+              BDT
               {{
                 showPromoInput
                   ? getBookingInfoDetails.payable
@@ -135,19 +138,7 @@
               }}
             </p>
           </div>
-          <div
-            v-if="getBookingInfoDetails.invoice.discount && !showPromoInput"
-            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
-          >
-            <p
-              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
-            >
-              Discount Amount
-            </p>
-            <p class="text-base font-medium text-[#E0293B]">
-              {{ `-${getBookingInfoDetails.invoice.discount}` }}
-            </p>
-          </div>
+
           <div
             class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
           >
@@ -157,7 +148,7 @@
               Processing Fee
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.serviceCharge }}
+              BDT {{ getBookingInfoDetails.serviceCharge }}
             </p>
           </div>
           <div
@@ -169,53 +160,140 @@
               Gateway Fee
             </p>
             <p class="text-xs lg:text-base font-medium text-blackPrimary">
-              {{ getBookingInfoDetails.paymentGatewayCommission }}
+              BDT {{ getBookingInfoDetails.paymentGatewayCommission }}
             </p>
           </div>
-
           <div
-            v-if="!showPromoInput"
-            class="flex justify-between gap-x-4 py-2 border-b last:border-b-0 border-dashed"
+            v-if="
+              getBookingInfoDetails?.invoice?.offer?.totalAmount ||
+              getBookingInfoDetails?.invoice?.promo?.amount
+            "
+            class="flex justify-between py-2"
           >
+            <p
+              class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight"
+            >
+              {{
+                getBookingInfoDetails?.invoice?.offer?.totalAmount
+                  ? "Offer"
+                  : "Promo"
+              }}
+            </p>
+            <div
+              class="border border-[#F04935] h-6 px-2 rounded-full flex items-center"
+            >
+              <p class="text-xs font-medium text-[#F04935]">
+                {{
+                  `- BDT ${
+                    getBookingInfoDetails?.invoice?.offer?.totalAmount ||
+                    getBookingInfoDetails?.invoice?.promo?.amount
+                  }`
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between bg-[#EFF7FD] rounded-b p-4">
+          <p class="text-sm font-normal text-blackLight">
+            Total ({{ getBookingInfoDetails.invoice.seatNo.length }} seat{{
+              getBookingInfoDetails.invoice.seatNo.length > 1 ? "s" : ""
+            }})
+          </p>
+          <div class="flex flex-row items-center">
+            <div
+              v-if="getBookingInfoDetails.invoice.discount"
+              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 h-6 justify-center rounded-full"
+            >
+              <img
+                src="@/assets/images/icons/promoIcon.svg"
+                alt=""
+                class="mr-[4px]"
+              />
+              <p class="text-xs font-medium text-[#FFF]">
+                You save BDT
+                <span class="text-sm">{{
+                  getBookingInfoDetails.invoice.discount
+                }}</span>
+              </p>
+            </div>
+            <p class="text-base font-medium text-blackPrimary">
+              <span class="font-bold">
+                BDT {{ getBookingInfoDetails.amount }}</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]"
+        v-if="!getBookingInfoDetails?.invoice?.offer?.totalAmount"
+      >
+        <div
+          class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
+        >
+          <p class="text-base font-medium text-blackPrimary">Promo</p>
+        </div>
+        <div class="flex gap-x-5 w-full flex-col">
+          <div class="flex justify-between w-full p-4">
             <input
+              :disabled="showPromoInput"
               type="text"
               id="promo"
               v-model="promoCode"
               placeholder="Enter Promo Code"
-              class="bg-[#f7f7f7] px-4 py-[13px] rounded w-3/4 focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
+              class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width"
             />
             <button
+              v-if="!showPromoInput"
               @click="applyPromo"
               :disabled="!promoCode"
-              :class="
-                !promoCode
-                  ? 'bg-[#FDF0F1] text-[#E0293B]'
-                  : 'bg-corporate text-successLight'
-              "
-              class="w-40 rounded-full lg:text-base text-xs font-medium"
+              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
-              <p class="">Apply promo</p>
+              <img
+                src="@/assets/images/icons/blueTickBus.svg"
+                alt=""
+                class="mr-2"
+              />
+              <p class="text-sm font-medium">Add promo</p>
+            </button>
+            <button
+              v-if="showPromoInput"
+              @click="removePromo"
+              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
+            >
+              <img
+                src="@/assets/images/icons/removePromoIcon.svg"
+                alt=""
+                class="mr-2"
+              />
+              <p class="text-sm font-medium">Remove promo</p>
             </button>
           </div>
-
-          <div
-            v-if="showPromoInput"
-            class="flex justify-between py-2 border-b last:border-b-0 border-dashed"
-          >
-            <p class="text-sm font-normal text-blackLight">Promo</p>
-            <p class="text-base font-medium text-[#E0293B]">
-              {{ `-${showPromoInput.amount}` }}
-            </p>
+          <div class="px-4" v-if="availablePromos?.length">
+            <div class="w-full h-[1px] bg-[#EDEDED]" />
           </div>
-        </div>
-        <div
-          class="flex justify-between bg-[#EFF7FD] border-t rounded-b px-4 py-[10px]"
-        >
-          <p class="text-sm font-normal text-blackLight">Total</p>
-          <p class="text-base font-medium text-blackPrimary">
-            BDT
-            <span class="font-bold">{{ getBookingInfoDetails.amount }}</span>
-          </p>
+          <div v-if="availablePromos?.length" class="p-4 pr-0">
+            <p class="text-base font-medium text-blackPrimary pb-4">
+              Available promo
+            </p>
+            <div
+              class="w-full flex overflow-x-scroll promo-container"
+              ref="promoSlider"
+            >
+              <div class="gap-x-5 flex flex-row">
+                <PromoBox
+                  v-for="promo in availablePromos.filter(
+                    (item) => item?.title && item.description
+                  )"
+                  :key="promo.code"
+                  :promo="promo"
+                  :activePromo="activePromo"
+                  :handlePromoBox="() => handlePromoBox(promo)"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -238,25 +316,25 @@
           </div>
         </div>
         <div class="p-5 flex justify-between gap-x-5">
-          <GateWayOption
-            plan-name="sslcommerz"
-            plan-discount=""
-            v-model="activePlan"
+          <BkashOption
+            plan-name="bkash"
+            plan-discount="10%"
+            v-model="gatewayType"
           />
           <NagadOption
             plan-name="nagad"
             plan-discount="10%"
-            v-model="activePlan"
+            v-model="gatewayType"
           />
-          <BkashOption
-            plan-name="bkash"
-            plan-discount="10%"
-            v-model="activePlan"
+          <GateWayOption
+            plan-name="sslcommerz"
+            plan-discount=""
+            v-model="gatewayType"
           />
         </div>
       </div>
 
-      <DealButton :callback="handleDealButton" />
+      <!-- <DealButton :callback="handleDealButton" /> -->
 
       <div v-if="!paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
         <PaymentTimeoutAlert />
@@ -356,12 +434,61 @@ export default {
   },
   data() {
     return {
-      activePlan: "bkash",
+      gatewayType: "",
+      activePromo: null,
       paymentAllowStatus: true,
       paymentValidateTime: 0,
       promoCode: "",
       agreePrivacyPolicy: true,
+      isDown: false,
+      startX: 0,
+      scrollLeft: 0,
     };
+  },
+  watch: {
+    async gatewayType() {
+      const payload = {
+        paymentId: this.getBookingInfoDetails._id,
+        gatewayType: this.gatewayType,
+      };
+      if (this.getBookingInfoDetails?.gatewayType !== this.gatewayType) {
+        try {
+          await this.updateGatewayAction(payload);
+        } catch (err) {
+          this.gatewayType = this.getBookingInfoDetails.gatewayType;
+        }
+      }
+    },
+  },
+  mounted() {
+    if (this.availablePromos?.length && this?.$refs?.promoSlider) {
+      const slider = this.$refs.promoSlider;
+
+      slider.addEventListener("mousedown", (e) => {
+        this.isDown = true;
+        slider.classList.add("active");
+        this.startX = e.pageX - slider.offsetLeft;
+        this.scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        this.isDown = false;
+        slider.classList.remove("active");
+      });
+
+      slider.addEventListener("mouseup", () => {
+        this.isDown = false;
+        slider.classList.remove("active");
+      });
+
+      slider.addEventListener("mousemove", (e) => {
+        if (!this.isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - this.startX) * 3;
+        slider.scrollLeft = this.scrollLeft - walk;
+      });
+    }
   },
   async asyncData({ query, store }) {
     await store.dispatch("busStore/getBookingInfoByTnxId", {
@@ -380,6 +507,17 @@ export default {
       if (b.diff(a, "seconds") > 0) {
         this.paymentValidateTime = b.diff(a, "seconds");
       }
+      if (this.getBookingInfoDetails?.invoice?.promo?.code) {
+        this.promoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
+        const getPromoObject = this.getBookingInfoDetails.availablePromos.find(
+          (promo) =>
+            promo.code === this.getBookingInfoDetails.invoice.promo.code
+        );
+        if (getPromoObject) {
+          this.activePromo = getPromoObject;
+        }
+      }
+      this.gatewayType = this.getBookingInfoDetails?.gatewayType || "";
     } else {
       this.paymentValidateTime = 0;
     }
@@ -391,6 +529,11 @@ export default {
         this.getBookingInfoDetails.invoice.boardingDateTime,
         6,
         "ddd, DD MMM YYYY"
+      );
+    },
+    availablePromos() {
+      return this.getBookingInfoDetails.availablePromos.filter(
+        (promo) => promo.title && promo.description && promo.code
       );
     },
     boardingTime() {
@@ -406,8 +549,17 @@ export default {
     ...mapActions("busStore", [
       "ticketConfirmAction",
       "applyPromoCodeAction",
+      "removePromoCodeAction",
       "getSurpriseDealAction",
+      "updateGatewayAction",
     ]),
+    handlePromoBox(promo) {
+      if (!this.showPromoInput) {
+        this.promoCode = promo.code;
+        this.activePromo = promo;
+        this.applyPromo();
+      }
+    },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
     },
@@ -433,7 +585,7 @@ export default {
     async paymentHandler() {
       const payload = {
         paymentId: this.getBookingInfoDetails._id,
-        gatewayType: this.activePlan,
+        gatewayType: this.gatewayType,
       };
       this.fireGTMEventForInitiateCheckout();
 
@@ -494,8 +646,57 @@ export default {
         this.$nuxt.$loading?.finish();
       });
     },
+    async removePromo() {
+      this.$nextTick(async () => {
+        this.$nuxt.$loading?.start();
+        const payload = {
+          paymentId: this.getBookingInfoDetails._id,
+        };
+
+        try {
+          const success = await this.removePromoCodeAction(payload);
+
+          if (success) {
+            this.promoCode = "";
+            this.activePromo = null;
+            this.$toast.success("Promo code removed successfully", {
+              position: "bottom-right",
+              duration: 5000,
+            });
+          } else {
+            this.$toast.error("Failed to remove promo code", {
+              position: "bottom-right",
+              duration: 5000,
+            });
+          }
+        } catch (error) {
+          this.$toast.error(`An error occurred: ${error}`, {
+            position: "bottom-right",
+            duration: 5000,
+          });
+        } finally {
+          this.$nuxt.$loading?.finish();
+        }
+      });
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.promo-container {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.promo-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.active {
+  cursor: grab;
+}
+
+.custom-width {
+  width: calc(100% - 181px);
+}
+</style>
