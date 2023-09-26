@@ -277,8 +277,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions("common", ["searchTicketAction"]),
-    ...mapMutations("common", ["setSearchedTicketList"]),
+    ...mapActions("common", [
+      "searchTicketAction",
+      "sendOtpForSearchTicketAction",
+    ]),
+    ...mapMutations("common", ["setSearchedTicketList", "setSelectedService"]),
     getFilteredTickets(isActive) {
       const currentTime = new Date();
       return this.getSearchedTicketList.tickets.filter((item) => {
@@ -314,6 +317,7 @@ export default {
     },
     handleServiceChange(service) {
       this.selectedService = service;
+      this.setSelectedService(service); //global update
       this.oopsAlertStatus = false;
       this.setSearchedTicketList([]);
     },
@@ -323,8 +327,20 @@ export default {
         const formData = {};
         if (this.selectedTab === 0) {
           formData.phone = `0${this.phone}`;
-          formData.pnr = "";
-          formData.transactionId = "";
+          try {
+            const responseData = await this.sendOtpForSearchTicketAction({
+              payload: formData,
+            });
+
+            this.setSearchedTicketList(responseData);
+            this.$nuxt.$loading?.finish();
+          } catch (err) {
+            this.setSearchedTicketList([]);
+            this.alertMessage = err;
+            this.$nuxt.$loading?.finish();
+          }
+
+          return;
         } else if (this.selectedTab === 1) {
           formData.pnr = this.pnr;
           formData.phone = "";
