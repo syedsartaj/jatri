@@ -321,7 +321,7 @@
               class="w-full flex overflow-x-scroll promo-container"
               ref="promoSlider"
             >
-              <div class="gap-x-5 flex flex-row">
+              <div class="gap-x-4 flex flex-row">
                 <PromoBox
                   v-for="(promo, index) in availablePromos"
                   :key="promo.code"
@@ -607,11 +607,11 @@ export default {
     },
 
     promoScrollLeft() {
-      this.scrollSlider(-260);
+      this.scrollSlider(-276);
     },
 
     promoScrollRight() {
-      this.scrollSlider(260);
+      this.scrollSlider(276);
     },
     updateSliderState() {
       const slider = this.$refs.promoSlider;
