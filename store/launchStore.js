@@ -22,7 +22,6 @@ export const state = () => ({
   mobileFilterInitialData: mobileFilterInitialData,
   mobileFilterData: mobileFilterInitialData,
   ticketDetails: {},
-  bookingInfoDetails: {},
   showSurpriseDealModal: null,
   launchBookingData: {},
 });
@@ -39,7 +38,6 @@ export const getters = {
   getMobileFloatingFilter: (state) => state.mobileFloatingFilter,
   getMobileFilterData: (state) => state.mobileFilterData,
   getMobileFilterInitialData: (state) => state.mobileFilterInitialData,
-  getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getTicketDetails: (state) => state.ticketDetails,
   getLaunchBookingData: (state) => state.launchBookingData,
@@ -274,6 +272,32 @@ export const actions = {
         });
     });
   },
+  async updateGatewayAction({ dispatch, commit }, payload) {
+    commit("setLoading", true);
+
+    return new Promise((resolve, reject) => {
+      this.$api
+        .$post(apis.SERVICE_TYPE.LAUNCH.POST_UPDATE_GATEWAY_URL, payload)
+        .then((res) => {
+          commit("updateBookingInfoForUpdateGateway", res.data);
+          commit("setLoading", false);
+          resolve(res);
+        })
+        .catch((error) => {
+          commit("setLoading", false);
+
+          this.$toast.error(
+            error.response?.data?.message || "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+
+          reject(error);
+        });
+    });
+  },
   async getSurpriseDealAction({ commit }, payload) {
     try {
       commit("setLoading", true);
@@ -346,7 +370,6 @@ export const mutations = {
     state.mobileFilterData = data;
   },
   setTicketDetails: (state, data) => (state.ticketDetails = data),
-  setBookingInfoDetails: (state, data) => (state.bookingInfoDetails = data),
   handleSurpriseDealModal: (state, data) => {
     handleScrollBehaviour(!data);
     state.showSurpriseDealModal = data;
@@ -369,5 +392,11 @@ export const mutations = {
         seatRow[colIndex].available = available;
       }
     }
+  },
+  updateBookingInfoForUpdateGateway: (state, data) => {
+    state.launchBookingData = {
+      ...state.launchBookingData,
+      ...data,
+    };
   },
 };

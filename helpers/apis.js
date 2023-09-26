@@ -61,6 +61,7 @@ export const SERVICE_TYPE = {
     GET_SEAT_VIEW_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/get-seat-view`,
     POST_PAYMENT_PENDING_BLOCK_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/payment-pending`,
     POST_PROMO_CODE_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/check-promo-code`,
+    POST_UPDATE_GATEWAY_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/update-gateway`,
     POST_SEAT_LOCK: `${PARIBAHAN_BASE_URL}/v1/api/water/seat-lock`,
     GET_TICKET_BY_TRANSACTION: `${PARIBAHAN_BASE_URL}/v1/api/water/get-ticket-info-by-txn-id`,
     GET_BOOKING_INFO_BY_TRANSACTION: `${PARIBAHAN_BASE_URL}/v1/api/water/get-booking-info-by-txn-id`,

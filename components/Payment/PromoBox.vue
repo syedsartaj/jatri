@@ -1,15 +1,19 @@
 <template>
   <div
-    :class="promo?.code === activePromo?.code ? 'bg-[#F1F9F1]' : 'bg-[#F7F7F7]'"
-    class="flex flex-col w-[260px] h-[124px] rounded-lg p-4"
+    :class="{
+      'bg-[#F1F9F1]': promo?.code === activePromo?.code,
+      'bg-[#F7F7F7]': promo?.code !== activePromo?.code,
+      'mr-[16px]': isLastItem,
+    }"
+    class="flex flex-col w-[260px] h-[124px] rounded-lg p-4 cursor-pointer"
+    @click="handlePromoBox()"
   >
     <div class="w-full flex flex-row items-center gap-x-2">
       <img
-        @click="handlePromoBox()"
         v-if="promo?.code !== activePromo?.code"
-        src="@/assets/images/icons/unCheckCircle.svg"
+        src="@/assets/images/icons/promoUncheckCircle.svg"
         alt=""
-        class="cursor-pointer h-6 w-6"
+        class="h-6 w-6"
       />
       <img
         v-if="promo?.code === activePromo?.code"
@@ -29,6 +33,6 @@
 <script>
 export default {
   name: "PromoBox",
-  props: ["promo", "activePromo", "handlePromoBox"],
+  props: ["promo", "activePromo", "handlePromoBox", "isLastItem"],
 };
 </script>
