@@ -248,7 +248,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { ServiceType } from "../../helpers/utils";
+import { isValidPhoneNumber, ServiceType } from "../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -276,9 +276,20 @@ export default {
       return this.getFilteredTickets(false);
     },
   },
+  watch: {
+    selectedService(newService) {
+      this.setSelectedService(newService); // global update
+    },
+  },
+  mounted() {
+    this.setSelectedService(ServiceType.BUS);
+  },
   methods: {
-    ...mapActions("common", ["searchTicketAction"]),
-    ...mapMutations("common", ["setSearchedTicketList"]),
+    ...mapActions("common", [
+      "searchTicketAction",
+      "sendOtpForSearchTicketAction",
+    ]),
+    ...mapMutations("common", ["setSearchedTicketList", "setSelectedService"]),
     getFilteredTickets(isActive) {
       const currentTime = new Date();
       return this.getSearchedTicketList.tickets.filter((item) => {
@@ -318,24 +329,33 @@ export default {
       this.setSearchedTicketList([]);
     },
     ticketData(e) {
-      this.$nextTick(async () => {
-        e.preventDefault();
-        const formData = {};
-        if (this.selectedTab === 0) {
-          formData.phone = `0${this.phone}`;
-          formData.pnr = "";
-          formData.transactionId = "";
-        } else if (this.selectedTab === 1) {
-          formData.pnr = this.pnr;
-          formData.phone = "";
-          formData.transactionId = "";
+      e.preventDefault();
+      const formData = {};
+      if (this.selectedTab === 0) {
+        formData.phone = `0${this.phone}`;
+        if (isValidPhoneNumber(`0${this.phone}`)) {
+          this.$nextTick(async () => {
+            await this.sendOtpForSearchTicketAction({
+              payload: formData,
+            });
+          });
         } else {
-          formData.transactionId = this.transactionId;
-          formData.phone = "";
-          formData.pnr = "";
+          this.setSearchedTicketList([]);
+          this.alertMessage = "Phone number is not valid!";
         }
-        if (this.pnr || this.phone || this.transactionId) {
-          this.alertMessage = null;
+
+        return;
+      } else if (this.selectedTab === 1) {
+        formData.pnr = this.pnr;
+        formData.transactionId = "";
+      } else {
+        formData.transactionId = this.transactionId;
+        formData.phone = "";
+        formData.pnr = "";
+      }
+      if (this.pnr || this.phone || this.transactionId) {
+        this.alertMessage = null;
+        this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
 
           try {
@@ -351,8 +371,8 @@ export default {
             this.alertMessage = err;
             this.$nuxt.$loading?.finish();
           }
-        }
-      });
+        });
+      }
     },
   },
 };
