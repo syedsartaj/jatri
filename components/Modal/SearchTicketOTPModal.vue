@@ -9,7 +9,7 @@
         >
           <div class="bg-white w-full flex items-center flex-col">
             <h1 class="text-2xl font-medium text-blackPrimary">
-              Verify OTP to cancel ticket
+              Verify OTP to search ticket
             </h1>
             <p class="text-base font-normal mt-2 text-[#8D8D8F] text-center">
               We sent an SMS with your code to
@@ -47,7 +47,7 @@
             class="h-auto w-full flex items-center justify-evenly gap-[20px] mt-8"
           >
             <button
-              @click="() => handleCancelTicketPopup(false)"
+              @click="() => handleSearchTicketOtpPopup(false)"
               class="border flex items-center justify-center text-[#151414] text-base font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
               Cancel
@@ -60,6 +60,18 @@
               Verify OTP
             </button>
           </div>
+          <!-- Ticket not found -->
+            <div
+              v-if="alertMessage"
+              class="w-full flex flex-row gap-x-2 items-center justify-center text-xs md:text-sm font-normal text-[#E0293B] mt-[10px]"
+            >
+              <img
+                src="@/assets/images/icons/warningRed.svg"
+                class="h-[16px] w-[16px] md:h-6 nd:w-6"
+                alt="error"
+              />
+              <div>{{ alertMessage }}</div>
+            </div>
         </div>
       </div>
     </div>
@@ -77,22 +89,41 @@ export default {
       second: 120,
       t: "",
       showResendButton: false,
+      alertMessage: null,
     };
   },
   methods: {
     ...mapActions("common", [
       "searchTicketAction",
-      "sendOtpForCancelTicketAction",
+      "sendOtpForSearchTicketAction",
     ]),
-    ...mapMutations("common", ["handleCancelTicketPopup"]),
+    ...mapMutations("common", [
+      "setSearchedTicketList",
+      "handleSearchTicketOtpPopup",
+    ]),
     handleOnClick() {
-      const otpCode = this.fieldData.join("");
-      this.searchTicketAction({
-        otpCode: otpCode,
-        phone: this.getSelectedPhone,
-        pnr: "",
-        transactionId: "",
-        service: this.getSelectedServiceType
+      this.$nextTick(async () => {
+        const otpCode = this.fieldData.join("");
+        const payload = {
+          otpCode: otpCode,
+          phone: this.getIsSearchTicketOtpPopupOpen,
+          pnr: "",
+          transactionId: "",
+        };
+        this.$nuxt.$loading?.start();
+        try {
+          const responseData = await this.searchTicketAction({
+            payload,
+            service: this.getSelectedServiceType,
+          });
+
+          this.setSearchedTicketList(responseData);
+          this.$nuxt.$loading?.finish();
+        } catch (err) {
+          this.setSearchedTicketList([]);
+          this.alertMessage = err;
+          this.$nuxt.$loading?.finish();
+        }
       });
     },
 
@@ -109,12 +140,13 @@ export default {
     handleResendOTP() {
       this.fieldData = ["", "", "", ""];
       const payload = {
-        ticketId: this.getSelectedPhone,
+        phone: this.getSelectedPhone,
       };
-      this.sendOtpForCancelTicketAction(payload);
+      this.sendOtpForSearchTicketAction(payload);
       this.startTimer();
     },
     handleOtpInput(e, index) {
+      this.alertMessage = null;
       this.fieldData[index] = e.target.value;
       if (e.target.value && e.target.nextElementSibling) {
         e.target.nextElementSibling.focus();
@@ -147,7 +179,6 @@ export default {
   },
   computed: {
     ...mapGetters("common", [
-      "getSelectedPhone",
       "getIsSearchTicketOtpPopupOpen",
       "getSelectedServiceType",
     ]),

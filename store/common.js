@@ -192,17 +192,15 @@ export const actions = {
   },
   async sendOtpForSearchTicketAction({ commit, state }, payloadData) {
     try {
-      commit("setLoading", true);
       const { data } = await this.$api.post(
-        apis.SERVICE_TYPE[COMMON].POST_SEND_OTP_BY_PHONE,
+        apis.SERVICE_TYPE.COMMON.POST_SEND_OTP_BY_PHONE,
         payloadData.payload
       );
-      console.log(data)
-      // commit("handleSearchTicketOtpPopup", data.phone);
-      // this.$toast.success(data.message, {
-      //   position: "bottom-right",
-      //   duration: 5000,
-      // });
+      commit("handleSearchTicketOtpPopup", data.data.phone);
+      this.$toast.success(data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
       commit("setLoading", false);
       return true;
     } catch (error) {
