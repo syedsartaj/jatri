@@ -284,6 +284,9 @@ export default {
   mounted() {
     this.setSelectedService(ServiceType.BUS);
   },
+  beforeDestroy() {
+    this.setSearchedTicketList([]);
+  },
   methods: {
     ...mapActions("common", [
       "searchTicketAction",
