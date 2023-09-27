@@ -202,7 +202,7 @@
           <div class="flex flex-row items-center">
             <div
               v-if="getBookingInfoDetails.invoice.discount"
-              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 h-6 justify-center rounded-full"
+              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full"
             >
               <img
                 src="@/assets/images/icons/promoIcon.svg"
@@ -274,20 +274,59 @@
             <div class="w-full h-[1px] bg-[#EDEDED]" />
           </div>
           <div v-if="availablePromos?.length" class="p-4 pr-0">
-            <p class="text-base font-medium text-blackPrimary pb-4">
-              Available promo
-            </p>
+            <div
+              class="pb-4 w-full flex flex-row justify-between items-center pr-4"
+            >
+              <p class="text-base font-medium text-blackPrimary">
+                Available promo
+              </p>
+              <div class="flex flex-row items-center">
+                <div
+                  class="w-8 h-8 bg-[#F7F7F7] flex items-center justify-center mr-3 rounded-full"
+                  @click="promoScrollLeft"
+                >
+                  <img
+                    v-if="isLeftScrollDisabled"
+                    src="@/assets/images/icons/promoLeftArrow.svg"
+                    alt=""
+                    class="h-4 w-4"
+                  />
+                  <img
+                    v-if="!isLeftScrollDisabled"
+                    src="@/assets/images/icons/promoLeftActiveArrow.svg"
+                    alt=""
+                    class="h-4 w-4"
+                  />
+                </div>
+                <div
+                  class="w-8 h-8 bg-[#F7F7F7] flex items-center justify-center rounded-full"
+                  @click="promoScrollRight"
+                >
+                  <img
+                    v-if="isRightScrollDisabled"
+                    src="@/assets/images/icons/promoRightArrow.svg"
+                    alt=""
+                    class="h-4 w-4"
+                  />
+                  <img
+                    v-if="!isRightScrollDisabled"
+                    src="@/assets/images/icons/promoRightActiveArrow.svg"
+                    alt=""
+                    class="h-4 w-4"
+                  />
+                </div>
+              </div>
+            </div>
             <div
               class="w-full flex overflow-x-scroll promo-container"
               ref="promoSlider"
             >
-              <div class="gap-x-5 flex flex-row">
+              <div class="gap-x-4 flex flex-row">
                 <PromoBox
-                  v-for="promo in availablePromos.filter(
-                    (item) => item?.title && item.description
-                  )"
+                  v-for="(promo, index) in availablePromos"
                   :key="promo.code"
                   :promo="promo"
+                  :isLastItem="index === availablePromos.length - 1"
                   :activePromo="activePromo"
                   :handlePromoBox="() => handlePromoBox(promo)"
                 />
@@ -443,6 +482,9 @@ export default {
       isDown: false,
       startX: 0,
       scrollLeft: 0,
+      sliderScrollLeft: 0, // Add this
+      isLeftScrollDisabled: true,
+      isRightScrollDisabled: true,
     };
   },
   watch: {
@@ -463,6 +505,13 @@ export default {
   mounted() {
     if (this.availablePromos?.length && this?.$refs?.promoSlider) {
       const slider = this.$refs.promoSlider;
+
+      // Calculate max scroll position
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+
+      // Initially set the button states based on the scroll position
+      this.isLeftScrollDisabled = true;
+      this.isRightScrollDisabled = maxScrollLeft <= 0;
 
       slider.addEventListener("mousedown", (e) => {
         this.isDown = true;
@@ -553,12 +602,38 @@ export default {
       "getSurpriseDealAction",
       "updateGatewayAction",
     ]),
-    handlePromoBox(promo) {
-      if (!this.showPromoInput) {
-        this.promoCode = promo.code;
-        this.activePromo = promo;
-        this.applyPromo();
+    handleSliderScroll() {
+      this.updateSliderState();
+    },
+
+    promoScrollLeft() {
+      this.scrollSlider(-276);
+    },
+
+    promoScrollRight() {
+      this.scrollSlider(276);
+    },
+    updateSliderState() {
+      const slider = this.$refs.promoSlider;
+      if (slider) {
+        this.sliderScrollLeft = slider.scrollLeft;
+
+        const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+        this.isLeftScrollDisabled = this.sliderScrollLeft === 0;
+        this.isRightScrollDisabled = this.sliderScrollLeft === maxScrollLeft;
       }
+    },
+    scrollSlider(amount) {
+      const slider = this.$refs.promoSlider;
+      if (slider) {
+        slider.scrollLeft += amount;
+        this.updateSliderState();
+      }
+    },
+    handlePromoBox(promo) {
+      this.promoCode = promo.code;
+      this.activePromo = promo;
+      this.applyPromo();
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
