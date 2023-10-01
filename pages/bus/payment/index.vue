@@ -734,10 +734,6 @@ export default {
           if (success) {
             this.promoCode = "";
             this.activePromo = null;
-            this.$toast.success("Promo code removed successfully", {
-              position: "bottom-right",
-              duration: 5000,
-            });
           } else {
             this.$toast.error("Failed to remove promo code", {
               position: "bottom-right",
