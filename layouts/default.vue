@@ -5,6 +5,7 @@
     <RequestSuccessfulModal v-if="getRequestSuccessfulStatus" />
     <SurpriseDealShowingModal v-if="getSurpriseDealModalStatus" />
     <CancelTicketOTPModal v-if="getIsTicketPopupOpen" />
+    <SearchTicketOTPModal v-if="getIsSearchTicketOtpPopupOpen" />
     <div class="bg-corporateBg flex flex-col justify-start items-start h-full">
       <Header />
       <div class="w-full">
@@ -30,6 +31,7 @@ export default {
     ...mapGetters("busStore", ["getSurpriseDealModalStatus"]),
     ...mapGetters("common", [
       "getIsTicketPopupOpen",
+      "getIsSearchTicketOtpPopupOpen",
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
     ]),
