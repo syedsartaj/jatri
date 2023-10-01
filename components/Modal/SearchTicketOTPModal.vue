@@ -27,6 +27,7 @@
                 class="w-[66px] h-[66px] text-center firstInputEl bg-[#F7F7F7] rounded-[6px]"
                 @keyup="(e) => handleOtpInput(e, index - 1)"
                 @paste="index === 1 && handlePaste($event)"
+                @keydown="onKeyDown(index - 1, $event)"
               />
             </div>
             <p
@@ -61,17 +62,17 @@
             </button>
           </div>
           <!-- Ticket not found -->
-            <div
-              v-if="alertMessage"
-              class="w-full flex flex-row gap-x-2 items-center justify-center text-xs md:text-sm font-normal text-[#E0293B] mt-[10px]"
-            >
-              <img
-                src="@/assets/images/icons/warningRed.svg"
-                class="h-[16px] w-[16px] md:h-6 nd:w-6"
-                alt="error"
-              />
-              <div>{{ alertMessage }}</div>
-            </div>
+          <div
+            v-if="alertMessage"
+            class="w-full flex flex-row gap-x-2 items-center justify-center text-xs md:text-sm font-normal text-[#E0293B] mt-[10px]"
+          >
+            <img
+              src="@/assets/images/icons/warningRed.svg"
+              class="h-[16px] w-[16px] md:h-6 nd:w-6"
+              alt="error"
+            />
+            <div>{{ alertMessage }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -140,18 +141,27 @@ export default {
     handleResendOTP() {
       this.fieldData = ["", "", "", ""];
       const payload = {
-        phone: this.getSelectedPhone,
+        phone: this.getIsSearchTicketOtpPopupOpen,
       };
-      this.sendOtpForSearchTicketAction(payload);
+      this.sendOtpForSearchTicketAction({ payload });
       this.startTimer();
+    },
+    onKeyDown(index, event) {
+      let items = document.getElementsByClassName("firstInputEl");
+      if (
+        event.key === "Backspace" &&
+        index > 0 &&
+        items &&
+        !items[index]?.value
+      ) {
+        items[index - 1].focus();
+      }
     },
     handleOtpInput(e, index) {
       this.alertMessage = null;
       this.fieldData[index] = e.target.value;
       if (e.target.value && e.target.nextElementSibling) {
         e.target.nextElementSibling.focus();
-      } else if (!e.target.value && e.target.previousElementSibling) {
-        e.target.previousElementSibling.focus();
       }
     },
     startTimer() {

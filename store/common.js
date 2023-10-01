@@ -197,10 +197,10 @@ export const actions = {
         payloadData.payload
       );
       commit("handleSearchTicketOtpPopup", data.data.phone);
-      this.$toast.success(data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
+      // this.$toast.success(data.message, {
+      //   position: "bottom-right",
+      //   duration: 5000,
+      // });
       commit("setLoading", false);
       return true;
     } catch (error) {

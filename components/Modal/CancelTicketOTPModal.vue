@@ -43,6 +43,7 @@
                 "
                 @keyup="(e) => handleOtpInput(e, index - 1)"
                 @paste="index === 1 && handlePaste($event)"
+                @keydown="onKeyDown(index - 1, $event)"
               />
             </div>
             <p
@@ -157,6 +158,17 @@ export default {
         }
       }
     },
+    onKeyDown(index, event) {
+      let items = document.getElementsByClassName("firstInputEl");
+      if (
+        event.key === "Backspace" &&
+        index > 0 &&
+        items &&
+        !items[index]?.value
+      ) {
+        items[index - 1].focus();
+      }
+    },
     handleResendOTP() {
       this.fieldData = ["", "", "", ""];
       const payload = {
@@ -169,8 +181,6 @@ export default {
       this.fieldData[index] = e.target.value;
       if (e.target.value && e.target.nextElementSibling) {
         e.target.nextElementSibling.focus();
-      } else if (!e.target.value && e.target.previousElementSibling) {
-        e.target.previousElementSibling.focus();
       }
     },
     startTimer() {
