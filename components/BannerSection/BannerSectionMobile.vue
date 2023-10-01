@@ -11,15 +11,23 @@
       >
         Ticketing made easy!
       </h2>
-      <h4 class="mt-2 text-base text-white font-normal text-start md:text-center">
+      <h4
+        class="mt-2 text-base text-white font-normal text-start md:text-center"
+      >
         Buy tickets online hassle-free
       </h4>
       <div class="mt-[48px] md:mt-[100px]">
         <SearchTab />
       </div>
-      <div class="bg-white rounded-[14px] px-4 pt-4 pb-6 shadow-lg">
+      <div class="bg-white rounded-[16px] p-4 custom-shadow">
         <SearchFilterFormMobile />
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.custom-shadow {
+  box-shadow: 0px 2px 20px 4px rgba(0, 0, 0, 0.08);
+}
+</style>

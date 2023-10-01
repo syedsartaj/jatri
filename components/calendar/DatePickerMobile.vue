@@ -2,20 +2,20 @@
   <div class="">
     <button
       :class="optionsIsOpen && 'border border-[#4D4D4F]'"
-      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[16px] py-[11px]"
+      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
       @click="toggleDropdown"
     >
       <div class="flex justify-start gap-x-4 items-center w-10/12">
         <img v-if="icon" :src="icon" alt="" />
         <p
           v-if="label && dateUpdate === ''"
-          class="text-xs font-normal text-blackSecondary text-left"
+          class="text-sm font-normal text-blackPrimary text-left"
         >
           {{ label }}
         </p>
         <p
           v-if="dateUpdate !== ''"
-          class="text-xs font-normal text-blackSecondary text-left"
+          class="text-sm font-normal text-blackPrimary text-left"
         >
           {{
             new Date(dateUpdate).toLocaleString("es-CL", {
