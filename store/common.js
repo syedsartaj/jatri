@@ -15,7 +15,9 @@ export const state = () => ({
   loading: false,
   searchedTicketList: [],
   selectedTicketId: "",
+  selectedPhone: "",
   isTicketPopupOpen: false,
+  isSearchTicketOtpPopupOpen: false,
   isBusReserveModalOpen: false,
   isRequestSuccessFull: false,
 });
@@ -39,7 +41,9 @@ export const getters = {
   getSelectedServiceType: (state) => state.selectedService,
   getSearchedTicketList: (state) => state.searchedTicketList,
   getIsTicketPopupOpen: (state) => state.isTicketPopupOpen,
+  getIsSearchTicketOtpPopupOpen: (state) => state.isSearchTicketOtpPopupOpen,
   getSelectedTicketId: (state) => state.selectedTicketId,
+  getSelectedPhone: (state) => state.selectedPhone,
   getBusReserveModalOpenStatus: (state) => state.isBusReserveModalOpen,
   getRequestSuccessfulStatus: (state) => state.isRequestSuccessFull,
 };
@@ -154,6 +158,7 @@ export const actions = {
           payloadData.payload
         )
         .then((res) => {
+          commit("handleSearchTicketOtpPopup");
           resolve(res.data.data);
         })
         .catch((e) => {
@@ -174,6 +179,28 @@ export const actions = {
         position: "bottom-right",
         duration: 5000,
       });
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+      return false;
+    }
+  },
+  async sendOtpForSearchTicketAction({ commit, state }, payloadData) {
+    try {
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE.COMMON.POST_SEND_OTP_BY_PHONE,
+        payloadData.payload
+      );
+      commit("handleSearchTicketOtpPopup", data.data.phone);
+      // this.$toast.success(data.message, {
+      //   position: "bottom-right",
+      //   duration: 5000,
+      // });
       commit("setLoading", false);
       return true;
     } catch (error) {
@@ -308,6 +335,13 @@ export const mutations = {
     state.isTicketPopupOpen = data;
     if (!data) {
       state.selectedTicketId = null;
+    }
+  },
+  handleSearchTicketOtpPopup: (state, data) => {
+    handleScrollBehaviour(!data);
+    state.isSearchTicketOtpPopupOpen = data;
+    if (!data) {
+      state.selectedPhone = null;
     }
   },
   setBusReserveModalOpenStatus: (state, data) => {
