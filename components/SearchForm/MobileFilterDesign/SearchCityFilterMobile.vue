@@ -22,7 +22,7 @@
           :placeholder="defaultOption"
           type="text"
           autofocus
-          @focus="handleOnFocus"
+          @click="handleOnFocus"
           @keyup="search"
         />
       </div>
