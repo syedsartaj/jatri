@@ -108,23 +108,18 @@ export default {
     handleShowOption() {
       setTimeout(() => {
         this.optionsIsOpen = true;
-      }, 10);
 
-      let items = this.getSearchElementData();
-      if (items) {
-        let focusItem = items[this.label === "From" ? 0 : 1];
-        setTimeout(function () {
-          const end = focusItem.value.length;
-          focusItem.setSelectionRange(end, end);
-          focusItem.focus();
-        }, 20);
-      }
+        // Assuming you have an input element you want to focus on
+        const inputElement =
+          this.getSearchElementData()[this.label === "From" ? 0 : 1];
+
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }, 10);
     },
     onClickOutside() {
       this.optionsIsOpen = false;
-    },
-    toggleDropdown() {
-      this.optionsIsOpen = !this.optionsIsOpen;
     },
     selectOption(option) {
       this.selectedOption = option;
@@ -144,24 +139,9 @@ export default {
         }
       }
     },
-    handleOnClick() {
-      this.optionsIsOpen = true;
-      let items = this.getSearchElementData();
-      if (items) {
-        let focusItem = items[this.label === "From" ? 0 : 1];
-        setTimeout(function () {
-          const end = focusItem.value.length;
-          focusItem.setSelectionRange(end, end);
-          focusItem.focus();
-        }, 10);
-      }
-    },
     search(e) {
       this.searchKey = e.target.value;
       this.$emit("input", e.target.value);
-    },
-    handleOnFocus() {
-      this.optionsIsOpen = true;
     },
     getSearchElementData() {
       return document.getElementsByClassName("searchInput");
