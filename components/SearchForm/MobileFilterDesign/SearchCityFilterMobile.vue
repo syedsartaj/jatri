@@ -107,9 +107,9 @@ export default {
     handleShowOption(e) {
       this.optionsIsOpen = true;
 
-      setTimeout(() => {
+      this.$nextTick(() => {
         e.target.focus();
-      }, 10);
+      });
     },
     onClickOutside() {
       this.optionsIsOpen = false;
@@ -121,15 +121,13 @@ export default {
       this.optionsIsOpen = false;
       let items = this.getSearchElementData();
       if (items) {
-        if (this.label === "From" && !items[3].value) {
-          setTimeout(function () {
+        this.$nextTick(() => {
+          if (this.label === "From" && !items[3].value) {
             items[3].focus();
-          }, 20);
-        } else if (this.label === "To" && !items[2].value) {
-          setTimeout(function () {
+          } else if (this.label === "To" && !items[2].value) {
             items[2].focus();
-          }, 20);
-        }
+          }
+        });
       }
     },
     search(e) {
