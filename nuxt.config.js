@@ -16,7 +16,7 @@ export default {
     },
     meta: [
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" },
       { hid: "description", name: "description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { hid: "og:description", name: "og:description", content: "Visit our website or download Jatri App to book your tickets. Find the best bus deals and reputable bus companies in one place." },
       { hid: "keywords", name: "keywords", content: "bus ticket bd, bus ticket online, bus ticket price, bus ticket booking online" },
