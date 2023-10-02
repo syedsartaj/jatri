@@ -11,6 +11,7 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
+          ref="textInput"
           id="searchInput"
           v-model="searchKey"
           :class="{
@@ -20,7 +21,6 @@
           :placeholder="defaultOption"
           autocomplete="off"
           type="text"
-          autofocus
           @keyup="search"
           @focus="handleShowOption"
         />
@@ -107,6 +107,7 @@ export default {
   },
   methods: {
     handleShowOption() {
+      this.$refs.textInput.focus();
       this.optionsIsOpen = true;
       let items = this.getSearchElementData();
       if (items) {
