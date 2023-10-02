@@ -2,7 +2,6 @@
   <div class="w-full relative" v-click-outside="onClickOutside">
     <!-- Input box open -->
     <button
-      @click="handleOnClick"
       :class="{
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
@@ -24,6 +23,7 @@
           type="text"
           autofocus
           @keyup="search"
+          @focus="handleOnClick"
         />
       </div>
       <img
