@@ -15,11 +15,7 @@
           id="searchInput"
           v-model="searchKey"
           autocomplete="off"
-          :class="{
-            'text-blackSecondary': searchKey === '',
-          }"
           class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
-          :placeholder="defaultOption"
           type="text"
           autofocus
           @focus="handleOnFocus"
