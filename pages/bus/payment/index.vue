@@ -199,10 +199,15 @@
               getBookingInfoDetails.invoice.seatNo.length > 1 ? "s" : ""
             }})
           </p>
-          <div class="flex flex-row items-center">
+          <div class="flex flex-col items-end">
+            <p class="text-base font-medium text-blackPrimary">
+              <span class="font-bold">
+                BDT {{ getBookingInfoDetails.amount }}</span
+              >
+            </p>
             <div
               v-if="getBookingInfoDetails.invoice.discount"
-              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full"
+              class="flex flex-row items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full mt-[4px]"
             >
               <img
                 src="@/assets/images/icons/promoIcon.svg"
@@ -216,11 +221,6 @@
                 }}</span>
               </p>
             </div>
-            <p class="text-base font-medium text-blackPrimary">
-              <span class="font-bold">
-                BDT {{ getBookingInfoDetails.amount }}</span
-              >
-            </p>
           </div>
         </div>
       </div>
