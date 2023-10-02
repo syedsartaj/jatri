@@ -2,7 +2,6 @@
   <div class="w-full relative" v-click-outside="onClickOutside">
     <!-- Input box open -->
     <button
-      @click="handleOnClick"
       :class="{
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
@@ -25,7 +24,7 @@
           autofocus
           @focus="handleOnFocus"
           @keyup="search"
-          @mousedown="handleOnMouseDown"
+          @mousedown="handleOnClick"
         />
       </div>
       <img
@@ -112,7 +111,8 @@ export default {
     handleOnMouseDown() {
       this.$refs.searchInput.focus();
     },
-    onClickOutside() {
+    onClickOutside(e) {
+      e.stopPropagation();
       this.optionsIsOpen = false;
     },
     toggleDropdown() {
