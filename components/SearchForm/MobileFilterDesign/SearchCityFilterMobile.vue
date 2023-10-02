@@ -11,7 +11,6 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
-          id="searchInput"
           v-model="searchKey"
           :class="{
             'text-blackSecondary': searchKey === '',
@@ -107,6 +106,7 @@ export default {
   methods: {
     handleShowOption(e) {
       this.optionsIsOpen = true;
+
       setTimeout(() => {
         e.target.focus();
       }, 10);
@@ -124,11 +124,11 @@ export default {
         if (this.label === "From" && !items[3].value) {
           setTimeout(function () {
             items[3].focus();
-          }, 5);
+          }, 20);
         } else if (this.label === "To" && !items[2].value) {
           setTimeout(function () {
             items[2].focus();
-          }, 5);
+          }, 20);
         }
       }
     },
