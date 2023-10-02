@@ -186,10 +186,6 @@ export const actions = {
           if (res.data) {
             commit("setPromoCode", res.data);
             resolve(res);
-            this.$toast.success("Promo applied successfully", {
-              position: "bottom-right",
-              duration: 5000,
-            });
           } else {
             resolve(res);
             commit("resetPromoCode");
@@ -279,11 +275,6 @@ export const actions = {
       );
 
       commit("updateBookingInfoForApplyPromo", data.data);
-
-      this.$toast.success("Promo code applied successfully", {
-        position: "bottom-right",
-        duration: 5000,
-      });
       commit("setLoading", false);
       return true;
     } catch (error) {

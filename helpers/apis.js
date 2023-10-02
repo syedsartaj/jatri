@@ -73,4 +73,7 @@ export const SERVICE_TYPE = {
     POST_SEND_OTP_BY_TICKET_ID: `${PARIBAHAN_BASE_URL}/v1/api/water/send-otp`,
     POST_CANCEL_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/cancel-ticket`,
   },
+  COMMON: {
+    POST_SEND_OTP_BY_PHONE: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp-by-phone`,
+  }
 };

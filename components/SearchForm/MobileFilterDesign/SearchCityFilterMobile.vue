@@ -1,24 +1,27 @@
 <template>
-  <div class="">
+  <div class="w-full relative" v-click-outside="onClickOutside">
+    <!-- Input box open -->
     <button
-      :class="optionsIsOpen && 'border border-[#4D4D4F]'"
-      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[16px] py-[11px]"
-      @click="toggleDropdown"
+      :class="{
+        'border border-[#E0293B]': showErrorToolTip,
+        'border border-[#151414]': optionsIsOpen,
+      }"
+      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
     >
-      <div class="flex justify-start gap-x-4 items-center w-10/12">
+      <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
-        <p
-          v-if="label && selectedOption === ''"
-          class="text-xs font-normal text-blackSecondary text-left mb-[2px]"
-        >
-          {{ label }}
-        </p>
-        <p
-          v-if="selectedOption !== ''"
-          class="text-xs font-normal text-blackSecondary text-left mb-[2px]"
-        >
-          {{ this.selectedOption.city_name.toUpperCase() }}
-        </p>
+        <input
+          v-model="searchKey"
+          :class="{
+            'text-blackSecondary': searchKey === '',
+          }"
+          class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
+          :placeholder="defaultOption"
+          autocomplete="off"
+          type="text"
+          @keyup="search"
+          @focus="handleShowOption"
+        />
       </div>
       <img
         src="@/assets/images/icons/mobileFilterDropdownIcon.svg"
@@ -27,44 +30,29 @@
       />
     </button>
 
+    <!-- ErrorToolTip -->
+    <SearchErrorToolTip v-if="showErrorToolTip" :message="errorMessage" />
+
     <!-- dropdown -->
     <div
-      v-if="optionsIsOpen"
-      class="mt-2 w-full bg-white rounded shadow-xl z-[1000] leading-6 absolute left-0 max-h-[307px] overflow-y-scroll"
+      v-if="optionsIsOpen && filteredOptionsData?.length"
+      class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
     >
-      <div class="flex justify-center items-center p-2">
-        <input
-          v-if="allowFilter"
-          id="searchInput"
-          v-model="searchKey"
-          class="w-full border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]"
-          placeholder="Search Location"
-          autocomplete="off"
-          type="text"
-          autofocus
-          @keyup="search"
-        />
-      </div>
       <ul
-        class="overflow-y-auto divide-y divide-dashed divide-[#DBDBDB] h-auto text-sm xl:text-md text-td_text px-4"
+        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[252px] text-base px-4"
       >
         <li
           v-for="(option, index) in filteredOptionsData"
           :key="index"
-          class="cursor-pointer font-inter py-[14px] font-medium hover:text-corporate relative"
-          :class="
-            option.city_name === selectedOption.city_name
-              ? 'text-corporate font-medium'
-              : ''
-          "
+          class="cursor-pointer font-inter py-[12px] font-normal hover:text-corporate relative"
+          :class="{
+            'text-corporate font-normal':
+              option.city_name === selectedOption.city_name,
+            'pt-0': index === 0,
+          }"
           @click="selectOption(option)"
         >
           {{ option.city_name }}
-          <span
-            v-if="option.city_name === selectedOption.city_name"
-            class="absolute right-5 top-5 bottom-0"
-            ><img src="@/assets/images/icons/tik.svg" alt="" class="w-4 h-3"
-          /></span>
         </li>
       </ul>
     </div>
@@ -72,8 +60,15 @@
 </template>
 
 <script>
-import { handleScrollBehaviour } from "../../../helpers/utils";
+import SearchErrorToolTip from "../../SearchForm/SearchErrorToolTip.vue";
+import vClickOutside from "v-click-outside";
 export default {
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+  components: {
+    SearchErrorToolTip,
+  },
   props: {
     label: {
       type: String,
@@ -96,6 +91,10 @@ export default {
       required: true,
     },
     defaultValue: "",
+    errorOccured: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
@@ -104,48 +103,53 @@ export default {
       searchKey: "",
     };
   },
-  watch: {
-    defaultValue: {
-      handler(value) {
-        this.selectedOption = value;
-      },
-      deep: true,
-      immediate: true,
-    },
-  },
-  mounted() {
-    window.addEventListener("click", this.close);
-  },
-
-  beforeDestroy() {
-    handleScrollBehaviour(true);
-    window.removeEventListener("click", this.close);
-  },
-
   methods: {
-    toggleDropdown() {
-      this.optionsIsOpen = !this.optionsIsOpen;
-      handleScrollBehaviour(!this.optionsIsOpen);
-      setTimeout(function () {
-        document.getElementById("searchInput").focus();
-      }, 10);
+    handleShowOption(e) {
+      this.optionsIsOpen = true;
+
+      this.$nextTick(() => {
+        e.target.focus();
+      });
+    },
+    onClickOutside() {
+      this.optionsIsOpen = false;
     },
     selectOption(option) {
       this.selectedOption = option;
+      this.searchKey = option.city_name;
       this.$emit("input", this.selectedOption.city_name);
-      handleScrollBehaviour(true);
       this.optionsIsOpen = false;
-    },
-    close(e) {
-      if (!this.$el.contains(e.target)) {
-        if (this.optionsIsOpen) {
-          handleScrollBehaviour(true);
-        }
-        this.optionsIsOpen = false;
+      let items = this.getSearchElementData();
+      if (items) {
+        this.$nextTick(() => {
+          if (this.label === "From" && !items[3].value) {
+            items[3].focus();
+          } else if (this.label === "To" && !items[2].value) {
+            items[2].focus();
+          }
+        });
       }
     },
     search(e) {
       this.searchKey = e.target.value;
+      this.$emit("input", e.target.value);
+    },
+    getSearchElementData() {
+      return document.getElementsByClassName("searchInput");
+    },
+  },
+  watch: {
+    defaultValue: {
+      handler(value) {
+        this.selectedOption = value;
+        if (this.selectedOption?.city_name) {
+          this.searchKey = this.selectedOption.city_name;
+        } else {
+          this.searchKey = value;
+        }
+      },
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -160,8 +164,26 @@ export default {
         a.city_name.localeCompare(b.city_name)
       );
     },
+
+    showErrorToolTip() {
+      return this.errorOccured && !this.selectedOption && !this.searchKey;
+    },
+    errorMessage() {
+      return this.label === "To"
+        ? "Enter destination first"
+        : "Enter location first";
+    },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+input[type="text"]:focus::-webkit-input-placeholder {
+  color: #8d8d8f;
+}
+
+.custom-shadow {
+  fill: var(--white-primary, #fff);
+  filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.3));
+}
+</style>

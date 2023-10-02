@@ -199,10 +199,12 @@
               getBookingInfoDetails.invoice.seatNo.length > 1 ? "s" : ""
             }})
           </p>
-          <div class="flex flex-row items-center">
+          <div
+            class="flex flex-col-reverse md:flex-row items-end md:items-start"
+          >
             <div
               v-if="getBookingInfoDetails.invoice.discount"
-              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full"
+              class="flex flex-row md:mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full mt-[4px] md:mt-0"
             >
               <img
                 src="@/assets/images/icons/promoIcon.svg"
@@ -734,10 +736,6 @@ export default {
           if (success) {
             this.promoCode = "";
             this.activePromo = null;
-            this.$toast.success("Promo code removed successfully", {
-              position: "bottom-right",
-              duration: 5000,
-            });
           } else {
             this.$toast.error("Failed to remove promo code", {
               position: "bottom-right",
