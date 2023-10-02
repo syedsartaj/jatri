@@ -11,7 +11,6 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
-          v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
           :class="{
@@ -23,7 +22,7 @@
           type="text"
           autofocus
           @keyup="search"
-          @focus="handleOnClick"
+          @focus="handleShowOption"
         />
       </div>
       <img
@@ -107,11 +106,19 @@ export default {
     };
   },
   methods: {
-    handleOnMouseDown() {
-      this.$refs.searchInput.focus();
+    handleShowOption() {
+      this.optionsIsOpen = true;
+      let items = this.getSearchElementData();
+      if (items) {
+        let focusItem = items[this.label === "From" ? 0 : 1];
+        setTimeout(function () {
+          const end = focusItem.value.length;
+          focusItem.setSelectionRange(end, end);
+          focusItem.focus();
+        }, 10);
+      }
     },
-    onClickOutside(e) {
-      e.stopPropagation();
+    onClickOutside() {
       this.optionsIsOpen = false;
     },
     toggleDropdown() {
@@ -135,8 +142,7 @@ export default {
         }
       }
     },
-    handleOnClick(e) {
-      e.stopPropagation();
+    handleOnClick() {
       this.optionsIsOpen = true;
       let items = this.getSearchElementData();
       if (items) {
@@ -150,7 +156,6 @@ export default {
     },
     search(e) {
       this.searchKey = e.target.value;
-      this.optionsIsOpen = true;
       this.$emit("input", e.target.value);
     },
     handleOnFocus() {
