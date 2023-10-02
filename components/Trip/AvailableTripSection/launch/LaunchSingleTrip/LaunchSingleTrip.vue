@@ -122,7 +122,7 @@
             {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
-          <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
+          <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
         </div>
         <div
           class="w-full md:hidden flex justify-start items-center gap-x-[10px] md:gap-x-3"
