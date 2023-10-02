@@ -55,6 +55,7 @@
             </button>
             <button
               :class="!isButtonActive && `opacity-60`"
+              :disabled="!isButtonActive"
               @click="handleOnClick"
               class="flex items-center justify-center bg-corporate text-white text-sm font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
