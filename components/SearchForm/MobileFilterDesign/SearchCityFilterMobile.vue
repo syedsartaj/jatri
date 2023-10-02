@@ -108,7 +108,7 @@ export default {
     handleShowOption(e) {
       this.optionsIsOpen = true;
       setTimeout(() => {
-        e.target.focus()
+        e.target.focus();
       }, 10);
     },
     onClickOutside() {
@@ -124,11 +124,11 @@ export default {
         if (this.label === "From" && !items[3].value) {
           setTimeout(function () {
             items[3].focus();
-          }, 10);
+          }, 5);
         } else if (this.label === "To" && !items[2].value) {
           setTimeout(function () {
             items[2].focus();
-          }, 10);
+          }, 5);
         }
       }
     },
