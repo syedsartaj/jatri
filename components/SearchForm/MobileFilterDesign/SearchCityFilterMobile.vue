@@ -14,7 +14,10 @@
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
-          class="w-full border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]"
+          :class="{
+            'text-blackSecondary': searchKey === '',
+          }"
+          class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
           placeholder="Search Location"
           autocomplete="off"
           type="text"
