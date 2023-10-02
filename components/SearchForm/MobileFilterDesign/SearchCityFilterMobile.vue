@@ -106,17 +106,13 @@ export default {
   },
   methods: {
     handleShowOption() {
-      setTimeout(() => {
-        this.optionsIsOpen = true;
+      this.optionsIsOpen = true;
+      const inputElement =
+        this.getSearchElementData()[this.label === "From" ? 0 : 1];
 
-        // Assuming you have an input element you want to focus on
-        const inputElement =
-          this.getSearchElementData()[this.label === "From" ? 0 : 1];
-
-        if (inputElement) {
-          inputElement.focus();
-        }
-      }, 10);
+      if (inputElement) {
+        inputElement.focus();
+      }
     },
     onClickOutside() {
       this.optionsIsOpen = false;
@@ -128,13 +124,13 @@ export default {
       this.optionsIsOpen = false;
       let items = this.getSearchElementData();
       if (items) {
-        if (this.label === "From" && !items[1].value) {
+        if (this.label === "From" && !items[3].value) {
           setTimeout(function () {
-            items[1].focus();
+            items[3].focus();
           }, 10);
-        } else if (this.label === "To" && !items[0].value) {
+        } else if (this.label === "To" && !items[2].value) {
           setTimeout(function () {
-            items[0].focus();
+            items[2].focus();
           }, 10);
         }
       }
@@ -181,9 +177,6 @@ export default {
       return this.label === "To"
         ? "Enter destination first"
         : "Enter location first";
-    },
-    isInitialView() {
-      return !this.selectedOption && !this.searchKey;
     },
   },
 };
