@@ -1,7 +1,7 @@
 <template>
   <div class="w-full relative" v-click-outside="onClickOutside">
     <!-- Input box open -->
-    <button
+    <div
       @click="handleOnClick"
       :class="{
         'border border-[#E0293B]': showErrorToolTip,
@@ -12,18 +12,14 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
-          v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
           autocomplete="off"
-          :class="{
-            'text-blackSecondary': searchKey === '',
-          }"
+
           class="rounded-md outline-none overflow-x-hidden text-sm font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
-          :placeholder="defaultOption"
           type="text"
           autofocus
-          @click="handleOnFocus"
+          @focus="handleOnFocus"
           @keyup="search"
         />
       </div>
@@ -32,7 +28,7 @@
         alt=""
         :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
       />
-    </button>
+    </div>
 
     <!-- ErrorToolTip -->
     <SearchErrorToolTip v-if="showErrorToolTip" :message="errorMessage" />
