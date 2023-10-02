@@ -108,7 +108,7 @@ export default {
     handleShowOption() {
       setTimeout(() => {
         this.optionsIsOpen = true;
-      }, 500);
+      }, 10);
 
       let items = this.getSearchElementData();
       if (items) {
@@ -117,7 +117,7 @@ export default {
           const end = focusItem.value.length;
           focusItem.setSelectionRange(end, end);
           focusItem.focus();
-        }, 10);
+        }, 20);
       }
     },
     onClickOutside() {
