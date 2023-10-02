@@ -106,13 +106,16 @@ export default {
   },
   methods: {
     handleShowOption() {
-      this.optionsIsOpen = true;
-      const inputElement =
-        this.getSearchElementData()[this.label === "From" ? 0 : 1];
+      setTimeout(() => {
+        this.optionsIsOpen = true;
 
-      if (inputElement) {
-        inputElement.focus();
-      }
+        const inputElement =
+          this.getSearchElementData()[this.label === "From" ? 2 : 3];
+
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }, 10);
     },
     onClickOutside() {
       this.optionsIsOpen = false;
