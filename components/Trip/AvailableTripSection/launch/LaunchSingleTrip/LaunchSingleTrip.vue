@@ -147,7 +147,7 @@
               {{ trip.seatFare[0].fare }}
               <span class="text-xs">TK</span>
             </h2>
-            <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
+            <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
           </div>
         </div>
         <div
