@@ -105,16 +105,10 @@ export default {
     };
   },
   methods: {
-    handleShowOption() {
+    handleShowOption(e) {
+      this.optionsIsOpen = true;
       setTimeout(() => {
-        this.optionsIsOpen = true;
-
-        const inputElement =
-          this.getSearchElementData()[this.label === "From" ? 2 : 3];
-
-        if (inputElement) {
-          inputElement.focus();
-        }
+        e.target.focus()
       }, 10);
     },
     onClickOutside() {
