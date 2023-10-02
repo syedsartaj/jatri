@@ -11,7 +11,6 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
-          ref="textInput"
           id="searchInput"
           v-model="searchKey"
           :class="{
@@ -36,59 +35,27 @@
     <SearchErrorToolTip v-if="showErrorToolTip" :message="errorMessage" />
 
     <!-- dropdown -->
-
-    <div v-if="optionsIsOpen && filteredOptionsData?.length">
-      <button
-        :class="{
-          'border border-[#E0293B]': showErrorToolTip,
-          'border border-[#151414]': optionsIsOpen,
-        }"
-        class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
+    <div
+      v-if="optionsIsOpen && filteredOptionsData?.length"
+      class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
+    >
+      <ul
+        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[252px] text-base px-4"
       >
-        <div class="flex justify-start gap-x-4 items-center w-full">
-          <img v-if="icon" :src="icon" alt="" />
-          <input
-            ref="textInput"
-            id="searchInput"
-            v-model="searchKey"
-            :class="{
-              'text-blackSecondary': searchKey === '',
-            }"
-            class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
-            :placeholder="defaultOption"
-            autocomplete="off"
-            type="text"
-            @keyup="search"
-            @focus="handleShowOption"
-          />
-        </div>
-        <img
-          src="@/assets/images/icons/mobileFilterDropdownIcon.svg"
-          alt=""
-          :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
-        />
-      </button>
-      <div
-        class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
-      >
-        <ul
-          class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[252px] text-base px-4"
+        <li
+          v-for="(option, index) in filteredOptionsData"
+          :key="index"
+          class="cursor-pointer font-inter py-[12px] font-normal hover:text-corporate relative"
+          :class="{
+            'text-corporate font-normal':
+              option.city_name === selectedOption.city_name,
+            'pt-0': index === 0,
+          }"
+          @click="selectOption(option)"
         >
-          <li
-            v-for="(option, index) in filteredOptionsData"
-            :key="index"
-            class="cursor-pointer font-inter py-[12px] font-normal hover:text-corporate relative"
-            :class="{
-              'text-corporate font-normal':
-                option.city_name === selectedOption.city_name,
-              'pt-0': index === 0,
-            }"
-            @click="selectOption(option)"
-          >
-            {{ option.city_name }}
-          </li>
-        </ul>
-      </div>
+          {{ option.city_name }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -139,8 +106,10 @@ export default {
   },
   methods: {
     handleShowOption() {
-      this.$refs.textInput.focus();
-      this.optionsIsOpen = true;
+      setTimeout(() => {
+        this.optionsIsOpen = true;
+      }, 500);
+
       let items = this.getSearchElementData();
       if (items) {
         let focusItem = items[this.label === "From" ? 0 : 1];
