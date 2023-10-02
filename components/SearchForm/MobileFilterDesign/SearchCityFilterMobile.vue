@@ -11,16 +11,15 @@
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <input
-          ref="searchInput"
+          v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
+          class="w-full border border-gray-300 lg:px-16 xl:px-20 px-10 py-2 rounded-md outline-none overflow-x-hidden text-[#747476]"
+          placeholder="Search Location"
           autocomplete="off"
-          class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
           type="text"
           autofocus
-          @focus="handleOnFocus"
           @keyup="search"
-          @mousedown="handleOnClick"
         />
       </div>
       <img
