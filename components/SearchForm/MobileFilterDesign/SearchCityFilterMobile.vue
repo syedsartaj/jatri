@@ -2,6 +2,7 @@
   <div class="w-full relative" v-click-outside="onClickOutside">
     <!-- Input box open -->
     <button
+      @click="handleOnClick"
       :class="{
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
@@ -18,7 +19,7 @@
             'text-blackSecondary': searchKey === '',
           }"
           class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
-          placeholder="Search Location"
+          :placeholder="defaultOption"
           autocomplete="off"
           type="text"
           autofocus
