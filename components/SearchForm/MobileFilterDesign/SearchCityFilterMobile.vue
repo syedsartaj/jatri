@@ -136,7 +136,8 @@ export default {
         }
       }
     },
-    handleOnClick() {
+    handleOnClick(e) {
+      e.stopPropagation();
       this.optionsIsOpen = true;
       let items = this.getSearchElementData();
       if (items) {
