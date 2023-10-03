@@ -1,12 +1,12 @@
 <template>
   <div class="w-full relative" v-click-outside="onClickOutside">
-    <!-- Input box open -->
-    <button
+    <div
       :class="{
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
       }"
       class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
+      @click="handleOnClick"
     >
       <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
@@ -20,7 +20,7 @@
           autocomplete="off"
           type="text"
           @keyup="search"
-          @focus="handleShowOption"
+          @focus="handleInputFocus"
         />
       </div>
       <img
@@ -28,7 +28,7 @@
         alt=""
         :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
       />
-    </button>
+    </div>
 
     <!-- ErrorToolTip -->
     <SearchErrorToolTip v-if="showErrorToolTip" :message="errorMessage" />
@@ -39,7 +39,7 @@
       class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
     >
       <ul
-        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[252px] text-base px-4"
+        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[220px] text-base px-4"
       >
         <li
           v-for="(option, index) in filteredOptionsData"
@@ -49,6 +49,7 @@
             'text-corporate font-normal':
               option.city_name === selectedOption.city_name,
             'pt-0': index === 0,
+            'pb-0': filteredOptionsData.length === 1,
           }"
           @click="selectOption(option)"
         >
@@ -104,7 +105,19 @@ export default {
     };
   },
   methods: {
-    handleShowOption(e) {
+    handleOnClick() {
+      this.optionsIsOpen = true;
+      let items = this.getSearchElementData();
+      if (items.length <= 4) {
+        if (this.label === "From") {
+          items[2].focus();
+        } else if (this.label === "To") {
+          items[3].focus();
+        }
+      }
+    },
+    handleInputFocus(e) {
+      console.log("checking");
       this.optionsIsOpen = true;
 
       this.$nextTick(() => {

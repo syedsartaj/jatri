@@ -250,7 +250,7 @@
               v-if="!showPromoInput"
               @click="applyPromo"
               :disabled="!promoCode"
-              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
+              class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
               <img
                 src="@/assets/images/icons/blueTickBus.svg"
@@ -262,7 +262,7 @@
             <button
               v-if="showPromoInput"
               @click="removePromo"
-              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
+              class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
             >
               <img
                 src="@/assets/images/icons/removePromoIcon.svg"
@@ -770,6 +770,12 @@ export default {
 }
 
 .custom-width {
-  width: calc(100% - 181px);
+  width: calc(100% - 156px);
+}
+
+@media only screen and (min-width: 768px) {
+  .custom-width {
+    width: calc(100% - 181px);
+  }
 }
 </style>
