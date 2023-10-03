@@ -1,11 +1,11 @@
 <template>
   <div class="w-full relative">
-    <button
+    <div
       :class="optionsIsOpen && 'border border-[#4D4D4F]'"
-      class="flex justify-between items-center rounded bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
+      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
       @click="toggleDropdown"
     >
-      <div class="flex justify-start gap-x-4 items-center w-10/12">
+      <div class="flex justify-start gap-x-4 items-center w-full">
         <img v-if="icon" :src="icon" alt="" />
         <p
           v-if="label && selectedOption === ''"
@@ -25,15 +25,15 @@
         alt=""
         :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
       />
-    </button>
+    </div>
 
     <!-- dropdown -->
     <div
       v-if="optionsIsOpen"
-      class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
+      class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] py-4"
     >
       <ul
-        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] max-h-[252px] text-base px-4"
+        class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[146px] text-base px-4"
       >
         <li
           v-for="(option, index) in filteredOptionsData"
@@ -139,7 +139,6 @@ export default {
 
 <style>
 .custom-shadow {
-  fill: var(--white-primary, #fff);
-  filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.3));
+
 }
 </style>
