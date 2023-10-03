@@ -1,13 +1,8 @@
 <template>
   <div>
-    <div
-      class="pt-80 sm:pt-12 mt-10 flex justify-center w-full lg:hidden"
-      v-if="!(getOfferImages && getOfferImages.length)"
-    ></div>
-
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="pt-80 sm:pt-12 mt-10 flex justify-center w-full lg:hidden"
+      class="flex justify-center w-full lg:hidden"
       v-if="getOfferImages && getOfferImages.length"
     >
       <div class="h-[324px] w-full bg-[#fef2f0]">

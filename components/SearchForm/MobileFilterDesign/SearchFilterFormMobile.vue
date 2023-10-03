@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid sm:grid-cols-2 gap-[14px]">
+    <div class="grid md:grid-cols-2 gap-[14px] md:gap-4">
       <SearchCityFilterMobile
         v-model="departure"
         :defaultValue="departureName"
@@ -10,6 +10,7 @@
         :allow-filter="true"
         :options="getCities"
         :errorOccured="errorOccured"
+        ref="departure"
       />
       <SearchCityFilterMobile
         v-model="destination"
@@ -20,6 +21,7 @@
         :allow-filter="true"
         :options="getCities"
         :errorOccured="errorOccured"
+        ref="destination"
       />
       <DatePickerMobile
         v-model="departingDate"
@@ -49,9 +51,9 @@
         :options="timeList"
       />
     </div>
-    <div class="w-full flex items-center mt-6 justify-center">
+    <div class="w-full flex items-center mt-6 mb-2 justify-center">
       <button
-        class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
+        class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[10px] px-[26px]"
         :class="
           !departure || !destination || !coachType || !departingDate
             ? 'bg-corporate'
