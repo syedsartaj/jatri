@@ -5,7 +5,7 @@
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
       }"
-      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
+      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px] input-wrapper"
       @click="handleOnClick"
     >
       <div class="flex justify-start gap-x-4 items-center w-full">
@@ -20,7 +20,6 @@
           autocomplete="off"
           type="text"
           @keyup="search"
-          @focus="handleInputFocus"
         />
       </div>
       <img
@@ -106,23 +105,23 @@ export default {
   },
   methods: {
     handleOnClick() {
-      this.optionsIsOpen = true;
       let items = this.getSearchElementData();
       if (items.length <= 4) {
         if (this.label === "From") {
+          this.optionsIsOpen = true;
+
           items[2].focus();
         } else if (this.label === "To") {
+          this.optionsIsOpen = true;
+
           items[3].focus();
         }
       }
     },
-    handleInputFocus(e) {
-      console.log("checking");
-      this.optionsIsOpen = true;
-
-      this.$nextTick(() => {
-        e.target.focus();
-      });
+    handleInputFocus() {
+      if (!this.optionsIsOpen) {
+        this.optionsIsOpen = true;
+      }
     },
     onClickOutside() {
       this.optionsIsOpen = false;
@@ -133,12 +132,14 @@ export default {
       this.$emit("input", this.selectedOption.city_name);
       this.optionsIsOpen = false;
       let items = this.getSearchElementData();
-      if (items) {
+      let inputClickerItems = document.getElementsByClassName("input-wrapper");
+
+      if (items && inputClickerItems) {
         this.$nextTick(() => {
           if (this.label === "From" && !items[3].value) {
-            items[3].focus();
+            inputClickerItems[1].click();
           } else if (this.label === "To" && !items[2].value) {
-            items[2].focus();
+            inputClickerItems[0].click();
           }
         });
       }
@@ -196,7 +197,7 @@ input[type="text"]:focus::-webkit-input-placeholder {
 }
 
 .custom-shadow {
-  fill: var(--white-primary, #fff);
+  fill: #fff;
   filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.3));
 }
 </style>
