@@ -5,7 +5,7 @@
         'border border-[#E0293B]': showErrorToolTip,
         'border border-[#151414]': optionsIsOpen,
       }"
-      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px]"
+      class="flex justify-between items-center rounded-[8px] bg-[#F7F7F7] focus:outline-none w-full px-[12px] py-[10px] input-wrapper"
       @click="handleOnClick"
     >
       <div class="flex justify-start gap-x-4 items-center w-full">
@@ -20,7 +20,6 @@
           autocomplete="off"
           type="text"
           @keyup="search"
-          @focus="!optionsIsOpen && handleInputFocus()"
         />
       </div>
       <img
@@ -36,7 +35,7 @@
     <!-- dropdown -->
     <div
       v-if="optionsIsOpen && filteredOptionsData?.length"
-      class="absolute mt-2 w-full bg-white rounded-[16px] z-[1000] divide-y-2 py-4"
+      class="absolute mt-2 w-full bg-white rounded-[16px] custom-shadow z-[1000] divide-y-2 py-4"
     >
       <ul
         class="w-full bg-white overflow-y-auto divide-y divide divide-[#EDEDED] h-[220px] text-base px-4"
@@ -133,12 +132,14 @@ export default {
       this.$emit("input", this.selectedOption.city_name);
       this.optionsIsOpen = false;
       let items = this.getSearchElementData();
-      if (items) {
+      let inputClickerItems = document.getElementsByClassName("input-wrapper");
+
+      if (items && inputClickerItems) {
         this.$nextTick(() => {
           if (this.label === "From" && !items[3].value) {
-            items[3].focus();
+            inputClickerItems[1].click();
           } else if (this.label === "To" && !items[2].value) {
-            items[2].focus();
+            inputClickerItems[0].click();
           }
         });
       }
@@ -193,5 +194,10 @@ export default {
 <style scoped>
 input[type="text"]:focus::-webkit-input-placeholder {
   color: #8d8d8f;
+}
+
+.custom-shadow {
+  fill: #fff;
+  filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.3));
 }
 </style>
