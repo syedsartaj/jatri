@@ -144,7 +144,7 @@ export default {
         ?.name;
     },
     isPhoneValid() {
-      return isValidPhoneNumber(this.passengerMobile);
+      return isValidPhoneNumber(`0${this.passengerMobile}`);
     },
     totalPrice() {
       return (
@@ -173,13 +173,13 @@ export default {
     },
     handlePromo() {
       this.$nextTick(async () => {
-        if (isValidPhoneNumber(this.passengerMobile)) {
+        if (isValidPhoneNumber(`0${this.passengerMobile}`)) {
           const payload = {
             promoCode: this.promoCode,
             companyId: this.getLaunchBookingData?.invoice.companyId,
             tripDateTime: this.getLaunchBookingData?.invoice.tripDateTime,
             paymentId: this.getLaunchBookingData?._id,
-            phone: this.passengerMobile,
+            phone: `0${this.passengerMobile}`,
           };
 
           try {
@@ -213,7 +213,7 @@ export default {
         this.isPromoApplied = true;
         this.handlePromoApplied();
         this.promoAmount = bookingData?.invoice?.promo?.amount || 0;
-        this.passengerMobile = bookingData?.invoice?.promo?.phone || "";
+        this.passengerMobile = bookingData?.invoice?.promo?.phone?.substring(1) || "";
       }
     }
   },
