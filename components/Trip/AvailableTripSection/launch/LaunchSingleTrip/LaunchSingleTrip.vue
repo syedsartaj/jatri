@@ -231,7 +231,9 @@
             <div class="flex flex-row items-center justify-center">
               <BedIcon v-if="selectedClass?.info?.isCabin" />
               <SofaIcon v-else-if="!selectedClass?.info?.isCabin" />
-              <p class="ml-3">{{ selectedClass?.info?.name || "Select a seat class" }}</p>
+              <p class="ml-3">
+                {{ selectedClass?.info?.name || "Select a seat class" }}
+              </p>
             </div>
             <img
               src="@/assets/images/home/arrowDown.svg"
@@ -478,7 +480,11 @@ export default {
         }
       }
 
-      this.classList = seatClassArray.length ? seatClassArray : [];
+      this.classList = seatClassArray.length
+        ? seatClassArray
+        : this.getSeatViewData?.seatPlan?.floors?.length
+        ? []
+        : this.classList;
     },
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
