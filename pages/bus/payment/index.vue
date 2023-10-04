@@ -199,10 +199,12 @@
               getBookingInfoDetails.invoice.seatNo.length > 1 ? "s" : ""
             }})
           </p>
-          <div class="flex flex-row items-center">
+          <div
+            class="flex flex-col-reverse md:flex-row items-end md:items-start"
+          >
             <div
               v-if="getBookingInfoDetails.invoice.discount"
-              class="flex flex-row mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full"
+              class="flex flex-row md:mr-4 items-center bg-[#48A43F] pl-[4px] pr-2 py-[2px] justify-center rounded-full mt-[4px] md:mt-0"
             >
               <img
                 src="@/assets/images/icons/promoIcon.svg"
@@ -248,7 +250,7 @@
               v-if="!showPromoInput"
               @click="applyPromo"
               :disabled="!promoCode"
-              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
+              class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
               <img
                 src="@/assets/images/icons/blueTickBus.svg"
@@ -260,7 +262,7 @@
             <button
               v-if="showPromoInput"
               @click="removePromo"
-              class="w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
+              class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
             >
               <img
                 src="@/assets/images/icons/removePromoIcon.svg"
@@ -768,6 +770,12 @@ export default {
 }
 
 .custom-width {
-  width: calc(100% - 181px);
+  width: calc(100% - 156px);
+}
+
+@media only screen and (min-width: 768px) {
+  .custom-width {
+    width: calc(100% - 181px);
+  }
 }
 </style>

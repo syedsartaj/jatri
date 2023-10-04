@@ -1,23 +1,27 @@
 <template>
   <div>
-    <div class="grid sm:grid-cols-2 gap-4">
+    <div class="grid md:grid-cols-2 gap-[14px] md:gap-4">
       <SearchCityFilterMobile
         v-model="departure"
         :defaultValue="departureName"
-        :label="'From city or your location'"
+        :label="'From'"
         :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
-        :default-option="'Choose your location'"
+        :default-option="'From city or your location'"
         :allow-filter="true"
         :options="getCities"
+        :errorOccured="errorOccured"
+        ref="departure"
       />
       <SearchCityFilterMobile
         v-model="destination"
         :defaultValue="destinationName"
-        :label="'To city or your destination'"
+        :label="'To'"
         :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
-        :default-option="'Choose your destination'"
+        :default-option="'To city or your destination'"
         :allow-filter="true"
         :options="getCities"
+        :errorOccured="errorOccured"
+        ref="destination"
       />
       <DatePickerMobile
         v-model="departingDate"
@@ -47,9 +51,9 @@
         :options="timeList"
       />
     </div>
-    <div class="w-full flex items-center mt-[32px] justify-center">
+    <div class="w-full flex items-center mt-6 mb-2 justify-center">
       <button
-        class=" w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[13px] px-[26px]"
+        class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[10px] px-[26px]"
         :class="
           !departure || !destination || !coachType || !departingDate
             ? 'bg-corporate'
@@ -72,6 +76,7 @@ export default {
   data() {
     return {
       ServiceType: ServiceType,
+      errorOccured: false,
       departure: "",
       destination: "",
       departureName: "",
@@ -134,6 +139,8 @@ export default {
           this.getSelectedServiceType === ServiceType.BUS
             ? "/bus/trip"
             : "/launch/trip";
+
+        console.log(query);
         this.$router.push({ path: pathName, query });
       } else {
         this.errorOccured = true;

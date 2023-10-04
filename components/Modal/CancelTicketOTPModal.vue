@@ -5,16 +5,7 @@
     <div class="fixed inset-0 z-10">
       <div class="flex justify-center items-center pt-60 px-4 lg:px-0">
         <div
-          class="
-            relative
-            transform
-            overflow-hidden
-            rounded-lg
-            bg-white
-            transition-all
-            w-[464px]
-            p-10
-          "
+          class="relative transform overflow-hidden rounded-lg bg-white transition-all w-[464px] p-10"
         >
           <div class="bg-white w-full flex items-center flex-col">
             <h1 class="text-2xl font-medium text-blackPrimary">
@@ -33,14 +24,7 @@
                 v-model="fieldData[index - 1]"
                 type="text"
                 maxlength="1"
-                class="
-                  w-[66px]
-                  h-[66px]
-                  text-center
-                  firstInputEl
-                  bg-[#F7F7F7]
-                  rounded-[6px]
-                "
+                class="md:w-[66px] md:h-[66px] text-center firstInputEl bg-[#F7F7F7] rounded-[6px] otp-field"
                 @keyup="(e) => handleOtpInput(e, index - 1)"
                 @paste="index === 1 && handlePaste($event)"
                 @keydown="onKeyDown(index - 1, $event)"
@@ -55,61 +39,25 @@
             <p
               v-if="showResendButton"
               @click="handleResendOTP"
-              class="
-                text-xs
-                font-normal
-                text-[#1E88E5] text-center
-                underline
-                mt-[20px]
-                cursor-pointer
-              "
+              class="text-xs font-normal text-[#1E88E5] text-center underline mt-[20px] cursor-pointer"
             >
               Did not get code?
             </p>
           </div>
           <div
-            class="
-              h-auto
-              w-full
-              flex
-              items-center
-              justify-evenly
-              gap-[20px]
-              mt-8
-            "
+            class="h-auto w-full flex items-center justify-evenly gap-[20px] mt-8"
           >
             <button
               @click="() => handleCancelTicketPopup(false)"
-              class="
-                border
-                flex
-                items-center
-                justify-center
-                text-[#151414] text-base
-                font-medium
-                h-[46px]
-                w-[295px]
-                rounded-full
-                cursor-pointer
-              "
+              class="border flex items-center justify-center text-[#151414] text-base font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
               Cancel
             </button>
             <button
               :class="!isButtonActive && `opacity-60`"
               @click="handleOnClick"
-              class="
-                flex
-                items-center
-                justify-center
-                bg-corporate
-                text-white text-sm
-                font-medium
-                h-[46px]
-                w-[295px]
-                rounded-full
-                cursor-pointer
-              "
+              :disabled="!isButtonActive"
+              class="flex items-center justify-center bg-corporate text-white text-sm font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
               Verify OTP
             </button>
@@ -144,7 +92,7 @@ export default {
       this.cancelTicketAction({
         ticketId: this.getSelectedTicketId,
         otpCode: otpCode,
-        phone: this.getIsTicketPopupOpen
+        phone: this.getIsTicketPopupOpen,
       });
     },
 
@@ -207,10 +155,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("common", [
-      "getSelectedTicketId",
-      "getIsTicketPopupOpen",
-    ]),
+    ...mapGetters("common", ["getSelectedTicketId", "getIsTicketPopupOpen"]),
     isButtonActive() {
       const { fieldData } = this;
       return fieldData[0] && fieldData[1] && fieldData[2] && fieldData[3];
@@ -221,3 +166,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.otp-field {
+  height: 55px;
+  width: 55px;
+}
+
+@media only screen and (min-width: 412px) {
+  .otp-field {
+    height: 66px;
+    width: 66px;
+  }
+}
+</style>

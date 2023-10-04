@@ -263,13 +263,7 @@
               <div
                 class="w-full flex flex-col-reverse xl:flex-row justify-between px-4"
               >
-                <div
-                  class="w-full h-[44px] xl:max-w-max px-8 my-4 xl:mb-0 underline flex items-center justify-center rounded-[8px] border-[1px] border-[#DBDBDB] text-sm font-normal text-blackPrimary"
-                >
-                  <a href="/policies#return-and-refund-policy" target="_blank"
-                    >Cancellation Policy</a
-                  >
-                </div>
+                <div />
                 <div class="w-full xl:w-[460px] flex flex-col pt-4 px-0">
                   <div
                     v-if="!paymentAllowStatus || paymentValidateTime === 0"

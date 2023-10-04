@@ -24,7 +24,7 @@
                 v-model="fieldData[index - 1]"
                 type="text"
                 maxlength="1"
-                class="w-[66px] h-[66px] text-center firstInputEl bg-[#F7F7F7] rounded-[6px]"
+                class="md:w-[66px] md:h-[66px] text-center firstInputEl bg-[#F7F7F7] rounded-[6px] otp-field"
                 @keyup="(e) => handleOtpInput(e, index - 1)"
                 @paste="index === 1 && handlePaste($event)"
                 @keydown="onKeyDown(index - 1, $event)"
@@ -55,6 +55,7 @@
             </button>
             <button
               :class="!isButtonActive && `opacity-60`"
+              :disabled="!isButtonActive"
               @click="handleOnClick"
               class="flex items-center justify-center bg-corporate text-white text-sm font-medium h-[46px] w-[295px] rounded-full cursor-pointer"
             >
@@ -202,3 +203,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.otp-field {
+  height: 55px;
+  width: 55px;
+}
+
+@media only screen and (min-width: 412px) {
+  .otp-field {
+    height: 66px;
+    width: 66px;
+  }
+}
+</style>

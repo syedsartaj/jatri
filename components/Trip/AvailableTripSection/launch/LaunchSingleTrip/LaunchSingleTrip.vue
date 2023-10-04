@@ -122,7 +122,7 @@
             {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
-          <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
+          <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
         </div>
         <div
           class="w-full md:hidden flex justify-start items-center gap-x-[10px] md:gap-x-3"
@@ -147,7 +147,7 @@
               {{ trip.seatFare[0].fare }}
               <span class="text-xs">TK</span>
             </h2>
-            <p class="text-xs font-normal text-blackLight mt-1">Per Ticket</p>
+            <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
           </div>
         </div>
         <div
@@ -231,7 +231,9 @@
             <div class="flex flex-row items-center justify-center">
               <BedIcon v-if="selectedClass?.info?.isCabin" />
               <SofaIcon v-else-if="!selectedClass?.info?.isCabin" />
-              <p class="ml-3">{{ selectedClass?.info?.name || "Select a seat class" }}</p>
+              <p class="ml-3">
+                {{ selectedClass?.info?.name || "Select a seat class" }}
+              </p>
             </div>
             <img
               src="@/assets/images/home/arrowDown.svg"
@@ -478,7 +480,11 @@ export default {
         }
       }
 
-      this.classList = seatClassArray.length ? seatClassArray : [];
+      this.classList = seatClassArray.length
+        ? seatClassArray
+        : this.getSeatViewData?.seatPlan?.floors?.length
+        ? []
+        : this.classList;
     },
     setCurrentTab(value) {
       if (this.selectedBuxIndex !== this.busIndex) {
