@@ -8,6 +8,7 @@
     <SearchTicketOTPModal v-if="getIsSearchTicketOtpPopupOpen" />
     <div class="bg-corporateBg flex flex-col h-full w-full">
       <GlobalHeader />
+      <Header />
       <div class="w-full">
         <Nuxt />
       </div>

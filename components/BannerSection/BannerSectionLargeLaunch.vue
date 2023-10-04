@@ -21,7 +21,7 @@
 </template>
 <style scoped>
 .homeBanner {
-  background-image: url("../../assets/images/home/bannerImageWeb.png");
+  background-image: url("../../assets/images/home/bannerImageLaunchWeb.png");
   background-size: 100% 100%;
 }
 

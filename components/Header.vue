@@ -1,27 +1,12 @@
 <template>
   <div class="w-full flex flex-col sticky top-0 z-50">
-    <HeadLine
-      v-if="getHeadLine?.length && getHeadLine[0].headline"
-      :headline="getHeadLine[0].headline"
-      :speed="30"
-      direction="left"
-      behavior="scroll"
-    />
     <div
-      class="bg-white w-full flex justify-between px-4 xl:px-[100px] py-[21px] lg:py-4"
+      class="bg-white w-full hidden lg:flex justify-end px-4 xl:px-[100px] py-[12px]"
     >
-      <NuxtLink to="/"
-        ><img
-          @click="handlePageRefresh"
-          src="@/assets/images/logo.svg"
-          alt="logo"
-          class="h-10 w-[79]"
-      /></NuxtLink>
-
-      <div class="flex gap-x-4 h-10">
+      <div class="flex gap-x-6 h-10">
         <a
           href="tel:09642080808"
-          class="border-[1px] border-[#DBDBDB] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 hidden lg:flex items-center justify-center"
+          class="border-[1px] border-[#EDEDED] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,11 +21,11 @@
             />
           </svg>
 
-          <span class="font-medium text-sm font-inter">09642080808</span>
+          <span class="font-medium text-xs font-inter">09642080808</span>
         </a>
 
         <div
-          class="bg-[#f7f7f7] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 hidden lg:flex cursor-pointer items-center justify-center"
+          class="bg-[#f7f7f7] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 flex cursor-pointer items-center justify-center"
           @click="setBusReserveModalOpenStatus"
         >
           <svg
@@ -56,7 +41,7 @@
             />
           </svg>
 
-          <span class="font-medium text-sm font-inter">Full bus reserve</span>
+          <span class="font-medium text-xs font-inter">Full bus reserve</span>
         </div>
 
         <NuxtLink
@@ -71,50 +56,40 @@
             fill="none"
           >
             <path
-              d="M14 2C14.1769 2 14.3464 2.07024 14.4714 2.19526C14.5965 2.32029 14.6667 2.48986 14.6667 2.66667V6.33333C14.2247 6.33333 13.8008 6.50893 13.4882 6.82149C13.1756 7.13405 13 7.55797 13 8C13 8.44203 13.1756 8.86595 13.4882 9.17851C13.8008 9.49107 14.2247 9.66667 14.6667 9.66667V13.3333C14.6667 13.5101 14.5965 13.6797 14.4714 13.8047C14.3464 13.9298 14.1769 14 14 14H2.00004C1.82323 14 1.65366 13.9298 1.52864 13.8047C1.40361 13.6797 1.33337 13.5101 1.33337 13.3333V9.66667C1.7754 9.66667 2.19932 9.49107 2.51189 9.17851C2.82445 8.86595 3.00004 8.44203 3.00004 8C3.00004 7.55797 2.82445 7.13405 2.51189 6.82149C2.19932 6.50893 1.7754 6.33333 1.33337 6.33333V2.66667C1.33337 2.48986 1.40361 2.32029 1.52864 2.19526C1.65366 2.07024 1.82323 2 2.00004 2H14ZM10.6667 6H5.33337V10H10.6667V6Z"
-              fill="#F04935"
+              d="M8.00065 1.33331C11.6827 1.33331 14.6673 4.31798 14.6673 7.99998C14.6673 11.682 11.6827 14.6666 8.00065 14.6666C4.31865 14.6666 1.33398 11.682 1.33398 7.99998H2.66732C2.66732 10.9453 5.05532 13.3333 8.00065 13.3333C10.946 13.3333 13.334 10.9453 13.334 7.99998C13.334 5.05465 10.946 2.66665 8.00065 2.66665C6.35798 2.66665 4.88865 3.40931 3.91065 4.57665L5.33398 5.99998H1.33398V1.99998L2.96532 3.63065C4.18732 2.22398 5.98998 1.33331 8.00065 1.33331ZM8.66732 4.66665V7.72331L10.8293 9.88531L9.88598 10.8286L7.33398 8.27531V4.66665H8.66732Z"
+              fill="#D42410"
             />
           </svg>
           <span
-            class="font-medium text-sm text-center font-inter text-[#F04935]"
+            class="font-medium text-xs text-center font-inter text-[#D42410]"
             >History</span
           >
         </NuxtLink>
-        <div class="flex lg:hidden">
-          <div v-if="showHamburgerMenu">
-            <HamburgerMenu :close="handleHamburgerMenu" />
-          </div>
-          <div v-else>
-            <img
-              class="h-11 w-11 cursor-pointer"
-              @click="handleHamburgerMenu"
-              src="@/assets/images/home/hamburger.svg"
-              alt=""
-            />
-          </div>
-        </div>
       </div>
     </div>
+    <HeadLine
+      v-if="getHeadLine?.length && getHeadLine[0].headline"
+      :headline="getHeadLine[0].headline"
+      :speed="30"
+      direction="left"
+      behavior="scroll"
+    />
   </div>
 </template>
 
 <script>
 import HamburgerMenu from "../components/Modal/HamburgerMenu.vue";
-import { mapMutations, mapGetters, mapActions } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import { handleScrollBehaviour } from "../helpers/utils";
 export default {
   components: { HamburgerMenu },
   data() {
     return {
-      showHamburgerMenu: false,
       showFullBusReserveModal: false,
     };
   },
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
-    handleHamburgerMenu() {
-      this.showHamburgerMenu = !this.showHamburgerMenu;
-    },
     handleFullReserveModal() {
       handleScrollBehaviour(this.showFullBusReserveModal);
       this.showFullBusReserveModal = !this.showFullBusReserveModal;

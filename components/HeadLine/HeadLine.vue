@@ -1,11 +1,11 @@
 <template>
   <div
-    class="scroll-ticker bg-corporate h-[40px] md:h-[60px] flex items-center justify-center"
+    class="scroll-ticker bg-corporate h-[32px] flex items-center justify-center"
   >
     <marquee
       :direction="direction"
       :behavior="behavior"
-      class="font-medium text-base md:text-xl text-[#FFFFFF] font-inter"
+      class="font-medium text-sm text-[#FFFFFF] font-inter"
     >
       <div v-html="headline"></div>
     </marquee>

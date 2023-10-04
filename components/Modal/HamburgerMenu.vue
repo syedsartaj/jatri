@@ -4,7 +4,7 @@
 
     <div class="fixed inset-0 z-10 overflow-y-auto">
       <div class="h-[68px] w-full flex justify-between items-center px-4">
-        <span class="text-[16px] text-[#151414] font-medium">Menu</span>
+        <span class="text-xl text-blackPrimary font-medium">Menu</span>
         <img
           class="w-6 h-6 cursor-pointer"
           src="@/assets/images/home/close.svg"
@@ -14,7 +14,7 @@
       </div>
       <div class="border-b-[1px] border-[#DBDBDB]" />
 
-      <div class="px-4 mt-5">
+      <div class="px-4">
         <ul class="list-none">
           <li
             v-for="(item, index) in menuList"
@@ -22,13 +22,7 @@
             @click="handleOnClick(index)"
           >
             <div
-              class="
-                h-[70px]
-                flex
-                justify-between
-                items-center
-                border-b-[1px] border-[#DBDBDB] border-dashed
-              "
+              class="h-[70px] flex justify-between items-center border-b-[1px] border-[#DBDBDB]"
             >
               <div class="gap-x-4 flex">
                 <img
@@ -40,11 +34,6 @@
                   {{ item.name }}</span
                 >
               </div>
-              <img
-                class="w-6 h-6 cursor-pointer"
-                src="@/assets/images/home/arrowRight.svg"
-                alt="close"
-              />
             </div>
           </li>
         </ul>
@@ -80,11 +69,11 @@ export default {
           icon: "fullBusReserve",
           url: "#",
         },
-        // {
-        //   name: "Profile",
-        //   icon: "user",
-        //   url: "#",
-        // },
+        {
+          name: "History",
+          icon: "history",
+          url: "/find-ticket",
+        },
       ],
     };
   },
@@ -93,11 +82,13 @@ export default {
     handleOnClick(index) {
       if (index === 0) {
         this.setBusReserveModalOpenStatus();
+      } else {
+        this.close();
+        this.$router.push(this.menuList[1].url);
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
