@@ -6,12 +6,13 @@
     <SurpriseDealShowingModal v-if="getSurpriseDealModalStatus" />
     <CancelTicketOTPModal v-if="getIsTicketPopupOpen" />
     <SearchTicketOTPModal v-if="getIsSearchTicketOtpPopupOpen" />
-    <div class="bg-corporateBg flex flex-col justify-start items-start h-full">
+    <div class="bg-corporateBg flex flex-col h-full w-full">
+      <GlobalHeader />
       <Header />
       <div class="w-full">
         <Nuxt />
       </div>
-      <Footer />
+      <GlobalFooter />
     </div>
   </div>
 </template>

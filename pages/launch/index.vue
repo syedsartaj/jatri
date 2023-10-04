@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white">
-    <BannerSectionLarge />
+    <BannerSectionLargeLaunch />
 
     <!-- Sticky search Box Start -->
     <div
       v-if="showStickySearchBox"
       :class="
         getHeadLine?.length && getHeadLine[0].headline
-          ? 'top-[146px]'
+          ? 'top-[112px]'
           : 'top-[86px]'
       "
       class="sticky z-50 hidden lg:block"
@@ -89,13 +89,13 @@ export default {
         const innerWidth = window.innerWidth;
         const pageYOffset = window.pageYOffset;
         if (innerWidth >= 1750) {
-          this.showStickySearchBox = pageYOffset >= 600;
+          this.showStickySearchBox = pageYOffset >= 384;
         } else if (innerWidth >= 1536) {
-          this.showStickySearchBox = pageYOffset >= 550;
+          this.showStickySearchBox = pageYOffset >= 380;
         } else if (innerWidth >= 1280) {
-          this.showStickySearchBox = pageYOffset >= 450;
+          this.showStickySearchBox = pageYOffset >= 382;
         } else if (innerWidth >= 992) {
-          this.showStickySearchBox = pageYOffset >= 400;
+          this.showStickySearchBox = pageYOffset >= 382;
         } else {
           this.showStickySearchBox = false;
         }
