@@ -3,7 +3,7 @@
     class="sticky top-0 left-0 z-[999] w-full bg-white border-b border-[#EDEDED]"
   >
     <div class="custom-container">
-      <div class="flex justify-between items-center py-3 px-2">
+      <div class="flex justify-between items-center py-[14px] lg:py-4">
         <div
           class="flex justify-between lg:justify-start items-center gap-x-2 lg:gap-x-8 w-full"
         >
@@ -60,7 +60,7 @@
             </div>
           </div>
         </div>
-        <div class="flex gap-x-4 lg:hidden py-4 ml-2">
+        <div class="flex gap-x-4 lg:hidden ml-2">
           <button @click="handleHamburgerMenu">
             <img
               class="w-6 h-6"
@@ -131,7 +131,7 @@ export default {
 
 <style>
 .custom-container {
-  @apply w-full mx-auto px-1 lg:px-12 lg:px-[60px] xl:px-[100px] 2xl:px-[200px];
+  @apply w-full mx-auto px-4 lg:px-[100px];
 }
 .linkItem {
   @apply flex justify-center items-center gap-x-2 text-sm lg:text-base font-medium;

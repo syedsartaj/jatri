@@ -1,10 +1,12 @@
 <template>
   <div class="relative block lg:hidden h-[502px] md:h-[452px]">
-    <img
-      src="@/assets/images/home/bannerImageMobile.jpg"
-      alt=""
-      class="w-full absolute top-0 h-[280px] md:h-[312px]"
-    />
+    <div
+      :class="{
+        'w-full absolute top-0 h-[280px] md:h-[312px]': true,
+        'banner-shadow-bus': service === 'BUS',
+        'banner-shadow-launch': service === 'LAUNCH',
+      }"
+    ></div>
     <div class="absolute mt-[48px] md:mt-[64px] right-4 left-4">
       <h2
         class="text-[28px] leading-[36px] md:text-[45px] md:leading-[52px] text-white font-bold text-start"
@@ -21,8 +23,36 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: ["service"],
+};
+</script>
+
 <style scoped>
 .custom-shadow {
   box-shadow: 0px 2px 20px 4px rgba(0, 0, 0, 0.08);
+}
+
+.banner-shadow-launch {
+  background-image: linear-gradient(
+      90deg,
+      rgba(21, 20, 20, 0.57) 0.01%,
+      rgba(255, 255, 255, 0) 99.64%
+    ),
+    url("../../assets/images/home/bannerImageMobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.banner-shadow-bus {
+  background-image: linear-gradient(
+      90deg,
+      rgba(21, 20, 20, 0.57) 0.01%,
+      rgba(255, 255, 255, 0) 99.64%
+    ),
+    url("../../assets/images/home/bannerImageMobileBus.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

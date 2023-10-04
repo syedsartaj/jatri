@@ -21,7 +21,7 @@
 
     <!-- Sticky search Box End -->
 
-    <BannerSectionMobile />
+    <BannerSectionMobile service="LAUNCH" />
 
     <HomePageOfferAndPromo />
 
