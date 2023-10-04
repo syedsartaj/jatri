@@ -7,23 +7,19 @@
         <div
           class="flex justify-between lg:justify-start items-center gap-x-2 lg:gap-x-8 w-full"
         >
-          <NuxtLink to="/">
+          <a href="https://jatri.co/">
             <img
-              @click="handlePageRefresh"
               class="min-w-[50px] h-[26px] lg:h-9 lg:w-[74px]"
               src="~/assets/images/header/jatri-logo.svg"
               alt="jatri logo"
             />
-          </NuxtLink>
+          </a>
           <div class="bg-[#FEF2F0] rounded-full">
             <div
               class="p-1 flex gap-x-1 lg:gap-x-2 justify-center items-center"
             >
               <div class="px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full">
-                <a
-                  href="https://rental.jatri.co/"
-                  target="_blank"
-                  class="linkItem"
+                <a href="https://rental.jatri.co/" class="linkItem"
                   ><img
                     class="w-3 lg:w-5"
                     src="~/assets/images/header/car-svg.svg"
@@ -113,11 +109,6 @@ export default {
         this.setSelectedService(ServiceType.LAUNCH);
       } else if (path === "/bus" || path === "/") {
         this.setSelectedService(ServiceType.BUS);
-      }
-    },
-    handlePageRefresh() {
-      if ($nuxt.$route.name === "index") {
-        window.location.reload();
       }
     },
   },

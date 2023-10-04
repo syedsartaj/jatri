@@ -12,13 +12,12 @@
     >
       <div class="px-4 lg:px-0 flex flex-wrap gap-4 justify-between">
         <div>
-          <NuxtLink to="/">
+          <a href="https://jatri.co/">
             <img
-              @click="handlePageRefresh"
               src="~/assets/images/footer/footer-white-logo.svg"
               alt="Jatri Logo"
             />
-          </NuxtLink>
+          </a>
           <p class="text-sm font-normal text-white mt-3">
             Jatri is a digital platform to make your daily commuting better.
           </p>
@@ -44,7 +43,6 @@
           <ul class="grid gap-4">
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/about-us"
                 class="text-white font-normal text-base"
                 >About us</a
@@ -52,7 +50,6 @@
             </li>
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/career"
                 class="text-white font-normal text-base"
                 >Career</a
@@ -60,7 +57,6 @@
             </li>
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/blog"
                 class="text-white font-normal text-base"
                 >Blog</a
@@ -68,7 +64,6 @@
             </li>
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/contact-us"
                 class="text-white font-normal text-base"
                 >Contact us</a
@@ -80,23 +75,18 @@
           <h4 class="text-white text-xl font-medium mb-6">Services</h4>
           <ul class="grid gap-4">
             <li>
-              <a
-                target="_blank"
-                href="https://rental.jatri.co/rental"
-                class="text-white text-base"
+              <a href="https://rental.jatri.co/" class="text-white text-base"
                 >Rental</a
               >
             </li>
             <li>
-              <a href="https://ticket.jatri.co/bus" class="text-white text-base"
-                >Bus ticketing</a
+              <nuxt-link to="/bus" class="text-white text-base"
+                >Bus ticketing</nuxt-link
               >
             </li>
             <li>
-              <a
-                href="https://ticket.jatri.co/launch"
-                class="text-white text-base"
-                >Launch ticketing</a
+              <nuxt-link to="/launch" class="text-white text-base"
+                >Launch ticketing</nuxt-link
               >
             </li>
           </ul>
@@ -106,7 +96,6 @@
           <ul class="grid gap-4">
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/ride-sharing-guideline"
                 class="text-white font-normal text-base"
                 >Ride sharing guideline</a
@@ -114,7 +103,6 @@
             </li>
             <li>
               <a
-                target="_blank"
                 href="https://jatri.co/enlistment-certificate"
                 class="text-white font-normal text-base"
                 >Enlistment certificate</a
@@ -142,7 +130,7 @@
               <a
                 class="text-white font-normal text-base"
                 href="mailto:support@jatri.co"
-                >support@jatri.co</a
+                >info@jatri.co</a
               >
             </li>
             <li class="flex items-center gap-2">
@@ -189,23 +177,20 @@
         <div
           class="px-4 lg:px-0 pb-4 lg:pb-0 flex justify-between gap-3 xl:gap-8 text-center divide-x divide-[#F6958A] lg:divide-x-0 space-x-0 sm:space-x-4 lg:space-x-0"
         >
-          <a
-            target="_blank"
-            href="https://jatri.co/user/term-and-condition"
+          <nuxt-link
+            to="/policies#terms-and-conditions"
             class="text-white font-medium text-sm underline"
-            >Terms and condition</a
+            >Terms and condition</nuxt-link
           >
-          <a
-            target="_blank"
-            href="https://jatri.co/user/refund-policy-of-jatri"
+          <nuxt-link
+            to="/policies#return-and-refund-policy"
             class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
-            >Return & refund policy</a
+            >Return & refund policy</nuxt-link
           >
-          <a
-            target="_blank"
-            href="https://jatri.co/user/privacy-policy"
+          <nuxt-link
+            to="/policies#privacy-policy"
             class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
-            >Privacy policy</a
+            >Privacy policy</nuxt-link
           >
         </div>
         <div
@@ -244,12 +229,5 @@
 <script>
 export default {
   name: "GlobalFooter",
-  methods: {
-    handlePageRefresh() {
-      if ($nuxt.$route.name === "index") {
-        window.location.reload();
-      }
-    },
-  },
 };
 </script>
