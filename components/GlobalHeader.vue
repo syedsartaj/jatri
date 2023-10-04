@@ -56,7 +56,7 @@
                       'w-3 lg:w-5': true,
                       invert: selectedService === ServiceType.LAUNCH,
                     }"
-                    src="~/assets/images/header/ship.svg"
+                    src="~/assets/images/header/Ship.svg"
                     alt=""
                   />Launch
                 </div>
