@@ -27,11 +27,11 @@
                   />Rental</a
                 >
               </div>
-              <div :class="getServiceClassName(ServiceType.BUS)">
-                <div
-                  class="linkItem"
-                  @click="handleServiceChange(ServiceType.BUS)"
-                >
+              <div
+                :class="getServiceClassName(ServiceType.BUS)"
+                @click="handleServiceChange(ServiceType.BUS)"
+              >
+                <div class="linkItem">
                   <img
                     :class="{
                       'w-3 lg:w-5': true,
@@ -42,11 +42,11 @@
                   />Bus
                 </div>
               </div>
-              <div :class="getServiceClassName(ServiceType.LAUNCH)">
-                <div
-                  class="linkItem"
-                  @click="handleServiceChange(ServiceType.LAUNCH)"
-                >
+              <div
+                :class="getServiceClassName(ServiceType.LAUNCH)"
+                @click="handleServiceChange(ServiceType.LAUNCH)"
+              >
+                <div class="linkItem">
                   <img
                     :class="{
                       'w-3 lg:w-5': true,
