@@ -20,13 +20,14 @@
             v-for="(item, index) in menuList"
             :key="index"
             @click="handleOnClick(index)"
+            class="cursor-pointer"
           >
             <div
               class="h-[70px] flex justify-between items-center border-b-[1px] border-[#DBDBDB]"
             >
               <div class="gap-x-4 flex">
                 <img
-                  class="w-6 h-6 cursor-pointer"
+                  class="w-6 h-6"
                   :src="require(`@/assets/images/home/${item.icon}.svg`)"
                   alt="close"
                 />
@@ -37,8 +38,8 @@
             </div>
           </li>
         </ul>
-        <div class="h-[70px] flex justify-between items-center">
-          <a class="gap-x-4 flex" href="tel:09642080808">
+        <div class="h-[70px] flex justify-between items-center w-full">
+          <a class="gap-x-4 flex cursor-pointer w-full" href="tel:09642080808">
             <img
               class="w-6 h-6 cursor-pointer"
               src="@/assets/images/icons/phoneBlack.svg"
@@ -65,14 +66,14 @@ export default {
     return {
       menuList: [
         {
-          name: "Full bus reserve",
-          icon: "fullBusReserve",
-          url: "#",
-        },
-        {
           name: "History",
           icon: "history",
           url: "/find-ticket",
+        },
+        {
+          name: "Full bus reserve",
+          icon: "fullBusReserve",
+          url: "#",
         },
       ],
     };
@@ -80,11 +81,11 @@ export default {
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
     handleOnClick(index) {
-      if (index === 0) {
+      if (index === 1) {
         this.setBusReserveModalOpenStatus();
       } else {
         this.close();
-        this.$router.push(this.menuList[1].url);
+        this.$router.push(this.menuList[0].url);
       }
     },
   },
