@@ -25,6 +25,7 @@
         </a>
 
         <div
+          v-if="selectedService === 'BUS'"
           class="bg-[#f7f7f7] text-blackPrimary rounded-full pl-4 pr-6 py-[10px] justify-between gap-x-2 flex cursor-pointer items-center justify-center"
           @click="setBusReserveModalOpenStatus"
         >
@@ -80,6 +81,12 @@ export default {
     return {
       showFullBusReserveModal: false,
     };
+  },
+  computed: {
+    ...mapGetters("common", ["getSelectedServiceType"]),
+    selectedService() {
+      return this.getSelectedServiceType;
+    },
   },
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
