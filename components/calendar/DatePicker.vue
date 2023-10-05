@@ -14,9 +14,27 @@
       <div v-if="dateUpdate !== ''" class="flex justify-between">
         <p class="text-sm xl:text-base font-medium text-blackPrimary text-left">
           {{
-            new Date(dateUpdate).toLocaleString("es-CL", {
-              dateStyle: "medium",
-            })
+            (() => {
+              const months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ];
+              const date = new Date(dateUpdate);
+              const day = date.getDate();
+              const month = months[date.getMonth()];
+              const year = date.getFullYear();
+              return `${day} ${month} ${year}`;
+            })()
           }}
         </p>
         <img
@@ -56,11 +74,6 @@
       v-if="optionsIsOpen"
       class="mt-10 -ml-5 bg-white rounded-md shadow-xl z-[1000] leading-6 before:block before:-mt-2 before:ml-20 before:-skew-y-3 before:bg-white before:h-5 before:w-5 before:rotate-45 absolute divide-y-2"
     >
-      <div class="text-center p-4">
-        <h2 class="font-inter text-sm xl:text-[20px] font-[400]">
-          <span>{{ defaultOption }}</span>
-        </h2>
-      </div>
       <div class="">
         <v-date-picker
           class="inline-block h-full border-none"

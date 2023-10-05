@@ -140,7 +140,6 @@ export default {
             ? "/bus/trip"
             : "/launch/trip";
 
-        console.log(query);
         this.$router.push({ path: pathName, query });
       } else {
         this.errorOccured = true;

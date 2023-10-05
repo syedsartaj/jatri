@@ -132,7 +132,7 @@ export default {
     },
     transpile: ["primevue", "vee-validate/dist/rules"],
   },
-  loading: "~/components/loader/Loader.vue",
+  loading: "~/components/Loader/Loader.vue",
   router: {
     middleware: ["setSelectedServiceMiddleware"],
   },
