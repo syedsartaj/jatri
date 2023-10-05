@@ -18,9 +18,27 @@
           class="text-sm font-normal text-blackPrimary text-left"
         >
           {{
-            new Date(dateUpdate).toLocaleString("es-CL", {
-              dateStyle: "medium",
-            })
+            (() => {
+              const months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ];
+              const date = new Date(dateUpdate);
+              const day = date.getDate();
+              const month = months[date.getMonth()];
+              const year = date.getFullYear();
+              return `${day} ${month} ${year}`;
+            })()
           }}
         </p>
       </div>

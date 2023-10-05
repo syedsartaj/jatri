@@ -42,7 +42,7 @@ export default {
     ),
     url("../../assets/images/home/bannerImageMobile.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .banner-shadow-bus {
@@ -53,6 +53,6 @@ export default {
     ),
     url("../../assets/images/home/bannerImageMobileBus.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 </style>

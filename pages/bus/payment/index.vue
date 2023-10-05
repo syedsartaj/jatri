@@ -374,9 +374,6 @@
           />
         </div>
       </div>
-
-      <!-- <DealButton :callback="handleDealButton" /> -->
-
       <div v-if="!paymentAllowStatus || paymentValidateTime === 0" class="mt-2">
         <PaymentTimeoutAlert />
       </div>

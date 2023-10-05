@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col sticky top-0 z-50">
+  <div class="w-full flex flex-col">
     <div
       class="bg-white w-full hidden lg:flex justify-end px-4 xl:px-[100px] py-[12px]"
     >
@@ -67,13 +67,6 @@
         </NuxtLink>
       </div>
     </div>
-    <HeadLine
-      v-if="getHeadLine?.length && getHeadLine[0].headline"
-      :headline="getHeadLine[0].headline"
-      :speed="30"
-      direction="left"
-      behavior="scroll"
-    />
   </div>
 </template>
 
@@ -99,9 +92,6 @@ export default {
         window.location.reload();
       }
     },
-  },
-  computed: {
-    ...mapGetters("common", ["getHeadLine"]),
   },
 };
 </script>

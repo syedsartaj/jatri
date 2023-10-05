@@ -1,14 +1,16 @@
 <template>
-  <div
-    class="scroll-ticker bg-corporate h-[32px] flex items-center justify-center"
-  >
-    <marquee
-      :direction="direction"
-      :behavior="behavior"
-      class="font-medium text-sm text-[#FFFFFF] font-inter"
+  <div class="w-full sticky top-[64px] lg:top-[72px] z-[999999]">
+    <div
+      class="scroll-ticker bg-corporate h-[32px] flex items-center justify-center"
     >
-      <div v-html="headline"></div>
-    </marquee>
+      <marquee
+        :direction="direction"
+        :behavior="behavior"
+        class="font-medium text-sm text-[#FFFFFF] font-inter"
+      >
+        <div v-html="headline"></div>
+      </marquee>
+    </div>
   </div>
 </template>
 

@@ -1,19 +1,24 @@
 <template>
   <div>
-    <!-- <Loader v-if="getLoading" /> -->
+    <div class="bg-corporateBg flex flex-col h-full w-full">
+      <GlobalHeader />
+      <Header />
+      <HeadLine
+        v-if="headlineVisibility"
+        :headline="getHeadLine[0].headline"
+        :speed="30"
+        direction="left"
+        behavior="scroll"
+      />
+      <Nuxt />
+      <GlobalFooter />
+    </div>
+
     <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
     <RequestSuccessfulModal v-if="getRequestSuccessfulStatus" />
     <SurpriseDealShowingModal v-if="getSurpriseDealModalStatus" />
     <CancelTicketOTPModal v-if="getIsTicketPopupOpen" />
     <SearchTicketOTPModal v-if="getIsSearchTicketOtpPopupOpen" />
-    <div class="bg-corporateBg flex flex-col h-full w-full">
-      <GlobalHeader />
-      <Header />
-      <div class="w-full">
-        <Nuxt />
-      </div>
-      <GlobalFooter />
-    </div>
   </div>
 </template>
 
@@ -35,7 +40,16 @@ export default {
       "getIsSearchTicketOtpPopupOpen",
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
+      "getHeadLine",
     ]),
+    headlineVisibility() {
+      const path = this.$route.path.toString();
+      return (
+        (path === "/" || path === "/bus" || path === "/launch") &&
+        this.getHeadLine?.length &&
+        this.getHeadLine[0].headline
+      );
+    },
   },
   methods: {
     liveChat() {

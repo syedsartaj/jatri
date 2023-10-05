@@ -1,5 +1,13 @@
 <template>
-  <div class="w-full">
+  <div
+    :class="{
+      '': isTripPage,
+      '-translate-y-12': !isTripPage,
+      'top-[168px]': getHeadLine?.length && getHeadLine[0].headline,
+      'top-[136px]': !(getHeadLine?.length && getHeadLine[0].headline),
+      'hidden lg:block w-full sticky z-[999999] lg:pr-[80px] xl:pr-[100px] lg:pl-[80px] xl:pl-[100px]': true,
+    }"
+  >
     <div
       v-if="getSelectedServiceType != ''"
       class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px] gap-x-4"
@@ -99,7 +107,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("common", ["getSelectedServiceType", "getCities"]),
+    ...mapGetters("common", [
+      "getSelectedServiceType",
+      "getCities",
+      "getHeadLine",
+    ]),
     isTripPage() {
       const path = this.$route.path.toString();
       return path.includes("/trip");
