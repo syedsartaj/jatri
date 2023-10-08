@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 left-0 z-[999999] w-full bg-white border-b border-[#EDEDED]"
+    class="sticky top-0 left-0 z-[999999998] w-full bg-white border-b border-[#EDEDED]"
   >
     <div class="custom-container">
       <div class="flex justify-between items-center py-[14px] lg:py-4">
