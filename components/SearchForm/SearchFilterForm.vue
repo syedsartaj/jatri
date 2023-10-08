@@ -6,8 +6,8 @@
       'top-[168px]': getHeadLine?.length && getHeadLine[0].headline,
       'top-[136px]': !(getHeadLine?.length && getHeadLine[0].headline),
       'hidden lg:block w-full z-[999998] lg:pr-[80px] xl:pr-[100px] lg:pl-[80px] xl:pl-[100px]': true,
-      sticky: isSticky,
-      fixed: !isSticky,
+      sticky: isSticky && !isTripPage,
+      fixed: !isSticky && !isTripPage,
     }"
   >
     <div

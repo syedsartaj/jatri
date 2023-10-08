@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-[99999999]">
+  <div class="relative z-[999999998]">
     <div
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
