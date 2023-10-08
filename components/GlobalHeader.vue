@@ -15,16 +15,16 @@
             />
           </a>
           <div class="bg-[#FEF2F0] rounded-full">
-            <div
-              class="p-1 flex gap-x-1 lg:gap-x-2 justify-center items-center"
-            >
+            <div class="flex gap-x-1 lg:gap-x-2 justify-center items-center">
               <div class="px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full">
                 <a href="https://rental.jatri.co/" class="linkItem"
                   ><img
                     class="w-3 lg:w-5"
                     src="~/assets/images/header/car-svg.svg"
                     alt=""
-                  />Rental</a
+                  /><span class="text-sm lg:text-base text-[#151414]"
+                    >Rental</span
+                  ></a
                 >
               </div>
               <div
@@ -39,7 +39,7 @@
                     }"
                     src="~/assets/images/header/bus_2.svg"
                     alt=""
-                  />Bus
+                  /><span class="text-sm lg:text-base">Bus</span>
                 </div>
               </div>
               <div
@@ -54,7 +54,9 @@
                     }"
                     src="~/assets/images/header/Ship.svg"
                     alt=""
-                  />Launch
+                  /><span class="text-sm lg:text-base"
+                    >Launch</span
+                  >
                 </div>
               </div>
             </div>
@@ -100,14 +102,14 @@ export default {
     getServiceClassName(service) {
       return {
         activeMenu: this.selectedService === service,
-        "px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full cursor-pointer": true,
+        "px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full cursor-pointer text-[#151414]": true,
       };
     },
     checkRoutePath() {
       const path = this.$route.path.toString();
       if (path.includes("/launch")) {
         this.setSelectedService(ServiceType.LAUNCH);
-      } else if (path.includes("/bus")) {
+      } else if (path.includes("/bus") || path === "/") {
         this.setSelectedService(ServiceType.BUS);
       }
     },
@@ -134,7 +136,7 @@ export default {
   @apply w-full mx-auto px-4 lg:px-[100px];
 }
 .linkItem {
-  @apply flex justify-center items-center gap-x-2 text-sm lg:text-base font-medium;
+  @apply flex justify-center items-center gap-x-1 lg:gap-x-2 text-xs lg:text-base font-normal;
 }
 .slide {
   @apply absolute animate-[slide_0.5s_forwards] -right-2/4;

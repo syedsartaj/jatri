@@ -212,7 +212,7 @@
           >
           <nuxt-link
             to="/policies#return-and-refund-policy"
-            class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
+            class="text-white font-medium text-sm underline border-x lg:border-x-0 border-[#F6958A] px-8 lg:px-4 xl:px-8"
             >Return & refund policy</nuxt-link
           >
           <nuxt-link
