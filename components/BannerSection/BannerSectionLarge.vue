@@ -19,9 +19,6 @@
           Buy tickets online hassle-free.
         </div>
       </div>
-      <!-- <div class="mt-[64px] sticky top-[120px] z-[99999999999]">
-        <SearchFilterForm />
-      </div> -->
     </div>
   </div>
 </template>
