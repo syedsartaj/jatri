@@ -12,7 +12,7 @@
   >
     <div
       v-if="getSelectedServiceType != ''"
-      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px] gap-x-4"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[16px] gap-x-4"
     >
       <div class="flex justify-between w-[86%] gap-x-4">
         <SearchCityFilter

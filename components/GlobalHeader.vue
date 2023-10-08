@@ -14,15 +14,15 @@
               alt="jatri logo"
             />
           </a>
-          <div class="bg-[#FEF2F0] rounded-full">
+          <div class="bg-[#FEF2F0] rounded-full p-1">
             <div class="flex gap-x-1 lg:gap-x-2 justify-center items-center">
               <div class="px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full">
                 <a href="https://rental.jatri.co/" class="linkItem"
                   ><img
-                    class="w-3 lg:w-5"
+                    class="w-3 h-3 lg:w-5 lg:h-5"
                     src="~/assets/images/header/car-svg.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base text-[#151414]"
+                  /><span class="text-sm lg:text-base text-[#151414] font-medium"
                     >Rental</span
                   ></a
                 >
@@ -34,12 +34,12 @@
                 <div class="linkItem">
                   <img
                     :class="{
-                      'w-3 lg:w-5': true,
+                      'w-3 h-3 lg:w-5 lg:h-5': true,
                       invert: selectedService === ServiceType.BUS,
                     }"
                     src="~/assets/images/header/bus_2.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base">Bus</span>
+                  /><span class="text-sm lg:text-base font-medium">Bus</span>
                 </div>
               </div>
               <div
@@ -49,13 +49,12 @@
                 <div class="linkItem">
                   <img
                     :class="{
-                      'w-3 lg:w-5': true,
+                      'w-3 h-3 lg:w-5 lg:h-5': true,
                       invert: selectedService === ServiceType.LAUNCH,
                     }"
                     src="~/assets/images/header/Ship.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base"
-                    >Launch</span
+                  /><span class="text-sm lg:text-base font-medium">Launch</span
                   >
                 </div>
               </div>
