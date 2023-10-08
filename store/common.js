@@ -321,7 +321,6 @@ export const mutations = {
     }
   },
   setSelectedService: (state, data) => {
-    console.log(data)
     state.selectedService = data;
   },
   setLoading: (state, data) => {
