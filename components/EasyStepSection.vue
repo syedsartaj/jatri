@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-bgShade3 py-[40px] lg:py-[60px] px-8 md:px-12 lg:px-[100px] mt-10 md:mt-[48px] lg:mt-[100px]"
+    class="bg-bgShade3 py-[40px] lg:py-[60px] px-4 md:px-12 lg:px-[100px] mt-10 md:mt-[48px] lg:mt-[100px]"
   >
     <h2
       class="text-[24px] md:text-[32px] lg:text-4xl text-blackPrimary text-center font-semibold lg:leading-[44px]"
