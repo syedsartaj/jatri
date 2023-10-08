@@ -60,23 +60,34 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   props: ["close"],
   computed: {
-    ...mapGetters("common", ["getBusReserveModalOpenStatus"]),
-  },
-  data() {
-    return {
-      menuList: [
-        {
-          name: "History",
-          icon: "history",
-          url: "/find-ticket",
-        },
-        {
-          name: "Full bus reserve",
-          icon: "fullBusReserve",
-          url: "#",
-        },
-      ],
-    };
+    ...mapGetters("common", [
+      "getBusReserveModalOpenStatus",
+      "getSelectedServiceType",
+    ]),
+    menuList() {
+      if (this.getSelectedServiceType === "BUS") {
+        return [
+          {
+            name: "History",
+            icon: "history",
+            url: "/find-ticket",
+          },
+          {
+            name: "Full bus reserve",
+            icon: "fullBusReserve",
+            url: "#",
+          },
+        ];
+      } else {
+        return [
+          {
+            name: "History",
+            icon: "history",
+            url: "/find-ticket",
+          },
+        ];
+      }
+    },
   },
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
@@ -85,7 +96,7 @@ export default {
         this.setBusReserveModalOpenStatus();
       } else {
         this.close();
-        this.$router.push(this.menuList[0].url);
+        this.$router.push("/find-ticket");
       }
     },
   },
