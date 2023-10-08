@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full sticky top-[64px] lg:top-[72px] z-[999999]">
+  <div class="w-full sticky lg:top-[72px] z-[999999]">
     <div
       class="scroll-ticker bg-corporate h-[32px] flex items-center justify-center"
     >
