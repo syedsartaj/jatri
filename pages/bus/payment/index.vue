@@ -9,7 +9,7 @@
         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED] overflow-hidden"
       >
         <div
-          class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
+          class="flex justify-start items-center gap-x-4 px-5 py-[16px] border-b"
         >
           <div
             class="bg-[#FEF2F0] rounded-full w-9 h-9 flex justify-center items-center"
@@ -103,9 +103,9 @@
         class="mt-4 bg-white rounded-[10px] border border-[#EDEDED] overflow-hidden"
       >
         <div
-          class="flex justify-start items-center gap-x-4 px-5 py-[22px] border-b"
+          class="flex justify-start items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base font-medium text-blackPrimary">Fare Details</p>
+          <p class="text-xl font-medium text-blackPrimary">Fare Details</p>
         </div>
         <div class="px-[14px] pt-3">
           <div
@@ -232,9 +232,9 @@
         v-if="!getBookingInfoDetails?.invoice?.offer?.totalAmount"
       >
         <div
-          class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
+          class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base font-medium text-blackPrimary">Promo</p>
+          <p class="text-xl font-medium text-blackPrimary">Promo</p>
         </div>
         <div class="flex gap-x-5 w-full flex-col">
           <div class="flex justify-between w-full p-4">
@@ -340,9 +340,9 @@
 
       <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
         <div
-          class="flex justify-between items-center gap-x-4 px-5 py-[22px] border-b"
+          class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base font-medium text-blackPrimary">Payment Method</p>
+          <p class="text-xl font-medium text-blackPrimary">Payment Method</p>
           <div
             class="flex justify-center items-center w-[139px] bg-[#F7F7F7] rounded-full text-base font-medium text-blackPrimary"
           >
@@ -356,7 +356,7 @@
             </p>
           </div>
         </div>
-        <div class="p-5 flex justify-between gap-x-5">
+        <div class="p-4 flex justify-between gap-x-3">
           <BkashOption
             plan-name="bkash"
             plan-discount="10%"

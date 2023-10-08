@@ -2,7 +2,7 @@
   <div
     @click="bookNow()"
     :class="!isLastItem && 'cursor-pointer'"
-    class="flex justify-between w-full items-center py-4 px-[20px] rounded-[10px] border-[1px] border-[#DBDBDB]"
+    class="flex justify-between w-full items-center py-3 px-[8px] lg:py-4 lg:px-[20px] rounded-[10px] border-[1px] border-[#DBDBDB]"
   >
     <div class="flex flex-row items-center w-full gap-x-[12px] max-w-[85%]">
       <img
