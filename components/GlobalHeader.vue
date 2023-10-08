@@ -105,9 +105,9 @@ export default {
     },
     checkRoutePath() {
       const path = this.$route.path.toString();
-      if (path === "/launch") {
+      if (path.includes("/launch")) {
         this.setSelectedService(ServiceType.LAUNCH);
-      } else if (path === "/bus" || path === "/") {
+      } else if (path.includes("/bus")) {
         this.setSelectedService(ServiceType.BUS);
       }
     },
