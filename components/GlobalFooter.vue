@@ -13,7 +13,7 @@
     >
       <div class="px-4 lg:px-0 flex flex-wrap gap-4 justify-between">
         <div>
-          <a href="https://jatri.co/">
+          <a :href="JATRI_URL">
             <img
               src="~/assets/images/footer/footer-white-logo.svg"
               alt="Jatri Logo"
@@ -78,9 +78,7 @@
           <h4 class="text-white text-xl font-medium mb-6">Services</h4>
           <ul class="grid gap-4">
             <li>
-              <a href="https://rental.jatri.co/" class="text-white text-base"
-                >Rental</a
-              >
+              <a :href="RENTAL_URL" class="text-white text-base">Rental</a>
             </li>
             <li>
               <nuxt-link to="/bus" class="text-white text-base"
@@ -249,5 +247,11 @@
 <script>
 export default {
   name: "GlobalFooter",
+  data() {
+    return {
+      RENTAL_URL: process.env.RENTAL_URL,
+      JATRI_URL: process.env.JATRI_URL,
+    };
+  },
 };
 </script>
