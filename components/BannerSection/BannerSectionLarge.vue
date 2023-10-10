@@ -13,7 +13,11 @@
         <div
           class="text-[28px] md:text-[45px] lg:text-[45px] text-white font-bold"
         >
-          Ticketing made easy!
+          {{
+            service === "BUS"
+              ? "Book your ticket the smarter way"
+              : "Reserve your ship tickets online"
+          }}
         </div>
         <div class="text-lg lg:text-xl text-white font-bold">
           Buy tickets online hassle-free.
