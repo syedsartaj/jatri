@@ -7,7 +7,7 @@
         <div
           class="flex justify-between lg:justify-start items-center gap-x-2 lg:gap-x-8 w-full"
         >
-          <a href="https://jatri.co/">
+          <a :href="JATRI_URL">
             <img
               class="min-w-[50px] h-[26px] lg:h-9 lg:w-[74px]"
               src="~/assets/images/header/jatri-logo.svg"
@@ -17,7 +17,7 @@
           <div class="bg-[#FEF2F0] rounded-full p-1">
             <div class="flex gap-x-1 lg:gap-x-2 justify-center items-center">
               <div class="px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full">
-                <a href="https://rental.jatri.co/" class="linkItem"
+                <a :href="RENTAL_URL" class="linkItem"
                   ><img
                     class="w-3 h-3 lg:w-5 lg:h-5"
                     src="~/assets/images/header/car-svg.svg"
@@ -88,6 +88,8 @@ export default {
     return {
       ServiceType: ServiceType,
       showHamburgerMenu: false,
+      RENTAL_URL: process.env.RENTAL_URL,
+      JATRI_URL: process.env.JATRI_URL,
     };
   },
   methods: {
