@@ -22,7 +22,8 @@
                     class="w-3 h-3 lg:w-5 lg:h-5"
                     src="~/assets/images/header/car-svg.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base text-[#151414] font-medium"
+                  /><span
+                    class="text-sm lg:text-base text-[#151414] font-normal"
                     >Rental</span
                   ></a
                 >
@@ -39,7 +40,7 @@
                     }"
                     src="~/assets/images/header/bus_2.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base font-medium">Bus</span>
+                  /><span class="text-sm lg:text-base">Bus</span>
                 </div>
               </div>
               <div
@@ -54,8 +55,7 @@
                     }"
                     src="~/assets/images/header/Ship.svg"
                     alt=""
-                  /><span class="text-sm lg:text-base font-medium">Launch</span
-                  >
+                  /><span class="text-sm lg:text-base">Launch</span>
                 </div>
               </div>
             </div>
@@ -101,6 +101,8 @@ export default {
     getServiceClassName(service) {
       return {
         activeMenu: this.selectedService === service,
+        "font-medium": this.selectedService === service,
+        "font-normal": this.selectedService !== service,
         "px-2 py-1 lg:px-3 gap-x-1 lg:gap-x-2 rounded-full cursor-pointer text-[#151414]": true,
       };
     },
@@ -135,7 +137,7 @@ export default {
   @apply w-full mx-auto px-4 lg:px-[100px];
 }
 .linkItem {
-  @apply flex justify-center items-center gap-x-1 lg:gap-x-2 text-xs lg:text-base font-normal;
+  @apply flex justify-center items-center gap-x-1 lg:gap-x-2 text-xs lg:text-base;
 }
 .slide {
   @apply absolute animate-[slide_0.5s_forwards] -right-2/4;
