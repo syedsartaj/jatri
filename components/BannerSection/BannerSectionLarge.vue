@@ -19,7 +19,7 @@
               : "Reserve your ship tickets online"
           }}
         </div>
-        <div class="text-lg lg:text-xl text-white font-bold">
+        <div class="text-xl text-white font-medium">
           Buy tickets online hassle-free.
         </div>
       </div>
