@@ -46,6 +46,7 @@
             <li>
               <a
                 href="https://www.jatri.co/about-us"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >About us</a
               >
@@ -53,6 +54,7 @@
             <li>
               <a
                 href="https://www.jatri.co/career"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >Career</a
               >
@@ -60,6 +62,7 @@
             <li>
               <a
                 href="https://www.jatri.co/blog"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >Blog</a
               >
@@ -67,6 +70,7 @@
             <li>
               <a
                 href="https://www.jatri.co/contact-us"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >Contact us</a
               >
@@ -78,15 +82,15 @@
           <h4 class="text-white text-xl font-medium mb-6">Services</h4>
           <ul class="grid gap-4">
             <li>
-              <a :href="RENTAL_URL" class="text-white text-base">Rental</a>
+              <a :href="RENTAL_URL" target="_blank" class="text-white text-base">Rental</a>
             </li>
             <li>
-              <nuxt-link to="/bus" class="text-white text-base"
+              <nuxt-link to="/bus" target="_blank" class="text-white text-base"
                 >Bus ticketing</nuxt-link
               >
             </li>
             <li>
-              <nuxt-link to="/launch" class="text-white text-base"
+              <nuxt-link to="/launch" target="_blank" class="text-white text-base"
                 >Launch ticketing</nuxt-link
               >
             </li>
@@ -98,6 +102,7 @@
             <li>
               <a
                 href="https://www.jatri.co/ride-sharing-guideline"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >Ride sharing guideline</a
               >
@@ -105,6 +110,7 @@
             <li>
               <a
                 href="https://www.jatri.co/enlistment-certificate"
+                target="_blank"
                 class="text-white font-normal text-base"
                 >Enlistment certificate</a
               >
@@ -205,16 +211,19 @@
         >
           <nuxt-link
             to="/policies#terms-and-conditions"
+            target="_blank"
             class="text-white font-medium text-sm underline"
             >Terms and condition</nuxt-link
           >
           <nuxt-link
             to="/policies#return-and-refund-policy"
+            target="_blank"
             class="text-white font-medium text-sm underline border-x lg:border-x-0 border-[#F6958A] px-8 lg:px-4 xl:px-8"
             >Return & refund policy</nuxt-link
           >
           <nuxt-link
             to="/policies#privacy-policy"
+            target="_blank"
             class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
             >Privacy policy</nuxt-link
           >
