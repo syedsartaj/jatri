@@ -59,4 +59,24 @@ export default {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+@media only screen and (min-width: 768px) {
+  .banner-shadow-bus {
+    background-image: linear-gradient(
+        90deg,
+        rgba(21, 20, 20, 0.57) 0.01%,
+        rgba(255, 255, 255, 0) 99.64%
+      ),
+      url("../../assets/images/home/bannerImageTab.png");
+  }
+
+  .banner-shadow-launch {
+    background-image: linear-gradient(
+        90deg,
+        rgba(21, 20, 20, 0.57) 0.01%,
+        rgba(255, 255, 255, 0) 99.64%
+      ),
+      url("../../assets/images/home/bannerImageTabLaunch.png");
+  }
+}
 </style>
