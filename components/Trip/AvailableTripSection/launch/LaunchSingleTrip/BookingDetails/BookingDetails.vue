@@ -297,12 +297,14 @@
                       <span>
                         <nuxt-link
                           to="/launch/policies#terms-and-conditions"
+                          target="_blank"
                           class="w-full underline text-[#1E88E5] font-medium"
                           >Terms and Conditions</nuxt-link
                         >
                         and
                         <nuxt-link
                           to="/launch/policies#return-and-refund-policy"
+                          target="_blank"
                           class="w-full underline text-[#1E88E5] font-medium"
                           >Cancellation Policy</nuxt-link
                         >
