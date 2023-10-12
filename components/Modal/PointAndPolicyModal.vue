@@ -62,7 +62,8 @@
                 v-if="isDroppingOrBoardingPoints"
                 :pointArray="getPointsArray"
               />
-              <CancelPolicySection v-else />
+              <CancelPolicySection v-else-if="!isLaunch" />
+              <CancelPolicySectionLaunch v-else-if="isLaunch" />
             </div>
           </div>
         </div>
@@ -81,6 +82,7 @@ export default {
     "setCurrentTab",
     "boardingPoints",
     "droppingPoints",
+    "isLaunch"
   ],
   data() {
     return {
