@@ -14,7 +14,7 @@
         {{
           service === "BUS"
             ? "Book your ticket the smarter way"
-            : "Reserve your ship tickets online"
+            : "Reserve your launch tickets online"
         }}
       </h2>
       <h4 class="mt-2 text-base text-white font-normal text-start">

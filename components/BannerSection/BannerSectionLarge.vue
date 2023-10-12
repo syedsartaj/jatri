@@ -16,7 +16,7 @@
           {{
             service === "BUS"
               ? "Book your ticket the smarter way"
-              : "Reserve your ship tickets online"
+              : "Reserve your launch tickets online"
           }}
         </div>
         <div class="text-xl text-white font-medium">

@@ -114,7 +114,7 @@
               >
                 <li class="">
                   The ticket will be treated as canceled if the passenger fails
-                  to arrive at the Ship/Launch 30 minutes before the departure
+                  to arrive at the Launch 30 minutes before the departure
                   time
                 </li>
                 <li>
@@ -148,7 +148,7 @@
               >
                 <li class="">
                   Issuing a valid e-ticket (a ticket that will be accepted by
-                  the ship/cruise operators) for its' network of operations
+                  the launch/cruise operators) for its' network of operations
                 </li>
                 <li>
                   Providing customer support and information regarding ticket
@@ -164,38 +164,38 @@
               <ul
                 class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
-                <li>The ship/cruise operator changes ticket price</li>
-                <li>The ship/cruise not departing/ reaching on time</li>
+                <li>The launch/cruise operator changes ticket price</li>
+                <li>The launch/cruise not departing/ reaching on time</li>
                 <li>
-                  The ship/cruise seats are not being up to the customer's
+                  The launch/cruise seats are not being up to the customer's
                   expectations
                 </li>
                 <li>
-                  The ship/cruise operator canceled the trip due to unavoidable
+                  The launch/cruise operator canceled the trip due to unavoidable
                   reasons
                 </li>
                 <li>
                   The baggage of the customer getting lost/ stolen/damaged
                 </li>
                 <li>
-                  The ship/cruise operator changes a customer's seat at the last
+                  The launch/cruise operator changes a customer's seat at the last
                   minute to accommodate a lady/child/patient or any other reason
                 </li>
                 <li>
                   The customer is waiting at the wrong boarding point (please
-                  call the ship operator to find out the exact boarding point)
+                  call the launch operator to find out the exact boarding point)
                 </li>
                 <li>
-                  The ship/cruise operator changes the boarding point and/or
+                  The launch/cruise operator changes the boarding point and/or
                   uses a pick-up vehicle at the boarding point to take customers
-                  to the ship/cruise departure point
+                  to the launch/cruise departure point
                 </li>
                 <li>
                   The departure times mentioned on the ticket are only tentative
                   timings.
                 </li>
                 <li>
-                  However, the ship/cruise will not leave the source before the
+                  However, the launch/cruise will not leave the source before the
                   time that is mentioned on the ticket
                 </li>
               </ul>
@@ -203,7 +203,7 @@
 
             <p class="text-base font-normal text-blackPrimary mt-4 md:mt-8">
               Customers are required to furnish the following at the time of
-              boarding the ship - a copy of the ticket (A print out of the
+              boarding the launch - a copy of the ticket (A print out of the
               e-ticket or the print out of the ticket provided on website or SMS
               confirmation. Failing to do so, they may not be allowed to board
               the launch/cruise)
@@ -223,7 +223,7 @@
                 </li>
                 <li>
                   Please note that the cancellation fee and cancellation period
-                  may differ from one ship/cruise operator to another.
+                  may differ from one launch/cruise operator to another.
                 </li>
                 <li>
                   If purchase confirmation email/SMS gets delayed or fails
@@ -241,7 +241,7 @@
                 </li>
                 <li>
                   Email/SMS service will not apply to customers purchasing
-                  tickets at the respective ship/cruise counters. It will apply
+                  tickets at the respective launch/cruise counters. It will apply
                   for purchase through online and our agent points and
                   purchasing through call centers.
                 </li>
@@ -249,7 +249,7 @@
                   Customers cannot claim
                   <span class="font-medium">www.Jatri.co</span> liable for any
                   situation, occurrence etc. happening due to failure of any
-                  responsibility of passengers or the ship/cruise operators.
+                  responsibility of passengers or the launch/cruise operators.
                 </li>
                 <li>
                   <span class="font-medium">www.Jatri.co</span> holds the right
@@ -258,7 +258,7 @@
                 </li>
                 <li>
                   Any type of ticket cancellation might not be allowed during
-                  Public Holidays journey as per ship company’s decisions.
+                  Public Holidays journey as per launch company’s decisions.
                 </li>
                 <li>
                   Tickets of international routes are not allowed for
@@ -350,7 +350,7 @@
               >
                 <li>
                   The ticket will be treated as canceled if the passenger fails
-                  to arrive at the ship 30 minutes before the departure time.
+                  to arrive at the launch 30 minutes before the departure time.
                 </li>
               </ul>
             </div>
@@ -500,7 +500,7 @@
               >
                 <li>Ticket PNR (required if a ticket was issued)</li>
                 <li>Mobile number used while buying the ticket</li>
-                <li>Category (e.g Bus/Ship)</li>
+                <li>Category (e.g Bus/Launch)</li>
                 <li>Date of payment</li>
                 <li>Method of Payment (e.g., bkash, COD, card)</li>
                 <li>
@@ -715,7 +715,7 @@
             >
               <li>
                 <span class="font-medium">Auto cancellation</span>
-                will happen if the customer fails to arrive at the ship 30
+                will happen if the customer fails to arrive at the launch 30
                 minutes before the departure time
               </li>
 
