@@ -113,30 +113,28 @@
                 class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify"
               >
                 <li class="">
-                  The ticket will be treated as cancelled if the passenger fails
-                  to report at the reporting station 15 minutes before the bus
-                  arrival
+                  The ticket will be treated as canceled if the passenger fails
+                  to arrive at the Ship/Launch 30 minutes before the departure
+                  time
                 </li>
                 <li>
-                  The authority reserves the right to change schedules/seats in
-                  case of emergency situations
+                  The authority reserves all the rights to change
+                  schedules/seats in case of emergency situations
                 </li>
                 <li>
                   The authority will not be held responsible for any illegal
-                  goods carried by the passenger
+                  goods or anything carried by the passenger
                 </li>
                 <li>
-                  Passengers may cancel his/her tickets prior to 24 hours from
-                  the time of journey
+                  Passengers may cancel his/her tickets 24 hours before the time
+                  of journey
                 </li>
               </ul>
             </div>
             <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
               Other Terms:
             </p>
-            <p
-              class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8"
-            >
+            <p class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8">
               Jatri.co is only the ticket reseller. It does not operate
               bus/cruise services of its own.
             </p>
@@ -150,11 +148,11 @@
               >
                 <li class="">
                   Issuing a valid e-ticket (a ticket that will be accepted by
-                  the bus/cruise operators) for its' network of operations;
+                  the ship/cruise operators) for its' network of operations
                 </li>
                 <li>
                   Providing customer support and information regarding ticket
-                  availability and online purchase;
+                  availability and online purchase
                 </li>
               </ul>
             </div>
@@ -166,49 +164,50 @@
               <ul
                 class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
-                <li>The bus/cruise operator changes ticket price.</li>
-                <li>The bus/cruise not departing/ reaching on time.</li>
+                <li>The ship/cruise operator changes ticket price</li>
+                <li>The ship/cruise not departing/ reaching on time</li>
                 <li>
-                  The bus/cruise seats are not being up to the customer's
-                  expectations.
+                  The ship/cruise seats are not being up to the customer's
+                  expectations
                 </li>
                 <li>
-                  The bus/cruise operator cancelled the trip due to unavoidable
-                  reasons.
+                  The ship/cruise operator canceled the trip due to unavoidable
+                  reasons
                 </li>
                 <li>
-                  The baggage of the customer getting lost/ stolen/damaged.
+                  The baggage of the customer getting lost/ stolen/damaged
                 </li>
                 <li>
-                  The bus/cruise operator changes a customer's seat at the last
-                  minute to accommodate a lady/child/patient or any other
-                  reason.
+                  The ship/cruise operator changes a customer's seat at the last
+                  minute to accommodate a lady/child/patient or any other reason
                 </li>
                 <li>
                   The customer is waiting at the wrong boarding point (please
-                  call the bus operator to find out the exact boarding point).
+                  call the ship operator to find out the exact boarding point)
                 </li>
                 <li>
-                  The bus/cruise operator changes the boarding point and/or uses
-                  a pick-up vehicle at the boarding point to take customers to
-                  the bus/cruise departure point.
+                  The ship/cruise operator changes the boarding point and/or
+                  uses a pick-up vehicle at the boarding point to take customers
+                  to the ship/cruise departure point
                 </li>
                 <li>
                   The departure times mentioned on the ticket are only tentative
-                  timings. However, the bus/cruise will not leave the source
-                  before the time that is mentioned on the ticket.
+                  timings.
+                </li>
+                <li>
+                  However, the ship/cruise will not leave the source before the
+                  time that is mentioned on the ticket
                 </li>
               </ul>
             </div>
 
             <p class="text-base font-normal text-blackPrimary mt-4 md:mt-8">
-              Passengers are required to furnish the following at the time of
-              boarding the bus - A copy of the ticket (A print out of the
+              Customers are required to furnish the following at the time of
+              boarding the ship - a copy of the ticket (A print out of the
               e-ticket or the print out of the ticket provided on website or SMS
               confirmation. Failing to do so, they may not be allowed to board
-              the bus/cruise.
+              the launch/cruise)
             </p>
-
             <p
               class="text-blackPrimary text-xl font-medium ml-4 md:ml-9 mt-4 md:mt-8"
             >
@@ -224,7 +223,7 @@
                 </li>
                 <li>
                   Please note that the cancellation fee and cancellation period
-                  may differ from one bus/cruise operator to another.
+                  may differ from one ship/cruise operator to another.
                 </li>
                 <li>
                   If purchase confirmation email/SMS gets delayed or fails
@@ -242,14 +241,15 @@
                 </li>
                 <li>
                   Email/SMS service will not apply to customers purchasing
-                  tickets at the respective bus/cruise counters. It will apply
+                  tickets at the respective ship/cruise counters. It will apply
                   for purchase through online and our agent points and
-                  purchasing through call centres.
+                  purchasing through call centers.
                 </li>
                 <li>
-                  Passenger cannot claim www.Jatri.co liable for any situation,
-                  occurrence etc. happen due to failure of any responsibility of
-                  passenger or the bus/cruise operators.
+                  Customers cannot claim
+                  <span class="font-medium">www.Jatri.co</span> liable for any
+                  situation, occurrence etc. happening due to failure of any
+                  responsibility of passengers or the ship/cruise operators.
                 </li>
                 <li>
                   <span class="font-medium">www.Jatri.co</span> holds the right
@@ -257,14 +257,16 @@
                   prior notice.
                 </li>
                 <li>
-                  Any kind of ticket cancellation might not be allowed during
-                  Public Holidays journey as per bus company decision.
+                  Any type of ticket cancellation might not be allowed during
+                  Public Holidays journey as per ship company’s decisions.
                 </li>
                 <li>
                   Tickets of international routes are not allowed for
                   cancellation, refund or change.
                 </li>
-                <li>No change, no cancel tickets before 10 days to Eid.</li>
+                <li>
+                  There will be no refund or cancellation before 10 days of Eid
+                </li>
                 <li>
                   If a ticket is confirmed or generated by the mobile number of
                   the mobile payment account, or bank card he can claim for
@@ -274,15 +276,17 @@
                 </li>
               </ul>
             </div>
-
+            <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
+              EID NOTICE:
+            </p>
             <p class="text-base font-normal text-blackPrimary mt-4">
-              EID NOTICE: EID TICKETS ARE NON REFUNDABLE AND CANNOT BE CHANGED.
-              DUE TO UNAVOIDABLE CIRCUMSTANCES (i.e MECHANICAL FAILURE OR WORST
-              TRAFFIC JAM), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION
-              JATRI.CO OR ITS BUS/CRUISE OPERATORS WILL NOT BE RESPONSIBLE IF
-              ANY TRIP IS CANCELLED, PASSENGER WILL GET REFUND ONLY COUNTER FARE
-              PRICE. JATRI.CO ONLINE TRANSACTION FEES WILL BE DEDUCTED FROM
-              TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED
+              EID TICKETS ARE NON REFUNDABLE AND CANNOT BE CHANGED. DUE TO
+              UNAVOIDABLE CIRCUMSTANCES (i.e MECHANICAL FAILURE OR ADVERSE
+              WEATHER), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION JATRI.CO OR
+              ITS SHIP/CRUISE OPERATORS WILL NOT BE RESPONSIBLE IF ANY TRIP IS
+              CANCELED, PASSENGER WILL GET REFUND ONLY COUNTER FARE PRICE. THE
+              CONVENIENCE FEE AND ONLINE TRANSACTION FEES OF JATRI.CO WILL BE
+              DEDUCTED FROM TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED
             </p>
 
             <div class="mt-6">
@@ -310,8 +314,8 @@
               Return & Refund Policies
             </p>
             <p class="text-base font-bold text-blackPrimary mt-4">
-              Before buying a ticket, customers are requested to read the
-              following cancellation and refund policies carefully.
+              Before purchasing a ticket, customers are requested to read the
+              following cancellation and refund policies carefully
             </p>
 
             <p class="text-base font-bold text-blackPrimary mt-4">
@@ -320,8 +324,7 @@
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4"
             >
-              Tickets bought through Jatri.co can be cancelled as per the
-              cancellation policy below:
+              Tickets can be canceled as per the cancellation policy below:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
@@ -330,10 +333,10 @@
                 <li>
                   <span class="font-medium"> Jatri.co</span>
                   is bound to comply with the terms set by the operator/event
-                  organiser/vendor whose ticket it is selling. So, if the
-                  operator/event organiser denies refund even though the claim
-                  was made within the terms mentioned here, Jatri.co will be
-                  unable to issue such refund.
+                  organizer/vendor in the terms of selling their tickets. So, if
+                  the operator/event organizer denies refund even though the
+                  claim was made within the terms mentioned here, Jatri.co will
+                  be unable to issue such refund.
                 </li>
               </ul>
             </div>
@@ -346,9 +349,8 @@
                 class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
-                  The ticket will be treated as cancelled if the passenger fails
-                  to report at the reporting station 15 minutes before the bus
-                  arrival.
+                  The ticket will be treated as canceled if the passenger fails
+                  to arrive at the ship 30 minutes before the departure time.
                 </li>
               </ul>
             </div>
@@ -367,7 +369,8 @@
                 <li>
                   For mobile payments, it is the responsibility of the customer
                   to input transaction ID (if applicable), PIN, OTP properly
-                  within time to confirm his ticket by himself.
+                  within the mentioned time to confirm his/her ticket/s by
+                  himself.
                 </li>
                 <li>
                   <span class="font-medium"> Jatri.co</span> sometimes does the
@@ -389,7 +392,7 @@
             >
               To be eligible for refund, customers need to cancel the ticket
               from jatri.co before the applicable time before the departure. And
-              must report the cancelation to the support centre (i.e. Call
+              must report the cancelation to the support center (i.e. Call
               09642080808 or email to info@jatri.co) of Jatri.co
             </p>
             <!--table-->
@@ -470,19 +473,23 @@
                   No ticket will be refunded unless it has been canceled as per
                   the cancellation/refund policy.
                 </li>
-                <li>
-                  Customers must call from the mobile number used while buying
-                  the ticket. <br />
-                  Cancellation/refund requests from other non-buying numbers
-                  will not be accepted.
-                </li>
-                <li>
-                  No refunds will be processed without a written request in the
-                  correct format (as outlined below) sent to info@jatri.co
-                  within the timeframe requirement given above
-                </li>
               </ul>
             </div>
+
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2"
+            >
+              Customers must call from the mobile number used while buying the
+              ticket. Cancellation/refund requests from other non-buying numbers
+              will not be accepted.
+            </p>
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2"
+            >
+              No refunds will be processed without a written request in the
+              correct format (as outlined below) sent to info@jatri.co within
+              the timeframe requirement given above
+            </p>
 
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
               Refund Request Format
@@ -493,18 +500,18 @@
               >
                 <li>Ticket PNR (required if a ticket was issued)</li>
                 <li>Mobile number used while buying the ticket</li>
-                <li>Category (e.g Bus/Launch)</li>
+                <li>Category (e.g Bus/Ship)</li>
                 <li>Date of payment</li>
                 <li>Method of Payment (e.g., bkash, COD, card)</li>
-                <li>Mobile payment trxID (for mobile payments)</li>
                 <li>
-                  Card type (e.g. Visa) and last 4 digits (for card payments)
+                  Mobile payment trxID (for mobile payments) Card type (e.g.
+                  Visa) and last 4 digits (for card payments)
                 </li>
               </ul>
             </div>
 
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
-              Where refund should be given to:
+              Refund should be given to -
             </p>
             <div>
               <p
@@ -528,7 +535,7 @@
                 class="text-base font-normal text-blackPrimary text-justify mt-2"
               >
                 For cards, refund will be given only to the card used for
-                purchase
+                purchases
               </p>
             </div>
 
@@ -541,7 +548,7 @@
               Jatri.co convenience fee is refundable only in case of trip
               cancellations by operators during non-Eid times. For Eid tickets,
               the convenience fee is non-refundable even if the operator has
-              cancelled the trip. This fee is also non-refundable if the
+              canceled the trip. This fee is also non-refundable if the
               passenger cancels the tickets due to a change of decision to
               travel.
             </p>
@@ -549,8 +556,8 @@
               class="text-base font-normal text-blackPrimary text-justify mt-4"
             >
               As per policy of an operator, Jatri.co may deduct a certain
-              percentage (%) of the ticket price towards cancellation fee,
-              where-ever applicable
+              percentage (%) of the ticket price towards cancellation fee (if
+              needed)
             </p>
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-4"
@@ -611,8 +618,9 @@
                   In case of BKash or Nagad payments, a full mobile number will
                   be required. It is to be noted that for reasons beyond
                   Jatri.co’s control, payment may require some time to post on
-                  the payment gateway’s panel which www. Jatri.co is used to
-                  verify payment.
+                  the payment gateway’s panel which
+                  <span class="font-medium">www. Jatri.co</span> uses to verify
+                  payment.
                 </li>
               </ul>
             </div>
@@ -681,7 +689,7 @@
             >
               <li>
                 First, you have to go to the ticket history option. You need to
-                input your phone number/PNR/transaction ID to search for your
+                add your phone number/PNR/transaction ID to search for your
                 ticket.
               </li>
 
@@ -706,31 +714,43 @@
               class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
             >
               <li>
-                Auto cancellation will happen if the customer fails to report at
-                the reporting station 15 minutes before the bus arrives.
+                <span class="font-medium">Auto cancellation</span>
+                will happen if the customer fails to arrive at the ship 30
+                minutes before the departure time
               </li>
 
               <li>
-                If the customer fails to pay the full amount that mentioned in
-                the screen will not get the activated tickets.
+                If the customer
+                <span class="font-medium">fails to pay</span> the full amount
+                that mentioned in the screen will not get the activated tickets.
               </li>
 
               <li>
                 To be eligible for refund, customers need to cancel the ticket
-                from ‘Ticket History’ a day before(Excluding 12:00 AM to 07:00
-                AM) the journey time. And must report the cancellation to the
-                support centre (i.e Call 09642080808 or email to info@jatri.co).
+                from <span class="font-medium">‘Ticket History’</span> a day
+                before<span class="font-medium"
+                  >(Excluding 12:00 AM to 07:00 AM)</span
+                >
+                the journey time. And must report the cancellation to the
+                support center (i.e Call 09642080808 or email to
+                <span type="email" class="text-[#0000FF] underline"
+                  >info@jatri.co</span
+                >).
               </li>
               <li>
-                Only during Eid time, customers are eligible for refund ONLY if
-                the operator cancels the trip and cannot provide an alternative
-                arrangement. (Note: Terms and conditions of refund policy might
-                update or change from time to time without any notice)
+                Only <span class="font-medium">during Eid time</span>, customers
+                are eligible for refund ONLY if the operator cancels the trip
+                and cannot provide an alternative arrangement. (<span
+                  class="font-medium"
+                  >Note</span
+                >: Terms and conditions of refund policy might update or change
+                from time to time without any notice)
               </li>
               <li>
-                For mobile payments, it is the responsibility of the customer to
-                input transaction ID (if applicable), PIN, OTP properly within
-                time to confirm his ticket by himself.
+                <span class="font-medium">For mobile payments</span>, it is the
+                responsibility of the customer to input transaction ID (if
+                applicable), PIN, OTP properly within time to confirm his ticket
+                by himself.
               </li>
               <li>
                 Jatri.co sometimes does the verification for the customer as a
