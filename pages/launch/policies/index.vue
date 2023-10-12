@@ -113,7 +113,7 @@
                 class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify"
               >
                 <li class="">
-                  The ticket will be treated as canceled if the passenger fails
+                  The ticket will be treated as cancelled if the passenger fails
                   to arrive at the Launch 30 minutes before the departure
                   time
                 </li>
@@ -171,7 +171,7 @@
                   expectations
                 </li>
                 <li>
-                  The launch/cruise operator canceled the trip due to unavoidable
+                  The launch/cruise operator cancelled the trip due to unavoidable
                   reasons
                 </li>
                 <li>
@@ -284,7 +284,7 @@
               UNAVOIDABLE CIRCUMSTANCES (i.e MECHANICAL FAILURE OR ADVERSE
               WEATHER), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION JATRI.CO OR
               ITS SHIP/CRUISE OPERATORS WILL NOT BE RESPONSIBLE IF ANY TRIP IS
-              CANCELED, PASSENGER WILL GET REFUND ONLY COUNTER FARE PRICE. THE
+              CANCELLED, PASSENGER WILL GET REFUND ONLY COUNTER FARE PRICE. THE
               CONVENIENCE FEE AND ONLINE TRANSACTION FEES OF JATRI.CO WILL BE
               DEDUCTED FROM TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED
             </p>
@@ -324,7 +324,7 @@
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4"
             >
-              Tickets can be canceled as per the cancellation policy below:
+              Tickets can be cancelled as per the cancellation policy below:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
@@ -349,7 +349,7 @@
                 class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
               >
                 <li>
-                  The ticket will be treated as canceled if the passenger fails
+                  The ticket will be treated as cancelled if the passenger fails
                   to arrive at the launch 30 minutes before the departure time.
                 </li>
               </ul>
@@ -452,7 +452,7 @@
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-4"
             >
-              No ticket will be refunded unless it has been canceled as per the
+              No ticket will be refunded unless it has been cancelled as per the
               cancellation policy above. In case of technical problems or any
               failed transaction due to network failure, time delay on complete
               payment, input transaction ID/validation of transaction (in case
@@ -470,7 +470,7 @@
                   Bank payment.
                 </li>
                 <li>
-                  No ticket will be refunded unless it has been canceled as per
+                  No ticket will be refunded unless it has been cancelled as per
                   the cancellation/refund policy.
                 </li>
               </ul>
@@ -548,7 +548,7 @@
               Jatri.co convenience fee is refundable only in case of trip
               cancellations by operators during non-Eid times. For Eid tickets,
               the convenience fee is non-refundable even if the operator has
-              canceled the trip. This fee is also non-refundable if the
+              cancelled the trip. This fee is also non-refundable if the
               passenger cancels the tickets due to a change of decision to
               travel.
             </p>
