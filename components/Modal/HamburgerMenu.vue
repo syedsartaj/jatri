@@ -19,7 +19,7 @@
           <li
             v-for="(item, index) in menuList"
             :key="index"
-            @click="handleOnClick(index)"
+            @click="handleOnClick(item, index)"
             class="cursor-pointer"
           >
             <div
@@ -70,7 +70,7 @@ export default {
           {
             name: "History",
             icon: "history",
-            url: "/find-ticket",
+            url: "/bus/find-ticket",
           },
           {
             name: "Full bus reserve",
@@ -83,7 +83,7 @@ export default {
           {
             name: "History",
             icon: "history",
-            url: "/find-ticket",
+            url: "/launch/find-ticket",
           },
         ];
       }
@@ -91,12 +91,12 @@ export default {
   },
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
-    handleOnClick(index) {
+    handleOnClick(item, index) {
       if (index === 1) {
         this.setBusReserveModalOpenStatus();
       } else {
         this.close();
-        this.$router.push("/find-ticket");
+        this.$router.push(item.url);
       }
     },
   },

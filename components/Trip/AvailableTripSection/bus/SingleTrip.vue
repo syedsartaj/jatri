@@ -525,13 +525,13 @@
             class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2"
           >
             <a
-              href="/policies#terms-and-conditions"
+              href="/bus/policies#terms-and-conditions"
               target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
               >Terms and Conditions</a
             >
             <a
-              href="/policies#return-and-refund-policy"
+              href="/bus/policies#return-and-refund-policy"
               target="_blank"
               class="w-full underline text-blackPrimary text-sm font-normal"
               >Cancellation Policy</a

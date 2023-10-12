@@ -204,17 +204,17 @@
           class="w-full lg:w-1/2 xl:w-auto px-4 lg:px-0 pb-4 lg:pb-0 flex justify-around lg:justify-center text-center"
         >
           <nuxt-link
-            to="/policies#terms-and-conditions"
+            :to="`/${selectedService}/policies#terms-and-conditions`"
             class="text-white font-medium text-sm underline"
             >Terms and condition</nuxt-link
           >
           <nuxt-link
-            to="/policies#return-and-refund-policy"
+           :to="`/${selectedService}/policies#return-and-refund-policy`"
             class="text-white font-medium text-sm underline border-x lg:border-x-0 border-[#F6958A] px-8 lg:px-4 xl:px-8"
             >Return & refund policy</nuxt-link
           >
           <nuxt-link
-            to="/policies#privacy-policy"
+           :to="`/${selectedService}/policies#privacy-policy`"
             class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
             >Privacy policy</nuxt-link
           >
@@ -245,8 +245,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "GlobalFooter",
+  computed: {
+    ...mapGetters("common", ["getSelectedServiceType"]),
+    selectedService() {
+      return this.getSelectedServiceType.toLowerCase();
+    },
+  },
   data() {
     return {
       RENTAL_URL: process.env.RENTAL_URL,
