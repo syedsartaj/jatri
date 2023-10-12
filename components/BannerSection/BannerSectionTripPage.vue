@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-image py-[30px]">
+  <div class="hidden lg:block w-full bg-image py-[30px]">
     <SearchFilterForm />
   </div>
 </template>

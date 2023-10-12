@@ -248,7 +248,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { isValidPhoneNumber, ServiceType } from "../../helpers/utils";
+import { isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -264,25 +264,22 @@ export default {
       oldTickets: [],
       alertMessage: null,
       ServiceType: ServiceType,
-      selectedService: ServiceType.BUS,
     };
   },
   computed: {
-    ...mapGetters("common", ["getSearchedTicketList"]),
+    ...mapGetters("common", [
+      "getSearchedTicketList",
+      "getSelectedServiceType",
+    ]),
     getActiveTickets() {
       return this.getFilteredTickets(true);
     },
     getOldTickets() {
       return this.getFilteredTickets(false);
     },
-  },
-  watch: {
-    selectedService(newService) {
-      this.setSelectedService(newService); // global update
+    selectedService() {
+      return this.getSelectedServiceType;
     },
-  },
-  mounted() {
-    this.setSelectedService(ServiceType.BUS);
   },
   beforeDestroy() {
     this.setSearchedTicketList([]);
@@ -327,7 +324,7 @@ export default {
       };
     },
     handleServiceChange(service) {
-      this.selectedService = service;
+      this.setSelectedService(service);
       this.oopsAlertStatus = false;
       this.setSearchedTicketList([]);
     },

@@ -46,7 +46,7 @@
         </div>
 
         <NuxtLink
-          to="/find-ticket"
+          :to="`/${selectedService.toLowerCase()}/find-ticket`"
           class="bg-[#FEF2F0] text-corporate rounded-full pl-4 pr-6 py-[10px] flex justify-between gap-x-2 items-center"
         >
           <svg

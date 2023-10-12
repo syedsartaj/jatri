@@ -1,8 +1,6 @@
 <template>
   <div class="">
-    <!-- <Header/> -->
     <SomethingWentWrong />
-    <!-- <Footer/> -->
   </div>
 </template>
    
