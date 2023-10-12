@@ -449,7 +449,7 @@
             <p
               class="text-base font-normal text-blackPrimary text-justify mt-4"
             >
-              No ticket will be refunded unless it has been canceled as per the
+              No ticket will be refunded unless it has been cancelled as per the
               cancellation policy above. In case of technical problems or any
               failed transaction due to network failure, time delay on complete
               payment, input transaction ID/validation of transaction (in case
@@ -467,7 +467,7 @@
                   Bank payment.
                 </li>
                 <li>
-                  No ticket will be refunded unless it has been canceled as per
+                  No ticket will be refunded unless it has been cancelled as per
                   the cancellation/refund policy.
                 </li>
                 <li>
