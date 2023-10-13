@@ -136,7 +136,7 @@
             </p>
             <p class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8">
               Jatri.co is only the ticket reseller. It does not operate
-              bus/cruise services of its own.
+              launch/cruise services of its own.
             </p>
 
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
@@ -673,7 +673,7 @@
               class="text-base font-normal text-blackPrimary text-justify mt-4"
             >
               We want you to feel confident about using Jatri.co to plan and
-              purchase your bus tickets. Your personal information is safe and
+              purchase your launch tickets. Your personal information is safe and
               secure with us. We have implemented appropriate administrative,
               technical, and physical security procedures to help protect the
               personal information you provide to us.

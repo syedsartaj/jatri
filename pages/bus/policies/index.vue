@@ -435,7 +435,7 @@
               of trip cancellation.
             </p>
             <p class="text-base font-normal text-blackPrimary">
-              Customers must claim a refund from the launch operator’s counter
+              Customers must claim a refund from the bus operator’s counter
               before trip time.
             </p>
 
