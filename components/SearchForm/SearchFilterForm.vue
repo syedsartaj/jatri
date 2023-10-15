@@ -1,9 +1,18 @@
 <template>
-  <div class="w-full">
-    <SearchTab v-if="!isTripPage" />
+  <div
+    :class="{
+      '': isTripPage,
+      '-translate-y-12': !isTripPage,
+      'top-[168px]': getHeadLine?.length && getHeadLine[0].headline,
+      'top-[136px]': !(getHeadLine?.length && getHeadLine[0].headline),
+      'hidden lg:block w-full z-[999998] lg:pr-[80px] xl:pr-[100px] lg:pl-[80px] xl:pl-[100px]': true,
+      sticky: isSticky && !isTripPage,
+      fixed: !isSticky && !isTripPage,
+    }"
+  >
     <div
       v-if="getSelectedServiceType != ''"
-      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[10px] gap-x-4"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[16px] gap-x-4"
     >
       <div class="flex justify-between w-[86%] gap-x-4">
         <SearchCityFilter
@@ -81,6 +90,8 @@ export default {
   name: "SearchFilterForm",
   data() {
     return {
+      isSticky: true,
+      scrollPosition: 351,
       ServiceType: ServiceType,
       errorOccured: false,
       departure: "",
@@ -100,13 +111,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("common", ["getSelectedServiceType", "getCities"]),
+    ...mapGetters("common", [
+      "getSelectedServiceType",
+      "getCities",
+      "getHeadLine",
+    ]),
     isTripPage() {
       const path = this.$route.path.toString();
       return path.includes("/trip");
     },
   },
   methods: {
+    handleScroll() {
+      const currentScroll = window.scrollY;
+      if (currentScroll >= this.scrollPosition) {
+        this.isSticky = false;
+      } else if (currentScroll < this.scrollPosition) {
+        this.isSticky = true;
+      }
+    },
     handleToastMessage(message) {
       this.$toast.error(message, {
         position: "bottom-right",
@@ -188,6 +211,12 @@ export default {
 
       this.$gtm.push(eventData);
     },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   watch: {
     "$route.query": {

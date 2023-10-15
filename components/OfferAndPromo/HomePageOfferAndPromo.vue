@@ -58,7 +58,7 @@
     <!-- Offer & Promos Section -->
 
     <div
-      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pb-0 justify-center w-full hidden lg:flex"
+      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pt-[52px] lg:pb-0 justify-center w-full hidden lg:flex"
       v-if="getOfferImages && getOfferImages.length"
     >
       <div

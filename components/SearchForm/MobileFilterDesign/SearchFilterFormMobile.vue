@@ -51,7 +51,7 @@
         :options="timeList"
       />
     </div>
-    <div class="w-full flex items-center mt-6 mb-2 justify-center">
+    <div class="w-full flex items-center mt-6 justify-center">
       <button
         class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[10px] px-[26px]"
         :class="
@@ -140,7 +140,6 @@ export default {
             ? "/bus/trip"
             : "/launch/trip";
 
-        console.log(query);
         this.$router.push({ path: pathName, query });
       } else {
         this.errorOccured = true;

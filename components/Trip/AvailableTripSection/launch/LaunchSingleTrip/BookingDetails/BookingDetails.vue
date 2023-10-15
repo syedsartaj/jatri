@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-[99999999]">
+  <div class="relative z-[999999998]">
     <div
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
@@ -296,13 +296,15 @@
 
                       <span>
                         <nuxt-link
-                          to="/policies#terms-and-conditions"
+                          to="/launch/policies#terms-and-conditions"
+                          target="_blank"
                           class="w-full underline text-[#1E88E5] font-medium"
                           >Terms and Conditions</nuxt-link
                         >
                         and
                         <nuxt-link
-                          to="/policies#return-and-refund-policy"
+                          to="/launch/policies#return-and-refund-policy"
+                          target="_blank"
                           class="w-full underline text-[#1E88E5] font-medium"
                           >Cancellation Policy</nuxt-link
                         >

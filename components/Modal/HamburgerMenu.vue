@@ -1,10 +1,10 @@
 <template>
-  <div class="relative z-[1000]">
+  <div class="relative z-[99999]">
     <div class="fixed inset-0 bg-white transition-opacity"></div>
 
     <div class="fixed inset-0 z-10 overflow-y-auto">
       <div class="h-[68px] w-full flex justify-between items-center px-4">
-        <span class="text-[16px] text-[#151414] font-medium">Menu</span>
+        <span class="text-xl text-blackPrimary font-medium">Menu</span>
         <img
           class="w-6 h-6 cursor-pointer"
           src="@/assets/images/home/close.svg"
@@ -14,25 +14,20 @@
       </div>
       <div class="border-b-[1px] border-[#DBDBDB]" />
 
-      <div class="px-4 mt-5">
+      <div class="px-4">
         <ul class="list-none">
           <li
             v-for="(item, index) in menuList"
             :key="index"
-            @click="handleOnClick(index)"
+            @click="handleOnClick(item, index)"
+            class="cursor-pointer"
           >
             <div
-              class="
-                h-[70px]
-                flex
-                justify-between
-                items-center
-                border-b-[1px] border-[#DBDBDB] border-dashed
-              "
+              class="h-[70px] flex justify-between items-center border-b-[1px] border-[#DBDBDB]"
             >
               <div class="gap-x-4 flex">
                 <img
-                  class="w-6 h-6 cursor-pointer"
+                  class="w-6 h-6"
                   :src="require(`@/assets/images/home/${item.icon}.svg`)"
                   alt="close"
                 />
@@ -40,16 +35,11 @@
                   {{ item.name }}</span
                 >
               </div>
-              <img
-                class="w-6 h-6 cursor-pointer"
-                src="@/assets/images/home/arrowRight.svg"
-                alt="close"
-              />
             </div>
           </li>
         </ul>
-        <div class="h-[70px] flex justify-between items-center">
-          <a class="gap-x-4 flex" href="tel:09642080808">
+        <div class="h-[70px] flex justify-between items-center w-full">
+          <a class="gap-x-4 flex cursor-pointer w-full" href="tel:09642080808">
             <img
               class="w-6 h-6 cursor-pointer"
               src="@/assets/images/icons/phoneBlack.svg"
@@ -70,34 +60,47 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   props: ["close"],
   computed: {
-    ...mapGetters("common", ["getBusReserveModalOpenStatus"]),
-  },
-  data() {
-    return {
-      menuList: [
-        {
-          name: "Full bus reserve",
-          icon: "fullBusReserve",
-          url: "#",
-        },
-        // {
-        //   name: "Profile",
-        //   icon: "user",
-        //   url: "#",
-        // },
-      ],
-    };
+    ...mapGetters("common", [
+      "getBusReserveModalOpenStatus",
+      "getSelectedServiceType",
+    ]),
+    menuList() {
+      if (this.getSelectedServiceType === "BUS") {
+        return [
+          {
+            name: "History",
+            icon: "history",
+            url: "/bus/find-ticket",
+          },
+          {
+            name: "Full bus reserve",
+            icon: "fullBusReserve",
+            url: "#",
+          },
+        ];
+      } else {
+        return [
+          {
+            name: "History",
+            icon: "history",
+            url: "/launch/find-ticket",
+          },
+        ];
+      }
+    },
   },
   methods: {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
-    handleOnClick(index) {
-      if (index === 0) {
+    handleOnClick(item, index) {
+      if (index === 1) {
         this.setBusReserveModalOpenStatus();
+      } else {
+        this.close();
+        this.$router.push(item.url);
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

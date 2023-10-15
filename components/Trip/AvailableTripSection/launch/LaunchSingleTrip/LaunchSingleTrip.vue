@@ -101,6 +101,7 @@
             :handlePointPolicyModal="handlePointPolicyModal"
             :boardingPoints="getBoardingPoints"
             :droppingPoints="getDroppingPoints"
+            :isLaunch="true"
           />
         </div>
       </div>

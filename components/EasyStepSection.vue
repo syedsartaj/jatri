@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-bgShade3 py-[40px] lg:py-[60px] px-8 md:px-12 lg:px-[100px] mt-10 md:mt-[48px] lg:mt-[100px]"
+    class="bg-bgShade3 py-[40px] lg:py-[60px] px-4 md:px-12 lg:px-[100px] mt-10 md:mt-[48px] lg:mt-[100px]"
   >
     <h2
       class="text-[24px] md:text-[32px] lg:text-4xl text-blackPrimary text-center font-semibold lg:leading-[44px]"
@@ -8,7 +8,7 @@
       Easy steps to enjoy journey
     </h2>
     <div
-      class="mt-8 lg:mt-[48px] flex flex-col justify-evenly md:flex-row md:gap-x-4 lg:gap-x-8"
+      class="mt-8 lg:mt-[48px] flex flex-col justify-between md:flex-row md:gap-x-4 lg:gap-x-8"
     >
       <div
         class="w-full lg:w-[392px] flex flex-col lg:items-start lg:text-left"

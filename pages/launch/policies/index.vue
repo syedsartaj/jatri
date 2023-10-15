@@ -3,8 +3,10 @@
     <div class="md:bg-white p-4 md:p-[40px]">
       <!-- mobile dropdown-->
       <div class="block md:hidden bg-white">
-        <button @click="toggler"
-          class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between">
+        <button
+          @click="toggler"
+          class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between"
+        >
           Terms & Conditions
           <img src="@/assets/images/ashDropDown.svg" alt="" />
         </button>
@@ -14,18 +16,38 @@
           </p>
 
           <hr class="mt-2 border-t border-[#DBDBDB]" />
-          <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions'
-              ? 'text-white bg-[#1E88E5]'
-              : 'text-black bg-transparent'
-            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
-          <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'
-              ? 'text-white bg-[#1E88E5]'
-              : 'text-black bg-transparent'
-            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
-          <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="$route.hash === '#privacy-policy'
-              ? 'text-white bg-[#1E88E5]'
-              : 'text-black bg-transparent'
-            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy
+          <a
+            @click="selectedContent = 'terms-condition'"
+            href="#terms-and-conditions"
+            :class="
+              $route.hash === '#terms-and-conditions'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+            "
+            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+            >Terms & Conditions</a
+          >
+          <a
+            @click="selectedContent = 'return-policy'"
+            href="#return-and-refund-policy"
+            :class="
+              $route.hash === '#return-and-refund-policy'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+            "
+            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+            >Return & Refund Policies</a
+          >
+          <a
+            @click="selectedContent = 'privacy-policy'"
+            href="#privacy-policy"
+            :class="
+              $route.hash === '#privacy-policy'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+            "
+            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+            >Privacy Policy
           </a>
         </div>
       </div>
@@ -37,18 +59,38 @@
               Table of contents
             </p>
             <hr class="mt-2 border-t border-[#DBDBDB]" />
-            <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
-            <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
-            <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="$route.hash === '#privacy-policy'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy
+            <a
+              @click="selectedContent = 'terms-condition'"
+              href="#terms-and-conditions"
+              :class="
+                $route.hash === '#terms-and-conditions'
+                  ? 'text-white bg-[#1E88E5]'
+                  : 'text-black bg-transparent'
+              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+              >Terms & Conditions</a
+            >
+            <a
+              @click="selectedContent = 'return-policy'"
+              href="#return-and-refund-policy"
+              :class="
+                $route.hash === '#return-and-refund-policy'
+                  ? 'text-white bg-[#1E88E5]'
+                  : 'text-black bg-transparent'
+              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+              >Return & Refund Policies</a
+            >
+            <a
+              @click="selectedContent = 'privacy-policy'"
+              href="#privacy-policy"
+              :class="
+                $route.hash === '#privacy-policy'
+                  ? 'text-white bg-[#1E88E5]'
+                  : 'text-black bg-transparent'
+              "
+              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
+              >Privacy Policy
             </a>
           </div>
         </div>
@@ -58,7 +100,9 @@
           <p id="terms-and-conditions">&nbsp;</p>
           <!-- Terms and Condition -->
           <div :class="$route.hash === '#terms-and-conditions' ? 'mt-20' : ' '">
-            <p class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
+            <p
+              class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
+            >
               Terms & Conditions
             </p>
             <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
@@ -66,32 +110,33 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify">
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify"
+              >
                 <li class="">
-                  The ticket will be treated as canceled if the passenger fails
-                  to report at the reporting station 15 minutes before the bus
-                  arrival.
+                  The ticket will be treated as cancelled if the passenger fails
+                  to arrive at the Launch 30 minutes before the departure
+                  time
                 </li>
                 <li>
-                  The authority reserves the right to change schedules/seats in
-                  case of emergency situations.
+                  The authority reserves all the rights to change
+                  schedules/seats in case of emergency situations
                 </li>
                 <li>
                   The authority will not be held responsible for any illegal
-                  goods carried by the passenger.
+                  goods or anything carried by the passenger
                 </li>
                 <li>
-                  Passenger may cancel his/her tickets prior to 24 hours from
-                  the time of journey.
+                  Passengers may cancel his/her tickets 24 hours before the time
+                  of journey
                 </li>
               </ul>
             </div>
             <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
               Other Terms:
             </p>
-            <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
+            <p class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8">
               Jatri.co is only the ticket reseller. It does not operate
-              bus/cruise services of its own.
+              launch/cruise services of its own.
             </p>
 
             <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
@@ -99,14 +144,15 @@
             </p>
             <div class="md:ml-9">
               <ul
-                class="list-disc dash-type mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+                class="list-disc dash-type mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
                 <li class="">
                   Issuing a valid e-ticket (a ticket that will be accepted by
-                  the bus/cruise operators) for its' network of operations;
+                  the launch/cruise operators) for its' network of operations
                 </li>
                 <li>
                   Providing customer support and information regarding ticket
-                  availability and online purchase;
+                  availability and online purchase
                 </li>
               </ul>
             </div>
@@ -116,64 +162,68 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
-                <li>The bus/cruise operator changes ticket price.</li>
-                <li>The bus/cruise not departing/ reaching on time.</li>
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
+                <li>The launch/cruise operator changes ticket price</li>
+                <li>The launch/cruise not departing/ reaching on time</li>
                 <li>
-                  The bus/cruise seats not being up to the customer's
-                  expectation.
+                  The launch/cruise seats are not being up to the customer's
+                  expectations
                 </li>
                 <li>
-                  The bus/cruise operator canceling the trip due to unavoidable
-                  reasons.
+                  The launch/cruise operator cancelled the trip due to unavoidable
+                  reasons
                 </li>
                 <li>
-                  The baggage of the customer getting lost/ stolen/damaged.
+                  The baggage of the customer getting lost/ stolen/damaged
                 </li>
                 <li>
-                  The bus/cruise operator changes a customer's seat at the last
-                  minute to accommodate a lady/child/patient or any other
-                  reason.
+                  The launch/cruise operator changes a customer's seat at the last
+                  minute to accommodate a lady/child/patient or any other reason
                 </li>
                 <li>
-                  The customer waiting at the wrong boarding point (please call
-                  the bus operator to find out the exact boarding point).
+                  The customer is waiting at the wrong boarding point (please
+                  call the launch operator to find out the exact boarding point)
                 </li>
                 <li>
-                  The bus/cruise operator changing the boarding point and/or
-                  using a pick-up vehicle at the boarding point to take
-                  customers to the bus/cruise departure point.
+                  The launch/cruise operator changes the boarding point and/or
+                  uses a pick-up vehicle at the boarding point to take customers
+                  to the launch/cruise departure point
                 </li>
                 <li>
                   The departure times mentioned on the ticket are only tentative
-                  timings. However, the bus/cruise will not leave the source
-                  before the time that is mentioned on the ticket.
+                  timings.
+                </li>
+                <li>
+                  However, the launch/cruise will not leave the source before the
+                  time that is mentioned on the ticket
                 </li>
               </ul>
             </div>
 
             <p class="text-base font-normal text-blackPrimary mt-4 md:mt-8">
-              Passengers are required to furnish the following at the time of
-              boarding the bus - A copy of the ticket (A print out of the
+              Customers are required to furnish the following at the time of
+              boarding the launch - a copy of the ticket (A print out of the
               e-ticket or the print out of the ticket provided on website or SMS
               confirmation. Failing to do so, they may not be allowed to board
-              the bus/cruise.
+              the launch/cruise)
             </p>
-
+            <p
+              class="text-blackPrimary text-xl font-medium ml-4 md:ml-9 mt-4 md:mt-8"
+            >
+              Cancellation Policy:
+            </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
-                <li class="">
-                  <p class="text-blackPrimary text-xl font-medium">
-                    Cancellation Policy:
-                    <span class="ml-2 text-base font-normal text-blackPrimary">
-                      The tickets booked through Jatri.co are only cancellable
-                      from Jatri Online as per Cancellation Policy</span>
-                  </p>
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
+                <li>
+                  The tickets booked through Jatri.co are only cancellable from
+                  Jatri Online as per Cancellation Policy
                 </li>
                 <li>
                   Please note that the cancellation fee and cancellation period
-                  may differ from one bus/cruise operator to another.
+                  may differ from one launch/cruise operator to another.
                 </li>
                 <li>
                   If purchase confirmation email/SMS gets delayed or fails
@@ -191,42 +241,52 @@
                 </li>
                 <li>
                   Email/SMS service will not apply to customers purchasing
-                  tickets at the respective bus/cruise counters. It will apply
+                  tickets at the respective launch/cruise counters. It will apply
                   for purchase through online and our agent points and
                   purchasing through call centers.
                 </li>
                 <li>
-                  Passenger cannot claim
+                  Customers cannot claim
                   <span class="font-medium">www.Jatri.co</span> liable for any
-                  situation, occurrence etc. happen due to failure of any
-                  responsibility of passenger or the bus/cruise operators.
+                  situation, occurrence etc. happening due to failure of any
+                  responsibility of passengers or the launch/cruise operators.
                 </li>
                 <li>
                   <span class="font-medium">www.Jatri.co</span> holds the right
-                  to update or change any terms time to time without any prior
-                  notice.
+                  to update or change any terms from time to time without any
+                  prior notice.
                 </li>
                 <li>
-                  Any kind of ticket cancellation might not be allowed during
-                  <span class="font-medium">Public Holidays</span> journey as
-                  per bus company decision.
+                  Any type of ticket cancellation might not be allowed during
+                  Public Holidays journey as per launch company’s decisions.
                 </li>
                 <li>
                   Tickets of international routes are not allowed for
                   cancellation, refund or change.
                 </li>
-                <li>No change, no cancel tickets before 10 days to Eid.</li>
+                <li>
+                  There will be no refund or cancellation before 10 days of Eid
+                </li>
+                <li>
+                  If a ticket is confirmed or generated by the mobile number of
+                  the mobile payment account, or bank card he can claim for
+                  refund. Such refunds will be given within 7 business days
+                  (excluding Friday and Saturday) AFTER the event/trip has taken
+                  place. This is also applicable for Eid time.
+                </li>
               </ul>
             </div>
-
+            <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
+              EID NOTICE:
+            </p>
             <p class="text-base font-normal text-blackPrimary mt-4">
-              EID NOTICE: EID TICKETS ARE NON REFUNDABLE AND CANNOT BE CHANGED.
-              DUE TO UNAVOIDABLE CIRCUMSTANCES (i.e MECHANICAL FAILURE OR WORST
-              TRAFFIC JAM), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION
-              JATRI.CO OR ITS BUS/CRUISE OPERATORS WILL NOT BE RESPONSIBLE IF
-              ANY TRIP IS CANCELED, PASSENGER WILL GET REFUND ONLY COUNTER FARE
-              PRICE. JATRI.CO ONLINE TRANSACTION FEES WILL BE DEDUCTED FROM
-              TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED
+              EID TICKETS ARE NON REFUNDABLE AND CANNOT BE CHANGED. DUE TO
+              UNAVOIDABLE CIRCUMSTANCES (i.e MECHANICAL FAILURE OR ADVERSE
+              WEATHER), SCHEDULE MIGHT BE DELAYED. IN SUCH CONDITION JATRI.CO OR
+              ITS SHIP/CRUISE OPERATORS WILL NOT BE RESPONSIBLE IF ANY TRIP IS
+              CANCELLED, PASSENGER WILL GET REFUND ONLY COUNTER FARE PRICE. THE
+              CONVENIENCE FEE AND ONLINE TRANSACTION FEES OF JATRI.CO WILL BE
+              DEDUCTED FROM TOTAL PAID AMOUNT AND WILL NOT BE REFUNDED
             </p>
 
             <div class="mt-6">
@@ -240,33 +300,43 @@
             </div>
           </div>
 
-          <hr id="return-and-refund-policy" class="mt-6 border-t border-[#DBDBDB]" />
+          <hr
+            id="return-and-refund-policy"
+            class="mt-6 border-t border-[#DBDBDB]"
+          />
           <!-- Return and refund policy -->
-          <div :class="$route.hash === '#return-and-refund-policy' ? 'mt-20' : ' '">
-            <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
+          <div
+            :class="$route.hash === '#return-and-refund-policy' ? 'mt-20' : ' '"
+          >
+            <p
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
+            >
               Return & Refund Policies
             </p>
             <p class="text-base font-bold text-blackPrimary mt-4">
-              Before buying a ticket, customers are requested to read the
-              following cancellation and refund policies carefully.
+              Before purchasing a ticket, customers are requested to read the
+              following cancellation and refund policies carefully
             </p>
 
             <p class="text-base font-bold text-blackPrimary mt-4">
               Cancellation Policy:
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4">
-              Tickets bought through Jatri.co can be canceled as per the
-              cancellation policy below:
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4"
+            >
+              Tickets can be cancelled as per the cancellation policy below:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
-              <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+              <ul
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
                 <li>
                   <span class="font-medium"> Jatri.co</span>
                   is bound to comply with the terms set by the operator/event
-                  organizer/vendor whose ticket it is selling. So, if the
-                  operator/event organizer denies refund even though the claim
-                  was made within the terms mentioned here, Jatri.co will be
-                  unable to issue such refund.
+                  organizer/vendor in the terms of selling their tickets. So, if
+                  the operator/event organizer denies refund even though the
+                  claim was made within the terms mentioned here, Jatri.co will
+                  be unable to issue such refund.
                 </li>
               </ul>
             </div>
@@ -275,11 +345,12 @@
               Auto cancellation:
             </p>
             <div class="ml-4 md:ml-9 mt=4">
-              <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+              <ul
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
                 <li>
-                  The ticket will be treated as canceled if the passenger fails
-                  to report at the reporting station 15 minutes before the bus
-                  arrival.
+                  The ticket will be treated as cancelled if the passenger fails
+                  to arrive at the launch 30 minutes before the departure time.
                 </li>
               </ul>
             </div>
@@ -288,7 +359,9 @@
               Failure to Pay:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
-              <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+              <ul
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
                 <li>
                   No ticket will be activated unless the customer has paid the
                   full amount mentioned on the screen.
@@ -296,7 +369,8 @@
                 <li>
                   For mobile payments, it is the responsibility of the customer
                   to input transaction ID (if applicable), PIN, OTP properly
-                  within time to confirm his ticket by himself.
+                  within the mentioned time to confirm his/her ticket/s by
+                  himself.
                 </li>
                 <li>
                   <span class="font-medium"> Jatri.co</span> sometimes does the
@@ -313,7 +387,9 @@
               Regular Time (Non-Eid Period):
             </p>
 
-            <p class="text-base font-medium text-blackPrimary mt-4 text-justify">
+            <p
+              class="text-base font-medium text-blackPrimary mt-4 text-justify"
+            >
               To be eligible for refund, customers need to cancel the ticket
               from jatri.co before the applicable time before the departure. And
               must report the cancelation to the support center (i.e. Call
@@ -323,7 +399,9 @@
             <div class="mt-4 border border-[#DBDBDB] rounded">
               <table class="min-w-full text-center">
                 <thead>
-                  <tr class="bg-[#F7F7F7] p-1 leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium">
+                  <tr
+                    class="bg-[#F7F7F7] p-1 leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
+                  >
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]"></th>
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Hours before trip time
@@ -332,7 +410,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium">
+                  <tr
+                    class="leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
+                  >
                     <td class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Jatri Online
                     </td>
@@ -358,99 +438,130 @@
               of trip cancellation.
             </p>
             <p class="text-base font-normal text-blackPrimary">
-              Customers must claim a refund from the bus operator’s counter
+              Customers must claim a refund from the launch operator’s counter
               before trip time.
             </p>
 
-            <p class="text-base font-medium text-blackPrimary mt-4">
+            <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
               Refund Policy
             </p>
-            <p class="text-base font-medium text-blackPrimary">
+            <p class="text-blackPrimary text-xl font-medium mt-4">
               Regular Time (Non-Eid Period):
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
-              No ticket will be refunded unless it has been canceled as per the cancellation policy above. In case of
-              technical problems or any failed transaction due to network failure, time delay on complete payment, input
-              transaction ID/validation of transaction (in case of mobile payment) or any other situation where payment is
+
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
+              No ticket will be refunded unless it has been cancelled as per the
+              cancellation policy above. In case of technical problems or any
+              failed transaction due to network failure, time delay on complete
+              payment, input transaction ID/validation of transaction (in case
+              of mobile payment) or any other situation where payment is
               successful but ticket is not generated in that case.
             </p>
 
-            <p class="text-base font-normal text-blackPrimary text-justify mt-2">
-              Incase of refunding the money, it will take 7 business days for
-              MFS(bKash, Nagad) and 12/15 business days for SSL Commerz/ Bank
-              payment.
+            <div class="ml-4 md:ml-9">
+              <ul
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
+                <li>
+                  Incase of refunding the money, it will take 7 business days
+                  for MFS(bKash, Nagad) and 12/15 business days for SSL Commerz/
+                  Bank payment.
+                </li>
+                <li>
+                  No ticket will be refunded unless it has been cancelled as per
+                  the cancellation/refund policy.
+                </li>
+              </ul>
+            </div>
+
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2"
+            >
+              Customers must call from the mobile number used while buying the
+              ticket. Cancellation/refund requests from other non-buying numbers
+              will not be accepted.
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-2">No ticket will be refunded unless it has been cancelled as per the
-              cancellation/refund policy.</p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-2">Customer must need to call from the mobile number used while
-              buying the ticket. Cancellation/refund request from other
-              non-buying number will not be accepted.</p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-2">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-2"
+            >
               No refunds will be processed without a written request in the
               correct format (as outlined below) sent to info@jatri.co within
               the timeframe requirement given above
-
-              <br />
-              <br />
-              Refund Request Format
-              <br />
-              <br />
-
-              Ticket PNR (required if a ticket was issued)
-              <br />
-
-              Mobile number used while buying the ticket
-              <br />
-
-              Category (e.g Bus/Launch)
-              <br />
-
-              Date of payment
-              <br />
-
-              Method of Payment (e.g., bkash, COD, card)
-              <br />
-
-              Mobile payment trxID (for mobile payments)
-              <br />
-
-              Card type (e.g. Visa) and last 4 digits (for card payments)
-              <br />
-              <br />
-
-              Where refund should be given to:
-              <br />
-              <br />
-
-              Personal bKash Number (If paid through bkash) OR
-              <br />
-              OR Bank details (if paid through card/online baking/DBBL mobile
-              banking) with Account Number, Bank Account Name, Bank Name, Branch
-              Name and Routing Code.
-              <br />
-              No cash refund given
-              <br />
-              For cards, refund will be given only to the card used for
-              purchases
             </p>
+
+            <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
+              Refund Request Format
+            </p>
+            <div class="ml-4 md:ml-9">
+              <ul
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
+                <li>Ticket PNR (required if a ticket was issued)</li>
+                <li>Mobile number used while buying the ticket</li>
+                <li>Category (e.g Bus/Launch)</li>
+                <li>Date of payment</li>
+                <li>Method of Payment (e.g., bkash, COD, card)</li>
+                <li>
+                  Mobile payment trxID (for mobile payments) Card type (e.g.
+                  Visa) and last 4 digits (for card payments)
+                </li>
+              </ul>
+            </div>
+
+            <p class="text-blackPrimary text-xl font-medium mt-4 md:mt-8">
+              Refund should be given to -
+            </p>
+            <div>
+              <p
+                class="text-base font-normal text-blackPrimary text-justify mt-2"
+              >
+                Personal bKash Number (If paid through bkash) OR
+              </p>
+              <p
+                class="text-base font-normal text-blackPrimary text-justify mt-2"
+              >
+                OR Bank details (if paid through card/online banking/DBBL mobile
+                banking) with Account Number, Bank Account Name, Bank Name,
+                Branch Name and Routing Code.
+              </p>
+              <p
+                class="text-base font-normal text-blackPrimary text-justify mt-2"
+              >
+                No cash refund will be given
+              </p>
+              <p
+                class="text-base font-normal text-blackPrimary text-justify mt-2"
+              >
+                For cards, refund will be given only to the card used for
+                purchases
+              </p>
+            </div>
 
             <p class="text-base font-bold text-blackPrimary mt-4">
               Amount of Refund:
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               Jatri.co convenience fee is refundable only in case of trip
               cancellations by operators during non-Eid times. For Eid tickets,
               the convenience fee is non-refundable even if the operator has
-              canceled the trip. This fee is also non-refundable if the
+              cancelled the trip. This fee is also non-refundable if the
               passenger cancels the tickets due to a change of decision to
               travel.
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               As per policy of an operator, Jatri.co may deduct a certain
-              percentage (%) of the ticket price towards cancellation fee,
-              where-ever applicable
+              percentage (%) of the ticket price towards cancellation fee (if
+              needed)
             </p>
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               For refunds through mobile payment gateways (e.g. bKash, Nagad), a
               fee is charged by the mobile payment company which will be
               deducted from the eligible refund amount. Similar conditions will
@@ -462,7 +573,9 @@
             </p>
 
             <div class="ml-4 md:ml-9 mt-4">
-              <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+              <ul
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+              >
                 <li>
                   If a customer has sent payment to Jatri.co but the e-ticket is
                   not confirmed or generated, i.e., there is no transaction ID
@@ -522,11 +635,15 @@
           <hr id="privacy-policy" class="mt-6 border-t border-[#DBDBDB]" />
           <!-- privacy policy data -->
           <div :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
-            <p class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
+            <p
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
+            >
               Privacy Policy
             </p>
 
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               Jatri services Limited values the relationship with the customers.
               We are committed to handling customer information in a
               professional manner. We take the issue of privacy of our customers
@@ -534,7 +651,9 @@
               visit our website.
             </p>
 
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               If you provide unique identifying information, such as name,
               address and other information to us, such information may be used
               for statistical and/or other purposes. Any personally identifiable
@@ -542,15 +661,19 @@
               disclosed, disseminated without your consent.
             </p>
 
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               Jatri services Ltd. may use your personal contact information such
               as Email, Mobile number to update you on any information regarding
               your travel or to update you on any offer(s).
             </p>
 
-            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
+            <p
+              class="text-base font-normal text-blackPrimary text-justify mt-4"
+            >
               We want you to feel confident about using Jatri.co to plan and
-              purchase your bus tickets. Your personal information is safe and
+              purchase your launch tickets. Your personal information is safe and
               secure with us. We have implemented appropriate administrative,
               technical, and physical security procedures to help protect the
               personal information you provide to us.
@@ -561,7 +684,9 @@
             Cancellation process:
           </p>
           <div class="ml-4 md:ml-9">
-            <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+            <ul
+              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+            >
               <li>
                 First, you have to go to the ticket history option. You need to
                 add your phone number/PNR/transaction ID to search for your
@@ -585,11 +710,13 @@
           </p>
 
           <div class="ml-4 md:ml-9">
-            <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
+            <ul
+              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
+            >
               <li>
                 <span class="font-medium">Auto cancellation</span>
-                will happen if the customer fails to report at the reporting
-                station 15 minutes before the bus arrives.
+                will happen if the customer fails to arrive at the launch 30
+                minutes before the departure time
               </li>
 
               <li>
@@ -601,16 +728,22 @@
               <li>
                 To be eligible for refund, customers need to cancel the ticket
                 from <span class="font-medium">‘Ticket History’</span> a day
-                before<span class="font-medium">(Excluding 12:00 AM to 07:00 AM)</span>
+                before<span class="font-medium"
+                  >(Excluding 12:00 AM to 07:00 AM)</span
+                >
                 the journey time. And must report the cancellation to the
                 support center (i.e Call 09642080808 or email to
-                <span type="email" class="text-[#0000FF] underline">info@jatri.co</span>).
+                <span type="email" class="text-[#0000FF] underline"
+                  >info@jatri.co</span
+                >).
               </li>
               <li>
                 Only <span class="font-medium">during Eid time</span>, customers
                 are eligible for refund ONLY if the operator cancels the trip
-                and cannot provide an alternative arrangement. (<span class="font-medium">Note</span>: Terms and
-                conditions of refund policy might update or change
+                and cannot provide an alternative arrangement. (<span
+                  class="font-medium"
+                  >Note</span
+                >: Terms and conditions of refund policy might update or change
                 from time to time without any notice)
               </li>
               <li>
