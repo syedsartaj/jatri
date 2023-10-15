@@ -223,7 +223,6 @@
           >
           <nuxt-link
            :to="`/${selectedService}/policies#privacy-policy`"
-            to="/policies#privacy-policy"
             target="_blank"
             class="text-white font-medium text-sm underline pl-2 sm:pl-6 lg:pl-0"
             >Privacy policy</nuxt-link
