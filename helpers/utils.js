@@ -38,3 +38,28 @@ export const isValidEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailRegex.test(email);
 };
+
+// Utility function to clean and validate a phone number string
+export const cleanAndValidatePhoneNumber = (input) => {
+  if (input.length === 1 && input[0] === "0") {
+    return "";
+  }
+  if (input.length > 10) {
+    return input.slice(0, 10);
+  }
+  // Prevent negative numbers
+  const parsedInput = parseInt(input);
+  return isNaN(parsedInput) || parsedInput < 0 ? "" : parsedInput.toString();
+};
+
+// Utility function to clean and validate a pasted text
+export const cleanAndValidatePastedText = (pastedText) => {
+  // Remove any leading zeros
+  const cleanedText = pastedText.replace(/^0+/, "");
+  // Ensure it's not a negative number
+  const parsedText = parseInt(cleanedText);
+  if (!isNaN(parsedText) && parsedText >= 0) {
+    return parsedText.toString().slice(0, 10);
+  }
+  return "";
+};

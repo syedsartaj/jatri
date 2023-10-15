@@ -248,7 +248,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
+import { cleanAndValidatePastedText, isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -300,23 +300,14 @@ export default {
       });
     },
     handleInput() {
-      if (this.phone.length === 1 && this.phone[0] === "0") {
-        this.phone = "";
-      }
-      if (this.phone.length > 10) {
-        this.phone = this.phone.slice(0, 10);
-      }
+      this.phone = cleanAndValidatePhoneNumber(this.phone);
     },
     handlePaste(event) {
       event.preventDefault();
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
-      // Remove any leading zeros
-      const cleanedText = pastedText.replace(/^0+/, "");
-      const truncatedText = cleanedText.slice(0, 10);
-      this.phone = truncatedText;
+      this.phone = cleanAndValidatePastedText(pastedText);
     },
-
     getServiceClassName(service) {
       return {
         "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,
