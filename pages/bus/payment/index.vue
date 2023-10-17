@@ -105,7 +105,9 @@
         <div
           class="flex justify-start items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Fare Details</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Fare Details
+          </p>
         </div>
         <div class="px-[14px] pt-3">
           <div
@@ -234,7 +236,9 @@
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Promo</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Promo
+          </p>
         </div>
         <div class="flex gap-x-5 w-full flex-col">
           <div class="flex justify-between w-full p-4">
@@ -342,7 +346,9 @@
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Payment Method</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Payment Method
+          </p>
           <div
             class="flex justify-center items-center w-[139px] bg-[#F7F7F7] rounded-full text-base font-medium text-blackPrimary"
           >
@@ -632,9 +638,7 @@ export default {
       }
     },
     handlePromoBox(promo) {
-      this.promoCode = promo.code;
-      this.activePromo = promo;
-      this.applyPromo();
+      this.applyPromo(promo);
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
@@ -704,11 +708,10 @@ export default {
     timeUp() {
       this.paymentAllowStatus = false;
     },
-    applyPromo() {
+    applyPromo(promo) {
       this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
         const payload = {
-          promoCode: this.promoCode,
+          promoCode: promo.code,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
           tripDateTime:
             this.getBookingInfoDetails.invoice?.tripDateTime ||
@@ -717,9 +720,18 @@ export default {
           paymentId: this.getBookingInfoDetails._id,
           tnxId: this.$route.query.tnxId,
         };
-        this.applyPromoCodeAction(payload);
 
-        this.$nuxt.$loading?.finish();
+        try {
+          this.$nuxt.$loading?.start();
+          const response = await this.applyPromoCodeAction(payload);
+          if (response?.amount) {
+            this.promoCode = promo.code;
+            this.activePromo = promo;
+          }
+          this.$nuxt.$loading?.finish();
+        } catch (error) {
+          this.$nuxt.$loading?.finish();
+        }
       });
     },
     async removePromo() {
