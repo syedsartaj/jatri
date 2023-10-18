@@ -9,7 +9,7 @@
         class="flex min-h-full items-end justify-center lg:p-4 text-center lg:items-center sm:p-0"
       >
         <div
-          class="relative transform overflow-hidden rounded-t-2xl lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full md:max-w-[800px]"
+          class="relative transform overflow-hidden rounded-t-2xl lg:rounded-lg bg-white text-left shadow-xl transition-all lg:my-8 w-full lg:max-w-[800px]"
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">

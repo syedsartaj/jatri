@@ -29,7 +29,7 @@
             transition-all
             lg:my-8
             w-full
-            md:max-w-[800px]
+            lg:max-w-[800px]
           "
         >
           <div class="bg-white p-4 lg:p-6 w-full">
