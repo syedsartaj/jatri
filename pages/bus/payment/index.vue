@@ -252,7 +252,7 @@
             />
             <button
               v-if="!showPromoInput"
-              @click="applyPromo"
+              @click="() => applyPromo()"
               :disabled="!promoCode"
               class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
@@ -621,7 +621,7 @@ export default {
       this.scrollSlider(276);
     },
     updateSliderState() {
-      const slider = this.$refs.promoSlider;
+      const slider = this.$refs?.promoSlider;
       if (slider) {
         this.sliderScrollLeft = slider.scrollLeft;
 
@@ -631,7 +631,7 @@ export default {
       }
     },
     scrollSlider(amount) {
-      const slider = this.$refs.promoSlider;
+      const slider = this.$refs?.promoSlider;
       if (slider) {
         slider.scrollLeft += amount;
         this.updateSliderState();
@@ -711,7 +711,7 @@ export default {
     applyPromo(promo) {
       this.$nextTick(async () => {
         const payload = {
-          promoCode: promo.code,
+          promoCode: promo?.code || this.promoCode,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
           tripDateTime:
             this.getBookingInfoDetails.invoice?.tripDateTime ||
@@ -724,15 +724,22 @@ export default {
         try {
           this.$nuxt.$loading?.start();
           const response = await this.applyPromoCodeAction(payload);
+
           if (response?.amount) {
-            this.promoCode = promo.code;
-            this.activePromo = promo;
+            this.promoCode = promo?.code || this.promoCode;
+            this.activePromo = promo || this.getPromoObject(this.promoCode);
           }
+
           this.$nuxt.$loading?.finish();
         } catch (error) {
           this.$nuxt.$loading?.finish();
         }
       });
+    },
+    getPromoObject(promoCode) {
+      return this.getBookingInfoDetails?.availablePromos?.find(
+        (promo) => promo.code === promoCode
+      );
     },
     async removePromo() {
       this.$nextTick(async () => {
