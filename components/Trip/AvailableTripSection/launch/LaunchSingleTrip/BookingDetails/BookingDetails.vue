@@ -430,15 +430,13 @@ export default {
   created() {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
-      let a = moment(new Date());
-      let getActualPendingValidity =
-        bookingData.pendingValidity.split("T")[0] +
-        " " +
-        bookingData.pendingValidity.split("T")[1].split(".")[0];
-      let b = moment(new Date(getActualPendingValidity));
-      if (b.diff(a, "seconds") > 0) {
-        this.paymentValidateTime = b.diff(a, "seconds");
-      }
+      this.paymentValidateTime = this.calculateSecondsLeft(
+        this.getBookingInfoDetails?.pendingValidity?.split("T")[0] +
+          " " +
+          this.getBookingInfoDetails?.pendingValidity
+            ?.split("T")[1]
+            .split(".")[0]
+      );
 
       this.boardingPoint = bookingData?.invoice?.boardingPoint || "";
       if (bookingData?.invoice?.droppingPoint) {
@@ -470,6 +468,12 @@ export default {
       "updateGatewayAction",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
+    calculateSecondsLeft(timeToCompare) {
+      const currentTime = moment();
+      const targetTime = moment(timeToCompare);
+      const diffInSeconds = targetTime?.diff(currentTime, "seconds");
+      return diffInSeconds || 0;
+    },
     handlePromoApplied() {
       this.isPromoApplied = true;
     },
