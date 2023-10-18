@@ -554,15 +554,15 @@ export default {
 
   created() {
     if (this.getBookingInfoDetails) {
-      let a = moment(new Date());
-      let getActualPendingValidity =
-        this.getBookingInfoDetails.pendingValidity.split("T")[0] +
-        " " +
-        this.getBookingInfoDetails.pendingValidity.split("T")[1].split(".")[0];
-      let b = moment(new Date(getActualPendingValidity));
-      if (b.diff(a, "seconds") > 0) {
-        this.paymentValidateTime = b.diff(a, "seconds");
-      }
+      // let a = moment(new Date());
+      // let getActualPendingValidity =
+      //   this.getBookingInfoDetails.pendingValidity.split("T")[0] +
+      //   " " +
+      //   this.getBookingInfoDetails.pendingValidity.split("T")[1].split(".")[0];
+      // let b = moment(new Date(getActualPendingValidity));
+      // if (b.diff(a, "seconds") > 0) {
+      //   this.paymentValidateTime = b.diff(a, "seconds");
+      // }
       if (this.getBookingInfoDetails?.invoice?.promo?.code) {
         this.promoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
         const getPromoObject = this.getBookingInfoDetails.availablePromos.find(
@@ -658,9 +658,6 @@ export default {
 
         this.$nuxt.$loading?.finish();
       });
-    },
-    timeFormate(time) {
-      return moment(time, "hh:mm").format("LT");
     },
     async paymentHandler() {
       const payload = {
