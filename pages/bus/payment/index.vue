@@ -554,15 +554,12 @@ export default {
 
   created() {
     if (this.getBookingInfoDetails) {
-      // let a = moment(new Date());
-      // let getActualPendingValidity =
-      //   this.getBookingInfoDetails.pendingValidity.split("T")[0] +
-      //   " " +
-      //   this.getBookingInfoDetails.pendingValidity.split("T")[1].split(".")[0];
-      // let b = moment(new Date(getActualPendingValidity));
-      // if (b.diff(a, "seconds") > 0) {
-      //   this.paymentValidateTime = b.diff(a, "seconds");
-      // }
+      this.paymentValidateTime = this.calculateSecondsLeft(
+        this.getBookingInfoDetails?.pendingValidity?.split("T")[0] +
+          " " +
+          this.getBookingInfoDetails?.pendingValidity?.split("T")[1].split(".")[0]
+      );
+
       if (this.getBookingInfoDetails?.invoice?.promo?.code) {
         this.promoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
         const getPromoObject = this.getBookingInfoDetails.availablePromos.find(
@@ -609,6 +606,12 @@ export default {
       "getSurpriseDealAction",
       "updateGatewayAction",
     ]),
+    calculateSecondsLeft(timeToCompare) {
+      const currentTime = moment();
+      const targetTime = moment(timeToCompare);
+      const diffInSeconds = targetTime?.diff(currentTime, "seconds");
+      return diffInSeconds || 0;
+    },
     handleSliderScroll() {
       this.updateSliderState();
     },
