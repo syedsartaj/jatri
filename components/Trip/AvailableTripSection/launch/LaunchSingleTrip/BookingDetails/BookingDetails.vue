@@ -139,7 +139,7 @@
                                   v-model="passengerMobile"
                                   @input="handleInput"
                                   @paste="handlePaste"
-                                  inputmode="none"
+                                   @wheel="$event.target.blur()"
                                 />
                               </div>
                               <div
