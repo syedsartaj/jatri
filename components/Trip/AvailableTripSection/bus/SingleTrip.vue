@@ -469,7 +469,7 @@
                 v-model="passengerPhone"
                 @input="handleInput"
                 @paste="handlePaste"
-                @wheel="$event.target.blur()"
+                inputmode="none"
               />
             </div>
           </div>

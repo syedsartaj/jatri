@@ -158,7 +158,7 @@
                       v-model="phone"
                       @input="handleInput"
                       @paste="handlePaste"
-                      @wheel="$event.target.blur()"
+                      inputmode="none"
                     />
                   </div>
                   <input
@@ -248,7 +248,12 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { cleanAndValidatePastedText, cleanAndValidatePhoneNumber, isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  isValidPhoneNumber,
+  ServiceType,
+} from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
