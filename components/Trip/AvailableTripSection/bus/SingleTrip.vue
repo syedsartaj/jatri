@@ -549,6 +549,7 @@ import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
+  cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
   moduleType,
 } from "../../../../helpers/utils";

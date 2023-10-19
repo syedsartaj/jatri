@@ -347,6 +347,7 @@ import {
   isValidPhoneNumber,
   isValidEmail,
   cleanAndValidatePhoneNumber,
+  cleanAndValidatePastedText,
 } from "../../../../../../helpers/utils";
 import { dateTimeFormat } from "../../../../../../helpers/dateTimeFormat";
 export default {
