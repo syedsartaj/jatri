@@ -139,7 +139,7 @@
                                   v-model="passengerMobile"
                                   @input="handleInput"
                                   @paste="handlePaste"
-                                   @wheel="$event.target.blur()"
+                                  @wheel="$event.target.blur()"
                                 />
                               </div>
                               <div
@@ -432,11 +432,9 @@ export default {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
       this.paymentValidateTime = this.calculateSecondsLeft(
-        this.getBookingInfoDetails?.pendingValidity?.split("T")[0] +
+        bookingData?.pendingValidity?.split("T")[0] +
           " " +
-          this.getBookingInfoDetails?.pendingValidity
-            ?.split("T")[1]
-            .split(".")[0]
+          bookingData?.pendingValidity?.split("T")[1].split(".")[0]
       );
 
       this.boardingPoint = bookingData?.invoice?.boardingPoint || "";
