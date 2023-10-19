@@ -248,7 +248,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { cleanAndValidatePhoneNumber, isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
+import { cleanAndValidatePastedText, cleanAndValidatePhoneNumber, isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
