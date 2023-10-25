@@ -334,7 +334,7 @@
                   :promo="promo"
                   :isLastItem="index === availablePromos.length - 1"
                   :activePromo="activePromo"
-                  :handlePromoBox="() => handlePromoBox(promo)"
+                  :handlePromoBox="() => handlePromoBox(promo, index)"
                 />
               </div>
             </div>
@@ -492,6 +492,7 @@ export default {
       sliderScrollLeft: 0, // Add this
       isLeftScrollDisabled: true,
       isRightScrollDisabled: true,
+      selectedPromoObjectIndex: null,
     };
   },
   watch: {
@@ -506,6 +507,11 @@ export default {
         } catch (err) {
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
+      }
+    },
+    selectedPromoObjectIndex() {
+      if (this.selectedPromoObjectIndex) {
+        this.makeSelectedPromoCenter(this.selectedPromoObjectIndex);
       }
     },
   },
@@ -557,17 +563,24 @@ export default {
       this.paymentValidateTime = this.calculateSecondsLeft(
         this.getBookingInfoDetails?.pendingValidity?.split("T")[0] +
           " " +
-          this.getBookingInfoDetails?.pendingValidity?.split("T")[1].split(".")[0]
+          this.getBookingInfoDetails?.pendingValidity
+            ?.split("T")[1]
+            .split(".")[0]
       );
 
-      if (this.getBookingInfoDetails?.invoice?.promo?.code) {
-        this.promoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
-        const getPromoObject = this.getBookingInfoDetails.availablePromos.find(
-          (promo) =>
-            promo.code === this.getBookingInfoDetails.invoice.promo.code
-        );
-        if (getPromoObject) {
-          this.activePromo = getPromoObject;
+      const invoicePromoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
+
+      if (invoicePromoCode) {
+        this.promoCode = invoicePromoCode;
+        const getPromoObjectIndex =
+          this.getBookingInfoDetails.availablePromos.findIndex(
+            (promo) => promo.code === invoicePromoCode
+          );
+
+        if (getPromoObjectIndex >= 0) {
+          this.activePromo =
+            this.getBookingInfoDetails.availablePromos[getPromoObjectIndex];
+          this.selectedPromoObjectIndex = getPromoObjectIndex;
         }
       }
       this.gatewayType = this.getBookingInfoDetails?.gatewayType || "";
@@ -640,7 +653,16 @@ export default {
         this.updateSliderState();
       }
     },
-    handlePromoBox(promo) {
+    makeSelectedPromoCenter(index) {
+      const slider = this.$refs?.promoSlider;
+      if (slider) {
+        const myStartPosition = index * 276;
+        const scrollAmount = myStartPosition - slider.scrollLeft;
+        this.scrollSlider(scrollAmount);
+      }
+    },
+    handlePromoBox(promo, index) {
+      this.selectedPromoObjectIndex = index;
       this.applyPromo(promo);
     },
     handleCheckBox() {
