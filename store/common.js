@@ -20,9 +20,11 @@ export const state = () => ({
   isSearchTicketOtpPopupOpen: false,
   isBusReserveModalOpen: false,
   isRequestSuccessFull: false,
+  ticketNotFoundError: null,
 });
 
 export const getters = {
+  getTicketNotFoundError: (state) => state.ticketNotFoundError,
   getCities: (state) =>
     state.selectedService === ServiceType.BUS
       ? state.citiesOfBus
@@ -162,6 +164,11 @@ export const actions = {
           resolve(res.data.data);
         })
         .catch((e) => {
+          const errorMessage = e?.response?.data?.message;
+          if (!errorMessage?.toLowerCase()?.includes("otp")) {
+            commit("handleSearchTicketOtpPopup");
+            commit("setTicketNotFoundError", errorMessage);
+          }
           reject(e.response.data.message ?? "Something went wrong!");
         });
     });
@@ -351,5 +358,8 @@ export const mutations = {
   handleSuccessfulModal: (state, data) => {
     handleScrollBehaviour(state.isRequestSuccessFull);
     state.isRequestSuccessFull = !state.isRequestSuccessFull;
+  },
+  setTicketNotFoundError: (state, data) => {
+    state.ticketNotFoundError = data;
   },
 };

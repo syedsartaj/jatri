@@ -158,7 +158,7 @@
                       v-model="phone"
                       @input="handleInput"
                       @paste="handlePaste"
-                       @wheel="$event.target.blur()"
+                      @wheel="$event.target.blur()"
                     />
                   </div>
                   <input
@@ -275,6 +275,7 @@ export default {
     ...mapGetters("common", [
       "getSearchedTicketList",
       "getSelectedServiceType",
+      "getTicketNotFoundError",
     ]),
     getActiveTickets() {
       return this.getFilteredTickets(true);
@@ -288,13 +289,26 @@ export default {
   },
   beforeDestroy() {
     this.setSearchedTicketList([]);
+    this.clearAllError();
+  },
+  watch: {
+    getTicketNotFoundError() {
+      if (this.getTicketNotFoundError) {
+        console.log(this.getTicketNotFoundError);
+        this.alertMessage = this.getTicketNotFoundError;
+      }
+    },
   },
   methods: {
     ...mapActions("common", [
       "searchTicketAction",
       "sendOtpForSearchTicketAction",
     ]),
-    ...mapMutations("common", ["setSearchedTicketList", "setSelectedService"]),
+    ...mapMutations("common", [
+      "setSearchedTicketList",
+      "setSelectedService",
+      "setTicketNotFoundError",
+    ]),
     getFilteredTickets(isActive) {
       const currentTime = new Date();
       return this.getSearchedTicketList.tickets.filter((item) => {
@@ -304,7 +318,12 @@ export default {
           : boardingTime < currentTime;
       });
     },
+    clearAllError() {
+      this.alertMessage && (this.alertMessage = null);
+      this.getTicketNotFoundError && this.setTicketNotFoundError(null);
+    },
     handleInput() {
+      this.clearAllError();
       this.phone = cleanAndValidatePhoneNumber(this.phone);
     },
     handlePaste(event) {
@@ -313,6 +332,7 @@ export default {
       const pastedText = event.clipboardData.getData("text/plain");
       this.phone = cleanAndValidatePastedText(pastedText);
     },
+
     getServiceClassName(service) {
       return {
         "w-full p-4 flex justify-between items-center flex-row cursor-pointer": true,
@@ -326,6 +346,7 @@ export default {
     },
     ticketData(e) {
       e.preventDefault();
+      this.clearAllError();
       const formData = {};
       if (this.selectedTab === 0) {
         formData.phone = `0${this.phone}`;
@@ -350,7 +371,6 @@ export default {
         formData.pnr = "";
       }
       if (this.pnr || this.phone || this.transactionId) {
-        this.alertMessage = null;
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
 
