@@ -510,7 +510,7 @@ export default {
       }
     },
     selectedPromoObjectIndex() {
-      if (this.selectedPromoObjectIndex) {
+      if (this.selectedPromoObjectIndex >= 0) {
         this.makeSelectedPromoCenter(this.selectedPromoObjectIndex);
       }
     },
@@ -654,13 +654,15 @@ export default {
       }
     },
     makeSelectedPromoCenter(index) {
-      const slider = this.$refs?.promoSlider;
-      if (slider) {
+      const promoSlider = this.$refs?.promoSlider;
+      if (promoSlider) {
         const myStartPosition = index * 276;
-        const scrollAmount = myStartPosition - slider.scrollLeft;
-        this.scrollSlider(scrollAmount);
+        const scrollAmount = myStartPosition - promoSlider.scrollLeft;
+        const centeringOffset = (promoSlider.clientWidth - 276) / 2;
+        this.scrollSlider(scrollAmount - centeringOffset);
       }
     },
+
     handlePromoBox(promo, index) {
       this.selectedPromoObjectIndex = index;
       this.applyPromo(promo);
@@ -744,7 +746,7 @@ export default {
         };
 
         try {
-          this.$nuxt.$loading?.start();
+          // this.$nuxt.$loading?.start();
           const response = await this.applyPromoCodeAction(payload);
 
           if (response?.amount) {
