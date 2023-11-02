@@ -18,8 +18,8 @@
           id="searchInput"
           v-model="searchKey"
           autocomplete="off"
-          class="rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-medium text-blackPrimary text-left placeholder-blackPrimary searchInput"
-          :placeholder="defaultOption"
+          class="w-full rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-medium text-blackPrimary text-left placeholder-blackPrimary searchInput"
+          :placeholder="secondHand || defaultOption"
           type="text"
           @keyup="search"
           @focus="handleOnFocus"
@@ -70,6 +70,7 @@
 <script>
 import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 import vClickOutside from "v-click-outside";
+import { mapGetters } from "vuex";
 export default {
   directives: {
     clickOutside: vClickOutside.directive,
@@ -105,11 +106,39 @@ export default {
       optionsIsOpen: false,
       selectedOption: "",
       searchKey: "",
+      secondHand: "",
     };
   },
   methods: {
     onClickOutside() {
       this.optionsIsOpen = false;
+
+      const availableCities =
+        (this.searchKey && this.getMatchingCities(this.searchKey)) || [];
+
+      if (this.searchKey && availableCities.length === 1) {
+        this.searchKey = availableCities[0].city_name;
+        this.secondHand = this.searchKey;
+        this.$emit("input", this.searchKey);
+      } else if (this.secondHand && availableCities.length === 0) {
+        this.searchKey = this.secondHand;
+        this.secondHand = this.searchKey;
+        this.$emit("input", this.searchKey);
+      } else if (this.isCityAvailable(this.searchKey)) {
+        this.secondHand = "";
+        this.searchKey = "";
+        this.$emit("input", this.searchKey);
+      }
+    },
+    getMatchingCities(city) {
+      return this.getCities.filter((s) =>
+        s.city_name.toLowerCase().startsWith(city.toLowerCase())
+      );
+    },
+    isCityAvailable(city) {
+      return this.getCities.map((s) =>
+        s.city_name.toLowerCase().includes(city.toLowerCase())
+      );
     },
     toggleDropdown() {
       this.optionsIsOpen = !this.optionsIsOpen;
@@ -117,6 +146,7 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.searchKey = option.city_name;
+      this.secondHand = this.searchKey;
       this.$emit("input", this.selectedOption.city_name);
       this.optionsIsOpen = false;
       let items = this.getSearchElementData();
@@ -151,6 +181,7 @@ export default {
     },
     handleOnFocus() {
       this.optionsIsOpen = true;
+      this.searchKey != "" && (this.searchKey = "");
     },
     getSearchElementData() {
       return document.getElementsByClassName("searchInput");
@@ -162,8 +193,10 @@ export default {
         this.selectedOption = value;
         if (this.selectedOption?.city_name) {
           this.searchKey = this.selectedOption.city_name;
+          this.secondHand = this.searchKey;
         } else {
           this.searchKey = value;
+          this.secondHand = this.searchKey;
         }
       },
       deep: true,
@@ -171,6 +204,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters("common", ["getCities"]),
     filteredOptionsData() {
       const searchKey = this.searchKey.toLowerCase().trim();
 
