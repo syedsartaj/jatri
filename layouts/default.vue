@@ -50,12 +50,12 @@ export default {
     headlineVisibility() {
       const path = this.$route.path.toString();
 
-      return (
-        (path === "/" || path === "/bus" || path === "/launch") &&
-        this.getHeadLine?.length &&
-        (this.getHeadLine[0].busSettings.headline ||
-          this.getHeadLine[0].launchSettings.headline)
-      );
+      if ((path === "/" || path === "/bus") && this.getHeadLine?.length) {
+        return this.getHeadLine[0].busSettings.headline;
+      } else if (path === "/launch") {
+        return this.getHeadLine[0].launchSettings.headline;
+      }
+      return false;
     },
   },
   methods: {

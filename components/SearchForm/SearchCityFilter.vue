@@ -125,8 +125,8 @@ export default {
         this.secondHand = this.searchKey;
         this.$emit("input", this.searchKey);
       } else if (this.isCityAvailable(this.searchKey)) {
-        this.secondHand = "";
-        this.searchKey = "";
+        
+        this.searchKey = this.secondHand;
         this.$emit("input", this.searchKey);
       }
     },
