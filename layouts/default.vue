@@ -5,7 +5,11 @@
       <Header />
       <HeadLine
         v-if="headlineVisibility"
-        :headline="getHeadLine[0].headline"
+        :headline="
+          getSelectedServiceType === 'BUS'
+            ? this.getHeadLine[0].busSettings.headline
+            : this.getHeadLine[0].launchSettings.headline
+        "
         :speed="30"
         direction="left"
         behavior="scroll"
@@ -41,14 +45,17 @@ export default {
       "getBusReserveModalOpenStatus",
       "getRequestSuccessfulStatus",
       "getHeadLine",
+      "getSelectedServiceType",
     ]),
     headlineVisibility() {
       const path = this.$route.path.toString();
-      return (
-        (path === "/" || path === "/bus" || path === "/launch") &&
-        this.getHeadLine?.length &&
-        this.getHeadLine[0].headline
-      );
+
+      if ((path === "/" || path === "/bus") && this.getHeadLine?.length) {
+        return this.getHeadLine[0].busSettings.headline;
+      } else if (path === "/launch") {
+        return this.getHeadLine[0].launchSettings.headline;
+      }
+      return false;
     },
   },
   methods: {

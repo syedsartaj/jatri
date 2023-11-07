@@ -248,7 +248,12 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { isValidPhoneNumber, ServiceType } from "../../../helpers/utils";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  isValidPhoneNumber,
+  ServiceType,
+} from "../../../helpers/utils";
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -270,6 +275,7 @@ export default {
     ...mapGetters("common", [
       "getSearchedTicketList",
       "getSelectedServiceType",
+      "getTicketNotFoundError",
     ]),
     getActiveTickets() {
       return this.getFilteredTickets(true);
@@ -283,13 +289,26 @@ export default {
   },
   beforeDestroy() {
     this.setSearchedTicketList([]);
+    this.clearAllError();
+  },
+  watch: {
+    getTicketNotFoundError() {
+      if (this.getTicketNotFoundError) {
+        console.log(this.getTicketNotFoundError);
+        this.alertMessage = this.getTicketNotFoundError;
+      }
+    },
   },
   methods: {
     ...mapActions("common", [
       "searchTicketAction",
       "sendOtpForSearchTicketAction",
     ]),
-    ...mapMutations("common", ["setSearchedTicketList", "setSelectedService"]),
+    ...mapMutations("common", [
+      "setSearchedTicketList",
+      "setSelectedService",
+      "setTicketNotFoundError",
+    ]),
     getFilteredTickets(isActive) {
       const currentTime = new Date();
       return this.getSearchedTicketList.tickets.filter((item) => {
@@ -299,22 +318,19 @@ export default {
           : boardingTime < currentTime;
       });
     },
+    clearAllError() {
+      this.alertMessage && (this.alertMessage = null);
+      this.getTicketNotFoundError && this.setTicketNotFoundError(null);
+    },
     handleInput() {
-      if (this.phone.length === 1 && this.phone[0] === "0") {
-        this.phone = "";
-      }
-      if (this.phone.length > 10) {
-        this.phone = this.phone.slice(0, 10);
-      }
+      this.clearAllError();
+      this.phone = cleanAndValidatePhoneNumber(this.phone);
     },
     handlePaste(event) {
       event.preventDefault();
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
-      // Remove any leading zeros
-      const cleanedText = pastedText.replace(/^0+/, "");
-      const truncatedText = cleanedText.slice(0, 10);
-      this.phone = truncatedText;
+      this.phone = cleanAndValidatePastedText(pastedText);
     },
 
     getServiceClassName(service) {
@@ -330,6 +346,7 @@ export default {
     },
     ticketData(e) {
       e.preventDefault();
+      this.clearAllError();
       const formData = {};
       if (this.selectedTab === 0) {
         formData.phone = `0${this.phone}`;
@@ -354,7 +371,6 @@ export default {
         formData.pnr = "";
       }
       if (this.pnr || this.phone || this.transactionId) {
-        this.alertMessage = null;
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
 

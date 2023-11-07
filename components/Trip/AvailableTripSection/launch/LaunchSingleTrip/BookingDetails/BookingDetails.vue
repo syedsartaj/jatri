@@ -346,6 +346,8 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
   isValidPhoneNumber,
   isValidEmail,
+  cleanAndValidatePhoneNumber,
+  cleanAndValidatePastedText,
 } from "../../../../../../helpers/utils";
 import { dateTimeFormat } from "../../../../../../helpers/dateTimeFormat";
 export default {
@@ -429,15 +431,11 @@ export default {
   created() {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
-      let a = moment(new Date());
-      let getActualPendingValidity =
-        bookingData.pendingValidity.split("T")[0] +
-        " " +
-        bookingData.pendingValidity.split("T")[1].split(".")[0];
-      let b = moment(new Date(getActualPendingValidity));
-      if (b.diff(a, "seconds") > 0) {
-        this.paymentValidateTime = b.diff(a, "seconds");
-      }
+      this.paymentValidateTime = this.calculateSecondsLeft(
+        bookingData?.pendingValidity?.split("T")[0] +
+          " " +
+          bookingData?.pendingValidity?.split("T")[1].split(".")[0]
+      );
 
       this.boardingPoint = bookingData?.invoice?.boardingPoint || "";
       if (bookingData?.invoice?.droppingPoint) {
@@ -469,28 +467,23 @@ export default {
       "updateGatewayAction",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
+    calculateSecondsLeft(timeToCompare) {
+      const currentTime = moment();
+      const targetTime = moment(timeToCompare);
+      const diffInSeconds = targetTime?.diff(currentTime, "seconds");
+      return diffInSeconds || 0;
+    },
     handlePromoApplied() {
       this.isPromoApplied = true;
     },
     handleInput() {
-      if (
-        this.passengerMobile.length === 1 &&
-        this.passengerMobile[0] === "0"
-      ) {
-        this.passengerMobile = "";
-      }
-      if (this.passengerMobile.length > 10) {
-        this.passengerMobile = this.passengerMobile.slice(0, 10);
-      }
+      this.passengerMobile = cleanAndValidatePhoneNumber(this.passengerMobile);
     },
     handlePaste(event) {
       event.preventDefault();
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
-      // Remove any leading zeros
-      const cleanedText = pastedText.replace(/^0+/, "");
-      const truncatedText = cleanedText.slice(0, 10);
-      this.passengerMobile = truncatedText;
+      this.passengerMobile = cleanAndValidatePastedText(pastedText);
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;

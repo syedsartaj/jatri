@@ -105,7 +105,9 @@
         <div
           class="flex justify-start items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Fare Details</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Fare Details
+          </p>
         </div>
         <div class="px-[14px] pt-3">
           <div
@@ -234,7 +236,9 @@
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Promo</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Promo
+          </p>
         </div>
         <div class="flex gap-x-5 w-full flex-col">
           <div class="flex justify-between w-full p-4">
@@ -248,7 +252,7 @@
             />
             <button
               v-if="!showPromoInput"
-              @click="applyPromo"
+              @click="() => applyPromo()"
               :disabled="!promoCode"
               class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
@@ -330,7 +334,7 @@
                   :promo="promo"
                   :isLastItem="index === availablePromos.length - 1"
                   :activePromo="activePromo"
-                  :handlePromoBox="() => handlePromoBox(promo)"
+                  :handlePromoBox="() => handlePromoBox(promo, index)"
                 />
               </div>
             </div>
@@ -342,7 +346,9 @@
         <div
           class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
         >
-          <p class="text-base sm:text-xl font-medium text-blackPrimary">Payment Method</p>
+          <p class="text-base sm:text-xl font-medium text-blackPrimary">
+            Payment Method
+          </p>
           <div
             class="flex justify-center items-center w-[139px] bg-[#F7F7F7] rounded-full text-base font-medium text-blackPrimary"
           >
@@ -486,6 +492,7 @@ export default {
       sliderScrollLeft: 0, // Add this
       isLeftScrollDisabled: true,
       isRightScrollDisabled: true,
+      selectedPromoObjectIndex: null,
     };
   },
   watch: {
@@ -500,6 +507,11 @@ export default {
         } catch (err) {
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
+      }
+    },
+    selectedPromoObjectIndex() {
+      if (this.selectedPromoObjectIndex >= 0) {
+        this.makeSelectedPromoCenter(this.selectedPromoObjectIndex);
       }
     },
   },
@@ -548,23 +560,27 @@ export default {
 
   created() {
     if (this.getBookingInfoDetails) {
-      let a = moment(new Date());
-      let getActualPendingValidity =
-        this.getBookingInfoDetails.pendingValidity.split("T")[0] +
-        " " +
-        this.getBookingInfoDetails.pendingValidity.split("T")[1].split(".")[0];
-      let b = moment(new Date(getActualPendingValidity));
-      if (b.diff(a, "seconds") > 0) {
-        this.paymentValidateTime = b.diff(a, "seconds");
-      }
-      if (this.getBookingInfoDetails?.invoice?.promo?.code) {
-        this.promoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
-        const getPromoObject = this.getBookingInfoDetails.availablePromos.find(
-          (promo) =>
-            promo.code === this.getBookingInfoDetails.invoice.promo.code
-        );
-        if (getPromoObject) {
-          this.activePromo = getPromoObject;
+      this.paymentValidateTime = this.calculateSecondsLeft(
+        this.getBookingInfoDetails?.pendingValidity?.split("T")[0] +
+          " " +
+          this.getBookingInfoDetails?.pendingValidity
+            ?.split("T")[1]
+            .split(".")[0]
+      );
+
+      const invoicePromoCode = this.getBookingInfoDetails?.invoice?.promo?.code;
+
+      if (invoicePromoCode) {
+        this.promoCode = invoicePromoCode;
+        const getPromoObjectIndex =
+          this.getBookingInfoDetails.availablePromos.findIndex(
+            (promo) => promo.code === invoicePromoCode
+          );
+
+        if (getPromoObjectIndex >= 0) {
+          this.activePromo =
+            this.getBookingInfoDetails.availablePromos[getPromoObjectIndex];
+          this.selectedPromoObjectIndex = getPromoObjectIndex;
         }
       }
       this.gatewayType = this.getBookingInfoDetails?.gatewayType || "";
@@ -603,6 +619,12 @@ export default {
       "getSurpriseDealAction",
       "updateGatewayAction",
     ]),
+    calculateSecondsLeft(timeToCompare) {
+      const currentTime = moment();
+      const targetTime = moment(timeToCompare);
+      const diffInSeconds = targetTime?.diff(currentTime, "seconds");
+      return diffInSeconds || 0;
+    },
     handleSliderScroll() {
       this.updateSliderState();
     },
@@ -615,7 +637,7 @@ export default {
       this.scrollSlider(276);
     },
     updateSliderState() {
-      const slider = this.$refs.promoSlider;
+      const slider = this.$refs?.promoSlider;
       if (slider) {
         this.sliderScrollLeft = slider.scrollLeft;
 
@@ -625,16 +647,25 @@ export default {
       }
     },
     scrollSlider(amount) {
-      const slider = this.$refs.promoSlider;
+      const slider = this.$refs?.promoSlider;
       if (slider) {
         slider.scrollLeft += amount;
         this.updateSliderState();
       }
     },
-    handlePromoBox(promo) {
-      this.promoCode = promo.code;
-      this.activePromo = promo;
-      this.applyPromo();
+    makeSelectedPromoCenter(index) {
+      const promoSlider = this.$refs?.promoSlider;
+      if (promoSlider) {
+        const myStartPosition = index * 276;
+        const scrollAmount = myStartPosition - promoSlider.scrollLeft;
+        const centeringOffset = (promoSlider.clientWidth - 276) / 2;
+        this.scrollSlider(scrollAmount - centeringOffset);
+      }
+    },
+
+    handlePromoBox(promo, index) {
+      this.selectedPromoObjectIndex = index;
+      this.applyPromo(promo);
     },
     handleCheckBox() {
       this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
@@ -654,9 +685,6 @@ export default {
 
         this.$nuxt.$loading?.finish();
       });
-    },
-    timeFormate(time) {
-      return moment(time, "hh:mm").format("LT");
     },
     async paymentHandler() {
       const payload = {
@@ -704,11 +732,10 @@ export default {
     timeUp() {
       this.paymentAllowStatus = false;
     },
-    applyPromo() {
+    applyPromo(promo) {
       this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
         const payload = {
-          promoCode: this.promoCode,
+          promoCode: promo?.code || this.promoCode,
           companyId: this.getBookingInfoDetails.invoice?.companyId,
           tripDateTime:
             this.getBookingInfoDetails.invoice?.tripDateTime ||
@@ -717,10 +744,26 @@ export default {
           paymentId: this.getBookingInfoDetails._id,
           tnxId: this.$route.query.tnxId,
         };
-        this.applyPromoCodeAction(payload);
 
-        this.$nuxt.$loading?.finish();
+        try {
+          // this.$nuxt.$loading?.start();
+          const response = await this.applyPromoCodeAction(payload);
+
+          if (response?.amount) {
+            this.promoCode = promo?.code || this.promoCode;
+            this.activePromo = promo || this.getPromoObject(this.promoCode);
+          }
+
+          this.$nuxt.$loading?.finish();
+        } catch (error) {
+          this.$nuxt.$loading?.finish();
+        }
       });
+    },
+    getPromoObject(promoCode) {
+      return this.getBookingInfoDetails?.availablePromos?.find(
+        (promo) => promo.code === promoCode
+      );
     },
     async removePromo() {
       this.$nextTick(async () => {

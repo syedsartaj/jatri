@@ -267,25 +267,26 @@ export const actions = {
     });
   },
   async applyPromoCodeAction({ dispatch, commit }, payload) {
-    try {
-      commit("setLoading", true);
-      const { data } = await this.$api.post(
-        apis.SERVICE_TYPE.BUS.POST_APPLY_PROMO_CODE_URL,
-        payload
-      );
-
-      commit("updateBookingInfoForApplyPromo", data.data);
-      commit("setLoading", false);
-      return true;
-    } catch (error) {
-      commit("setLoading", false);
-
-      this.$toast.error(error.response.data.message, {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.BUS.POST_APPLY_PROMO_CODE_URL, payload)
+        .then((res) => {
+          commit("updateBookingInfoForApplyPromo", res.data);
+          commit("setLoading", false);
+          resolve(res.data);
+        })
+        .catch((e) => {
+          commit("setLoading", false);
+          reject();
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
   },
   async updateGatewayAction({ dispatch, commit }, payload) {
     commit("setLoading", true);

@@ -548,7 +548,11 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../../../helpers/dateTimeFormat";
-import { moduleType } from "../../../../helpers/utils";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  moduleType,
+} from "../../../../helpers/utils";
 import { handleScrollBehaviour } from "../../../../helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
 export default {
@@ -677,21 +681,14 @@ export default {
       "seatLockAction",
     ]),
     handleInput() {
-      if (this.passengerPhone.length === 1 && this.passengerPhone[0] === "0") {
-        this.passengerPhone = "";
-      }
-      if (this.passengerPhone.length > 10) {
-        this.passengerPhone = this.passengerPhone.slice(0, 10);
-      }
+      this.passengerPhone = cleanAndValidatePhoneNumber(this.passengerPhone);
     },
+
     handlePaste(event) {
       event.preventDefault();
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
-      // Remove any leading zeros
-      const cleanedText = pastedText.replace(/^0+/, "");
-      const truncatedText = cleanedText.slice(0, 10);
-      this.passengerPhone = truncatedText;
+      this.passengerPhone = cleanAndValidatePastedText(pastedText);
     },
     getTripMeta(trip) {
       const { coach } = trip;
@@ -1274,4 +1271,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>
