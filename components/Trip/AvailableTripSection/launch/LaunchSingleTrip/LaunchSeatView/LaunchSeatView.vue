@@ -228,9 +228,10 @@ export default {
               selectedFloor: this.selectedFloor,
             },
           });
+
           this.$router.push(
             {
-              path: "/launch/payment",
+              path: "/launch/payment/passenger-details",
               query: {
                 tnxId: data.paymentInfo.transactionId,
               },

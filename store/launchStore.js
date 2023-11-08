@@ -399,4 +399,19 @@ export const mutations = {
       ...data,
     };
   },
+  deleteSeatFromTicketList: (state, data) => {
+    console.log(state.launchBookingData);
+    state.launchBookingData.invoice.seatNo =
+      state.launchBookingData.invoice.seatNo.filter((seat) => seat !== data);
+
+    const payload = {
+      companyId: "61433bdbf75de24d6a959e7b",
+      shipId: "64f6a64c8f9714ac461fc3a9",
+      tripId: "651a84840008c6ad63314942",
+      seatClassId: "64f6a6b3d87bd1ac56d0c3d9",
+      floorId: "64f6a65ad87bd1ac56d0c39d",
+      seatNumbers: "E91,E92,E93",
+      paymentId: "654b26a22cd57ffd68026c29",
+    };
+  },
 };
