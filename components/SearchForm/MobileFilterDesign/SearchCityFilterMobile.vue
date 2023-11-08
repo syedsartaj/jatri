@@ -27,6 +27,7 @@
         src="@/assets/images/icons/mobileFilterDropdownIcon.svg"
         alt=""
         :class="optionsIsOpen ? 'transition-all ease-in-out rotate-180' : ''"
+        @click="toggleDropdown"
       />
     </div>
 
@@ -107,6 +108,9 @@ export default {
     };
   },
   methods: {
+    toggleDropdown() {
+      this.optionsIsOpen = !this.optionsIsOpen;
+    },
     onClickOutside() {
       if (this.optionsIsOpen) {
         this.optionsIsOpen = false;
@@ -124,8 +128,7 @@ export default {
         this.secondHand = this.searchKey;
         this.$emit("input", this.searchKey);
       } else if (this.isCityAvailable(this.searchKey)) {
-        this.secondHand = "";
-        this.searchKey = "";
+        this.searchKey = this.secondHand;
         this.$emit("input", this.searchKey);
       }
     },
