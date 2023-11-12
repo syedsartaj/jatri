@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-[57.26%] wrapper flex flex-col border-[1px] border-[#EDEDED] rounded-2xl bg-[#FFFFFF] height-max-content"
+    class="w-full lg:w-[57.26%] wrapper flex flex-col border-[1px] border-[#EDEDED] rounded-2xl bg-[#FFFFFF] height-max-content"
   >
     <div class="w-full p-4 border-b-[1px] border-[#EDEDED]">
-      <div class="text-[20px] text-xl text-blackPrimary font-medium">
+      <div class="text-base lg:text-xl text-blackPrimary font-medium">
         Passenger details
       </div>
     </div>
@@ -58,7 +58,6 @@
             <input
               class="bg-[#f7f7f7] pl-2 pr-4 rounded-lg w-full focus:outline-0 text-sm font-medium placeholder:text-blackSecondary placeholder:font-normal text-blackPrimary"
               type="number"
-              :disabled="isPromoApplied"
               minlength="11"
               maxlength="11"
               required=""
@@ -153,14 +152,12 @@
         </div>
       </div>
 
-      <ContinuePaymentButton />
+      <ContinuePaymentButton :handleSubmit="paymentHandler" />
     </div>
   </div>
 </template>
-
 <script>
-import moment from "moment";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import {
   isValidPhoneNumber,
   isValidEmail,
@@ -169,13 +166,9 @@ import {
 } from "../../../helpers/utils";
 import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
 export default {
-  name: "BookingDetails",
+  name: "PassengerDetailsForm",
   data() {
     return {
-      gatewayType: "",
-      paymentAllowStatus: true,
-      paymentValidateTime: 0,
-      promoCode: "",
       boardingPoint: "",
       droppingPoint: "",
       passengerName: "",
@@ -183,8 +176,6 @@ export default {
       passengerEmail: "",
       errorOccurred: false,
       departureTime: "",
-      agreePrivacyPolicy: true,
-      isPromoApplied: false,
     };
   },
   computed: {
@@ -212,19 +203,6 @@ export default {
     },
   },
   watch: {
-    async gatewayType() {
-      const payload = {
-        paymentId: this.getLaunchBookingData._id,
-        gatewayType: this.gatewayType,
-      };
-      if (this.getLaunchBookingData?.gatewayType !== this.gatewayType) {
-        try {
-          await this.updateGatewayAction(payload);
-        } catch (err) {
-          this.gatewayType = this.getLaunchBookingData.gatewayType;
-        }
-      }
-    },
     getSeatViewData: {
       immediate: true,
       handler() {
@@ -249,12 +227,6 @@ export default {
   created() {
     const bookingData = this.getLaunchBookingData;
     if (bookingData) {
-      this.paymentValidateTime = this.calculateSecondsLeft(
-        bookingData?.pendingValidity?.split("T")[0] +
-          " " +
-          bookingData?.pendingValidity?.split("T")[1].split(".")[0]
-      );
-
       this.boardingPoint = bookingData?.invoice?.boardingPoint || "";
       if (bookingData?.invoice?.droppingPoint) {
         this.droppingPoint = bookingData?.invoice?.droppingPoint || "";
@@ -265,52 +237,23 @@ export default {
         bookingData?.passenger?.phone?.replace(/^0+/, "") ||
         bookingData?.invoice?.promo?.phone?.replace(/^0+/, "") ||
         "";
-      this.gatewayType = this.getLaunchBookingData?.gatewayType || "";
-    } else {
-      this.paymentValidateTime = 0;
-    }
-  },
-  beforeMount() {
-    const tnxId = localStorage.getItem("tnxId");
 
-    if (tnxId === this.$route?.query?.tnxId) {
-      localStorage.removeItem("tnxId");
-      window.location.reload();
+      if (this.passengerMobile) {
+        this.$router.push(
+          `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+        );
+      }
     }
   },
   methods: {
-    ...mapActions("launchStore", [
-      "ticketConfirmAction",
-      "getBookingInfoByTnxId",
-      "updateGatewayAction",
-    ]),
-    ...mapMutations("launchStore", ["setBookingDetailsData"]),
-    calculateSecondsLeft(timeToCompare) {
-      const currentTime = moment();
-      const targetTime = moment(timeToCompare);
-      const diffInSeconds = targetTime?.diff(currentTime, "seconds");
-      return diffInSeconds || 0;
-    },
-    handlePromoApplied() {
-      this.isPromoApplied = true;
-    },
+    ...mapActions("launchStore", ["postPassengerDetailsAction"]),
     handleInput() {
       this.passengerMobile = cleanAndValidatePhoneNumber(this.passengerMobile);
     },
     handlePaste(event) {
       event.preventDefault();
-      // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerMobile = cleanAndValidatePastedText(pastedText);
-    },
-    handleCheckBox() {
-      this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
-    },
-    goBack() {
-      window.history.back();
-    },
-    timeUp() {
-      this.paymentAllowStatus = false;
     },
     async paymentHandler() {
       const {
@@ -320,7 +263,6 @@ export default {
         passengerMobile,
         passengerEmail,
         getLaunchBookingData,
-        gatewayType,
       } = this;
 
       if (
@@ -340,18 +282,13 @@ export default {
             passengerMobile: `0${passengerMobile}`,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
-            gatewayType,
           };
 
           try {
-            const { data } = await this.ticketConfirmAction(payload);
-
-            localStorage.setItem("tnxId", this.$route?.query?.tnxId || "");
-
-            if (data?.gatewayUrl) {
-              window.location.href = data.gatewayUrl;
-              this.$nuxt.$loading?.finish();
-            }
+            await this.postPassengerDetailsAction(payload);
+            this.$router.push(
+              `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+            );
           } catch (err) {
             this.$toast.error(err, {
               position: "bottom-right",

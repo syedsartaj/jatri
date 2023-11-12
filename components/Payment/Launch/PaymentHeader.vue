@@ -1,15 +1,15 @@
 <template>
   <div
-    class="w-full px-[100px] bg-[#FEF2F0] h-[76px] flex items-center flex-row"
+    class="w-full px-4 lg:px-[100px] bg-[#FEF2F0] h-[56px] lg:h-[76px] flex items-center flex-row"
   >
     <div
       :class="{
-        'text-[20px] text-xl text-blackPrimary font-medium': true,
+        'text-base lg:text-xl text-blackPrimary font-medium': true,
       }"
     >
       Passenger details
     </div>
-    <div class="mx-4">
+    <div class="px-2 lg:mx-4">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -25,8 +25,8 @@
     </div>
     <div
       :class="{
-        'text-[20px]  text-blackPrimary font-medium': true,
-        'text-[#676769]': type !== 'payment'
+        'text-base lg: text-blackPrimary font-medium': true,
+        'text-[#676769]': type !== 'payment',
       }"
     >
       Payment details

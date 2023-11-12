@@ -1,13 +1,13 @@
 <template>
-  <div class="w-[57.26%] wrapper flex flex-col height-max-content">
+  <div class="w-full lg:w-[57.26%] wrapper flex flex-col height-max-content">
     <div
       class="bg-white rounded-[10px] border border-[#EDEDED]"
-      v-if="!getBookingInfoDetails?.invoice?.offer?.totalAmount"
+      v-if="!getLaunchBookingData?.invoice?.offer?.totalAmount"
     >
       <div
         class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
       >
-        <p class="text-base sm:text-xl font-medium text-blackPrimary">Promo</p>
+        <p class="text-base lg:text-xl font-medium text-blackPrimary">Promo</p>
       </div>
       <div class="flex gap-x-5 w-full flex-col">
         <div class="flex justify-between w-full p-4">
@@ -17,13 +17,13 @@
             id="promo"
             v-model="promoCode"
             placeholder="Enter Promo Code"
-            class="w-full bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width mr-4"
+            class="lg:w-full bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width mr-4"
           />
           <button
             v-if="!showPromoInput"
             @click="() => applyPromo()"
             :disabled="!promoCode"
-            class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
+            class="w-[150px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
           >
             <img
               src="@/assets/images/icons/blueTickBus.svg"
@@ -115,7 +115,7 @@
       <div
         class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
       >
-        <p class="text-base sm:text-xl font-medium text-blackPrimary">
+        <p class="text-base lg:text-xl font-medium text-blackPrimary">
           Payment Method
         </p>
         <div
@@ -266,6 +266,11 @@ export default {
       "getLaunchBookingData",
       "getLoading",
     ]),
+    availablePromos() {
+      return this.getLaunchBookingData?.availablePromos?.filter(
+        (promo) => promo.title && promo.description && promo.code
+      );
+    },
     boardingPoints() {
       return this.getSeatViewData.seatPlan.boardingPoints.map(
         (item) => item.name
@@ -281,6 +286,9 @@ export default {
     },
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
+    },
+    showPromoInput() {
+      return this.getLaunchBookingData?.invoice?.promo;
     },
   },
   watch: {
@@ -357,6 +365,36 @@ export default {
       "updateGatewayAction",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
+    applyPromo() {
+      this.$nextTick(async () => {
+        this.$nuxt.$loading?.start();
+        const payload = {
+          promoCode: this.promoCode,
+          companyId: this.trip.companyId,
+          tripDateTime: this.trip.tripDateTime,
+          coachType: this.trip.coach.type,
+        };
+        await this.getPromoCodeAction(payload)
+          .then((res) => {
+            if (res.statusCode === 200 && !res.data) {
+              this.totalPromoAmount = 0;
+            } else if (res.statusCode === 200 && res.data) {
+            }
+          })
+          .catch((error) => {
+            this.resetPromo();
+          });
+        if (
+          this.getPromoCode &&
+          this.getPromoCode.minSpend <= this.totalAmount
+        ) {
+          this.totalPromoAmount = this.getPromoCode.amount;
+        } else {
+          this.totalPromoAmount = 0;
+        }
+        this.$nuxt.$loading?.finish();
+      });
+    },
     calculateSecondsLeft(timeToCompare) {
       const currentTime = moment();
       const targetTime = moment(timeToCompare);
@@ -387,10 +425,8 @@ export default {
     async paymentHandler() {
       const {
         boardingPoint,
-        droppingPoint,
         passengerName,
         passengerMobile,
-        passengerEmail,
         getLaunchBookingData,
         gatewayType,
       } = this;
@@ -406,11 +442,6 @@ export default {
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
           const payload = {
-            boardingPoint,
-            droppingPoint,
-            passengerName,
-            passengerMobile: `0${passengerMobile}`,
-            passengerEmail,
             paymentId: getLaunchBookingData._id,
             gatewayType,
           };

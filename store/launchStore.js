@@ -317,6 +317,47 @@ export const actions = {
       return false;
     }
   },
+  async seatRemoveAction({ commit }, payload) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE.LAUNCH.POST_SEAT_REMOVE,
+        payload
+      );
+      commit("resetStateAfterSitRemove", data.data);
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(
+        error.response?.data?.message || "Something went wrong!",
+        {
+          position: "bottom-right",
+          duration: 5000,
+        }
+      );
+      return false;
+    }
+  },
+  async postPassengerDetailsAction({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.LAUNCH.POST_PASSENGER_DETAILS, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          reject();
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
+  },
 };
 
 export const mutations = {
@@ -399,26 +440,16 @@ export const mutations = {
       ...data,
     };
   },
-  deleteSeatFromTicketList: (state, data) => {
-    console.log(state.launchBookingData);
-    state.launchBookingData.invoice.seatNo =
-      state.launchBookingData.invoice.seatNo.filter((seat) => seat !== data);
-
-      const seatNo = state.launchBookingData.invoice.seatNo.filter((seat) => seat !== data);
-
-      console.log(seatNo)
-const { invoice } = state.launchBookingData;
-
-const { companyId , shipId, trip, seatClassId, floorId} = invoice;
-
-    const payload = {
-      companyId,
-      shipId,
-      tripId: trip,
-      seatClassId: seatClassId,
-      floorId,
-      seatNumbers: "E91,E92,E93",
-      paymentId: "654b26a22cd57ffd68026c29",
+  resetStateAfterSitRemove: (state, data) => {
+    state.launchBookingData = {
+      ...state.launchBookingData,
+      invoice: {
+        ...state.launchBookingData.invoice,
+        seatNo: data.invoice.seatNo,
+      },
+      paymentGatewayCommission: data.paymentGatewayCommission,
+      serviceCharge: data.serviceCharge,
+      amount: data.amount,
     };
   },
 };

@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="() => handleSubmit()"
     class="w-full h-[46px] bg-[#F04935] rounded-[100px] flex items-center justify-center gap-2 my-4 cursor-pointer"
   >
     <div class="text-base font-medium text-[#FFF]">Continue to payment</div>
@@ -17,3 +18,8 @@
     </svg>
   </div>
 </template>
+<script>
+export default {
+  props: ["handleSubmit"],
+};
+</script>

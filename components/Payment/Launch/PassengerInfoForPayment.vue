@@ -1,11 +1,46 @@
 <template>
-  <div class="w-full border-[1px] border-[#EDEDED] rounded-2xl bg-[#FFFFFF] mb-4">
-    <div class="w-full p-4 border-b-[1px] border-[#EDEDED]">
-      <div class="text-[20px] text-xl text-blackPrimary font-medium">
+  <div
+    class="w-full border-[1px] border-[#EDEDED] rounded-2xl bg-[#FFFFFF] mb-4"
+  >
+    <div
+      :class="{
+        'w-full p-4 flex flex-row items-center justify-between': true,
+        'border-b-[1px] border-[#EDEDED]': expandView,
+      }"
+    >
+      <div class="text-base lg:text-xl text-blackPrimary font-medium">
         Passenger details
       </div>
+      <div @click="toggleExpand" class="cursor-pointer flex lg:hidden">
+        <svg
+          v-if="expandView"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12.0007 10.9391L7.05072 15.8891L5.63672 14.4751L12.0007 8.11108L18.3647 14.4751L16.9507 15.8891L12.0007 10.9391Z"
+            fill="#151414"
+          />
+        </svg>
+        <svg
+          v-if="!expandView"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12.0007 13.061L16.9507 8.11096L18.3647 9.52496L12.0007 15.889L5.63672 9.52496L7.05072 8.11096L12.0007 13.061Z"
+            fill="#151414"
+          />
+        </svg>
+      </div>
     </div>
-    <div class="p-4 flex flex-col">
+    <div class="p-4 flex flex-col" v-if="expandView">
       <div class="w-full flex flex-row">
         <div
           class="h-6 w-6 flex items-center justify-center bg-[#F7F7F7] rounded-[100px]"
@@ -79,6 +114,16 @@ import moment from "moment";
 import { mapGetters } from "vuex";
 import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
 export default {
+  data() {
+    return {
+      expandView: true,
+    };
+  },
+  methods: {
+    toggleExpand() {
+      this.expandView = !this.expandView;
+    },
+  },
   computed: {
     ...mapGetters("launchStore", ["getLaunchBookingData"]),
     shipName() {

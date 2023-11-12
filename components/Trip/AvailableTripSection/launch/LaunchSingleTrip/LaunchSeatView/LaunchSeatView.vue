@@ -233,7 +233,7 @@ export default {
             {
               path: "/launch/payment/passenger-details",
               query: {
-                tnxId: data.paymentInfo.transactionId,
+                tnxId: data.transactionId,
               },
             },
             () => {
