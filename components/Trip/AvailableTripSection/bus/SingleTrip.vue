@@ -144,9 +144,7 @@
             v-if="trip.seatFare[0].discountFare"
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
-            <span class="line-through text-corporate">{{
-              trip.seatFare[0].fare
-            }}</span>
+            <span class="line-through text-corporate">{{ trip.seatFare }}</span>
             {{ trip.seatFare[0].discountFare }}
             <span class="text-base">TK</span>
           </h2>
@@ -154,7 +152,7 @@
             v-else
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
-            {{ trip.seatFare[0].fare }}
+            {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
@@ -171,13 +169,13 @@
               class="text-xl font-semibold text-blackPrimary"
             >
               <span class="line-through text-corporate">{{
-                trip.seatFare[0].fare
+                trip.seatFare
               }}</span>
               {{ trip.seatFare[0].discountFare }}
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
-              {{ trip.seatFare[0].fare }}
+              {{ trip.seatFare }}
               <span class="text-xs">TK</span>
             </h2>
             <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
@@ -475,11 +473,8 @@
           </div>
 
           <div class="mt-4">
-            <h2
-              class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
-            >
-              <span>Email ID </span>
-              <span class="text-[#8D8D8F] text-xs">Optional</span>
+            <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
+              Email <span class="text-[#E0293B]">*</span>
             </h2>
             <input
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
@@ -491,10 +486,7 @@
 
           <LoaderButton
             :class="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
+              !(passengerEmail && isValidPassengerEmail) ||
               !selectedSeatIds.length ||
               !boardingPoint ||
               !passengerName ||
@@ -504,10 +496,7 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
+              !(passengerEmail && isValidPassengerEmail) ||
               getLoading ||
               !boardingPoint ||
               !passengerName ||
@@ -551,6 +540,7 @@ import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
+  isValidEmail,
   moduleType,
 } from "../../../../helpers/utils";
 import { handleScrollBehaviour } from "../../../../helpers/utils";
@@ -601,6 +591,8 @@ export default {
       showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
+      oid: null,
+      sid: null,
     };
   },
   computed: {
@@ -618,6 +610,9 @@ export default {
       "getModalBoardingPoints",
       "getDroppingPoints",
     ]),
+    isValidPassengerEmail() {
+      return isValidEmail(this.passengerEmail);
+    },
     departureDateTime() {
       if (this.boardingPoint?.scheduleTime === "") {
         return dateTimeFormat(
@@ -784,7 +779,7 @@ export default {
         departureTime: this.trip.departureTime,
         sku: this.trip.sku,
         id: this.trip.id,
-        seatPlan: this.trip.seatPlan,
+        seatClass: this.trip.seatClass,
         seatFare: this.trip.seatFare,
         companyId: this.trip.companyId,
         coachType: this.trip.coach.type,
@@ -877,6 +872,14 @@ export default {
               this.droppingPoint?.name.toLowerCase()
           );
         });
+
+        // according to intercity v2 new model start
+        if (foundIndex !== -1) {
+          this.sid = seat.fareList[foundIndex].sid;
+          this.oid = seat.fareList[foundIndex].oid;
+        }
+        // according to intercity v2 new model end
+
         return foundIndex === -1 ? seat.fare : seat.fareList[foundIndex].fare;
       } else {
         return seat.fare;
@@ -998,10 +1001,7 @@ export default {
       });
     },
     async paymentPendingBlockHandler() {
-      if (
-        this.passengerEmail &&
-        !this.emailReg.test(String(this.passengerEmail).toLowerCase())
-      ) {
+      if (this.passengerEmail && !this.isValidPassengerEmail) {
         this.$toast.error("Enter a valid email address", {
           position: "bottom-right",
           duration: 50000,
@@ -1026,7 +1026,8 @@ export default {
           transportType: this.trip.transportType,
           transportId: String(this.trip.transportId),
           uid: this.trip.uid,
-          oid: this.getSeatViewData?.seatPlan?.oid || null,
+          oid: this.oid,
+          sid: this.sid,
           id: this.trip.id,
           seatClass: this.trip?.seatClass[0]?.name || null,
           sku: String(this.trip.sku),
