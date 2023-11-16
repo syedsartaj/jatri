@@ -317,6 +317,47 @@ export const actions = {
       return false;
     }
   },
+  async seatRemoveAction({ commit }, payload) {
+    try {
+      commit("setLoading", true);
+      const { data } = await this.$api.post(
+        apis.SERVICE_TYPE.LAUNCH.POST_SEAT_REMOVE,
+        payload
+      );
+      commit("resetStateAfterSitRemove", data.data);
+      commit("setLoading", false);
+      return true;
+    } catch (error) {
+      commit("setLoading", false);
+      this.$toast.error(
+        error.response?.data?.message || "Something went wrong!",
+        {
+          position: "bottom-right",
+          duration: 5000,
+        }
+      );
+      return false;
+    }
+  },
+  async postPassengerDetailsAction({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      return this.$api
+        .$post(apis.SERVICE_TYPE.LAUNCH.POST_PASSENGER_DETAILS, payload)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((e) => {
+          reject();
+          this.$toast.error(
+            e.response.data.message ?? "Something went wrong!",
+            {
+              position: "bottom-right",
+              duration: 5000,
+            }
+          );
+        });
+    });
+  },
 };
 
 export const mutations = {
@@ -397,6 +438,18 @@ export const mutations = {
     state.launchBookingData = {
       ...state.launchBookingData,
       ...data,
+    };
+  },
+  resetStateAfterSitRemove: (state, data) => {
+    state.launchBookingData = {
+      ...state.launchBookingData,
+      invoice: {
+        ...state.launchBookingData.invoice,
+        seatNo: data.invoice.seatNo,
+      },
+      paymentGatewayCommission: data.paymentGatewayCommission,
+      serviceCharge: data.serviceCharge,
+      amount: data.amount,
     };
   },
 };

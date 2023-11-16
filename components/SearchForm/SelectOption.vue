@@ -3,7 +3,7 @@
     <div class="">
       <h2
         :class="isRequired ? '' : 'justify-between'"
-        class="text-xs lg:text-base font-medium text-blackPrimary flex"
+        class="text-xs lg:text-base font-medium text-blackPrimary flex items-end"
       >
         <span>{{ label }} </span>
         <span v-if="isOptional" class="text-[#8D8D8F] text-xs">Optional</span>
@@ -11,7 +11,11 @@
       </h2>
       <button
         @click="toggleDropdown"
-        class="z-10 block bg-[#f7f7f7] px-4 py-[13px] mt-[10px] w-full rounded focus:outline-none"
+        :class="{
+          'z-10 block bg-[#f7f7f7] px-4  w-full  focus:outline-none': true,
+          'py-[13px] mt-[10px] rounded': !isPassengerForm,
+          'h-12 mt-2 rounded-lg': isPassengerForm,
+        }"
       >
         <div class="flex justify-between items-center">
           <p
@@ -40,7 +44,7 @@
     </div>
     <div
       v-show="optionsIsOpen"
-      class="border mt-4 w-11/12 bg-white rounded-md shadow-xl z-[1000] leading-6 before:grid  absolute divide-y-2"
+      class="border mt-4 w-11/12 bg-white rounded-md shadow-xl z-[1000] leading-6 before:grid absolute divide-y-2"
     >
       <div class="text-center p-4">
         <h2 class="font-inter text-xs xl:text-[16px] font-[600] text-td_text">
@@ -87,6 +91,10 @@ export default {
   props: {
     label: {
       type: String,
+      required: false,
+    },
+    isPassengerForm: {
+      type: Boolean,
       required: false,
     },
     defaultOption: {
