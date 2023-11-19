@@ -59,7 +59,7 @@
           </svg>
         </div>
         <div class="ml-4 text-sm text-blackPrimary font-normal">
-          Farhan Ahmed
+          {{ passengerName }}
         </div>
       </div>
       <div class="w-full flex flex-row mt-2">
@@ -81,10 +81,10 @@
         </div>
 
         <div class="ml-4 text-sm text-blackPrimary font-normal">
-          +8801789488746
+          +88 {{ passengerPhone }}
         </div>
       </div>
-      <div class="w-full flex flex-row mt-2">
+      <div class="w-full flex flex-row mt-2" v-if="passengerEmail">
         <div
           class="h-6 w-6 flex items-center justify-center bg-[#F7F7F7] rounded-[100px]"
         >
@@ -103,16 +103,14 @@
         </div>
 
         <div class="ml-4 text-sm text-blackPrimary font-normal">
-          farhan.ahmed@gmail.com
+          {{ passengerEmail }}
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import moment from "moment";
 import { mapGetters } from "vuex";
-import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
 export default {
   data() {
     return {
@@ -127,22 +125,16 @@ export default {
   computed: {
     ...mapGetters("launchStore", ["getLaunchBookingData"]),
     shipName() {
-      return this.getLaunchBookingData.invoice.company;
+      return this.getLaunchBookingData?.invoice?.ship || "";
     },
-    routeName() {
-      return this.getLaunchBookingData.invoice.route;
+    passengerName() {
+      return this.getLaunchBookingData?.passenger?.name || "";
     },
-    tripInformation() {
-      const { tripDateTime, boardingPoint } = this.getLaunchBookingData.invoice;
-      const parsedDate = moment(tripDateTime);
-
-      return `${parsedDate.format("hh:mm A")} ${
-        boardingPoint && `. ${boardingPoint}`
-      } .${dateTimeFormat(
-        new Date(tripDateTime).toLocaleString("en-Us"),
-        6,
-        "ll"
-      )}`;
+    passengerPhone() {
+      return this.getLaunchBookingData?.passenger?.phone || "";
+    },
+    passengerEmail() {
+      return this.getLaunchBookingData?.passenger?.email || "";
     },
   },
 };

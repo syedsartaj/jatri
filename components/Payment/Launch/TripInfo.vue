@@ -86,7 +86,7 @@ export default {
     ...mapGetters("launchStore", ["getLaunchBookingData"]),
 
     shipName() {
-      return this.getLaunchBookingData.invoice.company;
+      return this.getLaunchBookingData.invoice.ship;
     },
     routeName() {
       return this.getLaunchBookingData.invoice.route;
@@ -94,14 +94,13 @@ export default {
     tripInformation() {
       const { tripDateTime, boardingPoint } = this.getLaunchBookingData.invoice;
       const parsedDate = moment(tripDateTime);
+      const formattedTripDateTime = parsedDate.isValid()
+        ? parsedDate.format("ll") // Adjust the format to your preference
+        : "";
 
       return `${parsedDate.format("hh:mm A")} ${
-        boardingPoint && `. ${boardingPoint}`
-      } .${dateTimeFormat(
-        new Date(tripDateTime).toLocaleString("en-Us"),
-        6,
-        "ll"
-      )}`;
+        boardingPoint ? `. ${boardingPoint}` : ""
+      } .${formattedTripDateTime}`;
     },
   },
 };
