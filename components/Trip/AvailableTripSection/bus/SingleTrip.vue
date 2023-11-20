@@ -273,6 +273,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="NORMAL_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
 
@@ -284,6 +286,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="LOWER_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
             <div v-if="getUpperDeckSeatArray?.length">
@@ -294,6 +298,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="UPPER_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
           </div>
@@ -335,7 +341,7 @@
 
           <!-- Seat Fare Table -->
           <div
-            v-if="selectedSeatsObj.length"
+            v-if="selectedSeatsObjArray.length"
             class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]"
           >
             <div
@@ -577,7 +583,7 @@ export default {
       selectedSeatIds: [],
       selectedSeatLabels: [],
       selectedSeatFares: [],
-      selectedSeatsObj: [],
+      selectedSeatsObjArray: [],
       selectedCustomizeSeatList: [],
       totalAmount: 0,
       totalDiscountAmount: 0,
@@ -798,7 +804,7 @@ export default {
         (label) => label !== seat.seatNo
       );
 
-      this.selectedSeatFares = this.selectedSeatsObj
+      this.selectedSeatFares = this.selectedSeatsObjArray
         .map((item) => {
           if (item.id !== seat.id) {
             return item.fare;
@@ -806,7 +812,7 @@ export default {
         })
         .filter(Boolean);
 
-      this.selectedSeatsObj = this.selectedSeatsObj.filter(
+      this.selectedSeatsObjArray = this.selectedSeatsObjArray.filter(
         (item) => item.id !== seat.id
       );
 
@@ -855,7 +861,7 @@ export default {
     handleSitSelect(seat) {
       this.selectedSeatIds.push(seat.id);
       this.selectedSeatLabels.push(seat.seatNo);
-      this.selectedSeatsObj.push(seat);
+      this.selectedSeatsObjArray.push(seat);
       this.selectedSeatFares.push(seat.fare);
       this.totalAmount += this.getTheCorrectSeatFare(seat);
     },
@@ -885,7 +891,7 @@ export default {
         return seat.fare;
       }
     },
-    disCountCalculationOnSitselect(seat) {
+    disCountCalculationOnSitSelect(seat) {
       if (seat.discountFare !== null) {
         this.totalDiscountAmount += seat.fare - seat.discountFare;
         if (
@@ -936,7 +942,7 @@ export default {
           return;
         } else {
           this.handleSitSelect(seat);
-          this.disCountCalculationOnSitselect(seat);
+          this.disCountCalculationOnSitSelect(seat);
           this.promoCalculationOnSitSelect();
         }
       }
@@ -1137,7 +1143,7 @@ export default {
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
       this.selectedSeatFares = [];
-      this.selectedSeatsObj = [];
+      this.selectedSeatsObjArray = [];
       this.totalAmount = 0;
       this.totalDiscountAmount = 0;
       this.totalDiscountFare = 0;
@@ -1194,7 +1200,7 @@ export default {
       );
     },
     updateTotalAmount() {
-      this.totalAmount = this.selectedSeatsObj.reduce((total, item) => {
+      this.totalAmount = this.selectedSeatsObjArray.reduce((total, item) => {
         return total + this.getTheCorrectSeatFare(item);
       }, 0);
     },
@@ -1202,7 +1208,7 @@ export default {
       let tempTotalDiscountAmount = 0;
       let tempTotalDiscountFare = 0;
 
-      this.selectedSeatsObj.forEach((seat) => {
+      this.selectedSeatsObjArray.forEach((seat) => {
         if (seat.discountFare !== null) {
           const discountAmount =
             this.getTheCorrectSeatFare(seat) - seat.discountFare;
@@ -1224,6 +1230,53 @@ export default {
 
       this.totalDiscountAmount = tempTotalDiscountAmount;
       this.totalDiscountFare = tempTotalDiscountFare;
+    },
+    actionForNotAvailableSeats(notAvailableSeats) {
+      const notAvailableSeatsLabels = notAvailableSeats.map(
+        (seat) => seat.seatNo
+      );
+
+      if (notAvailableSeatsLabels?.length) {
+        this.handleSeatLock(notAvailableSeatsLabels.join(","), false);
+      }
+    },
+    manageSeatSelectionAndPromoCalculation() {
+      const seats = this.selectedSeatsObjArray.slice();
+
+      // Filter out unavailable seats
+      const notAvailableSeats = seats.filter(
+        (seat) => !this.isSeatAvailable(seat)
+      );
+
+      // Handle action for unavailable seats
+      if (notAvailableSeats.length) {
+        this.actionForNotAvailableSeats(notAvailableSeats);
+      }
+
+      // Filter available seats and perform operations
+      const availableSeats = seats.filter((seat) => this.isSeatAvailable(seat));
+      this.resetForm();
+      availableSeats.forEach((seat) => {
+        this.handleSitSelect(seat);
+        this.disCountCalculationOnSitSelect(seat);
+        this.promoCalculationOnSitSelect();
+      });
+    },
+    isSeatAvailable(seat) {
+      if (!seat || (!seat.fareList && seat.status !== "available")) {
+        return false;
+      }
+
+      if (seat.fareList) {
+        return seat.fareList.some(
+          (item) =>
+            item.boardingPoint === this.boardingPoint.name &&
+            item.droppingPoint === this.droppingPoint.name &&
+            item.status === "available"
+        );
+      }
+
+      return seat.status === "available";
     },
   },
   watch: {
@@ -1253,20 +1306,14 @@ export default {
       },
       deep: true,
     },
-    selectedSeatsObj(value) {
+    selectedSeatsObjArray(value) {
       this.updateTheCustomizedSitList(value);
     },
-    boardingPoint(value) {
-      this.updateTheCustomizedSitList(this.selectedSeatsObj);
-      this.updateTotalAmount();
-      this.updateTotalDiscountAndFareAmount();
-      this.promoCalculationOnSitSelect();
+    boardingPoint() {
+      this.manageSeatSelectionAndPromoCalculation();
     },
-    droppingPoint(value) {
-      this.updateTheCustomizedSitList(this.selectedSeatsObj);
-      this.updateTotalAmount();
-      this.updateTotalDiscountAndFareAmount();
-      this.promoCalculationOnSitSelect();
+    droppingPoint() {
+      this.manageSeatSelectionAndPromoCalculation();
     },
   },
 };
