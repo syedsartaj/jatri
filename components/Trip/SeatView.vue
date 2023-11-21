@@ -95,13 +95,23 @@ export default {
         return false;
       }
 
-      if (seat.fareList) {
-        return seat.fareList.some(
-          (item) =>
-            item.boardingPoint === this.boardingPoint.name &&
-            item.droppingPoint === this.droppingPoint.name &&
-            item.status === "available"
+      if (
+        seat.fareList &&
+        this.boardingPoint?.name &&
+        this.droppingPoint?.name
+      ) {
+        const isStatusMissing = seat.fareList.some(
+          (seat) => !seat.hasOwnProperty("status")
         );
+
+        if (!isStatusMissing) {
+          return seat.fareList.some(
+            (item) =>
+              item.boardingPoint === this.boardingPoint?.name &&
+              item.droppingPoint === this.droppingPoint?.name &&
+              item.status === "available"
+          );
+        }
       }
 
       return seat.status === "available";

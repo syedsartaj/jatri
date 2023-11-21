@@ -314,6 +314,7 @@
               :label="'Boarding Point'"
               :options="getSeatBoardingPointArray"
               propertyName="name"
+              :isRequired="true"
             />
             <!-- :options="getSeatBoardingPointArray" -->
           </div>
@@ -323,8 +324,8 @@
               :default-option="'Select Your Dropping Location'"
               :label="'Dropping Point'"
               :options="getSeatDroppingPointArray"
-              :isOptional="true"
               propertyName="name"
+              :isRequired="true"
             />
             <!-- :options="getSeatDroppingPointArray" -->
           </div>
@@ -494,7 +495,8 @@
             :class="
               !(passengerEmail && isValidPassengerEmail) ||
               !selectedSeatIds.length ||
-              !boardingPoint ||
+              !boardingPoint?.name ||
+              !(getSeatDroppingPointArray.length && droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -504,7 +506,8 @@
             :disabled="
               !(passengerEmail && isValidPassengerEmail) ||
               getLoading ||
-              !boardingPoint ||
+              !boardingPoint?.name ||
+              !(getSeatDroppingPointArray.length && droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -742,7 +745,7 @@ export default {
           this.handleSeatLock(this.selectedSeatLabels.join(","), false);
         }
         this.$emit("selectedTripId", null);
-        this.resetForm();
+        this.resetForm(true);
         return;
       }
       this.$nextTick(async () => {
@@ -1101,7 +1104,7 @@ export default {
               coachType: this.trip.coach.type,
               tripDateTime: this.trip.tripDateTime,
             };
-            this.resetForm();
+            this.resetForm(false);
             this.getPbSeatViewAction(seatViewPayload);
             this.$nuxt.$loading?.finish();
           } else {
@@ -1136,10 +1139,12 @@ export default {
       this.$gtm.push(eventData);
     },
 
-    resetForm() {
-      this.passengerName = "";
-      this.passengerPhone = "";
-      this.passengerEmail = "";
+    resetForm(clearUserInfo) {
+      if (clearUserInfo) {
+        this.passengerName = "";
+        this.passengerPhone = "";
+        this.passengerEmail = "";
+      }
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
       this.selectedSeatFares = [];
@@ -1255,7 +1260,7 @@ export default {
 
       // Filter available seats and perform operations
       const availableSeats = seats.filter((seat) => this.isSeatAvailable(seat));
-      this.resetForm();
+      this.resetForm(false);
       availableSeats.forEach((seat) => {
         this.handleSitSelect(seat);
         this.disCountCalculationOnSitSelect(seat);
@@ -1267,13 +1272,23 @@ export default {
         return false;
       }
 
-      if (seat.fareList) {
-        return seat.fareList.some(
-          (item) =>
-            item.boardingPoint === this.boardingPoint.name &&
-            item.droppingPoint === this.droppingPoint.name &&
-            item.status === "available"
+      if (
+        seat.fareList &&
+        this.boardingPoint?.name &&
+        this.droppingPoint?.name
+      ) {
+        const isStatusMissing = seat.fareList.some(
+          (seat) => !seat.hasOwnProperty("status")
         );
+
+        if (!isStatusMissing) {
+          return seat.fareList.some(
+            (item) =>
+              item.boardingPoint === this.boardingPoint?.name &&
+              item.droppingPoint === this.droppingPoint?.name &&
+              item.status === "available"
+          );
+        }
       }
 
       return seat.status === "available";
@@ -1287,22 +1302,18 @@ export default {
         this.selectedSeatLabels?.length
       ) {
         this.handleSeatLock(this.selectedSeatLabels.join(","), false);
-        this.resetForm();
+        this.resetForm(false);
       }
     },
-    getSeatBoardingPointArray(value) {
-      const findId = value.findIndex((item) => item?.defaultBoarding === true);
-      this.boardingPoint = findId === -1 ? value[0] : value[findId];
+    getSeatBoardingPointArray() {
+      this.boardingPoint = { name: "", id: "" };
     },
-    getSeatDroppingPointArray(value) {
-      let findId = value.findIndex(
-        (item) => item?.defaultDroppingPoint === true
-      );
-      this.droppingPoint = findId === -1 ? { name: "", id: "" } : value[findId];
+    getSeatDroppingPointArray() {
+      this.droppingPoint = { name: "", id: "" };
     },
     getTrips: {
       handler(value) {
-        this.resetForm();
+        this.resetForm(false);
       },
       deep: true,
     },
