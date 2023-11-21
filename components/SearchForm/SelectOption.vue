@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full">
-    <div class="">
+    <div>
       <h2
         :class="isRequired ? '' : 'justify-between'"
         class="text-xs lg:text-base font-medium text-blackPrimary flex items-end"
@@ -9,28 +9,31 @@
         <span v-if="isOptional" class="text-[#8D8D8F] text-xs">Optional</span>
         <span v-if="isRequired" class="text-[#E0293B] ml-1">*</span>
       </h2>
+
       <button
         @click="toggleDropdown"
-        :class="{
-          'z-10 block bg-[#f7f7f7] px-4  w-full  focus:outline-none': true,
-          'py-[13px] mt-[10px] rounded': !isPassengerForm,
-          'h-12 mt-2 rounded-lg': isPassengerForm,
-        }"
+        :class="[
+          'z-10 block bg-[#f7f7f7] px-4 w-full focus:outline-none',
+          !isPassengerForm
+            ? 'py-[13px] mt-[10px] rounded'
+            : 'h-12 mt-2 rounded-lg',
+        ]"
       >
         <div class="flex justify-between items-center">
           <p
-            v-if="selectedOption !== ''"
             class="text-blackPrimary text-sm font-normal"
+            v-if="shouldDisplaySelectedOption"
           >
-            {{ propertyName ? selectedOption[propertyName] : selectedOption }}
+            {{ displaySelectedOption }}
           </p>
-          <p v-else class="text-blackSecondary text-sm font-normal">
-            Select boarding point
+          <p class="text-blackPrimary text-sm font-normal" v-else>
+            {{ defaultOption }}
           </p>
           <img src="@/assets/images/icons/dropdown.svg" alt="dropdown" />
         </div>
       </button>
     </div>
+
     <div
       v-if="errorMessage"
       class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
@@ -42,6 +45,7 @@
       />
       <div>Please select a boarding point.</div>
     </div>
+
     <div
       v-show="optionsIsOpen"
       class="border mt-4 w-11/12 bg-white rounded-md shadow-xl z-[1000] leading-6 before:grid absolute divide-y-2"
@@ -149,6 +153,21 @@ export default {
       if (!this.$el.contains(e.target)) {
         this.optionsIsOpen = false;
       }
+    },
+  },
+  computed: {
+    shouldDisplaySelectedOption() {
+      return (
+        this.selectedOption &&
+        (this.selectedOption.name !== "" ||
+          (typeof this.selectedOption !== "object" &&
+            this.selectedOption !== ""))
+      );
+    },
+    displaySelectedOption() {
+      return this.propertyName
+        ? this.selectedOption[this.propertyName]
+        : this.selectedOption;
     },
   },
 };
