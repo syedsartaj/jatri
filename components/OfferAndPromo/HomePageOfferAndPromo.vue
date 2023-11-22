@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="offerPromoDiv">
     <!-- Offer & Promos Section Mobile -->
     <div
       class="flex justify-center w-full lg:hidden"
@@ -46,12 +46,14 @@
               v-for="(offerImg, index) in generateOfferImgArrForMobile()"
               :key="index"
             >
-              <img
-                :id="index"
-                :src="offerImg"
-                alt=""
-                class="rounded-[10px] w-[300px] h-[200px]"
-              />
+              <div :style="{ marginRight: GapBetweenImageInPx + 'px' }">
+                <img
+                  :id="index"
+                  :src="offerImg"
+                  alt=""
+                  class="rounded-[10px] w-[300px] h-[200px]"
+                />
+              </div>
             </slide>
           </hooper>
         </div>
@@ -107,15 +109,14 @@
               v-for="(offerImg, index) in generateOfferImgArrForLarge()"
               :key="index"
             >
-            <div class="mr-[20px]">
-              <img
-                :id="index"
-                :src="offerImg"
-                alt=""
-                class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px]  pointer-events-none"
-              />
-            </div>
-            
+              <div :style="{ marginRight: GapBetweenImageInPx + 'px' }">
+                <img
+                  :id="index"
+                  :src="offerImg"
+                  alt=""
+                  class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none"
+                />
+              </div>
             </slide>
           </hooper>
         </div>
@@ -132,10 +133,13 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
-      windowHeight: 0,
+      windowWidth: 0,
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 2,
+      ImageWidthLarge: 460,
+      ImageWidthMobile: 300,
+      GapBetweenImageInPx: 15,
       hooperSettings: {
         infiniteScroll: true,
         centerMode: false,
@@ -145,7 +149,6 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 3,
-       
       },
       hooperSettingsMobile: {
         infiniteScroll: true,
@@ -156,21 +159,22 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 1,
-       
       },
     };
   },
   mounted() {
-    this.windowHeight = window.innerWidth
     this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    })
+      this.updateCarousel();
+
+      window.addEventListener("resize", this.updateCarousel);
+    });
   },
 
-  beforeDestroy() { 
-    window.removeEventListener('resize', this.onResize); 
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
   methods: {
+
     prevSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlide.slidePrev();
@@ -180,6 +184,7 @@ export default {
       this.slideLeft = true;
       this.slideRight = false;
     },
+
     nextSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlide.slideNext();
@@ -189,9 +194,35 @@ export default {
       this.slideRight = true;
       this.slideLeft = false;
     },
-    onResize() {
-      this.windowHeight = window.innerHeight
+
+    updateCarousel() {
+      this.windowWidth = window.innerWidth;
+
+      if (this.windowWidth > 768) {
+
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.ImageWidthLarge
+        );
+        this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
+        this.$refs.hooperSlide.update();
+
+      } else {
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.ImageWidthMobile
+        );
+        this.$refs.hooperSlideMobile.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideMobile.update();
+
+       
+      }
     },
+
+    calculateNumOfPromoToShow(ImageSize) {
+      const NumberOfItemToShowWithoutGap = this.windowWidth / ImageSize;
+      return NumberOfItemToShowWithoutGap;
+    },
+
     generateOfferImgArrForLarge() {
       if (
         this.getOfferImages.length <
@@ -210,6 +241,7 @@ export default {
         return this.getOfferImages;
       }
     },
+
     generateOfferImgArrForMobile() {
       if (
         this.getOfferImages.length <
