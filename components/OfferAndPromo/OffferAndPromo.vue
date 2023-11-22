@@ -1,6 +1,8 @@
 <template>
-  <div
-    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex items-center mb-[20px]"
+  <div>
+ <!-- Offer & Promos Section Mobile -->
+ <div
+    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex md:hidden items-center mb-[20px]"
     v-if="getOfferImages && getOfferImages.length"
   >
     <img
@@ -10,14 +12,16 @@
       @click="scrollLeft"
     />
     <div class="overflow-hidden w-full h-[100px]">
-      <hooper ref="hooperSlide" :settings="hooperSettings">
-        <slide v-for="(offerImg, index) in getOfferImages" :key="index">
-          <img
-            :id="index"
-            :src="offerImg"
-            alt=""
-            class="rounded-[8px] w-[175px] h-[100px] pointer-events-none"
-          />
+      <hooper ref="hooperSlide" :settings="hooperSettingsMobile">
+        <slide v-for="(offerImg, index) in generateOfferImgArrForMobile()" :key="index">
+          <div class="mr-[7px]">
+            <img
+              :id="index"
+              :src="offerImg"
+              alt=""
+              class="rounded-[8px] w-[120px] md:w-[180px] pointer-events-none"
+            />
+          </div>
         </slide>
       </hooper>
     </div>
@@ -28,6 +32,44 @@
       @click="scrollRight"
     />
   </div>
+
+
+    <!-- Offer & Promos Section -->
+
+  <div
+    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] hidden md:flex items-center mb-[20px]"
+    v-if="getOfferImages && getOfferImages.length"
+  >
+    <img
+      src="@/assets/images/arrowLeftBlack.svg"
+      alt=""
+      class="h-4 w-4 cursor-pointer mr-[12px]"
+      @click="scrollLeft"
+    />
+    <div class="overflow-hidden w-full h-[100px]">
+      <hooper ref="hooperSlide" :settings="hooperSettings">
+        <slide v-for="(offerImg, index) in generateOfferImgArrForLarge()" :key="index">
+    
+          <div class="mr-[7px]">
+            <img
+              :id="index"
+              :src="offerImg"
+              alt=""
+              class="rounded-[8px] w-[120px] md:w-[180px] pointer-events-none"
+            />
+          </div>
+        </slide>
+      </hooper>
+    </div>
+    <img
+      src="@/assets/images/arrowRightBlack.svg"
+      alt=""
+      class="h-4 w-4 cursor-pointer ml-[12px]"
+      @click="scrollRight"
+    />
+  </div>
+  </div>
+   
 </template>
 
 <script>
@@ -45,91 +87,29 @@ export default {
       slideLeft: false,
       slideRight: false,
       imageUrl: "",
+      OfferImgMultiplier: 2,
+
       hooperSettings: {
-        slidesToShow: 1,
-        loop: false,
         infiniteScroll: true,
         centerMode: false,
-        nav: false,
         autoPlay: true,
-        touch: true,
-        wheelControl: false,
-        keyboardControl: false,
-        mouseDrag: true,
-        dragThreshold: 10,
         playSpeed: 3000,
         transition: 2000,
-        breakpoints: {
-          1700: {
-            itemsToShow: 5.2,
-          },
-          1650: {
-            itemsToShow: 4.5,
-          },
-          1450: {
-            itemsToShow: 4,
-          },
-          1400: {
-            itemsToShow: 3.7,
-          },
-          1350: {
-            itemsToShow: 3.5,
-          },
-          1250: {
-            itemsToShow: 3,
-          },
-          1200: {
-            itemsToShow: 2.8,
-          },
-          1100: {
-            itemsToShow: 2.5,
-          },
-          1024: {
-            itemsToShow: 2.2,
-          },
-          1000: {
-            itemsToShow: 4.5,
-          },
-          950: {
-            itemsToShow: 4.2,
-          },
-          900: {
-            itemsToShow: 4,
-          },
-          850: {
-            itemsToShow: 3.8,
-          },
-          800: {
-            itemsToShow: 3.5,
-          },
-          750: {
-            itemsToShow: 3.2,
-          },
-          700: {
-            itemsToShow: 3,
-          },
-          650: {
-            itemsToShow: 2.8,
-          },
-          600: {
-            itemsToShow: 2.5,
-          },
-          550: {
-            itemsToShow: 2.2,
-          },
-          450: {
-            itemsToShow: 1.8,
-          },
-          400: {
-            itemsToShow: 1.5,
-          },
-          360: {
-            itemsToShow: 1.2,
-          },
-          325: {
-            itemsToShow: 1,
-          },
-        },
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 4,
+       
+      },
+      hooperSettingsMobile: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 2.5,
+       
       },
     };
   },
@@ -152,6 +132,42 @@ export default {
       this.$refs.hooperSlide.slideNext();
       this.slideRight = true;
       this.slideLeft = false;
+    },
+    generateOfferImgArrForLarge() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
+    },
+    generateOfferImgArrForMobile() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
     },
   },
 };

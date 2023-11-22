@@ -42,7 +42,10 @@
         </div>
         <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
           <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
-            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
+            <slide
+              v-for="(offerImg, index) in generateOfferImgArrForMobile()"
+              :key="index"
+            >
               <img
                 :id="index"
                 :src="offerImg"
@@ -100,13 +103,19 @@
         </div>
         <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
           <hooper ref="hooperSlide" :settings="hooperSettings">
-            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
+            <slide
+              v-for="(offerImg, index) in generateOfferImgArrForLarge()"
+              :key="index"
+            >
+            <div class="mr-[20px]">
               <img
                 :id="index"
                 :src="offerImg"
                 alt=""
-                class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none"
+                class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px]  pointer-events-none"
               />
+            </div>
+            
             </slide>
           </hooper>
         </div>
@@ -123,8 +132,10 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
+      windowHeight: 0,
       slideLeft: false,
       slideRight: false,
+      OfferImgMultiplier: 2,
       hooperSettings: {
         infiniteScroll: true,
         centerMode: false,
@@ -133,39 +144,8 @@ export default {
         transition: 2000,
         wheelControl: false,
         keyboardControl: false,
-        itemsToShow: 5,
-        breakpoints: {
-          2300: {
-            itemsToShow: 4.2,
-          },
-          2100: {
-            itemsToShow: 4,
-          },
-          1900: {
-            itemsToShow: 3.5,
-          },
-          1700: {
-            itemsToShow: 3,
-          },
-          1520: {
-            itemsToShow: 2.7,
-          },
-          1440: {
-            itemsToShow: 2.5,
-          },
-          1280: {
-            itemsToShow: 2.2,
-          },
-          1140: {
-            itemsToShow: 2.3,
-          },
-          1060: {
-            itemsToShow: 2.2,
-          },
-          1024: {
-            itemsToShow: 2,
-          },
-        },
+        itemsToShow: 3,
+       
       },
       hooperSettingsMobile: {
         infiniteScroll: true,
@@ -176,40 +156,19 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 1,
-        breakpoints: {
-          950: {
-            itemsToShow: 2.8,
-          },
-          890: {
-            itemsToShow: 2.7,
-          },
-          850: {
-            itemsToShow: 2.5,
-          },
-          720: {
-            itemsToShow: 2.2,
-          },
-          633: {
-            itemsToShow: 2,
-          },
-          600: {
-            itemsToShow: 1.8,
-          },
-          500: {
-            itemsToShow: 1.5,
-          },
-          420: {
-            itemsToShow: 1.3,
-          },
-          390: {
-            itemsToShow: 1.2,
-          },
-          320: {
-            itemsToShow: 1,
-          },
-        },
+       
       },
     };
+  },
+  mounted() {
+    this.windowHeight = window.innerWidth
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    })
+  },
+
+  beforeDestroy() { 
+    window.removeEventListener('resize', this.onResize); 
   },
   methods: {
     prevSlide(action) {
@@ -229,6 +188,45 @@ export default {
       }
       this.slideRight = true;
       this.slideLeft = false;
+    },
+    onResize() {
+      this.windowHeight = window.innerHeight
+    },
+    generateOfferImgArrForLarge() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
+    },
+    generateOfferImgArrForMobile() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
     },
   },
   components: { Hooper, Slide },
