@@ -46,12 +46,12 @@
               v-for="(offerImg, index) in generateOfferImgArrForMobile()"
               :key="index"
             >
-              <div :style="{ marginRight: GapBetweenImageInPx + 'px' }">
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
                 <img
                   :id="index"
                   :src="offerImg"
                   alt=""
-                  class="rounded-[10px] w-[300px] h-[200px]"
+                  class="rounded-[10px] w-[320px] h-[200px]"
                 />
               </div>
             </slide>
@@ -109,12 +109,12 @@
               v-for="(offerImg, index) in generateOfferImgArrForLarge()"
               :key="index"
             >
-              <div :style="{ marginRight: GapBetweenImageInPx + 'px' }">
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
                 <img
                   :id="index"
                   :src="offerImg"
                   alt=""
-                  class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none"
+                  class="rounded-2xl w-[460px] h-[260px] pointer-events-none"
                 />
               </div>
             </slide>
@@ -136,10 +136,11 @@ export default {
       windowWidth: 0,
       slideLeft: false,
       slideRight: false,
-      OfferImgMultiplier: 2,
-      ImageWidthLarge: 460,
-      ImageWidthMobile: 300,
-      GapBetweenImageInPx: 15,
+      OfferImgMultiplier: 3,
+      imageWidthLarge: 460,
+      imageWidthMobile: 320,
+      gapBetweenImageInPx: 15,
+      breakPoint: 1024,
       hooperSettings: {
         infiniteScroll: true,
         centerMode: false,
@@ -171,10 +172,9 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("resize", this.updateCarousel);
   },
   methods: {
-
     prevSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlide.slidePrev();
@@ -198,29 +198,73 @@ export default {
     updateCarousel() {
       this.windowWidth = window.innerWidth;
 
-      if (this.windowWidth > 768) {
-
+      if (this.windowWidth > this.breakPoint) {
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
-          this.ImageWidthLarge
+          this.imageWidthLarge
         );
         this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
         this.$refs.hooperSlide.update();
-
       } else {
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
-          this.ImageWidthMobile
+          this.imageWidthMobile
         );
         this.$refs.hooperSlideMobile.config.itemsToShow =
           NumberOfItemToShowWithGap;
         this.$refs.hooperSlideMobile.update();
-
-       
       }
     },
 
-    calculateNumOfPromoToShow(ImageSize) {
-      const NumberOfItemToShowWithoutGap = this.windowWidth / ImageSize;
-      return NumberOfItemToShowWithoutGap;
+    calculateNumOfPromoToShow(imageSize) {
+      const PADDING = 16;
+      let totalGap;
+      let numberOfItemToShowWithoutGap;
+      let numberOfItemToShowWithGap;
+
+      if (this.windowWidth > this.breakPoint) {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlide.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlide.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      } else {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlideMobile.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          if (integerPart >= 1) {
+            totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+          } else {
+            totalGap = integerPart * this.gapBetweenImageInPx;
+          }
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlideMobile.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      }
+
+      return numberOfItemToShowWithGap;
     },
 
     generateOfferImgArrForLarge() {
