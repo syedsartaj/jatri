@@ -401,7 +401,7 @@ export const mutations = {
       };
 
       const fareDiff =
-        getActualFare(a.seatFare[0].fare) - getActualFare(b.seatFare[0].fare);
+        getActualFare(a.seatFare) - getActualFare(b.seatFare);
 
       if (fareDiff !== 0) {
         return sortBy * fareDiff;
