@@ -183,7 +183,7 @@
             to="/bus/policies#return-and-refund-policy"
             target="_blank"
             class="w-full underline text-[#1E88E5] font-medium"
-            >Cancellation Policy</nuxt-link
+            >Return & refund Policy</nuxt-link
           >
         </span>
       </p>

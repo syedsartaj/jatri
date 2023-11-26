@@ -496,7 +496,7 @@
               !(passengerEmail && isValidPassengerEmail) ||
               !selectedSeatIds.length ||
               !boardingPoint?.name ||
-              !(getSeatDroppingPointArray.length && droppingPoint?.name) ||
+              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -507,7 +507,7 @@
               !(passengerEmail && isValidPassengerEmail) ||
               getLoading ||
               !boardingPoint?.name ||
-              !(getSeatDroppingPointArray.length && droppingPoint?.name) ||
+              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -1026,6 +1026,7 @@ export default {
         });
         return;
       }
+      console.log(this.trip?.seatClass);
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
         this.fireGTMEventForAddToCart();
@@ -1038,7 +1039,7 @@ export default {
           oid: this.oid,
           sid: this.sid,
           id: this.trip.id,
-          seatClass: this.trip?.seatClass[0]?.name || null,
+          seatClass: this.trip?.seatClass,
           sku: String(this.trip.sku),
           fromCity: this.trip.fromCity,
           toCity: this.trip.toCity,
