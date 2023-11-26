@@ -401,7 +401,7 @@ export const mutations = {
       };
 
       const fareDiff =
-        getActualFare(a.seatFare[0].fare) - getActualFare(b.seatFare[0].fare);
+        getActualFare(a.seatFare) - getActualFare(b.seatFare);
 
       if (fareDiff !== 0) {
         return sortBy * fareDiff;
@@ -411,19 +411,72 @@ export const mutations = {
     });
   },
   updateSeatStatus: (state, seatInfo) => {
-    const { seatType, rowIndex, colIndex } = seatInfo;
-    switch (seatType) {
-      case "UPPER_DECK": {
-        state.upperDeckSeatArray[rowIndex][colIndex].status = "booked";
-        break;
+    const { seatType, rowIndex, colIndex, boardingPoint, droppingPoint } =
+      seatInfo;
+
+    const isStatusMissing = (fareList) =>
+      fareList.some((seat) => !seat.hasOwnProperty("status"));
+
+    const getSeatFareList = (deck) => deck?.[rowIndex]?.[colIndex]?.fareList;
+
+    const upperDeckFareList =
+      state?.upperDeckSeatArray &&
+      !isStatusMissing(getSeatFareList(state.upperDeckSeatArray));
+    const lowerDeckFareList =
+      state?.lowerDeckSeatArray &&
+      !isStatusMissing(getSeatFareList(state.lowerDeckSeatArray));
+    const seatArrayFareList =
+      state?.seatArray && !isStatusMissing(getSeatFareList(state.seatArray));
+
+    const fareListAvailable =
+      upperDeckFareList || lowerDeckFareList || seatArrayFareList;
+
+    const updateFareListStatus = (fareList, deck) => {
+      let flag = false;
+      fareList.forEach((item, index) => {
+        const isMatchingPoints =
+          item.boardingPoint === boardingPoint.name &&
+          item.droppingPoint === droppingPoint.name;
+
+        if (isMatchingPoints) {
+          flag = true;
+          deck[rowIndex][colIndex].fareList[index].status = "booked";
+        }
+      });
+
+      if (!flag) {
+        deck[rowIndex][colIndex].status = "booked";
       }
-      case "LOWER_DECK": {
-        state.lowerDeckSeatArray[rowIndex][colIndex].status = "booked";
-        break;
+    };
+
+    if (fareListAvailable) {
+      switch (seatType) {
+        case "UPPER_DECK":
+          updateFareListStatus(
+            state.upperDeckSeatArray[rowIndex][colIndex].fareList,
+            state.upperDeckSeatArray
+          );
+          break;
+        case "LOWER_DECK":
+          updateFareListStatus(
+            state.lowerDeckSeatArray[rowIndex][colIndex].fareList,
+            state.lowerDeckSeatArray
+          );
+          break;
+        default:
+          updateFareListStatus(
+            state.seatArray[rowIndex][colIndex].fareList,
+            state.seatArray
+          );
       }
-      default: {
-        state.seatArray[rowIndex][colIndex].status = "booked";
-      }
+    } else {
+      const deck =
+        seatType === "UPPER_DECK"
+          ? state.upperDeckSeatArray
+          : seatType === "LOWER_DECK"
+          ? state.lowerDeckSeatArray
+          : state.seatArray;
+      deck[rowIndex][colIndex].status = "booked";
     }
   },
   updateMobileFilterData: (state, data) => {

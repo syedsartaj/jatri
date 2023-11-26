@@ -19,19 +19,22 @@
           :key="colIndex"
           class="relative group"
           @click="
-            colSeat &&
-              colSeat.status === 'available' &&
-              addSeatHandler(colSeat, { seatType, rowIndex, colIndex })
+            isSeatAvailable(colSeat) &&
+              addSeatHandler(colSeat, {
+                seatType,
+                rowIndex,
+                colIndex,
+                boardingPoint,
+                droppingPoint,
+              })
           "
         >
           <SleeperBedIcon
             v-if="colSeat.class.toLowerCase() == 'sleeper'"
-            :class="handleClass(colSeat.status)"
-            :fill="
-              handleFill(colSeat.status, selectedSeatIds.includes(colSeat.id))
-            "
+            :class="handleClass(colSeat)"
+            :fill="handleFill(colSeat, selectedSeatIds.includes(colSeat.id))"
             :stroke="
-              handleStroke(colSeat.status, selectedSeatIds.includes(colSeat.id))
+              handleStroke(colSeat, selectedSeatIds.includes(colSeat.id))
             "
             height="40"
             width="28"
@@ -39,15 +42,11 @@
           <ArmChairIcon
             v-if="colSeat.class.toLowerCase() != 'sleeper'"
             :class="
-              colSeat.status !== 'available'
-                ? 'cursor-default'
-                : 'cursor-pointer'
+              !isSeatAvailable(colSeat) ? 'cursor-default' : 'cursor-pointer'
             "
-            :fill="
-              handleFill(colSeat.status, selectedSeatIds.includes(colSeat.id))
-            "
+            :fill="handleFill(colSeat, selectedSeatIds.includes(colSeat.id))"
             :stroke="
-              handleStroke(colSeat.status, selectedSeatIds.includes(colSeat.id))
+              handleStroke(colSeat, selectedSeatIds.includes(colSeat.id))
             "
             height="26"
             width="30"
@@ -68,22 +67,61 @@ export default {
     "addSeatHandler",
     "selectedSeatIds",
     "seatType",
+    "droppingPoint",
+    "boardingPoint",
   ],
   methods: {
-    handleClass: (status) =>
-      status !== "available" ? "cursor-default" : "cursor-pointer",
-    handleFill: (status, isIdAvaiableInArray) =>
-      status !== "available"
+    handleClass(colSeat) {
+      return !this.isSeatAvailable(colSeat)
+        ? "cursor-default"
+        : "cursor-pointer";
+    },
+    handleFill(colSeat, isIdAvailableInArray) {
+      return !this.isSeatAvailable(colSeat)
         ? "#8D8D8F"
-        : isIdAvaiableInArray
+        : isIdAvailableInArray
         ? "#48A43F"
-        : "white",
-    handleStroke: (status, isIdAvaiableInArray) =>
-      status !== "available"
+        : "white";
+    },
+    handleStroke(colSeat, isIdAvailableInArray) {
+      return !this.isSeatAvailable(colSeat)
         ? "#DBDBDB"
-        : isIdAvaiableInArray
+        : isIdAvailableInArray
         ? "#48A43F"
-        : "#8D8D8F",
+        : "#8D8D8F";
+    },
+    isSeatAvailable(seat) {
+      if (!seat || (!seat.fareList && seat.status !== "available")) {
+        return false;
+      }
+
+      if (
+        seat.fareList &&
+        this.boardingPoint?.name &&
+        this.droppingPoint?.name
+      ) {
+        const isStatusMissing = seat.fareList.some(
+          (seat) => !seat.hasOwnProperty("status")
+        );
+
+        if (!isStatusMissing) {
+          return seat.fareList.some(
+            (item) =>
+              item.boardingPoint === this.boardingPoint?.name &&
+              item.droppingPoint === this.droppingPoint?.name &&
+              item.status === "available"
+          );
+        }
+      }
+
+      return seat.status === "available";
+    },
+  },
+
+  watch: {
+    seatArray() {
+      return this.seatArray;
+    },
   },
 };
 </script>
