@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="offerPromoDiv">
     <!-- Offer & Promos Section Mobile -->
     <div
       class="flex justify-center w-full lg:hidden"
@@ -42,13 +42,18 @@
         </div>
         <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
           <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
-            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
-              <img
-                :id="index"
-                :src="offerImg"
-                alt=""
-                class="rounded-[10px] w-[300px] h-[200px]"
-              />
+            <slide
+              v-for="(offerImg, index) in generateOfferImgArrForMobile()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <img
+                  :id="index"
+                  :src="offerImg"
+                  alt=""
+                  class="rounded-[10px] w-[320px] h-[200px]"
+                />
+              </div>
             </slide>
           </hooper>
         </div>
@@ -100,13 +105,18 @@
         </div>
         <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
           <hooper ref="hooperSlide" :settings="hooperSettings">
-            <slide v-for="(offerImg, index) in getOfferImages" :key="index">
-              <img
-                :id="index"
-                :src="offerImg"
-                alt=""
-                class="rounded-2xl w-[280px] lg:w-[350px] xl:w-[460px] h-[164px] lg:h-[200px] xl:h-[260px] pointer-events-none"
-              />
+            <slide
+              v-for="(offerImg, index) in generateOfferImgArrForLarge()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <img
+                  :id="index"
+                  :src="offerImg"
+                  alt=""
+                  class="rounded-2xl w-[460px] h-[260px] pointer-events-none"
+                />
+              </div>
             </slide>
           </hooper>
         </div>
@@ -123,8 +133,14 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
+      windowWidth: 0,
       slideLeft: false,
       slideRight: false,
+      OfferImgMultiplier: 3,
+      imageWidthLarge: 460,
+      imageWidthMobile: 320,
+      gapBetweenImageInPx: 15,
+      breakPoint: 1024,
       hooperSettings: {
         infiniteScroll: true,
         centerMode: false,
@@ -133,39 +149,7 @@ export default {
         transition: 2000,
         wheelControl: false,
         keyboardControl: false,
-        itemsToShow: 5,
-        breakpoints: {
-          2300: {
-            itemsToShow: 4.2,
-          },
-          2100: {
-            itemsToShow: 4,
-          },
-          1900: {
-            itemsToShow: 3.5,
-          },
-          1700: {
-            itemsToShow: 3,
-          },
-          1520: {
-            itemsToShow: 2.7,
-          },
-          1440: {
-            itemsToShow: 2.5,
-          },
-          1280: {
-            itemsToShow: 2.2,
-          },
-          1140: {
-            itemsToShow: 2.3,
-          },
-          1060: {
-            itemsToShow: 2.2,
-          },
-          1024: {
-            itemsToShow: 2,
-          },
-        },
+        itemsToShow: 3,
       },
       hooperSettingsMobile: {
         infiniteScroll: true,
@@ -176,40 +160,19 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 1,
-        breakpoints: {
-          950: {
-            itemsToShow: 2.8,
-          },
-          890: {
-            itemsToShow: 2.7,
-          },
-          850: {
-            itemsToShow: 2.5,
-          },
-          720: {
-            itemsToShow: 2.2,
-          },
-          633: {
-            itemsToShow: 2,
-          },
-          600: {
-            itemsToShow: 1.8,
-          },
-          500: {
-            itemsToShow: 1.5,
-          },
-          420: {
-            itemsToShow: 1.3,
-          },
-          390: {
-            itemsToShow: 1.2,
-          },
-          320: {
-            itemsToShow: 1,
-          },
-        },
       },
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.updateCarousel();
+
+      window.addEventListener("resize", this.updateCarousel);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.updateCarousel);
   },
   methods: {
     prevSlide(action) {
@@ -221,6 +184,7 @@ export default {
       this.slideLeft = true;
       this.slideRight = false;
     },
+
     nextSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlide.slideNext();
@@ -229,6 +193,116 @@ export default {
       }
       this.slideRight = true;
       this.slideLeft = false;
+    },
+
+    updateCarousel() {
+      this.windowWidth = window.innerWidth;
+
+      if (this.windowWidth > this.breakPoint) {
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthLarge
+        );
+        this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
+        this.$refs.hooperSlide.update();
+      } else {
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthMobile
+        );
+        this.$refs.hooperSlideMobile.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideMobile.update();
+      }
+    },
+
+    calculateNumOfPromoToShow(imageSize) {
+      const PADDING = 16;
+      let totalGap;
+      let numberOfItemToShowWithoutGap;
+      let numberOfItemToShowWithGap;
+
+      if (this.windowWidth > this.breakPoint) {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlide.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlide.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      } else {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlideMobile.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          if (integerPart >= 1) {
+            totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+          } else {
+            totalGap = integerPart * this.gapBetweenImageInPx;
+          }
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlideMobile.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      }
+
+      return numberOfItemToShowWithGap;
+    },
+
+    generateOfferImgArrForLarge() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
+    },
+
+    generateOfferImgArrForMobile() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
     },
   },
   components: { Hooper, Slide },

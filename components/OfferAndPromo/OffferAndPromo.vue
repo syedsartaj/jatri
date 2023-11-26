@@ -1,6 +1,8 @@
 <template>
-  <div
-    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex items-center mb-[20px]"
+  <div>
+ <!-- Offer & Promos Section Mobile -->
+ <div
+    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex md:hidden items-center mb-[20px]"
     v-if="getOfferImages && getOfferImages.length"
   >
     <img
@@ -10,14 +12,16 @@
       @click="scrollLeft"
     />
     <div class="overflow-hidden w-full h-[100px]">
-      <hooper ref="hooperSlide" :settings="hooperSettings">
-        <slide v-for="(offerImg, index) in getOfferImages" :key="index">
-          <img
-            :id="index"
-            :src="offerImg"
-            alt=""
-            class="rounded-[8px] w-[175px] h-[100px] pointer-events-none"
-          />
+      <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
+        <slide v-for="(offerImg, index) in generateOfferImgArrForMobile()" :key="index">
+          <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+            <img
+              :id="index"
+              :src="offerImg"
+              alt=""
+              class="rounded-[8px] w-[120px]  pointer-events-none"
+            />
+          </div>
         </slide>
       </hooper>
     </div>
@@ -28,6 +32,44 @@
       @click="scrollRight"
     />
   </div>
+
+
+    <!-- Offer & Promos Section -->
+
+  <div
+    class="p-4 w-full bg-[#FFFFFF] rounded-[10px] hidden md:flex items-center mb-[20px]"
+    v-if="getOfferImages && getOfferImages.length"
+  >
+    <img
+      src="@/assets/images/arrowLeftBlack.svg"
+      alt=""
+      class="h-4 w-4 cursor-pointer mr-[12px]"
+      @click="scrollLeft"
+    />
+    <div class="overflow-hidden w-full h-[100px]">
+      <hooper ref="hooperSlide" :settings="hooperSettings">
+        <slide v-for="(offerImg, index) in generateOfferImgArrForLarge()" :key="index">
+    
+          <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+            <img
+              :id="index"
+              :src="offerImg"
+              alt=""
+              class="rounded-[8px] w-[180px] pointer-events-none"
+            />
+          </div>
+        </slide>
+      </hooper>
+    </div>
+    <img
+      src="@/assets/images/arrowRightBlack.svg"
+      alt=""
+      class="h-4 w-4 cursor-pointer ml-[12px]"
+      @click="scrollRight"
+    />
+  </div>
+  </div>
+   
 </template>
 
 <script>
@@ -42,102 +84,56 @@ export default {
   },
   data() {
     return {
+      windowWidth: 0,
       slideLeft: false,
       slideRight: false,
       imageUrl: "",
+      OfferImgMultiplier: 3,
+      imageWidthLarge: 180,
+      imageWidthMobile: 120,
+      gapBetweenImageInPx: 7,
+      breakPoint: 768,
+
       hooperSettings: {
-        slidesToShow: 1,
-        loop: false,
         infiniteScroll: true,
         centerMode: false,
-        nav: false,
         autoPlay: true,
-        touch: true,
-        wheelControl: false,
-        keyboardControl: false,
-        mouseDrag: true,
-        dragThreshold: 10,
         playSpeed: 3000,
         transition: 2000,
-        breakpoints: {
-          1700: {
-            itemsToShow: 5.2,
-          },
-          1650: {
-            itemsToShow: 4.5,
-          },
-          1450: {
-            itemsToShow: 4,
-          },
-          1400: {
-            itemsToShow: 3.7,
-          },
-          1350: {
-            itemsToShow: 3.5,
-          },
-          1250: {
-            itemsToShow: 3,
-          },
-          1200: {
-            itemsToShow: 2.8,
-          },
-          1100: {
-            itemsToShow: 2.5,
-          },
-          1024: {
-            itemsToShow: 2.2,
-          },
-          1000: {
-            itemsToShow: 4.5,
-          },
-          950: {
-            itemsToShow: 4.2,
-          },
-          900: {
-            itemsToShow: 4,
-          },
-          850: {
-            itemsToShow: 3.8,
-          },
-          800: {
-            itemsToShow: 3.5,
-          },
-          750: {
-            itemsToShow: 3.2,
-          },
-          700: {
-            itemsToShow: 3,
-          },
-          650: {
-            itemsToShow: 2.8,
-          },
-          600: {
-            itemsToShow: 2.5,
-          },
-          550: {
-            itemsToShow: 2.2,
-          },
-          450: {
-            itemsToShow: 1.8,
-          },
-          400: {
-            itemsToShow: 1.5,
-          },
-          360: {
-            itemsToShow: 1.2,
-          },
-          325: {
-            itemsToShow: 1,
-          },
-        },
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 4,
+       
+      },
+      hooperSettingsMobile: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 2.5,
+       
       },
     };
   },
   components: { Hooper, Slide },
 
   mounted() {
-    window.addEventListener("scroll", this.handleScroll);
+    // window.addEventListener("scroll", this.handleScroll);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+
+    this.$nextTick(() => {
+      this.updateCarousel();
+
+      window.addEventListener("resize", this.updateCarousel);
+    });
+  },
+
+  beforeDestroy() {
+    // window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("resize", this.updateCarousel);
   },
   computed: {
     ...mapGetters("common", ["getOfferImages"]),
@@ -152,6 +148,112 @@ export default {
       this.$refs.hooperSlide.slideNext();
       this.slideRight = true;
       this.slideLeft = false;
+    },
+    updateCarousel() {
+      this.windowWidth = window.innerWidth;
+
+      if (this.windowWidth > this.breakPoint) {
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthLarge
+        );
+        this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
+        this.$refs.hooperSlide.update();
+      } else {
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthMobile
+        );
+        this.$refs.hooperSlideMobile.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideMobile.update();
+      }
+    },
+
+    calculateNumOfPromoToShow(imageSize) {
+      const PADDING = 16;
+      let totalGap;
+      let numberOfItemToShowWithoutGap;
+      let numberOfItemToShowWithGap;
+
+      if (this.windowWidth > this.breakPoint) {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlide.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlide.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      } else {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlideMobile.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          if (integerPart >= 1) {
+            totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+          } else {
+            totalGap = integerPart * this.gapBetweenImageInPx;
+          }
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlideMobile.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      }
+      return numberOfItemToShowWithGap;
+    },
+    generateOfferImgArrForLarge() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
+    },
+    generateOfferImgArrForMobile() {
+      if (
+        this.getOfferImages.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.getOfferImages);
+        }
+        return generatedImg;
+      } else {
+        return this.getOfferImages;
+      }
     },
   },
 };
