@@ -17,7 +17,7 @@
             id="promo"
             v-model="promoCode"
             placeholder="Enter Promo Code"
-            class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width"
+            class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-sm placeholder:text-[#676769] text-blackPrimary custom-width"
           />
           <button
             v-if="!showPromoInput"

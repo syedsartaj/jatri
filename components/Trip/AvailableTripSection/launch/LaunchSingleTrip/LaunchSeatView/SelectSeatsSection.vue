@@ -6,18 +6,18 @@
       <p class="text-xs text-[#676769] font-medium">Selected seats</p>
       <p class="text-blackPrimary text-base font-medium">
         <span>{{ selectedSeatsTitleAndPrice.titleArray.join(", ") }}</span> -
-        BDT ({{ selectedSeatsTitleAndPrice.price }})
+        (BDT{{ selectedSeatsTitleAndPrice.price }})
       </p>
     </div>
     <button
       @click="handlePaymentPending"
-      class="bg-corporate rounded-full flex justify-center gap-x-2 items-center text-white text-sm font-medium py-[10px] pl-6 pr-4"
+      class="bg-corporate rounded-full flex justify-center items-center text-white text-sm font-medium py-[10px] pl-6 pr-4"
     >
       Continue
       <img
         src="@/assets/images/icons/arrowRightWhite.svg"
         alt=""
-        class="w-[16px] h-[16px]"
+        class="w-[16px] h-[16px] ml-2"
       />
     </button>
   </div>

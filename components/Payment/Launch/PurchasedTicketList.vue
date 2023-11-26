@@ -42,7 +42,7 @@
     </div>
     <div class="p-4 pb-0" v-if="expandView">
       <table class="w-full text-center">
-        <tbody class="text-xs font-medium text-blackSecondary">
+        <tbody class="text-xs font-normal text-blackSecondary">
           <tr
             v-for="(item, index) in getLaunchBookingData?.invoice?.seatNo"
             :key="index"
@@ -100,14 +100,14 @@
         </tbody>
       </table>
       <div
-        class="w-full flex flex-row justify-between py-[10px] border-dashed border-b-[1px] border-[#DBDBDB] font-medium text-blackPrimary"
+        class="w-full flex flex-row justify-between py-[10px] border-dashed border-b-[1px] border-[#DBDBDB] "
       >
-        <div class="text-xs">Processing fee</div>
-        <div class="text-sm font-medium">BDT {{ serviceCharge }}</div>
+        <div class="text-xs font-normal text-blackSecondary">Processing fee</div>
+        <div class="text-sm font-medium text-blackPrimary">BDT {{ serviceCharge }}</div>
       </div>
       <div class="w-full flex flex-row justify-between py-[10px]">
-        <div class="text-xs">Gateway fee</div>
-        <div class="text-sm font-medium">BDT {{ paymentGatewayCommission }}</div>
+        <div class="text-xs font-normal text-blackSecondary">Gateway fee</div>
+        <div class="text-sm font-medium text-blackPrimary">BDT {{ paymentGatewayCommission }}</div>
       </div>
       <div
         v-if="
@@ -160,7 +160,7 @@
           </p>
         </div>
         <p class="text-base font-medium text-blackPrimary">
-          <span class="font-bold"> BDT {{ getLaunchBookingData.amount }}</span>
+          <span class="font-semibold"> BDT {{ getLaunchBookingData.amount }}</span>
         </p>
       </div>
     </div>
