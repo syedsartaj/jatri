@@ -7,7 +7,7 @@
       <div
         class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b"
       >
-        <p class="text-base lg:text-xl font-medium text-blackPrimary">Promo</p>
+        <p class="text-base sm:text-xl font-medium text-blackPrimary">Promo</p>
       </div>
       <div class="flex gap-x-5 w-full flex-col">
         <div class="flex justify-between w-full p-4">
@@ -17,13 +17,13 @@
             id="promo"
             v-model="promoCode"
             placeholder="Enter Promo Code"
-            class="lg:w-full bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width mr-4"
+            class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-sm placeholder:text-[#676769] text-blackPrimary custom-width"
           />
           <button
             v-if="!showPromoInput"
             @click="() => applyPromo()"
             :disabled="!promoCode"
-            class="w-[150px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
+            class="w-[150px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
           >
             <img
               src="@/assets/images/icons/blueTickBus.svg"
@@ -35,7 +35,7 @@
           <button
             v-if="showPromoInput"
             @click="removePromo"
-            class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
+            class="w-[150px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
           >
             <img
               src="@/assets/images/icons/removePromoIcon.svg"
@@ -183,7 +183,7 @@
             to="/bus/policies#return-and-refund-policy"
             target="_blank"
             class="w-full underline text-[#1E88E5] font-medium"
-            >Cancellation Policy</nuxt-link
+            >Return & refund Policy</nuxt-link
           >
         </span>
       </p>
@@ -501,5 +501,15 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.custom-width {
+  width: calc(100% - 165px);
+}
+
+@media only screen and (min-width: 1024px) {
+  .custom-width {
+    width: calc(100% - 181px);
+  }
 }
 </style>

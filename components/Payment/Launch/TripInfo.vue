@@ -70,7 +70,6 @@
 <script>
 import moment from "moment";
 import { mapGetters } from "vuex";
-import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
 export default {
   data() {
     return {
@@ -80,6 +79,15 @@ export default {
   methods: {
     toggleExpand() {
       this.expandView = !this.expandView;
+    },
+    formatTimeTo12Hour(timeString) {
+      const date = new Date(timeString);
+      const hours = date.getUTCHours();
+      const minutes = date.getUTCMinutes();
+      const ampm = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+
+      return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
     },
   },
   computed: {
@@ -95,10 +103,12 @@ export default {
       const { tripDateTime, boardingPoint } = this.getLaunchBookingData.invoice;
       const parsedDate = moment(tripDateTime);
       const formattedTripDateTime = parsedDate.isValid()
-        ? parsedDate.format("ll") // Adjust the format to your preference
+        ? parsedDate
+            .format("ddd, DD MMMM YYYY")
+            .replace(/([a-zA-Z]+),/, (_, day) => day.slice(0, 3) + ",")
         : "";
 
-      return `${parsedDate.format("hh:mm A")} ${
+      return `${this.formatTimeTo12Hour(tripDateTime)} ${
         boardingPoint ? `. ${boardingPoint}` : ""
       } .${formattedTripDateTime}`;
     },

@@ -10,10 +10,9 @@
     <div class="w-full px-4">
       <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4">
         <div class="w-full mt-4">
-          <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-            Passenger name
-            <span class="text-[#E0293B]">*</span>
-          </h2>
+          <div class="text-base lg:text-xl text-blackPrimary font-medium">
+            Passenger name <span class="text-[#E0293B]">*</span>
+          </div>
           <input
             :class="
               errorOccurred &&
@@ -38,10 +37,10 @@
           </div>
         </div>
         <div class="mt-4 w-full">
-          <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-            Mobile number
-            <span class="text-[#E0293B]">*</span>
-          </h2>
+          <div class="text-base lg:text-xl text-blackPrimary font-medium">
+            Mobile number <span class="text-[#E0293B]">*</span>
+          </div>
+
           <div
             :class="
               errorOccurred &&
@@ -51,11 +50,16 @@
             class="flex h-[48px] mt-2 bg-[#F7F7F7] rounded pl-[16px]"
           >
             <div class="flex items-center shrink-0">
-              <div class="text-sm font-medium tracking-wide text-blackPrimary">
+              <div class="text-sm font-medium tracking-wide text-[#676769]">
                 +880
               </div>
             </div>
             <input
+              :class="
+                errorOccurred &&
+                !isValidPassengerNumber &&
+                'bg-[#FDF0F1]'
+              "
               class="bg-[#f7f7f7] pl-2 pr-4 rounded-lg w-full focus:outline-0 text-sm font-medium placeholder:text-blackSecondary placeholder:font-normal text-blackPrimary"
               type="number"
               minlength="11"
@@ -84,12 +88,12 @@
 
       <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4">
         <div class="mt-4 w-full">
-          <h2
-            class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between items-end"
+          <div
+            class="text-base lg:text-xl text-blackPrimary font-medium flex justify-between items-end"
           >
-            <span>Email </span>
+            <span>Email address</span>
             <span class="text-[#676769] text-xs font-normal">Optional</span>
-          </h2>
+          </div>
           <input
             :class="
               passengerEmail &&
@@ -128,10 +132,9 @@
 
       <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4 pb-4">
         <div class="mt-4 w-full">
-          <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
+          <div class="text-base lg:text-xl text-blackPrimary font-medium">
             Departure time
-          </h2>
-
+          </div>
           <div
             class="bg-[#f7f7f7] px-4 mt-2 rounded-lg w-full h-[48px] flex items-center justify-start"
           >
@@ -203,15 +206,6 @@ export default {
     },
   },
   watch: {
-    getSeatViewData: {
-      immediate: true,
-      handler() {
-        if (this.getSeatViewData?.seatPlan?.droppingPoints) {
-          this.droppingPoint =
-            this.getSeatViewData?.seatPlan?.droppingPoints[0].name;
-        }
-      },
-    },
     boardingPoint() {
       const boardingDateTime =
         this.getSeatViewData.seatPlan.boardingPoints.find(

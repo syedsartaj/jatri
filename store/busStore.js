@@ -415,7 +415,7 @@ export const mutations = {
       seatInfo;
 
     const isStatusMissing = (fareList) =>
-      fareList.some((seat) => !seat.hasOwnProperty("status"));
+      fareList?.some((seat) => !seat.hasOwnProperty("status"));
 
     const getSeatFareList = (deck) => deck?.[rowIndex]?.[colIndex]?.fareList;
 
@@ -433,7 +433,7 @@ export const mutations = {
 
     const updateFareListStatus = (fareList, deck) => {
       let flag = false;
-      fareList.forEach((item, index) => {
+      fareList?.forEach((item, index) => {
         const isMatchingPoints =
           item.boardingPoint === boardingPoint.name &&
           item.droppingPoint === droppingPoint.name;

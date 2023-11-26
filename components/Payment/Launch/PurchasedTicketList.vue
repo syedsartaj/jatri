@@ -42,7 +42,7 @@
     </div>
     <div class="p-4 pb-0" v-if="expandView">
       <table class="w-full text-center">
-        <tbody class="text-xs font-medium text-blackSecondary">
+        <tbody class="text-xs font-normal text-blackSecondary">
           <tr
             v-for="(item, index) in getLaunchBookingData?.invoice?.seatNo"
             :key="index"
@@ -52,24 +52,18 @@
                 : 'border-dashed border-b dark:border-neutral-[#EDEDED]'
             "
           >
-            <td
-              class="whitespace-nowrap pl-[0px] pt-0 p-[10px] dark:border-neutral-[#EDEDED] text-left"
-            >
+            <td class="pl-0 py-2 pr-1 md:pr-2 dark:border-neutral-[#EDEDED] text-left">
               {{ item }}
             </td>
-            <td
-              class="whitespace-nowrap pt-0 p-[10px] dark:border-neutral-[#EDEDED]"
-            >
+            <td class="py-2 px-1 md:px-2 dark:border-neutral-[#EDEDED]">
               {{ getLaunchBookingData?.invoice?.floor }}
             </td>
-            <td
-              class="whitespace-nowrap pt-0 p-[10px] dark:border-neutral-[#EDEDED]"
-            >
+            <td class="py-2 px-1 md:px-2 dark:border-neutral-[#EDEDED]">
               {{ getLaunchBookingData?.invoice?.seatClass }}
             </td>
             <td
               :class="{
-                'whitespace-nowrap pt-0 p-[10px] text-sm text-right text-blackPrimary': true,
+                'py-2 pl-1 md:pl-2 text-sm text-right text-blackPrimary font-medium': true,
                 'pr-0':
                   !isEditable &&
                   getLaunchBookingData?.invoice?.seatNo?.length === 1,
@@ -81,7 +75,6 @@
               v-if="
                 isEditable && getLaunchBookingData?.invoice?.seatNo?.length > 1
               "
-              class="pb-[14px]"
             >
               <div class="w-full flex items-start justify-end">
                 <div
@@ -107,14 +100,14 @@
         </tbody>
       </table>
       <div
-        class="w-full flex flex-row justify-between py-[10px] border-dashed border-b-[1px] border-[#DBDBDB] font-medium text-blackPrimary"
+        class="w-full flex flex-row justify-between py-[10px] border-dashed border-b-[1px] border-[#DBDBDB] "
       >
-        <div class="text-xs">Processing fee</div>
-        <div class="text-sm">BDT {{ serviceCharge }}</div>
+        <div class="text-xs font-normal text-blackSecondary">Processing fee</div>
+        <div class="text-sm font-medium text-blackPrimary">BDT {{ serviceCharge }}</div>
       </div>
       <div class="w-full flex flex-row justify-between py-[10px]">
-        <div class="text-xs">Gateway fee</div>
-        <div class="text-sm">BDT {{ paymentGatewayCommission }}</div>
+        <div class="text-xs font-normal text-blackSecondary">Gateway fee</div>
+        <div class="text-sm font-medium text-blackPrimary">BDT {{ paymentGatewayCommission }}</div>
       </div>
       <div
         v-if="
@@ -123,7 +116,7 @@
         "
         class="flex justify-between py-2"
       >
-        <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight">
+        <p class="text-[11px] leading-4 lg:text-sm font-normal text-blackLight font-medium">
           {{
             getLaunchBookingData?.invoice?.offer?.totalAmount
               ? "Offer"
@@ -167,7 +160,7 @@
           </p>
         </div>
         <p class="text-base font-medium text-blackPrimary">
-          <span class="font-bold"> BDT {{ getLaunchBookingData.amount }}</span>
+          <span class="font-semibold"> BDT {{ getLaunchBookingData.amount }}</span>
         </p>
       </div>
     </div>
