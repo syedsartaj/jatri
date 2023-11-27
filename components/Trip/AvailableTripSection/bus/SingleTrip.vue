@@ -333,9 +333,9 @@
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
               Departure Time
             </h2>
-            <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
+            <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded h-[46px]">
               <p class="text-blackPrimary text-sm font-medium">
-                {{ departureDateTime }}
+                {{ boardingPoint?.scheduleTime ? departureDateTime : "" }}
               </p>
             </div>
           </div>

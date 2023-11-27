@@ -23,7 +23,7 @@
             v-if="!showPromoInput"
             @click="() => applyPromo()"
             :disabled="!promoCode"
-            class="w-[150px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
+            class="w-[140px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
           >
             <img
               src="@/assets/images/icons/blueTickBus.svg"
@@ -35,7 +35,7 @@
           <button
             v-if="showPromoInput"
             @click="removePromo"
-            class="w-[150px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
+            class="w-[140px] lg:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
           >
             <img
               src="@/assets/images/icons/removePromoIcon.svg"
@@ -366,34 +366,34 @@ export default {
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
     applyPromo() {
-      this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
-        const payload = {
-          promoCode: this.promoCode,
-          companyId: this.trip.companyId,
-          tripDateTime: this.trip.tripDateTime,
-          coachType: this.trip.coach.type,
-        };
-        await this.getPromoCodeAction(payload)
-          .then((res) => {
-            if (res.statusCode === 200 && !res.data) {
-              this.totalPromoAmount = 0;
-            } else if (res.statusCode === 200 && res.data) {
-            }
-          })
-          .catch((error) => {
-            this.resetPromo();
-          });
-        if (
-          this.getPromoCode &&
-          this.getPromoCode.minSpend <= this.totalAmount
-        ) {
-          this.totalPromoAmount = this.getPromoCode.amount;
-        } else {
-          this.totalPromoAmount = 0;
-        }
-        this.$nuxt.$loading?.finish();
-      });
+      // this.$nextTick(async () => {
+      //   this.$nuxt.$loading?.start();
+      //   const payload = {
+      //     promoCode: this.promoCode,
+      //     companyId: this.trip.companyId,
+      //     tripDateTime: this.trip.tripDateTime,
+      //     coachType: this.trip.coach.type,
+      //   };
+      //   await this.getPromoCodeAction(payload)
+      //     .then((res) => {
+      //       if (res.statusCode === 200 && !res.data) {
+      //         this.totalPromoAmount = 0;
+      //       } else if (res.statusCode === 200 && res.data) {
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       this.resetPromo();
+      //     });
+      //   if (
+      //     this.getPromoCode &&
+      //     this.getPromoCode.minSpend <= this.totalAmount
+      //   ) {
+      //     this.totalPromoAmount = this.getPromoCode.amount;
+      //   } else {
+      //     this.totalPromoAmount = 0;
+      //   }
+      //   this.$nuxt.$loading?.finish();
+      // });
     },
     calculateSecondsLeft(timeToCompare) {
       const currentTime = moment();
@@ -504,10 +504,10 @@ input[type="number"] {
 }
 
 .custom-width {
-  width: calc(100% - 165px);
+  width: calc(100% - 156px);
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .custom-width {
     width: calc(100% - 181px);
   }
