@@ -6,7 +6,7 @@
       <p class="text-xs text-[#676769] font-medium">Selected seats</p>
       <p class="text-blackPrimary text-base font-medium">
         <span>{{ selectedSeatsTitleAndPrice.titleArray.join(", ") }}</span> -
-        (BDT{{ selectedSeatsTitleAndPrice.price }})
+        (BDT {{ selectedSeatsTitleAndPrice.price }})
       </p>
     </div>
     <button
