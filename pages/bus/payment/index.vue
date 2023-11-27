@@ -252,7 +252,7 @@
             />
             <button
               v-if="!showPromoInput"
-              @click="() => applyPromo()"
+              <!-- @click="() => applyPromo()" -->
               :disabled="!promoCode"
               class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
             >
