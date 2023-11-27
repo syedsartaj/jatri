@@ -26,7 +26,7 @@
     <div
       :class="{
         'text-base lg:text-xl text-blackPrimary font-medium': true,
-        'text-[#676769]': type !== 'payment',
+        'text-[#676769]': type === 'passenger',
       }"
     >
       Payment details
