@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="w-full px-4">
-      <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4">
+      <div class="w-full flex flex-col md:flex-row justify-evenly gap-x-4">
         <div class="w-full mt-4">
           <div class="text-base lg:text-xl text-blackPrimary font-medium">
             Passenger name <span class="text-[#E0293B]">*</span>
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4">
+      <div class="w-full flex flex-col md:flex-row justify-evenly gap-x-4">
         <div class="mt-4 w-full">
           <div
             class="text-base lg:text-xl text-blackPrimary font-medium flex justify-between items-end"
@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <div class="w-full flex flex-col xl:flex-row justify-evenly gap-x-4 pb-4">
+      <div class="w-full flex flex-col md:flex-row justify-evenly gap-x-4 pb-4">
         <div class="mt-4 w-full">
           <div class="text-base lg:text-xl text-blackPrimary font-medium">
             Departure time
