@@ -102,10 +102,9 @@ export default {
     tripInformation() {
       const { tripDateTime, boardingPoint } = this.getLaunchBookingData.invoice;
       const parsedDate = moment(tripDateTime);
+
       const formattedTripDateTime = parsedDate.isValid()
-        ? parsedDate
-            .format("ddd, DD MMMM YYYY")
-            .replace(/([a-zA-Z]+),/, (_, day) => day.slice(0, 3) + ",")
+        ? parsedDate.utc().format("ddd, DD MMMM YYYY")
         : "";
 
       return `${this.formatTimeTo12Hour(tripDateTime)} ${
