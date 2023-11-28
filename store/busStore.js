@@ -75,6 +75,9 @@ export const actions = {
       commit("setBoardingPoints", data.boardingPoints || []);
       commit("setBusCompanies", data.companies || []);
       commit("setBusClasses", data.busClasses || []);
+      if (payload.priceFilterType) {
+        commit("sortedTrip", payload.priceFilterType);
+      }
     } catch (error) {
       const errorMessage = error?.response?.data?.message;
 
@@ -400,8 +403,7 @@ export const mutations = {
         return parseFloat(tempFare); // Parse fare value as number
       };
 
-      const fareDiff =
-        getActualFare(a.seatFare) - getActualFare(b.seatFare);
+      const fareDiff = getActualFare(a.seatFare) - getActualFare(b.seatFare);
 
       if (fareDiff !== 0) {
         return sortBy * fareDiff;

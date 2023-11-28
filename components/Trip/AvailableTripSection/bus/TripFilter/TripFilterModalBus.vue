@@ -362,7 +362,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations("busStore", ["sortedTrip", "updateMobileFilterData"]),
+    ...mapMutations("busStore", ["updateMobileFilterData"]),
     ...mapActions("busStore", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       const newFilterData = {
@@ -408,7 +408,7 @@ export default {
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
-      const { from, to, type, date } = this.$route.query;
+      const { from, to, date } = this.$route.query;
       const formattedDate = new Date(+date).toLocaleString("en-CA", {
         dateStyle: "short",
       });
@@ -451,6 +451,10 @@ export default {
             : this.selectedTime === "12 pm - 06 pm"
             ? "day"
             : "night";
+      }
+
+      if (this.priceFilterType) {
+        payload.priceFilterType = this.priceFilterType;
       }
 
       await this.getPbScheduleDataAction(payload);

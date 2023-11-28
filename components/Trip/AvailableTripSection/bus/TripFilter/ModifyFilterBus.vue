@@ -277,7 +277,6 @@ export default {
     coachType() {
       this.handleFromSubmit();
     },
-
     priceFilterType: {
       immediate: true,
       handler: function (value) {

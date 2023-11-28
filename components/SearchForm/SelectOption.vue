@@ -13,8 +13,8 @@
 
       <div
         v-if="isPassengerForm"
-        :class="isRequired ? '' : 'justify-between'"
-        class="text-base lg:text-xl text-blackPrimary font-medium flex justify-between items-end"
+        :class="(isRequired && !isOptional) ? '' : 'justify-between'"
+        class="text-base lg:text-xl text-blackPrimary font-medium flex items-end"
       >
         <span>{{ label }} </span>
         <span v-if="isOptional" class="text-[#8D8D8F] text-xs">Optional</span>
