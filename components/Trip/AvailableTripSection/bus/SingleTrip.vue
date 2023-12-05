@@ -311,7 +311,7 @@
             <SelectOption
               v-model="boardingPoint"
               :default-option="'Select Your Boarding Location'"
-              :label="'Boarding Point'"
+              :label="'Boarding point'"
               :options="getSeatBoardingPointArray"
               propertyName="name"
               :isRequired="true"
@@ -322,7 +322,7 @@
             <SelectOption
               v-model="droppingPoint"
               :default-option="'Select Your Dropping Location'"
-              :label="'Dropping Point'"
+              :label="'Dropping point'"
               :options="getSeatDroppingPointArray"
               propertyName="name"
               :isRequired="true"
@@ -331,7 +331,7 @@
           </div>
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Departure Time
+              Departure time
             </h2>
             <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded h-[46px]">
               <p class="text-blackPrimary text-sm font-medium">
@@ -392,7 +392,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Discount Amount
+                Discount amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT {{ totalDiscountFare }}
@@ -406,7 +406,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Promo Amount
+                Promo amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT {{ totalPromoAmount }}
@@ -418,7 +418,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Total Fare
+                Total fare
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT
@@ -432,7 +432,7 @@
           <!-- Passenger Information -->
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Passenger Name <span class="text-[#E0293B]">*</span>
+              Passenger name <span class="text-[#E0293B]">*</span>
             </h2>
             <input
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
@@ -444,7 +444,7 @@
 
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Phone No <span class="text-[#E0293B]">*</span>
+              Phone no <span class="text-[#E0293B]">*</span>
             </h2>
             <div class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]">
               <div class="flex items-center shrink-0">
@@ -480,8 +480,11 @@
           </div>
 
           <div class="mt-4">
-            <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Email <span class="text-[#E0293B]">*</span>
+            <h2
+              class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
+            >
+              <span>Email id </span>
+              <span class="text-[#8D8D8F] text-xs">Optional</span>
             </h2>
             <input
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
@@ -493,7 +496,7 @@
 
           <LoaderButton
             :class="
-              !(passengerEmail && isValidPassengerEmail) ||
+              (passengerEmail && !isValidPassengerEmail) ||
               !selectedSeatIds.length ||
               !boardingPoint?.name ||
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
@@ -504,7 +507,7 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              !(passengerEmail && isValidPassengerEmail) ||
+              (passengerEmail && !isValidPassengerEmail) ||
               getLoading ||
               !boardingPoint?.name ||
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
