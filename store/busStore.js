@@ -102,15 +102,17 @@ export const actions = {
       );
       commit("setSeatViewData", data);
       commit("resetPromoCode");
-    } catch (error) {
+    } catch (error) { 
+      const errorMessages = error?.response?.data?.message
+      const errorMsg = Array.isArray(errorMessages) ? errorMessages[0] : errorMessages
       if (error.response && error.response.data.statusCode === 404) {
-        this.$toast.error(error.response.data.message, {
+        this.$toast.error(errorMsg, {
           position: "bottom-right",
           duration: 5000,
         });
         window.location.reload(true);
       }
-      this.$toast.error(error.response.data.message, {
+      this.$toast.error(errorMsg, {
         position: "bottom-right",
         duration: 5000,
       });

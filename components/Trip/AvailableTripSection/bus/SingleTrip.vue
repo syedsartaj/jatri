@@ -1102,7 +1102,7 @@ export default {
               departureTime: this.trip.departureTime,
               sku: this.trip.sku,
               id: this.trip.id,
-              seatPlan: this.trip.seatPlan,
+              seatClass: this.trip.seatClass,
               seatFare: this.trip.seatFare,
               companyId: this.trip.companyId,
               coachType: this.trip.coach.type,
