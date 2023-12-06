@@ -54,7 +54,7 @@
         class="h-4 w-4"
         alt="error"
       />
-      <div>Please select a boarding point.</div>
+      <div>Please select a {{ label.toLowerCase() }}.</div>
     </div>
 
     <div
