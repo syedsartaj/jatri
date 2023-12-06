@@ -294,7 +294,6 @@ export default {
   watch: {
     getTicketNotFoundError() {
       if (this.getTicketNotFoundError) {
-        console.log(this.getTicketNotFoundError);
         this.alertMessage = this.getTicketNotFoundError;
       }
     },

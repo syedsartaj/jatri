@@ -144,9 +144,7 @@
             v-if="trip.seatFare[0].discountFare"
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
-            <span class="line-through text-corporate">{{
-              trip.seatFare[0].fare
-            }}</span>
+            <span class="line-through text-corporate">{{ trip.seatFare }}</span>
             {{ trip.seatFare[0].discountFare }}
             <span class="text-base">TK</span>
           </h2>
@@ -154,7 +152,7 @@
             v-else
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
-            {{ trip.seatFare[0].fare }}
+            {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
@@ -171,13 +169,13 @@
               class="text-xl font-semibold text-blackPrimary"
             >
               <span class="line-through text-corporate">{{
-                trip.seatFare[0].fare
+                trip.seatFare
               }}</span>
               {{ trip.seatFare[0].discountFare }}
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
-              {{ trip.seatFare[0].fare }}
+              {{ trip.seatFare }}
               <span class="text-xs">TK</span>
             </h2>
             <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
@@ -275,6 +273,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="NORMAL_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
 
@@ -286,6 +286,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="LOWER_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
             <div v-if="getUpperDeckSeatArray?.length">
@@ -296,6 +298,8 @@
                 :addSeatHandler="addSeatHandler"
                 :selectedSeatIds="selectedSeatIds"
                 seatType="UPPER_DECK"
+                :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint"
               />
             </div>
           </div>
@@ -307,9 +311,10 @@
             <SelectOption
               v-model="boardingPoint"
               :default-option="'Select Your Boarding Location'"
-              :label="'Boarding Point'"
+              :label="'Boarding point'"
               :options="getSeatBoardingPointArray"
               propertyName="name"
+              :isRequired="true"
             />
             <!-- :options="getSeatBoardingPointArray" -->
           </div>
@@ -317,27 +322,27 @@
             <SelectOption
               v-model="droppingPoint"
               :default-option="'Select Your Dropping Location'"
-              :label="'Dropping Point'"
+              :label="'Dropping point'"
               :options="getSeatDroppingPointArray"
-              :isOptional="true"
               propertyName="name"
+              :isRequired="true"
             />
             <!-- :options="getSeatDroppingPointArray" -->
           </div>
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Departure Time
+              Departure time
             </h2>
-            <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded">
+            <div class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded h-[46px]">
               <p class="text-blackPrimary text-sm font-medium">
-                {{ departureDateTime }}
+                {{ boardingPoint?.scheduleTime ? departureDateTime : "" }}
               </p>
             </div>
           </div>
 
           <!-- Seat Fare Table -->
           <div
-            v-if="selectedSeatsObj.length"
+            v-if="selectedSeatsObjArray.length"
             class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]"
           >
             <div
@@ -387,7 +392,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Discount Amount
+                Discount amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT {{ totalDiscountFare }}
@@ -401,7 +406,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Promo Amount
+                Promo amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT {{ totalPromoAmount }}
@@ -413,7 +418,7 @@
               <p
                 class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
               >
-                Total Fare
+                Total fare
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT
@@ -427,7 +432,7 @@
           <!-- Passenger Information -->
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Passenger Name <span class="text-[#E0293B]">*</span>
+              Passenger name <span class="text-[#E0293B]">*</span>
             </h2>
             <input
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
@@ -439,7 +444,7 @@
 
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
-              Phone No <span class="text-[#E0293B]">*</span>
+              Phone no <span class="text-[#E0293B]">*</span>
             </h2>
             <div class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]">
               <div class="flex items-center shrink-0">
@@ -478,7 +483,7 @@
             <h2
               class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
             >
-              <span>Email ID </span>
+              <span>Email id </span>
               <span class="text-[#8D8D8F] text-xs">Optional</span>
             </h2>
             <input
@@ -491,12 +496,10 @@
 
           <LoaderButton
             :class="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
+              (passengerEmail && !isValidPassengerEmail) ||
               !selectedSeatIds.length ||
-              !boardingPoint ||
+              !boardingPoint?.name ||
+              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -504,12 +507,10 @@
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
             :disabled="
-              (this.passengerEmail &&
-                !this.emailReg.test(
-                  String(this.passengerEmail).toLowerCase()
-                )) ||
+              (passengerEmail && !isValidPassengerEmail) ||
               getLoading ||
-              !boardingPoint ||
+              !boardingPoint?.name ||
+              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
               String(`0${this.passengerPhone}`).length != 11
@@ -551,6 +552,7 @@ import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
+  isValidEmail,
   moduleType,
 } from "../../../../helpers/utils";
 import { handleScrollBehaviour } from "../../../../helpers/utils";
@@ -587,7 +589,7 @@ export default {
       selectedSeatIds: [],
       selectedSeatLabels: [],
       selectedSeatFares: [],
-      selectedSeatsObj: [],
+      selectedSeatsObjArray: [],
       selectedCustomizeSeatList: [],
       totalAmount: 0,
       totalDiscountAmount: 0,
@@ -601,6 +603,8 @@ export default {
       showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
+      oid: null,
+      sid: null,
     };
   },
   computed: {
@@ -618,6 +622,9 @@ export default {
       "getModalBoardingPoints",
       "getDroppingPoints",
     ]),
+    isValidPassengerEmail() {
+      return isValidEmail(this.passengerEmail);
+    },
     departureDateTime() {
       if (this.boardingPoint?.scheduleTime === "") {
         return dateTimeFormat(
@@ -741,7 +748,7 @@ export default {
           this.handleSeatLock(this.selectedSeatLabels.join(","), false);
         }
         this.$emit("selectedTripId", null);
-        this.resetForm();
+        this.resetForm(true);
         return;
       }
       this.$nextTick(async () => {
@@ -784,7 +791,7 @@ export default {
         departureTime: this.trip.departureTime,
         sku: this.trip.sku,
         id: this.trip.id,
-        seatPlan: this.trip.seatPlan,
+        seatClass: this.trip.seatClass,
         seatFare: this.trip.seatFare,
         companyId: this.trip.companyId,
         coachType: this.trip.coach.type,
@@ -803,7 +810,7 @@ export default {
         (label) => label !== seat.seatNo
       );
 
-      this.selectedSeatFares = this.selectedSeatsObj
+      this.selectedSeatFares = this.selectedSeatsObjArray
         .map((item) => {
           if (item.id !== seat.id) {
             return item.fare;
@@ -811,7 +818,7 @@ export default {
         })
         .filter(Boolean);
 
-      this.selectedSeatsObj = this.selectedSeatsObj.filter(
+      this.selectedSeatsObjArray = this.selectedSeatsObjArray.filter(
         (item) => item.id !== seat.id
       );
 
@@ -860,7 +867,7 @@ export default {
     handleSitSelect(seat) {
       this.selectedSeatIds.push(seat.id);
       this.selectedSeatLabels.push(seat.seatNo);
-      this.selectedSeatsObj.push(seat);
+      this.selectedSeatsObjArray.push(seat);
       this.selectedSeatFares.push(seat.fare);
       this.totalAmount += this.getTheCorrectSeatFare(seat);
     },
@@ -877,12 +884,20 @@ export default {
               this.droppingPoint?.name.toLowerCase()
           );
         });
+
+        // according to intercity v2 new model start
+        if (foundIndex !== -1) {
+          this.sid = seat.fareList[foundIndex].sid;
+          this.oid = seat.fareList[foundIndex].oid;
+        }
+        // according to intercity v2 new model end
+
         return foundIndex === -1 ? seat.fare : seat.fareList[foundIndex].fare;
       } else {
         return seat.fare;
       }
     },
-    disCountCalculationOnSitselect(seat) {
+    disCountCalculationOnSitSelect(seat) {
       if (seat.discountFare !== null) {
         this.totalDiscountAmount += seat.fare - seat.discountFare;
         if (
@@ -933,7 +948,7 @@ export default {
           return;
         } else {
           this.handleSitSelect(seat);
-          this.disCountCalculationOnSitselect(seat);
+          this.disCountCalculationOnSitSelect(seat);
           this.promoCalculationOnSitSelect();
         }
       }
@@ -998,10 +1013,7 @@ export default {
       });
     },
     async paymentPendingBlockHandler() {
-      if (
-        this.passengerEmail &&
-        !this.emailReg.test(String(this.passengerEmail).toLowerCase())
-      ) {
+      if (this.passengerEmail && !this.isValidPassengerEmail) {
         this.$toast.error("Enter a valid email address", {
           position: "bottom-right",
           duration: 50000,
@@ -1017,6 +1029,7 @@ export default {
         });
         return;
       }
+      console.log(this.trip?.seatClass);
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
         this.fireGTMEventForAddToCart();
@@ -1026,9 +1039,10 @@ export default {
           transportType: this.trip.transportType,
           transportId: String(this.trip.transportId),
           uid: this.trip.uid,
-          oid: this.getSeatViewData?.seatPlan?.oid || null,
+          oid: this.oid,
+          sid: this.sid,
           id: this.trip.id,
-          seatClass: this.trip?.seatClass[0]?.name || null,
+          seatClass: this.trip?.seatClass,
           sku: String(this.trip.sku),
           fromCity: this.trip.fromCity,
           toCity: this.trip.toCity,
@@ -1088,13 +1102,13 @@ export default {
               departureTime: this.trip.departureTime,
               sku: this.trip.sku,
               id: this.trip.id,
-              seatPlan: this.trip.seatPlan,
+              seatClass: this.trip.seatClass,
               seatFare: this.trip.seatFare,
               companyId: this.trip.companyId,
               coachType: this.trip.coach.type,
               tripDateTime: this.trip.tripDateTime,
             };
-            this.resetForm();
+            this.resetForm(false);
             this.getPbSeatViewAction(seatViewPayload);
             this.$nuxt.$loading?.finish();
           } else {
@@ -1129,14 +1143,16 @@ export default {
       this.$gtm.push(eventData);
     },
 
-    resetForm() {
-      this.passengerName = "";
-      this.passengerPhone = "";
-      this.passengerEmail = "";
+    resetForm(clearUserInfo) {
+      if (clearUserInfo) {
+        this.passengerName = "";
+        this.passengerPhone = "";
+        this.passengerEmail = "";
+      }
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
       this.selectedSeatFares = [];
-      this.selectedSeatsObj = [];
+      this.selectedSeatsObjArray = [];
       this.totalAmount = 0;
       this.totalDiscountAmount = 0;
       this.totalDiscountFare = 0;
@@ -1193,7 +1209,7 @@ export default {
       );
     },
     updateTotalAmount() {
-      this.totalAmount = this.selectedSeatsObj.reduce((total, item) => {
+      this.totalAmount = this.selectedSeatsObjArray.reduce((total, item) => {
         return total + this.getTheCorrectSeatFare(item);
       }, 0);
     },
@@ -1201,7 +1217,7 @@ export default {
       let tempTotalDiscountAmount = 0;
       let tempTotalDiscountFare = 0;
 
-      this.selectedSeatsObj.forEach((seat) => {
+      this.selectedSeatsObjArray.forEach((seat) => {
         if (seat.discountFare !== null) {
           const discountAmount =
             this.getTheCorrectSeatFare(seat) - seat.discountFare;
@@ -1224,6 +1240,63 @@ export default {
       this.totalDiscountAmount = tempTotalDiscountAmount;
       this.totalDiscountFare = tempTotalDiscountFare;
     },
+    actionForNotAvailableSeats(notAvailableSeats) {
+      const notAvailableSeatsLabels = notAvailableSeats.map(
+        (seat) => seat.seatNo
+      );
+
+      if (notAvailableSeatsLabels?.length) {
+        this.handleSeatLock(notAvailableSeatsLabels.join(","), false);
+      }
+    },
+    manageSeatSelectionAndPromoCalculation() {
+      const seats = this.selectedSeatsObjArray.slice();
+
+      // Filter out unavailable seats
+      const notAvailableSeats = seats.filter(
+        (seat) => !this.isSeatAvailable(seat)
+      );
+
+      // Handle action for unavailable seats
+      if (notAvailableSeats.length) {
+        this.actionForNotAvailableSeats(notAvailableSeats);
+      }
+
+      // Filter available seats and perform operations
+      const availableSeats = seats.filter((seat) => this.isSeatAvailable(seat));
+      this.resetForm(false);
+      availableSeats.forEach((seat) => {
+        this.handleSitSelect(seat);
+        this.disCountCalculationOnSitSelect(seat);
+        this.promoCalculationOnSitSelect();
+      });
+    },
+    isSeatAvailable(seat) {
+      if (!seat || (!seat.fareList && seat.status !== "available")) {
+        return false;
+      }
+
+      if (
+        seat.fareList &&
+        this.boardingPoint?.name &&
+        this.droppingPoint?.name
+      ) {
+        const isStatusMissing = seat.fareList.some(
+          (seat) => !seat.hasOwnProperty("status")
+        );
+
+        if (!isStatusMissing) {
+          return seat.fareList.some(
+            (item) =>
+              item.boardingPoint === this.boardingPoint?.name &&
+              item.droppingPoint === this.droppingPoint?.name &&
+              item.status === "available"
+          );
+        }
+      }
+
+      return seat.status === "available";
+    },
   },
   watch: {
     selectedTrip(value) {
@@ -1233,39 +1306,29 @@ export default {
         this.selectedSeatLabels?.length
       ) {
         this.handleSeatLock(this.selectedSeatLabels.join(","), false);
-        this.resetForm();
+        this.resetForm(false);
       }
     },
-    getSeatBoardingPointArray(value) {
-      const findId = value.findIndex((item) => item?.defaultBoarding === true);
-      this.boardingPoint = findId === -1 ? value[0] : value[findId];
+    getSeatBoardingPointArray() {
+      this.boardingPoint = { name: "", id: "" };
     },
-    getSeatDroppingPointArray(value) {
-      let findId = value.findIndex(
-        (item) => item?.defaultDroppingPoint === true
-      );
-      this.droppingPoint = findId === -1 ? { name: "", id: "" } : value[findId];
+    getSeatDroppingPointArray() {
+      this.droppingPoint = { name: "", id: "" };
     },
     getTrips: {
       handler(value) {
-        this.resetForm();
+        this.resetForm(false);
       },
       deep: true,
     },
-    selectedSeatsObj(value) {
+    selectedSeatsObjArray(value) {
       this.updateTheCustomizedSitList(value);
     },
-    boardingPoint(value) {
-      this.updateTheCustomizedSitList(this.selectedSeatsObj);
-      this.updateTotalAmount();
-      this.updateTotalDiscountAndFareAmount();
-      this.promoCalculationOnSitSelect();
+    boardingPoint() {
+      this.manageSeatSelectionAndPromoCalculation();
     },
-    droppingPoint(value) {
-      this.updateTheCustomizedSitList(this.selectedSeatsObj);
-      this.updateTotalAmount();
-      this.updateTotalDiscountAndFareAmount();
-      this.promoCalculationOnSitSelect();
+    droppingPoint() {
+      this.manageSeatSelectionAndPromoCalculation();
     },
   },
 };

@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="flex flex-col justify-between items-start py-[16px]">
-          <p class="text-xs font-normal text-blackLight">ROUTE</p>
+          <p class="text-xs font-medium text-[#8D8D8F]">ROUTE</p>
           <h2
             class="text-xs lg:text-sm font-medium text-blackPrimary text-right mt-1"
           >
@@ -123,7 +123,10 @@
             {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
-          <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
+          <p class="text-xs font-normal text-blackLight mt-1 mb-2">Per Seat</p>
+          <SeatAvailabilityButton
+            :handleSeatAvailableModal="handleSeatAvailableModal"
+          />
         </div>
         <div
           class="w-full md:hidden flex justify-start items-center gap-x-[10px] md:gap-x-3"
@@ -148,18 +151,15 @@
               {{ trip.seatFare[0].fare }}
               <span class="text-xs">TK</span>
             </h2>
-            <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
+            <p class="text-xs font-normal text-blackLight my-1">Per Seat</p>
+            <SeatAvailabilityButton
+              :handleSeatAvailableModal="handleSeatAvailableModal"
+            />
           </div>
         </div>
         <div
           class="w-full flex flex-row justify-end md:justify-start items-center lg:mt-[26px] gap-x-2"
         >
-          <img
-            @click="handleSeatAvailableModal"
-            src="@/assets/images/icons/seatClassIcon.svg"
-            alt=""
-            class="w-[40px] cursor-pointer"
-          />
           <button
             @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
             class="md:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3"
@@ -195,7 +195,7 @@
           class="flex flex-col w-full"
           v-if="getSeatViewData?.seatPlan?.floors?.length"
         >
-          <p class="text-xs lg:text-base font-medium text-blackPrimary">
+          <p class="text-xs md:text-base font-medium text-blackPrimary">
             Select floor<span class="text-[#E0293B] ml-1">*</span>
           </p>
           <div
@@ -220,7 +220,7 @@
           </div>
         </div>
         <div class="flex flex-col w-full" v-if="classList.length">
-          <p class="text-xs lg:text-base font-medium text-blackPrimary">
+          <p class="text-xs md:text-base font-medium text-blackPrimary">
             Seat class <span class="text-[#E0293B] ml-1">*</span>
           </p>
           <div
