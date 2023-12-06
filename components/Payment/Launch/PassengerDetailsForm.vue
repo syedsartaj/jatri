@@ -149,7 +149,8 @@
             :default-option="'Select dropping point'"
             :label="'Dropping point'"
             :options="droppingPoints"
-            :isOptional="true"
+            :isRequired="true"
+            :errorMessage="errorOccurred && !droppingPoint"
             :isPassengerForm="true"
           />
         </div>
@@ -260,7 +261,8 @@ export default {
       } = this;
 
       if (
-        !boardingPoint ||
+        !boardingPoint || 
+        !droppingPoint || 
         passengerName.length < 3 ||
         !isValidPhoneNumber(`0${passengerMobile}`) ||
         !getLaunchBookingData
