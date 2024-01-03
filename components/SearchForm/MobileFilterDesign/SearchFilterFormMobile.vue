@@ -3,6 +3,7 @@
     <div class="grid md:grid-cols-2 gap-[14px] md:gap-4">
       <SearchCityFilterMobile
         v-model="departure"
+        :componentUniqueId="'from-city-input'"
         :defaultValue="departureName"
         :label="'From'"
         :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
@@ -14,6 +15,7 @@
       />
       <SearchCityFilterMobile
         v-model="destination"
+        :componentUniqueId="'to-city-input'"
         :defaultValue="destinationName"
         :label="'To'"
         :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
