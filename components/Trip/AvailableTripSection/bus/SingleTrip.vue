@@ -467,7 +467,7 @@
               <input
                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondary text-blackPrimary"
                 type="number"
-                autocomplete="off"
+                autocomplete="something-to-fool-chrome"
                 minlength="11"
                 maxlength="11"
                 required=""
