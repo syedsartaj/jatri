@@ -19,6 +19,7 @@
           :placeholder="secondHand || defaultOption"
           autocomplete="off"
           type="text"
+          :id="componentUniqueId"
           @keyup="search"
           @focus="handleOnFocus"
         />
@@ -73,6 +74,10 @@ export default {
     SearchErrorToolTip,
   },
   props: {
+    componentUniqueId:{
+      type: String,
+      required: true,
+    },
     label: {
       type: String,
       required: false,
@@ -105,6 +110,7 @@ export default {
       selectedOption: "",
       searchKey: "",
       secondHand: "",
+      
     };
   },
   methods: {
@@ -115,6 +121,9 @@ export default {
       if (this.optionsIsOpen) {
         this.optionsIsOpen = false;
       }
+
+      const inputBox = document.getElementById(this.componentUniqueId);
+      inputBox.blur();
 
       const availableCities =
         (this.searchKey && this.getMatchingCities(this.searchKey)) || [];

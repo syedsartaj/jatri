@@ -141,11 +141,11 @@
             class="w-[30px]"
           />
           <h2
-            v-if="trip.seatFare[0].discountFare"
+            v-if="trip.discountSeatFare"
             class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
           >
             <span class="line-through text-corporate">{{ trip.seatFare }}</span>
-            {{ trip.seatFare[0].discountFare }}
+            {{ trip.discountSeatFare }}
             <span class="text-base">TK</span>
           </h2>
           <h2
@@ -165,13 +165,13 @@
           />
           <div>
             <h2
-              v-if="trip.seatFare[0].discountFare"
+              v-if="trip.discountSeatFare"
               class="text-xl font-semibold text-blackPrimary"
             >
               <span class="line-through text-corporate">{{
                 trip.seatFare
               }}</span>
-              {{ trip.seatFare[0].discountFare }}
+              {{ trip.discountSeatFare }}
               <span class="text-xs">TK</span>
             </h2>
             <h2 v-else class="text-xl font-semibold text-blackPrimary">
@@ -467,6 +467,7 @@
               <input
                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondary text-blackPrimary"
                 type="number"
+                autocomplete="off"
                 minlength="11"
                 maxlength="11"
                 required=""
