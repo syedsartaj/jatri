@@ -3,7 +3,7 @@
  <!-- Offer & Promos Section Mobile -->
  <div
     class="p-4 w-full bg-[#FFFFFF] rounded-[10px] flex md:hidden items-center mb-[20px]"
-    v-if="getOfferImages && getOfferImages.length"
+    v-if="offerPromoGetter && offerPromoGetter.length"
   >
     <img
       src="@/assets/images/arrowLeftBlack.svg"
@@ -13,11 +13,11 @@
     />
     <div class="overflow-hidden w-full h-[100px]">
       <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
-        <slide v-for="(offerImg, index) in generateOfferImgArrForMobile()" :key="index">
+        <slide v-for="(offer, index) in generateOfferImgArrForMobile()" :key="index">
           <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
             <img
               :id="index"
-              :src="offerImg"
+              :src="offer.image"
               alt=""
               class="rounded-[8px] w-[120px]  pointer-events-none"
             />
@@ -38,7 +38,7 @@
 
   <div
     class="p-4 w-full bg-[#FFFFFF] rounded-[10px] hidden md:flex items-center mb-[20px]"
-    v-if="getOfferImages && getOfferImages.length"
+    v-if="offerPromoGetter && offerPromoGetter.length"
   >
     <img
       src="@/assets/images/arrowLeftBlack.svg"
@@ -48,12 +48,12 @@
     />
     <div class="overflow-hidden w-full h-[100px]">
       <hooper ref="hooperSlide" :settings="hooperSettings">
-        <slide v-for="(offerImg, index) in generateOfferImgArrForLarge()" :key="index">
+        <slide v-for="(offer, index) in generateOfferImgArrForLarge()" :key="index">
     
           <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
             <img
               :id="index"
-              :src="offerImg"
+              :src="offer.image"
               alt=""
               class="rounded-[8px] w-[180px] pointer-events-none"
             />
@@ -136,7 +136,7 @@ export default {
     window.removeEventListener("resize", this.updateCarousel);
   },
   computed: {
-    ...mapGetters("common", ["getOfferImages"]),
+    ...mapGetters("common", [ "offerPromoGetter"]),
   },
   methods: {
     scrollLeft() {
@@ -221,7 +221,7 @@ export default {
     },
     generateOfferImgArrForLarge() {
       if (
-        this.getOfferImages.length <
+        this.offerPromoGetter.length <
         this.hooperSettings.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
@@ -230,16 +230,16 @@ export default {
           i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
       }
     },
     generateOfferImgArrForMobile() {
       if (
-        this.getOfferImages.length <
+        this.offerPromoGetter.length <
         this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
@@ -248,11 +248,11 @@ export default {
           i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
       }
     },
   },

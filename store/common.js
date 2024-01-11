@@ -4,7 +4,7 @@ import { ServiceType, handleScrollBehaviour } from "../helpers/utils";
 export const state = () => ({
   citiesOfBus: [],
   citiesOfLaunch: [],
-  offerImages: [],
+  offerPromoList: [],
   blogList: [],
   headLine: [],
   busOperators: [],
@@ -30,7 +30,7 @@ export const getters = {
       ? state.citiesOfBus
       : state.citiesOfLaunch,
   getBlogList: (state) => state.blogList,
-  getOfferImages: (state) => state.offerImages,
+  offerPromoGetter: (state) => state.offerPromoList,
   getHeadLine: (state) => state.headLine,
   getOperatorListData: (state) =>
     state.selectedService === ServiceType.BUS
@@ -65,15 +65,17 @@ export const actions = {
     } catch (error) {}
   },
 
-  async getOfferImageApi({ commit }) {
+  async getOfferPromoApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
-      const imageLinkArr = data?.offerAndPromoImages || [];
-      const tmpOfferImages = [];
-      imageLinkArr.forEach((item) => {
-        tmpOfferImages.push(process.env.OFFER_IMAGE_BASE_URL + item.image);
-      });
-      commit("setOfferImages", tmpOfferImages);
+      let offerPromoList = data?.offerAndPromoImages || [];
+      offerPromoList = offerPromoList.map(
+        (offer) =>{
+          offer.image = process.env.OFFER_IMAGE_BASE_URL + offer.image
+          return offer;
+        }
+      );
+      commit("setOfferPromoList", offerPromoList);
     } catch (error) {
       console.log(error);
     }
@@ -304,9 +306,10 @@ export const mutations = {
   setHeadLine: (state, data) => {
     state.headLine = data;
   },
-  setOfferImages: (state, data) => {
-    state.offerImages = data;
+  setOfferPromoList: (state, data) => {
+    state.offerPromoList = data;
   },
+  
   setOperatorList: (state, { service, data }) => {
     if (service === ServiceType.BUS) {
       state.busOperators = data;

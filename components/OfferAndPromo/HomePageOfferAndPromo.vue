@@ -2,125 +2,210 @@
   <div ref="offerPromoDiv">
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="flex justify-center w-full lg:hidden"
-      v-if="getOfferImages && getOfferImages.length"
+      class="flex justify-center w-full md:hidden"
+      v-if="offerPromoGetter && offerPromoGetter.length"
     >
-      <div class="h-[324px] w-full bg-[#fef2f0]">
-        <div
-          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
-        >
-          <h2
-            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-semibold"
-          >
-            Offers & Promos
+      <div class="w-full">
+        <div class="flex justify-between items-center">
+          <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
+            Best offers for you
           </h2>
-
-          <div class="flex justify-between gap-x-4">
-            <button
-              @click="prevSlide('mobile')"
-              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
-              :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideLeft
-                :fill="slideLeft ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-            <button
-              @click="nextSlide('mobile')"
-              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
-              :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideRight
-                :fill="slideRight ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
+          <div class="pr-4 font-inter text-xs font-medium text-corporate">
+            See all offers
           </div>
         </div>
-        <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
+        <div class="mt-10 ml-4 w-full overflow-hidden">
           <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
             <slide
-              v-for="(offerImg, index) in generateOfferImgArrForMobile()"
+              v-for="(offer, index) in generateOfferImgArrForMobile()"
               :key="index"
             >
               <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <img
-                  :id="index"
-                  :src="offerImg"
-                  alt=""
-                  class="rounded-[10px] w-[320px] h-[200px]"
-                />
+                <div class="customOfferCard-container">
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class="rounded-[10px] w-full"
+                  />
+                  <div class="customOfferCard hidden">dsdadfadfsafsd</div>
+                </div>
+              </div>
+            </slide>
+          </hooper>
+        </div>
+        <div class="flex justify-center gap-x-4 pt-6">
+          <button
+            @click="prevSlide('mobile')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideLeft
+              :fill="slideLeft ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+          <button
+            @click="nextSlide('mobile')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideRight
+              :fill="slideRight ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer & Promos Section Tab -->
+    <div
+      class="justify-center w-full hidden md:flex xl:hidden"
+      v-if="offerPromoGetter && offerPromoGetter.length"
+    >
+      <div class="w-full">
+        <div class="flex justify-between items-center">
+          <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
+            Best offers for you Tab
+          </h2>
+          <div class="pr-4 font-inter text-base font-medium text-corporate">
+            See all offers
+          </div>
+        </div>
+        <div class="mt-10 ml-4 w-full overflow-hidden">
+          <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
+            <slide
+              v-for="(offer, index) in generateOfferImgArrForTab()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container">
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class="rounded-[10px] w-full"
+                  />
+                  <div class="customOfferCard hidden">dsdadfadfsafsd</div>
+                </div>
+              </div>
+            </slide>
+          </hooper>
+        </div>
+        <div class="flex justify-center gap-x-4 pt-6">
+          <button
+            @click="prevSlide('tab')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideLeft
+              :fill="slideLeft ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+          <button
+            @click="nextSlide('tab')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideRight
+              :fill="slideRight ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer & Promos Section Web-->
+    <div
+      class="xl:pt-16 xl:px-[100px] justify-center w-full hidden xl:flex"
+      v-if="offerPromoGetter && offerPromoGetter.length"
+    >
+      <div class="overflow-hidden xl:w-full h-auto">
+        <div class="flex justify-between items-center">
+          <h2
+            class="text-[36px] leading-[44px] font-inter font-semibold text-blackPrimary"
+          >
+            Best offers for you Web
+          </h2>
+          <div class="offer__button--mobile">See all offers</div>
+        </div>
+        <div class="mt-5 xl:mt-[42px] p-2">
+          <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
+            <slide
+              v-for="(offer, index) in generateOfferImgArrForLarge()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container">
+                  
+                  <!-- <svg class="w-full h-[258px] bg-[#eff7fd] rounded-2xl" >
+                    <defs>
+                      <clipPath id="circleView">
+                        <circle cx="600" cy="175" r="345" fill="#fff" />
+                      </clipPath>
+                    </defs>
+                    <image
+                      :xlink:href="offer.image"
+                      clip-path="url(#circleView)"
+                    />
+                  </svg> -->
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class=" rounded-2xl w-full pointer-events-none"
+                  />
+                  <div class="customOfferCard">
+                    <div class="flex justify-between">
+                      <div>
+                        <img
+                          class="min-w-[50px] h-[26px] lg:h-9 lg:w-[74px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div v-if>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </slide>
           </hooper>
         </div>
       </div>
     </div>
-
-    <!-- Offer & Promos Section -->
-
-    <div
-      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pt-[52px] lg:pb-0 justify-center w-full hidden lg:flex"
-      v-if="getOfferImages && getOfferImages.length"
-    >
-      <div
-        class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-auto xl:h-[464px]"
+    <div class="justify-center gap-x-4 pt-8 hidden xl:flex">
+      <button
+        @click="prevSlide('large')"
+        class="rounded-full border w-[28px] xl:w-10 h-[28px] xl:h-10 flex justify-center items-center"
+        :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
       >
-        <div
-          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
-        >
-          <h2
-            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold"
-          >
-            Offers & Promos
-          </h2>
-
-          <div class="flex justify-between gap-x-4">
-            <button
-              @click="prevSlide('large')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
-              :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideLeft
-                :fill="slideLeft ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-            <button
-              @click="nextSlide('large')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
-              :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideRight
-                :fill="slideRight ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-          </div>
-        </div>
-        <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
-          <hooper ref="hooperSlide" :settings="hooperSettings">
-            <slide
-              v-for="(offerImg, index) in generateOfferImgArrForLarge()"
-              :key="index"
-            >
-              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <img
-                  :id="index"
-                  :src="offerImg"
-                  alt=""
-                  class="rounded-2xl w-[460px] h-[260px] pointer-events-none"
-                />
-              </div>
-            </slide>
-          </hooper>
-        </div>
-      </div>
+        <SlideLeft
+          :fill="slideLeft ? '#151414' : '#8D8D8F'"
+          width="8.43"
+          height="13.79"
+        />
+      </button>
+      <button
+        @click="nextSlide('large')"
+        class="rounded-full border w-[28px] xl:w-10 h-[28px] xl:h-10 flex justify-center items-center"
+        :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+      >
+        <SlideRight
+          :fill="slideRight ? '#151414' : '#8D8D8F'"
+          width="8.43"
+          height="13.79"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -133,15 +218,15 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
-      windowWidth: 0,
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
-      imageWidthLarge: 460,
-      imageWidthMobile: 320,
+      imageWidthWeb: 0,
+      imageWidthTab: 0,
+      imageWidthMobile: 0,
       gapBetweenImageInPx: 15,
-      breakPoint: 1024,
-      hooperSettings: {
+      breakPoint: 768,
+      hooperSettingsWeb: {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
@@ -150,6 +235,16 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 3,
+      },
+      hooperSettingsTab: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 2,
       },
       hooperSettingsMobile: {
         infiniteScroll: true,
@@ -164,20 +259,27 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.updateCarousel();
-
-      window.addEventListener("resize", this.updateCarousel);
-    });
+    if (this.offerPromoGetter.length) {
+      // change back to offerPromoGetter.length
+      this.$nextTick(() => {
+        this.updateCarousel();
+        window.addEventListener("resize", this.updateCarousel);
+      });
+    }
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.updateCarousel);
+    if (this.offerPromoGetter.length) {
+      // change back to offerPromoGetter.length
+      window.removeEventListener("resize", this.updateCarousel);
+    }
   },
   methods: {
     prevSlide(action) {
       if (action === "large") {
-        this.$refs.hooperSlide.slidePrev();
+        this.$refs.hooperSlideWeb.slidePrev();
+      } else if ("tab") {
+        this.$refs.hooperSlideTab.slidePrev();
       } else {
         this.$refs.hooperSlideMobile.slidePrev();
       }
@@ -187,7 +289,9 @@ export default {
 
     nextSlide(action) {
       if (action === "large") {
-        this.$refs.hooperSlide.slideNext();
+        this.$refs.hooperSlideWeb.slideNext();
+      } else if ("tab") {
+        this.$refs.hooperSlideTab.slideNext();
       } else {
         this.$refs.hooperSlideMobile.slideNext();
       }
@@ -196,15 +300,24 @@ export default {
     },
 
     updateCarousel() {
-      this.windowWidth = window.innerWidth;
-
-      if (this.windowWidth > this.breakPoint) {
+      if (window.innerWidth >= 1280) {
+        this.imageWidthWeb = window.innerWidth * 0.3;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
-          this.imageWidthLarge
+          this.imageWidthWeb
         );
-        this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
-        this.$refs.hooperSlide.update();
+        this.$refs.hooperSlideWeb.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideWeb.update();
+      } else if (window.innerWidth < 1280 && window.innerWidth >= 768) {
+        this.imageWidthTab = window.innerWidth * 0.43;
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthTab
+        );
+        this.$refs.hooperSlideTab.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideTab.update();
       } else {
+        this.imageWidthMobile = window.innerWidth * 0.8;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthMobile
         );
@@ -220,9 +333,9 @@ export default {
       let numberOfItemToShowWithoutGap;
       let numberOfItemToShowWithGap;
 
-      if (this.windowWidth > this.breakPoint) {
+      if (window.innerWidth >= 1280) {
         numberOfItemToShowWithoutGap =
-          (this.$refs.hooperSlide.$el.clientWidth - PADDING) / imageSize;
+          (this.$refs.hooperSlideWeb.$el.clientWidth - PADDING) / imageSize;
 
         const integerPart = numberOfItemToShowWithoutGap.toFixed();
         const fractionPart = numberOfItemToShowWithoutGap - integerPart;
@@ -237,7 +350,30 @@ export default {
         }
 
         const containerActualWidth =
-          this.$refs.hooperSlide.$el.clientWidth - PADDING - totalGap;
+          this.$refs.hooperSlideWeb.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      } else if (window.innerWidth < 1280 && window.innerWidth >= 768) {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlideTab.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          if (integerPart >= 1) {
+            totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+          } else {
+            totalGap = integerPart * this.gapBetweenImageInPx;
+          }
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlideTab.$el.clientWidth - PADDING - totalGap;
         numberOfItemToShowWithGap = containerActualWidth / imageSize;
       } else {
         numberOfItemToShowWithoutGap =
@@ -269,26 +405,26 @@ export default {
 
     generateOfferImgArrForLarge() {
       if (
-        this.getOfferImages.length <
-        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+        this.offerPromoGetter.length <
+        this.hooperSettingsWeb.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
         for (
           let i = 0;
-          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i < this.hooperSettingsWeb.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
       }
     },
 
-    generateOfferImgArrForMobile() {
+    generateOfferImgArrForTab() {
       if (
-        this.getOfferImages.length <
+        this.offerPromoGetter.length <
         this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
@@ -297,17 +433,90 @@ export default {
           i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
+      }
+    },
+
+    generateOfferImgArrForMobile() {
+      if (
+        this.offerPromoGetter.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
+        }
+        return generatedImg;
+      } else {
+        return this.offerPromoGetter;
       }
     },
   },
   components: { Hooper, Slide },
   computed: {
-    ...mapGetters("common", ["getOfferImages"]),
+    ...mapGetters("common", ["offerPromoGetter"]),
   },
 };
 </script>
+
+<style scoped>
+.customOfferCard-container {
+  --def-transition-duration: 0.4s;
+  
+}
+
+.customOfferCard-container .customOfferCard {
+  visibility: hidden;
+  transform: translate3d(0, 50px, 0);
+  transition: transform;
+  transition-duration: var(--def-transition-duration);
+  transition-timing-function: ease-in-out;
+}
+
+.customOfferCard-container:hover .customOfferCard {
+  visibility: visible;
+  transform: translate3d(0, -50px, 0);
+}
+
+.offer__button--mobile {
+  padding: 0 16px;
+  cursor: pointer;
+  color: #f04935;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.offer__header--mobile {
+  padding: 0 16px;
+  color: #151414;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.custom {
+  clip-path: circle(140% at 160% 90%);
+}
+
+@media (max-width: 411px) {
+}
+
+@media (min-width: 412px) and (max-width: 767px) {
+}
+
+@media (min-width: 768px) {
+}
+</style>
