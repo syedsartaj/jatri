@@ -1,0 +1,8 @@
+
+<template>
+<FeaturedOffers/>
+</template>
+
+
+
+

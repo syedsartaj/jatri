@@ -10,7 +10,7 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div class="pr-4 font-inter text-xs font-medium text-corporate">
+          <div @click="gotoOfferPage" class="pr-4 font-inter text-xs font-medium text-corporate">
             See all offers
           </div>
         </div>
@@ -26,9 +26,53 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-[10px] w-full"
+                    class="rounded-2xl w-full"
                   />
-                  <div class="customOfferCard hidden">dsdadfadfsafsd</div>
+                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                    <div class="flex justify-between items-center p-4">
+                      <div>
+                        <img
+                          class="max-w-[54px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div
+                      @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-6"
+                            alt="copy button"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="px-4 text-xs font-semibold font-inter text-blackPrimary"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                      class="pt-1 md:pt-3 px-4 break-words text-xs font-light not-italic"
+                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']): offer.details"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </slide>
@@ -71,7 +115,7 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you Tab
           </h2>
-          <div class="pr-4 font-inter text-base font-medium text-corporate">
+          <div @click="gotoOfferPage" class="pr-4 font-inter text-base font-medium text-corporate">
             See all offers
           </div>
         </div>
@@ -87,9 +131,53 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-[10px] w-full"
+                    class="rounded-2xl w-full"
                   />
-                  <div class="customOfferCard hidden">dsdadfadfsafsd</div>
+                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                    <div class="flex justify-between items-center p-4">
+                      <div>
+                        <img
+                          class="max-w-[54px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div
+                      @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-6"
+                            alt="copy button"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="px-4 text-sm font-semibold font-inter text-blackPrimary"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                      class="pt-3 px-4 break-words text-sm font-light not-italic"
+                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']): offer.details"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </slide>
@@ -134,7 +222,7 @@
           >
             Best offers for you Web
           </h2>
-          <div class="offer__button--mobile">See all offers</div>
+          <div @click="gotoOfferPage" class="offer__button--mobile">See all offers</div>
         </div>
         <div class="mt-5 xl:mt-[42px] p-2">
           <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
@@ -144,36 +232,55 @@
             >
               <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
                 <div class="customOfferCard-container">
-                  
-                  <!-- <svg class="w-full h-[258px] bg-[#eff7fd] rounded-2xl" >
-                    <defs>
-                      <clipPath id="circleView">
-                        <circle cx="600" cy="175" r="345" fill="#fff" />
-                      </clipPath>
-                    </defs>
-                    <image
-                      :xlink:href="offer.image"
-                      clip-path="url(#circleView)"
-                    />
-                  </svg> -->
                   <img
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class=" rounded-2xl w-full pointer-events-none"
+                    class="rounded-2xl w-full pointer-events-none"
                   />
-                  <div class="customOfferCard">
-                    <div class="flex justify-between">
+                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                    <div class="flex justify-between items-center p-4">
                       <div>
                         <img
-                          class="min-w-[50px] h-[26px] lg:h-9 lg:w-[74px]"
+                          class="max-w-[54px]"
                           src="~/assets/images/header/jatri-logo.svg"
                           alt="jatri logo"
                         />
                       </div>
-                      <div v-if>
-
+                      <div
+                        @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-6"
+                            alt="copy button"
+                          />
+                        </div>
                       </div>
+                    </div>
+
+                    <div
+                      class="px-4 text-base font-semibold font-inter text-blackPrimary"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                      class="pt-3 px-4 break-words text-base font-light not-italic"
+                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']): offer.details"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
                     </div>
                   </div>
                 </div>
@@ -218,6 +325,11 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
+      OFFER_DETAILS_CHAR_LIMIT:{
+        MOBILE: 30,
+        TAB: 40,
+        WEB: 150
+      },
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
@@ -278,7 +390,7 @@ export default {
     prevSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slidePrev();
-      } else if ("tab") {
+      } else if (action ==="tab") {
         this.$refs.hooperSlideTab.slidePrev();
       } else {
         this.$refs.hooperSlideMobile.slidePrev();
@@ -290,7 +402,7 @@ export default {
     nextSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slideNext();
-      } else if ("tab") {
+      } else if (action ==="tab") {
         this.$refs.hooperSlideTab.slideNext();
       } else {
         this.$refs.hooperSlideMobile.slideNext();
@@ -301,7 +413,7 @@ export default {
 
     updateCarousel() {
       if (window.innerWidth >= 1280) {
-        this.imageWidthWeb = window.innerWidth * 0.3;
+        this.imageWidthWeb = window.innerWidth * 0.28;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthWeb
         );
@@ -459,6 +571,23 @@ export default {
         return this.offerPromoGetter;
       }
     },
+
+    gotoOfferPage(){
+      this.$router.push("/bus/offer")
+    },
+    gotoSpecificOffer(id){
+      this.$router.push(`/bus/offer#${id}`)
+
+    },
+    handlePromoCopy(promoCode){
+      navigator.clipboard.writeText(promoCode);
+      navigator.clipboard.readText();
+      this.$toast.success(`Promo Code Copied: ${promoCode}`, {
+              position: "bottom-right",
+              duration: 50000,
+              containerClass: "padding: 100px",
+            });
+    },
   },
   components: { Hooper, Slide },
   computed: {
@@ -470,12 +599,12 @@ export default {
 <style scoped>
 .customOfferCard-container {
   --def-transition-duration: 0.4s;
-  
+  position: relative;
 }
 
 .customOfferCard-container .customOfferCard {
   visibility: hidden;
-  transform: translate3d(0, 50px, 0);
+  transform: translate3d(0, 0, 0);
   transition: transform;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
@@ -483,7 +612,7 @@ export default {
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
-  transform: translate3d(0, -50px, 0);
+  transform: translate3d(0, -100%, 0);
 }
 
 .offer__button--mobile {
@@ -497,18 +626,9 @@ export default {
   line-height: 16px;
 }
 
-.offer__header--mobile {
-  padding: 0 16px;
-  color: #151414;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 32px;
-}
-
-.custom {
-  clip-path: circle(140% at 160% 90%);
+.custom-right-arrow {
+  width: 16px;
+  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
 }
 
 @media (max-width: 411px) {
