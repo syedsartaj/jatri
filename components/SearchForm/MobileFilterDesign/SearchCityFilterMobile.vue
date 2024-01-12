@@ -17,7 +17,7 @@
           }"
           class="w-full rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-normal text-blackPrimary text-left placeholder-blackSecondary searchInput bg-transparent"
           :placeholder="secondHand || defaultOption"
-          autocomplete="off"
+          autocomplete="something-to-fool-chrome"
           type="text"
           :id="componentUniqueId"
           @keyup="search"
