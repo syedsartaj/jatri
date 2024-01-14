@@ -97,14 +97,14 @@
           </div>
         </div>
       </div>
-      <div v-if="offer.details !== 'undefined' && offer.details && offer.details.length > MAX_DETAIILS_LEN && (clickedOffer !==index)" class="px-6 pb-6">
+      <div v-if="(offer.details !== 'undefined') && offer.details && (offer.details.length > MAX_DETAIILS_LEN) && (clickedOffer !==index)" class="px-6 pb-6">
         <div  
         class="text-base font-normal text-blackLight"    
         v-html="offer.details.slice(0, MAX_DETAIILS_LEN).concat(['...'])"
       ></div><span @click="()=>changeClickedOffer(index)" class="font-bold cursor-pointer">See more</span>
       </div>
       
-      <div v-if="offer.details !== 'undefined' && offer.details && offer.details.length < MAX_DETAIILS_LEN || (clickedOffer === index)" class="px-6 pb-6" v-html="offer.details"></div>
+      <div v-if="(offer.details !== 'undefined') && offer.details && (offer.details.length < MAX_DETAIILS_LEN) || (clickedOffer === index)" class="px-6 pb-6" v-html="offer.details"></div>
 
       <div class="flex justify-start items-center pl-6 pb-6">
         <div @click="gotoHomePage"
