@@ -344,7 +344,7 @@ export default {
       hooperSettingsWeb: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: false,
+        autoPlay: true,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
@@ -354,7 +354,7 @@ export default {
       hooperSettingsTab: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: false,
+        autoPlay: true,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
@@ -364,7 +364,7 @@ export default {
       hooperSettingsMobile: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: false,
+        autoPlay: true,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
