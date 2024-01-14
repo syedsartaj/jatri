@@ -38,7 +38,9 @@
               </div>
             </div>
             <div class="pt-4 text-[#151414] font-inter text-xl font-medium">
-              BDT {{ offer.maxPromoAmount }}
+              <!-- For future use -->
+              <!-- {{ offer.amountType === 'percentage' && offer.code ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`: offer.amountType === 'percentage' && !offer.code ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`: offer.amountType === 'fixed' && offer.code ? `BDT ${offer.amount}`: `BDT ${offer.amount}`}} -->
+              {{ offer.amountType === 'percentage' ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`: `BDT ${offer.amount}` }}
             </div>
           </div>
 
@@ -63,6 +65,7 @@
           </div>
 
           <div
+          v-if="offer.code"
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
           >
             <div class="flex justify-start items-center">
@@ -94,14 +97,14 @@
           </div>
         </div>
       </div>
-      <div v-if="offer.details.length > MAX_DETAIILS_LEN && (clickedOffer !==index)" class="px-6 pb-6">
+      <div v-if="offer.details !== 'undefined' && offer.details && offer.details.length > MAX_DETAIILS_LEN && (clickedOffer !==index)" class="px-6 pb-6">
         <div  
         class="text-base font-normal text-blackLight"    
         v-html="offer.details.slice(0, MAX_DETAIILS_LEN).concat(['...'])"
       ></div><span @click="()=>changeClickedOffer(index)" class="font-bold cursor-pointer">See more</span>
       </div>
       
-      <div v-if="offer.details.length < MAX_DETAIILS_LEN || (clickedOffer === index)" class="px-6 pb-6" v-html="offer.details"></div>
+      <div v-if="offer.details !== 'undefined' && offer.details && offer.details.length < MAX_DETAIILS_LEN || (clickedOffer === index)" class="px-6 pb-6" v-html="offer.details"></div>
 
       <div class="flex justify-start items-center pl-6 pb-6">
         <div @click="gotoHomePage"
@@ -149,11 +152,7 @@ export default {
     handlePromoCopy(promoCode){
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
-      this.$toast.success(`Promo Code Copied: ${promoCode}`, {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
+      
     }
   },
   components: {},

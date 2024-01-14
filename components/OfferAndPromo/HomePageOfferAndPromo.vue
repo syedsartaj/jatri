@@ -64,6 +64,7 @@
                     </div>
 
                     <div
+                    v-if="offer.details !== 'undefined' && offer.details "
                       class="pt-1 md:pt-3 px-4 break-words text-[11px] leading-4 font-normal not-italic"
                       v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
@@ -169,6 +170,7 @@
                     </div>
 
                     <div
+                    v-if="offer.details !== 'undefined' && offer.details "
                       class=" pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
                       v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
@@ -236,9 +238,9 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-2xl w-full pointer-events-none"
+                    class="shrink-image rounded-2xl w-full pointer-events-none"
                   />
-                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
                     <div class="flex justify-between items-center p-4">
                       <div>
                         <img
@@ -274,6 +276,7 @@
                     </div>
 
                     <div
+                    v-if="offer.details !== 'undefined' && offer.details"
                       class=" pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
                       v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
@@ -582,11 +585,7 @@ export default {
     handlePromoCopy(promoCode){
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
-      this.$toast.success(`Promo Code Copied: ${promoCode}`, {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
+      
     },
   },
   components: { Hooper, Slide },
@@ -600,22 +599,35 @@ export default {
 .customOfferCard-container {
   --def-transition-duration: 0.4s;
   position: relative;
+  
 }
 
 .customOfferCard-container .customOfferCard {
   visibility: hidden;
   transform: translate3d(0, 0, 0);
-  transition: transform;
+  transition: transform visibility;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
   background-image: url(../../assets/images//offer/offer-card-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
+  
 }
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
   transform: translate3d(0, -100%, 0);
+  
+}
+
+.customOfferCard-container .shrink-image{
+  transform: scale(1);
+  transition: scale;
+  transition-duration: var(--def-transition-duration);
+  transition-timing-function: ease-in-out;
+}
+.customOfferCard-container:hover .shrink-image{
+transform: scale(0.99);
 }
 
 .custom-right-arrow {
@@ -623,9 +635,7 @@ export default {
   filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
 }
 
-div.reset{
-display: inline !important;
-}
+
 
 @media (max-width: 411px) {
 }
