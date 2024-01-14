@@ -9,7 +9,7 @@
       v-for="(offer, index) in offerPromoGetter"
       :id="offer.code"
       :key="index"
-      class="bg-white mb-4"
+      class="bg-white rounded-2xl mb-4"
     >
       <div class="p-6 xl:grid xl:grid-cols-3 xl:gap-4 justify-start">
         <div class=" xl:col-span-2">
@@ -20,7 +20,7 @@
           />
         </div>
         <div
-          class=" flex flex-col pt-4 md:grid md:grid-cols-3 xl:col-span-1 xl:flex xl:flex-col gap-4 xl:justify-start xl:items-center  md:pt-4 xl:pl-8"
+          class=" flex flex-col pt-4 md:grid md:grid-cols-3 xl:col-span-1 xl:flex xl:flex-col gap-4 xl:justify-start xl:items-center  md:pt-4 xl:pt-0 xl:pl-4"
         >
           <div
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
@@ -95,7 +95,8 @@
         </div>
       </div>
       <div v-if="offer.details.length > MAX_DETAIILS_LEN && (clickedOffer !==index)" class="px-6 pb-6">
-        <div      
+        <div  
+        class="text-base font-normal text-blackLight"    
         v-html="offer.details.slice(0, MAX_DETAIILS_LEN).concat(['...'])"
       ></div><span @click="()=>changeClickedOffer(index)" class="font-bold cursor-pointer">See more</span>
       </div>
@@ -106,7 +107,7 @@
         <div @click="gotoHomePage"
           class="bg-corporate cursor-pointer rounded-full max-w-[185px] flex justify-start items-center py-4 pl-8 pr-6"
         >
-          <div class="pr-2 text-white">Book Now</div>
+          <div class="pr-2 text-white text-base xl:text-xl font-medium font-inter ">Book Now</div>
           <div>
             <img
               class="w-4"
