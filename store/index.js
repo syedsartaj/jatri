@@ -6,7 +6,7 @@ export const actions = {
       await Promise.all([
         dispatch("common/getHeadLineApi"),
         dispatch("common/getBlogListApi"),
-        dispatch("common/getOfferImageApi"),
+        dispatch("common/getOfferPromoApi"),
         dispatch("common/getCitiesList", { service: ServiceType.BUS }),
         dispatch("common/getCitiesList", { service: ServiceType.LAUNCH }),
         dispatch("common/getOperatorListApi", { service: ServiceType.BUS }),

@@ -2,125 +2,320 @@
   <div ref="offerPromoDiv">
     <!-- Offer & Promos Section Mobile -->
     <div
-      class="flex justify-center w-full lg:hidden"
-      v-if="getOfferImages && getOfferImages.length"
+      class="flex justify-center w-full md:hidden"
+      v-if="offerPromoGetter && offerPromoGetter.length"
     >
-      <div class="h-[324px] w-full bg-[#fef2f0]">
-        <div
-          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
-        >
-          <h2
-            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-semibold"
-          >
-            Offers & Promos
+      <div class="w-full">
+        <div class="flex justify-between items-center">
+          <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
+            Best offers for you
           </h2>
-
-          <div class="flex justify-between gap-x-4">
-            <button
-              @click="prevSlide('mobile')"
-              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
-              :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideLeft
-                :fill="slideLeft ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-            <button
-              @click="nextSlide('mobile')"
-              class="rounded-full border w-[36px] lg:w-10 h-[36px] lg:h-10 flex justify-center items-center"
-              :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideRight
-                :fill="slideRight ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+            See all offers
           </div>
         </div>
-        <div class="mt-10 ml-4 w-full h-[200px] overflow-hidden">
+        <div class="mt-10 ml-4 w-full overflow-hidden">
           <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
             <slide
-              v-for="(offerImg, index) in generateOfferImgArrForMobile()"
+              v-for="(offer, index) in generateOfferImgArrForMobile()"
               :key="index"
             >
               <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <img
-                  :id="index"
-                  :src="offerImg"
-                  alt=""
-                  class="rounded-[10px] w-[320px] h-[200px]"
-                />
+                <div class="customOfferCard-container">
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class="rounded-2xl w-full"
+                  />
+                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                    <div class="flex justify-between items-center px-4 pt-4">
+                      <div>
+                        <img
+                          class="max-w-[34px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div
+                      @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-4"
+                            alt="copy button"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="px-4 pt-1 text-xs font-semibold font-inter text-blackLight"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                    v-if="offer.details !== 'undefined' && offer.details "
+                      class="pt-1 md:pt-3 px-4 break-words text-[11px] leading-4 font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs cursor-pointer">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </slide>
+          </hooper>
+        </div>
+        <div class="flex justify-center gap-x-4 pt-6">
+          <button
+            @click="prevSlide('mobile')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideLeft
+              :fill="slideLeft ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+          <button
+            @click="nextSlide('mobile')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideRight
+              :fill="slideRight ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer & Promos Section Tab -->
+    <div
+      class="justify-center w-full hidden md:flex xl:hidden"
+      v-if="offerPromoGetter && offerPromoGetter.length"
+    >
+      <div class="w-full">
+        <div class="flex justify-between items-center">
+          <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
+            Best offers for you
+          </h2>
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+            See all offers
+          </div>
+        </div>
+        <div class="mt-10 ml-4 w-full overflow-hidden">
+          <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
+            <slide
+              v-for="(offer, index) in generateOfferImgArrForTab()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container">
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class="rounded-2xl w-full"
+                  />
+                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                    <div class="flex justify-between items-center px-4 pt-4">
+                      <div>
+                        <img
+                          class="max-w-[41px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div
+                      @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-6"
+                            alt="copy button"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="px-4 pt-[2px] text-sm font-semibold font-inter text-blackPrimary"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                    v-if="offer.details !== 'undefined' && offer.details "
+                      class=" pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </slide>
+          </hooper>
+        </div>
+        <div class="flex justify-center gap-x-4 pt-6">
+          <button
+            @click="prevSlide('tab')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideLeft
+              :fill="slideLeft ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+          <button
+            @click="nextSlide('tab')"
+            class="rounded-full border w-[36px] h-[36px] flex justify-center items-center"
+            :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+          >
+            <SlideRight
+              :fill="slideRight ? '#151414' : '#8D8D8F'"
+              width="8.43"
+              height="13.79"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offer & Promos Section Web-->
+    <div
+      class="xl:pt-16 xl:px-[100px] justify-center w-full hidden xl:flex"
+      v-if="offerPromoGetter && offerPromoGetter.length"
+    >
+      <div class="overflow-hidden xl:w-full h-auto">
+        <div class="flex justify-between items-center">
+          <h2
+            class="text-[36px] leading-[44px] font-inter font-semibold text-blackPrimary"
+          >
+            Best offers for you
+          </h2>
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate">See all offers</div>
+        </div>
+        <div class="mt-5 xl:mt-[42px] ">
+          <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
+            <slide
+              v-for="(offer, index) in generateOfferImgArrForLarge()"
+              :key="index"
+            >
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container">
+                  <img
+                    :id="index"
+                    :src="offer.image"
+                    alt=""
+                    class="shrink-image rounded-2xl w-full pointer-events-none"
+                  />
+                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                    <div class="flex justify-between items-center p-4">
+                      <div>
+                        <img
+                          class="max-w-[54px]"
+                          src="~/assets/images/header/jatri-logo.svg"
+                          alt="jatri logo"
+                        />
+                      </div>
+                      <div
+                        @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        v-if="offer.code"
+                      >
+                        <div
+                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                        >
+                          {{ offer.code }}
+                        </div>
+                        <div>
+                          <img
+                            src="~/assets/images/copy-button.svg"
+                            class="w-6"
+                            alt="copy button"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="px-4 text-base font-semibold font-inter text-blackPrimary"
+                    >
+                      {{ offer.description }}
+                    </div>
+
+                    <div
+                    v-if="offer.details !== 'undefined' && offer.details"
+                      class=" pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                    ></div>
+
+                    <div class="px-4 pt-3 flex justify-start items-center">
+                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
+                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </slide>
           </hooper>
         </div>
       </div>
     </div>
-
-    <!-- Offer & Promos Section -->
-
-    <div
-      class="pt-80 p-4 lg:mt-0 lg:p-[100px] lg:pt-[52px] lg:pb-0 justify-center w-full hidden lg:flex"
-      v-if="getOfferImages && getOfferImages.length"
-    >
-      <div
-        class="border border-[#c8c8c8] rounded-[30px] overflow-hidden md:w-full h-auto xl:h-[464px]"
+    <div class="justify-center gap-x-4 pt-8 hidden xl:flex">
+      <button
+        @click="prevSlide('large')"
+        class="rounded-full border w-[28px] xl:w-10 h-[28px] xl:h-10 flex justify-center items-center"
+        :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
       >
-        <div
-          class="flex justify-between items-center pt-6 lg:pt-[56px] px-[18px] lg:px-[60px]"
-        >
-          <h2
-            class="text-2xl lg:text-4xl lg:leading-[44px] text-blackPrimary text-center font-medium lg:font-semibold"
-          >
-            Offers & Promos
-          </h2>
-
-          <div class="flex justify-between gap-x-4">
-            <button
-              @click="prevSlide('large')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
-              :class="slideLeft ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideLeft
-                :fill="slideLeft ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-            <button
-              @click="nextSlide('large')"
-              class="rounded-full border w-[28px] lg:w-10 h-[28px] lg:h-10 flex justify-center items-center"
-              :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
-            >
-              <SlideRight
-                :fill="slideRight ? '#151414' : '#8D8D8F'"
-                width="8.43"
-                height="13.79"
-              />
-            </button>
-          </div>
-        </div>
-        <div class="mt-5 lg:mt-[42px] p-2 h-[260px]">
-          <hooper ref="hooperSlide" :settings="hooperSettings">
-            <slide
-              v-for="(offerImg, index) in generateOfferImgArrForLarge()"
-              :key="index"
-            >
-              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <img
-                  :id="index"
-                  :src="offerImg"
-                  alt=""
-                  class="rounded-2xl w-[460px] h-[260px] pointer-events-none"
-                />
-              </div>
-            </slide>
-          </hooper>
-        </div>
-      </div>
+        <SlideLeft
+          :fill="slideLeft ? '#151414' : '#8D8D8F'"
+          width="8.43"
+          height="13.79"
+        />
+      </button>
+      <button
+        @click="nextSlide('large')"
+        class="rounded-full border w-[28px] xl:w-10 h-[28px] xl:h-10 flex justify-center items-center"
+        :class="slideRight ? 'border-blackPrimary' : 'border-[#8D8D8F]'"
+      >
+        <SlideRight
+          :fill="slideRight ? '#151414' : '#8D8D8F'"
+          width="8.43"
+          height="13.79"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -133,15 +328,20 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
-      windowWidth: 0,
+      OFFER_DETAILS_CHAR_LIMIT:{
+        MOBILE: 110,
+        TAB: 120,
+        WEB: 150
+      },
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
-      imageWidthLarge: 460,
-      imageWidthMobile: 320,
+      imageWidthWeb: 392,
+      imageWidthTab: 320,
+      imageWidthMobile: 286,
       gapBetweenImageInPx: 15,
-      breakPoint: 1024,
-      hooperSettings: {
+      breakPoint: 768,
+      hooperSettingsWeb: {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
@@ -150,6 +350,16 @@ export default {
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 3,
+      },
+      hooperSettingsTab: {
+        infiniteScroll: true,
+        centerMode: false,
+        autoPlay: true,
+        playSpeed: 3000,
+        transition: 2000,
+        wheelControl: false,
+        keyboardControl: false,
+        itemsToShow: 2,
       },
       hooperSettingsMobile: {
         infiniteScroll: true,
@@ -164,20 +374,27 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.updateCarousel();
-
-      window.addEventListener("resize", this.updateCarousel);
-    });
+    if (this.offerPromoGetter.length) {
+      // change back to offerPromoGetter.length
+      this.$nextTick(() => {
+        this.updateCarousel();
+        window.addEventListener("resize", this.updateCarousel);
+      });
+    }
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.updateCarousel);
+    if (this.offerPromoGetter.length) {
+      // change back to offerPromoGetter.length
+      window.removeEventListener("resize", this.updateCarousel);
+    }
   },
   methods: {
     prevSlide(action) {
       if (action === "large") {
-        this.$refs.hooperSlide.slidePrev();
+        this.$refs.hooperSlideWeb.slidePrev();
+      } else if (action ==="tab") {
+        this.$refs.hooperSlideTab.slidePrev();
       } else {
         this.$refs.hooperSlideMobile.slidePrev();
       }
@@ -187,7 +404,9 @@ export default {
 
     nextSlide(action) {
       if (action === "large") {
-        this.$refs.hooperSlide.slideNext();
+        this.$refs.hooperSlideWeb.slideNext();
+      } else if (action ==="tab") {
+        this.$refs.hooperSlideTab.slideNext();
       } else {
         this.$refs.hooperSlideMobile.slideNext();
       }
@@ -196,15 +415,24 @@ export default {
     },
 
     updateCarousel() {
-      this.windowWidth = window.innerWidth;
-
-      if (this.windowWidth > this.breakPoint) {
+      if (window.innerWidth >= 1280) {
+        // this.imageWidthWeb = window.innerWidth * 0.28;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
-          this.imageWidthLarge
+          this.imageWidthWeb
         );
-        this.$refs.hooperSlide.config.itemsToShow = NumberOfItemToShowWithGap;
-        this.$refs.hooperSlide.update();
+        this.$refs.hooperSlideWeb.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideWeb.update();
+      } else if (window.innerWidth < 1280 && window.innerWidth >= 768) {
+        // this.imageWidthTab = window.innerWidth * 0.43;
+        const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
+          this.imageWidthTab
+        );
+        this.$refs.hooperSlideTab.config.itemsToShow =
+          NumberOfItemToShowWithGap;
+        this.$refs.hooperSlideTab.update();
       } else {
+        // this.imageWidthMobile = window.innerWidth * 0.8;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthMobile
         );
@@ -220,9 +448,9 @@ export default {
       let numberOfItemToShowWithoutGap;
       let numberOfItemToShowWithGap;
 
-      if (this.windowWidth > this.breakPoint) {
+      if (window.innerWidth >= 1280) {
         numberOfItemToShowWithoutGap =
-          (this.$refs.hooperSlide.$el.clientWidth - PADDING) / imageSize;
+          (this.$refs.hooperSlideWeb.$el.clientWidth - PADDING) / imageSize;
 
         const integerPart = numberOfItemToShowWithoutGap.toFixed();
         const fractionPart = numberOfItemToShowWithoutGap - integerPart;
@@ -237,7 +465,30 @@ export default {
         }
 
         const containerActualWidth =
-          this.$refs.hooperSlide.$el.clientWidth - PADDING - totalGap;
+          this.$refs.hooperSlideWeb.$el.clientWidth - PADDING - totalGap;
+        numberOfItemToShowWithGap = containerActualWidth / imageSize;
+      } else if (window.innerWidth < 1280 && window.innerWidth >= 768) {
+        numberOfItemToShowWithoutGap =
+          (this.$refs.hooperSlideTab.$el.clientWidth - PADDING) / imageSize;
+
+        const integerPart = numberOfItemToShowWithoutGap.toFixed();
+        const fractionPart = numberOfItemToShowWithoutGap - integerPart;
+
+        if (
+          fractionPart > 0 &&
+          fractionPart * imageSize > integerPart * this.gapBetweenImageInPx
+        ) {
+          totalGap = integerPart * this.gapBetweenImageInPx;
+        } else {
+          if (integerPart >= 1) {
+            totalGap = (integerPart - 1) * this.gapBetweenImageInPx;
+          } else {
+            totalGap = integerPart * this.gapBetweenImageInPx;
+          }
+        }
+
+        const containerActualWidth =
+          this.$refs.hooperSlideTab.$el.clientWidth - PADDING - totalGap;
         numberOfItemToShowWithGap = containerActualWidth / imageSize;
       } else {
         numberOfItemToShowWithoutGap =
@@ -269,26 +520,26 @@ export default {
 
     generateOfferImgArrForLarge() {
       if (
-        this.getOfferImages.length <
-        this.hooperSettings.itemsToShow * this.OfferImgMultiplier
+        this.offerPromoGetter.length <
+        this.hooperSettingsWeb.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
         for (
           let i = 0;
-          i < this.hooperSettings.itemsToShow * this.OfferImgMultiplier;
+          i < this.hooperSettingsWeb.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
       }
     },
 
-    generateOfferImgArrForMobile() {
+    generateOfferImgArrForTab() {
       if (
-        this.getOfferImages.length <
+        this.offerPromoGetter.length <
         this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
       ) {
         let generatedImg = [];
@@ -297,17 +548,102 @@ export default {
           i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
           i++
         ) {
-          generatedImg = generatedImg.concat(this.getOfferImages);
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
         return generatedImg;
       } else {
-        return this.getOfferImages;
+        return this.offerPromoGetter;
       }
+    },
+
+    generateOfferImgArrForMobile() {
+      if (
+        this.offerPromoGetter.length <
+        this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier
+      ) {
+        let generatedImg = [];
+        for (
+          let i = 0;
+          i < this.hooperSettingsMobile.itemsToShow * this.OfferImgMultiplier;
+          i++
+        ) {
+          generatedImg = generatedImg.concat(this.offerPromoGetter);
+        }
+        return generatedImg;
+      } else {
+        return this.offerPromoGetter;
+      }
+    },
+
+    gotoOfferPage(){
+      this.$router.push("/bus/offer")
+    },
+    gotoSpecificOffer(id){
+      this.$router.push(`/bus/offer#${id}`)
+
+    },
+    handlePromoCopy(promoCode){
+      navigator.clipboard.writeText(promoCode);
+      navigator.clipboard.readText();
+      
     },
   },
   components: { Hooper, Slide },
   computed: {
-    ...mapGetters("common", ["getOfferImages"]),
+    ...mapGetters("common", ["offerPromoGetter"]),
   },
 };
 </script>
+
+<style scoped>
+.customOfferCard-container {
+  --def-transition-duration: 0.4s;
+  position: relative;
+  
+}
+
+.customOfferCard-container .customOfferCard {
+  visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transition: transform visibility;
+  transition-duration: var(--def-transition-duration);
+  transition-timing-function: ease-in-out;
+  background-image: url(../../assets/images//offer/offer-card-bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+}
+
+.customOfferCard-container:hover .customOfferCard {
+  visibility: visible;
+  transform: translate3d(0, -100%, 0);
+  
+}
+
+.customOfferCard-container .shrink-image{
+  transform: scale(1);
+  transition: scale;
+  transition-duration: var(--def-transition-duration);
+  transition-timing-function: ease-in-out;
+}
+.customOfferCard-container:hover .shrink-image{
+transform: scale(0.99);
+}
+
+.custom-right-arrow {
+  width: 16px;
+  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
+}
+
+
+
+@media (max-width: 411px) {
+}
+
+@media (min-width: 412px) and (max-width: 767px) {
+}
+
+@media (min-width: 768px) {
+}
+
+</style>
