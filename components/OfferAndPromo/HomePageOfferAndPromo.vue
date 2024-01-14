@@ -10,7 +10,7 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 font-inter text-xs font-medium text-corporate">
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
             See all offers
           </div>
         </div>
@@ -28,11 +28,11 @@
                     alt=""
                     class="rounded-2xl w-full"
                   />
-                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
-                    <div class="flex justify-between items-center p-4">
+                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                    <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
-                          class="max-w-[54px]"
+                          class="max-w-[34px]"
                           src="~/assets/images/header/jatri-logo.svg"
                           alt="jatri logo"
                         />
@@ -43,14 +43,14 @@
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
                         >
                           {{ offer.code }}
                         </div>
                         <div>
                           <img
                             src="~/assets/images/copy-button.svg"
-                            class="w-6"
+                            class="w-4"
                             alt="copy button"
                           />
                         </div>
@@ -58,18 +58,18 @@
                     </div>
 
                     <div
-                      class="px-4 text-xs font-semibold font-inter text-blackPrimary"
+                      class="px-4 pt-1 text-xs font-semibold font-inter text-blackLight"
                     >
                       {{ offer.description }}
                     </div>
 
                     <div
-                      class="pt-1 md:pt-3 px-4 break-words text-xs font-light not-italic"
-                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']): offer.details"
+                      class="pt-1 md:pt-3 px-4 break-words text-[11px] leading-4 font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs cursor-pointer">View details</div>
                       <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
                     </div>
                   </div>
@@ -113,9 +113,9 @@
       <div class="w-full">
         <div class="flex justify-between items-center">
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
-            Best offers for you Tab
+            Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 font-inter text-base font-medium text-corporate">
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
             See all offers
           </div>
         </div>
@@ -134,10 +134,10 @@
                     class="rounded-2xl w-full"
                   />
                   <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
-                    <div class="flex justify-between items-center p-4">
+                    <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
-                          class="max-w-[54px]"
+                          class="max-w-[41px]"
                           src="~/assets/images/header/jatri-logo.svg"
                           alt="jatri logo"
                         />
@@ -148,7 +148,7 @@
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-base font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
                         >
                           {{ offer.code }}
                         </div>
@@ -163,18 +163,18 @@
                     </div>
 
                     <div
-                      class="px-4 text-sm font-semibold font-inter text-blackPrimary"
+                      class="px-4 pt-[2px] text-sm font-semibold font-inter text-blackPrimary"
                     >
                       {{ offer.description }}
                     </div>
 
                     <div
-                      class="pt-3 px-4 break-words text-sm font-light not-italic"
-                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']): offer.details"
+                      class=" pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
                       <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
                     </div>
                   </div>
@@ -220,11 +220,11 @@
           <h2
             class="text-[36px] leading-[44px] font-inter font-semibold text-blackPrimary"
           >
-            Best offers for you Web
+            Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="offer__button--mobile">See all offers</div>
+          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate">See all offers</div>
         </div>
-        <div class="mt-5 xl:mt-[42px] p-2">
+        <div class="mt-5 xl:mt-[42px] ">
           <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
             <slide
               v-for="(offer, index) in generateOfferImgArrForLarge()"
@@ -274,12 +274,12 @@
                     </div>
 
                     <div
-                      class="pt-3 px-4 break-words text-base font-light not-italic"
-                      v-html="offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']): offer.details"
+                      class=" pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
+                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs">View details</div>
+                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
                       <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
                     </div>
                   </div>
@@ -326,22 +326,22 @@ export default {
   data() {
     return {
       OFFER_DETAILS_CHAR_LIMIT:{
-        MOBILE: 30,
-        TAB: 40,
+        MOBILE: 110,
+        TAB: 120,
         WEB: 150
       },
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
-      imageWidthWeb: 0,
-      imageWidthTab: 0,
-      imageWidthMobile: 0,
+      imageWidthWeb: 392,
+      imageWidthTab: 320,
+      imageWidthMobile: 286,
       gapBetweenImageInPx: 15,
       breakPoint: 768,
       hooperSettingsWeb: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: true,
+        autoPlay: false,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
@@ -351,7 +351,7 @@ export default {
       hooperSettingsTab: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: true,
+        autoPlay: false,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
@@ -361,7 +361,7 @@ export default {
       hooperSettingsMobile: {
         infiniteScroll: true,
         centerMode: false,
-        autoPlay: true,
+        autoPlay: false,
         playSpeed: 3000,
         transition: 2000,
         wheelControl: false,
@@ -413,7 +413,7 @@ export default {
 
     updateCarousel() {
       if (window.innerWidth >= 1280) {
-        this.imageWidthWeb = window.innerWidth * 0.28;
+        // this.imageWidthWeb = window.innerWidth * 0.28;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthWeb
         );
@@ -421,7 +421,7 @@ export default {
           NumberOfItemToShowWithGap;
         this.$refs.hooperSlideWeb.update();
       } else if (window.innerWidth < 1280 && window.innerWidth >= 768) {
-        this.imageWidthTab = window.innerWidth * 0.43;
+        // this.imageWidthTab = window.innerWidth * 0.43;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthTab
         );
@@ -429,7 +429,7 @@ export default {
           NumberOfItemToShowWithGap;
         this.$refs.hooperSlideTab.update();
       } else {
-        this.imageWidthMobile = window.innerWidth * 0.8;
+        // this.imageWidthMobile = window.innerWidth * 0.8;
         const NumberOfItemToShowWithGap = this.calculateNumOfPromoToShow(
           this.imageWidthMobile
         );
@@ -608,6 +608,9 @@ export default {
   transition: transform;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
+  background-image: url(../../assets/images//offer/offer-card-bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .customOfferCard-container:hover .customOfferCard {
@@ -615,20 +618,13 @@ export default {
   transform: translate3d(0, -100%, 0);
 }
 
-.offer__button--mobile {
-  padding: 0 16px;
-  cursor: pointer;
-  color: #f04935;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-}
-
 .custom-right-arrow {
   width: 16px;
   filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
+}
+
+div.reset{
+display: inline !important;
 }
 
 @media (max-width: 411px) {
@@ -639,4 +635,5 @@ export default {
 
 @media (min-width: 768px) {
 }
+
 </style>
