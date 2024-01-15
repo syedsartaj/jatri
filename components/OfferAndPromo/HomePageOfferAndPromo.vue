@@ -10,7 +10,10 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate"
+          >
             See all offers
           </div>
         </div>
@@ -28,7 +31,9 @@
                     alt=""
                     class="rounded-2xl w-full"
                   />
-                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full rounded-2xl"
+                  >
                     <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
@@ -38,7 +43,7 @@
                         />
                       </div>
                       <div
-                      @click="handlePromoCopy(offer.code)"
+                        @click="handlePromoCopy(offer.code)"
                         class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
                         v-if="offer.code"
                       >
@@ -64,14 +69,38 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details "
+                      v-if="offer.details !== 'undefined' && offer.details"
                       class="pt-1 md:pt-3 px-4 break-words text-[11px] leading-4 font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.MOBILE
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE)
+                              .concat(['...'])
+                          : offer.details.length >
+                            OFFER_DETAILS_CHAR_LIMIT.MOBILE
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -116,7 +145,10 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate"
+          >
             See all offers
           </div>
         </div>
@@ -134,7 +166,9 @@
                     alt=""
                     class="rounded-2xl w-full"
                   />
-                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl"
+                  >
                     <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
@@ -144,7 +178,7 @@
                         />
                       </div>
                       <div
-                      @click="handlePromoCopy(offer.code)"
+                        @click="handlePromoCopy(offer.code)"
                         class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
                         v-if="offer.code"
                       >
@@ -170,14 +204,37 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details "
-                      class=" pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-if="offer.details !== 'undefined' && offer.details"
+                      class="pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.TAB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB)
+                              .concat(['...'])
+                          : offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -224,9 +281,14 @@
           >
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate">See all offers</div>
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate"
+          >
+            See all offers
+          </div>
         </div>
-        <div class="mt-5 xl:mt-[42px] ">
+        <div class="mt-5 xl:mt-[42px]">
           <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
             <slide
               v-for="(offer, index) in generateOfferImgArrForLarge()"
@@ -240,7 +302,9 @@
                     alt=""
                     class="shrink-image rounded-2xl w-full pointer-events-none"
                   />
-                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full rounded-2xl"
+                  >
                     <div class="flex justify-between items-center p-4">
                       <div>
                         <img
@@ -276,14 +340,37 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details"
-                      class=" pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-if="offer.details !== 'undefined' && offer.details"
+                      class="pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.WEB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB)
+                              .concat(['...'])
+                          : offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -328,11 +415,12 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
-      OFFER_DETAILS_CHAR_LIMIT:{
+      OFFER_DETAILS_CHAR_LIMIT: {
         MOBILE: 110,
         TAB: 120,
-        WEB: 150
+        WEB: 150,
       },
+      descriptionRegex : /<\/p|<\/h|<\/li|<br/,
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
@@ -393,7 +481,7 @@ export default {
     prevSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slidePrev();
-      } else if (action ==="tab") {
+      } else if (action === "tab") {
         this.$refs.hooperSlideTab.slidePrev();
       } else {
         this.$refs.hooperSlideMobile.slidePrev();
@@ -405,7 +493,7 @@ export default {
     nextSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slideNext();
-      } else if (action ==="tab") {
+      } else if (action === "tab") {
         this.$refs.hooperSlideTab.slideNext();
       } else {
         this.$refs.hooperSlideMobile.slideNext();
@@ -575,17 +663,15 @@ export default {
       }
     },
 
-    gotoOfferPage(){
-      this.$router.push("/bus/offer")
+    gotoOfferPage() {
+      this.$router.push("/bus/offer");
     },
-    gotoSpecificOffer(id){
-      this.$router.push(`/bus/offer#${id}`)
-
+    gotoSpecificOffer(id) {
+      this.$router.push(`/bus/offer#${id}`);
     },
-    handlePromoCopy(promoCode){
+    handlePromoCopy(promoCode) {
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
-      
     },
   },
   components: { Hooper, Slide },
@@ -599,7 +685,6 @@ export default {
 .customOfferCard-container {
   --def-transition-duration: 0.4s;
   position: relative;
-  
 }
 
 .customOfferCard-container .customOfferCard {
@@ -611,31 +696,28 @@ export default {
   background-image: url(../../assets/images//offer/offer-card-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
-  
 }
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
   transform: translate3d(0, -100%, 0);
-  
 }
 
-.customOfferCard-container .shrink-image{
+.customOfferCard-container .shrink-image {
   transform: scale(1);
   transition: scale;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
 }
-.customOfferCard-container:hover .shrink-image{
-transform: scale(0.99);
+.customOfferCard-container:hover .shrink-image {
+  transform: scale(0.99);
 }
 
 .custom-right-arrow {
   width: 16px;
-  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
+  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg)
+    brightness(90%) contrast(99%);
 }
-
-
 
 @media (max-width: 411px) {
 }
@@ -645,5 +727,4 @@ transform: scale(0.99);
 
 @media (min-width: 768px) {
 }
-
 </style>
