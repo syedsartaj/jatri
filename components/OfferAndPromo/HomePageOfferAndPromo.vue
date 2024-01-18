@@ -29,7 +29,7 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-2xl w-full"
+                    class="shrink-image rounded-2xl w-full pointer-events-none"
                   />
                   <div
                     class="customOfferCard absolute w-full h-full rounded-2xl"
@@ -44,18 +44,18 @@
                       </div>
                       <div
                         @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-2 pr-[2px] py-[2px]"
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-2"
                         >
                           {{ offer.code }}
                         </div>
                         <div>
                           <img
                             src="~/assets/images/copy-button.svg"
-                            class="w-4"
+                            class="w-5"
                             alt="copy button"
                           />
                         </div>
@@ -164,7 +164,7 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-2xl w-full"
+                    class="shrink-image rounded-2xl w-full"
                   />
                   <div
                     class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl"
@@ -179,18 +179,18 @@
                       </div>
                       <div
                         @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-[6px] py-[2px] pr-[2px]"
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-2"
                         >
                           {{ offer.code }}
                         </div>
                         <div>
                           <img
                             src="~/assets/images/copy-button.svg"
-                            class="w-6"
+                            class="w-5"
                             alt="copy button"
                           />
                         </div>
@@ -315,7 +315,7 @@
                       </div>
                       <div
                         @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-3 pr-1 py-1"
                         v-if="offer.code"
                       >
                         <div
@@ -433,8 +433,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 3,
@@ -443,8 +443,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 2,
@@ -453,8 +453,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 1,
@@ -667,7 +667,7 @@ export default {
       this.$router.push("/bus/offer");
     },
     gotoSpecificOffer(id) {
-      this.$router.push(`/bus/offer#${id}`);
+      this.$router.push({path:`/bus/offer`, query:{promo: id}});
     },
     handlePromoCopy(promoCode) {
       navigator.clipboard.writeText(promoCode);
