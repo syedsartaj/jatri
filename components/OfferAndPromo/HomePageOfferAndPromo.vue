@@ -29,7 +29,7 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="shrink-image rounded-2xl w-full pointer-events-none"
+                    class=" rounded-2xl w-full pointer-events-none"
                   />
                   <div
                     class="customOfferCard absolute w-full h-full rounded-2xl"
@@ -164,7 +164,7 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="shrink-image rounded-2xl w-full"
+                    class=" rounded-2xl w-full"
                   />
                   <div
                     class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl"
@@ -274,7 +274,7 @@
       class="xl:pt-16 xl:px-[100px] justify-center w-full hidden xl:flex"
       v-if="offerPromoGetter && offerPromoGetter.length"
     >
-      <div class="overflow-hidden xl:w-full h-auto">
+      <div class="overflow-hidden xl:w-full h-auto ">
         <div class="flex justify-between items-center">
           <h2
             class="text-[36px] leading-[44px] font-inter font-semibold text-blackPrimary"
@@ -288,19 +288,19 @@
             See all offers
           </div>
         </div>
-        <div class="mt-5 xl:mt-[42px]">
+        <div class="mt-5 xl:mt-[42px] ">
           <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
             <slide
               v-for="(offer, index) in generateOfferImgArrForLarge()"
               :key="index"
             >
-              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <div class="customOfferCard-container">
+              <div  :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container ">
                   <img
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="shrink-image rounded-2xl w-full pointer-events-none"
+                    class=" rounded-2xl w-full pointer-events-none"
                   />
                   <div
                     class="customOfferCard absolute w-full h-full rounded-2xl"
@@ -685,33 +685,32 @@ export default {
 .customOfferCard-container {
   --def-transition-duration: 0.4s;
   position: relative;
+
+}
+
+.med{
+  -webkit-backface-visibility: hidden;
+  backface-visibility:hidden;
 }
 
 .customOfferCard-container .customOfferCard {
   visibility: hidden;
   transform: translate3d(0, 0, 0);
-  transition: transform visibility;
+  transition: transform visibility scale;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
   background-image: url(../../assets/images//offer/offer-card-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
+  
 }
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
-  transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0) scale(1.01);
+ 
 }
 
-.customOfferCard-container .shrink-image {
-  transform: scale(1);
-  transition: scale;
-  transition-duration: var(--def-transition-duration);
-  transition-timing-function: ease-in-out;
-}
-.customOfferCard-container:hover .shrink-image {
-  transform: scale(0.99);
-}
 
 .custom-right-arrow {
   width: 16px;
