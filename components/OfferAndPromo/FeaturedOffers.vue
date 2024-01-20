@@ -141,7 +141,7 @@ export default {
   
     setTimeout(() => {
       const el = document.getElementById(this.$route.query.promo);
-    document.getElementById(this.$route.query.promo).scrollIntoView({ behavior: "smooth", block: "start"});
+      window.scrollTo({top: el.offsetTop - 80, behavior: "smooth"});
     }, 1);
     
     },
