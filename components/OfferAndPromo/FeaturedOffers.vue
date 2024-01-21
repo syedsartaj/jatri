@@ -8,6 +8,7 @@
     <div
       v-for="(offer, index) in offerPromoGetter"
       :id="offer.code"
+      :ref="offer.code"
       :key="index"
       class="bg-white rounded-2xl mb-4"
     >
@@ -136,7 +137,14 @@ export default {
       clickedOffer: undefined,
     };
   },
-  mounted() {},
+  mounted() {
+  
+    setTimeout(() => {
+      const el = document.getElementById(this.$route.query.promo);
+      window.scrollTo({top: el.offsetTop - 80, behavior: "smooth"});
+    }, 1);
+    
+    },
 
   beforeDestroy() {},
   methods: {

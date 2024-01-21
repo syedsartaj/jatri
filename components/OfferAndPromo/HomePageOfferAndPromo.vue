@@ -10,7 +10,10 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate"
+          >
             See all offers
           </div>
         </div>
@@ -26,9 +29,11 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-2xl w-full"
+                    class=" rounded-2xl w-full pointer-events-none"
                   />
-                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full rounded-2xl"
+                  >
                     <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
@@ -38,19 +43,19 @@
                         />
                       </div>
                       <div
-                      @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-2 pr-[2px] py-[2px]"
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-2"
                         >
                           {{ offer.code }}
                         </div>
                         <div>
                           <img
                             src="~/assets/images/copy-button.svg"
-                            class="w-4"
+                            class="w-5"
                             alt="copy button"
                           />
                         </div>
@@ -64,14 +69,38 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details "
+                      v-if="offer.details !== 'undefined' && offer.details"
                       class="pt-1 md:pt-3 px-4 break-words text-[11px] leading-4 font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.MOBILE ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.MOBILE
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.MOBILE)
+                              .concat(['...'])
+                          : offer.details.length >
+                            OFFER_DETAILS_CHAR_LIMIT.MOBILE
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -116,7 +145,10 @@
           <h2 class="pl-4 font-inter text-2xl font-semibold text-blackPrimary">
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate">
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-xs font-medium text-corporate"
+          >
             See all offers
           </div>
         </div>
@@ -132,9 +164,11 @@
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="rounded-2xl w-full"
+                    class=" rounded-2xl w-full"
                   />
-                  <div class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full bg-[#eff7fd] rounded-2xl"
+                  >
                     <div class="flex justify-between items-center px-4 pt-4">
                       <div>
                         <img
@@ -144,19 +178,19 @@
                         />
                       </div>
                       <div
-                      @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        @click="handlePromoCopy(offer.code)"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-[6px] py-[2px] pr-[2px]"
                         v-if="offer.code"
                       >
                         <div
-                          class="text-blackPrimary font-inter text-sm font-medium pr-1"
+                          class="text-blackPrimary font-inter text-sm font-medium pr-2"
                         >
                           {{ offer.code }}
                         </div>
                         <div>
                           <img
                             src="~/assets/images/copy-button.svg"
-                            class="w-6"
+                            class="w-5"
                             alt="copy button"
                           />
                         </div>
@@ -170,14 +204,37 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details "
-                      class=" pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-if="offer.details !== 'undefined' && offer.details"
+                      class="pt-[2px] px-4 break-words text-xs text-blackLight font-inter font-normal not-italic"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.TAB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.TAB)
+                              .concat(['...'])
+                          : offer.details.length > OFFER_DETAILS_CHAR_LIMIT.TAB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click="gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -217,14 +274,19 @@
       class="xl:pt-16 xl:px-[100px] justify-center w-full hidden xl:flex"
       v-if="offerPromoGetter && offerPromoGetter.length"
     >
-      <div class="overflow-hidden xl:w-full h-auto">
+      <div class="overflow-hidden xl:w-full h-auto ">
         <div class="flex justify-between items-center">
           <h2
             class="text-[36px] leading-[44px] font-inter font-semibold text-blackPrimary"
           >
             Best offers for you
           </h2>
-          <div @click="gotoOfferPage" class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate">See all offers</div>
+          <div
+            @click="gotoOfferPage"
+            class="pr-4 cursor-pointer font-inter text-base font-medium text-corporate"
+          >
+            See all offers
+          </div>
         </div>
         <div class="mt-5 xl:mt-[42px] ">
           <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
@@ -232,15 +294,17 @@
               v-for="(offer, index) in generateOfferImgArrForLarge()"
               :key="index"
             >
-              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                <div class="customOfferCard-container">
+              <div  :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <div class="customOfferCard-container ">
                   <img
                     :id="index"
                     :src="offer.image"
                     alt=""
-                    class="shrink-image rounded-2xl w-full pointer-events-none"
+                    class=" rounded-2xl w-full pointer-events-none"
                   />
-                  <div class="customOfferCard absolute w-full h-full  rounded-2xl">
+                  <div
+                    class="customOfferCard absolute w-full h-full rounded-2xl"
+                  >
                     <div class="flex justify-between items-center p-4">
                       <div>
                         <img
@@ -251,7 +315,7 @@
                       </div>
                       <div
                         @click="handlePromoCopy(offer.code)"
-                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full p-1"
+                        class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-3 pr-1 py-1"
                         v-if="offer.code"
                       >
                         <div
@@ -276,14 +340,37 @@
                     </div>
 
                     <div
-                    v-if="offer.details !== 'undefined' && offer.details"
-                      class=" pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
-                      v-html="offer.details.split('</')[0].length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB).concat(['...']):offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB ? offer.details.split('</')[0].concat(['...']): offer.details.split('</')[0]"
+                      v-if="offer.details !== 'undefined' && offer.details"
+                      class="pt-3 px-4 break-words text-sm text-blackLight font-inter font-normal not-italic"
+                      v-html="
+                        offer.details.split(descriptionRegex)[0].length >
+                        OFFER_DETAILS_CHAR_LIMIT.WEB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .slice(0, OFFER_DETAILS_CHAR_LIMIT.WEB)
+                              .concat(['...'])
+                          : offer.details.length > OFFER_DETAILS_CHAR_LIMIT.WEB
+                          ? offer.details
+                              .split(descriptionRegex)[0]
+                              .concat(['...'])
+                          : offer.details.split(descriptionRegex)[0]
+                      "
                     ></div>
 
                     <div class="px-4 pt-3 flex justify-start items-center">
-                      <div @click=" gotoSpecificOffer(offer.code)" class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer">View details</div>
-                      <div><img class="  custom-right-arrow" src="~/assets/images/arrowRightBlack.svg" alt="" /></div>
+                      <div
+                        @click="gotoSpecificOffer(offer.code)"
+                        class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
+                      >
+                        View details
+                      </div>
+                      <div>
+                        <img
+                          class="custom-right-arrow"
+                          src="~/assets/images/arrowRightBlack.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -328,11 +415,12 @@ export default {
   name: "HomePageOfferAndPromo",
   data() {
     return {
-      OFFER_DETAILS_CHAR_LIMIT:{
+      OFFER_DETAILS_CHAR_LIMIT: {
         MOBILE: 110,
         TAB: 120,
-        WEB: 150
+        WEB: 150,
       },
+      descriptionRegex : /<\/p|<\/h|<\/li|<br/,
       slideLeft: false,
       slideRight: false,
       OfferImgMultiplier: 3,
@@ -345,8 +433,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 3,
@@ -355,8 +443,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 2,
@@ -365,8 +453,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 1,
@@ -393,7 +481,7 @@ export default {
     prevSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slidePrev();
-      } else if (action ==="tab") {
+      } else if (action === "tab") {
         this.$refs.hooperSlideTab.slidePrev();
       } else {
         this.$refs.hooperSlideMobile.slidePrev();
@@ -405,7 +493,7 @@ export default {
     nextSlide(action) {
       if (action === "large") {
         this.$refs.hooperSlideWeb.slideNext();
-      } else if (action ==="tab") {
+      } else if (action === "tab") {
         this.$refs.hooperSlideTab.slideNext();
       } else {
         this.$refs.hooperSlideMobile.slideNext();
@@ -575,17 +663,15 @@ export default {
       }
     },
 
-    gotoOfferPage(){
-      this.$router.push("/bus/offer")
+    gotoOfferPage() {
+      this.$router.push("/bus/offer");
     },
-    gotoSpecificOffer(id){
-      this.$router.push(`/bus/offer#${id}`)
-
+    gotoSpecificOffer(id) {
+      this.$router.push({path:`/bus/offer`, query:{promo: id}});
     },
-    handlePromoCopy(promoCode){
+    handlePromoCopy(promoCode) {
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
-      
     },
   },
   components: { Hooper, Slide },
@@ -599,13 +685,18 @@ export default {
 .customOfferCard-container {
   --def-transition-duration: 0.4s;
   position: relative;
-  
+
+}
+
+.med{
+  -webkit-backface-visibility: hidden;
+  backface-visibility:hidden;
 }
 
 .customOfferCard-container .customOfferCard {
   visibility: hidden;
   transform: translate3d(0, 0, 0);
-  transition: transform visibility;
+  transition: transform visibility scale;
   transition-duration: var(--def-transition-duration);
   transition-timing-function: ease-in-out;
   background-image: url(../../assets/images//offer/offer-card-bg.png);
@@ -616,26 +707,16 @@ export default {
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
-  transform: translate3d(0, -100%, 0);
-  
+  transform: translate3d(0, -100%, 0) scale(1.01);
+ 
 }
 
-.customOfferCard-container .shrink-image{
-  transform: scale(1);
-  transition: scale;
-  transition-duration: var(--def-transition-duration);
-  transition-timing-function: ease-in-out;
-}
-.customOfferCard-container:hover .shrink-image{
-transform: scale(0.99);
-}
 
 .custom-right-arrow {
   width: 16px;
-  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg) brightness(90%) contrast(99%);
+  filter: invert(52%) sepia(91%) saturate(3086%) hue-rotate(187deg)
+    brightness(90%) contrast(99%);
 }
-
-
 
 @media (max-width: 411px) {
 }
@@ -645,5 +726,4 @@ transform: scale(0.99);
 
 @media (min-width: 768px) {
 }
-
 </style>

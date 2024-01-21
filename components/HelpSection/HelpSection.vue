@@ -22,7 +22,8 @@
         </p>
       </div>
       <div class="w-full lg:w-[710px] mt-6 lg:mt-0">
-        <Accordion
+        <ClientOnly>
+          <Accordion
           v-for="(data, i) in accordionData"
           :accordion="data"
           :index="i"
@@ -30,6 +31,8 @@
           :open="data.open"
           @toggleOpen="toggleOpen"
         />
+        </ClientOnly>
+        
       </div>
     </div>
   </div>
