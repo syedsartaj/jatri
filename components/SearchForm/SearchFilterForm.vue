@@ -27,7 +27,7 @@
           :label="'From'"
           :default-option="'Choose a location'"
           :allow-filter="true"
-          :options="getCities"
+          :options="cityListWithoutToCity"
           :errorOccured="errorOccured"
         />
         <SearchCityFilter
@@ -36,7 +36,7 @@
           :label="'To'"
           :default-option="'Choose a location'"
           :allow-filter="true"
-          :options="getCities"
+          :options="cityListWithoutFromCity"
           :errorOccured="errorOccured"
         />
         <SearchBusFilter
@@ -105,7 +105,6 @@ export default {
       destinationName: "",
       departingDate: new Date().toLocaleString("en-CA", { dateStyle: "short" }),
       coachType: "all",
-      // passengerName: "",
       coachTypes: [
         { city_name: "ac" },
         { city_name: "non-ac" },
@@ -113,6 +112,7 @@ export default {
       ],
       selectedTime: "",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
+      
     };
   },
   computed: {
@@ -125,6 +125,19 @@ export default {
       const path = this.$route.path.toString();
       return path.includes("/trip");
     },
+
+    cityListWithoutToCity() {
+      return this.getCities.filter((city) => {
+        return city.city_name.toLowerCase() !== this.destination.toLowerCase();
+      })
+    },
+
+    cityListWithoutFromCity() {
+      return this.getCities.filter((city) => {
+        return city.city_name.toLowerCase() !== this.departure.toLowerCase();
+      })
+    },
+
   },
   methods: {
     
