@@ -469,7 +469,7 @@ export default {
         selectedTime: null,
         selectedBusClass: null,
         priceFilterType: null,
-        coachType: "all",
+        coachType: this.$route.query.type,
       };
       this.updateMobileFilterData(newFilterData);
       this.handleFromSubmit();
