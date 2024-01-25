@@ -116,11 +116,13 @@ export default {
     };
   },
   computed: {
+    
     ...mapGetters("common", [
       "getSelectedServiceType",
       "getCities",
       "getHeadLine",
     ]),
+
     isTripPage() {
       const path = this.$route.path.toString();
       return path.includes("/trip");
