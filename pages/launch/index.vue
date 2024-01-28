@@ -11,6 +11,7 @@
     <PopularRouteSection />
     <Blog />
     <HelpSection />
+    <GlobalFooter />
   </div>
 </template>
 

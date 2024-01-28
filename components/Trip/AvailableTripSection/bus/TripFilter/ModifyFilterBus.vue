@@ -274,9 +274,9 @@ export default {
   },
 
   watch: {
-    coachType() {
-      this.handleFromSubmit();
-    },
+    // coachType() {
+    //   this.handleFromSubmit();
+    // },
     priceFilterType: {
       immediate: true,
       handler: function (value) {
@@ -303,6 +303,8 @@ export default {
     ...mapActions("busStore", ["getPbScheduleDataAction"]),
     setCoachtype(type) {
       this.coachType = type;
+      this.handleTripFilter();
+
     },
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
@@ -338,7 +340,7 @@ export default {
       }
 
       payload.date = formattedDate;
-      payload.busType = type;
+      payload.busType = this.coachType;
 
       if (this.boardingPoint) {
         payload.boardingPoint = this.boardingPoint;
@@ -368,7 +370,7 @@ export default {
       this.selectedTime = null;
       this.selectedBusClass = null;
       this.priceFilterType = null;
-      this.coachType = "all";
+      this.coachType = this.$route.query.type;
       this.handleTripFilter();
     },
     setTime(time) {

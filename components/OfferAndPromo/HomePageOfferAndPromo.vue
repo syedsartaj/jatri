@@ -271,7 +271,7 @@
 
     <!-- Offer & Promos Section Web-->
     <div
-      class="xl:pt-16 xl:px-[100px] justify-center w-full hidden xl:flex"
+      class="xl:pt-16 xl:px-[100px] justify-center w-full  hidden xl:flex"
       v-if="offerPromoGetter && offerPromoGetter.length"
     >
       <div class="overflow-hidden xl:w-full h-auto ">

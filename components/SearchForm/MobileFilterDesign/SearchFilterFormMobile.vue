@@ -9,7 +9,7 @@
         :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
         :default-option="'From city or your location'"
         :allow-filter="true"
-        :options="getCities"
+        :options="cityListWithoutToCity"
         :errorOccured="errorOccured"
         ref="departure"
       />
@@ -21,7 +21,7 @@
         :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
         :default-option="'To city or your destination'"
         :allow-filter="true"
-        :options="getCities"
+        :options="cityListWithoutFromCity"
         :errorOccured="errorOccured"
         ref="destination"
       />
@@ -99,6 +99,18 @@ export default {
   computed: {
     ...mapGetters("common", ["getCities"]),
     ...mapGetters("common", ["getSelectedServiceType"]),
+
+    cityListWithoutToCity() {
+      return this.getCities.filter((city) => {
+        return city.city_name.toLowerCase() !== this.destination.toLowerCase();
+      })
+    },
+
+    cityListWithoutFromCity() {
+      return this.getCities.filter((city) => {
+        return city.city_name.toLowerCase() !== this.departure.toLowerCase();
+      })
+    },
   },
   methods: {
     handleToastMessage(message) {
