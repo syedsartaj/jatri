@@ -15,7 +15,7 @@
         behavior="scroll"
       />
       <Nuxt />
-      <GlobalFooter />
+      <GlobalFooter v-if="renderGlobalFooter" />
     </div>
 
     <FullBusReserveModal v-if="getBusReserveModalOpenStatus" />
@@ -57,6 +57,14 @@ export default {
       }
       return false;
     },
+// All homepages need footer with same parent for css to sticky to work.
+    renderGlobalFooter(){ 
+      const path = this.$route.path.toString();
+
+      if(path === "/" || path === "/bus" || path === "/launch") return false;
+      return true;
+    }
+
   },
   methods: {
     liveChat() {
