@@ -9,7 +9,7 @@
       src="@/assets/images/arrowLeftBlack.svg"
       alt=""
       class="h-4 w-4 cursor-pointer mr-[12px]"
-      @click="scrollLeft"
+      @click="scrollLeftMobile"
     />
     <div class="overflow-hidden w-full h-[100px]">
       <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
@@ -29,7 +29,7 @@
       src="@/assets/images/arrowRightBlack.svg"
       alt=""
       class="h-4 w-4 cursor-pointer ml-[12px]"
-      @click="scrollRight"
+      @click="scrollRightMobile"
     />
   </div>
 
@@ -98,8 +98,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 4,
@@ -109,8 +109,8 @@ export default {
         infiniteScroll: true,
         centerMode: false,
         autoPlay: true,
-        playSpeed: 3000,
-        transition: 2000,
+        playSpeed: 4000,
+        transition: 450,
         wheelControl: false,
         keyboardControl: false,
         itemsToShow: 2.5,
@@ -149,6 +149,17 @@ export default {
       this.slideRight = true;
       this.slideLeft = false;
     },
+    scrollLeftMobile() {
+      this.$refs.hooperSlideMobile.slidePrev();
+      this.slideLeft = true;
+      this.slideRight = false;
+    },
+    scrollRightMobile() {
+      this.$refs.hooperSlideMobile.slideNext();
+      this.slideRight = true;
+      this.slideLeft = false;
+    },
+   
     updateCarousel() {
       this.windowWidth = window.innerWidth;
 
