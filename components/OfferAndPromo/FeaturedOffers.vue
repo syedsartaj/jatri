@@ -138,11 +138,13 @@ export default {
     };
   },
   mounted() {
-  
-    setTimeout(() => {
-      const el = document.getElementById(this.$route.query.promo);
-      window.scrollTo({top: el.offsetTop - 80, behavior: "smooth"});
-    }, 1);
+     
+    if(this.getPromoCode().includes(this.$route.query.promo)){
+      setTimeout(() => {
+        const el = document.getElementById(this.$route.query.promo);
+        window.scrollTo({top: el.offsetTop - 80, behavior: "smooth"});
+      }, 1);
+    }
     
     },
 
@@ -161,11 +163,15 @@ export default {
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
       
+    },
+    getPromoCode(){
+      return this.offerPromoGetter.map((offer) => offer.code)
     }
   },
   components: {},
   computed: {
     ...mapGetters("common", ["offerPromoGetter"]),
+    
   },
 };
 </script>
