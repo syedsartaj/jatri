@@ -22,7 +22,7 @@
               :src="
                 (trip.companyImages?.logo &&
                   `${imageUrl}${trip.companyImages?.logo}`) ||
-                require(`@/assets/images/busDefaultImage.svg`)
+                require(`@/assets/images/launchDefaultImage.jpg`)
               "
               class="h-[40px] w-[40px] rounded-full"
               alt=""
