@@ -22,7 +22,7 @@
               :src="
                 (trip.companyImages?.logo &&
                   `${imageUrl}${trip.companyImages?.logo}`) ||
-                require(`@/assets/images/busDefaultImage.svg`)
+                require(`@/assets/images/launchDefaultImage.jpg`)
               "
               class="h-[40px] w-[40px] rounded-full"
               alt=""
@@ -42,7 +42,7 @@
             class="flex flex-col justify-start gap-x-4 w-5/12 md:w-3/12 lg:w-5/12 xl:w-3/12 cursor-pointer"
           >
             <p class="text-xs font-normal text-blackLight text-right">
-              DEPARTURE TIME
+              <!-- DEPARTURE TIME -->
             </p>
 
             <h2 class="text-base font-medium text-blackPrimary text-right">
