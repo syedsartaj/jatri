@@ -136,7 +136,7 @@ export default {
 
 <style>
 .custom-container {
-  @apply w-full mx-auto px-4 lg:px-[100px];
+  @apply w-full mx-auto px-4 xl:px-[100px];
 }
 .linkItem {
   @apply flex justify-center items-center gap-x-1 lg:gap-x-2 text-xs lg:text-base;
