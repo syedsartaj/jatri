@@ -96,7 +96,7 @@
     <!-- Offer & Promos Section Large -->
 
     <div
-      class="p-[10px] w-full bg-[#FFFFFF] rounded-[10px] hidden xl:flex justify-between items-center mb-[20px]"
+      class="p-[10px] w-full bg-[#FFFFFF] rounded-2xl hidden xl:flex justify-between items-center mb-[20px]"
       v-if="offerPromoGetter && offerPromoGetter.length"
     >
       <img
