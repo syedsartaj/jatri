@@ -17,7 +17,7 @@
             id="promo"
             v-model="promoCode"
             placeholder="Enter Promo Code"
-            class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-sm placeholder:text-[#676769] text-blackPrimary custom-width"
+            class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-sm placeholder:text-[#676769] placeholder:text-xs placeholder:font-normal text-blackPrimary custom-width md:placeholder:text-sm"
           />
           <button
             v-if="!showPromoInput"
@@ -240,8 +240,11 @@ import {
   cleanAndValidatePastedText,
 } from "../../../helpers/utils";
 import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
+import ERROR_CODE from "@/constant/errorCodeEnum";
+
+
 export default {
-  name: "BookingDetails",
+  name: "LaunchPromoAndPayment",
   data() {
     return {
       gatewayType: "",
@@ -301,6 +304,9 @@ export default {
         try {
           await this.updateGatewayAction(payload);
         } catch (err) {
+          if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+            this.$router.go(-2);
+          }
           this.gatewayType = this.getLaunchBookingData.gatewayType;
         }
       }
@@ -365,7 +371,7 @@ export default {
       "updateGatewayAction",
     ]),
     ...mapMutations("launchStore", ["setBookingDetailsData"]),
-    applyPromo() {
+    applyPromo() { // TODO: handle several payment attempt if promo is enabled for launch
       // this.$nextTick(async () => {
       //   this.$nuxt.$loading?.start();
       //   const payload = {
@@ -456,7 +462,11 @@ export default {
               this.$nuxt.$loading?.finish();
             }
           } catch (err) {
-            this.$toast.error(err, {
+
+            if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+            this.$router.go(-2);
+          };
+            this.$toast.error(err.response.data.message, {
               position: "bottom-right",
               duration: 50000,
               containerClass: "padding: 100px",
