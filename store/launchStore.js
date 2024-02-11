@@ -226,6 +226,7 @@ export const actions = {
           shipId: data.invoice.shipId,
           companyId: data.invoice.companyId,
         };
+       
 
         const response = await this.$api.$post(
           apis.SERVICE_TYPE.LAUNCH.GET_SEAT_VIEW_URL,

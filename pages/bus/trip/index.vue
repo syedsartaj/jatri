@@ -1,11 +1,13 @@
 <template>
   <div>
-    <!-- Search modifier -->
     <div class="relative">
-      <BannerSectionTripPage />
-      <ModifyFilterMobileBus />
+      <!-- Search modifier start -->
+      <BannerSectionTripPage /> 
+      <ModifyFilterMobileBus /> 
+      <!-- Search modifier end -->
 
-      <!-- Mobile device filter button -->
+
+      <!-- Mobile device filter button start -->
       <button
         v-if="getMobileFloatingFilter"
         @click="toggleTripFilterModal"
@@ -14,14 +16,17 @@
         <img src="@/assets/images/icons/filterIcon.svg" alt="" />
         <span>Filter</span>
       </button>
+      <!-- Mobile device filter button end -->
 
-      <!-- Filter modal -->
+      <!--Modal Filter modal start-->
       <div class="block lg:hiddden" v-if="isTripFilterModalOpen">
         <TripFilterModalBus
           :close="toggleTripFilterModal"
           @handleTripFilterModal="toggleTripFilterModal"
         />
       </div>
+      <!--Modal Filter modal end-->
+
     </div>
 
     <AvailableTripSection />
