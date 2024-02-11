@@ -1,0 +1,5 @@
+const ERROR_CODE = Object.freeze({
+    SEVERAL_TRANSACTION_ATTEMPT: "SEVERAL_TRANSACTION_ATTEMPT",
+});
+
+export default ERROR_CODE;

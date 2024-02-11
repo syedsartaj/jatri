@@ -7,6 +7,10 @@ export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
   },
+  validate({ query }) {
+    const { tnxId } = query;
+    return tnxId;
+  },
 
   async asyncData({ query, store }) {
     await store.dispatch("launchStore/getBookingInfoByTnxId", {

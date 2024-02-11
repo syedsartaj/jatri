@@ -249,7 +249,7 @@ export const actions = {
           resolve(res);
         })
         .catch((e) => {
-          reject(e.response.data.message ?? "Something went wrong!");
+          reject(e);
         });
     });
   },

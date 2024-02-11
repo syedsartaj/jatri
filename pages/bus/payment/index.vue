@@ -470,6 +470,8 @@
 import { mapActions, mapGetters } from "vuex";
 import moment from "moment";
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
+import ERROR_CODE from "@/constant/errorCodeEnum";
+
 export default {
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
@@ -505,6 +507,9 @@ export default {
         try {
           await this.updateGatewayAction(payload);
         } catch (err) {
+          if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+            this.$router.back();
+          };
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
       }
@@ -703,7 +708,10 @@ export default {
             this.$nuxt.$loading?.finish();
           }
         } catch (err) {
-          this.$toast.error(err, {
+          if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+            this.$router.back();
+          };
+          this.$toast.error(err.response.data.message, {
             position: "bottom-right",
             duration: 50000,
             containerClass: "padding: 100px",
@@ -756,6 +764,9 @@ export default {
 
           this.$nuxt.$loading?.finish();
         } catch (error) {
+          if(error.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+            this.$router.back();
+          };
           this.$nuxt.$loading?.finish();
         }
       });
