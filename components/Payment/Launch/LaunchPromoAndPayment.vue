@@ -305,7 +305,20 @@ export default {
           await this.updateGatewayAction(payload);
         } catch (err) {
           if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
-            this.$router.go(-2);
+            const query = {
+              from: this.getLaunchBookingData.invoice.fromCity,
+              to: this.getLaunchBookingData.invoice.toCity,
+              date: new Date(
+                dateTimeFormat(
+                  this.getLaunchBookingData.invoice.boardingDateTime,
+                  6,
+                  "DD MMM YYYY"
+                )
+              ).getTime(),
+             
+            };
+            
+              this.$router.push({ path: "/launch/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
           }
           this.gatewayType = this.getLaunchBookingData.gatewayType;
         }
@@ -464,7 +477,20 @@ export default {
           } catch (err) {
 
             if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
-            this.$router.go(-2);
+              const query = {
+              from: this.getLaunchBookingData.invoice.fromCity,
+              to: this.getLaunchBookingData.invoice.toCity,
+              date: new Date(
+                dateTimeFormat(
+                  this.getLaunchBookingData.invoice.boardingDateTime,
+                  6,
+                  "DD MMM YYYY"
+                )
+              ).getTime(),
+              
+            };
+            
+              this.$router.push({ path: "/launch/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
           };
             this.$toast.error(err.response.data.message, {
               position: "bottom-right",
@@ -510,6 +536,7 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type="number"] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 

@@ -360,8 +360,11 @@ export default {
             ? "day"
             : "night";
       }
-
+      if (this.priceFilterType) {
+        payload.priceFilterType = this.priceFilterType;
+      }
       await this.getPbScheduleDataAction(payload);
+      
       this.$nuxt.$loading?.finish();
     },
     resetFilter() {

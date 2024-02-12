@@ -507,9 +507,24 @@ export default {
         try {
           await this.updateGatewayAction(payload);
         } catch (err) {
-          if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
-            this.$router.back();
-          };
+          if (
+            err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
+          ) {
+            const query = {
+              from: this.getBookingInfoDetails.invoice.fromCity,
+              to: this.getBookingInfoDetails.invoice.toCity,
+              date: new Date(
+                dateTimeFormat(
+                  this.getBookingInfoDetails.invoice.boardingDateTime,
+                  6,
+                  "DD MMM YYYY"
+                )
+              ).getTime(),
+              type: "all",
+            };
+            
+              this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
+          }
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
       }
@@ -708,9 +723,11 @@ export default {
             this.$nuxt.$loading?.finish();
           }
         } catch (err) {
-          if(err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+          if (
+            err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
+          ) {
             this.$router.back();
-          };
+          }
           this.$toast.error(err.response.data.message, {
             position: "bottom-right",
             duration: 50000,
@@ -764,9 +781,11 @@ export default {
 
           this.$nuxt.$loading?.finish();
         } catch (error) {
-          if(error.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT){
+          if (
+            error.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
+          ) {
             this.$router.back();
-          };
+          }
           this.$nuxt.$loading?.finish();
         }
       });
@@ -805,6 +824,7 @@ export default {
         }
       });
     },
+    
   },
 };
 </script>
