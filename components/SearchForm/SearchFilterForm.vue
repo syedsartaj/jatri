@@ -12,7 +12,7 @@
         (getHeadLine[0]?.busSettings?.headline ||
           getHeadLine[0]?.launchSettings?.headline)
       ),
-      'hidden lg:block w-full z-[999998] lg:pr-[80px] xl:pr-[100px] lg:pl-[80px] xl:pl-[100px]': true,
+      'hidden lg:block w-full z-[999998] lg:pr-4 xl:pr-[100px] lg:pl-4 xl:pl-[100px]': true,
       sticky: !isTripPage,
     }"
   >

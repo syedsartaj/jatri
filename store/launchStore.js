@@ -226,6 +226,7 @@ export const actions = {
           shipId: data.invoice.shipId,
           companyId: data.invoice.companyId,
         };
+       
 
         const response = await this.$api.$post(
           apis.SERVICE_TYPE.LAUNCH.GET_SEAT_VIEW_URL,
@@ -249,7 +250,7 @@ export const actions = {
           resolve(res);
         })
         .catch((e) => {
-          reject(e.response.data.message ?? "Something went wrong!");
+          reject(e);
         });
     });
   },

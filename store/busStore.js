@@ -267,7 +267,7 @@ export const actions = {
           resolve(res);
         })
         .catch((e) => {
-          reject(e.response.data.message ?? "Something went wrong!");
+          reject(e);
         });
     });
   },
@@ -282,7 +282,7 @@ export const actions = {
         })
         .catch((e) => {
           commit("setLoading", false);
-          reject();
+          reject(e);
           this.$toast.error(
             e.response.data.message ?? "Something went wrong!",
             {

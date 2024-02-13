@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-[#f7f7f7]">
-    <div class="w-full lg:w-[816px] mx-auto py-[30px]">
+  <div class="bg-[#f7f7f7] px-4">
+    <div class="w-full lg:w-[816px] mx-auto pt-6 pb-10 md:pt-12 lg:pb-[100px]">
       <div class="w-full bg-white rounded-[10px] border border-[#DBDBDB]">
         <div class="text-center p-[10px] border-b border-[#DBDBDB]">
           <p class="text-blackPrimary text-xl font-medium">Find Ticket</p>
@@ -339,6 +339,7 @@ export default {
       };
     },
     handleServiceChange(service) {
+      this.$router.push({path:`/${service.toLowerCase()}/find-ticket`});
       this.setSelectedService(service);
       this.oopsAlertStatus = false;
       this.setSearchedTicketList([]);

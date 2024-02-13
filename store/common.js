@@ -234,11 +234,19 @@ export const actions = {
       return true;
     } catch (error) {
       commit("setLoading", false);
-      this.$toast.error(error.response.data.message[0], {
-        position: "bottom-right",
-        duration: 5000,
-      });
-      return false;
+      if(Array.isArray(error.response.data.message)){
+        this.$toast.error(error.response.data.message[0], {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        return false;
+      }else{
+        this.$toast.error(error.response.data.message, {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        return false;
+      }
     }
   },
   async cancelTicketAction({ commit, state }, payload) {

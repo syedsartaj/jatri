@@ -1,7 +1,7 @@
 <template>
-  <div class="md:px-4 xl:px-[100px] pb-10 xl:pb-[100px] bg-[#F7F7F7]">
+  <div class="px-4 xl:px-[100px] pb-10 xl:pb-[100px] bg-[#F7F7F7]">
     <div
-      class="md:pt-6 xl:pt-[40px] pb-[32px] text-blackPrimary font-inter text-[36px] leading-[44px] font-semibold"
+      class="pt-6 xl:pt-[40px] pb-[32px] text-blackPrimary font-inter text-[36px] leading-[44px] font-semibold"
     >
       Featured offers
     </div>
@@ -13,7 +13,7 @@
       class="bg-white rounded-2xl mb-4"
     >
       <div class="p-6 xl:grid xl:grid-cols-3 xl:gap-4 justify-start">
-        <div class=" xl:col-span-2">
+        <div class="xl:col-span-2">
           <img
             class="w-full rounded-2xl"
             :src="offer.image"
@@ -21,7 +21,7 @@
           />
         </div>
         <div
-          class=" flex flex-col pt-4 md:grid md:grid-cols-3 xl:col-span-1 xl:flex xl:flex-col gap-4 xl:justify-start xl:items-center  md:pt-4 xl:pt-0 xl:pl-4"
+          class="flex flex-col pt-4 md:grid md:grid-cols-3 xl:col-span-1 xl:flex xl:flex-col gap-4 xl:justify-start xl:items-center md:pt-4 xl:pt-0 xl:pl-4"
         >
           <div
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
@@ -41,7 +41,11 @@
             <div class="pt-4 text-[#151414] font-inter text-xl font-medium">
               <!-- For future use -->
               <!-- {{ offer.amountType === 'percentage' && offer.code ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`: offer.amountType === 'percentage' && !offer.code ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`: offer.amountType === 'fixed' && offer.code ? `BDT ${offer.amount}`: `BDT ${offer.amount}`}} -->
-              {{ offer.amountType === 'percentage' ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`: `BDT ${offer.amount}` }}
+              {{
+                offer.amountType === "percentage"
+                  ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`
+                  : `BDT ${offer.amount}`
+              }}
             </div>
           </div>
 
@@ -66,7 +70,7 @@
           </div>
 
           <div
-          v-if="offer.code"
+            v-if="offer.code"
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
           >
             <div class="flex justify-start items-center">
@@ -81,7 +85,8 @@
                 Promo code
               </div>
             </div>
-            <div @click="handlePromoCopy(offer.code)"
+            <div
+              @click="handlePromoCopy(offer.code)"
               class="mt-4 p-3 bg-[#eff7fd] flex justify-between items-center cursor-pointer rounded-lg border border-[#8FC4F2] border-dashed"
             >
               <div class="text-blackPrimary font-inter text-xl font-medium">
@@ -98,20 +103,47 @@
           </div>
         </div>
       </div>
-      <div v-if="(offer.details !== 'undefined') && offer.details && (offer.details.length > MAX_DETAIILS_LEN) && (clickedOffer !==index)" class="px-6 pb-6">
-        <div  
-        class="text-base font-normal text-blackLight"    
-        v-html="offer.details.slice(0, MAX_DETAIILS_LEN).concat(['...'])"
-      ></div><span @click="()=>changeClickedOffer(index)" class="font-bold cursor-pointer">See more</span>
+      <div
+        v-if="
+          offer.details !== 'undefined' &&
+          offer.details &&
+          offer.details.length > MAX_DETAIILS_LEN &&
+          clickedOffer !== index
+        "
+        class="px-6 pb-6"
+      >
+        <div
+          class="text-base font-normal text-blackLight"
+          v-html="offer.details.slice(0, MAX_DETAIILS_LEN).concat(['...'])"
+        ></div>
+        <span
+          @click="() => changeClickedOffer(index)"
+          class="font-bold cursor-pointer"
+          >See more</span
+        >
       </div>
-      
-      <div v-if="(offer.details !== 'undefined') && offer.details && (offer.details.length < MAX_DETAIILS_LEN) || (clickedOffer === index)" class="px-6 pb-6" v-html="offer.details"></div>
+
+      <div
+        v-if="
+          (offer.details !== 'undefined' &&
+            offer.details &&
+            offer.details.length < MAX_DETAIILS_LEN) ||
+          clickedOffer === index
+        "
+        class="px-6 pb-6"
+        v-html="offer.details"
+      ></div>
 
       <div class="flex justify-start items-center pl-6 pb-6">
-        <div @click="gotoHomePage"
-          class="bg-corporate cursor-pointer rounded-full max-w-[185px] flex justify-start items-center py-4 pl-8 pr-6"
+        <div
+          @click="gotoHomePage"
+          class="bg-corporate cursor-pointer rounded-full max-w-[185px] flex justify-start items-center py-[11px] pl-8 pr-8"
         >
-          <div class="pr-2 text-white text-base xl:text-xl font-medium font-inter ">Book Now</div>
+          <div
+            class="pr-2 text-white text-base xl:text-xl font-medium font-inter"
+          >
+            Book Now
+          </div>
           <div>
             <img
               class="w-4"
@@ -138,30 +170,32 @@ export default {
     };
   },
   mounted() {
-  
-    setTimeout(() => {
-      const el = document.getElementById(this.$route.query.promo);
-      window.scrollTo({top: el.offsetTop - 80, behavior: "smooth"});
-    }, 1);
-    
-    },
+    if (this.getPromoCode().includes(this.$route.query.promo)) {
+      setTimeout(() => {
+        const el = document.getElementById(this.$route.query.promo);
+        window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+      }, 1);
+    }
+  },
 
   beforeDestroy() {},
   methods: {
     validity(time) {
       return dateTimeFormat(time, 0, "DD MMM YYYY");
     },
-    changeClickedOffer(index){
-        this.clickedOffer = index;
+    changeClickedOffer(index) {
+      this.clickedOffer = index;
     },
-    gotoHomePage(){
+    gotoHomePage() {
       this.$router.push("/bus");
     },
-    handlePromoCopy(promoCode){
+    handlePromoCopy(promoCode) {
       navigator.clipboard.writeText(promoCode);
       navigator.clipboard.readText();
-      
-    }
+    },
+    getPromoCode() {
+      return this.offerPromoGetter.map((offer) => offer.code);
+    },
   },
   components: {},
   computed: {
@@ -170,6 +204,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
