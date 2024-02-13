@@ -93,6 +93,7 @@ export default {
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
     handleOnClick(item, index) {
       if (index === 1) {
+        this.close();
         this.setBusReserveModalOpenStatus();
       } else {
         this.close();
