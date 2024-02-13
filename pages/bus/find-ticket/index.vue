@@ -339,6 +339,7 @@ export default {
       };
     },
     handleServiceChange(service) {
+      this.$router.push({path:`/${service.toLowerCase()}/find-ticket`});
       this.setSelectedService(service);
       this.oopsAlertStatus = false;
       this.setSearchedTicketList([]);

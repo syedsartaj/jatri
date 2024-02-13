@@ -83,10 +83,10 @@
               >
                 <!-- First Row -->
                 <div
-                  class="flex justify-evenly gap-6 mb-6 flex-col md:flex-row"
+                  class="flex justify-evenly gap-6 mb-6 flex-col xl:flex-row"
                 >
                   <!-- First Item -->
-                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col md:flex-row">
+                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row">
                     <div class="w-full">
                       <CommonInputLabel label="Journey date" />
                       <SelectDate
@@ -108,7 +108,7 @@
                       />
                     </div>
                   </div>
-                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full">
+                  <div class="xl:flex xl:justify-evenly xl:gap-4 lg:gap-6 w-full">
                     <div class="w-full">
                       <CommonInputLabel label="Boarding place" />
                       <EnterInput
@@ -132,7 +132,7 @@
 
                 <!-- Second Row -->
                 <div
-                  class="flex justify-evenly gap-6 mb-6 flex-col md:flex-row"
+                  class="flex justify-evenly gap-6 mb-6 flex-col xl:flex-row"
                 >
                   <!-- First Item -->
                   <div
@@ -143,7 +143,7 @@
                       lg:gap-6
                       w-full
                       flex-col
-                      md:flex-row
+                      xl:flex-row
                     "
                   >
                     <div class="w-full">
@@ -181,7 +181,7 @@
                       lg:gap-6
                       w-full
                       flex-col
-                      md:flex-row
+                      xl:flex-row
                     "
                   >
                     <div class="w-full">
@@ -246,7 +246,7 @@
 
                 <!-- Fourth Row -->
                 <div
-                  class="flex justify-evenly gap-6 mb-6 flex-col md:flex-row"
+                  class="flex justify-evenly gap-6 mb-6 flex-col xl:flex-row"
                 >
                   <!-- First Item -->
                   <div
@@ -257,7 +257,7 @@
                       lg:gap-6
                       w-full
                       flex-col
-                      md:flex-row
+                      xl:flex-row
                     "
                   >
                     <div class="w-full">
@@ -294,7 +294,7 @@
                       lg:gap-6
                       w-full
                       flex-col
-                      md:flex-row
+                      xl:flex-row
                     "
                   >
                     <div class="w-full">
@@ -372,7 +372,7 @@ export default {
   methods: {
     ...mapActions("common", ["fullBusReservationAction"]),
     ...mapMutations("common", ["setBusReserveModalOpenStatus"]),
-    handleSumbit() {
+    async handleSumbit() {
       const {
         journeyDate,
         returnDate,
@@ -390,7 +390,7 @@ export default {
       } = this;
 
       if (
-        journeyDate &&
+        (journeyDate &&
         busType &&
         boardingPlace &&
         droppingPlace &&
@@ -403,7 +403,7 @@ export default {
         contactPhone.length === 11 &&
         approximateBudget &&
         parseInt(approximateBudget) > 0 &&
-        (!contactEmail || (contactEmail && this.isValidEmail))
+        (!contactEmail || (contactEmail && this.isValidEmail)))
       ) {
         const payload = {
           journeyDate,
@@ -420,7 +420,7 @@ export default {
           contactEmail,
           approximateBudget: parseInt(approximateBudget),
         };
-        this.fullBusReservationAction(payload);
+        await this.fullBusReservationAction(payload);
       } else {
         this.errorOccured = true;
       }

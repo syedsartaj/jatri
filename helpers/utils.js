@@ -63,3 +63,9 @@ export const cleanAndValidatePastedText = (pastedText) => {
   }
   return "";
 };
+
+export const extractApiResMessage = (error) => {
+  if(Object.hasOwn(error, 'response')){
+
+  }
+}
