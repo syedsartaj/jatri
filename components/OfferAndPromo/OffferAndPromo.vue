@@ -24,7 +24,7 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
+                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
@@ -71,7 +71,7 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
+                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
@@ -118,7 +118,7 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
+                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
@@ -409,49 +409,5 @@ export default {
 </script>
 
 <style scoped>
-.scroll-parent {
-  width: 100%;
-  position: relative;
-  overflow-x: hidden;
-}
 
-.scroll-element {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0%;
-  top: 0%;
-}
-
-.primary {
-  animation: primary 10s linear infinite;
-}
-
-.secondary {
-  animation: secondary 10s linear infinite;
-}
-
-@keyframes primary {
-  from {
-    left: 0%;
-  }
-
-  to {
-    left: -100%;
-  }
-}
-
-@keyframes secondary {
-  from {
-    left: 100%;
-  }
-
-  to {
-    left: 0%;
-  }
-}
-
-/* .hooper-track li {
-  width: 196px !important;
-} */
 </style>
