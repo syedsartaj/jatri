@@ -149,7 +149,7 @@ import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
 
 export default {
-  name: "OffferAndPromo",
+  name: "OfferAndPromo",
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
   },
