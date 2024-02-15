@@ -27,7 +27,7 @@
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
-                      class="rounded-2xl w-full pointer-events-none"
+                      class="rounded-2xl w-full h-auto pointer-events-none"
                     />
                 </div>
               </slide>
