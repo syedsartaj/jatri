@@ -16,7 +16,6 @@
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
         <div class="w-full">
-          <div class="flex justify-between items-center"></div>
           <div class="w-full overflow-hidden">
             <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
               <slide
@@ -63,7 +62,6 @@
       >
       
         <div class="w-full">
-          <div class="flex justify-between items-center"></div>
           <div class=" w-full overflow-hidden">
             <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
               <slide
@@ -110,7 +108,6 @@
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
         <div class="overflow-hidden xl:w-full h-auto">
-          <div class="flex justify-between items-center"></div>
           <div>
             <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
               <slide
