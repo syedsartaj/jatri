@@ -23,14 +23,12 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
                       class="rounded-2xl w-full pointer-events-none"
                     />
-                  </div>
                 </div>
               </slide>
             </hooper>
@@ -69,14 +67,12 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
                       class="rounded-2xl w-full"
                     />
-                  </div>
                 </div>
               </slide>
             </hooper>
@@ -115,7 +111,6 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div >
                     <img
                       :id="index"
                       :src="offer.image"
@@ -123,7 +118,6 @@
                       class="rounded-2xl w-full pointer-events-none"
                     />
                     
-                  </div>
                 </div>
               </slide>
             </hooper>
