@@ -465,10 +465,10 @@
                   Please check the Terms and Conditions from <br />
                   <a
                     style="font-weight: 600"
-                    href="https://cutt.ly/XwkEW0iU"
+                    href="https://cutt.ly/AwVPArto"
                     target="_blank"
                     rel="noopener"
-                    >https://cutt.ly/XwkEW0iU</a
+                    >https://cutt.ly/AwVPArto</a
                   >
                 </p>
               </div>
@@ -488,10 +488,10 @@
                   Please check the Cancellation Policy from <br />
                   <a
                     style="font-weight: 600"
-                    href="https://cutt.ly/XwkEW0iU"
+                    href="https://cutt.ly/7wVPAHqN"
                     target="_blank"
                     rel="noopener"
-                    >https://cutt.ly/XwkEW0iU</a
+                    >https://cutt.ly/7wVPAHqN</a
                   >
                 </p>
               </div>

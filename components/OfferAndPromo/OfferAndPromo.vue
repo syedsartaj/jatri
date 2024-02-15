@@ -15,7 +15,7 @@
         class="flex justify-center min-w-[84%] md:hidden"
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
-        <div class="w-full">
+        
           <div class="w-full overflow-hidden">
             <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
               <slide
@@ -27,13 +27,13 @@
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
-                      class="rounded-2xl w-full h-auto pointer-events-none"
+                      class="rounded-2xl w-full  pointer-events-none"
                     />
                 </div>
               </slide>
             </hooper>
           </div>
-        </div>
+        
       </div>
       <img
         src="@/assets/images/arrowRightBlack.svg"
@@ -59,7 +59,7 @@
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
       
-        <div class="w-full">
+       
           <div class=" w-full overflow-hidden">
             <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
               <slide
@@ -77,7 +77,7 @@
               </slide>
             </hooper>
           </div>
-        </div>
+       
       </div>
       <img
         src="@/assets/images/arrowRightBlack.svg"
@@ -400,5 +400,7 @@ export default {
 </script>
 
 <style scoped>
-
+.hooper{
+  height: auto;
+}
 </style>
