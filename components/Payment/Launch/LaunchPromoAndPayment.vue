@@ -173,14 +173,14 @@
 
         <span>
           <nuxt-link
-            to="/bus/policies#terms-and-conditions"
+            to="/launch/policies#terms-and-conditions"
             target="_blank"
             class="w-full underline text-[#1E88E5] font-medium"
             >Terms and Conditions</nuxt-link
           >
           and
           <nuxt-link
-            to="/bus/policies#return-and-refund-policy"
+            to="/launch/policies#return-and-refund-policy"
             target="_blank"
             class="w-full underline text-[#1E88E5] font-medium"
             >Return & refund Policy</nuxt-link

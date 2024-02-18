@@ -15,8 +15,7 @@
         class="flex justify-center min-w-[84%] md:hidden"
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
-        <div class="w-full">
-          <div class="flex justify-between items-center"></div>
+        
           <div class="w-full overflow-hidden">
             <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
               <slide
@@ -24,19 +23,17 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
                     <img
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
-                      class="rounded-2xl w-full pointer-events-none"
+                      class="rounded-2xl w-full  pointer-events-none"
                     />
-                  </div>
                 </div>
               </slide>
             </hooper>
           </div>
-        </div>
+        
       </div>
       <img
         src="@/assets/images/arrowRightBlack.svg"
@@ -62,8 +59,7 @@
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
       
-        <div class="w-full">
-          <div class="flex justify-between items-center"></div>
+       
           <div class=" w-full overflow-hidden">
             <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
               <slide
@@ -71,19 +67,17 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
                     <img
                       :id="index"
                       :src="offer.image"
                       alt="offer image"
                       class="rounded-2xl w-full"
                     />
-                  </div>
                 </div>
               </slide>
             </hooper>
           </div>
-        </div>
+       
       </div>
       <img
         src="@/assets/images/arrowRightBlack.svg"
@@ -110,7 +104,6 @@
         v-if="offerPromoGetter && offerPromoGetter.length"
       >
         <div class="overflow-hidden xl:w-full h-auto">
-          <div class="flex justify-between items-center"></div>
           <div>
             <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
               <slide
@@ -118,7 +111,6 @@
                 :key="index"
               >
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                  <div class="customOfferCard-container">
                     <img
                       :id="index"
                       :src="offer.image"
@@ -126,7 +118,6 @@
                       class="rounded-2xl w-full pointer-events-none"
                     />
                     
-                  </div>
                 </div>
               </slide>
             </hooper>
@@ -149,7 +140,7 @@ import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
 
 export default {
-  name: "OffferAndPromo",
+  name: "OfferAndPromo",
   middleware(ctx) {
     ctx.$gtm.push({ event: "ssr" });
   },
@@ -409,49 +400,7 @@ export default {
 </script>
 
 <style scoped>
-.scroll-parent {
-  width: 100%;
-  position: relative;
-  overflow-x: hidden;
+.hooper{
+  height: auto;
 }
-
-.scroll-element {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0%;
-  top: 0%;
-}
-
-.primary {
-  animation: primary 10s linear infinite;
-}
-
-.secondary {
-  animation: secondary 10s linear infinite;
-}
-
-@keyframes primary {
-  from {
-    left: 0%;
-  }
-
-  to {
-    left: -100%;
-  }
-}
-
-@keyframes secondary {
-  from {
-    left: 100%;
-  }
-
-  to {
-    left: 0%;
-  }
-}
-
-/* .hooper-track li {
-  width: 196px !important;
-} */
 </style>

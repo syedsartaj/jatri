@@ -8,7 +8,7 @@
 
         <div class="w-full mt-6 p-4">
           <div
-            class="flex bg-white h-[40px] lg:h-[36px] justify-between rounded-t-[10px] max-w-max ml-4 bg-[#f7f7f7]"
+            class="flex  h-[40px] lg:h-[36px] justify-between rounded-t-[10px] max-w-max ml-4 bg-[#f7f7f7]"
           >
             <div
               :class="getServiceClassName(ServiceType.BUS)"

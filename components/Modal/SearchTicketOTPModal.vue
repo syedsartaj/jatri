@@ -1,9 +1,9 @@
 <template>
-  <div class="relative z-[99999999]">
+  <div class="sticky z-[999999999] ">
     <div class="fixed inset-0 opacity-50 bg-[#151414]"></div>
 
-    <div class="fixed inset-0 z-10">
-      <div class="flex justify-center items-center pt-60 px-4 lg:px-0">
+    <div class="fixed inset-0 z-10 flex flex-col justify-center">
+      <div class="flex justify-center items-center   px-4 lg:px-0">
         <div
           class="relative transform overflow-hidden rounded-lg bg-white transition-all w-[464px] p-10"
         >
