@@ -358,12 +358,13 @@ export default {
     cancelTicket(ticketId) {
       const payload = {
         ticketId,
+        service: this.serviceType,
+
       };
       this.setCancelTicketId(ticketId);
-      this.sendOtpForCancelTicketAction({
-        payload,
-        service: this.serviceType,
-      });
+      this.sendOtpForCancelTicketAction(
+        payload
+      );
     },
   },
   computed: {
