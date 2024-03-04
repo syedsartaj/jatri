@@ -180,7 +180,7 @@ export const actions = {
       commit("setLoading", true);
       const { data } = await this.$api.post(
         apis.SERVICE_TYPE[payloadData.service].POST_SEND_OTP_BY_TICKET_ID,
-        payloadData.payload
+        {ticketId: payloadData.ticketId}
       );
       commit("setSelectedService", payloadData.service);
       commit("handleCancelTicketPopup", data.data.phone);

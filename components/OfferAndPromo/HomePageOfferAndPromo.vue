@@ -89,7 +89,7 @@
 
                     <div class="px-4 pt-3 flex justify-start items-center">
                       <div
-                        @click="gotoSpecificOffer(offer.code)"
+                        @click="gotoSpecificOffer(offer._id)"
                         class="pr-1 text-[#1E88E5] text-xs cursor-pointer"
                       >
                         View details
@@ -223,7 +223,7 @@
 
                     <div class="px-4 pt-3 flex justify-start items-center">
                       <div
-                        @click="gotoSpecificOffer(offer.code)"
+                        @click="gotoSpecificOffer(offer._id)"
                         class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
                       >
                         View details
@@ -359,7 +359,7 @@
 
                     <div class="px-4 pt-3 flex justify-start items-center">
                       <div
-                        @click="gotoSpecificOffer(offer.code)"
+                        @click="gotoSpecificOffer(offer._id)"
                         class="pr-1 text-[#1E88E5] text-xs font-medium cursor-pointer"
                       >
                         View details
@@ -667,7 +667,7 @@ export default {
       this.$router.push("/bus/offer");
     },
     gotoSpecificOffer(id) {
-      this.$router.push({path:`/bus/offer`, query:{promo: id}});
+      this.$router.push({path:`/bus/offer/${id}`});
     },
     handlePromoCopy(promoCode) {
       navigator.clipboard.writeText(promoCode);
