@@ -38,14 +38,11 @@
 
 <script>
 import moment from "moment";
-import { mapMutations } from "vuex";
 
 export default {
   methods: {
-    ...mapMutations("busStore", ["setTrips"]),
 
     modifySearch() {
-      this.setTrips([]);
       this.$router.push({ path: "/bus", query: { ...this.$route.query } });
     },
 
