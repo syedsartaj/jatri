@@ -39,10 +39,15 @@
 
 <script>
 import moment from "moment";
+import { mapMutations } from "vuex";
 
 export default {
   methods: {
+
+    ...mapMutations("launchStore", ["setTrips"]),
+
     modifySearch() {
+      this.setTrips([]);
       this.$router.push({ path: "/launch", query: { ...this.$route.query } });
     },
     getHumanTime(time) {
