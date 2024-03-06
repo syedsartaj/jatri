@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "BusTripList",
@@ -43,6 +43,8 @@ export default {
   },
   methods: {
     ...mapActions("busStore", ["getPbScheduleDataAction"]),
+    ...mapMutations("busStore", ["setTrips"]),
+
     selectTrip(tripId) {
       this.selectedBusId = tripId;
     },
@@ -77,6 +79,8 @@ export default {
 
         if (payload.from && payload.to) {
           await this.getPbScheduleDataAction(payload);
+        }else{ //from & to is not matched so we are invalidating already fetched trips
+          this.setTrips([])
         }
 
         this.$nuxt.$loading?.finish();

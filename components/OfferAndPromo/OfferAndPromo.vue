@@ -194,12 +194,13 @@ export default {
   mounted() {
     // window.addEventListener("scroll", this.handleScroll);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
-
-    this.$nextTick(() => {
-      this.updateCarousel();
-
-      window.addEventListener("resize", this.updateCarousel);
-    });
+    if (this.offerPromoGetter.length) {
+      this.$nextTick(() => {
+        this.updateCarousel();
+  
+        window.addEventListener("resize", this.updateCarousel);
+      });
+    }
   },
 
   beforeDestroy() {
@@ -370,7 +371,6 @@ export default {
         ) {
           generatedImg = generatedImg.concat(this.offerPromoGetter);
         }
-        console.log("generatedImg====", generatedImg)
         return generatedImg;
       } else {
         return this.offerPromoGetter;

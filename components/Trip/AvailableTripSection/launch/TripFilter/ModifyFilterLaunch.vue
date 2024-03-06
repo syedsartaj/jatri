@@ -186,6 +186,8 @@ export default {
     },
   },
 
+  
+
   methods: {
     ...mapMutations("launchStore", ["sortedTrip", "updateMobileFilterData"]),
     ...mapActions("launchStore", ["getPbScheduleDataAction"]),
