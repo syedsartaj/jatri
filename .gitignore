@@ -94,3 +94,6 @@ sw.*
 
 # Vim swap files
 *.swp
+# yarn and yarn related files
+.yarn
+.yarnrc.yml
