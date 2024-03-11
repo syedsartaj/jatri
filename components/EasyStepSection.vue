@@ -34,7 +34,7 @@
               >
             </li>
             <li>Select your location</li>
-            <li>Select Bus Type</li>
+            <li v-if="selectedService === 'bus'">Select Bus Type</li>
             <li>Select the date of your journey</li>
           </ul>
         </div>
@@ -63,7 +63,7 @@
             <li>Provide all the information</li>
             <li>Select the <span class="font-semibold">Next</span> option</li>
             <li>
-              By clicking on the operator name/image, you can see the entire bus
+              By clicking on the operator name/image, you can see the entire {{ selectedService }}
               image
             </li>
           </ul>
@@ -123,7 +123,15 @@
   </div>
 </template>
 <script>
+import {  mapGetters } from "vuex";
+
 export default {
   props: ["handleOnClick"],
+  computed: {
+    ...mapGetters("common", ["getSelectedServiceType"]),
+    selectedService() {
+      return this.getSelectedServiceType.toLowerCase();
+    },
+  },
 };
 </script>

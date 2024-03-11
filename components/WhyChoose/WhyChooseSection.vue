@@ -36,8 +36,13 @@
           </p>
         </div>
         <div class="lg:p-4 lg:w-[392px] mt-8 lg:mt-0">
-          <img
+          <img v-if="selectedService=== 'bus'"
             src="@/assets/images/home/red-bus.png"
+            alt=""
+            class="w-[66px] block max-sm:m-auto"
+          />
+          <img v-else
+            src="@/assets/images/icons/shipIcon.svg"
             alt=""
             class="w-[66px] block max-sm:m-auto"
           />
@@ -51,7 +56,7 @@
           >
             We have an excellent system of taking service based on preference,
             as there is ticketing service for multiple routes via different
-            categories of buses.
+            categories of {{selectedService.toLowerCase()}}es.
           </p>
         </div>
         <div class="lg:p-4 lg:w-[392px] mt-8 lg:mt-0">
@@ -76,3 +81,15 @@
     </div>
   </div>
 </template>
+<script>
+  import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+      ...mapGetters("common", ["getSelectedServiceType"]),
+      selectedService() {
+        return this.getSelectedServiceType.toLowerCase();
+      },
+    },
+}
+</script>
