@@ -121,6 +121,7 @@ export default {
       this.fieldData = ["", "", "", ""];
       const payload = {
         ticketId: this.getSelectedTicketId,
+        service: this.getSelectedServiceType
       };
       this.sendOtpForCancelTicketAction(payload);
       this.startTimer();
@@ -155,7 +156,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("common", ["getSelectedTicketId", "getIsTicketPopupOpen"]),
+    ...mapGetters("common", ["getSelectedTicketId", "getIsTicketPopupOpen", "getSelectedServiceType"]),
     isButtonActive() {
       const { fieldData } = this;
       return fieldData[0] && fieldData[1] && fieldData[2] && fieldData[3];

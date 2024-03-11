@@ -50,6 +50,8 @@ export default {
     ]),
   },
 
+ 
+
   methods: {
     ...mapMutations("busStore", ["updateMobileFilterData"]),
     toggleTripFilterModal() {

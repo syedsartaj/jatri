@@ -74,10 +74,10 @@
           <div
             class="w-full bg-white rounded-[8px] border border-[#DBDBDB] p-4"
           >
-            <div class="flex space-x-[10px]">
+            <div class="flex gap-x-[8px]">
               <button
                 @click="selectedTab = 0"
-                class="px-4 lg:px-6 py-[5px] rounded-full border text-sm font-medium"
+                class="px-[11px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
                 :class="
                   selectedTab === 0
                     ? 'bg-[#F04935] border-[#F04935] text-white'
@@ -88,7 +88,7 @@
               </button>
               <button
                 @click="selectedTab = 1"
-                class="px-4 lg:px-6 py-[5px] rounded-full border text-sm font-medium"
+                class="px-[11px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
                 :class="
                   selectedTab === 1
                     ? 'bg-[#F04935] border-[#F04935] text-white'
@@ -99,7 +99,7 @@
               </button>
               <button
                 @click="selectedTab = 2"
-                class="px-4 lg:px-6 py-[5px] rounded-full border text-sm font-medium"
+                class="px-[11px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
                 :class="
                   selectedTab === 2
                     ? 'bg-[#F04935] border-[#F04935] text-white'

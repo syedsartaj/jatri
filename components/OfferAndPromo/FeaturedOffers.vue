@@ -7,7 +7,7 @@
     </div>
     <div
       v-for="(offer, index) in offerPromoGetter"
-      :id="offer.code"
+      :id="offer._id"
       :ref="offer.code"
       :key="index"
       class="bg-white rounded-2xl mb-4"
@@ -39,10 +39,10 @@
               </div>
             </div>
             <div class="pt-4 text-[#151414] font-inter text-xl font-medium">
-              <!-- For future use -->
-              <!-- {{ offer.amountType === 'percentage' && offer.code ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`: offer.amountType === 'percentage' && !offer.code ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`: offer.amountType === 'fixed' && offer.code ? `BDT ${offer.amount}`: `BDT ${offer.amount}`}} -->
               {{
-                offer.amountType === "percentage"
+                !offer.code
+                  ? `BDT ${offer.amount} per seat upto BDT ${offer.maxOfferAmount}`
+                  : offer.amountType === "percentage"
                   ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`
                   : `BDT ${offer.amount}`
               }}
@@ -170,9 +170,9 @@ export default {
     };
   },
   mounted() {
-    if (this.getPromoCode().includes(this.$route.query.promo)) {
+    if (this.getPromoCode().includes(this.$route.params.id)) {
       setTimeout(() => {
-        const el = document.getElementById(this.$route.query.promo);
+        const el = document.getElementById(this.$route.params.id);
         window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
       }, 1);
     }
@@ -194,7 +194,7 @@ export default {
       navigator.clipboard.readText();
     },
     getPromoCode() {
-      return this.offerPromoGetter.map((offer) => offer.code);
+      return this.offerPromoGetter.map((offer) => offer._id);
     },
   },
   components: {},

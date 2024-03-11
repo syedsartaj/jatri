@@ -41,6 +41,7 @@ import moment from "moment";
 
 export default {
   methods: {
+
     modifySearch() {
       this.$router.push({ path: "/bus", query: { ...this.$route.query } });
     },

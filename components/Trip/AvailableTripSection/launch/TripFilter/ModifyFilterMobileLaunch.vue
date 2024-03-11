@@ -42,6 +42,8 @@ import moment from "moment";
 
 export default {
   methods: {
+
+
     modifySearch() {
       this.$router.push({ path: "/launch", query: { ...this.$route.query } });
     },
