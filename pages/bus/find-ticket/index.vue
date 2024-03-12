@@ -88,7 +88,7 @@
               </button>
               <button
                 @click="selectedTab = 1"
-                class="px-[11px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
+                class="px-[10px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
                 :class="
                   selectedTab === 1
                     ? 'bg-[#F04935] border-[#F04935] text-white'
