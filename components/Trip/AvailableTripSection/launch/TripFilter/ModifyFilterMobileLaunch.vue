@@ -22,7 +22,7 @@
           </div>
           <p class="text-xs font-normal text-blackSecondary">
             <span>{{ getHumanDate($route.query.date) }}</span
-            >,
+            >
             <span class="uppercase">{{ getHumanTime($route.query.time) }}</span>
           </p>
         </div>
@@ -48,12 +48,8 @@ export default {
       this.$router.push({ path: "/launch", query: { ...this.$route.query } });
     },
     getHumanTime(time) {
-      return time === "morning"
-        ? "4 am - 12 pm"
-        : time === "day"
-        ? "12 pm - 06 pm"
-        : "06 pm - 03 am";
-    },
+        return time === "morning"? ", 4 am - 12 pm": time === "day"? ", 12 pm - 06 pm":time === "night"? ", 06 pm - 03 am": "";
+      },
 
     getHumanDate(date) {
       return moment(

@@ -88,7 +88,7 @@
               </button>
               <button
                 @click="selectedTab = 1"
-                class="px-[11px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
+                class="px-[10px]  py-[5px] rounded-full border text-sm font-medium lg:px-6"
                 :class="
                   selectedTab === 1
                     ? 'bg-[#F04935] border-[#F04935] text-white'
@@ -131,27 +131,27 @@
                 <div class="w-full md:w-9/12">
                   <div
                     v-if="selectedTab === 0"
-                    class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]"
+                    class="flex px-2 py-[6px]  bg-[#F7F7F7] rounded md:p-4"
                   >
                     <div class="flex items-center shrink-0">
                       <img
-                        class="w-[48px] h-[32px]"
+                      class="w-[32px] h-[32px]"
                         src="@/assets/images/bd-flag.svg"
                         alt=""
                       />
                       <div
-                        class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
+                      class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[10px]"
                       >
                         +880
                       </div>
                       <img
-                        class="w-[2px] h-[28px] ml-[4px]"
+                      class="w-[2px] h-[24px] ml-[4px] mr-2"
                         src="@/assets/images/input-separator.svg"
                         alt=""
                       />
                     </div>
                     <input
-                      class="w-full p-4 bg-[#F7F7F7] rounded outline-none text-sm lg:text-base placeholder:text-sm lg:placeholder:text-base font-normal text-blackPrimary placeholder:text-[#676769]"
+                    class="w-full  bg-[#F7F7F7] rounded-lg outline-none text-sm  font-normal text-blackPrimary placeholder:text-sm placeholder:text-[#676769] lg:text-base  lg:placeholder:text-base"
                       type="number"
                       required=""
                       placeholder="Enter Mobile Number"

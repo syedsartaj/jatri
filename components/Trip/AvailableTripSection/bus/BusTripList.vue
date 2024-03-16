@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-40">
+  <div class="pb-10">
     <div v-if="getTrips.length > 0">
       <SingleTrip
         v-for="(trip, index) in getTrips"
