@@ -59,7 +59,7 @@
     </div>
 
     <!-- for show to user-->
-    <div class="w-full overflow-x-auto overflow-y-hidden rounded-t-md">
+    <div class="w-full overflow-x-auto overflow-y-hidden rounded-t-md custom-word-break">
       <div class="border-b border-[#DBDBDB] bg-white">
         <div
           class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]"
@@ -78,10 +78,10 @@
           <div
             class="flex flex-col md:flex-row justify-between divide-y md:divide-y-0 md:divide-x divide-[#DBDBDB]"
           >
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2 ">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary ">
                   {{ getTicketDetails.passenger.name }}
                 </p>
               </div>
@@ -406,4 +406,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.custom-word-break{
+word-break: break-word;
+}
+</style>

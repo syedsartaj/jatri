@@ -463,7 +463,6 @@ export default {
   },
   mounted() {
     if (this.offerPromoGetter.length) {
-      // change back to offerPromoGetter.length
       this.$nextTick(() => {
         this.updateCarousel();
         window.addEventListener("resize", this.updateCarousel);
@@ -473,7 +472,6 @@ export default {
 
   beforeDestroy() {
     if (this.offerPromoGetter.length) {
-      // change back to offerPromoGetter.length
       window.removeEventListener("resize", this.updateCarousel);
     }
   },

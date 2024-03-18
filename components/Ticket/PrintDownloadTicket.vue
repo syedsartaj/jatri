@@ -1,84 +1,6 @@
 <template>
-  <!-- <div style="border-bottom: 1px solid #DBDBDB; background-color: #ffffff; ">
-          <div style="background-color: #EFF7FD; padding: 15px 50px; display: flex; justify-content: start; align-items: center; column-gap: 12px;">
-               <img src="@/assets/images/logo.svg" alt="jatri logo" style="width: 51px;">
-               <div style="background-color: #D9D9D9; width: 1px; height: 24px;"></div>
-               <h2 style="color: #151414; font-size: 20px; line-height: 28px; font-weight: 500;"><span>{{ TicketDetails.companyName }}</span></h2>
-          </div>
-          <div style="padding: 24px;">
-               <div style="display: flex; justify-content: space-between;">
-                    <div style="border-right: 1px solid #DBDBDB; width: 50%;">
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Name:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.passenger.name }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Coach:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.coach }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width:50%; font-weight: 400; color: #4D4D4F; text-align: right;">Departure time:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ departureDateTime }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Seat fare:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ Math.ceil((TicketDetails.payable + TicketDetails.discount) / TicketDetails.totalSeat) }} TK</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Seats:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.seatNumbers.join(', ') }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">From:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.fromCity }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Boarding:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{  TicketDetails.boardingPlace }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Issued on:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{issuedOn}}</p>
-                         </div>
-                    </div>
-                    <div style="width: 50%;">
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Transection ID:</p>
-                              <p style="width: 50%; padding-left: 10px;  font-weight: 500; color: #151414;">{{TicketDetails.transactionId}}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">PNR Code:</p>
-                              <p style="width: 50%; padding-left: 10px;  font-weight: 500; color: #151414;">{{TicketDetails.pnrCode}}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Journey date:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ tripDate }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Reporting time</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ reportTimeWithAddTime }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">To:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.toCity }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Total fare:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{ TicketDetails.payable + TicketDetails.discount }} TK</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Dropping:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">{{  TicketDetails.droppingPoint }}</p>
-                         </div>
-                         <div style="font-size: 12px; line-height: 16px; margin-bottom: 14px; display: flex; justify-content: start;">
-                              <p style="width: 50%; font-weight: 400; color: #4D4D4F; text-align: right;">Issued by:</p>
-                              <p style="width: 50%; padding-left: 10px; font-weight: 500; color: #151414;">Jatri.co</p>
-                         </div>
-                    </div>
-               </div>
-          </div>
-     </div> -->
-  <div style="width: 100%; overflow-x: auto; overflow-y: hidden">
+  
+  <div style="width: 100%; overflow-x: auto; overflow-y: hidden; ">
     <!-- <div style="width: 802px; display: flex;"> -->
     <div
       style="
@@ -140,6 +62,7 @@
                   color: #4d4d4f;
                   margin-top: 16px;
                   font-weight: 400;
+                  word-break: break-word;
                 "
               >
                 Name :
