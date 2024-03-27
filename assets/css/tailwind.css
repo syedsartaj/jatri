@@ -19,4 +19,8 @@
      background-color: #F04935 !important;
 }
 
+.Vue-Toastification__container{
+     z-index: 999999999999999; 
+}
+
 body, html { overflow-x: clip; } 
