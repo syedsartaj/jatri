@@ -17,7 +17,7 @@
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
-          autocomplete="something-to-fool-chrome"
+          autocomplete="off"
           class="w-full rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-medium text-blackPrimary text-left placeholder-blackPrimary searchInput"
           :placeholder="secondHand || defaultOption"
           type="text"
