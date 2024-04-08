@@ -51,7 +51,7 @@
           >
             <div class="flex items-center shrink-0">
               <div class="text-sm font-medium tracking-wide text-[#676769]">
-                +880
+                +88
               </div>
             </div>
             <input
@@ -200,7 +200,7 @@ export default {
       );
     },
     isValidPassengerNumber() {
-      return isValidPhoneNumber(`0${this.passengerMobile}`);
+      return isValidPhoneNumber(this.passengerMobile);
     },
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
@@ -264,7 +264,7 @@ export default {
         !boardingPoint || 
         !droppingPoint || 
         passengerName.length < 3 ||
-        !isValidPhoneNumber(`0${passengerMobile}`) ||
+        !isValidPhoneNumber(passengerMobile) ||
         !getLaunchBookingData
       ) {
         this.errorOccurred = true;
@@ -275,7 +275,7 @@ export default {
             boardingPoint,
             droppingPoint,
             passengerName,
-            passengerMobile: `0${passengerMobile}`,
+            passengerMobile: passengerMobile,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
           };
