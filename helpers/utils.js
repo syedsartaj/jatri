@@ -41,27 +41,26 @@ export const isValidEmail = (email) => {
 
 // Utility function to clean and validate a phone number string
 export const cleanAndValidatePhoneNumber = (input) => {
-  if (input.length === 1 && input[0] === "0") {
-    return "";
+  const cleanedInput = input.replace(/\D/g, "");
+  
+  if (cleanedInput.length > 11) {
+    return cleanedInput.slice(0, 11);
   }
-  if (input.length > 10) {
-    return input.slice(0, 10);
-  }
+  
   // Prevent negative numbers
-  const parsedInput = parseInt(input);
-  return isNaN(parsedInput) || parsedInput < 0 ? "" : parsedInput.toString();
+  return cleanedInput.trim();
 };
 
 // Utility function to clean and validate a pasted text
 export const cleanAndValidatePastedText = (pastedText) => {
-  // Remove any leading zeros
-  const cleanedText = pastedText.replace(/^0+/, "");
-  // Ensure it's not a negative number
-  const parsedText = parseInt(cleanedText);
-  if (!isNaN(parsedText) && parsedText >= 0) {
-    return parsedText.toString().slice(0, 10);
+  const cleanedInput = pastedText.replace(/\D/g, "");
+  
+  if (cleanedInput.length > 11) {
+    return cleanedInput.slice(0, 11);
   }
-  return "";
+  
+  // Prevent negative numbers
+  return cleanedInput.trim();
 };
 
 export const extractApiResMessage = (error) => {

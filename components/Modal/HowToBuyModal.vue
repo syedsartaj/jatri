@@ -1,10 +1,5 @@
 <template>
-  <div class="relative z-[999999999]">
-    <div
-      class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
-    ></div>
-
-    <div class="fixed inset-0 z-10 overflow-y-auto">
+    <div ref="howRef" class="fixed z-[999999999] h-[100vh] box-border left-0 top-0 w-full bg-blackPrimary bg-opacity-50 transition-opacity">
       <div
         class="flex flex-col w-full min-h-full justify-center lg:p-4 text-center sm:items-center sm:p-0"
       >
@@ -40,13 +35,22 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
   props: ["close"],
+  mounted(){
+  document.body.style.overflow= "hidden";  
+  document.body.style.position= "fixed";  
+  document.body.style.width= "100vw"; 
+  window.scrollTo(); 
+  }, 
+  beforeDestroy(){
+    document.body.style.overflow= "";  
+  document.body.style.position= "";  
+  document.body.style.width= "";
+  }
 };
 </script>
 
-<style></style>
