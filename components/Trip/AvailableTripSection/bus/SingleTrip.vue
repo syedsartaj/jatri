@@ -456,7 +456,7 @@
                 <div
                   class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
                 >
-                  +880
+                  +88
                 </div>
                 <img
                   class="w-[2px] h-[28px] ml-[4px]"
@@ -503,7 +503,7 @@
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
-              String(`0${this.passengerPhone}`).length != 11
+              String(`${this.passengerPhone}`).length != 11
                 ? 'bg-gray-500 user cursor-not-allowed'
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
@@ -514,7 +514,7 @@
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
-              String(`0${this.passengerPhone}`).length != 11
+              String(`${this.passengerPhone}`).length != 11
             "
             :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
@@ -1069,7 +1069,7 @@ export default {
           boardingDateTime: this.boardingPoint.scheduleTime,
           reportingDateTime: this.boardingPoint.reportingTime,
           passengerName: this.passengerName,
-          passengerMobile: `0${this.passengerPhone}`,
+          passengerMobile: this.passengerPhone,
           passengerEmail: this.passengerEmail,
           passengerAddress: "dhaka",
           passengerGender: "male",

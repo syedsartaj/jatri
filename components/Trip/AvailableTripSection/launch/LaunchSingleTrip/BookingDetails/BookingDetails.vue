@@ -125,7 +125,7 @@
                                   <div
                                     class="text-s font-Inter font-medium tracking-wide text-[#151414]"
                                   >
-                                    +880
+                                    +88
                                   </div>
                                 </div>
                                 <input
@@ -387,7 +387,7 @@ export default {
       );
     },
     isValidPassengerNumber() {
-      return isValidPhoneNumber(`0${this.passengerMobile}`);
+      return isValidPhoneNumber(this.passengerMobile);
     },
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
@@ -508,7 +508,7 @@ export default {
       if (
         !boardingPoint ||
         passengerName.length < 3 ||
-        !isValidPhoneNumber(`0${passengerMobile}`) ||
+        !isValidPhoneNumber(passengerMobile) ||
         !getLaunchBookingData
       ) {
         this.errorOccurred = true;
@@ -519,7 +519,7 @@ export default {
             boardingPoint,
             droppingPoint,
             passengerName,
-            passengerMobile: `0${passengerMobile}`,
+            passengerMobile: passengerMobile,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
             gatewayType,
