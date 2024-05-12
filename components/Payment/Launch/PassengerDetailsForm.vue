@@ -56,9 +56,7 @@
             </div>
             <input
               :class="
-                errorOccurred &&
-                !isValidPassengerNumber &&
-                'bg-[#FDF0F1]'
+                errorOccurred && !isValidPassengerNumber && 'bg-[#FDF0F1]'
               "
               class="bg-[#f7f7f7] pl-2 pr-4 rounded-lg w-full focus:outline-0 text-sm font-medium placeholder:text-blackSecondary placeholder:font-normal text-blackPrimary"
               type="number"
@@ -235,7 +233,14 @@ export default {
 
       if (this.passengerMobile) {
         this.$router.push(
-          `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+          {
+            path: `/launch/payment/payment-details`,
+            query: {
+              tnxId: this.$route.query.tnxId,
+              from: this.$route.query.from,
+              to: this.$route.query.to,
+            },
+          }
         );
       }
     }
@@ -261,8 +266,8 @@ export default {
       } = this;
 
       if (
-        !boardingPoint || 
-        !droppingPoint || 
+        !boardingPoint ||
+        !droppingPoint ||
         passengerName.length < 3 ||
         !isValidPhoneNumber(passengerMobile) ||
         !getLaunchBookingData
@@ -283,7 +288,14 @@ export default {
           try {
             await this.postPassengerDetailsAction(payload);
             this.$router.push(
-              `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+              {
+            path: `/launch/payment/payment-details`,
+            query: {
+              tnxId: this.$route.query.tnxId,
+              from: this.$route.query.from,
+              to: this.$route.query.to,
+            },
+          }
             );
           } catch (err) {
             this.$toast.error(err, {
