@@ -5,51 +5,18 @@
     ></div>
 
     <div
-      class="
-        fixed
-        inset-0
-        z-10
-        p-[11px]
-        lg:p-0
-        flex
-        items-center
-        justify-center
-      "
+      class="fixed inset-0 z-10 p-[11px] lg:p-0 flex items-center justify-center"
     >
       <div
-        class="
-          flex
-          justify-center
-          lg:p-4
-          text-center
-          lg:items-center lg:px-[100px]
-          h-full
-          lg:h-auto
-        "
+        class="flex justify-center lg:p-4 text-center lg:items-center lg:px-[100px] h-full lg:h-auto"
       >
         <div
-          class="
-            relative
-            transform
-            overflow-hidden overflow-y-auto
-            rounded-lg
-            bg-white
-            text-left
-            shadow-xl
-            transition-all
-            w-full
-            max-h-[100vh]
-          "
+          class="relative transform overflow-hidden overflow-y-auto rounded-lg bg-white text-left shadow-xl transition-all w-full max-h-[100vh]"
         >
           <div class="bg-white p-4 lg:p-6 w-full">
             <div class="flex justify-between">
               <h2
-                class="
-                  text-xl
-                  lg:text-[32px] lg:leading-[40px]
-                  font-medium
-                  text-blackPrimary
-                "
+                class="text-xl lg:text-[32px] lg:leading-[40px] font-medium text-blackPrimary"
               >
                 Full bus reserve
               </h2>
@@ -70,25 +37,22 @@
                 form and submit. We will check and reserve a bus for you.
               </p>
               <div
-                class="
-                  lg:border lg:border-[#DBDBDB]
-                  rounded
-                  scrollbar-hide
-                  h-full
-                  lg:h-auto
-                  mt-6
-                  lg:p-6
-                  p-4
-                "
+                class="lg:border lg:border-[#DBDBDB] rounded scrollbar-hide h-full lg:h-auto mt-6 lg:p-6 p-4"
               >
                 <!-- First Row -->
                 <div
                   class="flex justify-evenly gap-6 mb-6 flex-col xl:flex-row"
                 >
                   <!-- First Item -->
-                  <div class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row">
+                  <div
+                    class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row"
+                  >
                     <div class="w-full">
-                      <CommonInputLabel label="Journey date" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Journey date" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <SelectDate
                         v-model="journeyDate"
                         :label="'Select a Date'"
@@ -108,9 +72,15 @@
                       />
                     </div>
                   </div>
-                  <div class="xl:flex xl:justify-evenly xl:gap-4 lg:gap-6 w-full">
+                  <div
+                    class="xl:flex xl:justify-evenly xl:gap-4 lg:gap-6 w-full"
+                  >
                     <div class="w-full">
-                      <CommonInputLabel label="Boarding place" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Boarding place" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter boarding place"
                         type="text"
@@ -119,7 +89,11 @@
                       />
                     </div>
                     <div class="w-full">
-                      <CommonInputLabel label="Dropping place" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Dropping place" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter dropping place"
                         type="text"
@@ -136,18 +110,14 @@
                 >
                   <!-- First Item -->
                   <div
-                    class="
-                      flex
-                      justify-evenly
-                      gap-4
-                      lg:gap-6
-                      w-full
-                      flex-col
-                      xl:flex-row
-                    "
+                    class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row"
                   >
                     <div class="w-full">
-                      <CommonInputLabel label="No. of bus needed" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="No. of bus needed" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter number Of Buses"
                         type="number"
@@ -174,18 +144,14 @@
                   </div>
                   <!-- SEcond Item -->
                   <div
-                    class="
-                      flex
-                      justify-evenly
-                      gap-4
-                      lg:gap-6
-                      w-full
-                      flex-col
-                      xl:flex-row
-                    "
+                    class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row"
                   >
                     <div class="w-full">
-                      <CommonInputLabel label="No. of seats" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="No. of seats" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter budget amount"
                         type="number"
@@ -212,16 +178,14 @@
 
                 <!-- Third Row -->
                 <div
-                  class="
-                    grid grid-flow-row-dense grid-cols-1 grid-rows-2
-                    lg:grid-cols-4 lg:grid-rows-1
-                    mb-0
-                    lg:mb-6
-                    gap-x-6
-                  "
+                  class="grid grid-flow-row-dense grid-cols-1 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 mb-0 lg:mb-6 gap-x-6"
                 >
                   <div class="w-full col-span-1 mb-6 lg:mb-0">
-                    <CommonInputLabel label="Approximate budget" />
+                    <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Approximate budget" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                     <EnterInput
                       placeholder="Enter budget amount"
                       type="number"
@@ -250,18 +214,14 @@
                 >
                   <!-- First Item -->
                   <div
-                    class="
-                      flex
-                      justify-evenly
-                      gap-4
-                      lg:gap-6
-                      w-full
-                      flex-col
-                      xl:flex-row
-                    "
+                    class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row"
                   >
                     <div class="w-full">
-                      <CommonInputLabel label="Contact Person Name" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Contact Person Name" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter name"
                         type="text"
@@ -270,7 +230,11 @@
                       />
                     </div>
                     <div class="w-full">
-                      <CommonInputLabel label="Mobile No" />
+                      <div class="flex gap-2 items-center">
+                        <CommonInputLabel label="Mobile No" />
+                        <span class="text-danger">*</span>
+                      </div>
+
                       <EnterInput
                         placeholder="Enter mobile number"
                         type="text"
@@ -287,15 +251,7 @@
                   </div>
                   <!-- SEcond Item -->
                   <div
-                    class="
-                      flex
-                      justify-evenly
-                      gap-4
-                      lg:gap-6
-                      w-full
-                      flex-col
-                      xl:flex-row
-                    "
+                    class="flex justify-evenly gap-4 lg:gap-6 w-full flex-col xl:flex-row"
                   >
                     <div class="w-full">
                       <CommonInputLabel label="Email (Optional)" />
@@ -314,17 +270,7 @@
                 <div class="flex justify-center w-full mt-[10px] mb-20 lg:mb-0">
                   <button
                     @click="handleSumbit"
-                    class="
-                      flext
-                      items-center
-                      justify-center
-                      bg-corporate
-                      text-white text-sm
-                      font-medium
-                      h-[46px]
-                      w-40
-                      rounded-full
-                    "
+                    class="flext items-center justify-center bg-corporate text-white text-sm font-medium h-[46px] w-40 rounded-full"
                   >
                     Submit
                   </button>
@@ -390,7 +336,7 @@ export default {
       } = this;
 
       if (
-        (journeyDate &&
+        journeyDate &&
         busType &&
         boardingPlace &&
         droppingPlace &&
@@ -403,7 +349,7 @@ export default {
         contactPhone.length === 11 &&
         approximateBudget &&
         parseInt(approximateBudget) > 0 &&
-        (!contactEmail || (contactEmail && this.isValidEmail)))
+        (!contactEmail || (contactEmail && this.isValidEmail))
       ) {
         const payload = {
           journeyDate,

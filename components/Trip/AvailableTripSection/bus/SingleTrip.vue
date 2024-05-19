@@ -503,7 +503,7 @@
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
-              String(`${this.passengerPhone}`).length != 11
+              !realPhoneNumber
                 ? 'bg-gray-500 user cursor-not-allowed'
                 : 'bg-corporate hover:bg-[#D93E2D]'
             "
@@ -514,7 +514,7 @@
               (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
               !passengerName ||
               !passengerPhone ||
-              String(`${this.passengerPhone}`).length != 11
+              !realPhoneNumber
             "
             :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
@@ -546,18 +546,22 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
+
+import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
+  handleScrollBehaviour,
   isValidEmail,
   moduleType,
+  validatePhone
 } from "../../../../helpers/utils";
-import { handleScrollBehaviour } from "../../../../helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
+
 export default {
   components: { SleeperBedIcon },
   props: [
@@ -606,6 +610,7 @@ export default {
       requestOnGoing: false,
       oid: null,
       sid: null,
+      realPhoneNumber: false,
     };
   },
   computed: {
@@ -690,6 +695,7 @@ export default {
     ]),
     handleInput() {
       this.passengerPhone = cleanAndValidatePhoneNumber(this.passengerPhone);
+      this.realPhoneNumber = validatePhone(this.passengerPhone)
     },
 
     handlePaste(event) {
@@ -697,6 +703,7 @@ export default {
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerPhone = cleanAndValidatePastedText(pastedText);
+      this.realPhoneNumber = validatePhone(pastedText);
     },
     getTripMeta(trip) {
       const { coach } = trip;
@@ -1030,7 +1037,7 @@ export default {
         });
         return;
       }
-      console.log(this.trip?.seatClass);
+
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
         this.fireGTMEventForAddToCart();
@@ -1069,7 +1076,7 @@ export default {
           boardingDateTime: this.boardingPoint.scheduleTime,
           reportingDateTime: this.boardingPoint.reportingTime,
           passengerName: this.passengerName,
-          passengerMobile: this.passengerPhone,
+          passengerMobile: this.passengerPhone?.length === 10 ? `0${this.passengerPhone}` :`${this.passengerPhone}`,
           passengerEmail: this.passengerEmail,
           passengerAddress: "dhaka",
           passengerGender: "male",
@@ -1335,16 +1342,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-</style>
