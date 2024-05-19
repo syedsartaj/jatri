@@ -31,7 +31,10 @@ export const isValidPhoneNumber = (phoneNumber) => {
   // Remove any non-digit characters from the input
   const cleanNumber = phoneNumber?.replace(/\D/g, "");
 
-  return cleanNumber?.length === 11 && cleanNumber?.startsWith("01");
+  const formattedNumber =
+    cleanNumber?.length === 10 ? `0${cleanNumber}` : cleanNumber;
+
+  return formattedNumber?.length === 11 && formattedNumber?.startsWith("01");
 };
 
 export const isValidEmail = (email) => {
@@ -39,14 +42,38 @@ export const isValidEmail = (email) => {
   return emailRegex.test(email);
 };
 
+export const validatePhone = (inputPhone) => {
+  const regex = /^(?:0\d{10}|[1-9]\d{9})$/;
+
+  if (regex.test(inputPhone)) {
+    return true;
+  } else {
+    return false;
+  }
+
+  if (inputPhone[0] === "0") {
+    if (inputPhone.length === 11) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (inputPhone.length === 10) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
 // Utility function to clean and validate a phone number string
 export const cleanAndValidatePhoneNumber = (input) => {
   const cleanedInput = input.replace(/\D/g, "");
-  
+
   if (cleanedInput.length > 11) {
     return cleanedInput.slice(0, 11);
   }
-  
+
   // Prevent negative numbers
   return cleanedInput.trim();
 };
@@ -54,17 +81,16 @@ export const cleanAndValidatePhoneNumber = (input) => {
 // Utility function to clean and validate a pasted text
 export const cleanAndValidatePastedText = (pastedText) => {
   const cleanedInput = pastedText.replace(/\D/g, "");
-  
+
   if (cleanedInput.length > 11) {
     return cleanedInput.slice(0, 11);
   }
-  
+
   // Prevent negative numbers
   return cleanedInput.trim();
 };
 
 export const extractApiResMessage = (error) => {
-  if(Object.hasOwn(error, 'response')){
-
+  if (Object.hasOwn(error, "response")) {
   }
-}
+};

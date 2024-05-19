@@ -160,13 +160,14 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {
-  isValidPhoneNumber,
-  isValidEmail,
-  cleanAndValidatePhoneNumber,
-  cleanAndValidatePastedText,
-} from "../../../helpers/utils";
 import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  isValidEmail,
+  isValidPhoneNumber,
+  validatePhone
+} from "../../../helpers/utils";
 export default {
   name: "PassengerDetailsForm",
   data() {
@@ -178,6 +179,7 @@ export default {
       passengerEmail: "",
       errorOccurred: false,
       departureTime: "",
+      realPhoneNumber: false,
     };
   },
   computed: {
@@ -249,11 +251,13 @@ export default {
     ...mapActions("launchStore", ["postPassengerDetailsAction"]),
     handleInput() {
       this.passengerMobile = cleanAndValidatePhoneNumber(this.passengerMobile);
+      this.realPhoneNumber = validatePhone(this.passengerMobile)
     },
     handlePaste(event) {
       event.preventDefault();
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerMobile = cleanAndValidatePastedText(pastedText);
+      this.realPhoneNumber = validatePhone(pastedText)
     },
     async paymentHandler() {
       const {
@@ -280,7 +284,7 @@ export default {
             boardingPoint,
             droppingPoint,
             passengerName,
-            passengerMobile: passengerMobile,
+            passengerMobile: passengerMobile.length === 10 ? `0${passengerMobile}` :`${passengerMobile}`,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
           };

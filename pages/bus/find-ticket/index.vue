@@ -249,10 +249,11 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
+  ServiceType,
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
   isValidPhoneNumber,
-  ServiceType,
+  validatePhone,
 } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
@@ -269,6 +270,7 @@ export default {
       oldTickets: [],
       alertMessage: null,
       ServiceType: ServiceType,
+      realPhoneNumber: false,
     };
   },
   computed: {
@@ -324,12 +326,14 @@ export default {
     handleInput() {
       this.clearAllError();
       this.phone = cleanAndValidatePhoneNumber(this.phone);
+      this.realPhoneNumber = validatePhone(this.phone);
     },
     handlePaste(event) {
       event.preventDefault();
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.phone = cleanAndValidatePastedText(pastedText);
+      this.realPhoneNumber = validatePhone(this.phone);
     },
 
     getServiceClassName(service) {
@@ -349,7 +353,7 @@ export default {
       this.clearAllError();
       const formData = {};
       if (this.selectedTab === 0) {
-        formData.phone = this.phone;
+        formData.phone = this.phone?.length === 10 ? `0${this.phone}` : this.phone;
         if (isValidPhoneNumber(this.phone)) {
           this.$nextTick(async () => {
             await this.sendOtpForSearchTicketAction({

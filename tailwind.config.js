@@ -16,6 +16,7 @@ module.exports = {
         corporateBg: '#E8E8E8',
         bgShade3: '#F4F8FB',
         successLight: '#F1F9F1',
+        danger: '#E0293B',
         blackPrimary: '#151414',
         blackSecondary:'#676769',
         blackLight: '#4D4D4F',
