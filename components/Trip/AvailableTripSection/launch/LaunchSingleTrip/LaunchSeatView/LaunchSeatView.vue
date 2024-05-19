@@ -234,6 +234,8 @@ export default {
               path: "/launch/payment/passenger-details",
               query: {
                 tnxId: data.transactionId,
+                from:   this.$route.query.from,
+        to:  this.$route.query.to,
               },
             },
             () => {

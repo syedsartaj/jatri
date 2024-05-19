@@ -1126,6 +1126,8 @@ export default {
                 query: {
                   tnxId:
                     this.getPaymentPendingBlockData.paymentInfo.transactionId,
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
                 },
               });
             }

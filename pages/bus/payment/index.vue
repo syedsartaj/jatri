@@ -510,21 +510,10 @@ export default {
           if (
             err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            const query = {
-              from: this.getBookingInfoDetails.invoice.fromCity,
-              to: this.getBookingInfoDetails.invoice.toCity,
-              date: new Date(
-                dateTimeFormat(
-                  this.getBookingInfoDetails.invoice.boardingDateTime,
-                  6,
-                  "DD MMM YYYY"
-                )
-              ).getTime(),
-              type: "all",
-            };
             
-              this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
-          }
+            
+            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice)      
+              }
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
       }
@@ -726,20 +715,7 @@ export default {
           if (
             err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            const query = {
-              from: this.getBookingInfoDetails.invoice.fromCity,
-              to: this.getBookingInfoDetails.invoice.toCity,
-              date: new Date(
-                dateTimeFormat(
-                  this.getBookingInfoDetails.invoice.boardingDateTime,
-                  6,
-                  "DD MMM YYYY"
-                )
-              ).getTime(),
-              type: "all",
-            };
-            
-              this.$router.push({ path: "/bus/trip", query }); 
+            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice)
           }
           this.$toast.error(err.response.data.message, {
             position: "bottom-right",
@@ -797,20 +773,7 @@ export default {
           if (
             error.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            const query = {
-              from: this.getBookingInfoDetails.invoice.fromCity,
-              to: this.getBookingInfoDetails.invoice.toCity,
-              date: new Date(
-                dateTimeFormat(
-                  this.getBookingInfoDetails.invoice.boardingDateTime,
-                  6,
-                  "DD MMM YYYY"
-                )
-              ).getTime(),
-              type: "all",
-            };
-            
-              this.$router.push({ path: "/bus/trip", query }); 
+            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice) 
           }
           this.$nuxt.$loading?.finish();
         }
@@ -850,6 +813,23 @@ export default {
         }
       });
     },
+
+    handleSeveralPaymentAttempt(invoice) {
+      const query = {
+        from:   this.$route.query.from,
+        to:  this.$route.query.to,
+              date: new Date(
+                dateTimeFormat(
+                  invoice.boardingDateTime,
+                  6,
+                  "DD MMM YYYY"
+                )
+              ).getTime(),
+              type: "all",
+            };
+            
+              this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
+    }
     
   },
 };
