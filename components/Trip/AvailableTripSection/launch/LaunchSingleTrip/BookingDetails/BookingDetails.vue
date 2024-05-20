@@ -125,7 +125,7 @@
                                   <div
                                     class="text-s font-Inter font-medium tracking-wide text-[#151414]"
                                   >
-                                    +88
+                                    +880
                                   </div>
                                 </div>
                                 <input
@@ -343,13 +343,13 @@
 <script>
 import moment from "moment";
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import {
-  isValidPhoneNumber,
-  isValidEmail,
-  cleanAndValidatePhoneNumber,
-  cleanAndValidatePastedText,
-} from "../../../../../../helpers/utils";
 import { dateTimeFormat } from "../../../../../../helpers/dateTimeFormat";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  isValidEmail,
+  isValidPhoneNumber,
+} from "../../../../../../helpers/utils";
 export default {
   name: "BookingDetails",
   data() {

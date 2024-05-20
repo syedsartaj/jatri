@@ -51,7 +51,7 @@
           >
             <div class="flex items-center shrink-0">
               <div class="text-sm font-medium tracking-wide text-[#676769]">
-                +88
+                +880
               </div>
             </div>
             <input
