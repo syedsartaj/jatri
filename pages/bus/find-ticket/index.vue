@@ -142,7 +142,7 @@
                       <div
                       class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[10px]"
                       >
-                        +88
+                        +880
                       </div>
                       <img
                       class="w-[2px] h-[24px] ml-[4px] mr-2"
