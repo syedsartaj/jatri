@@ -1,6 +1,5 @@
 <template>
   <div style="width: 100%; overflow-x: auto; overflow-y: hidden">
-    <!-- <div style="width: 802px; display: flex;"> -->
     <div
       style="
         width: 802px;
@@ -8,7 +7,7 @@
         font-family: 'Inter', sans-serif;
       "
     >
-      <!-- ========= Heading Part ========= -->
+      <!-- ========= Heading Part 7QTT7NU69GF67V7 ========= -->
       <div
         style="
           background-color: #f04935;
@@ -25,29 +24,44 @@
       </div>
       <!-- ========= Main Part ========= -->
       <div style="padding-left: 24px; padding-right: 24px">
+        <!-- ========= Top Heading ========= -->
         <div
           style="
             display: flex;
             gap: 0.5rem;
-            margin-top: 16px;
-            margin-bottom: 16px;
+            margin-top: 12px;
+            margin-bottom: 12px;
           "
         >
           <img
             src="https://digital-ticketing.s3.amazonaws.com/DT/company/logo/hanif-enterprise-6475c6a0da2ef03909a01086-1708326900868.png"
             alt=""
-            style="height: 40px; width: 40px; border-radius: 100%"
+            style="height: 32px; width: auto; border-radius: 100%"
           />
           <div>
-            <p style="color: #151414; font-size: 14px; font-weight: 700">
+            <p
+              style="
+                color: #151414;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 20px;
+              "
+            >
               {{ ticketDetails.companyName }}
             </p>
-            <p style="color: #151414; font-size: 12px; font-weight: 400">
+            <p
+              style="
+                color: #151414;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 16px;
+              "
+            >
               {{ ticketDetails.coach }}
             </p>
           </div>
         </div>
-        <!-- 1st part -->
+        <!-- ========= Passenger Details ========= -->
         <div
           style="
             width: 100%;
@@ -58,7 +72,7 @@
         >
           <p
             style="
-              padding: 10px 8px;
+              padding: 8px 8px 8px 12px;
               background-color: #fde5e2;
               font-size: 12px;
               font-weight: 600;
@@ -66,52 +80,68 @@
           >
             Passenger Details:
           </p>
+          <img
+            :src="require('@/assets/images/ticket/eidStamp.svg')"
+            alt="eidStamp"
+            style="
+              width: 81px;
+              height: 81px;
+              top: 50px;
+              left: 900px;
+              position: absolute;
+              z-index: 999;
+            "
+          />
           <div
             style="
               display: grid;
               grid-template-columns: repeat(4, minmax(0, 1fr));
               color: #151414;
               font-size: 12px;
-              padding: 10px;
-              gap: 5px;
+              line-height: 16px;
+              padding: 8px;
+              gap: 6px;
             "
           >
-            <p style="font-weight: 400">Name</p>
-            <p style="font-weight: 700">{{ ticketDetails.passenger.name }}</p>
-            <p style="font-weight: 400">Bus Type</p>
-            <p style="font-weight: 700">
+            <p style="color: #494949; font-weight: 400">Name</p>
+            <p style="font-weight: 500">{{ ticketDetails.passenger.name }}</p>
+            <p style="color: #494949; font-weight: 400">Bus Type</p>
+            <p style="font-weight: 500">
               {{
                 serviceType === "BUS"
                   ? ticketDetails.coachType
                   : ticketDetails.shipType
               }}
             </p>
-            <p style="font-weight: 400">Mobile Number</p>
-            <p style="font-weight: 700">{{ ticketDetails.passenger.phone }}</p>
-            <p style="font-weight: 400">Selected Seat</p>
+            <p style="color: #494949; font-weight: 400">Mobile Number</p>
+            <p style="font-weight: 500">{{ ticketDetails.passenger.phone }}</p>
+            <p style="color: #494949; font-weight: 400">Selected Seat</p>
             <div>
               <div
                 v-for="seat in ticketDetails.seatNumbers"
                 :key="seat"
                 style="
-                  width: 32px;
-                  height: 22px;
-                  background-color: #f04935;
-                  color: white;
-                  font-size: 14px;
                   display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  border-radius: 4px;
-                  font-weight: 500;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 10px;
                 "
               >
-                {{ seat }}
+                <span
+                  style="
+                    background-color: #f04935;
+                    padding: 2px 8px;
+                    border-radius: 4px;
+                    color: #fff;
+                    font-weight: 500;
+                  "
+                  >{{ seat }}</span
+                >
               </div>
             </div>
           </div>
         </div>
-        <!-- 2st part -->
+        <!-- ========= Journey & Payment Details ========= -->
         <div style="display: flex">
           <div
             style="
@@ -123,7 +153,7 @@
           >
             <p
               style="
-                padding: 10px 8px;
+                padding: 8px 8px 8px 12px;
                 background-color: #fde5e2;
                 font-size: 12px;
                 font-weight: 600;
@@ -137,28 +167,32 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 color: #151414;
                 font-size: 12px;
-                padding: 10px;
-                gap: 5px;
+                padding: 12px;
+                gap: 8px;
               "
             >
-              <p style="font-weight: 400">Ticket No</p>
-              <p style="font-weight: 700">{{ ticketDetails.pnrCode }}</p>
-              <p style="font-weight: 400">From</p>
-              <p style="font-weight: 700">{{ ticketDetails.fromCity }}</p>
-              <p style="font-weight: 400">To</p>
-              <p style="font-weight: 700">{{ ticketDetails.toCity }}</p>
-              <p style="font-weight: 400">Departure Time & Date</p>
-              <p style="font-weight: 700">{{ departureDateTime }}</p>
-              <p style="font-weight: 400">Boarding counter</p>
-              <p style="font-weight: 700">{{ ticketDetails.boardingPlace }}</p>
-              <p style="font-weight: 400">Dropping counter</p>
-              <p style="font-weight: 700">{{ ticketDetails.dropingPlace }}</p>
-              <p style="font-weight: 400">Reporting Date &Time</p>
-              <p style="font-weight: 700">{{ reportTimeWithAddTime }}</p>
-              <p style="font-weight: 400">Issued by</p>
-              <p style="font-weight: 700">Jatri Online</p>
-              <p style="font-weight: 400">Issue Date &Time</p>
-              <p style="font-weight: 700">{{ issuedOn }}</p>
+              <p style="color: #676769; font-weight: 400">Ticket No</p>
+              <p style="font-weight: 500">{{ ticketDetails.pnrCode }}</p>
+              <p style="color: #676769; font-weight: 400">From</p>
+              <p style="font-weight: 500">{{ ticketDetails.fromCity }}</p>
+              <p style="color: #676769; font-weight: 400">To</p>
+              <p style="font-weight: 500">{{ ticketDetails.toCity }}</p>
+              <p style="color: #676769; font-weight: 400">
+                Departure Time & Date
+              </p>
+              <p style="font-weight: 500">{{ departureDateTime }}</p>
+              <p style="color: #676769; font-weight: 400">Boarding counter</p>
+              <p style="font-weight: 500">{{ ticketDetails.boardingPlace }}</p>
+              <p v-if="ticketDetails.dropingPlace" style="color: #676769; font-weight: 400">Dropping counter</p>
+              <p v-if="ticketDetails.dropingPlace" style="font-weight: 500">{{ ticketDetails.dropingPlace }}</p>
+              <p style="color: #676769; font-weight: 400">
+                Reporting Date &Time
+              </p>
+              <p style="font-weight: 500">{{ reportTimeWithAddTime }}</p>
+              <p style="color: #676769; font-weight: 400">Issued by</p>
+              <p style="font-weight: 500">Jatri Online</p>
+              <p style="color: #676769; font-weight: 400">Issue Date &Time</p>
+              <p style="font-weight: 500">{{ issuedOn }}</p>
             </div>
           </div>
           <div
@@ -166,7 +200,7 @@
           >
             <p
               style="
-                padding: 10px 8px;
+                padding: 8px 8px 8px 12px;
                 background-color: #fde5e2;
                 font-size: 12px;
                 font-weight: 600;
@@ -180,12 +214,16 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 color: #151414;
                 font-size: 12px;
-                padding: 6px 10px;
-                gap: 5px;
+                padding: 12px;
+                gap: 8px;
               "
-            > 
-              <p>Ticket Fare Seat ( {{ ticketDetails.seatNumbers[0] }} ):</p>
-              <p style="text-align: right">{{ ticketFareString }}</p>
+            >
+              <p style="color: #494949; font-weight: 400">
+                Ticket Fare Seat ( {{ ticketDetails.seatNumbers[0] }} ):
+              </p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketFareString }}
+              </p>
               <div
                 style="
                   grid-column: span 2 / span 2;
@@ -195,18 +233,40 @@
                   margin-bottom: 4px;
                 "
               ></div>
-              <p>Sub total</p>
-              <p style="text-align: right">{{ ticketDetails.totalAmount }} ৳</p>
-              <p>Discount:</p>
-              <p style="text-align: right">{{ ticketDetails.discount }} ৳</p>
-              <p>Promo:</p>
-              <p style="text-align: right">{{ ticketDetails.promo }} ৳</p>
-              <p>Service Charge:</p>
-              <p style="text-align: right">
+              <p style="color: #494949; font-weight: 400">Sub total</p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketDetails.payable }} ৳
+              </p>
+              <p
+                style="color: #494949; font-weight: 400"
+                v-if="ticketDetails.discount"
+              >
+                Discount:
+              </p>
+              <p
+                v-if="ticketDetails.discount"
+                style="font-weight: 600; text-align: right"
+              >
+                - {{ ticketDetails.discount }} ৳
+              </p>
+              <p
+                style="color: #494949; font-weight: 400"
+                v-if="ticketDetails.promo"
+              >
+                Promo:
+              </p>
+              <p
+                v-if="ticketDetails.promo"
+                style="font-weight: 600; text-align: right"
+              >
+                - {{ ticketDetails.promo }} ৳
+              </p>
+              <p style="color: #494949; font-weight: 400">Service Charge:</p>
+              <p style="font-weight: 600; text-align: right">
                 {{ ticketDetails.serviceCharge }} ৳
               </p>
-              <p>Gateway Charge:</p>
-              <p style="text-align: right">
+              <p style="color: #494949; font-weight: 400">Gateway Charge:</p>
+              <p style="font-weight: 600; text-align: right">
                 {{ ticketDetails.gatewayCharge }} ৳
               </p>
               <div
@@ -218,18 +278,19 @@
                   margin-bottom: 4px;
                 "
               ></div>
-              <p>Total</p>
-              <p style="text-align: right">{{ ticketDetails.totalAmount }}</p>
+              <p style="color: #494949; font-weight: 400">Total</p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketDetails.totalAmount }} ৳
+              </p>
             </div>
           </div>
         </div>
-
         <!-- ========= T&C Condition part =========  -->
         <div
           style="
             background-color: #f7f7f7;
             margin-top: 10px;
-            padding: 5px;
+            padding: 4px 8px 4px 8px;
             border-radius: 8px;
           "
         >
@@ -250,6 +311,7 @@
                   list-style-type: disc;
                   color: #151414;
                   font-size: 8px;
+                  font-weight: 400;
                   padding-left: 20px;
                 "
               >
@@ -277,6 +339,16 @@
                   The bus operator canceled the trip due to unavoidable reasons.
                 </li>
               </ul>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  font-weight: 400;
+                  margin-top: 5px;
+                "
+              >
+                *Trip may delay due to traffics during occasions
+              </p>
             </div>
 
             <div style="width: 49%; margin-left: 16px">
@@ -295,6 +367,7 @@
                   list-style-type: disc;
                   color: #151414;
                   font-size: 8px;
+                  font-weight: 400;
                   padding-left: 15px;
                 "
               >
@@ -321,6 +394,16 @@
                   time.
                 </li>
               </ul>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  font-weight: 400;
+                  margin-top: 5px;
+                "
+              >
+                *Applicable if only the ticket is cancellable
+              </p>
             </div>
           </div>
         </div>
@@ -329,9 +412,9 @@
           style="
             display: flex;
             justify-content: space-between;
-            margin-left: 20px;
+            margin-left: 100px;
+            margin-right: 100px;
             align-items: center;
-            margin-top: 14px;
           "
         >
           <div
@@ -484,7 +567,8 @@
             color: #151414;
             font-weight: 400;
             line-height: 16px;
-            margin-top: 10px;
+            margin-top: 25px;
+            margin-bottom: 25px;
           "
         >
           N.B: Please carry print copy or soft copy to collect your counter
@@ -492,16 +576,7 @@
         </p>
       </div>
       <!-- ========= Footer part ========= -->
-      <div
-        style="
-          background-color: #f04935;
-          padding-left: 24px;
-          margin-top: 9px;
-          padding-right: 24px;
-          padding-top: 12px;
-          padding-bottom: 12px;
-        "
-      >
+      <div style="background-color: #f04935; padding: 12px 16px">
         <div style="display: flex; justify-content: space-between">
           <div
             style="

@@ -34,6 +34,7 @@
             :id="'printTicket-' + getTicketDetails._id"
             :ticketFareString="ticketFareString"
             :serviceType="serviceType"
+            :seatFareArray="seatFareArray"
           />
         </section>
       </vue-html2pdf>
@@ -55,6 +56,7 @@
         :phone="supportPhone"
         :downloadTicketStatus="downloadTicketValue"
         :serviceType="serviceType"
+        :seatFareArray="seatFareArray"
       />
     </div>
 
@@ -283,7 +285,7 @@
 </template>
 
 <script>
-import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
+import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "UserViewTicket",
@@ -292,6 +294,7 @@ export default {
       downloadTicketValue: false,
       seatFareObject: {},
       ticketFareString: "",
+      seatFareArray: '',
     };
   },
   props: [
@@ -310,6 +313,30 @@ export default {
     for (let key in this.seatFareObject) {
       this.ticketFareString += `[${key} x ${this.seatFareObject[key]}]`;
     }
+
+    let seatFares = this.getPaymentHistory?.seatFares;
+    let seatNumbers = this.getTicketDetails.seatNumbers
+    const fareMap = {};
+
+    // Populate the mapping object
+    for (let i = 0; i < seatNumbers.length; i++) {
+      const seat = seatNumbers[i];
+      const fare = seatFares[i];
+
+      if (!fareMap[fare]) {
+        fareMap[fare] = [];
+      }
+
+      fareMap[fare].push(seat);
+    }
+    
+    // Convert the mapping object to the desired output format
+    this.seatFareArray = Object.keys(fareMap).map((fare) => {
+      return {
+        seat: fareMap[fare],
+        fare: `${fare}x${fareMap[fare].length}`,
+      };
+    });
   },
   methods: {
     // downloadFunction
