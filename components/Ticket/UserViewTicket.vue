@@ -1,6 +1,5 @@
 <template>
   <div class="border border-[#DBDBDB] rounded-md">
-    <!-- for download -->
     <client-only>
       <vue-html2pdf
         class="hidden"
@@ -19,13 +18,10 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
-        :pdf-margin="10"
-        pdf-orientation="portrait"
-        pdf-content-width="800px"
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
-        <section slot="pdf-content">
+        <section slot="pdf-content" class="a4-content">
           <PrintDownloadTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
@@ -61,7 +57,9 @@
     </div>
 
     <!-- for show to user-->
-    <div class="w-full overflow-x-auto overflow-y-hidden rounded-t-md custom-word-break">
+    <div
+      class="w-full overflow-x-auto overflow-y-hidden rounded-t-md custom-word-break"
+    >
       <div class="border-b border-[#DBDBDB] bg-white">
         <div
           class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]"
@@ -80,10 +78,10 @@
           <div
             class="flex flex-col md:flex-row justify-between divide-y md:divide-y-0 md:divide-x divide-[#DBDBDB]"
           >
-            <div class="w-full md:w-1/2 ">
+            <div class="w-full md:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
                 <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary ">
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
                   {{ getTicketDetails.passenger.name }}
                 </p>
               </div>
@@ -219,6 +217,7 @@
       </div>
     </div>
     <!-- {{getTicketDetails}} -->
+    <p v-if="getTicketDetails.tripType === 'eid'" class="text-[#f04935] pt-2 text-center bg-white">This is a Eid ticket it is non cancellable & non refundable</p>
     <div
       class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md"
     >
@@ -294,7 +293,7 @@ export default {
       downloadTicketValue: false,
       seatFareObject: {},
       ticketFareString: "",
-      seatFareArray: '',
+      seatFareArray: "",
     };
   },
   props: [
@@ -315,7 +314,7 @@ export default {
     }
 
     let seatFares = this.getPaymentHistory?.seatFares;
-    let seatNumbers = this.getTicketDetails.seatNumbers
+    let seatNumbers = this.getTicketDetails.seatNumbers;
     const fareMap = {};
 
     // Populate the mapping object
@@ -329,7 +328,7 @@ export default {
 
       fareMap[fare].push(seat);
     }
-    
+
     // Convert the mapping object to the desired output format
     this.seatFareArray = Object.keys(fareMap).map((fare) => {
       return {
@@ -355,7 +354,7 @@ export default {
     printTicket(id) {
       this.downloadTicketValue = false;
       let divContents = window.document.getElementById(id).innerHTML;
-      var printWindow = window.open();
+      var printWindow = window.open("", "_blank");
       var is_chrome = Boolean(window.chrome);
       printWindow.document.write("<html>");
       printWindow.document.write(`<head>`);
@@ -363,7 +362,9 @@ export default {
       printWindow.document.write(
         `*{ font-family: 'Inter', sans-serif;box-sizing: border-box;margin: 0;padding: 0;}`
       ); // delete date and page number
-      printWindow.document.write(`@page { size: auto;  margin: 0mm; }`); // delete date and page number
+      printWindow.document.write(
+        `@page { width: 210mm; height: 297mm; margin: 0mm; }`
+      ); // delete date and page number
       printWindow.document.write(`</style>`);
       printWindow.document.write(`</head>`);
       printWindow.document.write("<body>");
@@ -386,12 +387,9 @@ export default {
       const payload = {
         ticketId,
         service: this.serviceType,
-
       };
       this.setCancelTicketId(ticketId);
-      this.sendOtpForCancelTicketAction(
-        payload
-      );
+      this.sendOtpForCancelTicketAction(payload);
     },
   },
   computed: {
@@ -434,8 +432,7 @@ export default {
 </script>
 
 <style scoped>
-
-.custom-word-break{
-word-break: break-word;
+.custom-word-break {
+  word-break: break-word;
 }
 </style>
