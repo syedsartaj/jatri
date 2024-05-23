@@ -1,5 +1,16 @@
 <template>
-  <div class="border border-[#DBDBDB] rounded-md">
+  <div class="">
+    <PrintDownloadTicket
+      class="mb-4"
+      :ticketDetails="getTicketDetails"
+      :email="supportEmail"
+      :phone="supportPhone"
+      :downloadTicketStatus="downloadTicketValue"
+      :id="'printTicket-' + getTicketDetails._id"
+      :ticketFareString="ticketFareString"
+      :serviceType="serviceType"
+      :seatFareArray="seatFareArray"
+    />
     <client-only>
       <vue-html2pdf
         class="hidden"
@@ -217,7 +228,12 @@
       </div>
     </div>
     <!-- {{getTicketDetails}} -->
-    <p v-if="getTicketDetails.tripType === 'eid'" class="text-[#f04935] pt-2 text-center bg-white">This is a Eid ticket it is non cancellable & non refundable</p>
+    <p
+      v-if="getTicketDetails.tripType === 'eid'"
+      class="text-[#f04935] pt-2 text-center bg-white"
+    >
+      This is a Eid ticket it is non cancellable & non refundable
+    </p>
     <div
       class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md"
     >

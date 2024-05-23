@@ -2,7 +2,8 @@
   <div style="width: 100%; overflow-x: auto; overflow-y: hidden">
     <div
       style="
-        width: 802px;
+        width: 595px;
+        height: 842px;
         background-color: white;
         font-family: 'Inter', sans-serif;
       "
