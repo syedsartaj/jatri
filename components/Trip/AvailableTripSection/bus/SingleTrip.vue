@@ -11,9 +11,12 @@
           : 'border-0 border-[#DBDBDB]'
       "
     >
+     <p v-if="trip.tripType === 'eid'" class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-[290px] ml-[-5px] mt-[4px] h-[20px] bg-no-repeat text-white text-[10px] px-6 pt-[2px] font-medium absolute z-50">Eid ticket-Non refundable-Non cancelable</p>
       <div
-        class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        :class="trip.tripType === 'eid'?'pt-[26px] pb-5':'py-5'"
+        class="w-full lg:w-4/5 px-4 lg:px-6 divide-y divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
+      
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
             class="flex justify-start gap-x-4 items-center w-7/12 md:w-9/12 lg:w-7/12 xl:w-9/12 cursor-pointer"
@@ -456,7 +459,7 @@
                 <div
                   class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
                 >
-                  +88
+                  +880
                 </div>
                 <img
                   class="w-[2px] h-[28px] ml-[4px]"
@@ -546,7 +549,6 @@
 </template>
 
 <script>
-
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
@@ -1078,10 +1080,11 @@ export default {
           passengerName: this.passengerName,
           passengerMobile: this.passengerPhone?.length === 10 ? `0${this.passengerPhone}` :`${this.passengerPhone}`,
           passengerEmail: this.passengerEmail,
-          passengerAddress: "",
-          passengerGender: "",
-          passengerAge: "",
+          passengerAddress: "dhaka",
+          passengerGender: "male",
+          passengerAge: "20",
           isTicketCancelable: 1,
+          tripType: this.trip.tripType,
           companyId: this.trip.companyId,
           tripDateTime: this.trip.tripDateTime,
           promoCode: this.promoCode,

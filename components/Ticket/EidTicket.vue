@@ -7,7 +7,7 @@
         font-family: 'Inter', sans-serif;
       "
     >
-      <!-- ========= Heading Part ZLECIV1HGIZZM13 ========= -->
+      <!-- ========= Heading Part 7QTT7NU69GF67V7 ========= -->
       <div
         style="
           background-color: #f04935;
@@ -86,8 +86,8 @@
             style="
               width: 81px;
               height: 81px;
-              top: 59px;
-              left: 670px;
+              top: 50px;
+              left: 900px;
               position: absolute;
               z-index: 999;
             "
@@ -116,9 +116,18 @@
             <p style="color: #494949; font-weight: 400">Mobile Number</p>
             <p style="font-weight: 500">{{ ticketDetails.passenger.phone }}</p>
             <p style="color: #494949; font-weight: 400">Selected Seat</p>
-            <div class="flex gap-2">
-              <div v-for="seat in ticketDetails.seatNumbers" :key="seat">
-                <div
+            <div>
+              <div
+                v-for="seat in ticketDetails.seatNumbers"
+                :key="seat"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 10px;
+                "
+              >
+                <span
                   style="
                     background-color: #f04935;
                     padding: 2px 8px;
@@ -126,9 +135,8 @@
                     color: #fff;
                     font-weight: 500;
                   "
+                  >{{ seat }}</span
                 >
-                  {{ seat }}
-                </div>
               </div>
             </div>
           </div>
@@ -175,8 +183,8 @@
               <p style="font-weight: 500">{{ departureDateTime }}</p>
               <p style="color: #676769; font-weight: 400">Boarding counter</p>
               <p style="font-weight: 500">{{ ticketDetails.boardingPlace }}</p>
-              <p style="color: #676769; font-weight: 400">Dropping counter</p>
-              <p style="font-weight: 500">{{ ticketDetails.dropingPlace }}</p>
+              <p v-if="ticketDetails.dropingPlace" style="color: #676769; font-weight: 400">Dropping counter</p>
+              <p v-if="ticketDetails.dropingPlace" style="font-weight: 500">{{ ticketDetails.dropingPlace }}</p>
               <p style="color: #676769; font-weight: 400">
                 Reporting Date &Time
               </p>
@@ -200,15 +208,6 @@
             >
               Payment Details:
             </p>
-            <div v-for="(tickets, i) in seatFareArray" :key="i">
-              <p style="color: #494949; font-weight: 400">
-                Ticket Fare Seat (
-                <span v-for="sit in tickets.seat" :key="sit">{{ sit }}</span> )
-              </p>
-              <p style="font-weight: 600; text-align: right">
-                {{ tickets.fare }}
-              </p>
-            </div>
             <div
               style="
                 display: grid;
@@ -219,6 +218,12 @@
                 gap: 8px;
               "
             >
+              <p style="color: #494949; font-weight: 400">
+                Ticket Fare Seat ( {{ ticketDetails.seatNumbers[0] }} ):
+              </p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketFareString }}
+              </p>
               <div
                 style="
                   grid-column: span 2 / span 2;
@@ -403,103 +408,172 @@
           </div>
         </div>
         <!-- ========= social part =========  -->
-        <div class="flex justify-between">
-          <div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-left: 100px;
+            margin-right: 100px;
+            align-items: center;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              column-gap: 10px;
+              justify-content: flex-start;
+              align-items: start;
+            "
+          >
             <div
+              v-if="downloadTicketStatus"
               style="
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 15px;
-                margin-top: 12px;
+                column-gap: 10px;
+                margin-top: 6px;
+                align-items: start;
               "
             >
-              <div class="flex gap-x-2">
-                <img
-                  :src="require('@/assets/images/ticket/mail.svg')"
-                  alt=""
-                  style="width: 17px; height: 15px; display: inline-block"
-                />
-                <div>
-                  <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                    Get in touch
-                  </p>
-                  <p style="color: #151414; font-size: 12px; font-weight: 600">
-                    {{ getSearchedTicketList.supportEmail || email }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-x-2">
-                <img
-                  :src="require('@/assets/images/ticket/phone.svg')"
-                  alt=""
-                  style="width: 15px; height: 15px; display: inline-block"
-                />
-                <div>
-                  <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                    Call us
-                  </p>
-                  <p style="color: #151414; font-size: 12px; font-weight: 600">
-                    {{ getSearchedTicketList.supportPhone || phone }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-x-2">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2.406 1.20996L9.19467 8.00063L2.40667 14.7913C2.28596 14.7405 2.18295 14.6552 2.11059 14.5461C2.03824 14.437 1.99976 14.3089 2 14.178V1.82329C2.00005 1.69251 2.03857 1.56463 2.11076 1.45557C2.18295 1.34651 2.28563 1.2611 2.406 1.20996ZM9.666 8.47196L11.2007 10.0066L3.90933 14.2286L9.666 8.47196ZM11.7987 6.33996L13.67 7.42396C13.771 7.48256 13.8549 7.56668 13.9132 7.66789C13.9715 7.76909 14.0022 7.88383 14.0022 8.00063C14.0022 8.11742 13.9715 8.23216 13.9132 8.33337C13.8549 8.43457 13.771 8.51869 13.67 8.57729L11.798 9.66129L10.1373 8.00063L11.7987 6.33996ZM3.90933 1.77263L11.2013 5.99396L9.666 7.52929L3.90933 1.77263Z"
-                    fill="#F04935"
-                  />
-                </svg>
-                <div>
-                  <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                    Download App
-                  </p>
-                  <p style="color: #151414; font-size: 12px; font-weight: 600">
-                    Get latest updates
-                  </p>
-                </div>
-              </div>
               <img
-                :src="require('@/assets/images/ticket/qr.png')"
+                :src="require('@/assets/images/ticket/mail.svg')"
                 alt=""
-                style="height: 50px; width: 50px"
+                style="width: 17px; height: 15px; display: inline-block"
               />
+              <div>
+                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                  Get in touch
+                </p>
+                <p style="color: #151414; font-size: 12px; font-weight: 600">
+                  {{ getSearchedTicketList.supportEmail || email }}
+                </p>
+              </div>
             </div>
             <div
+              v-else
               style="
-                font-size: 11px;
-                color: #151414;
-                font-weight: 400;
-                line-height: 16px;
-                margin-top: 10px;
-                margin-bottom: 22px;
+                display: flex;
+                column-gap: 10px;
+                margin-top: 6px;
+                align-items: start;
               "
             >
-              <p class="text-[#f04935]">
-                This is a Eid ticket it is non cancellable & non refundable
-              </p>
-              <p>
-                N.B: Please carry print copy or soft copy to collect your
-                counter ticket copy.
-              </p>
+              <img
+                :src="require('@/assets/images/ticket/mail.svg')"
+                alt=""
+                style="width: 17px; height: 15px; display: inline-block"
+              />
+              <div>
+                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                  Get in touch
+                </p>
+                <p style="color: #151414; font-size: 12px; font-weight: 600">
+                  {{ getSearchedTicketList.supportEmail || email }}
+                </p>
+              </div>
             </div>
           </div>
 
-          <img
-            :src="require('@/assets/images/ticket/eidFooter.svg')"
-            alt="eidStamp"
-            style="top: 636px; left: 650px; position: absolute"
-          />
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: flex-start;
+              text-align: left;
+            "
+          >
+            <div
+              v-if="downloadTicketStatus"
+              style="
+                display: flex;
+                column-gap: 10px;
+                margin-top: 6px;
+                align-items: start;
+              "
+            >
+              <img
+                :src="require('@/assets/images/ticket/phone.svg')"
+                alt=""
+                style="width: 15px; height: 15px; display: inline-block"
+              />
+              <div>
+                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                  Call us
+                </p>
+                <p style="color: #151414; font-size: 12px; font-weight: 600">
+                  {{ getSearchedTicketList.supportPhone || phone }}
+                </p>
+              </div>
+            </div>
+            <div
+              v-else
+              style="
+                display: flex;
+                column-gap: 10px;
+                margin-top: 6px;
+                align-items: start;
+              "
+            >
+              <img
+                :src="require('@/assets/images/ticket/phone.svg')"
+                alt=""
+                style="width: 15px; height: 15px; display: inline-block"
+              />
+              <div>
+                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                  Call us
+                </p>
+                <p style="color: #151414; font-size: 12px; font-weight: 600">
+                  {{ getSearchedTicketList.supportPhone || phone }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; column-gap: 10px; align-items: center">
+            <svg
+              style="margin-bottom: 4px"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.406 1.20996L9.19467 8.00063L2.40667 14.7913C2.28596 14.7405 2.18295 14.6552 2.11059 14.5461C2.03824 14.437 1.99976 14.3089 2 14.178V1.82329C2.00005 1.69251 2.03857 1.56463 2.11076 1.45557C2.18295 1.34651 2.28563 1.2611 2.406 1.20996ZM9.666 8.47196L11.2007 10.0066L3.90933 14.2286L9.666 8.47196ZM11.7987 6.33996L13.67 7.42396C13.771 7.48256 13.8549 7.56668 13.9132 7.66789C13.9715 7.76909 14.0022 7.88383 14.0022 8.00063C14.0022 8.11742 13.9715 8.23216 13.9132 8.33337C13.8549 8.43457 13.771 8.51869 13.67 8.57729L11.798 9.66129L10.1373 8.00063L11.7987 6.33996ZM3.90933 1.77263L11.2013 5.99396L9.666 7.52929L3.90933 1.77263Z"
+                fill="#F04935"
+              />
+            </svg>
+
+            <div>
+              <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                Download App
+              </p>
+              <p style="color: #151414; font-size: 12px; font-weight: 600">
+                Get latest updates
+              </p>
+            </div>
+            <img
+              :src="require('@/assets/images/ticket/qr.png')"
+              alt=""
+              style="height: 60px; width: 60px; margin: 5px; padding: 5px"
+            />
+          </div>
         </div>
+        <p
+          style="
+            text-align: center;
+            font-size: 11px;
+            color: #151414;
+            font-weight: 400;
+            line-height: 16px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+          "
+        >
+          N.B: Please carry print copy or soft copy to collect your counter
+          ticket copy.
+        </p>
       </div>
       <!-- ========= Footer part ========= -->
       <div style="background-color: #f04935; padding: 12px 16px">
@@ -537,7 +611,6 @@ export default {
     "downloadTicketStatus",
     "ticketFareString",
     "serviceType",
-    "seatFareArray",
   ],
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
