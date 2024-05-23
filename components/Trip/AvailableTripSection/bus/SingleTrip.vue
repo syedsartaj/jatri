@@ -11,9 +11,9 @@
           : 'border-0 border-[#DBDBDB]'
       "
     >
-     <p v-if="trip.tripType === 'eid'" class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-fit bg-no-repeat pl-[16px] pr-[32px] text-white text-[10px] font-medium absolute  z-50">Eid ticket-Non refundable-Non cancelable</p>
+     <p v-if="trip.tripType === 'eid'" class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-[290px] ml-[-5px] mt-[4px] h-[20px] bg-no-repeat text-white text-[10px] px-6 pt-[2px] font-medium absolute z-50">Eid ticket-Non refundable-Non cancelable</p>
       <div
-        :class="trip.tripType === 'eid'?'pt-10 pb-5':'py-5'"
+        :class="trip.tripType === 'eid'?'pt-[26px] pb-5':'py-5'"
         class="w-full lg:w-4/5 px-4 lg:px-6 divide-y divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
       
