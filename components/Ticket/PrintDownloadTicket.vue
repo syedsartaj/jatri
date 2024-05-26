@@ -1,5 +1,14 @@
 <template>
-  <div style="width: 100%; overflow-x: auto; overflow-y: hidden">
+  <div
+    style="
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      color-adjust: exact !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    "
+  >
     <div
       style="
         width: 800px;
@@ -13,13 +22,23 @@
         v-if="ticketDetails.tripType === 'eid'"
         :src="require('@/assets/images/ticket/eidHeader.svg')"
         alt=""
-        style="width: 800px; height: 50px;background-repeat: no-repeat; object-fit: cover;"
+        style="
+          width: 800px;
+          height: 50px;
+          background-repeat: no-repeat;
+          object-fit: cover;
+        "
       />
       <img
         v-else
         :src="require('@/assets/images/ticket/header.svg')"
         alt=""
-        style="width: 800px; height: 50px;background-repeat: no-repeat; object-fit: cover;"
+        style="
+          width: 800px;
+          height: 50px;
+          background-repeat: no-repeat;
+          object-fit: cover;
+        "
       />
 
       <!-- ========= Main Part ========= -->
@@ -29,8 +48,8 @@
           style="
             display: flex;
             gap: 0.5rem;
-            margin-top: 16px;
-            margin-bottom: 16px;
+            margin-top: 14px;
+            margin-bottom: 20px;
           "
         >
           <img
@@ -43,10 +62,9 @@
             <p
               style="
                 color: #151414;
-                font-size: 19px;
+                font-size: 20px;
                 font-weight: 700;
-                line-height: 20px;
-                margin-bottom: 4px;
+                line-height: 22px;
               "
             >
               {{ ticketDetails.companyName }}
@@ -54,9 +72,9 @@
             <p
               style="
                 color: #151414;
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: 500;
-                line-height: 16px;
+                line-height: 20px;
               "
             >
               Coach No: {{ ticketDetails.coach }}
@@ -69,14 +87,14 @@
             width: 100%;
             border: 2px solid #fde5e2;
             border-radius: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
           "
         >
           <p
             style="
               padding: 10px;
               background-color: #fde5e2;
-              font-size: 16px;
+              font-size: 18px;
               font-weight: 600;
             "
           >
@@ -89,7 +107,7 @@
             style="
               width: 295px;
               height: 112px;
-              top: 53px;
+              top: 56px;
               left: 500px;
               position: absolute;
               z-index: 999;
@@ -313,7 +331,7 @@
         <div
           style="
             background-color: #f7f7f7;
-            margin-top: 10px;
+            margin-top: 16px;
             padding: 4px 10px 4px 10px;
             border-radius: 8px;
           "
@@ -434,7 +452,7 @@
         <!-- ========= social part =========  -->
         <div
           v-if="ticketDetails.tripType === 'eid'"
-          class="flex justify-between"
+          style="display: flex; justify-content: space-between;"
         >
           <div>
             <div
@@ -446,7 +464,7 @@
                 margin-top: 24px;
               "
             >
-              <div class="flex gap-x-2">
+              <div style="display: flex;   gap: 17px;">
                 <img
                   :src="require('@/assets/images/ticket/mail.svg')"
                   alt=""
@@ -462,7 +480,7 @@
                 </div>
               </div>
 
-              <div class="flex gap-x-2">
+              <div style="display: flex;  gap: 17px;">
                 <img
                   :src="require('@/assets/images/ticket/phone.svg')"
                   alt=""
@@ -478,7 +496,7 @@
                 </div>
               </div>
 
-              <div class="flex gap-x-2">
+              <div style="display: flex;  gap: 17px;">
                 <svg
                   width="16"
                   height="16"
@@ -512,7 +530,7 @@
                 color: #151414;
                 font-weight: 400;
                 line-height: 16px;
-                margin-top: 12px;
+                margin-top: 14px;
                 padding: 4px;
                 margin-bottom: 24px;
               "
@@ -537,7 +555,7 @@
           style="
             display: flex;
             justify-content: space-between;
-            margin-top: 16px;
+            margin-top: 14px;
             margin-left: 55px;
             margin-right: 55px;
             align-items: center;
@@ -693,8 +711,9 @@
             color: #151414;
             font-weight: 400;
             line-height: 16px;
-            margin-top: 12px;
-            margin-bottom: 20px;
+            margin-top: 16px;
+            text-align: center;
+            margin-bottom: 36px;
           "
         >
           <p class="text-center">
@@ -704,7 +723,7 @@
         </div>
       </div>
       <!-- ========= Footer part ========= -->
-      <div style="background-color: #f04935 !important; padding: 14px 110px">
+      <div style="background-color: #f04935; padding: 14px 40px">
         <div style="display: flex; justify-content: space-between">
           <div
             style="

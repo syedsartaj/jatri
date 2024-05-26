@@ -1,16 +1,5 @@
 <template>
-  <div class="">
-    <PrintDownloadTicket
-      class="mb-4"
-      :ticketDetails="getTicketDetails"
-      :email="supportEmail"
-      :phone="supportPhone"
-      :downloadTicketStatus="downloadTicketValue"
-      :id="'printTicket-' + getTicketDetails._id"
-      :ticketFareString="ticketFareString"
-      :serviceType="serviceType"
-      :seatFareArray="seatFareArray"
-    />
+  <div class="border border-[#DBDBDB] rounded-md">
     <client-only>
       <vue-html2pdf
         class="hidden"
