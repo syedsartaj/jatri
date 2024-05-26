@@ -2,7 +2,7 @@
   <div
     style="
       width: 100%;
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: hidden;
       color-adjust: exact !important;
       -webkit-print-color-adjust: exact !important;
@@ -49,7 +49,7 @@
             display: flex;
             gap: 0.5rem;
             margin-top: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
           "
         >
           <img
@@ -72,8 +72,9 @@
             <p
               style="
                 color: #151414;
+                margin-top: 6px;
                 font-size: 18px;
-                font-weight: 500;
+                font-weight: 400;
                 line-height: 20px;
               "
             >
@@ -142,18 +143,18 @@
             <table style="border-collapse: collapse">
               <tbody>
                 <tr>
-                  <td
-                    v-for="seat in ticketDetails.seatNumbers"
-                    :key="seat"
-                    style="
-                      background: #f04935;
-                      border-radius: 4px;
-                      color: #fff;
-                      font-weight: 500;
-                      padding: 4px;
-                    "
-                  >
-                    <span style="margin-right: 3px">{{ seat }}</span>
+                  <td v-for="seat in ticketDetails.seatNumbers" :key="seat">
+                    <span
+                      style="
+                        background: #f04935;
+                        border-radius: 6px;
+                        color: #fff;
+                        font-weight: 500;
+                        padding: 4px 8px;
+                        margin-right: 3px;
+                      "
+                      >{{ seat }}</span
+                    >
                   </td>
                 </tr>
               </tbody>
@@ -172,7 +173,9 @@
           >
             <p
               style="
-                padding: 10px;
+                padding-left: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 background-color: #fde5e2;
                 font-size: 18px;
                 font-weight: 600;
@@ -221,7 +224,9 @@
           >
             <p
               style="
-                padding: 10px;
+                padding-left: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 background-color: #fde5e2;
                 font-size: 18px;
                 font-weight: 600;
@@ -235,7 +240,7 @@
               style="
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                font-size: 16px;
+                font-size: 15px;
                 padding-top: 6px;
                 padding-left: 14px;
                 padding-right: 14px;
@@ -248,12 +253,12 @@
                   grid-column: span 2 / span 2;
                 "
               >
-                Ticket Fare Seat (
-                <span v-for="sit in tickets.seat" :key="sit">{{ sit }}, </span>
+                Ticket Fare Seat (<span v-for="(sit, index) in tickets.seat" :key="sit">{{sit}}<span v-if="index != tickets.seat.length - 1">,</span></span
+                >
                 )
               </p>
-              <p style="font-weight: 600; text-align: right">
-                {{ tickets.fare }}
+              <p style="font-weight: 500; text-align: right">
+                {{ tickets.fare }} ৳
               </p>
             </div>
             <div
@@ -261,7 +266,7 @@
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 color: #151414;
-                font-size: 14px;
+                font-size: 16px;
                 padding: 6px 14px;
                 gap: 10px;
               "
@@ -276,7 +281,7 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Sub total</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.payable }} ৳
               </p>
               <p
@@ -287,7 +292,7 @@
               </p>
               <p
                 v-if="ticketDetails.discount"
-                style="font-weight: 600; text-align: right"
+                style="font-weight: 500; text-align: right"
               >
                 - {{ ticketDetails.discount }} ৳
               </p>
@@ -299,16 +304,16 @@
               </p>
               <p
                 v-if="ticketDetails.promo"
-                style="font-weight: 600; text-align: right"
+                style="font-weight: 500; text-align: right"
               >
                 - {{ ticketDetails.promo }} ৳
               </p>
               <p style="color: #494949; font-weight: 400">Service Charge:</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.serviceCharge }} ৳
               </p>
               <p style="color: #494949; font-weight: 400">Gateway Charge:</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.gatewayCharge }} ৳
               </p>
               <div
@@ -321,7 +326,7 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Total</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.totalAmount }} ৳
               </p>
             </div>
@@ -340,7 +345,8 @@
             <div style="width: 50%">
               <p
                 style="
-                  font-size: 14px;
+                  font-size: 11px;
+                  line-height: 12px;
                   color: #151414;
                   font-weight: 600;
                   margin-bottom: 6px;
@@ -353,6 +359,7 @@
                   list-style-type: disc;
                   color: #151414;
                   font-size: 11px;
+                  line-height: 14px;
                   font-weight: 400;
                   padding-left: 20px;
                 "
@@ -396,19 +403,21 @@
             <div style="width: 49%; margin-left: 10px">
               <p
                 style="
-                  font-size: 14px;
+                  font-size: 11px;
+                  line-height: 12px;
                   color: #151414;
                   font-weight: 600;
                   margin-bottom: 6px;
                 "
               >
-                Cancel Policy
+                Cancellation policy
               </p>
               <ul
                 style="
                   list-style-type: disc;
                   color: #151414;
                   font-size: 11px;
+                  line-height: 14px;
                   font-weight: 400;
                   padding-left: 17px;
                 "
@@ -419,12 +428,14 @@
                   operator's approval.
                 </li>
                 <li>
-                  You must apply for cancellation & refund 24 hours before trip
+                  You must apply for
+                  <b>cancellation & refund 24 hours before trip</b>
                   departure time (excluding 12 AM to 7 AM).
                 </li>
                 <li>
-                  In case of refund, it will take 7 working days for MFS(bKash,
-                  Nagad) and 12/15 working days for SSL Commerz/ Bank payment.
+                  In case of refund, it will take
+                  <b>7 working days for MFS</b>(bKash, Nagad) and
+                  <b>12/15 working days for SSL Commerz/ Bank</b> payment.
                 </li>
                 <li>
                   No ticket will be refunded unless it has been canceled as per
@@ -432,8 +443,8 @@
                 </li>
                 <li>
                   If the Bus operator cancels the trip after this period, you
-                  must apply for a refund within 24 hours of the trip departure
-                  time.
+                  must <b>apply for a refund within 24 hours</b> of the trip
+                  departure time.
                 </li>
               </ul>
               <p
@@ -452,7 +463,7 @@
         <!-- ========= social part =========  -->
         <div
           v-if="ticketDetails.tripType === 'eid'"
-          style="display: flex; justify-content: space-between;"
+          style="display: flex; justify-content: space-between"
         >
           <div>
             <div
@@ -464,7 +475,7 @@
                 margin-top: 24px;
               "
             >
-              <div style="display: flex;   gap: 17px;">
+              <div style="display: flex; gap: 17px">
                 <img
                   :src="require('@/assets/images/ticket/mail.svg')"
                   alt=""
@@ -474,13 +485,13 @@
                   <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                     Get in touch
                   </p>
-                  <p style="color: #151414; font-size: 14px; font-weight: 600">
+                  <p style="color: #151414; font-size: 16px; font-weight: 600">
                     {{ getSearchedTicketList.supportEmail || email }}
                   </p>
                 </div>
               </div>
 
-              <div style="display: flex;  gap: 17px;">
+              <div style="display: flex; gap: 17px">
                 <img
                   :src="require('@/assets/images/ticket/phone.svg')"
                   alt=""
@@ -490,13 +501,13 @@
                   <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                     Call us
                   </p>
-                  <p style="color: #151414; font-size: 14px; font-weight: 600">
+                  <p style="color: #151414; font-size: 16px; font-weight: 600">
                     {{ getSearchedTicketList.supportPhone || phone }}
                   </p>
                 </div>
               </div>
 
-              <div style="display: flex;  gap: 17px;">
+              <div style="display: flex; gap: 17px">
                 <svg
                   width="16"
                   height="16"
@@ -513,7 +524,7 @@
                   <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                     Download App
                   </p>
-                  <p style="color: #151414; font-size: 14px; font-weight: 600">
+                  <p style="color: #151414; font-size: 16px; font-weight: 600">
                     Get latest updates
                   </p>
                 </div>
@@ -526,7 +537,7 @@
             </div>
             <div
               style="
-                font-size: 12px;
+                font-size: 13px;
                 color: #151414;
                 font-weight: 400;
                 line-height: 16px;
@@ -535,7 +546,7 @@
                 margin-bottom: 24px;
               "
             >
-              <p class="text-[#f04935]">
+              <p style="color: #f04935">
                 This is a Eid ticket it is non cancellable & non refundable
               </p>
               <p>
@@ -644,7 +655,7 @@
                 <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                   Call us
                 </p>
-                <p style="color: #151414; font-size: 14px; font-weight: 600">
+                <p style="color: #151414; font-size: 16px; font-weight: 600">
                   {{ getSearchedTicketList.supportPhone || phone }}
                 </p>
               </div>
@@ -667,7 +678,7 @@
                 <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                   Call us
                 </p>
-                <p style="color: #151414; font-size: 14px; font-weight: 600">
+                <p style="color: #151414; font-size: 16px; font-weight: 600">
                   {{ getSearchedTicketList.supportPhone || phone }}
                 </p>
               </div>
@@ -693,7 +704,7 @@
               <p style="color: #4d4d4f; font-size: 12px; font-weight: 500">
                 Download App
               </p>
-              <p style="color: #151414; font-size: 14px; font-weight: 600">
+              <p style="color: #151414; font-size: 16px; font-weight: 600">
                 Get latest updates
               </p>
             </div>
@@ -716,7 +727,7 @@
             margin-bottom: 36px;
           "
         >
-          <p class="text-center">
+          <p style="text-align: center; font-size: 13px">
             N.B: Please carry print copy or soft copy to collect your counter
             ticket copy.
           </p>
