@@ -62,17 +62,17 @@
     >
       <div class="border-b border-[#DBDBDB] bg-white">
         <div
-          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]"
+          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-between items-center gap-x-3"
         >
+          <h2 class="text-[#151414] text-sm lg:text-xl font-medium">
+            {{ getTicketDetails.companyName }}
+          </h2>
           <img
             src="@/assets/images/logo.svg"
             alt="jatri logo"
             class="w-10 lg:w-[51px]"
           />
           <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
-          <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">
-            {{ getTicketDetails.companyName }}
-          </h2>
         </div>
         <div class="p-3 md:py-5 lg:p-4">
           <div
@@ -214,15 +214,16 @@
             </div>
           </div>
         </div>
+        <p
+          v-if="getTicketDetails.tripType === 'eid'"
+          class="text-[#f04935] text-[16px] pb-2 font-[500] leading-[24px] text-center bg-white"
+        >
+          This ticket is Non - Refundable & Cancellable
+        </p>
       </div>
     </div>
     <!-- {{getTicketDetails}} -->
-    <p
-      v-if="getTicketDetails.tripType === 'eid'"
-      class="text-[#f04935] pt-2 text-center bg-white"
-    >
-      This is a Eid ticket it is non cancellable & non refundable
-    </p>
+
     <div
       class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md"
     >

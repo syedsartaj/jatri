@@ -2,7 +2,7 @@
   <div
     style="
       width: 100%;
-      overflow-x: hidden;
+      overflow-x: auto;
       overflow-y: hidden;
       color-adjust: exact !important;
       -webkit-print-color-adjust: exact !important;
@@ -54,7 +54,7 @@
         >
           <img
             v-if="ticketDetails.companyImage"
-            :src="imageUrl+ticketDetails.companyImage"
+            :src="imageUrl + ticketDetails.companyImage"
             alt=""
             style="height: 42px; width: auto; border-radius: 100%"
           />
@@ -116,49 +116,61 @@
           />
           <div
             style="
-              display: grid;
-              grid-template-columns: repeat(4, minmax(0, 1fr));
-              color: #151414;
+              display: flex;
+              gap: 10px;
               font-size: 16px;
               line-height: 18px;
               padding: 10px;
-              gap: 12px;
             "
           >
-            <p style="color: #494949; font-weight: 400">Name</p>
-            <p style="font-weight: 500">{{ ticketDetails.passenger.name }}</p>
-            <p style="color: #494949; font-weight: 400">Bus Type</p>
-            <p style="font-weight: 500">
-              {{
-                serviceType === "BUS"
-                  ? ticketDetails.coachType
-                  : ticketDetails.shipType
-              }}
-            </p>
-            <p style="color: #494949; font-weight: 400">Mobile Number</p>
-            <p style="font-weight: 500">
-              {{ ticketDetails.passenger.phone }}
-            </p>
-            <p style="color: #494949; font-weight: 400">Selected Seat</p>
-            <table style="border-collapse: collapse">
-              <tbody>
-                <tr>
-                  <td v-for="seat in ticketDetails.seatNumbers" :key="seat">
-                    <span
-                      style="
-                        background: #f04935;
-                        border-radius: 6px;
-                        color: #fff;
-                        font-weight: 500;
-                        padding: 4px 8px;
-                        margin-right: 3px;
-                      "
-                      >{{ seat }}</span
-                    >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div style="width: 50%; gap: 14px; padding: 12px">
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Name</p>
+                <p style="font-weight: 500">
+                  {{ ticketDetails.passenger.name }}
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Mobile Number</p>
+                <p style="font-weight: 500">
+                  {{ ticketDetails.passenger.phone }}
+                </p>
+              </div>
+            </div>
+            <div style="width: 50%; gap: 14px; padding:12px">
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Bus Type</p>
+                <p style="font-weight: 500">
+                  {{
+                    serviceType === "BUS"
+                      ? ticketDetails.coachType
+                      : ticketDetails.shipType
+                  }}
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400; ">Selected Seat</p>
+                <table style="border-collapse: collapse">
+                  <tbody>
+                    <tr>
+                      <td v-for="seat in ticketDetails.seatNumbers" :key="seat">
+                        <span
+                          style="
+                            background: #f04935;
+                            border-radius: 6px;
+                            color: #fff;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            margin-right: 3px;
+                          "
+                          >{{ seat }}</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <!-- ========= Journey & Payment Details ========= -->
@@ -240,10 +252,10 @@
               style="
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                font-size: 15px;
+                font-size: 12px;
                 padding-top: 6px;
-                padding-left: 14px;
-                padding-right: 14px;
+                padding-left: 12px;
+                padding-right: 12px;
               "
             >
               <p
@@ -253,7 +265,11 @@
                   grid-column: span 2 / span 2;
                 "
               >
-                Ticket Fare Seat (<span v-for="(sit, index) in tickets.seat" :key="sit">{{sit}}<span v-if="index != tickets.seat.length - 1">,</span></span
+                Ticket Fare Seat (<span
+                  v-for="(sit, index) in tickets.seat"
+                  :key="sit"
+                  >{{ sit
+                  }}<span v-if="index != tickets.seat.length - 1">,</span></span
                 >
                 )
               </p>
@@ -471,8 +487,8 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                gap: 17px;
-                margin-top: 24px;
+                gap: 16px;
+                margin-top: 6px;
               "
             >
               <div style="display: flex; gap: 17px">
@@ -541,9 +557,9 @@
                 color: #151414;
                 font-weight: 400;
                 line-height: 16px;
-                margin-top: 14px;
+                margin-top: 6px;
                 padding: 4px;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
               "
             >
               <p style="color: #f04935">
@@ -558,7 +574,7 @@
           <img
             :src="require('@/assets/images/ticket/eidFooter.svg')"
             alt="eidStamp"
-            style="top: 880px; left: 650px; position: absolute"
+            style="top: 672px; left: 468px; position: absolute"
           />
         </div>
         <div

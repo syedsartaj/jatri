@@ -1,35 +1,41 @@
 <template>
-  <div style="width: 100%; overflow-x: auto; overflow-y: hidden">
-    <div
+  <div
+    style="
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      position: relative;
+    "
+  >
+      <div
       style="
+      overflow: auto;
+        top: 100px;
+        left: 50px;
         width: 595px;
         height: 842px;
         background-color: white;
+        position: fixed;
         font-family: 'Inter', sans-serif;
       "
     >
-      <!-- ========= Heading Part 7QTT7NU69GF67V7 ========= -->
-      <div
+      <img
+        :src="require('@/assets/images/ticket/header.svg')"
+        alt=""
         style="
-          background-color: #f04935;
+          width: 100%;
           height: 44px;
-          padding-left: 30px;
-          padding-top: 10px;
+          background-repeat: no-repeat;
+          object-fit: cover;
         "
-      >
-        <img
-          :src="require('@/assets/images/ticket/logo-white.png')"
-          alt=""
-          style="width: 44px; height: 21.3px; display: block"
-        />
-      </div>
+      />
       <!-- ========= Main Part ========= -->
       <div style="padding-left: 24px; padding-right: 24px">
         <!-- ========= Top Heading ========= -->
         <div
           style="
             display: flex;
-            gap: 0.5rem;
+            gap: 16px;
             margin-top: 12px;
             margin-bottom: 12px;
           "
@@ -77,55 +83,64 @@
               background-color: #fde5e2;
               font-size: 12px;
               font-weight: 600;
+              line-height: 16px;
             "
           >
             Passenger Details:
           </p>
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(4, minmax(0, 1fr));
-              color: #151414;
-              font-size: 12px;
-              line-height: 16px;
-              padding: 8px;
-              gap: 6px;
-            "
-          >
-            <p style="color: #494949; font-weight: 400">Name</p>
-            <p style="font-weight: 500">{{ ticketDetails.passenger.name }}</p>
-            <p style="color: #494949; font-weight: 400">Bus Type</p>
-            <p style="font-weight: 500">
-              {{
-                serviceType === "BUS"
-                  ? ticketDetails.coachType
-                  : ticketDetails.shipType
-              }}
-            </p>
-            <p style="color: #494949; font-weight: 400">Mobile Number</p>
-            <p style="font-weight: 500">{{ ticketDetails.passenger.phone }}</p>
-            <p style="color: #494949; font-weight: 400">Selected Seat</p>
-            <div>
-              <div
-                v-for="seat in ticketDetails.seatNumbers"
-                :key="seat"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: flex-start;
-                  gap: 10px;
-                "
-              >
-                <span
-                  style="
-                    background-color: #f04935;
-                    padding: 2px 8px;
-                    border-radius: 4px;
-                    color: #fff;
-                    font-weight: 500;
-                  "
-                  >{{ seat }}</span
-                >
+          <div style="display: flex; gap: 10px; font-size: 12px;">
+            <div
+              style="
+                width: 50%;
+                gap: 8px 14px;
+                padding: 2px 12px;
+              "
+            >
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Name</p>
+                <p style="font-weight: 500">
+                  {{ ticketDetails.passenger.name }}
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Mobile Number</p>
+                <p style="font-weight: 500">
+                  {{ ticketDetails.passenger.phone }}
+                </p>
+              </div>
+            </div>
+            <div style="width: 50%; gap: 8px 14px; padding: 2px 12px">
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Bus Type</p>
+                <p style="font-weight: 500">
+                  {{
+                    serviceType === "BUS"
+                      ? ticketDetails.coachType
+                      : ticketDetails.shipType
+                  }}
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px">
+                <p style="color: #494949; font-weight: 400">Selected Seat</p>
+                <table style="border-collapse: collapse">
+                  <tbody>
+                    <tr>
+                      <td v-for="seat in ticketDetails.seatNumbers" :key="seat">
+                        <span
+                          style="
+                            background: #f04935;
+                            border-radius: 6px;
+                            color: #fff;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            margin-right: 3px;
+                          "
+                          >{{ seat }}</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -166,13 +181,24 @@
               <p style="font-weight: 500">{{ ticketDetails.fromCity }}</p>
               <p style="color: #676769; font-weight: 400">To</p>
               <p style="font-weight: 500">{{ ticketDetails.toCity }}</p>
-              <p style="color: #676769; font-weight: 400">Departure Time & Date</p>
+              <p style="color: #676769; font-weight: 400">
+                Departure Time & Date
+              </p>
               <p style="font-weight: 500">{{ departureDateTime }}</p>
               <p style="color: #676769; font-weight: 400">Boarding counter</p>
               <p style="font-weight: 500">{{ ticketDetails.boardingPlace }}</p>
-              <p v-if="ticketDetails.dropingPlace" style="color: #676769; font-weight: 400">Dropping counter</p>
-              <p v-if="ticketDetails.dropingPlace" style="font-weight: 500">{{ ticketDetails.dropingPlace }}</p>
-              <p style="color: #676769; font-weight: 400">Reporting Date &Time</p>
+              <p
+                v-if="ticketDetails.dropingPlace"
+                style="color: #676769; font-weight: 400"
+              >
+                Dropping counter
+              </p>
+              <p v-if="ticketDetails.dropingPlace" style="font-weight: 500">
+                {{ ticketDetails.dropingPlace }}
+              </p>
+              <p style="color: #676769; font-weight: 400">
+                Reporting Date &Time
+              </p>
               <p style="font-weight: 500">{{ reportTimeWithAddTime }}</p>
               <p style="color: #676769; font-weight: 400">Issued by</p>
               <p style="font-weight: 500">Jatri Online</p>
@@ -194,6 +220,37 @@
               Payment Details:
             </p>
             <div
+              v-for="(tickets, i) in seatFareArray"
+              :key="i"
+              style="
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                font-size: 12px;
+                padding-top: 6px;
+                padding-left: 12px;
+                padding-right: 12px;
+              "
+            >
+              <p
+                style="
+                  color: #494949;
+                  font-weight: 400;
+                  grid-column: span 2 / span 2;
+                "
+              >
+                Ticket Fare Seat (<span
+                  v-for="(sit, index) in tickets.seat"
+                  :key="sit"
+                  >{{ sit
+                  }}<span v-if="index != tickets.seat.length - 1">,</span></span
+                >
+                )
+              </p>
+              <p style="font-weight: 500; text-align: right">
+                {{ tickets.fare }} ৳
+              </p>
+            </div>
+            <div
               style="
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -203,8 +260,6 @@
                 gap: 8px;
               "
             >
-              <p style="color: #494949; font-weight: 400">Ticket Fare Seat ( {{ ticketDetails.seatNumbers[0] }} ):</p>
-              <p style="font-weight: 600;text-align: right">{{ ticketFareString }}</p>
               <div
                 style="
                   grid-column: span 2 / span 2;
@@ -215,17 +270,39 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Sub total</p>
-              <p style="font-weight: 600;text-align: right">{{ ticketDetails.payable }} ৳</p>
-              <p style="color: #494949; font-weight: 400" v-if="ticketDetails.discount">Discount:</p>
-              <p v-if="ticketDetails.discount" style="font-weight: 600;text-align: right">- {{ ticketDetails.discount }} ৳</p>
-              <p style="color: #494949; font-weight: 400" v-if="ticketDetails.promo">Promo:</p>
-              <p v-if="ticketDetails.promo" style="font-weight: 600;text-align: right">- {{ ticketDetails.promo }} ৳</p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketDetails.payable }} ৳
+              </p>
+              <p
+                style="color: #494949; font-weight: 400"
+                v-if="ticketDetails.discount"
+              >
+                Discount:
+              </p>
+              <p
+                v-if="ticketDetails.discount"
+                style="font-weight: 600; text-align: right"
+              >
+                - {{ ticketDetails.discount }} ৳
+              </p>
+              <p
+                style="color: #494949; font-weight: 400"
+                v-if="ticketDetails.promo"
+              >
+                Promo:
+              </p>
+              <p
+                v-if="ticketDetails.promo"
+                style="font-weight: 600; text-align: right"
+              >
+                - {{ ticketDetails.promo }} ৳
+              </p>
               <p style="color: #494949; font-weight: 400">Service Charge:</p>
-              <p style="font-weight: 600;text-align: right">
+              <p style="font-weight: 600; text-align: right">
                 {{ ticketDetails.serviceCharge }} ৳
               </p>
               <p style="color: #494949; font-weight: 400">Gateway Charge:</p>
-              <p style="font-weight: 600;text-align: right">
+              <p style="font-weight: 600; text-align: right">
                 {{ ticketDetails.gatewayCharge }} ৳
               </p>
               <div
@@ -238,7 +315,9 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Total</p>
-              <p style="font-weight: 600;text-align: right">{{ ticketDetails.totalAmount }} ৳</p>
+              <p style="font-weight: 600; text-align: right">
+                {{ ticketDetails.totalAmount }} ৳
+              </p>
             </div>
           </div>
         </div>
@@ -255,7 +334,7 @@
             <div style="width: 50%">
               <p
                 style="
-                  font-size: 12px;
+                  font-size: 8px;
                   color: #151414;
                   font-weight: 600;
                   margin-bottom: 6px;
@@ -269,7 +348,7 @@
                   color: #151414;
                   font-size: 8px;
                   font-weight: 400;
-                  padding-left: 20px;
+                  padding-left: 15px;
                 "
               >
                 <li>
@@ -296,19 +375,28 @@
                   The bus operator canceled the trip due to unavoidable reasons.
                 </li>
               </ul>
-              <p style="color: #F04935; font-size: 8px; font-weight: 400; margin-top: 5px;">*Trip may delay due to traffics during occasions</p>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  font-weight: 400;
+                  margin-top: 5px;
+                "
+              >
+                *Trip may delay due to traffics during occasions
+              </p>
             </div>
 
             <div style="width: 49%; margin-left: 16px">
               <p
                 style="
-                  font-size: 12px;
+                  font-size: 8px;
                   color: #151414;
                   font-weight: 600;
                   margin-bottom: 6px;
                 "
               >
-                Cancel Policy
+                Cancellation policy
               </p>
               <ul
                 style="
@@ -325,12 +413,14 @@
                   operator's approval.
                 </li>
                 <li>
-                  You must apply for cancellation & refund 24 hours before trip
+                  You must apply for
+                  <b>cancellation & refund 24 hours before trip</b>
                   departure time (excluding 12 AM to 7 AM).
                 </li>
                 <li>
-                  In case of refund, it will take 7 working days for MFS(bKash,
-                  Nagad) and 12/15 working days for SSL Commerz/ Bank payment.
+                  In case of refund, it will take
+                  <b>7 working days for MFS</b>(bKash, Nagad) and
+                  <b>12/15 working days for SSL Commerz/ Bank</b> payment.
                 </li>
                 <li>
                   No ticket will be refunded unless it has been canceled as per
@@ -338,11 +428,20 @@
                 </li>
                 <li>
                   If the Bus operator cancels the trip after this period, you
-                  must apply for a refund within 24 hours of the trip departure
-                  time.
+                  must <b>apply for a refund within 24 hours</b> of the trip
+                  departure time.
                 </li>
               </ul>
-              <p style="color: #F04935; font-size: 8px; font-weight: 400; margin-top: 5px;">*Applicable if only the ticket is cancellable</p>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  font-weight: 400;
+                  margin-top: 5px;
+                "
+              >
+                *Applicable if only the ticket is cancellable
+              </p>
             </div>
           </div>
         </div>
@@ -351,24 +450,24 @@
           style="
             display: flex;
             justify-content: space-between;
-            margin-left: 100px;
-            margin-right: 100px;
+            margin-top: 8px;
+            margin-left: 50px;
+            margin-right: 50px;
             align-items: center;
           "
         >
           <div
             style="
               display: flex;
-              column-gap: 10px;
+              column-gap: 12px;
               justify-content: flex-start;
               align-items: start;
             "
           >
             <div
-              v-if="downloadTicketStatus"
               style="
                 display: flex;
-                column-gap: 10px;
+                column-gap: 12px;
                 margin-top: 6px;
                 align-items: start;
               "
@@ -376,30 +475,7 @@
               <img
                 :src="require('@/assets/images/ticket/mail.svg')"
                 alt=""
-                style="width: 17px; height: 15px; display: inline-block"
-              />
-              <div>
-                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                  Get in touch
-                </p>
-                <p style="color: #151414; font-size: 12px; font-weight: 600">
-                  {{ getSearchedTicketList.supportEmail || email }}
-                </p>
-              </div>
-            </div>
-            <div
-              v-else
-              style="
-                display: flex;
-                column-gap: 10px;
-                margin-top: 6px;
-                align-items: start;
-              "
-            >
-              <img
-                :src="require('@/assets/images/ticket/mail.svg')"
-                alt=""
-                style="width: 17px; height: 15px; display: inline-block"
+                style="width: 19px; height: 17px; display: inline-block"
               />
               <div>
                 <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -422,10 +498,9 @@
             "
           >
             <div
-              v-if="downloadTicketStatus"
               style="
                 display: flex;
-                column-gap: 10px;
+                column-gap: 12px;
                 margin-top: 6px;
                 align-items: start;
               "
@@ -433,30 +508,7 @@
               <img
                 :src="require('@/assets/images/ticket/phone.svg')"
                 alt=""
-                style="width: 15px; height: 15px; display: inline-block"
-              />
-              <div>
-                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                  Call us
-                </p>
-                <p style="color: #151414; font-size: 12px; font-weight: 600">
-                  {{ getSearchedTicketList.supportPhone || phone }}
-                </p>
-              </div>
-            </div>
-            <div
-              v-else
-              style="
-                display: flex;
-                column-gap: 10px;
-                margin-top: 6px;
-                align-items: start;
-              "
-            >
-              <img
-                :src="require('@/assets/images/ticket/phone.svg')"
-                alt=""
-                style="width: 15px; height: 15px; display: inline-block"
+                style="width: 17px; height: 17px; display: inline-block"
               />
               <div>
                 <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -469,7 +521,7 @@
             </div>
           </div>
 
-          <div style="display: flex; column-gap: 10px; align-items: center">
+          <div style="display: flex; column-gap: 12px; align-items: center">
             <svg
               style="margin-bottom: 4px"
               width="16"
@@ -495,32 +547,29 @@
             <img
               :src="require('@/assets/images/ticket/qr.png')"
               alt=""
-              style="height: 60px; width: 60px; margin: 5px; padding: 5px"
+              style="height: 32px; width: 32px; margin: 5px; padding: 5px"
             />
           </div>
         </div>
-        <p
+        <div
           style="
-            text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #151414;
             font-weight: 400;
             line-height: 16px;
-            margin-top: 25px;
-            margin-bottom: 25px;
+            margin-top: 8px;
+            text-align: center;
+            margin-bottom: 32px;
           "
         >
-          N.B: Please carry print copy or soft copy to collect your counter
-          ticket copy.
-        </p>
+          <p style="text-align: center; font-size: 13px">
+            N.B: Please carry print copy or soft copy to collect your counter
+            ticket copy.
+          </p>
+        </div>
       </div>
       <!-- ========= Footer part ========= -->
-      <div
-        style="
-          background-color: #f04935;
-          padding: 12px 16px;
-        "
-      >
+      <div style="background-color: #f04935; padding: 12px 16px">
         <div style="display: flex; justify-content: space-between">
           <div
             style="
@@ -548,6 +597,11 @@
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      imageUrl: "",
+    };
+  },
   props: [
     "ticketDetails",
     "email",
@@ -555,7 +609,11 @@ export default {
     "downloadTicketStatus",
     "ticketFareString",
     "serviceType",
+    "seatFareArray",
   ],
+  mounted() {
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+  },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
