@@ -54,9 +54,9 @@
         >
           <img
             v-if="ticketDetails.companyImage"
-            src="ticketDetails.companyImage"
+            :src="imageUrl+ticketDetails.companyImage"
             alt=""
-            style="height: 32px; width: auto; border-radius: 100%"
+            style="height: 42px; width: auto; border-radius: 100%"
           />
           <div>
             <p
@@ -762,6 +762,11 @@
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      imageUrl: "",
+    };
+  },
   props: [
     "ticketDetails",
     "email",
@@ -771,6 +776,9 @@ export default {
     "serviceType",
     "seatFareArray",
   ],
+  mounted() {
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+  },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
     reportTimeWithAddTime() {
