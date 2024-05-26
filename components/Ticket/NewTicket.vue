@@ -7,10 +7,9 @@
       position: relative;
     "
   >
-      <div
+    <div
       style="
-      overflow: auto;
-        top: 100px;
+        top: 40px;
         left: 50px;
         width: 595px;
         height: 842px;
@@ -88,30 +87,79 @@
           >
             Passenger Details:
           </p>
-          <div style="display: flex; gap: 10px; font-size: 12px;">
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              align-self: stretch;
+              gap: 31px;
+              padding: 8px;
+              font-size: 12px;
+              line-height: 16px;
+            "
+          >
             <div
               style="
-                width: 50%;
-                gap: 8px 14px;
-                padding: 2px 12px;
+                display: flex;
+                align-items: flex-start;
+                gap: 14px;
+                flex: 1 0 0;
               "
             >
-              <div style="display: flex; gap: 10px">
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 8px;
+                "
+              >
                 <p style="color: #494949; font-weight: 400">Name</p>
+                <p style="color: #494949; font-weight: 400">Mobile Number</p>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 8px;
+                "
+              >
                 <p style="font-weight: 500">
                   {{ ticketDetails.passenger.name }}
                 </p>
-              </div>
-              <div style="display: flex; gap: 10px">
-                <p style="color: #494949; font-weight: 400">Mobile Number</p>
                 <p style="font-weight: 500">
                   {{ ticketDetails.passenger.phone }}
                 </p>
               </div>
             </div>
-            <div style="width: 50%; gap: 8px 14px; padding: 2px 12px">
-              <div style="display: flex; gap: 10px">
+            <div
+              style="
+                display: flex;
+                align-items: flex-start;
+                gap: 14px;
+                flex: 1 0 0;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 8px;
+                "
+              >
                 <p style="color: #494949; font-weight: 400">Bus Type</p>
+                <p style="color: #494949; font-weight: 400">Selected Seat</p>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 8px;
+                "
+              >
                 <p style="font-weight: 500">
                   {{
                     serviceType === "BUS"
@@ -119,9 +167,6 @@
                       : ticketDetails.shipType
                   }}
                 </p>
-              </div>
-              <div style="display: flex; gap: 10px">
-                <p style="color: #494949; font-weight: 400">Selected Seat</p>
                 <table style="border-collapse: collapse">
                   <tbody>
                     <tr>
@@ -160,6 +205,7 @@
                 padding: 8px 8px 8px 12px;
                 background-color: #fde5e2;
                 font-size: 12px;
+                line-height: 16px;
                 font-weight: 600;
               "
             >
@@ -171,7 +217,8 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 color: #151414;
                 font-size: 12px;
-                padding: 12px;
+                line-height: 16px;
+                padding: 12px 8px 12px 12px;
                 gap: 8px;
               "
             >
@@ -214,49 +261,52 @@
                 padding: 8px 8px 8px 12px;
                 background-color: #fde5e2;
                 font-size: 12px;
+                line-height: 16px;
                 font-weight: 600;
               "
             >
               Payment Details:
             </p>
-            <div
-              v-for="(tickets, i) in seatFareArray"
-              :key="i"
-              style="
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                font-size: 12px;
-                padding-top: 6px;
-                padding-left: 12px;
-                padding-right: 12px;
-              "
-            >
-              <p
+            <div style="display: flex; flex-direction: column; padding: 12px 8px 4px 12px; gap: 8px">
+              <div
+                v-for="(tickets, i) in seatFareArray"
+                :key="i"
                 style="
-                  color: #494949;
-                  font-weight: 400;
-                  grid-column: span 2 / span 2;
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  font-size: 12px;
+                  line-height: 16px;
+                  gap: 8px;
                 "
               >
-                Ticket Fare Seat (<span
-                  v-for="(sit, index) in tickets.seat"
-                  :key="sit"
-                  >{{ sit
-                  }}<span v-if="index != tickets.seat.length - 1">,</span></span
+                <p
+                  style="
+                    color: #494949;
+                    font-weight: 400;
+                    grid-column: span 2 / span 2;
+                  "
                 >
-                )
-              </p>
-              <p style="font-weight: 500; text-align: right">
-                {{ tickets.fare }} ৳
-              </p>
+                  Ticket Fare Seat (
+                    <span
+                    v-for="(sit, index) in tickets.seat" :key="sit">{{ sit}}
+                    <span v-if="index != tickets.seat.length - 1">,</span>
+                  </span>
+                  )
+                </p>
+                <p style="font-weight: 500; text-align: right">
+                  {{ tickets.fare }} ৳
+                </p>
+              </div>
             </div>
+
             <div
               style="
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 color: #151414;
                 font-size: 12px;
-                padding: 12px;
+                line-height: 16px;
+                padding: 4px 8px 12px 12px;
                 gap: 8px;
               "
             >
@@ -270,18 +320,18 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Sub total</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.payable }} ৳
               </p>
               <p
                 style="color: #494949; font-weight: 400"
                 v-if="ticketDetails.discount"
               >
-                Discount:
+                Discount
               </p>
               <p
                 v-if="ticketDetails.discount"
-                style="font-weight: 600; text-align: right"
+                style="font-weight: 500; text-align: right"
               >
                 - {{ ticketDetails.discount }} ৳
               </p>
@@ -289,20 +339,20 @@
                 style="color: #494949; font-weight: 400"
                 v-if="ticketDetails.promo"
               >
-                Promo:
+                Promo
               </p>
               <p
                 v-if="ticketDetails.promo"
-                style="font-weight: 600; text-align: right"
+                style="font-weight: 500; text-align: right"
               >
                 - {{ ticketDetails.promo }} ৳
               </p>
-              <p style="color: #494949; font-weight: 400">Service Charge:</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="color: #494949; font-weight: 400">Service Charge</p>
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.serviceCharge }} ৳
               </p>
-              <p style="color: #494949; font-weight: 400">Gateway Charge:</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="color: #494949; font-weight: 400">Gateway Charge</p>
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.gatewayCharge }} ৳
               </p>
               <div
@@ -315,7 +365,7 @@
                 "
               ></div>
               <p style="color: #494949; font-weight: 400">Total</p>
-              <p style="font-weight: 600; text-align: right">
+              <p style="font-weight: 500; text-align: right">
                 {{ ticketDetails.totalAmount }} ৳
               </p>
             </div>
@@ -324,20 +374,42 @@
         <!-- ========= T&C Condition part =========  -->
         <div
           style="
-            background-color: #f7f7f7;
-            margin-top: 10px;
-            padding: 4px 8px 4px 8px;
-            border-radius: 8px;
+            display: flex;
+            margin-top: 8px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 16px;
+            align-self: stretch;
           "
         >
-          <div style="display: flex">
-            <div style="width: 50%">
+          <div
+            style="
+              display: flex;
+              padding: 2px 8px 0px 8px;
+              align-items: flex-start;
+              gap: 16px;
+              align-self: stretch;
+              border-radius: 8px;
+              background-color: #f7f7f7;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+                flex: 1 0 0;
+                align-self: stretch;
+              "
+            >
               <p
                 style="
                   font-size: 8px;
+                  line-height: 16px;
                   color: #151414;
                   font-weight: 600;
-                  margin-bottom: 6px;
                 "
               >
                 Terms and condition
@@ -347,6 +419,7 @@
                   list-style-type: disc;
                   color: #151414;
                   font-size: 8px;
+                  line-height: 150%;
                   font-weight: 400;
                   padding-left: 15px;
                 "
@@ -379,21 +452,30 @@
                 style="
                   color: #f04935;
                   font-size: 8px;
+                  line-height: 150%;
                   font-weight: 400;
-                  margin-top: 5px;
                 "
               >
                 *Trip may delay due to traffics during occasions
               </p>
             </div>
 
-            <div style="width: 49%; margin-left: 16px">
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+                flex: 1 0 0;
+                align-self: stretch;
+              "
+            >
               <p
                 style="
                   font-size: 8px;
                   color: #151414;
                   font-weight: 600;
-                  margin-bottom: 6px;
+                  line-height: 16px;
                 "
               >
                 Cancellation policy
@@ -403,6 +485,7 @@
                   list-style-type: disc;
                   color: #151414;
                   font-size: 8px;
+                  line-height: 150%;
                   font-weight: 400;
                   padding-left: 15px;
                 "
@@ -436,48 +519,37 @@
                 style="
                   color: #f04935;
                   font-size: 8px;
+                  line-height: 150%;
                   font-weight: 400;
-                  margin-top: 5px;
                 "
               >
                 *Applicable if only the ticket is cancellable
               </p>
             </div>
           </div>
-        </div>
-        <!-- ========= social part =========  -->
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            margin-left: 50px;
-            margin-right: 50px;
-            align-items: center;
-          "
-        >
           <div
             style="
               display: flex;
-              column-gap: 12px;
-              justify-content: flex-start;
-              align-items: start;
+              justify-content: center;
+              align-items: center;
+              gap: 16px;
+              align-self: stretch;
             "
           >
-            <div
-              style="
-                display: flex;
-                column-gap: 12px;
-                margin-top: 6px;
-                align-items: start;
-              "
-            >
+            <div style="display: flex; align-items: flex-start; gap: 6px">
               <img
                 :src="require('@/assets/images/ticket/mail.svg')"
                 alt=""
                 style="width: 19px; height: 17px; display: inline-block"
               />
-              <div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  line-height: 16px;
+                "
+              >
                 <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
                   Get in touch
                 </p>
@@ -486,31 +558,21 @@
                 </p>
               </div>
             </div>
-          </div>
 
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-              align-items: flex-start;
-              text-align: left;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                column-gap: 12px;
-                margin-top: 6px;
-                align-items: start;
-              "
-            >
+            <div style="display: flex; align-items: flex-start; gap: 6px">
               <img
                 :src="require('@/assets/images/ticket/phone.svg')"
                 alt=""
                 style="width: 17px; height: 17px; display: inline-block"
               />
-              <div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  line-height: 16px;
+                "
+              >
                 <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
                   Call us
                 </p>
@@ -519,54 +581,61 @@
                 </p>
               </div>
             </div>
-          </div>
 
-          <div style="display: flex; column-gap: 12px; align-items: center">
-            <svg
-              style="margin-bottom: 4px"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.406 1.20996L9.19467 8.00063L2.40667 14.7913C2.28596 14.7405 2.18295 14.6552 2.11059 14.5461C2.03824 14.437 1.99976 14.3089 2 14.178V1.82329C2.00005 1.69251 2.03857 1.56463 2.11076 1.45557C2.18295 1.34651 2.28563 1.2611 2.406 1.20996ZM9.666 8.47196L11.2007 10.0066L3.90933 14.2286L9.666 8.47196ZM11.7987 6.33996L13.67 7.42396C13.771 7.48256 13.8549 7.56668 13.9132 7.66789C13.9715 7.76909 14.0022 7.88383 14.0022 8.00063C14.0022 8.11742 13.9715 8.23216 13.9132 8.33337C13.8549 8.43457 13.771 8.51869 13.67 8.57729L11.798 9.66129L10.1373 8.00063L11.7987 6.33996ZM3.90933 1.77263L11.2013 5.99396L9.666 7.52929L3.90933 1.77263Z"
-                fill="#F04935"
+            <div style="display: flex; align-items: flex-start; gap: 6px">
+              <svg
+                style="margin-bottom: 4px"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.406 1.20996L9.19467 8.00063L2.40667 14.7913C2.28596 14.7405 2.18295 14.6552 2.11059 14.5461C2.03824 14.437 1.99976 14.3089 2 14.178V1.82329C2.00005 1.69251 2.03857 1.56463 2.11076 1.45557C2.18295 1.34651 2.28563 1.2611 2.406 1.20996ZM9.666 8.47196L11.2007 10.0066L3.90933 14.2286L9.666 8.47196ZM11.7987 6.33996L13.67 7.42396C13.771 7.48256 13.8549 7.56668 13.9132 7.66789C13.9715 7.76909 14.0022 7.88383 14.0022 8.00063C14.0022 8.11742 13.9715 8.23216 13.9132 8.33337C13.8549 8.43457 13.771 8.51869 13.67 8.57729L11.798 9.66129L10.1373 8.00063L11.7987 6.33996ZM3.90933 1.77263L11.2013 5.99396L9.666 7.52929L3.90933 1.77263Z"
+                  fill="#F04935"
+                />
+              </svg>
+
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  line-height: 16px;
+                "
+              >
+                <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
+                  Download App
+                </p>
+                <p style="color: #151414; font-size: 12px; font-weight: 600">
+                  Get latest updates
+                </p>
+              </div>
+              <img
+                :src="require('@/assets/images/ticket/qr.png')"
+                alt=""
+                style="height: 32px; width: 32px"
               />
-            </svg>
-
-            <div>
-              <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
-                Download App
-              </p>
-              <p style="color: #151414; font-size: 12px; font-weight: 600">
-                Get latest updates
-              </p>
             </div>
-            <img
-              :src="require('@/assets/images/ticket/qr.png')"
-              alt=""
-              style="height: 32px; width: 32px; margin: 5px; padding: 5px"
-            />
           </div>
         </div>
-        <div
+        <!-- ========= social part =========  -->
+        <p
           style="
-            font-size: 12px;
-            color: #151414;
-            font-weight: 400;
-            line-height: 16px;
-            margin-top: 8px;
             text-align: center;
-            margin-bottom: 32px;
+            font-size: 11px;
+            line-height: 16px;
+            font-weight: 400;
+            color: #151414;
+            margin-top: 25px;
+            text-align: center;
+            margin-bottom: 39px;
           "
         >
-          <p style="text-align: center; font-size: 13px">
-            N.B: Please carry print copy or soft copy to collect your counter
-            ticket copy.
-          </p>
-        </div>
+          N.B: Please carry print copy or soft copy to collect your counter
+          ticket copy.
+        </p>
       </div>
       <!-- ========= Footer part ========= -->
       <div style="background-color: #f04935; padding: 12px 16px">
