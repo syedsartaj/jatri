@@ -18,11 +18,12 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
+        :html-to-pdf-options="pdfOptions"
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
-        <section slot="pdf-content" class="a4-content">
-          <PrintDownloadTicket
+        <section slot="pdf-content" class="a4-content scale-200">
+          <NewTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
             :phone="supportPhone"
@@ -46,7 +47,7 @@
       "
       class="hidden"
     >
-      <PrintDownloadTicket
+      <NewTicket
         :ticketDetails="getTicketDetails"
         :email="supportEmail"
         :phone="supportPhone"
@@ -62,17 +63,17 @@
     >
       <div class="border-b border-[#DBDBDB] bg-white">
         <div
-          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]"
+          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-between items-center gap-x-3"
         >
+          <h2 class="text-[#151414] text-sm lg:text-xl font-medium">
+            {{ getTicketDetails.companyName }}
+          </h2>
           <img
             src="@/assets/images/logo.svg"
             alt="jatri logo"
             class="w-10 lg:w-[51px]"
           />
           <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
-          <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">
-            {{ getTicketDetails.companyName }}
-          </h2>
         </div>
         <div class="p-3 md:py-5 lg:p-4">
           <div
@@ -214,10 +215,16 @@
             </div>
           </div>
         </div>
+        <p
+          v-if="getTicketDetails.tripType === 'eid'"
+          class="text-[#f04935] text-[16px] pb-2 font-[500] leading-[24px] text-center bg-white"
+        >
+          This ticket is Non - Refundable & Cancellable
+        </p>
       </div>
     </div>
     <!-- {{getTicketDetails}} -->
-    <p v-if="getTicketDetails.tripType === 'eid'" class="text-[#f04935] pt-2 text-center bg-white">This is a Eid ticket it is non cancellable & non refundable</p>
+
     <div
       class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md"
     >
@@ -294,6 +301,11 @@ export default {
       seatFareObject: {},
       ticketFareString: "",
       seatFareArray: "",
+      pdfOptions: {
+        html2canvas: {
+          scale: 13,
+        }
+      },
     };
   },
   props: [
@@ -363,12 +375,27 @@ export default {
         `*{ font-family: 'Inter', sans-serif;box-sizing: border-box;margin: 0;padding: 0;}`
       ); // delete date and page number
       printWindow.document.write(
-        `@page { width: 210mm; height: 297mm; margin: 0mm; }`
-      ); // delete date and page number
+        `@page {
+          margin: 0;
+          padding: 0;
+          width: 210mm;
+          height: 297mm; 
+        }`
+      );
+      printWindow.document.write(
+        `.print-content {
+      width: 595px; 
+      height: 842px;
+      transform: scale(2);
+      transform-origin: top left;
+    }`
+      );
       printWindow.document.write(`</style>`);
       printWindow.document.write(`</head>`);
       printWindow.document.write("<body>");
+      printWindow.document.write(`<div class="print-content">`);
       printWindow.document.write(divContents);
+      printWindow.document.write(`</div>`);
       printWindow.document.write("</body>");
       printWindow.document.write("</html>");
       printWindow.document.close();
