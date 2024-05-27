@@ -18,11 +18,12 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
+        :html-to-pdf-options="pdfOptions"
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
-        <section slot="pdf-content" class="a4-content">
-          <PrintDownloadTicket
+        <section slot="pdf-content" class="a4-content scale-200">
+          <NewTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
             :phone="supportPhone"
@@ -46,7 +47,7 @@
       "
       class="hidden"
     >
-      <PrintDownloadTicket
+      <NewTicket
         :ticketDetails="getTicketDetails"
         :email="supportEmail"
         :phone="supportPhone"
@@ -300,6 +301,11 @@ export default {
       seatFareObject: {},
       ticketFareString: "",
       seatFareArray: "",
+      pdfOptions: {
+        html2canvas: {
+          scale: 13,
+        }
+      },
     };
   },
   props: [
@@ -369,12 +375,27 @@ export default {
         `*{ font-family: 'Inter', sans-serif;box-sizing: border-box;margin: 0;padding: 0;}`
       ); // delete date and page number
       printWindow.document.write(
-        `@page { width: 210mm; height: 297mm; margin: 0mm; }`
-      ); // delete date and page number
+        `@page {
+          margin: 0;
+          padding: 0;
+          width: 210mm;
+          height: 297mm; 
+        }`
+      );
+      printWindow.document.write(
+        `.print-content {
+      width: 595px; 
+      height: 842px;
+      transform: scale(2);
+      transform-origin: top left;
+    }`
+      );
       printWindow.document.write(`</style>`);
       printWindow.document.write(`</head>`);
       printWindow.document.write("<body>");
+      printWindow.document.write(`<div class="print-content">`);
       printWindow.document.write(divContents);
+      printWindow.document.write(`</div>`);
       printWindow.document.write("</body>");
       printWindow.document.write("</html>");
       printWindow.document.close();
