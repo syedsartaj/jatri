@@ -1039,7 +1039,7 @@ export default {
     issuedOn() {
       return (
         this.ticketDetails &&
-        dateTimeFormat(this.ticketDetails.createdAt, 0, "lll")
+        dateTimeFormat(this.ticketDetails.ticketDateTime, 0, "lll")
       );
     },
   },
