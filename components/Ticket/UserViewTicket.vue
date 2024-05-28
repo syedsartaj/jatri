@@ -22,7 +22,7 @@
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
-        <section slot="pdf-content" class="a4-content scale-200">
+        <section slot="pdf-content">
           <NewTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
@@ -301,10 +301,15 @@ export default {
       seatFareObject: {},
       ticketFareString: "",
       seatFareArray: "",
+
       pdfOptions: {
         html2canvas: {
-          scale: 13,
-        }
+          dpi: 192,
+          scale: 4,
+          letterRendering: true,
+        },
+        image: { type: 'jpeg', quality: 1 },
+        jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
       },
     };
   },
