@@ -1,5 +1,25 @@
 <template>
   <div class="border border-[#DBDBDB] rounded-md">
+    <!-- for print-->
+    <div
+      :id="'printTicket-' + getTicketDetails._id"
+      style="
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-radius: 6px 6px 0 0;
+      "
+      class="hidden"
+    >
+      <NewTicket
+        :ticketDetails="getTicketDetails"
+        :email="supportEmail"
+        :phone="supportPhone"
+        :downloadTicketStatus="downloadTicketValue"
+        :serviceType="serviceType"
+        :seatFareArray="seatFareArray"
+      />
+    </div>
     <client-only>
       <vue-html2pdf
         class="hidden"
@@ -23,7 +43,7 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <NewTicket
+          <PrintDownloadTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
             :phone="supportPhone"
@@ -36,26 +56,6 @@
         </section>
       </vue-html2pdf>
     </client-only>
-    <!-- for print-->
-    <div
-      :id="'printTicket-' + getTicketDetails._id"
-      style="
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        border-radius: 6px 6px 0 0;
-      "
-      class="hidden"
-    >
-      <NewTicket
-        :ticketDetails="getTicketDetails"
-        :email="supportEmail"
-        :phone="supportPhone"
-        :downloadTicketStatus="downloadTicketValue"
-        :serviceType="serviceType"
-        :seatFareArray="seatFareArray"
-      />
-    </div>
 
     <!-- for show to user-->
     <div
@@ -303,12 +303,18 @@ export default {
       seatFareArray: "",
 
       pdfOptions: {
+        filename:
+          this.getTicketDetails.companyName +
+          "_" +
+          this.getTicketDetails.passenger.name +
+          "_" +
+          this.getTicketDetails.pnrCode,
         html2canvas: {
           dpi: 192,
           scale: 4,
           letterRendering: true,
         },
-        image: { type: 'jpeg', quality: 1 },
+        image: { type: "jpeg", quality: 1 },
         jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
       },
     };
