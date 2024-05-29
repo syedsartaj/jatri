@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div 
     style="
       width: 595px;
       background-color: white;
@@ -931,7 +931,7 @@
       "
     >
       <p style="color: #f04935">
-        This is a Eid ticket it is non cancellable & non refundable
+        This is an Eid ticket it is non cancellable & non refundable
       </p>
       <p>
         N.B: Please carry print copy or soft copy to collect your counter ticket
