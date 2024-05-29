@@ -313,6 +313,7 @@ export default {
           dpi: 192,
           scale: 4,
           letterRendering: true,
+          useCORS: true,
         },
         image: { type: "jpeg", quality: 1 },
         jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },

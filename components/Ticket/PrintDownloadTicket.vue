@@ -35,8 +35,8 @@
       <img
         v-if="ticketDetails.companyImage"
         :src="imageUrl + ticketDetails.companyImage"
-        alt=""
-        style="height: 32px; width: auto; border-radius: 100%"
+        alt="company Image"
+        style="height: 32px; width: 32px; border-radius: 100%"
       />
       <div>
         <p
@@ -204,6 +204,7 @@
                     border-radius: 4px;
                     display: flex;
                     padding-left: 8px;
+                    margin-top: 5px;
                     padding-bottom: 9px;
                     padding-right: 8px;
                     flex-direction: column;
@@ -217,6 +218,7 @@
                       font-size: 12px;
                       font-weight: 500;
                       line-height: 15px;
+                      margin-top: -5px;
                     "
                     >{{ seat }}</span
                   >
@@ -943,7 +945,7 @@
       "
     >
       <p style="color: #f04935">
-        This is a Eid ticket it is non cancellable & non refundable
+        This is an Eid ticket it is non cancellable & non refundable
       </p>
       <p>
         N.B: Please carry print copy or soft copy to collect your counter ticket
@@ -1011,7 +1013,7 @@
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
 export default {
-  data() {
+    data() {
     return {
       imageUrl: "",
     };
@@ -1025,7 +1027,7 @@ export default {
     "serviceType",
     "seatFareArray",
   ],
-  mounted() {
+  created() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   computed: {
