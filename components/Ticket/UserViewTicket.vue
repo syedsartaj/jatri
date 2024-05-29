@@ -11,7 +11,7 @@
       "
       class="hidden"
     >
-      <NewTicket
+      <PrintBusTicket
         :ticketDetails="getTicketDetails"
         :email="supportEmail"
         :phone="supportPhone"
@@ -20,7 +20,7 @@
         :seatFareArray="seatFareArray"
       />
     </div>
-    <client-only>
+    <client-only v-if="getSelectedServiceType === ServiceType.LAUNCH">
       <vue-html2pdf
         class="hidden"
         :show-layout="false"
@@ -43,7 +43,7 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <PrintDownloadTicket
+          <LaunchTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
             :phone="supportPhone"
@@ -291,8 +291,11 @@
 </template>
 
 <script>
+
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import { ServiceType } from "../../helpers/utils";
+
 export default {
   name: "UserViewTicket",
   data() {
@@ -300,8 +303,8 @@ export default {
       downloadTicketValue: false,
       seatFareObject: {},
       ticketFareString: "",
+      ServiceType: ServiceType,
       seatFareArray: "",
-
       pdfOptions: {
         filename:
           this.getTicketDetails.companyName +
@@ -369,9 +372,25 @@ export default {
     hasGenerated() {
       alert("PDF generated successfully!");
     },
-    downloadTicket(id) {
-      this.downloadTicketValue = true;
-      this.$refs.html2Pdf.generatePdf(id);
+    async downloadTicket(id) {
+
+        try {
+          const response = await this.getDownloadPdfApi(
+            this.getTicketDetails._id
+          );
+          let fileUrl = window.URL.createObjectURL(new Blob([response]));
+          let fileLink = document.createElement("a");
+          fileLink.href = fileUrl;
+          fileLink.setAttribute(
+            "download",
+            `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
+          );
+          document.body.appendChild(fileLink);
+          fileLink.click();
+        } catch (error) {
+          console.error("Error downloading the PDF", error);
+        }
+    
     },
 
     // printFunction
@@ -420,7 +439,11 @@ export default {
         }, 500);
       };
     },
-    ...mapActions("common", ["sendOtpForCancelTicketAction"]),
+    ...mapGetters("common", ["getSelectedServiceType"]),
+    ...mapActions("common", [
+      "sendOtpForCancelTicketAction",
+      "getDownloadPdfApi",
+    ]),
     ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {

@@ -578,6 +578,7 @@
           align-items: flex-start;
           gap: 16px;
           align-self: stretch;
+          z-index: 999;
         "
       >
         <div
@@ -958,7 +959,7 @@
       v-if="ticketDetails.tripType === 'eid'"
       :src="require('@/assets/images/ticket/eidFooter.svg')"
       alt="eidStamp"
-      style="top: 636px; left: 436px; position: absolute"
+      style="top: 636px; left: 436px; position: absolute; "
     />
     <!-- ========= Footer part ========= -->
     <div

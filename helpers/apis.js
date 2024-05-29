@@ -50,6 +50,7 @@ export const SERVICE_TYPE = {
     POST_SEARCH_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/search-ticket`,
     POST_SEND_OTP_BY_TICKET_ID: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp`,
     POST_CANCEL_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/cancel-ticket`,
+    DOWNLOAD_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/intercity/download-ticket-pdf/`,
   },
   LAUNCH: {
     GET_OPERATOR_LIST_URL: `${PARIBAHAN_BASE_URL}/v1/api/water/operators`,
@@ -77,5 +78,5 @@ export const SERVICE_TYPE = {
   },
   COMMON: {
     POST_SEND_OTP_BY_PHONE: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp-by-phone`,
-  }
+  },
 };
