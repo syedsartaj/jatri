@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     style="
       width: 595px;
       background-color: white;
@@ -581,152 +581,135 @@
           z-index: 999;
         "
       >
-        <div
+        <table
           style="
-            display: flex;
-            padding: 2px 8px;
-            align-items: flex-start;
-            gap: 16px;
-            align-self: stretch;
-            border-radius: 8px;
+            width: 100%;
+            max-width: 563px;
+            border-collapse: collapse;
             background-color: #f7f7f7;
+            border-radius: 8px;
           "
         >
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 4px;
-              flex: 1 0 0;
-              align-self: stretch;
-            "
-          >
-            <p
-              style="
-                font-size: 8px;
-                line-height: 16px;
-                color: #151414;
-                font-weight: 600;
-              "
-            >
-              Terms and condition
-            </p>
-            <ul
-              style="
-                list-style-type: disc;
-                color: #151414;
-                font-size: 8px;
-                line-height: 12px;
-                font-weight: 400;
-                padding-left: 20px;
-              "
-            >
-              <li>
-                The ticket will be treated as canceled if the passenger fails to
-                report at the reporting station 15 minutes before the bus
-                arrival
-              </li>
-              <li>
-                The authority reserves the right to change schedules/seats in
-                case of emergencies
-              </li>
-              <li>
-                The authority will not be responsible for any illegal goods
-                carried by the passenger
-              </li>
-              <li>
-                Passengers may cancel his/her tickets 24 hours before the time
-                of the journey
-              </li>
-              <li>Jatri.co will not be responsible for:</li>
-              <li>The bus operator changing the ticket price.</li>
-              <li>The bus not departing/ reaching on time.</li>
-              <li>
-                The bus operator canceled the trip due to unavoidable reasons.
-              </li>
-            </ul>
-            <p
-              style="
-                color: #f04935;
-                font-size: 8px;
-                line-height: 12px;
-                font-weight: 400;
-                padding-bottom: 2px;
-              "
-            >
-              *Trip may delay due to traffics during occasions
-            </p>
-          </div>
+          <tr>
+            <td style="padding: 8px">
+              <p
+                style="
+                  font-size: 8px;
+                  line-height: 16px;
+                  color: #151414;
+                  font-weight: 600;
+                "
+              >
+                Terms and condition
+              </p>
+              <ul
+                style="
+                  list-style-type: disc;
+                  color: #151414;
+                  font-size: 8px;
+                  line-height: 12px;
+                  font-weight: 400;
+                  padding-left: 20px;
+                "
+              >
+                <li>
+                  The ticket will be treated as canceled if the passenger fails
+                  to report at the reporting station 15 minutes before the bus
+                  arrival
+                </li>
+                <li>
+                  The authority reserves the right to change schedules/seats in
+                  case of emergencies
+                </li>
+                <li>
+                  The authority will not be responsible for any illegal goods
+                  carried by the passenger
+                </li>
+                <li>
+                  Passengers may cancel his/her tickets 24 hours before the time
+                  of the journey
+                </li>
+                <li>Jatri.co will not be responsible for:</li>
+                <li>The bus operator changing the ticket price.</li>
+                <li>The bus not departing/ reaching on time.</li>
+                <li>
+                  The bus operator canceled the trip due to unavoidable reasons.
+                </li>
+              </ul>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  line-height: 12px;
+                  font-weight: 400;
+                  padding-bottom: 2px;
+                "
+              >
+                *Trip may delay due to traffics during occasions
+              </p>
+            </td>
 
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 4px;
-              flex: 1 0 0;
-              align-self: stretch;
-            "
-          >
-            <p
-              style="
-                font-size: 8px;
-                color: #151414;
-                font-weight: 600;
-                line-height: 16px;
-              "
-            >
-              Cancellation policy
-            </p>
-            <ul
-              style="
-                list-style-type: disc;
-                color: #151414;
-                font-size: 8px;
-                line-height: 12px;
-                font-weight: 400;
-                padding-left: 20px;
-              "
-            >
-              <li>
-                Cancellation & Refund of tickets will be made as per policy
-                mentioned in the ticket.jatri.co and subject to the bus
-                operator's approval.
-              </li>
-              <li>
-                You must apply for
-                <b>cancellation & refund 24 hours before trip</b>
-                departure time (excluding 12 AM to 7 AM).
-              </li>
-              <li>
-                In case of refund, it will take
-                <b>7 working days for MFS</b>(bKash, Nagad) and
-                <b>12/15 working days for SSL Commerz/ Bank</b> payment.
-              </li>
-              <li>
-                No ticket will be refunded unless it has been canceled as per
-                the cancellation/refund policy.
-              </li>
-              <li>
-                If the Bus operator cancels the trip after this period, you must
-                <b>apply for a refund within 24 hours</b> of the trip departure
-                time.
-              </li>
-            </ul>
-            <p
-              style="
-                color: #f04935;
-                font-size: 8px;
-                line-height: 12px;
-                font-weight: 400;
-                padding-bottom: 2px;
-              "
-            >
-              *Applicable if only the ticket is cancellable
-            </p>
-          </div>
-        </div>
+            <td style="padding-left: 31px; padding-right: 8px;">
+              <p
+                style="
+                  font-size: 8px;
+                  color: #151414;
+                  font-weight: 600;
+                  line-height: 16px;
+                "
+              >
+                Cancellation policy
+              </p>
+              <ul
+                style="
+                  list-style-type: disc;
+                  color: #151414;
+                  font-size: 8px;
+                  line-height: 12px;
+                  font-weight: 400;
+                  padding-left: 20px;
+                "
+              >
+                <li>
+                  Cancellation & Refund of tickets will be made as per policy
+                  mentioned in the ticket.jatri.co and subject to the bus
+                  operator's approval.
+                </li>
+                <li>
+                  You must apply for
+                  <b>cancellation & refund 24 hours before trip</b>
+                  departure time (excluding 12 AM to 7 AM).
+                </li>
+                <li>
+                  In case of refund, it will take
+                  <b>7 working days for MFS</b>(bKash, Nagad) and
+                  <b>12/15 working days for SSL Commerz/ Bank</b> payment.
+                </li>
+                <li>
+                  No ticket will be refunded unless it has been canceled as per
+                  the cancellation/refund policy.
+                </li>
+                <li>
+                  If the Bus operator cancels the trip after this period, you
+                  must
+                  <b>apply for a refund within 24 hours</b> of the trip
+                  departure time.
+                </li>
+              </ul>
+              <p
+                style="
+                  color: #f04935;
+                  font-size: 8px;
+                  line-height: 12px;
+                  font-weight: 400;
+                  padding-bottom: 2px;
+                "
+              >
+                *Applicable if only the ticket is cancellable
+              </p>
+            </td>
+          </tr>
+        </table>
         <div
           v-if="ticketDetails.tripType === 'eid'"
           style="
@@ -959,7 +942,7 @@
       v-if="ticketDetails.tripType === 'eid'"
       :src="require('@/assets/images/ticket/eidFooter.svg')"
       alt="eidStamp"
-      style="top: 636px; left: 436px; position: absolute; "
+      style="top: 636px; left: 436px; position: absolute"
     />
     <!-- ========= Footer part ========= -->
     <div
