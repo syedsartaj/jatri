@@ -1082,9 +1082,11 @@ export default {
       ) {
         this.errorOccurred = true;
 
-        if (this.boardingPoint.name && this.droppingPoint.name) {
-          this.$refs.passengerPhoneInput.focus();
+        if (!this.passengerName) {
           this.$refs.passengerNameInput.focus();
+        }
+        if (!this.passengerPhone) {
+          this.$refs.passengerPhoneInput.focus();
         }
         this.$nextTick(async () => {
           const el = this.$refs[`busForm`];
