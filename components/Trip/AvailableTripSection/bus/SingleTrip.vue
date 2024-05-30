@@ -1079,7 +1079,7 @@ export default {
         !this.selectedSeatIds.length ||
         !this.boardingPoint?.name ||
         (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
-        !this.passengerName ||
+        this.passengerName.length < 3 ||
         !isValidPhoneNumber(this.passengerPhone) ||
         !this.realPhoneNumber
       ) {
