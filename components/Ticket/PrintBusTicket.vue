@@ -507,7 +507,7 @@
                 "
               >
                 <p style="font-weight: 500; text-align: right">
-                  {{ ticketDetails.payable }} ৳
+                  {{ ticketDetails.discountType === 'OFFER' ?  ticketDetails.payable + ticketDetails.discount :ticketDetails.payable }} ৳
                 </p>
 
                 <p
