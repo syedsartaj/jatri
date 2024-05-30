@@ -1081,11 +1081,10 @@ export default {
         !isValidPhoneNumber(this.passengerPhone)
       ) {
         this.errorOccurred = true;
-
-        if (!this.passengerName) {
+        if (!this.passengerName && this.boardingPoint.name && this.droppingPoint.name) {
           this.$refs.passengerNameInput.focus();
         }
-        if (!this.passengerPhone) {
+        else if (!this.passengerPhone && this.boardingPoint.name && this.droppingPoint.name) {
           this.$refs.passengerPhoneInput.focus();
         }
         this.$nextTick(async () => {
