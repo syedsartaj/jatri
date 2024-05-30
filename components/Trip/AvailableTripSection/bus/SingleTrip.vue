@@ -590,7 +590,6 @@ import {
   isValidEmail,
   isValidPhoneNumber,
   moduleType,
-  validatePhone,
 } from "../../../../helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
 
@@ -643,7 +642,6 @@ export default {
       requestOnGoing: false,
       oid: null,
       sid: null,
-      realPhoneNumber: false,
     };
   },
   computed: {
@@ -731,7 +729,7 @@ export default {
     ]),
     handleInput() {
       this.passengerPhone = cleanAndValidatePhoneNumber(this.passengerPhone);
-      this.realPhoneNumber = validatePhone(this.passengerPhone);
+      // this.realPhoneNumber = validatePhone(this.passengerPhone);
     },
 
     handlePaste(event) {
@@ -739,7 +737,7 @@ export default {
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerPhone = cleanAndValidatePastedText(pastedText);
-      this.realPhoneNumber = validatePhone(pastedText);
+      // this.realPhoneNumber = validatePhone(pastedText);
     },
     getTripMeta(trip) {
       const { coach } = trip;
@@ -1080,8 +1078,7 @@ export default {
         !this.boardingPoint?.name ||
         (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
         !this.passengerName ||
-        !isValidPhoneNumber(this.passengerPhone) ||
-        !this.realPhoneNumber
+        !isValidPhoneNumber(this.passengerPhone)
       ) {
         this.errorOccurred = true;
     
