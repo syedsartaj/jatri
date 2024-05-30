@@ -34,10 +34,8 @@ export const isValidPhoneNumber = (phoneNumber) => {
    if (cleanNumber?.length === 10) {
      cleanNumber = `0${cleanNumber}`;
    }
-
    const isValidFormat =
      cleanNumber?.length === 11 && /^01[3-9]\d{8}$/.test(cleanNumber);
-
    return isValidFormat;
 };
 
@@ -47,7 +45,7 @@ export const isValidEmail = (email) => {
 };
 
 export const validatePhone = (inputPhone) => {
-  const regex = /^(?:0\d{10}(1[3-9]\d{8}|[1-9]\d{9}))$/;
+  const regex = /^(?:0\d{10}|[1-9]\d{9})$/;
 
   if (regex.test(inputPhone)) {
     return true;
@@ -55,19 +53,6 @@ export const validatePhone = (inputPhone) => {
     return false;
   }
 
-  if (inputPhone[0] === "0") {
-    if (inputPhone.length === 11) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    if (inputPhone.length === 10) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 };
 
 // Utility function to clean and validate a phone number string
