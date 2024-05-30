@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full">
-    <div>
+    <div ref="selectElement">
       <h2
         v-if="!isPassengerForm"
         :class="isRequired ? '' : 'justify-between'"
@@ -13,7 +13,7 @@
 
       <div
         v-if="isPassengerForm"
-        :class="(isRequired && !isOptional) ? '' : 'justify-between'"
+        :class="isRequired && !isOptional ? '' : 'justify-between'"
         class="text-base lg:text-xl text-blackPrimary font-medium flex items-end"
       >
         <span>{{ label }} </span>
@@ -28,6 +28,7 @@
           !isPassengerForm
             ? 'py-[13px] mt-[10px] rounded'
             : 'h-12 mt-2 rounded-lg',
+          errorMessage && 'bg-[#FDF0F1] border border-[#E0293B]',
         ]"
       >
         <div class="flex justify-between items-center">
