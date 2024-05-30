@@ -11,8 +11,15 @@
           : 'border-0 border-[#DBDBDB]'
       "
     >
+      <p
+        v-if="trip.tripType === 'eid'"
+        class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-[290px] ml-[-5px] mt-[4px] h-[20px] bg-no-repeat text-white text-[10px] px-6 pt-[2px] font-medium absolute z-50"
+      >
+        Eid ticket-Non refundable-Non cancelable
+      </p>
       <div
-        class="w-full lg:w-4/5 py-5 px-4 lg:px-6 divide-y grid grid-cols-1 divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
+        :class="trip.tripType === 'eid' ? 'pt-[26px] pb-5' : 'py-5'"
+        class="w-full lg:w-4/5 px-4 lg:px-6 divide-y divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
       >
         <div class="flex justify-between items-center pb-[15px] order-first">
           <div
@@ -305,27 +312,36 @@
           </div>
         </div>
 
-        <div class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
+        <div
+          ref="busForm"
+          class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0"
+        >
           <!-- Trip Information -->
           <div class="">
             <SelectOption
+              ref="boardingPoint"
               v-model="boardingPoint"
               :default-option="'Select Your Boarding Location'"
               :label="'Boarding point'"
               :options="getSeatBoardingPointArray"
               propertyName="name"
               :isRequired="true"
+              :errorMessage="errorOccurred && !boardingPoint.name"
+              :isPassengerForm="true"
             />
             <!-- :options="getSeatBoardingPointArray" -->
           </div>
           <div class="mt-4" v-if="getSeatDroppingPointArray.length">
             <SelectOption
+              ref="droppingPoint"
               v-model="droppingPoint"
               :default-option="'Select Your Dropping Location'"
               :label="'Dropping point'"
               :options="getSeatDroppingPointArray"
               propertyName="name"
               :isRequired="true"
+              :errorMessage="errorOccurred && !droppingPoint.name"
+              :isPassengerForm="true"
             />
             <!-- :options="getSeatDroppingPointArray" -->
           </div>
@@ -435,18 +451,42 @@
               Passenger name <span class="text-[#E0293B]">*</span>
             </h2>
             <input
+              ref="passengerNameInput"
+              :class="
+                errorOccurred &&
+                passengerName.length < 3 &&
+                'bg-[#FDF0F1] border border-[#E0293B]'
+              "
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
               type="text"
               placeholder="Enter your name"
               v-model="passengerName"
             />
+            <div
+              v-if="errorOccurred && passengerName.length < 3"
+              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
+            >
+              <img
+                src="@/assets/images/icons/warningRed.svg"
+                class="h-4 w-4"
+                alt="error"
+              />
+              <div>Length must be at least 3 characters.</div>
+            </div>
           </div>
 
           <div class="mt-4">
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
               Phone no <span class="text-[#E0293B]">*</span>
             </h2>
-            <div class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]">
+            <div
+              :class="
+                errorOccurred &&
+                !isValidPassengerNumber &&
+                'bg-[#FDF0F1] border border-[#E0293B]'
+              "
+              class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]"
+            >
               <div class="flex items-center shrink-0">
                 <img
                   class="w-[48px] h-[32px]"
@@ -456,7 +496,7 @@
                 <div
                   class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
                 >
-                  +88
+                  +880
                 </div>
                 <img
                   class="w-[2px] h-[28px] ml-[4px]"
@@ -465,6 +505,7 @@
                 />
               </div>
               <input
+                ref="passengerPhoneInput"
                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondary text-blackPrimary"
                 type="number"
                 autocomplete="something-to-fool-chrome"
@@ -477,6 +518,17 @@
                 @paste="handlePaste"
                 @wheel="$event.target.blur()"
               />
+            </div>
+            <div
+              v-if="errorOccurred && !isValidPassengerNumber"
+              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
+            >
+              <img
+                src="@/assets/images/icons/warningRed.svg"
+                class="h-4 w-4"
+                alt="error"
+              />
+              <div>Please enter a valid phone number.</div>
             </div>
           </div>
 
@@ -496,26 +548,6 @@
           </div>
 
           <LoaderButton
-            :class="
-              (passengerEmail && !isValidPassengerEmail) ||
-              !selectedSeatIds.length ||
-              !boardingPoint?.name ||
-              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
-              !passengerName ||
-              !passengerPhone ||
-              String(`${this.passengerPhone}`).length != 11
-                ? 'bg-gray-500 user cursor-not-allowed'
-                : 'bg-corporate hover:bg-[#D93E2D]'
-            "
-            :disabled="
-              (passengerEmail && !isValidPassengerEmail) ||
-              getLoading ||
-              !boardingPoint?.name ||
-              (getSeatDroppingPointArray.length && !droppingPoint?.name) ||
-              !passengerName ||
-              !passengerPhone ||
-              String(`${this.passengerPhone}`).length != 11
-            "
             :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
             @onClick="paymentPendingBlockHandler"
@@ -547,17 +579,21 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
+
+import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
+  handleScrollBehaviour,
   isValidEmail,
+  isValidPhoneNumber,
   moduleType,
+  validatePhone,
 } from "../../../../helpers/utils";
-import { handleScrollBehaviour } from "../../../../helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
+
 export default {
   components: { SleeperBedIcon },
   props: [
@@ -600,12 +636,14 @@ export default {
       passengerEmail: "",
       promoCode: "",
       totalPromoAmount: 0,
+      errorOccurred: false,
       moduleType: this.trip.moduleType,
       showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
       oid: null,
       sid: null,
+      realPhoneNumber: false,
     };
   },
   computed: {
@@ -625,6 +663,9 @@ export default {
     ]),
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
+    },
+    isValidPassengerNumber() {
+      return isValidPhoneNumber(this.passengerPhone);
     },
     departureDateTime() {
       if (this.boardingPoint?.scheduleTime === "") {
@@ -690,6 +731,7 @@ export default {
     ]),
     handleInput() {
       this.passengerPhone = cleanAndValidatePhoneNumber(this.passengerPhone);
+      this.realPhoneNumber = validatePhone(this.passengerPhone);
     },
 
     handlePaste(event) {
@@ -697,6 +739,7 @@ export default {
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerPhone = cleanAndValidatePastedText(pastedText);
+      this.realPhoneNumber = validatePhone(pastedText);
     },
     getTripMeta(trip) {
       const { coach } = trip;
@@ -1013,6 +1056,7 @@ export default {
         }
       });
     },
+    
     async paymentPendingBlockHandler() {
       if (this.passengerEmail && !this.isValidPassengerEmail) {
         this.$toast.error("Enter a valid email address", {
@@ -1030,102 +1074,130 @@ export default {
         });
         return;
       }
-      console.log(this.trip?.seatClass);
-      this.$nextTick(async () => {
-        this.$nuxt.$loading?.start();
-        this.fireGTMEventForAddToCart();
-        const payload = {
-          moduleType: this.trip.moduleType,
-          busServiceType: this.trip.busServiceType,
-          transportType: this.trip.transportType,
-          transportId: String(this.trip.transportId),
-          uid: this.trip.uid,
-          oid: this.oid,
-          sid: this.sid,
-          id: this.trip.id,
-          seatClass: this.trip?.seatClass,
-          sku: String(this.trip.sku),
-          fromCity: this.trip.fromCity,
-          toCity: this.trip.toCity,
-          route: this.trip.route.name,
-          company: this.trip.company,
-          busId: this.trip.busId,
-          busName: this.trip.busId,
-          coachName: this.trip.coach.name,
-          coachType: this.trip.coach.type,
-          coachNo: this.trip.coach.registrationNumber,
-          seatLbls: this.selectedSeatLabels.join(","),
-          seatIds: this.selectedSeatIds.join(","),
-          ticketPrice: this.selectedSeatFares.join(","),
-          boardingPointId: String(this.boardingPoint.id),
-          boardingPointName: this.boardingPoint.name,
-          droppingPointName: this.droppingPoint.name,
-          droppingPointId: String(this.droppingPoint.id),
-          departureId: this.trip.departureId,
-          departureDate: this.trip.departureDate,
-          departureTime: new Date(
-            `${this.trip.departureDate} ${this.trip.departureTime}`
-          ).toLocaleString("en-Us", { timeStyle: "short" }),
-          boardingDateTime: this.boardingPoint.scheduleTime,
-          reportingDateTime: this.boardingPoint.reportingTime,
-          passengerName: this.passengerName,
-          passengerMobile: this.passengerPhone,
-          passengerEmail: this.passengerEmail,
-          passengerAddress: "dhaka",
-          passengerGender: "male",
-          passengerAge: "20",
-          isTicketCancelable: 1,
-          companyId: this.trip.companyId,
-          tripDateTime: this.trip.tripDateTime,
-          promoCode: this.promoCode,
-        };
-        await this.getPbPaymentPendingBlockAction(payload).then((res) => {
-          if (res.statusCode === 404) {
-            this.$toast.error(res.message, {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
-            window.location.reload(true);
-          }
-          if (res.error) {
-            const seatViewPayload = {
-              moduleType: this.trip.moduleType,
-              busServiceType: this.trip.busServiceType,
-              transportType: this.trip.transportType,
-              transportId: this.trip.transportId,
-              uid: this.trip.uid,
-              fromCity: this.trip.fromCity,
-              toCity: this.trip.toCity,
-              busId: this.trip.busId,
-              departureId: this.trip.departureId,
-              departureDate: this.trip.departureDate,
-              departureTime: this.trip.departureTime,
-              sku: this.trip.sku,
-              id: this.trip.id,
-              seatClass: this.trip.seatClass,
-              seatFare: this.trip.seatFare,
-              companyId: this.trip.companyId,
-              coachType: this.trip.coach.type,
-              tripDateTime: this.trip.tripDateTime,
-            };
-            this.resetForm(false);
-            this.getPbSeatViewAction(seatViewPayload);
-            this.$nuxt.$loading?.finish();
-          } else {
-            if (res.statusCode === 200) {
-              this.$router.push({
-                path: "/bus/payment",
-                query: {
-                  tnxId:
-                    this.getPaymentPendingBlockData.paymentInfo.transactionId,
-                },
-              });
-            }
-          }
-          this.$nuxt.$loading?.finish();
+      if (
+        (this.passengerEmail && !this.isValidPassengerEmail) ||
+        !this.selectedSeatIds.length ||
+        !this.boardingPoint?.name ||
+        (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
+        this.passengerName.length < 3 ||
+        !isValidPhoneNumber(this.passengerPhone) ||
+        !this.realPhoneNumber
+      ) {
+        this.errorOccurred = true;
+    
+        if (this.boardingPoint.name && this.droppingPoint.name) {
+          this.$refs.passengerPhoneInput.focus();
+          this.$refs.passengerNameInput.focus();
+        }
+        this.$nextTick(async () => {
+          const el = this.$refs[`busForm`];
+          setTimeout(() => {
+            window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+          }, 1);
         });
-      });
+      } else {
+        this.$nextTick(async () => {
+          this.$nuxt.$loading?.start();
+          this.fireGTMEventForAddToCart();
+          const payload = {
+            moduleType: this.trip.moduleType,
+            busServiceType: this.trip.busServiceType,
+            transportType: this.trip.transportType,
+            transportId: String(this.trip.transportId),
+            uid: this.trip.uid,
+            oid: this.oid,
+            sid: this.sid,
+            id: this.trip.id,
+            seatClass: this.trip?.seatClass,
+            sku: String(this.trip.sku),
+            fromCity: this.trip.fromCity,
+            toCity: this.trip.toCity,
+            route: this.trip.route.name,
+            company: this.trip.company,
+            busId: this.trip.busId,
+            busName: this.trip.busId,
+            coachName: this.trip.coach.name,
+            coachType: this.trip.coach.type,
+            coachNo: this.trip.coach.registrationNumber,
+            seatLbls: this.selectedSeatLabels.join(","),
+            seatIds: this.selectedSeatIds.join(","),
+            ticketPrice: this.selectedSeatFares.join(","),
+            boardingPointId: String(this.boardingPoint.id),
+            boardingPointName: this.boardingPoint.name,
+            droppingPointName: this.droppingPoint.name,
+            droppingPointId: String(this.droppingPoint.id),
+            departureId: this.trip.departureId,
+            departureDate: this.trip.departureDate,
+            departureTime: new Date(
+              `${this.trip.departureDate} ${this.trip.departureTime}`
+            ).toLocaleString("en-Us", { timeStyle: "short" }),
+            boardingDateTime: this.boardingPoint.scheduleTime,
+            reportingDateTime: this.boardingPoint.reportingTime,
+            passengerName: this.passengerName,
+            passengerMobile:
+              this.passengerPhone?.length === 10
+                ? `0${this.passengerPhone}`
+                : `${this.passengerPhone}`,
+            passengerEmail: this.passengerEmail,
+            passengerAddress: "dhaka",
+            passengerGender: "male",
+            passengerAge: "20",
+            isTicketCancelable: this.trip.isTicketCancelable,
+            tripType: this.trip.tripType,
+            companyId: this.trip.companyId,
+            tripDateTime: this.trip.tripDateTime,
+            promoCode: this.promoCode,
+          };
+          await this.getPbPaymentPendingBlockAction(payload).then((res) => {
+            if (res.statusCode === 404) {
+              this.$toast.error(res.message, {
+                position: "bottom-right",
+                duration: 50000,
+                containerClass: "padding: 100px",
+              });
+              window.location.reload(true);
+            }
+            if (res.error) {
+              const seatViewPayload = {
+                moduleType: this.trip.moduleType,
+                busServiceType: this.trip.busServiceType,
+                transportType: this.trip.transportType,
+                transportId: this.trip.transportId,
+                uid: this.trip.uid,
+                fromCity: this.trip.fromCity,
+                toCity: this.trip.toCity,
+                busId: this.trip.busId,
+                departureId: this.trip.departureId,
+                departureDate: this.trip.departureDate,
+                departureTime: this.trip.departureTime,
+                sku: this.trip.sku,
+                id: this.trip.id,
+                seatClass: this.trip.seatClass,
+                seatFare: this.trip.seatFare,
+                companyId: this.trip.companyId,
+                coachType: this.trip.coach.type,
+                tripDateTime: this.trip.tripDateTime,
+              };
+              this.resetForm(false);
+              this.getPbSeatViewAction(seatViewPayload);
+              this.$nuxt.$loading?.finish();
+            } else {
+              if (res.statusCode === 200) {
+                this.$router.push({
+                  path: "/bus/payment",
+                  query: {
+                    tnxId:
+                      this.getPaymentPendingBlockData.paymentInfo.transactionId,
+                    from: this.$route.query.from,
+                    to: this.$route.query.to,
+                  },
+                });
+              }
+            }
+            this.$nuxt.$loading?.finish();
+          });
+        });
+      }
     },
     fireGTMEventForAddToCart() {
       const eventData = {
@@ -1149,6 +1221,7 @@ export default {
         this.passengerName = "";
         this.passengerPhone = "";
         this.passengerEmail = "";
+         this.errorOccurred = false;
       }
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
@@ -1159,6 +1232,7 @@ export default {
       this.totalDiscountFare = 0;
       this.promoCode = "";
       this.totalPromoAmount = 0;
+     
     },
 
     resetPromo() {
@@ -1334,17 +1408,23 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
+/* Hide the spinners in Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Hide the spinners in Edge Legacy */
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
 }
 </style>

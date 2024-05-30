@@ -29,9 +29,16 @@ export const ServiceType = {
 
 export const isValidPhoneNumber = (phoneNumber) => {
   // Remove any non-digit characters from the input
-  const cleanNumber = phoneNumber?.replace(/\D/g, "");
+  let cleanNumber = phoneNumber?.replace(/\D/g, "");
 
-  return cleanNumber?.length === 11 && cleanNumber?.startsWith("01");
+   if (cleanNumber?.length === 10) {
+     cleanNumber = `0${cleanNumber}`;
+   }
+
+   const isValidFormat =
+     cleanNumber?.length === 11 && /^01[3-9]\d{8}$/.test(cleanNumber);
+
+   return isValidFormat;
 };
 
 export const isValidEmail = (email) => {
@@ -39,14 +46,38 @@ export const isValidEmail = (email) => {
   return emailRegex.test(email);
 };
 
+export const validatePhone = (inputPhone) => {
+  const regex = /^(?:0\d{10}(1[3-9]\d{8}|[1-9]\d{9}))$/;
+
+  if (regex.test(inputPhone)) {
+    return true;
+  } else {
+    return false;
+  }
+
+  if (inputPhone[0] === "0") {
+    if (inputPhone.length === 11) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (inputPhone.length === 10) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
 // Utility function to clean and validate a phone number string
 export const cleanAndValidatePhoneNumber = (input) => {
   const cleanedInput = input.replace(/\D/g, "");
-  
+
   if (cleanedInput.length > 11) {
     return cleanedInput.slice(0, 11);
   }
-  
+
   // Prevent negative numbers
   return cleanedInput.trim();
 };
@@ -54,17 +85,16 @@ export const cleanAndValidatePhoneNumber = (input) => {
 // Utility function to clean and validate a pasted text
 export const cleanAndValidatePastedText = (pastedText) => {
   const cleanedInput = pastedText.replace(/\D/g, "");
-  
+
   if (cleanedInput.length > 11) {
     return cleanedInput.slice(0, 11);
   }
-  
+
   // Prevent negative numbers
   return cleanedInput.trim();
 };
 
 export const extractApiResMessage = (error) => {
-  if(Object.hasOwn(error, 'response')){
-
+  if (Object.hasOwn(error, "response")) {
   }
-}
+};

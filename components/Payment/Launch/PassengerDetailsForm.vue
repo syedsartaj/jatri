@@ -51,14 +51,12 @@
           >
             <div class="flex items-center shrink-0">
               <div class="text-sm font-medium tracking-wide text-[#676769]">
-                +88
+                +880
               </div>
             </div>
             <input
               :class="
-                errorOccurred &&
-                !isValidPassengerNumber &&
-                'bg-[#FDF0F1]'
+                errorOccurred && !isValidPassengerNumber && 'bg-[#FDF0F1]'
               "
               class="bg-[#f7f7f7] pl-2 pr-4 rounded-lg w-full focus:outline-0 text-sm font-medium placeholder:text-blackSecondary placeholder:font-normal text-blackPrimary"
               type="number"
@@ -162,13 +160,14 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {
-  isValidPhoneNumber,
-  isValidEmail,
-  cleanAndValidatePhoneNumber,
-  cleanAndValidatePastedText,
-} from "../../../helpers/utils";
 import { dateTimeFormat } from "../../../helpers/dateTimeFormat";
+import {
+  cleanAndValidatePastedText,
+  cleanAndValidatePhoneNumber,
+  isValidEmail,
+  isValidPhoneNumber,
+  validatePhone
+} from "../../../helpers/utils";
 export default {
   name: "PassengerDetailsForm",
   data() {
@@ -180,6 +179,7 @@ export default {
       passengerEmail: "",
       errorOccurred: false,
       departureTime: "",
+      realPhoneNumber: false,
     };
   },
   computed: {
@@ -235,7 +235,14 @@ export default {
 
       if (this.passengerMobile) {
         this.$router.push(
-          `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+          {
+            path: `/launch/payment/payment-details`,
+            query: {
+              tnxId: this.$route.query.tnxId,
+              from: this.$route.query.from,
+              to: this.$route.query.to,
+            },
+          }
         );
       }
     }
@@ -244,11 +251,13 @@ export default {
     ...mapActions("launchStore", ["postPassengerDetailsAction"]),
     handleInput() {
       this.passengerMobile = cleanAndValidatePhoneNumber(this.passengerMobile);
+      this.realPhoneNumber = validatePhone(this.passengerMobile)
     },
     handlePaste(event) {
       event.preventDefault();
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerMobile = cleanAndValidatePastedText(pastedText);
+      this.realPhoneNumber = validatePhone(pastedText)
     },
     async paymentHandler() {
       const {
@@ -261,8 +270,8 @@ export default {
       } = this;
 
       if (
-        !boardingPoint || 
-        !droppingPoint || 
+        !boardingPoint ||
+        !droppingPoint ||
         passengerName.length < 3 ||
         !isValidPhoneNumber(passengerMobile) ||
         !getLaunchBookingData
@@ -275,7 +284,7 @@ export default {
             boardingPoint,
             droppingPoint,
             passengerName,
-            passengerMobile: passengerMobile,
+            passengerMobile: passengerMobile.length === 10 ? `0${passengerMobile}` :`${passengerMobile}`,
             passengerEmail,
             paymentId: getLaunchBookingData._id,
           };
@@ -283,7 +292,14 @@ export default {
           try {
             await this.postPassengerDetailsAction(payload);
             this.$router.push(
-              `/launch/payment/payment-details?tnxId=${this.$route.query.tnxId}`
+              {
+            path: `/launch/payment/payment-details`,
+            query: {
+              tnxId: this.$route.query.tnxId,
+              from: this.$route.query.from,
+              to: this.$route.query.to,
+            },
+          }
             );
           } catch (err) {
             this.$toast.error(err, {

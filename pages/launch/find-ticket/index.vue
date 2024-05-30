@@ -142,7 +142,7 @@
                       <div
                       class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[10px]"
                       >
-                        +88
+                        +880
                       </div>
                       <img
                       class="w-[2px] h-[24px] ml-[4px] mr-2"
@@ -249,10 +249,10 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
+  ServiceType,
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
   isValidPhoneNumber,
-  ServiceType,
 } from "../../../helpers/utils";
 export default {
   middleware(ctx) {
@@ -349,7 +349,7 @@ export default {
       this.clearAllError();
       const formData = {};
       if (this.selectedTab === 0) {
-        formData.phone = this.phone;
+        formData.phone = this.phone?.length === 10 ? `0${this.phone}` : this.phone;
         if (isValidPhoneNumber(this.phone)) {
           this.$nextTick(async () => {
             await this.sendOtpForSearchTicketAction({

@@ -6,16 +6,15 @@
       v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
       class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer"
     >
-      <p
+      <div
         v-if="label"
         class="text-xs font-normal text-blackSecondary text-left uppercase mb-[2px]"
       >
         {{ label }}
-      </p>
+      </div>
       <div class="flex justify-between items-center">
         <input
           v-if="allowFilter"
-          id="searchInput"
           v-model="searchKey"
           autocomplete="off"
           class="w-full rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-medium text-blackPrimary text-left placeholder-blackPrimary searchInput"
@@ -68,9 +67,9 @@
 </template>
 
 <script>
-import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 import vClickOutside from "v-click-outside";
 import { mapGetters } from "vuex";
+import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 export default {
   directives: {
     clickOutside: vClickOutside.directive,

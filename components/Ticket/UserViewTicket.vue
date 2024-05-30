@@ -1,7 +1,40 @@
 <template>
   <div class="border border-[#DBDBDB] rounded-md">
-    <!-- for download -->
-    <client-only>
+    <!-- for print-->
+    <div
+      :id="'printTicket-' + getTicketDetails._id"
+      style="
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-radius: 6px 6px 0 0;
+      "
+      class="hidden"
+    >
+      <template v-if="serviceType === 'BUS'">
+        <PrintBusTicket
+          :ticketDetails="getTicketDetails"
+          :email="supportEmail"
+          :phone="supportPhone"
+          :downloadTicketStatus="downloadTicketValue"
+          :serviceType="serviceType"
+          :seatFareArray="seatFareArray"
+        />
+      </template>
+      <template v-else>
+        <LaunchTicket
+          :ticketDetails="getTicketDetails"
+          :email="supportEmail"
+          :phone="supportPhone"
+          :downloadTicketStatus="downloadTicketValue"
+          :serviceType="serviceType"
+          :seatFareArray="seatFareArray"
+        />
+      </template>
+    </div>
+
+    <!-- for download-->
+    <client-only v-if="serviceType === 'LAUNCH'">
       <vue-html2pdf
         class="hidden"
         :show-layout="false"
@@ -26,7 +59,7 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <PrintDownloadTicket
+          <LaunchTicket
             :ticketDetails="getTicketDetails"
             :email="supportEmail"
             :phone="supportPhone"
@@ -34,54 +67,38 @@
             :id="'printTicket-' + getTicketDetails._id"
             :ticketFareString="ticketFareString"
             :serviceType="serviceType"
+            :seatFareArray="seatFareArray"
           />
         </section>
       </vue-html2pdf>
     </client-only>
-    <!-- for print-->
-    <div
-      :id="'printTicket-' + getTicketDetails._id"
-      style="
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        border-radius: 6px 6px 0 0;
-      "
-      class="hidden"
-    >
-      <PrintDownloadTicket
-        :ticketDetails="getTicketDetails"
-        :email="supportEmail"
-        :phone="supportPhone"
-        :downloadTicketStatus="downloadTicketValue"
-        :serviceType="serviceType"
-      />
-    </div>
 
     <!-- for show to user-->
-    <div class="w-full overflow-x-auto overflow-y-hidden rounded-t-md custom-word-break">
+    <div
+      class="w-full overflow-x-auto overflow-y-hidden rounded-t-md custom-word-break"
+    >
       <div class="border-b border-[#DBDBDB] bg-white">
         <div
-          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-start items-center gap-x-3 divide-x divide-[#D9D9D9]"
+          class="bg-[#EFF7FD] py-[10px] lg:py-[15px] px-[10px] lg:px-[50px] flex justify-between items-center gap-x-3"
         >
+          <h2 class="text-[#151414] text-sm lg:text-xl font-medium">
+            {{ getTicketDetails.companyName }}
+          </h2>
           <img
             src="@/assets/images/logo.svg"
             alt="jatri logo"
             class="w-10 lg:w-[51px]"
           />
           <!-- <div class="bg-[#D9D9D9] w-[1px] h-6"></div> -->
-          <h2 class="text-[#151414] text-sm lg:text-xl font-medium pl-3">
-            {{ getTicketDetails.companyName }}
-          </h2>
         </div>
         <div class="p-3 md:py-5 lg:p-4">
           <div
             class="flex flex-col md:flex-row justify-between divide-y md:divide-y-0 md:divide-x divide-[#DBDBDB]"
           >
-            <div class="w-full md:w-1/2 ">
+            <div class="w-full md:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
-                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
-                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary ">
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name</p>
+                <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
                   {{ getTicketDetails.passenger.name }}
                 </p>
               </div>
@@ -214,9 +231,16 @@
             </div>
           </div>
         </div>
+        <p
+          v-if="getTicketDetails.tripType === 'eid'"
+          class="text-[#f04935] text-[16px] pb-2 font-[500] leading-[24px] text-center bg-white"
+        >
+          This ticket is Non - Refundable & Cancellable
+        </p>
       </div>
     </div>
     <!-- {{getTicketDetails}} -->
+
     <div
       class="flex justify-center gap-x-[10px] lg:gap-x-6 bg-white p-4 lg:p-5 rounded-b-md"
     >
@@ -283,8 +307,9 @@
 </template>
 
 <script>
-import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
+import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+
 export default {
   name: "UserViewTicket",
   data() {
@@ -292,6 +317,7 @@ export default {
       downloadTicketValue: false,
       seatFareObject: {},
       ticketFareString: "",
+      seatFareArray: "",
     };
   },
   props: [
@@ -310,6 +336,30 @@ export default {
     for (let key in this.seatFareObject) {
       this.ticketFareString += `[${key} x ${this.seatFareObject[key]}]`;
     }
+
+    let seatFares = this.getPaymentHistory?.seatFares;
+    let seatNumbers = this.getTicketDetails.seatNumbers;
+    const fareMap = {};
+
+    // Populate the mapping object
+    for (let i = 0; i < seatNumbers.length; i++) {
+      const seat = seatNumbers[i];
+      const fare = seatFares[i];
+
+      if (!fareMap[fare]) {
+        fareMap[fare] = [];
+      }
+
+      fareMap[fare].push(seat);
+    }
+
+    // Convert the mapping object to the desired output format
+    this.seatFareArray = Object.keys(fareMap).map((fare) => {
+      return {
+        seat: fareMap[fare],
+        fare: `${fare}x${fareMap[fare].length}`,
+      };
+    });
   },
   methods: {
     // downloadFunction
@@ -319,16 +369,35 @@ export default {
     hasGenerated() {
       alert("PDF generated successfully!");
     },
-    downloadTicket(id) {
-      this.downloadTicketValue = true;
-      this.$refs.html2Pdf.generatePdf(id);
+    async downloadTicket(id) {
+      if (this.serviceType === "BUS") {
+        try {
+          const response = await this.getDownloadPdfApi(
+            this.getTicketDetails._id
+          );
+          let fileUrl = window.URL.createObjectURL(new Blob([response]));
+          let fileLink = document.createElement("a");
+          fileLink.href = fileUrl;
+          fileLink.setAttribute(
+            "download",
+            `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
+          );
+          document.body.appendChild(fileLink);
+          fileLink.click();
+        } catch (error) {
+          console.error("Error downloading the PDF", error);
+        }
+      } else {
+        this.downloadTicketValue = true;
+        this.$refs.html2Pdf.generatePdf(id);
+      }
     },
 
     // printFunction
     printTicket(id) {
       this.downloadTicketValue = false;
       let divContents = window.document.getElementById(id).innerHTML;
-      var printWindow = window.open();
+      var printWindow = window.open("", "_blank");
       var is_chrome = Boolean(window.chrome);
       printWindow.document.write("<html>");
       printWindow.document.write(`<head>`);
@@ -336,11 +405,31 @@ export default {
       printWindow.document.write(
         `*{ font-family: 'Inter', sans-serif;box-sizing: border-box;margin: 0;padding: 0;}`
       ); // delete date and page number
-      printWindow.document.write(`@page { size: auto;  margin: 0mm; }`); // delete date and page number
+      printWindow.document.write(
+        `@page {
+          margin: 0;
+          padding: 0;
+          width: 210mm;
+          height: 297mm; 
+        }`
+      );
+      if (this.serviceType === "BUS") {
+        printWindow.document.write(
+          `.print-content {
+            width: 595px; 
+            height: 842px;
+            transform: scale(2);
+            transform-origin: top left;
+            -webkit-print-color-adjust: exact;
+          }`
+        );
+      }
       printWindow.document.write(`</style>`);
       printWindow.document.write(`</head>`);
       printWindow.document.write("<body>");
+      printWindow.document.write(`<div class="print-content">`);
       printWindow.document.write(divContents);
+      printWindow.document.write(`</div>`);
       printWindow.document.write("</body>");
       printWindow.document.write("</html>");
       printWindow.document.close();
@@ -353,18 +442,19 @@ export default {
         }, 500);
       };
     },
-    ...mapActions("common", ["sendOtpForCancelTicketAction"]),
+    ...mapGetters("common", ["getSelectedServiceType"]),
+    ...mapActions("common", [
+      "sendOtpForCancelTicketAction",
+      "getDownloadPdfApi",
+    ]),
     ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
         ticketId,
         service: this.serviceType,
-
       };
       this.setCancelTicketId(ticketId);
-      this.sendOtpForCancelTicketAction(
-        payload
-      );
+      this.sendOtpForCancelTicketAction(payload);
     },
   },
   computed: {
@@ -407,8 +497,7 @@ export default {
 </script>
 
 <style scoped>
-
-.custom-word-break{
-word-break: break-word;
+.custom-word-break {
+  word-break: break-word;
 }
 </style>
