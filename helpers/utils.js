@@ -29,12 +29,16 @@ export const ServiceType = {
 
 export const isValidPhoneNumber = (phoneNumber) => {
   // Remove any non-digit characters from the input
-  const cleanNumber = phoneNumber?.replace(/\D/g, "");
+  let cleanNumber = phoneNumber?.replace(/\D/g, "");
 
-  const formattedNumber =
-    cleanNumber?.length === 10 ? `0${cleanNumber}` : cleanNumber;
+   if (cleanNumber?.length === 10) {
+     cleanNumber = `0${cleanNumber}`;
+   }
 
-  return formattedNumber?.length === 11 && formattedNumber?.startsWith("01");
+   const isValidFormat =
+     cleanNumber?.length === 11 && /^01[3-9]\d{8}$/.test(cleanNumber);
+
+   return isValidFormat;
 };
 
 export const isValidEmail = (email) => {
@@ -43,7 +47,7 @@ export const isValidEmail = (email) => {
 };
 
 export const validatePhone = (inputPhone) => {
-  const regex = /^(?:0\d{10}|[1-9]\d{9})$/;
+  const regex = /^(?:0\d{10}(1[3-9]\d{8}|[1-9]\d{9}))$/;
 
   if (regex.test(inputPhone)) {
     return true;

@@ -1,11 +1,12 @@
 <template>
-  <div style="width: 100%; overflow-x: hidden; overflow-y: hidden">
+  <div style="width: 100%; overflow-x: hidden; overflow-y: hidden;">
     <!-- <div style="width: 802px; display: flex;"> -->
     <div
       style="
         width: 802px;
         font-family: 'Inter', sans-serif;
         border: 1px solid #f94035;
+        -webkit-print-color-adjust: exact;
       "
     >
       <div style="padding-top: 24px; padding-left: 24px; padding-right: 24px;">
