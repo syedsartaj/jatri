@@ -1083,7 +1083,7 @@ export default {
           passengerAddress: "dhaka",
           passengerGender: "male",
           passengerAge: "20",
-          isTicketCancelable: 1,
+          isTicketCancelable: this.trip.isTicketCancelable,
           tripType: this.trip.tripType,
           companyId: this.trip.companyId,
           tripDateTime: this.trip.tripDateTime,

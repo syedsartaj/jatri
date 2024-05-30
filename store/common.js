@@ -57,7 +57,16 @@ export const actions = {
       commit("setBlogList", data.blogs || []);
     } catch (error) {}
   },
-
+  async getDownloadPdfApi({ commit }, payloadData) {
+    try {
+      const response = await this.$blobApi.$get(
+        apis.SERVICE_TYPE.BUS.DOWNLOAD_TICKET + payloadData
+      );
+      return response;
+    } catch (error) {
+      console.log("error", error)
+    }
+  },
   async getHeadLineApi({ commit }) {
     try {
       const { data } = await this.$api.$get(apis.GET_HEAD_LINE);
@@ -69,12 +78,10 @@ export const actions = {
     try {
       const { data } = await this.$api.$get(apis.GS_OFFER_AND_PROMO_IMAGES);
       let offerPromoList = data?.offerAndPromoImages || [];
-      offerPromoList = offerPromoList.map(
-        (offer) =>{
-          offer.image = process.env.OFFER_IMAGE_BASE_URL + offer.image
-          return offer;
-        }
-      );
+      offerPromoList = offerPromoList.map((offer) => {
+        offer.image = process.env.OFFER_IMAGE_BASE_URL + offer.image;
+        return offer;
+      });
       commit("setOfferPromoList", offerPromoList);
     } catch (error) {
       console.log(error);
@@ -180,7 +187,7 @@ export const actions = {
       commit("setLoading", true);
       const { data } = await this.$api.post(
         apis.SERVICE_TYPE[payloadData.service].POST_SEND_OTP_BY_TICKET_ID,
-        {ticketId: payloadData.ticketId}
+        { ticketId: payloadData.ticketId }
       );
       commit("setSelectedService", payloadData.service);
       commit("handleCancelTicketPopup", data.data.phone);
@@ -234,13 +241,13 @@ export const actions = {
       return true;
     } catch (error) {
       commit("setLoading", false);
-      if(Array.isArray(error.response.data.message)){
+      if (Array.isArray(error.response.data.message)) {
         this.$toast.error(error.response.data.message[0], {
           position: "bottom-right",
           duration: 5000,
         });
         return false;
-      }else{
+      } else {
         this.$toast.error(error.response.data.message, {
           position: "bottom-right",
           duration: 5000,
@@ -317,7 +324,6 @@ export const mutations = {
   setOfferPromoList: (state, data) => {
     state.offerPromoList = data;
   },
-  
   setOperatorList: (state, { service, data }) => {
     if (service === ServiceType.BUS) {
       state.busOperators = data;
