@@ -17,7 +17,7 @@
           v-if="allowFilter"
           id="searchInput"
           v-model="searchKey"
-          autocomplete="off"
+          autocomplete="nope"
           class="w-full rounded-md outline-none overflow-x-hidden text-sm xl:text-base font-medium text-blackPrimary text-left placeholder-blackPrimary searchInput"
           :placeholder="secondHand || defaultOption"
           type="text"
@@ -68,9 +68,9 @@
 </template>
 
 <script>
-import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 import vClickOutside from "v-click-outside";
 import { mapGetters } from "vuex";
+import SearchErrorToolTip from "./SearchErrorToolTip.vue";
 export default {
   directives: {
     clickOutside: vClickOutside.directive,
