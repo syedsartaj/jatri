@@ -591,7 +591,7 @@
           "
         >
           <tr>
-            <td style="padding: 8px">
+            <td style="padding: 6px">
               <p
                 style="
                   font-size: 8px;
