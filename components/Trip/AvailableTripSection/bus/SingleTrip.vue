@@ -590,7 +590,6 @@ import {
   isValidEmail,
   isValidPhoneNumber,
   moduleType,
-  validatePhone,
 } from "../../../../helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
 
@@ -643,7 +642,6 @@ export default {
       requestOnGoing: false,
       oid: null,
       sid: null,
-      realPhoneNumber: false,
     };
   },
   computed: {
@@ -731,7 +729,7 @@ export default {
     ]),
     handleInput() {
       this.passengerPhone = cleanAndValidatePhoneNumber(this.passengerPhone);
-      this.realPhoneNumber = validatePhone(this.passengerPhone);
+      // this.realPhoneNumber = validatePhone(this.passengerPhone);
     },
 
     handlePaste(event) {
@@ -739,7 +737,7 @@ export default {
       // Get the pasted text
       const pastedText = event.clipboardData.getData("text/plain");
       this.passengerPhone = cleanAndValidatePastedText(pastedText);
-      this.realPhoneNumber = validatePhone(pastedText);
+      // this.realPhoneNumber = validatePhone(pastedText);
     },
     getTripMeta(trip) {
       const { coach } = trip;
@@ -1056,7 +1054,7 @@ export default {
         }
       });
     },
-    
+
     async paymentPendingBlockHandler() {
       if (this.passengerEmail && !this.isValidPassengerEmail) {
         this.$toast.error("Enter a valid email address", {
@@ -1080,14 +1078,15 @@ export default {
         !this.boardingPoint?.name ||
         (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
         this.passengerName.length < 3 ||
-        !isValidPhoneNumber(this.passengerPhone) ||
-        !this.realPhoneNumber
+        !isValidPhoneNumber(this.passengerPhone)
       ) {
         this.errorOccurred = true;
-    
-        if (this.boardingPoint.name && this.droppingPoint.name) {
-          this.$refs.passengerPhoneInput.focus();
+
+        if (!this.passengerName) {
           this.$refs.passengerNameInput.focus();
+        }
+        if (!this.passengerPhone) {
+          this.$refs.passengerPhoneInput.focus();
         }
         this.$nextTick(async () => {
           const el = this.$refs[`busForm`];
@@ -1221,7 +1220,7 @@ export default {
         this.passengerName = "";
         this.passengerPhone = "";
         this.passengerEmail = "";
-         this.errorOccurred = false;
+        this.errorOccurred = false;
       }
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
@@ -1232,7 +1231,6 @@ export default {
       this.totalDiscountFare = 0;
       this.promoCode = "";
       this.totalPromoAmount = 0;
-     
     },
 
     resetPromo() {
