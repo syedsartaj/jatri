@@ -4,6 +4,7 @@
       width: 595px;
       background-color: white;
       font-family: 'Inter', sans-serif;
+      -webkit-print-color-adjust: exact;
     "
   >
     <img
