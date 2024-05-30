@@ -6,12 +6,12 @@
       v-bind:class="showErrorToolTip && 'border-[#E0293B]'"
       class="block rounded-lg bg-white focus:outline-none w-full lg:p-2 border-[1px] border-[#DBDBDB] cursor-pointer"
     >
-      <label
+      <div
         v-if="label"
         class="text-xs font-normal text-blackSecondary text-left uppercase mb-[2px]"
       >
         {{ label }}
-      </label>
+      </div>
       <div class="flex justify-between items-center">
         <input
           v-if="allowFilter"
