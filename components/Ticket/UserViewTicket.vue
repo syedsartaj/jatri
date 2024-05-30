@@ -11,16 +11,30 @@
       "
       class="hidden"
     >
-      <PrintBusTicket
-        :ticketDetails="getTicketDetails"
-        :email="supportEmail"
-        :phone="supportPhone"
-        :downloadTicketStatus="downloadTicketValue"
-        :serviceType="serviceType"
-        :seatFareArray="seatFareArray"
-      />
+      <template v-if="serviceType === 'BUS'">
+        <PrintBusTicket
+          :ticketDetails="getTicketDetails"
+          :email="supportEmail"
+          :phone="supportPhone"
+          :downloadTicketStatus="downloadTicketValue"
+          :serviceType="serviceType"
+          :seatFareArray="seatFareArray"
+        />
+      </template>
+      <template v-else>
+        <LaunchTicket
+          :ticketDetails="getTicketDetails"
+          :email="supportEmail"
+          :phone="supportPhone"
+          :downloadTicketStatus="downloadTicketValue"
+          :serviceType="serviceType"
+          :seatFareArray="seatFareArray"
+        />
+      </template>
     </div>
-    <client-only v-if="getSelectedServiceType === ServiceType.LAUNCH">
+
+    <!-- for download-->
+    <client-only v-if="serviceType === 'LAUNCH'">
       <vue-html2pdf
         class="hidden"
         :show-layout="false"
@@ -38,7 +52,9 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
-        :html-to-pdf-options="pdfOptions"
+        :pdf-margin="10"
+        pdf-orientation="portrait"
+        pdf-content-width="800px"
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
@@ -81,7 +97,7 @@
           >
             <div class="w-full md:w-1/2">
               <div class="text-xs mb-[14px] flex justify-start">
-                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name:</p>
+                <p class="w-1/2 font-normal text-[#4D4D4F] text-right">Name</p>
                 <p class="w-1/2 pl-[10px] font-medium text-blackPrimary">
                   {{ getTicketDetails.passenger.name }}
                 </p>
@@ -291,10 +307,8 @@
 </template>
 
 <script>
-
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { ServiceType } from "../../helpers/utils";
 
 export default {
   name: "UserViewTicket",
@@ -303,24 +317,7 @@ export default {
       downloadTicketValue: false,
       seatFareObject: {},
       ticketFareString: "",
-      ServiceType: ServiceType,
       seatFareArray: "",
-      pdfOptions: {
-        filename:
-          this.getTicketDetails.companyName +
-          "_" +
-          this.getTicketDetails.passenger.name +
-          "_" +
-          this.getTicketDetails.pnrCode,
-        html2canvas: {
-          dpi: 192,
-          scale: 4,
-          letterRendering: true,
-          useCORS: true,
-        },
-        image: { type: "jpeg", quality: 1 },
-        jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
-      },
     };
   },
   props: [
@@ -373,7 +370,7 @@ export default {
       alert("PDF generated successfully!");
     },
     async downloadTicket(id) {
-
+      if (this.serviceType === "BUS") {
         try {
           const response = await this.getDownloadPdfApi(
             this.getTicketDetails._id
@@ -390,7 +387,10 @@ export default {
         } catch (error) {
           console.error("Error downloading the PDF", error);
         }
-    
+      } else {
+        this.downloadTicketValue = true;
+        this.$refs.html2Pdf.generatePdf(id);
+      }
     },
 
     // printFunction
@@ -413,14 +413,16 @@ export default {
           height: 297mm; 
         }`
       );
-      printWindow.document.write(
-        `.print-content {
+      if (this.serviceType === "BUS") {
+        printWindow.document.write(
+          `.print-content {
       width: 595px; 
       height: 842px;
       transform: scale(2);
       transform-origin: top left;
     }`
-      );
+        );
+      }
       printWindow.document.write(`</style>`);
       printWindow.document.write(`</head>`);
       printWindow.document.write("<body>");
