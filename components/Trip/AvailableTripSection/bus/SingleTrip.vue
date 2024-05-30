@@ -1083,8 +1083,6 @@ export default {
         this.errorOccurred = true;
         this.$refs.passengerPhoneInput.focus();
         this.$refs.passengerNameInput.focus();
-        this.$refs.droppingPointInput.scrollIntoView();
-        this.$refs.boardingPointInput.scrollIntoView();
       } else {
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
@@ -1221,6 +1219,7 @@ export default {
       this.totalDiscountFare = 0;
       this.promoCode = "";
       this.totalPromoAmount = 0;
+      this.errorOccurred = false;
     },
 
     resetPromo() {
@@ -1396,3 +1395,23 @@ export default {
   },
 };
 </script>
+<style scoped>
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the spinners in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Hide the spinners in Edge Legacy */
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+</style>
