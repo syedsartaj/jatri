@@ -416,11 +416,12 @@ export default {
       if (this.serviceType === "BUS") {
         printWindow.document.write(
           `.print-content {
-      width: 595px; 
-      height: 842px;
-      transform: scale(2);
-      transform-origin: top left;
-    }`
+            width: 595px; 
+            height: 842px;
+            transform: scale(2);
+            transform-origin: top left;
+            -webkit-print-color-adjust: exact;
+          }`
         );
       }
       printWindow.document.write(`</style>`);

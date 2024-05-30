@@ -312,8 +312,10 @@
           </div>
         </div>
 
-        <div class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
-          <form action=""></form>
+        <div
+          ref="busForm"
+          class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0"
+        >
           <!-- Trip Information -->
           <div class="">
             <SelectOption
@@ -1054,6 +1056,7 @@ export default {
         }
       });
     },
+    
     async paymentPendingBlockHandler() {
       if (this.passengerEmail && !this.isValidPassengerEmail) {
         this.$toast.error("Enter a valid email address", {
@@ -1081,8 +1084,17 @@ export default {
         !this.realPhoneNumber
       ) {
         this.errorOccurred = true;
-        this.$refs.passengerPhoneInput.focus();
-        this.$refs.passengerNameInput.focus();
+    
+        if (this.boardingPoint.name && this.droppingPoint.name) {
+          this.$refs.passengerPhoneInput.focus();
+          this.$refs.passengerNameInput.focus();
+        }
+        this.$nextTick(async () => {
+          const el = this.$refs[`busForm`];
+          setTimeout(() => {
+            window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+          }, 1);
+        });
       } else {
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
@@ -1209,6 +1221,7 @@ export default {
         this.passengerName = "";
         this.passengerPhone = "";
         this.passengerEmail = "";
+         this.errorOccurred = false;
       }
       this.selectedSeatIds = [];
       this.selectedSeatLabels = [];
@@ -1219,7 +1232,7 @@ export default {
       this.totalDiscountFare = 0;
       this.promoCode = "";
       this.totalPromoAmount = 0;
-      this.errorOccurred = false;
+     
     },
 
     resetPromo() {
