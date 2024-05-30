@@ -1078,8 +1078,7 @@ export default {
         !this.boardingPoint?.name ||
         (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
         this.passengerName.length < 3 ||
-        !isValidPhoneNumber(this.passengerPhone) ||
-        !this.realPhoneNumber
+        !isValidPhoneNumber(this.passengerPhone)
       ) {
         this.errorOccurred = true;
 
