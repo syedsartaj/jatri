@@ -372,20 +372,35 @@ export default {
     async downloadTicket(id) {
       if (this.serviceType === "BUS") {
         try {
+          this.$nuxt.$loading?.start();
           const response = await this.getDownloadPdfApi(
             this.getTicketDetails._id
           );
-          let fileUrl = window.URL.createObjectURL(new Blob([response]));
-          let fileLink = document.createElement("a");
-          fileLink.href = fileUrl;
-          fileLink.setAttribute(
-            "download",
-            `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
-          );
-          document.body.appendChild(fileLink);
-          fileLink.click();
+          if(response) {
+            let fileUrl = window.URL.createObjectURL(new Blob([response]));
+            let fileLink = document.createElement("a");
+            fileLink.href = fileUrl;
+            fileLink.setAttribute(
+              "download",
+              `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
+            );
+            document.body.appendChild(fileLink);
+            fileLink.click();
+          } else {
+            this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
+              position: "bottom-right",
+              duration: 50000,
+              containerClass: "padding: 100px",
+            });
+          }
+          this.$nuxt.$loading?.finish();
         } catch (error) {
-          console.error("Error downloading the PDF", error);
+          this.$toast.error("Error downloading the PDF.", {
+              position: "bottom-right",
+              duration: 50000,
+              containerClass: "padding: 100px",
+            });
+          this.$nuxt.$loading?.finish();
         }
       } else {
         this.downloadTicketValue = true;
