@@ -68,7 +68,7 @@ export default function ({ $axios, app }, inject) {
         const token = `Bearer ${data.access_token}`;
         app.$auth.$storage.setCookie("pb_token", token);
         originalConfig.headers.Authorization = token;
-        return api(originalConfig);
+        return blobApi(originalConfig);
       } catch (_error) {
         return Promise.reject(_error);
       }
