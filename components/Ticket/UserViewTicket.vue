@@ -52,23 +52,34 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
+        :html-to-pdf-options="pdfOptions"
         :pdf-margin="10"
         pdf-orientation="portrait"
-        pdf-content-width="800px"
         @progress="onProgress($event)"
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <LaunchTicket
-            :ticketDetails="getTicketDetails"
-            :email="supportEmail"
-            :phone="supportPhone"
-            :downloadTicketStatus="downloadTicketValue"
-            :id="'printTicket-' + getTicketDetails._id"
-            :ticketFareString="ticketFareString"
-            :serviceType="serviceType"
-            :seatFareArray="seatFareArray"
-          />
+          <template v-if="serviceType === 'BUS'">
+            <DownloadBusTicket
+              :ticketDetails="getTicketDetails"
+              :email="supportEmail"
+              :phone="supportPhone"
+              :downloadTicketStatus="downloadTicketValue"
+              :serviceType="serviceType"
+              :seatFareArray="seatFareArray"
+            />
+          </template>
+          <template v-else>
+            <LaunchTicket
+              :ticketDetails="getTicketDetails"
+              :email="supportEmail"
+              :phone="supportPhone"
+              :downloadTicketStatus="downloadTicketValue"
+              :id="'printTicket-' + getTicketDetails._id"
+              :ticketFareString="ticketFareString"
+              :serviceType="serviceType"
+              :seatFareArray="seatFareArray"
+          /></template>
         </section>
       </vue-html2pdf>
     </client-only>
@@ -318,6 +329,22 @@ export default {
       seatFareObject: {},
       ticketFareString: "",
       seatFareArray: "",
+      pdfOptions: {
+        filename:
+          this.getTicketDetails.companyName +
+          "_" +
+          this.getTicketDetails.passenger.name +
+          "_" +
+          this.getTicketDetails.pnrCode,
+        html2canvas: {
+          dpi: 192,
+          scale: 4,
+          letterRendering: true,
+          useCORS: true,
+        },
+        image: { type: "jpeg", quality: 1 },
+        jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
+      },
     };
   },
   props: [
@@ -370,44 +397,44 @@ export default {
       alert("PDF generated successfully!");
     },
     async downloadTicket(id) {
-      if (this.serviceType === "BUS") {
-        try {
-          this.$nuxt.$loading?.start();
-          const response = await this.getDownloadPdfApi(
-            this.getTicketDetails._id
-          );
-          if(response) {
-            let fileUrl = window.URL.createObjectURL(new Blob([response]));
-            let fileLink = document.createElement("a");
-            fileLink.href = fileUrl;
-            fileLink.setAttribute(
-              "download",
-              `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
-            );
-            document.body.appendChild(fileLink);
-            fileLink.click();
-          } else {
-            this.downloadTicketValue = true;
-            this.$refs.html2Pdf.generatePdf(id);
-            // this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
-            //   position: "bottom-right",
-            //   duration: 50000,
-            //   containerClass: "padding: 100px",
-            // });
-          }
-          this.$nuxt.$loading?.finish();
-        } catch (error) {
-          this.$toast.error("Error downloading the PDF.", {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
-          this.$nuxt.$loading?.finish();
-        }
-      } else {
-        this.downloadTicketValue = true;
-        this.$refs.html2Pdf.generatePdf(id);
-      }
+      this.downloadTicketValue = true;
+      this.$refs.html2Pdf.generatePdf(id);
+      // if (this.serviceType === "BUS") {
+      //   try {
+      //     this.$nuxt.$loading?.start();
+      //     const response = await this.getDownloadPdfApi(
+      //       this.getTicketDetails._id
+      //     );
+      //     if (response) {
+      //       let fileUrl = window.URL.createObjectURL(new Blob([response]));
+      //       let fileLink = document.createElement("a");
+      //       fileLink.href = fileUrl;
+      //       fileLink.setAttribute(
+      //         "download",
+      //         `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
+      //       );
+      //       document.body.appendChild(fileLink);
+      //       fileLink.click();
+      //     } else {
+      //       this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
+      //         position: "bottom-right",
+      //         duration: 50000,
+      //         containerClass: "padding: 100px",
+      //       });
+      //     }
+      //     this.$nuxt.$loading?.finish();
+      //   } catch (error) {
+      //     this.$toast.error("Error downloading the PDF.", {
+      //         position: "bottom-right",
+      //         duration: 50000,
+      //         containerClass: "padding: 100px",
+      //       });
+      //     this.$nuxt.$loading?.finish();
+      //   }
+      // } else {
+      //   this.downloadTicketValue = true;
+      //   this.$refs.html2Pdf.generatePdf(id);
+      // }
     },
 
     // printFunction
