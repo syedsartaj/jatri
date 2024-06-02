@@ -24,12 +24,12 @@
 
     <!-- ========= Main Part ========= -->
 
-    <!-- ========= Top Heading ========= -->
+    <!-- ========= Top Heading ZLECIV1HGIZZM13 YHV91C95TNC2HC6 ========= -->
     <div
       style="
         display: flex;
         gap: 16px;
-        margin-top: 12px;
+        margin-top: 6px;
         margin-bottom: 12px;
         margin-left: 16px;
         margin-right: 16px;
@@ -38,9 +38,11 @@
       <img
         v-if="ticketDetails.companyImage"
         :src="imageUrl + ticketDetails.companyImage"
-        alt=""
-        style="height: 32px; width: auto; border-radius: 100%; margin-top: 2px"
+        crossorigin="anonymous"
+        alt="company Image"
+        style="height: 32px; width: 32px; border-radius: 100%; margin-top: 10px;"
       />
+      
       <div>
         <p
           style="
@@ -63,6 +65,7 @@
           {{ ticketDetails.coach }}
         </p>
       </div>
+      <div v-if="!ticketDetails.companyImage" style="height: 32px; margin-top: 10px; width: 0px;"></div>
     </div>
 
     <div
@@ -84,22 +87,23 @@
           align-items: flex-start;
         "
       >
-        <p
+        <div
           style="
             display: flex;
-            padding: 8px 8px 8px 12px;
+            padding-left: 12px;
+            padding-bottom: 12px;
+            padding-top: 2px;
+            padding-right: 8px;
             align-items: center;
-            gap: 2px;
             align-self: stretch;
             border-radius: 8px 8px 0px 0px;
             background: #fde5e2;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
           "
         >
-          Passenger Details:
-        </p>
+          <p style="font-size: 12px; font-weight: 600; line-height: 16px">
+            Passenger Details:
+          </p>
+        </div>
         <img
           v-if="ticketDetails.tripType === 'eid'"
           :src="require('@/assets/images/ticket/eidStamp.svg')"
@@ -205,10 +209,12 @@
                     background: #f04935;
                     border-radius: 4px;
                     display: flex;
-                    padding: 2px 8px;
+                    padding-left: 8px;
+                    margin-top: 5px;
+                    padding-bottom: 9px;
+                    padding-right: 8px;
                     flex-direction: column;
                     align-items: flex-start;
-                    gap: 10px;
                   "
                   :key="seat"
                 >
@@ -217,7 +223,8 @@
                       color: #fff;
                       font-size: 12px;
                       font-weight: 500;
-                      line-height: 16px;
+                      line-height: 15px;
+                      margin-top: -5px;
                     "
                     >{{ seat }}</span
                   >
@@ -245,30 +252,32 @@
             align-self: stretch;
           "
         >
-          <p
+          <div
             style="
               display: flex;
               height: 28px;
-              padding: 8px 8px 8px 12px;
+              padding-left: 12px;
+              padding-bottom: 12px;
+              padding-top: 2px;
+              padding-right: 8px;
               border-radius: 8px 8px 0px 0px;
               background: #fde5e2;
               align-items: center;
               gap: 2px;
               align-self: stretch;
-              font-size: 12px;
-              font-weight: 600;
-              line-height: 16px;
             "
           >
-            Journey details:
-          </p>
+            <p style="font-size: 12px; font-weight: 600; line-height: 16px">
+              Journey details:
+            </p>
+          </div>
           <div
             style="
               color: #151414;
               font-size: 12px;
               line-height: 16px;
               display: flex;
-              padding: 12px 8px 12px 12px;
+              padding: 6px 8px 12px 12px;
               flex-direction: column;
               align-items: flex-start;
               gap: 8px;
@@ -382,27 +391,29 @@
             flex: 1 0 0;
           "
         >
-          <p
+          <div
             style="
               display: flex;
               height: 28px;
-              padding: 8px 8px 8px 12px;
+              padding-left: 12px;
+              padding-bottom: 12px;
+              padding-top: 2px;
+              padding-right: 8px;
               border-radius: 8px 8px 0px 0px;
               background: #fde5e2;
               align-items: center;
               gap: 2px;
               align-self: stretch;
-              font-size: 12px;
-              font-weight: 600;
-              line-height: 16px;
             "
           >
-            Payment details:
-          </p>
+            <p style="font-size: 12px; font-weight: 600; line-height: 16px">
+              Payment details:
+            </p>
+          </div>
           <div
             style="
               display: flex;
-              padding: 12px 8px 12px 12px;
+              padding: 6px 8px 12px 12px;
               flex-direction: column;
               align-items: flex-start;
               gap: 8px;
@@ -420,6 +431,7 @@
               style="
                 display: flex;
                 justify-content: space-between;
+                padding-bottom: 7px;
                 align-items: flex-start;
                 align-self: stretch;
               "
@@ -467,12 +479,12 @@
                 </div>
               </div>
             </div>
-
             <hr style="width: 207px; height: 1px; border: 1px dashed #b6b6b6" />
             <div
               style="
                 display: flex;
                 justify-content: space-between;
+                padding-bottom: 7px;
                 align-items: flex-start;
                 align-self: stretch;
               "
@@ -514,8 +526,7 @@
                     ticketDetails.discountType === "OFFER"
                       ? ticketDetails.payable + ticketDetails.discount
                       : ticketDetails.payable
-                  }}
-                  ৳
+                  }} ৳
                 </p>
 
                 <p
@@ -586,138 +597,154 @@
           align-items: flex-start;
           gap: 16px;
           align-self: stretch;
-          z-index: 999;
         "
       >
-        <table
+        <div
           style="
-            width: 100%;
-            max-width: 563px;
-            border-collapse: collapse;
-            background-color: #f7f7f7;
+            display: flex;
+            padding: 0px 8px 4px 8px;
+            align-items: flex-start;
+            gap: 16px;
+            align-self: stretch;
             border-radius: 8px;
+            background-color: #f7f7f7;
           "
         >
-          <tr>
-            <td style="padding: 6px">
-              <p
-                style="
-                  font-size: 8px;
-                  line-height: 16px;
-                  color: #151414;
-                  font-weight: 600;
-                "
-              >
-                Terms and condition
-              </p>
-              <ul
-                style="
-                  list-style-type: disc;
-                  color: #151414;
-                  font-size: 8px;
-                  line-height: 12px;
-                  font-weight: 400;
-                  padding-left: 20px;
-                "
-              >
-                <li>
-                  The ticket will be treated as canceled if the passenger fails
-                  to report at the reporting station 15 minutes before the bus
-                  arrival
-                </li>
-                <li>
-                  The authority reserves the right to change schedules/seats in
-                  case of emergencies
-                </li>
-                <li>
-                  The authority will not be responsible for any illegal goods
-                  carried by the passenger
-                </li>
-                <li>
-                  Passengers may cancel his/her tickets 24 hours before the time
-                  of the journey
-                </li>
-                <li>Jatri.co will not be responsible for:</li>
-                <li>The bus operator changing the ticket price.</li>
-                <li>The bus not departing/ reaching on time.</li>
-                <li>
-                  The bus operator canceled the trip due to unavoidable reasons.
-                </li>
-              </ul>
-              <p
-                style="
-                  color: #f04935;
-                  font-size: 8px;
-                  line-height: 12px;
-                  font-weight: 400;
-                  padding-bottom: 2px;
-                "
-              >
-                *Trip may delay due to traffics during occasions
-              </p>
-            </td>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 4px;
+              flex: 1 0 0;
+              align-self: stretch;
+            "
+          >
+            <p
+              style="
+                font-size: 8px;
+                line-height: 16px;
+                color: #151414;
+                font-weight: 600;
+              "
+            >
+              Terms and condition
+            </p>
+            <ul
+              style="
+                list-style-type: disc;
+                color: #151414;
+                font-size: 8px;
+                line-height: 12px;
+                font-weight: 400;
+                padding-left: 20px;
+              "
+            >
+              <li>
+                The ticket will be treated as canceled if the passenger fails to
+                report at the reporting station 15 minutes before the bus
+                arrival
+              </li>
+              <li>
+                The authority reserves the right to change schedules/seats in
+                case of emergencies
+              </li>
+              <li>
+                The authority will not be responsible for any illegal goods
+                carried by the passenger
+              </li>
+              <li>
+                Passengers may cancel his/her tickets 24 hours before the time
+                of the journey
+              </li>
+              <li>Jatri.co will not be responsible for:</li>
+              <li>The bus operator changing the ticket price.</li>
+              <li>The bus not departing/ reaching on time.</li>
+              <li>
+                The bus operator canceled the trip due to unavoidable reasons.
+              </li>
+            </ul>
+            <p
+              style="
+                color: #f04935;
+                font-size: 8px;
+                line-height: 12px;
+                font-weight: 400;
+                padding-bottom: 2px;
+              "
+            >
+              *Trip may delay due to traffics during occasions
+            </p>
+          </div>
 
-            <td style="padding-left: 31px; padding-right: 8px">
-              <p
-                style="
-                  font-size: 8px;
-                  color: #151414;
-                  font-weight: 600;
-                  line-height: 16px;
-                "
-              >
-                Cancellation policy
-              </p>
-              <ul
-                style="
-                  list-style-type: disc;
-                  color: #151414;
-                  font-size: 8px;
-                  line-height: 12px;
-                  font-weight: 400;
-                  padding-left: 20px;
-                "
-              >
-                <li>
-                  Cancellation & Refund of tickets will be made as per policy
-                  mentioned in the ticket.jatri.co and subject to the bus
-                  operator's approval.
-                </li>
-                <li>
-                  You must apply for
-                  <b>cancellation & refund 24 hours before trip</b>
-                  departure time (excluding 12 AM to 7 AM).
-                </li>
-                <li>
-                  In case of refund, it will take
-                  <b>7 working days for MFS</b>(bKash, Nagad) and
-                  <b>12/15 working days for SSL Commerz/ Bank</b> payment.
-                </li>
-                <li>
-                  No ticket will be refunded unless it has been canceled as per
-                  the cancellation/refund policy.
-                </li>
-                <li>
-                  If the Bus operator cancels the trip after this period, you
-                  must
-                  <b>apply for a refund within 24 hours</b> of the trip
-                  departure time.
-                </li>
-              </ul>
-              <p
-                style="
-                  color: #f04935;
-                  font-size: 8px;
-                  line-height: 12px;
-                  font-weight: 400;
-                  padding-bottom: 2px;
-                "
-              >
-                *Applicable if only the ticket is cancellable
-              </p>
-            </td>
-          </tr>
-        </table>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 4px;
+              flex: 1 0 0;
+              align-self: stretch;
+            "
+          >
+            <p
+              style="
+                font-size: 8px;
+                color: #151414;
+                font-weight: 600;
+                line-height: 16px;
+              "
+            >
+              Cancellation policy
+            </p>
+            <ul
+              style="
+                list-style-type: disc;
+                color: #151414;
+                font-size: 8px;
+                line-height: 12px;
+                font-weight: 400;
+                padding-left: 20px;
+              "
+            >
+              <li>
+                Cancellation & Refund of tickets will be made as per policy
+                mentioned in the ticket.jatri.co and subject to the bus
+                operator's approval.
+              </li>
+              <li>
+                You must apply for
+                <b>cancellation & refund 24 hours before trip</b>
+                departure time (excluding 12 AM to 7 AM).
+              </li>
+              <li>
+                In case of refund, it will take
+                <b>7 working days for MFS</b>(bKash, Nagad) and
+                <b>12/15 working days for SSL Commerz/ Bank</b> payment.
+              </li>
+              <li>
+                No ticket will be refunded unless it has been canceled as per
+                the cancellation/refund policy.
+              </li>
+              <li>
+                If the Bus operator cancels the trip after this period, you must
+                <b>apply for a refund within 24 hours</b> of the trip departure
+                time.
+              </li>
+            </ul>
+            <p
+              style="
+                color: #f04935;
+                font-size: 8px;
+                line-height: 12px;
+                font-weight: 400;
+                padding-bottom: 2px;
+              "
+            >
+              *Applicable if only the ticket is cancellable
+            </p>
+          </div>
+        </div>
         <div
           v-if="ticketDetails.tripType === 'eid'"
           style="
@@ -728,7 +755,7 @@
             align-self: stretch;
           "
         >
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <img
               :src="require('@/assets/images/ticket/mail.svg')"
               alt=""
@@ -740,6 +767,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -751,7 +779,7 @@
             </div>
           </div>
 
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <img
               :src="require('@/assets/images/ticket/phone.svg')"
               alt=""
@@ -763,6 +791,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -774,9 +803,8 @@
             </div>
           </div>
 
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <svg
-              style="margin-bottom: 4px"
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -795,6 +823,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -821,7 +850,7 @@
             align-self: stretch;
           "
         >
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <img
               :src="require('@/assets/images/ticket/mail.svg')"
               alt=""
@@ -833,6 +862,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -844,7 +874,7 @@
             </div>
           </div>
 
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <img
               :src="require('@/assets/images/ticket/phone.svg')"
               alt=""
@@ -856,6 +886,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -867,7 +898,7 @@
             </div>
           </div>
 
-          <div style="display: flex; align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; column-gap: 6px">
             <svg
               style="margin-bottom: 4px"
               width="16"
@@ -888,6 +919,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 line-height: 16px;
+                margin-top: -10px;
               "
             >
               <p style="color: #4d4d4f; font-size: 10px; font-weight: 500">
@@ -917,7 +949,7 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
+        margin-top: 19px;
         margin-bottom: 22px;
         margin-left: 16px;
       "
@@ -939,8 +971,8 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
-        margin-bottom: 38px;
+        margin-top: 22px;
+        margin-bottom: 35px;
       "
     >
       N.B: Please carry print copy or soft copy to collect your counter ticket
@@ -974,14 +1006,14 @@
             align-items: center;
           "
         >
-          <p>Powered by:</p>
+          <p style="margin-top: -12px">Powered by:</p>
           <img
             :src="require('@/assets/images/ticket/logo-white.png')"
             alt=""
             style="height: 16px"
           />
         </div>
-        <p>www.jatri.co</p>
+        <p style="margin-top: -7px">www.jatri.co</p>
       </div>
     </div>
   </div>
@@ -1005,7 +1037,7 @@ export default {
     "serviceType",
     "seatFareArray",
   ],
-  mounted() {
+  created() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
   },
   computed: {

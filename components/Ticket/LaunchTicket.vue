@@ -6,7 +6,9 @@
         width: 802px;
         font-family: 'Inter', sans-serif;
         border: 1px solid #f94035;
-        -webkit-print-color-adjust: exact;
+        color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       "
     >
       <div style="padding-top: 24px; padding-left: 24px; padding-right: 24px;">

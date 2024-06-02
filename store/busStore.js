@@ -1,5 +1,5 @@
 import * as apis from "../helpers/apis";
-import { ServiceType, handleScrollBehaviour } from "../helpers/utils";
+import { handleScrollBehaviour } from "../helpers/utils";
 
 const mobileFilterInitialData = {
   coachTypes: ["ac", "non-ac", "all"],
@@ -102,9 +102,11 @@ export const actions = {
       );
       commit("setSeatViewData", data);
       commit("resetPromoCode");
-    } catch (error) { 
-      const errorMessages = error?.response?.data?.message
-      const errorMsg = Array.isArray(errorMessages) ? errorMessages[0] : errorMessages
+    } catch (error) {
+      const errorMessages = error?.response?.data?.message;
+      const errorMsg = Array.isArray(errorMessages)
+        ? errorMessages[0]
+        : errorMessages;
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(errorMsg, {
           position: "bottom-right",

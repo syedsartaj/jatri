@@ -28,49 +28,87 @@
           :phone="supportPhone"
           :downloadTicketStatus="downloadTicketValue"
           :serviceType="serviceType"
-          :seatFareArray="seatFareArray"
+          :ticketFareString="ticketFareString"
         />
       </template>
     </div>
 
     <!-- for download-->
     <client-only>
-      <vue-html2pdf
-        class="hidden"
-        :show-layout="false"
-        :float-layout="true"
-        :enable-download="true"
-        :preview-modal="true"
-        :paginate-elements-by-height="1400"
-        :filename="
-          getTicketDetails.companyName +
-          '_' +
-          getTicketDetails.passenger.name +
-          '_' +
-          getTicketDetails.pnrCode
-        "
-        :pdf-quality="2"
-        :manual-pagination="false"
-        pdf-format="a4"
-        :pdf-margin="10"
-        pdf-orientation="portrait"
-        pdf-content-width="800px"
-        @progress="onProgress($event)"
-        ref="html2Pdf"
-      >
-        <section slot="pdf-content">
-          <LaunchTicket
-            :ticketDetails="getTicketDetails"
-            :email="supportEmail"
-            :phone="supportPhone"
-            :downloadTicketStatus="downloadTicketValue"
-            :id="'printTicket-' + getTicketDetails._id"
-            :ticketFareString="ticketFareString"
-            :serviceType="serviceType"
-            :seatFareArray="seatFareArray"
-          />
-        </section>
-      </vue-html2pdf>
+      <template v-if="serviceType === 'BUS'">
+        <vue-html2pdf
+          class="hidden"
+          :show-layout="false"
+          :float-layout="true"
+          :enable-download="true"
+          :preview-modal="true"
+          :paginate-elements-by-height="1400"
+          :filename="
+            getTicketDetails.companyName +
+            '_' +
+            getTicketDetails.passenger.name +
+            '_' +
+            getTicketDetails.pnrCode
+          "
+          :pdf-quality="2"
+          :manual-pagination="false"
+          pdf-format="a4"
+          :html-to-pdf-options="pdfOptions"
+          :pdf-margin="10"
+          pdf-orientation="portrait"
+          @progress="onProgress($event)"
+          ref="html2Pdf"
+        >
+          <section slot="pdf-content">
+            <DownloadBusTicket
+              :ticketDetails="getTicketDetails"
+              :email="supportEmail"
+              :phone="supportPhone"
+              :downloadTicketStatus="downloadTicketValue"
+              :serviceType="serviceType"
+              :seatFareArray="seatFareArray"
+            />
+          </section>
+        </vue-html2pdf>
+      </template>
+
+      <template v-else>
+        <vue-html2pdf
+          class="hidden"
+          :show-layout="false"
+          :float-layout="true"
+          :enable-download="true"
+          :preview-modal="true"
+          :paginate-elements-by-height="1400"
+          :filename="
+            getTicketDetails.companyName +
+            '_' +
+            getTicketDetails.passenger.name +
+            '_' +
+            getTicketDetails.pnrCode
+          "
+          :pdf-quality="2"
+          :manual-pagination="false"
+          pdf-format="a4"
+          :pdf-margin="10"
+          pdf-orientation="portrait"
+          @progress="onProgress($event)"
+          ref="html2Pdf"
+        >
+          <section slot="pdf-content" v-if="ticketFareString">
+            <LaunchTicket
+              :ticketDetails="getTicketDetails"
+              :email="supportEmail"
+              :phone="supportPhone"
+              :downloadTicketStatus="downloadTicketValue"
+              :id="'printTicket-' + getTicketDetails._id"
+              :ticketFareString="ticketFareString"
+              :serviceType="serviceType"
+              :seatFareArray="seatFareArray"
+            />
+          </section>
+        </vue-html2pdf>
+      </template>
     </client-only>
 
     <!-- for show to user-->
@@ -318,6 +356,19 @@ export default {
       seatFareObject: {},
       ticketFareString: "",
       seatFareArray: "",
+      pdfOptions: {
+        filename: `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`,
+        html2canvas: {
+          dpi: 192,
+          scale: 4,
+          letterRendering: true,
+          allowTaint: false,
+          logging: false,
+          useCORS: true,
+        },
+        image: { type: "jpeg", quality: 1 },
+        jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
+      },
     };
   },
   props: [
@@ -364,50 +415,52 @@ export default {
   methods: {
     // downloadFunction
     onProgress(event) {
-      console.log(`Processed: ${event} / 100`);
     },
     hasGenerated() {
       alert("PDF generated successfully!");
     },
     async downloadTicket(id) {
-      if (this.serviceType === "BUS") {
-        try {
-          this.$nuxt.$loading?.start();
-          const response = await this.getDownloadPdfApi(
-            this.getTicketDetails._id
-          );
-          if(response) {
-            let fileUrl = window.URL.createObjectURL(new Blob([response]));
-            let fileLink = document.createElement("a");
-            fileLink.href = fileUrl;
-            fileLink.setAttribute(
-              "download",
-              `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
-            );
-            document.body.appendChild(fileLink);
-            fileLink.click();
-          } else {
-            this.downloadTicketValue = true;
-            this.$refs.html2Pdf.generatePdf(id);
-            // this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
-            //   position: "bottom-right",
-            //   duration: 50000,
-            //   containerClass: "padding: 100px",
-            // });
-          }
-          this.$nuxt.$loading?.finish();
-        } catch (error) {
-          this.$toast.error("Error downloading the PDF.", {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
-          this.$nuxt.$loading?.finish();
-        }
-      } else {
-        this.downloadTicketValue = true;
-        this.$refs.html2Pdf.generatePdf(id);
-      }
+      // const image = await this.getDownloadPdfImage(this.getTicketDetails.companyImage);
+      this.$nuxt.$loading?.start();
+      this.downloadTicketValue = true;
+      this.$refs.html2Pdf.generatePdf(id);
+      this.$nuxt.$loading?.finish();
+      // if (this.serviceType === "BUS") {
+      //   try {
+      //     this.$nuxt.$loading?.start();
+      //     const response = await this.getDownloadPdfApi(
+      //       this.getTicketDetails._id
+      //     );
+      //     if (response) {
+      //       let fileUrl = window.URL.createObjectURL(new Blob([response]));
+      //       let fileLink = document.createElement("a");
+      //       fileLink.href = fileUrl;
+      //       fileLink.setAttribute(
+      //         "download",
+      //         `${this.getTicketDetails.companyName}_${this.getTicketDetails.passenger.name}_${this.getTicketDetails.pnrCode}.pdf`
+      //       );
+      //       document.body.appendChild(fileLink);
+      //       fileLink.click();
+      //     } else {
+      //       this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
+      //         position: "bottom-right",
+      //         duration: 50000,
+      //         containerClass: "padding: 100px",
+      //       });
+      //     }
+      //     this.$nuxt.$loading?.finish();
+      //   } catch (error) {
+      //     this.$toast.error("Error downloading the PDF.", {
+      //         position: "bottom-right",
+      //         duration: 50000,
+      //         containerClass: "padding: 100px",
+      //       });
+      //     this.$nuxt.$loading?.finish();
+      //   }
+      // } else {
+      //   this.downloadTicketValue = true;
+      //   this.$refs.html2Pdf.generatePdf(id);
+      // }
     },
 
     // printFunction
@@ -464,6 +517,8 @@ export default {
       "sendOtpForCancelTicketAction",
       "getDownloadPdfApi",
     ]),
+    ...mapActions("busStore", ["getDownloadPdfImage"]),
+
     ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {
