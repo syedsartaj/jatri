@@ -4,7 +4,9 @@
       width: 595px;
       background-color: white;
       font-family: 'Inter', sans-serif;
-      -webkit-print-color-adjust: exact;
+      color-adjust: exact !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     "
   >
     <img
@@ -37,7 +39,7 @@
         v-if="ticketDetails.companyImage"
         :src="imageUrl + ticketDetails.companyImage"
         alt=""
-        style="height: 32px; width: auto; border-radius: 100%"
+        style="height: 32px; width: auto; border-radius: 100%; margin-top: 2px"
       />
       <div>
         <p
@@ -486,13 +488,13 @@
                 <p style="color: #494949; font-weight: 400">Sub total</p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.discount"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
                 >
                   Discount
                 </p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.promo"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
                 >
                   Promo
                 </p>
@@ -508,21 +510,26 @@
                 "
               >
                 <p style="font-weight: 500; text-align: right">
-                  {{ ticketDetails.discountType === 'OFFER' ?  ticketDetails.payable + ticketDetails.discount :ticketDetails.payable }} ৳
+                  {{
+                    ticketDetails.discountType === "OFFER"
+                      ? ticketDetails.payable + ticketDetails.discount
+                      : ticketDetails.payable
+                  }}
+                  ৳
                 </p>
 
                 <p
-                  v-if="ticketDetails.discount"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
                   style="font-weight: 500; text-align: right"
                 >
                   - {{ ticketDetails.discount }} ৳
                 </p>
 
                 <p
-                  v-if="ticketDetails.promo"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
                   style="font-weight: 500; text-align: right"
                 >
-                  - {{ ticketDetails.promo }} ৳
+                  - {{ ticketDetails.discount }} ৳
                 </p>
 
                 <p style="font-weight: 500; text-align: right">
@@ -650,7 +657,7 @@
               </p>
             </td>
 
-            <td style="padding-left: 31px; padding-right: 8px;">
+            <td style="padding-left: 31px; padding-right: 8px">
               <p
                 style="
                   font-size: 8px;
