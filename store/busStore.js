@@ -1,5 +1,5 @@
 import * as apis from "../helpers/apis";
-import { ServiceType, handleScrollBehaviour } from "../helpers/utils";
+import { handleScrollBehaviour } from "../helpers/utils";
 
 const mobileFilterInitialData = {
   coachTypes: ["ac", "non-ac", "all"],
@@ -36,6 +36,7 @@ export const state = () => ({
   ticketDetails: {},
   bookingInfoDetails: {},
   showSurpriseDealModal: null,
+  companyImageForTicketPDFDownload: null,
 });
 
 export const getters = {
@@ -60,9 +61,24 @@ export const getters = {
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getTicketDetails: (state) => state.ticketDetails,
+  getCompanyImageForTicketPDFDownload: (state) =>
+    state.companyImageForTicketPDFDownload,
 };
 
 export const actions = {
+  async getDownloadPdfImage({ commit }, payloadData) {
+    console.log("asdfaa===========",payloadData);
+    try {
+      console.log("base==========", process.env.OFFER_IMAGE_BASE_URL);
+      const response = await this.$blobApi.$get(
+        process.env.OFFER_IMAGE_BASE_URL + payloadData
+      );
+       commit("setDownloadPdfImage", response || null);
+      return response;
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
   async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
@@ -102,9 +118,11 @@ export const actions = {
       );
       commit("setSeatViewData", data);
       commit("resetPromoCode");
-    } catch (error) { 
-      const errorMessages = error?.response?.data?.message
-      const errorMsg = Array.isArray(errorMessages) ? errorMessages[0] : errorMessages
+    } catch (error) {
+      const errorMessages = error?.response?.data?.message;
+      const errorMsg = Array.isArray(errorMessages)
+        ? errorMessages[0]
+        : errorMessages;
       if (error.response && error.response.data.statusCode === 404) {
         this.$toast.error(errorMsg, {
           position: "bottom-right",
@@ -381,6 +399,9 @@ export const mutations = {
     (state.paymentPendingBlockData = data),
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;
+  },
+  setDownloadPdfImage: (state, data) => {
+     state.companyImageForTicketPDFDownload = data
   },
   setModalBoardingPoints: (state, data) =>
     (state.modalBoardingPointList = data),
