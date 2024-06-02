@@ -4,6 +4,9 @@
       width: 595px;
       background-color: white;
       font-family: 'Inter', sans-serif;
+      color-adjust: exact !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     "
   >
     <img
@@ -34,9 +37,10 @@
     >
       <img
         v-if="ticketDetails.companyImage"
-        :src="getCompanyImageForTicketPDFDownload"
+        :src="imageUrl + ticketDetails.companyImage"
+        crossorigin="anonymous"
         alt="company Image"
-        style="height: 32px; width: 32px; border-radius: 100%"
+        style="height: 32px; width: 32px; border-radius: 100%; margin-top: 10px;"
       />
       <div>
         <p
@@ -494,13 +498,13 @@
                 <p style="color: #494949; font-weight: 400">Sub total</p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.discount"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
                 >
                   Discount
                 </p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.promo"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
                 >
                   Promo
                 </p>
@@ -516,21 +520,25 @@
                 "
               >
                 <p style="font-weight: 500; text-align: right">
-                  {{ ticketDetails.payable }} ৳
+                  {{
+                    ticketDetails.discountType === "OFFER"
+                      ? ticketDetails.payable + ticketDetails.discount
+                      : ticketDetails.payable
+                  }} ৳
                 </p>
 
                 <p
-                  v-if="ticketDetails.discount"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
                   style="font-weight: 500; text-align: right"
                 >
                   - {{ ticketDetails.discount }} ৳
                 </p>
 
                 <p
-                  v-if="ticketDetails.promo"
+                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
                   style="font-weight: 500; text-align: right"
                 >
-                  - {{ ticketDetails.promo }} ৳
+                  - {{ ticketDetails.discount }} ৳
                 </p>
 
                 <p style="font-weight: 500; text-align: right">
@@ -1032,7 +1040,6 @@ export default {
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
-    ...mapGetters("busStore", ["getCompanyImageForTicketPDFDownload"]),
     reportTimeWithAddTime() {
       return (
         this.ticketDetails &&
