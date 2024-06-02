@@ -42,6 +42,7 @@
         alt="company Image"
         style="height: 32px; width: 32px; border-radius: 100%; margin-top: 10px;"
       />
+      
       <div>
         <p
           style="
@@ -64,6 +65,7 @@
           {{ ticketDetails.coach }}
         </p>
       </div>
+      <div v-if="!ticketDetails.companyImage" style="height: 32px; margin-top: 10px; width: 0px;"></div>
     </div>
 
     <div
@@ -947,7 +949,7 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
+        margin-top: 19px;
         margin-bottom: 22px;
         margin-left: 16px;
       "
@@ -969,8 +971,8 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
-        margin-bottom: 38px;
+        margin-top: 22px;
+        margin-bottom: 35px;
       "
     >
       N.B: Please carry print copy or soft copy to collect your counter ticket
