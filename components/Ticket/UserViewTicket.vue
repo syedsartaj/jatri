@@ -34,7 +34,7 @@
     </div>
 
     <!-- for download-->
-    <client-only v-if="serviceType === 'LAUNCH'">
+    <client-only>
       <vue-html2pdf
         class="hidden"
         :show-layout="false"
@@ -387,11 +387,13 @@ export default {
             document.body.appendChild(fileLink);
             fileLink.click();
           } else {
-            this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
-              position: "bottom-right",
-              duration: 50000,
-              containerClass: "padding: 100px",
-            });
+            this.downloadTicketValue = true;
+            this.$refs.html2Pdf.generatePdf(id);
+            // this.$toast.error("Ticket download failed. Try to print the ticket using print button.", {
+            //   position: "bottom-right",
+            //   duration: 50000,
+            //   containerClass: "padding: 100px",
+            // });
           }
           this.$nuxt.$loading?.finish();
         } catch (error) {
