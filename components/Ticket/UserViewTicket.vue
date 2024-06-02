@@ -340,7 +340,7 @@ export default {
           dpi: 192,
           scale: 4,
           letterRendering: true,
-          useCORS: true,
+          useCORS: false,
         },
         image: { type: "jpeg", quality: 1 },
         jsPDF: { unit: "px", format: [595, 842], orientation: "portrait" },
@@ -397,6 +397,7 @@ export default {
       alert("PDF generated successfully!");
     },
     async downloadTicket(id) {
+      const image = await this.getDownloadPdfImage(this.getTicketDetails.companyImage);
       this.downloadTicketValue = true;
       this.$refs.html2Pdf.generatePdf(id);
       // if (this.serviceType === "BUS") {
@@ -491,6 +492,8 @@ export default {
       "sendOtpForCancelTicketAction",
       "getDownloadPdfApi",
     ]),
+    ...mapActions('busStore', ['getDownloadPdfImage']),
+
     ...mapMutations("common", ["setCancelTicketId"]),
     cancelTicket(ticketId) {
       const payload = {

@@ -34,7 +34,7 @@
     >
       <img
         v-if="ticketDetails.companyImage"
-        :src="imageUrl + ticketDetails.companyImage"
+        :src="getCompanyImageForTicketPDFDownload"
         alt="company Image"
         style="height: 32px; width: 32px; border-radius: 100%"
       />
@@ -996,14 +996,14 @@
             align-items: center;
           "
         >
-          <p style="margin-top: -12px;">Powered by:</p>
+          <p style="margin-top: -12px">Powered by:</p>
           <img
             :src="require('@/assets/images/ticket/logo-white.png')"
             alt=""
             style="height: 16px"
           />
         </div>
-        <p style="margin-top: -7px;">www.jatri.co</p>
+        <p style="margin-top: -7px">www.jatri.co</p>
       </div>
     </div>
   </div>
@@ -1013,7 +1013,7 @@
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
 export default {
-    data() {
+  data() {
     return {
       imageUrl: "",
     };
@@ -1032,6 +1032,7 @@ export default {
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
+    ...mapGetters("busStore", ["getCompanyImageForTicketPDFDownload"]),
     reportTimeWithAddTime() {
       return (
         this.ticketDetails &&
