@@ -597,6 +597,7 @@
           align-items: flex-start;
           gap: 16px;
           align-self: stretch;
+          z-index: 999;
         "
       >
         <div
