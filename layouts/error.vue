@@ -1,12 +1,31 @@
 <template>
-  <div class="">
-    <SomethingWentWrong />
+  <div>
+    <component :is="errorComponent" />
   </div>
 </template>
-   
+
 <script>
-import SomethingWentWrong from "../components/Alerts/SomethingWentWrong.vue";
+import NotFoundPage from '../components/Error/NotFoundPage.vue';
+import WrongError from '../components/Error/WrongError.vue';
+
 export default {
-  components: { SomethingWentWrong },
+  props: {
+    error: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    errorComponent() {
+      switch (this.error.statusCode) {
+        case 404:
+          return NotFoundPage;
+        case 500:
+          return WrongError;
+        default:
+          return WrongError; // Default fallback
+      }
+    },
+  },
 };
 </script>

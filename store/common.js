@@ -64,7 +64,7 @@ export const actions = {
       );
       return response;
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
     }
   },
   async getHeadLineApi({ commit }) {
@@ -112,19 +112,17 @@ export const actions = {
   },
   async getOperatorById({ commit }, { service, id }) {
     return new Promise((resolve, reject) => {
-      return this.$api
+      this.$api
         .$get(`${apis.SERVICE_TYPE[service].GET_OPERATOR_BY_ID_URL}?id=${id}`)
         .then((res) => {
-          resolve(res.data.operator);
+          if (res.data && res.data.operator) {
+            resolve(res.data.operator);
+          } else {
+            reject(new Error("Operator not found"));
+          }
         })
         .catch((e) => {
-          this.$toast.error(
-            e.response.data.message ?? "Something went wrong!",
-            {
-              position: "bottom-right",
-              duration: 5000,
-            }
-          );
+          reject(e);
         });
     });
   },
