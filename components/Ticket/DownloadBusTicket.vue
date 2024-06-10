@@ -961,8 +961,7 @@
         This is an Eid ticket it is non cancellable & non refundable
       </p>
       <p>
-        N.B: Please carry print copy or soft copy to collect your counter ticket
-        copy.
+        N.B: Please carry a print out copy to make your journey
       </p>
     </div>
     <p
@@ -978,8 +977,7 @@
         margin-bottom: 35px;
       "
     >
-      N.B: Please carry print copy or soft copy to collect your counter ticket
-      copy.
+        N.B: Please carry a print out copy to make your journey
     </p>
     <img
       v-if="ticketDetails.tripType === 'eid'"
