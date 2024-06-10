@@ -597,6 +597,8 @@
           align-items: flex-start;
           gap: 16px;
           align-self: stretch;
+          position: relative;
+          z-index: 999 !important;
         "
       >
         <div
@@ -608,6 +610,7 @@
             align-self: stretch;
             border-radius: 8px;
             background-color: #f7f7f7;
+            z-index: 999;
           "
         >
           <div
@@ -978,9 +981,9 @@
     </p>
     <img
       v-if="ticketDetails.tripType === 'eid'"
-      :src="require('@/assets/images/ticket/eidFooter.svg')"
+      :src="require('@/assets/images/ticket/eidFooterDownload.svg')"
       alt="eidStamp"
-      style="top: 636px; left: 436px; position: absolute"
+      style="top: 673px; left: 455px; position: absolute"
     />
     <!-- ========= Footer part ========= -->
     <div
