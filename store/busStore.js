@@ -517,8 +517,18 @@ export const mutations = {
     };
   },
   updateBookingInfoForUpdateGateway: (state, data) => {
+    console.log('payload', data);
+    console.log("state", state.bookingInfoDetails);
     state.bookingInfoDetails = {
       ...state.bookingInfoDetails,
+      invoice: {
+        ...state.bookingInfoDetails.invoice,
+        discount: data.promoDiscount,
+        promo: {
+          ...state.bookingInfoDetails.invoice.promo,
+          amount: data.promoDiscount,
+        },
+      },
       ...data,
     };
   },
