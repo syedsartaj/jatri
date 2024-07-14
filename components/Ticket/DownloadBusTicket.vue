@@ -977,7 +977,7 @@
         margin-bottom: 35px;
       "
     >
-      N.B: Please carry a print out copy to make your journey
+        N.B: Please carry a print out copy to make your journey
     </p>
     <img
       v-if="ticketDetails.tripType === 'eid'"

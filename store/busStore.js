@@ -519,6 +519,14 @@ export const mutations = {
   updateBookingInfoForUpdateGateway: (state, data) => {
     state.bookingInfoDetails = {
       ...state.bookingInfoDetails,
+      invoice: {
+        ...state.bookingInfoDetails.invoice,
+        discount: data.promoDiscount,
+        promo: {
+          ...state.bookingInfoDetails.invoice.promo,
+          amount: data.promoDiscount,
+        },
+      },
       ...data,
     };
   },
