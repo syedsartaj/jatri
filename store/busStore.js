@@ -517,8 +517,6 @@ export const mutations = {
     };
   },
   updateBookingInfoForUpdateGateway: (state, data) => {
-    console.log('payload', data);
-    console.log("state", state.bookingInfoDetails);
     state.bookingInfoDetails = {
       ...state.bookingInfoDetails,
       invoice: {
