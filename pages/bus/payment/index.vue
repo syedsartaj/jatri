@@ -243,7 +243,7 @@
         <div class="flex gap-x-5 w-full flex-col">
           <div class="flex justify-between w-full p-4">
             <input
-              :disabled="showPromoInput"
+              :disabled="selectedPromoObjectIndex"
               type="text"
               id="promo"
               v-model="promoCode"
@@ -251,7 +251,7 @@
               class="bg-[#f7f7f7] px-4 py-[13px] rounded focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary custom-width"
             />
             <button
-              v-if="!showPromoInput"
+              v-if="selectedPromoObjectIndex === null"
               @click="() => applyPromo()"
               :disabled="!promoCode"
               class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#EFF7FD] text-[#156CB7]"
@@ -264,7 +264,7 @@
               <p class="text-sm font-medium">Add promo</p>
             </button>
             <button
-              v-if="showPromoInput"
+              v-else
               @click="removePromo"
               class="w-[140px] md:w-[165px] rounded-full flex flex-nowrap flex-row items-center justify-center whitespace-nowrap bg-[#FDF0F1] text-[#C71C2D]"
             >
@@ -284,7 +284,7 @@
               class="pb-4 w-full flex flex-row justify-between items-center pr-4"
             >
               <p class="text-base sm:text-xl font-medium text-blackPrimary">
-                Available promo
+                Available promo 
               </p>
               <div class="flex flex-row items-center">
                 <div
@@ -467,10 +467,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import moment from "moment";
-import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import ERROR_CODE from "@/constant/errorCodeEnum";
+import { dateTimeFormat } from "@/helpers/dateTimeFormat";
+import moment from "moment";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   middleware(ctx) {
@@ -797,6 +797,7 @@ export default {
           if (success) {
             this.promoCode = "";
             this.activePromo = null;
+            this.selectedPromoObjectIndex = null;
           } else {
             this.$toast.error("Failed to remove promo code", {
               position: "bottom-right",
@@ -828,7 +829,7 @@ export default {
               type: "all",
             };
             
-              this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
+    this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
     }
     
   },
