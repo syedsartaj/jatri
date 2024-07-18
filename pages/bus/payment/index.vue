@@ -284,7 +284,7 @@
               class="pb-4 w-full flex flex-row justify-between items-center pr-4"
             >
               <p class="text-base sm:text-xl font-medium text-blackPrimary">
-                Available promo 
+                Available promo
               </p>
               <div class="flex flex-row items-center">
                 <div
@@ -510,10 +510,10 @@ export default {
           if (
             err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            
-            
-            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice)      
-              }
+            this.handleSeveralPaymentAttempt(
+              this.getBookingInfoDetails.invoice
+            );
+          }
           this.gatewayType = this.getBookingInfoDetails.gatewayType;
         }
       }
@@ -715,7 +715,9 @@ export default {
           if (
             err.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice)
+            this.handleSeveralPaymentAttempt(
+              this.getBookingInfoDetails.invoice
+            );
           }
           this.$toast.error(err.response.data.message, {
             position: "bottom-right",
@@ -773,16 +775,22 @@ export default {
           if (
             error.response.data.error === ERROR_CODE.SEVERAL_TRANSACTION_ATTEMPT
           ) {
-            this.handleSeveralPaymentAttempt(this.getBookingInfoDetails.invoice) 
+            this.handleSeveralPaymentAttempt(
+              this.getBookingInfoDetails.invoice
+            );
           }
           this.$nuxt.$loading?.finish();
         }
       });
     },
     getPromoObject(promoCode) {
-      return this.getBookingInfoDetails?.availablePromos?.find(
-        (promo) => promo.code === promoCode
+      let active = this.getBookingInfoDetails?.availablePromos?.find(
+        (promo) => promo.code.toLowerCase() === promoCode.toLowerCase()
       );
+      if (active) {
+        this.selectedPromoObjectIndex = active;
+      }
+      return active;
     },
     async removePromo() {
       this.$nextTick(async () => {
@@ -817,21 +825,16 @@ export default {
 
     handleSeveralPaymentAttempt(invoice) {
       const query = {
-        from:   this.$route.query.from,
-        to:  this.$route.query.to,
-              date: new Date(
-                dateTimeFormat(
-                  invoice.boardingDateTime,
-                  6,
-                  "DD MMM YYYY"
-                )
-              ).getTime(),
-              type: "all",
-            };
-            
-    this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
-    }
-    
+        from: this.$route.query.from,
+        to: this.$route.query.to,
+        date: new Date(
+          dateTimeFormat(invoice.boardingDateTime, 6, "DD MMM YYYY")
+        ).getTime(),
+        type: "all",
+      };
+
+      this.$router.push({ path: "/bus/trip", query }); // We can use replace but it will create inconsistant behavior for new tab
+    },
   },
 };
 </script>
