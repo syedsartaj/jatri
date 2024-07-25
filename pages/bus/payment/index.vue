@@ -525,6 +525,7 @@ export default {
     },
   },
   mounted() {
+  
     if (this.availablePromos?.length && this?.$refs?.promoSlider) {
       const slider = this.$refs.promoSlider;
 
