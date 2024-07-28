@@ -488,13 +488,19 @@
                 <p style="color: #494949; font-weight: 400">Sub total</p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
+                  v-if="
+                    ticketDetails.discount &&
+                    ticketDetails.discountType === 'OFFER'
+                  "
                 >
                   Discount
                 </p>
                 <p
                   style="color: #494949; font-weight: 400"
-                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
+                  v-if="
+                    ticketDetails.discount &&
+                    ticketDetails.discountType === 'PROMO'
+                  "
                 >
                   Promo
                 </p>
@@ -519,14 +525,20 @@
                 </p>
 
                 <p
-                  v-if="ticketDetails.discount && ticketDetails.discountType === 'OFFER'"
+                  v-if="
+                    ticketDetails.discount &&
+                    ticketDetails.discountType === 'OFFER'
+                  "
                   style="font-weight: 500; text-align: right"
                 >
                   - {{ ticketDetails.discount }} ৳
                 </p>
 
                 <p
-                  v-if="ticketDetails.discount && ticketDetails.discountType === 'PROMO'"
+                  v-if="
+                    ticketDetails.discount &&
+                    ticketDetails.discountType === 'PROMO'
+                  "
                   style="font-weight: 500; text-align: right"
                 >
                   - {{ ticketDetails.discount }} ৳
@@ -917,19 +929,23 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
-        margin-bottom: 22px;
         margin-left: 16px;
       "
     >
-      <p style="color: #f04935">
-        This is an Eid ticket it is non cancellable & non refundable
-      </p>
-      <p>
-        N.B: Please carry a print out copy to make your journey
-      </p>
+      <div v-if="isFirefox" style="margin-top: 20px; margin-bottom: 17px">
+        <p style="color: #f04935">
+          This is an Eid ticket it is non cancellable & non refundable
+        </p>
+        <p>N.B: Please carry a print out copy to make your journey</p>
+      </div>
+      <div v-else style="margin-top: 25px; margin-bottom: 22px">
+        <p style="color: #f04935">
+          This is an Eid ticket it is non cancellable & non refundable
+        </p>
+        <p>N.B: Please carry a print out copy to make your journey</p>
+      </div>
     </div>
-    <p
+    <div
       v-else
       style="
         max-width: 595px;
@@ -938,12 +954,15 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 25px;
-        margin-bottom: 38px;
       "
     >
-      N.B: Please carry a print out copy to make your journey
-    </p>
+      <p v-if="isFirefox" style="margin-top: 22px; margin-bottom: 31px">
+        N.B: Please carry a print out copy to make your journey
+      </p>
+      <p v-else style="margin-top: 25px; margin-bottom: 38px">
+        N.B: Please carry a print out copy to make your journey
+      </p>
+    </div>
     <img
       v-if="ticketDetails.tripType === 'eid'"
       :src="require('@/assets/images/ticket/eidFooter.svg')"
@@ -992,6 +1011,7 @@ export default {
   data() {
     return {
       imageUrl: "",
+      isFirefox: false,
     };
   },
   props: [
@@ -1005,6 +1025,9 @@ export default {
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+    if (typeof window !== undefined) {
+      this.isFirefox = /Firefox/i.test(navigator.userAgent);
+    }
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
@@ -1035,5 +1058,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
