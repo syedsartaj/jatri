@@ -238,7 +238,7 @@
       >
         <div
           style="
-            
+            display: flex;
             width: 328px;
             flex-direction: column;
             align-items: flex-start;
@@ -740,7 +740,7 @@
             align-self: stretch;
           "
         >
-          <div style=" align-items: flex-start; gap: 6px">
+          <div style="display: flex; align-items: flex-start; gap: 6px">
             <img
               :src="require('@/assets/images/ticket/mail.svg')"
               alt=""
@@ -936,7 +936,7 @@
         <p style="color: #f04935">
           This is an Eid ticket it is non cancellable & non refundable
         </p>
-        <p>N.B: Please carry a print out copy to make your journey </p>
+        <p>N.B: Please carry a print out copy to make your journey</p>
       </div>
       <div v-else style="margin-top: 25px; margin-bottom: 22px">
         <p style="color: #f04935">
@@ -957,7 +957,7 @@
       "
     >
       <p v-if="isFirefox" style="margin-top: 22px; margin-bottom: 31px">
-        N.B: Please carry a print out copy to make your journey 
+        N.B: Please carry a print out copy to make your journey
       </p>
       <p v-else style="margin-top: 25px; margin-bottom: 38px">
         N.B: Please carry a print out copy to make your journey
@@ -1011,7 +1011,7 @@ export default {
   data() {
     return {
       imageUrl: "",
-      isFirefox: /Firefox/i.test(navigator.userAgent),
+      isFirefox: false,
     };
   },
   props: [
@@ -1024,8 +1024,12 @@ export default {
     "seatFareArray",
   ],
   mounted() {
-    console.log(this.isFirefox);
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+  },
+  created() {
+    if (process.client) {
+      this.isFirefox = /Firefox/i.test(navigator.userAgent);
+    }
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
