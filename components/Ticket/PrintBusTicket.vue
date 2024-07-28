@@ -1025,7 +1025,7 @@ export default {
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
-    if (process.client) {
+    if (typeof window !== undefined) {
       this.isFirefox = /Firefox/i.test(navigator.userAgent);
     }
   },
