@@ -1025,9 +1025,9 @@ export default {
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
-    // if (typeof window !== undefined) {
-    //   this.isFirefox = /Firefox/i.test(navigator.userAgent);
-    // }
+    if (typeof window !== undefined) {
+      this.isFirefox = /Firefox/i.test(navigator.userAgent);
+    }
   },
   computed: {
     ...mapGetters("common", ["getSearchedTicketList"]),
