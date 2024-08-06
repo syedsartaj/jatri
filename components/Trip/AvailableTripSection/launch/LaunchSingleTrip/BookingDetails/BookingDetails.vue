@@ -243,11 +243,11 @@
                             plan-discount=""
                             v-model="gatewayType"
                           />
-                          <NagadOption
+                          <!-- <NagadOption
                             plan-name="nagad"
                             plan-discount="10%"
                             v-model="gatewayType"
-                          />
+                          /> -->
                           <BkashOption
                             plan-name="bkash"
                             plan-discount="10%"

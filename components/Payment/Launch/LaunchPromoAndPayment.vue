@@ -137,11 +137,11 @@
           plan-discount="10%"
           v-model="gatewayType"
         />
-        <NagadOption
+        <!-- <NagadOption
           plan-name="nagad"
           plan-discount="10%"
           v-model="gatewayType"
-        />
+        /> -->
         <GateWayOption
           plan-name="sslcommerz"
           plan-discount=""
