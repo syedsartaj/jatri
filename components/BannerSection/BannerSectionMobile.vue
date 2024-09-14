@@ -7,8 +7,20 @@
         'banner-shadow-launch': service === 'LAUNCH',
       }"
     ></div>
-    <div class="absolute mt-[32px] md:-mt-1 right-4 left-4">
-      <div class="mt-[156px] md:mt-[212px] bg-white rounded-[16px] p-4 custom-shadow">
+    <div class="absolute mt-[32px] md:mt-[64px] right-4 left-4">
+      <h2
+        class="text-[28px] leading-[36px] md:text-[45px] md:leading-[52px] text-white font-bold text-start"
+      >
+        {{
+          service === "BUS"
+            ? ""
+            : "Reserve your launch tickets online"
+        }}
+      </h2>
+      <h4 v-if="service === 'LAUNCH'" class="mt-2 text-base text-white font-normal text-start">
+        Buy tickets online hassle-free.
+      </h4>
+      <div class="mt-6 md:mt-[64px] bg-white rounded-[16px] p-4 custom-shadow">
         <SearchFilterFormMobile />
       </div>
     </div>

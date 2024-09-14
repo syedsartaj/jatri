@@ -6,7 +6,24 @@
       'homeBanner-launch': service === 'LAUNCH',
     }"
   >
-    
+    <div
+      class="absolute lg:top-[80px] lg:left-[96px] lg:right-[96px] z-40 flex flex-col"
+    >
+      <div class="ml-[4px]">
+        <div
+          class="text-[28px] md:text-[45px] lg:text-[45px] text-white font-bold"
+        >
+          {{
+            service === "BUS"
+              ? ""
+              : "Reserve your launch tickets online"
+          }}
+        </div>
+        <div v-if="service === 'LAUNCH'" class="text-xl text-white font-medium">
+          Buy tickets online hassle-free.
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
