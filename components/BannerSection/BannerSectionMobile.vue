@@ -13,11 +13,11 @@
       >
         {{
           service === "BUS"
-            ? "Book your ticket the smarter way"
+            ? ""
             : "Reserve your launch tickets online"
         }}
       </h2>
-      <h4 class="mt-2 text-base text-white font-normal text-start">
+      <h4 v-if="service === 'LAUNCH'" class="mt-2 text-base text-white font-normal text-start">
         Buy tickets online hassle-free.
       </h4>
       <div class="mt-6 md:mt-[64px] bg-white rounded-[16px] p-4 custom-shadow">
@@ -50,11 +50,7 @@ export default {
 }
 
 .banner-shadow-bus {
-  background-image: linear-gradient(
-      90deg,
-      rgba(21, 20, 20, 0.57) 0.01%,
-      rgba(255, 255, 255, 0) 99.64%
-    ),
+  background-image: 
     url("../../assets/images/home/bannerImageMobileBus.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -62,11 +58,7 @@ export default {
 
 @media only screen and (min-width: 768px) {
   .banner-shadow-bus {
-    background-image: linear-gradient(
-        90deg,
-        rgba(21, 20, 20, 0.57) 0.01%,
-        rgba(255, 255, 255, 0) 99.64%
-      ),
+    background-image: 
       url("../../assets/images/home/bannerImageTab.png");
   }
 

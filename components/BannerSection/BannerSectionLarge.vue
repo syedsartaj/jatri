@@ -15,11 +15,11 @@
         >
           {{
             service === "BUS"
-              ? "Book your ticket the smarter way"
+              ? ""
               : "Reserve your launch tickets online"
           }}
         </div>
-        <div class="text-xl text-white font-medium">
+        <div v-if="service === 'LAUNCH'" class="text-xl text-white font-medium">
           Buy tickets online hassle-free.
         </div>
       </div>
@@ -48,11 +48,7 @@ export default {
 }
 
 .homeBanner-bus {
-  background-image: linear-gradient(
-      90deg,
-      rgba(21, 20, 20, 0.57) 0.01%,
-      rgba(255, 255, 255, 0) 99.64%
-    ),
+  background-image: 
     url("../../assets/images/home/bannerImageWeb.png");
   background-repeat: no-repeat;
 }
