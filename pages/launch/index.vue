@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white">
-    <BannerSectionLarge service="LAUNCH" />
+    <LaunchBannerLarge/>
     <SearchFilterForm />
-    <BannerSectionMobile service="LAUNCH" />
+    <LaunchBannerSmall/>
     <HomePageOfferAndPromo />
     <WhyChooseSection />
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />

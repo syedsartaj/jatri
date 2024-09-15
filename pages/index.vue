@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white">
-    <BannerSectionLarge service="BUS" />
+    <BusBannerLarge/>
     <SearchFilterForm />
-    <BannerSectionMobile service="BUS" />
+    <BusBannerSmall/>
     <HomePageOfferAndPromo />
     <WhyChooseSection />
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />
