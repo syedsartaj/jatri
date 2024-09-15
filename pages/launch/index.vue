@@ -9,7 +9,7 @@
     <HowToBuyModal v-if="howToBuyModalStatus" :close="handleHowToBuyModal" />
     <OperatorSection />
     <PopularRouteSection />
-    <Blog />
+    <!-- <Blog /> -->
     <HelpSection />
     <GlobalFooter />
   </div>
