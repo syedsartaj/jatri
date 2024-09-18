@@ -2,7 +2,7 @@
   <div
     :class="{
       '': isTripPage,
-      '-translate-y-12': !isTripPage,
+      '-translate-y-10': !isTripPage,
       'top-[168px]':
         getHeadLine?.length &&
         (getHeadLine[0]?.busSettings?.headline ||
@@ -112,11 +112,11 @@ export default {
       ],
       selectedTime: "",
       timeList: ["4 am - 12 pm", "12 pm - 06 pm", "06 pm - 03 am"],
-      
+
     };
   },
   computed: {
-    
+
     ...mapGetters("common", [
       "getSelectedServiceType",
       "getCities",
@@ -142,7 +142,7 @@ export default {
 
   },
   methods: {
-    
+
     handleToastMessage(message) {
       this.$toast.error(message, {
         position: "bottom-right",

@@ -1,33 +1,38 @@
-<template>
-  <div class="hidden lg:block relative homeBanner homeBanner-bus">
-    
-  </div>
-</template>
 <script>
+import {
+  Hooper,
+  Navigation as HooperNavigation,
+  Pagination as HooperPagination,
+  Slide
+} from 'hooper';
+
 export default {
   props: ["service"],
+  components: {
+    Hooper,
+    Slide,
+    HooperNavigation,
+    HooperPagination
+  },
 };
 </script>
-<style scoped>
-.homeBanner {
-  background-image: url("@/assets/images/home/bannerImageWeb.png");
-  background-size: 100% 100%;
-}
 
-.homeBanner-bus {
-  background-image: url("@/assets/images/home/bannerImageWeb.png");
-  background-repeat: no-repeat;
-}
-
-@media only screen and (min-width: 992px) {
-  .homeBanner {
-    height: 400px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .homeBanner {
-    height: 286px;
-  }
-}
-</style>
+<template>
+  <div class="relative">
+    <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
+      <hooper>
+        <slide v-for="(n, index) in 5" :key="index">
+          <div>
+            <picture>
+              <source media="(max-width: 640px)" srcset="@/assets/images/home/mobile-slider1.png">
+              <source media="(max-width: 1023px)" srcset="@/assets/images/home/tab-slider1.png">
+              <img src="@/assets/images/home/desktop-slider1.png" alt="slider img" class="w-full h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]" />
+            </picture>
+          </div>
+        </slide>
+        <hooper-navigation slot="hooper-addons" class="hidden md:block"></hooper-navigation>
+        <hooper-pagination slot="hooper-addons"></hooper-pagination>
+      </hooper>
+    </div>
+  </div>
+</template>

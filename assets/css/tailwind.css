@@ -20,7 +20,41 @@
 }
 
 .Vue-Toastification__container{
-     z-index: 999999999999999; 
+     z-index: 999999999999999;
 }
 
-body, html { overflow-x: clip; } 
+body, html { overflow-x: clip; }
+
+@layer utilities {
+  .hooper-slider-navigation-custom .hooper-next,
+  .hooper-slider-navigation-custom .hooper-prev {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 100%;
+    margin: 0 16px;
+  }
+
+  .hooper-slider-pagination-custom .hooper-indicator {
+    margin: 0 4px;
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    opacity: 0.5;
+    border-radius: 100%;
+    transition: all .3s;
+  }
+
+  .hooper-slider-pagination-custom .hooper-indicator:hover,
+  .hooper-slider-pagination-custom .hooper-indicator.is-active {
+    width: 16px;
+    height: 8px;
+    background-color: #ffffff;
+    opacity: 1;
+    border-radius: 20px;
+  }
+
+  /*home banner slider*/
+  .home-banner-slider .hooper-pagination {
+    @apply bottom-20 lg:bottom-10 2xl:bottom-[50px];
+  }
+}
