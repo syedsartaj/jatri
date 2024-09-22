@@ -1,43 +1,38 @@
+<script>
+import {
+  Hooper,
+  Navigation as HooperNavigation,
+  Pagination as HooperPagination,
+  Slide
+} from 'hooper';
+
+export default {
+  props: ["service"],
+  components: {
+    Hooper,
+    Slide,
+    HooperNavigation,
+    HooperPagination
+  },
+};
+</script>
+
 <template>
-  <div class="hidden lg:block relative homeBanner-launch">
-    <div
-      class="absolute lg:top-[80px] lg:left-[96px] lg:right-[96px] z-40 flex flex-col"
-    >
-      <div class="ml-[4px]">
-        <div
-          class="text-[28px] md:text-[45px] lg:text-[45px] text-white font-bold"
-        >
-          Reserve your launch tickets online
-        </div>
-        <div class="text-xl text-white font-medium">
-          Buy tickets online hassle-free.
-        </div>
-      </div>
+  <div class="relative">
+    <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
+      <hooper :autoPlay="true" :playSpeed="4000">
+        <slide v-for="(n, index) in 5" :key="index">
+          <div>
+            <picture>
+              <source media="(max-width: 640px)" srcset="@/assets/images/home/mobile-slider1.png">
+              <source media="(max-width: 1023px)" srcset="@/assets/images/home/tab-slider1.png">
+              <img src="@/assets/images/home/desktop-slider1.png" alt="slider img" class="w-full h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]" />
+            </picture>
+          </div>
+        </slide>
+        <hooper-navigation slot="hooper-addons" class="hidden md:block"></hooper-navigation>
+        <hooper-pagination slot="hooper-addons"></hooper-pagination>
+      </hooper>
     </div>
   </div>
 </template>
-
-<style scoped>
-.homeBanner-launch {
-  background-image: linear-gradient(
-      90deg,
-      rgba(21, 20, 20, 0.57) 0.01%,
-      rgba(255, 255, 255, 0) 99.64%
-    ),
-    url("@/assets/images/home/bannerImageLaunchWeb.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-@media only screen and (min-width: 992px) {
-  .homeBanner-launch {
-    height: 400px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .homeBanner-launch {
-    height: 286px;
-  }
-}
-</style>

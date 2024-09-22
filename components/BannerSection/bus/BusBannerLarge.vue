@@ -20,7 +20,7 @@ export default {
 <template>
   <div class="relative">
     <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
-      <hooper>
+      <hooper :autoPlay="true" :playSpeed="4000">
         <slide v-for="(n, index) in 5" :key="index">
           <div>
             <picture>
