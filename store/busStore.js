@@ -1,6 +1,6 @@
 import * as apis from "../helpers/apis";
 import { handleScrollBehaviour } from "../helpers/utils";
-
+import { moduleType } from "@/constant/ModuleType";
 const mobileFilterInitialData = {
   coachTypes: ["ac", "non-ac", "all"],
   coachType: "",
@@ -36,6 +36,7 @@ export const state = () => ({
   ticketDetails: {},
   bookingInfoDetails: {},
   showSurpriseDealModal: null,
+  bannerImages: {}
 });
 
 export const getters = {
@@ -60,9 +61,31 @@ export const getters = {
   getBookingInfoDetails: (state) => state.bookingInfoDetails,
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getTicketDetails: (state) => state.ticketDetails,
+  bannerImagesGetter: (state) => state.bannerImages,
 };
 
 export const actions = {
+  async getBannerImages({ commit }) {
+    try {
+      const { data } = await this.$api.$get(
+        apis.SERVICE_TYPE.BUS.BANNER_IMAGES,
+        {params: {moduleType: moduleType.BUS}}
+      );
+      commit("setBannerImages", data.banners);
+    } catch (error) {
+      if (error.response && error.response.data.statusCode === 404) {
+        this.$toast.error(error.response.data.message, {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        window.location.reload(true);
+      }
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+    }
+  },
   async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
@@ -388,6 +411,7 @@ export const mutations = {
     (state.modalBoardingPointList = data),
   setDroppingPoints: (state, data) => (state.droppingPoints = data),
 
+  setBannerImages: (state, data) => (state.bannerImages = data),
   setTrips: (state, data) => (state.trips = Object.values(data)),
   setBoardingPoints: (state, data) => (state.boardingPoints = data),
   setBusCompanies: (state, data) => (state.busCompanies = data),
