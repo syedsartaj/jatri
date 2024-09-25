@@ -58,6 +58,6 @@ body, html { overflow-x: clip; }
 
   /*home banner slider*/
   .home-banner-slider .hooper-pagination {
-    @apply bottom-20 lg:bottom-10 2xl:bottom-[50px];
+    @apply bottom-[88px] lg:bottom-[46px] 2xl:bottom-[56px];
   }
 }
