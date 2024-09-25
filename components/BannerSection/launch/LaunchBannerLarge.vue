@@ -68,7 +68,7 @@ export default {
   <div>
     <div v-if="bannerImages.length" class="relative">
       <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
-        <hooper ref="bannerRef">
+        <hooper ref="bannerRef" :autoPlay="true" :playSpeed="5000">
           <slide
             v-for="(banner, index) in bannerImages"
             :key="index"
