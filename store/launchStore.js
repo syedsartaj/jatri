@@ -1,5 +1,6 @@
 import * as apis from "../helpers/apis";
 import { handleScrollBehaviour } from "../helpers/utils";
+import {moduleType} from "@/constant/ModuleType";
 
 const mobileFilterInitialData = {
   priceFilter: ["l2h", "h2l"],
@@ -24,6 +25,7 @@ export const state = () => ({
   ticketDetails: {},
   showSurpriseDealModal: null,
   launchBookingData: {},
+  bannerImages: {}
 });
 
 export const getters = {
@@ -41,9 +43,31 @@ export const getters = {
   getSurpriseDealModalStatus: (state) => state.showSurpriseDealModal,
   getTicketDetails: (state) => state.ticketDetails,
   getLaunchBookingData: (state) => state.launchBookingData,
+  bannerImagesGetter: (state) => state.bannerImages,
 };
 
 export const actions = {
+  async getBannerImages({ commit }) {
+    try {
+      const { data } = await this.$api.$get(
+        apis.SERVICE_TYPE.LAUNCH.BANNER_IMAGES,
+        {params: {moduleType: moduleType.LAUNCH}}
+      );
+      commit("setBannerImages", data.banners);
+    } catch (error) {
+      if (error.response && error.response.data.statusCode === 404) {
+        this.$toast.error(error.response.data.message, {
+          position: "bottom-right",
+          duration: 5000,
+        });
+        window.location.reload(true);
+      }
+      this.$toast.error(error.response.data.message, {
+        position: "bottom-right",
+        duration: 5000,
+      });
+    }
+  },
   async getPbScheduleDataAction({ commit }, payload) {
     try {
       const { data } = await this.$api.$post(
@@ -226,7 +250,7 @@ export const actions = {
           shipId: data.invoice.shipId,
           companyId: data.invoice.companyId,
         };
-       
+
 
         const response = await this.$api.$post(
           apis.SERVICE_TYPE.LAUNCH.GET_SEAT_VIEW_URL,
@@ -372,6 +396,7 @@ export const mutations = {
   mobileFloatingFilter: (state, data) => {
     state.mobileFloatingFilter = data;
   },
+  setBannerImages: (state, data) => (state.bannerImages = data),
   setTrips: (state, data) => (state.trips = Object.values(data)),
   setBoardingPoints: (state, data) => (state.boardingPoints = data),
   setLaunchList: (state, data) => (state.launchList = data),

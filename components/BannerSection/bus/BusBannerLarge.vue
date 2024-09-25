@@ -23,7 +23,7 @@ export default {
     ...mapActions("busStore", ["getBannerImages"]),
 
     getImagesByScreenSizeWrapper() {
-        this.getImagesByScreenSize()
+      this.getImagesByScreenSize()
       if(this.bannerImages.length) {
         this.$nextTick(() => {
           this.$refs.bannerRef.update();

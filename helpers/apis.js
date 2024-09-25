@@ -76,6 +76,7 @@ export const SERVICE_TYPE = {
     POST_CANCEL_TICKET: `${PARIBAHAN_BASE_URL}/v1/api/water/cancel-ticket`,
     POST_SEAT_REMOVE: `${PARIBAHAN_BASE_URL}/v1/api/water/payment-seat-remove`,
     POST_PASSENGER_DETAILS: `${PARIBAHAN_BASE_URL}/v1/api/water/passenger-details-payment`,
+    BANNER_IMAGES: `${PARIBAHAN_BASE_URL}/v1/api/intercity/get-banners`,
   },
   COMMON: {
     POST_SEND_OTP_BY_PHONE: `${PARIBAHAN_BASE_URL}/v1/api/intercity/send-otp-by-phone`,

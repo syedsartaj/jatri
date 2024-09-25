@@ -1,4 +1,5 @@
 <script>
+import { mapGetters, mapActions } from "vuex";
 import {
   Hooper,
   Navigation as HooperNavigation,
@@ -7,32 +8,81 @@ import {
 } from 'hooper';
 
 export default {
-  props: ["service"],
   components: {
     Hooper,
     Slide,
     HooperNavigation,
     HooperPagination
   },
+  data(){
+    return{
+      bannerImages: []
+    }
+  },
+  methods: {
+    ...mapActions("launchStore", ["getBannerImages"]),
+
+    getImagesByScreenSizeWrapper() {
+      this.getImagesByScreenSize()
+      if(this.bannerImages.length) {
+        this.$nextTick(() => {
+          this.$refs.bannerRef.update();
+        })
+      }
+    },
+    getImagesByScreenSize () {
+      if (process.browser) {
+        if (window.innerWidth <= 640) {
+          this.bannerImages = this.bannerImagesGetter.mobileViewImages
+          return
+        }
+        if (window.innerWidth <= 1023) {
+          this.bannerImages =  this.bannerImagesGetter.tabletViewImages
+          return
+        }
+        if (window.innerWidth >= 1024) {
+          this.bannerImages =  this.bannerImagesGetter.webViewImages
+          return
+        }
+      }
+    }
+  },
+  computed: {
+    ...mapGetters("launchStore", [
+      "bannerImagesGetter",
+    ]),
+  },
+  async mounted()  {
+    await this.getBannerImages();
+    this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
+    this.getImagesByScreenSizeWrapper()
+    window.addEventListener("resize", this.getImagesByScreenSizeWrapper)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getImagesByScreenSizeWrapper);
+  },
 };
 </script>
 
 <template>
-  <div class="relative">
-    <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
-      <hooper :autoPlay="true" :playSpeed="4000">
-        <slide v-for="(n, index) in 5" :key="index">
-          <div>
-            <picture>
-              <source media="(max-width: 640px)" srcset="@/assets/images/home/mobile-slider1.png">
-              <source media="(max-width: 1023px)" srcset="@/assets/images/home/tab-slider1.png">
-              <img src="@/assets/images/home/desktop-slider1.png" alt="slider img" class="w-full h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]" />
-            </picture>
-          </div>
-        </slide>
-        <hooper-navigation slot="hooper-addons" class="hidden md:block"></hooper-navigation>
-        <hooper-pagination slot="hooper-addons"></hooper-pagination>
-      </hooper>
+  <div>
+    <div v-if="bannerImages.length" class="relative">
+      <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
+        <hooper ref="bannerRef" :autoPlay="true" :playSpeed="4000">
+          <slide
+            v-for="(banner, index) in bannerImages"
+            :key="index"
+          >
+            <div>
+              <img :src="imageUrl + banner" alt="slider img" class="w-full h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]" />
+            </div>
+          </slide>
+          <hooper-navigation slot="hooper-addons" class="hidden md:block"></hooper-navigation>
+          <hooper-pagination slot="hooper-addons"></hooper-pagination>
+        </hooper>
+      </div>
     </div>
+
+    <div v-else class="w-full bg-[#FEF2F0] h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]"></div>
   </div>
 </template>
