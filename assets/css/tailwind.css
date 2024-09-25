@@ -26,6 +26,9 @@
 body, html { overflow-x: clip; }
 
 @layer utilities {
+  .hooper{
+    height: auto !important;
+  }
   .hooper-slider-navigation-custom .hooper-next,
   .hooper-slider-navigation-custom .hooper-prev {
     background-color: #fff;
