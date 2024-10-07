@@ -35,13 +35,14 @@
                     class="customOfferCard absolute w-full h-full rounded-2xl"
                   >
                     <div class="flex justify-between items-center px-4 pt-4">
-                      <div>
+                      <!-- <div>
                         <img
                           class="max-w-[34px]"
                           src="~/assets/images/header/jatri-logo.svg"
                           alt="jatri logo"
                         />
-                      </div>
+                      </div> -->
+                      {{ offer }}
                       <div
                         @click="handlePromoCopy(offer.code)"
                         class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-2 pr-[2px] py-[2px]"
@@ -700,13 +701,13 @@ export default {
   background-image: url(../../assets/images//offer/offer-card-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
-  
+
 }
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
   transform: translate3d(0, -100%, 0) scale(1.01);
- 
+
 }
 
 

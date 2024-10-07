@@ -23,7 +23,7 @@
         <div
           class="flex flex-col pt-4 md:grid md:grid-cols-3 xl:col-span-1 xl:flex xl:flex-col gap-4 xl:justify-start xl:items-center md:pt-4 xl:pt-0 xl:pl-4"
         >
-          <div
+          <div v-if="!offer?.title"
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
           >
             <div class="flex justify-start items-center">
@@ -50,6 +50,7 @@
           </div>
 
           <div
+            v-if="!offer?.title"
             class="w-full border border-solid border-[#EDEDED] p-4 rounded-lg"
           >
             <div class="flex justify-start items-center">
