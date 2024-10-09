@@ -35,14 +35,13 @@
                     class="customOfferCard absolute w-full h-full rounded-2xl"
                   >
                     <div class="flex justify-between items-center px-4 pt-4">
-                      <!-- <div>
+                      <div>
                         <img
                           class="max-w-[34px]"
                           src="~/assets/images/header/jatri-logo.svg"
                           alt="jatri logo"
                         />
-                      </div> -->
-                      {{ offer }}
+                      </div>
                       <div
                         @click="handlePromoCopy(offer.code)"
                         class="flex justify-center items-center cursor-pointer border border-solid border-[#EDEDED] bg-white rounded-full pl-2 pr-[2px] py-[2px]"
