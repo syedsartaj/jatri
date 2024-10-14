@@ -61,14 +61,3 @@ body, html { overflow-x: clip; }
     @apply bottom-[88px] lg:bottom-[46px] 2xl:bottom-[56px];
   }
 }
-
-.home-banner-slider .hooper-liveregion.hooper-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
