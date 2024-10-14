@@ -3,7 +3,7 @@
     <LaunchBannerLarge/>
     <SearchFilterForm />
     <LaunchBannerSmall/>
-    <HomePageOfferAndPromo />
+    <!-- <HomePageOfferAndPromo /> -->
     <WhyChooseSection />
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />
     <HowToBuyModal v-if="howToBuyModalStatus" :close="handleHowToBuyModal" />

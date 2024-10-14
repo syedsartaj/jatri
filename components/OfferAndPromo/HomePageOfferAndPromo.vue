@@ -700,13 +700,13 @@ export default {
   background-image: url(../../assets/images//offer/offer-card-bg.png);
   background-repeat: no-repeat;
   background-size: contain;
-  
+
 }
 
 .customOfferCard-container:hover .customOfferCard {
   visibility: visible;
   transform: translate3d(0, -100%, 0) scale(1.01);
- 
+
 }
 
 

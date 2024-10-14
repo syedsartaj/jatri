@@ -9,7 +9,7 @@
 
     <!-- TRIPS -->
     <div class="w-full lg:col-span-2 2xl:col-span-2">
-      <OfferAndPromo />
+      <OfferAndPromo v-if="ServiceType.BUS === selectedService"/>
       <BusTripList v-if="ServiceType.BUS === selectedService" />
       <LaunchTripList v-if="ServiceType.LAUNCH === selectedService" />
     </div>

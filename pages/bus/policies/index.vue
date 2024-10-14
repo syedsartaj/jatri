@@ -335,6 +335,9 @@
                   was made within the terms mentioned here, Jatri.co will be
                   unable to issue such refund.
                 </li>
+                <li>
+                  Migrated tickets are non cancellable non refundable in any circumstances, unless the trip is cancelled by the operator.
+                </li>
               </ul>
             </div>
 
