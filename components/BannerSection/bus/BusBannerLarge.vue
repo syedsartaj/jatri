@@ -16,7 +16,8 @@ export default {
   },
   data(){
     return{
-      bannerImages: []
+      bannerImages: [],
+      imageUrl: "",
     }
   },
   methods: {
@@ -68,7 +69,13 @@ export default {
   <div>
     <div v-if="bannerImages.length" class="relative">
       <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
-        <hooper ref="bannerRef" :autoPlay="true" :playSpeed="5000">
+        <hooper
+          ref="bannerRef"
+          :autoPlay="true"
+          :playSpeed="5000"
+          :mouseDrag="false"
+          :wheelControl="bannerImages.length > 1"
+        >
           <slide
             v-for="(banner, index) in bannerImages"
             :key="index"
@@ -77,8 +84,8 @@ export default {
               <img :src="imageUrl + banner" alt="slider img" class="w-full h-[280px] md:h-[312px] lg:h-[286px] 2xl:h-[370px]" />
             </div>
           </slide>
-          <hooper-navigation slot="hooper-addons" class="hidden md:block"></hooper-navigation>
-          <hooper-pagination slot="hooper-addons"></hooper-pagination>
+          <hooper-navigation v-if="bannerImages.length > 1" slot="hooper-addons" class="hidden md:block"></hooper-navigation>
+          <hooper-pagination v-if="bannerImages.length > 1" slot="hooper-addons"></hooper-pagination>
         </hooper>
       </div>
     </div>
