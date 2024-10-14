@@ -16,7 +16,8 @@ export default {
   },
   data(){
     return{
-      bannerImages: []
+      bannerImages: [],
+      imageUrl: "",
     }
   },
   methods: {
@@ -68,7 +69,13 @@ export default {
   <div>
     <div v-if="bannerImages.length" class="relative">
       <div class="home-banner-slider hooper-slider-navigation-custom hooper-slider-pagination-custom">
-        <hooper ref="bannerRef" :autoPlay="true" :playSpeed="5000" :mouseDrag="false">
+        <hooper
+          ref="bannerRef"
+          :autoPlay="true"
+          :playSpeed="5000"
+          :mouseDrag="false"
+          :wheelControl="bannerImages.length > 1"
+        >
           <slide
             v-for="(banner, index) in bannerImages"
             :key="index"
