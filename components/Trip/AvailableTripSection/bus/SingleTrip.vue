@@ -976,7 +976,7 @@ export default {
           return;
         }
 
-        const isSeatLocked = await this.isSeatLocked([seat.seatNo].join(","));
+        const isSeatLocked = await this.isSeatLocked(seat);
 
         if (isSeatLocked) {
           //update seat status here
@@ -995,7 +995,9 @@ export default {
         }
       }
     },
-    isSeatLocked(seatLbls) {
+    isSeatLocked(seat) {
+      const seatLabels = seat.seatNo;
+      const seatIds = seat.id;
       return new Promise((resolve) => {
         this.requestOnGoing = true;
         this.$nextTick(async () => {
@@ -1006,7 +1008,8 @@ export default {
             departureDate: this.trip.departureDate,
             locked: true,
             uid: this.trip.uid,
-            seatLbls: seatLbls,
+            seatLbls: seatLabels,
+            seatIds: seatIds,
             coachName: this.trip.coach.name,
           };
 
