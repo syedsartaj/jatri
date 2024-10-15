@@ -96,13 +96,14 @@ export default {
       slideRight: false,
       imageUrl: "",
       hooperSettings: {
-        infiniteScroll: true,
+        infiniteScroll: false,
         wheelControl: false,
         keyboardControl: false,
         centerMode: false,
         autoPlay: false,
         playSpeed: 3000,
         itemsToShow: 5,
+        mouseDrag: false,
         breakpoints: {
           2300: {
             itemsToShow: 5,
