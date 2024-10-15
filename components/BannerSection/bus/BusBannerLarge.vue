@@ -6,6 +6,7 @@ import {
   Pagination as HooperPagination,
   Slide
 } from 'hooper';
+import "hooper/dist/hooper.css";
 
 export default {
   components: {
