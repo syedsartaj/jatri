@@ -966,7 +966,7 @@ export default {
 
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
-        this.handleSeatLock([seat.seatNo].join(","), false);
+        this.handleSeatLock(seat, false);
         this.handleSitUnSelect(seat);
         this.disCountCalculationOnSitUnselect(seat);
         this.promoCalculationOnUnSelect();
@@ -1028,7 +1028,9 @@ export default {
         });
       });
     },
-    handleSeatLock(seatLbls, action) {
+    handleSeatLock(seat, action) {
+      const seatLabels = seat.seatNo;
+      const seatIds = seat.id;
       this.requestOnGoing = true;
       this.$nextTick(async () => {
         const payload = {
@@ -1038,7 +1040,8 @@ export default {
           departureDate: this.trip.departureDate,
           locked: action,
           uid: this.trip.uid,
-          seatLbls: seatLbls,
+          seatLbls: seatLabels,
+          seatIds: seatIds,
           coachName: this.trip.coach.name,
         };
 
