@@ -787,7 +787,7 @@ export default {
       if (selectedTripId === "") {
         // Unlock all seats while close seat view
         if (this.selectedSeatLabels?.length) {
-          this.handleSeatLock(this.selectedSeatLabels.join(","), false);
+          this.handleSeatLock(this.selectedSeatLabels.join(","), this.selectedSeatIds.join(","), false);
         }
         this.$emit("selectedTripId", null);
         this.resetForm(true);
@@ -966,7 +966,7 @@ export default {
 
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
-        this.handleSeatLock(seat, false);
+        this.handleSeatLock([seat.seatNo].join(","), [seat.id].join(","), false);
         this.handleSitUnSelect(seat);
         this.disCountCalculationOnSitUnselect(seat);
         this.promoCalculationOnUnSelect();
@@ -1009,7 +1009,7 @@ export default {
             locked: true,
             uid: this.trip.uid,
             seatLbls: seatLabels,
-            seatIds: seatIds,
+            seatIds: typeof seatIds === "number" ? seatIds.toString() : seatIds,
             coachName: this.trip.coach.name,
           };
 
@@ -1028,9 +1028,9 @@ export default {
         });
       });
     },
-    handleSeatLock(seat, action) {
-      const seatLabels = seat.seatNo;
-      const seatIds = seat.id;
+    handleSeatLock(seatLabels, seatIds, action) {
+      // const seatLabels = seat.seatNo;
+      // const seatIds = seat.id;
       this.requestOnGoing = true;
       this.$nextTick(async () => {
         const payload = {
@@ -1041,7 +1041,7 @@ export default {
           locked: action,
           uid: this.trip.uid,
           seatLbls: seatLabels,
-          seatIds: seatIds,
+          seatIds: typeof seatIds === "number" ? seatIds.toString() : seatIds,
           coachName: this.trip.coach.name,
         };
 
@@ -1322,9 +1322,12 @@ export default {
       const notAvailableSeatsLabels = notAvailableSeats.map(
         (seat) => seat.seatNo
       );
+      const notAvailableSeatsIds = notAvailableSeats.map(
+        (seat) => seat.id
+      );
 
       if (notAvailableSeatsLabels?.length) {
-        this.handleSeatLock(notAvailableSeatsLabels.join(","), false);
+        this.handleSeatLock(notAvailableSeatsLabels.join(","), notAvailableSeatsIds.join(","), false);
       }
     },
     manageSeatSelectionAndPromoCalculation() {
@@ -1383,7 +1386,7 @@ export default {
         value != this.busIndex &&
         this.selectedSeatLabels?.length
       ) {
-        this.handleSeatLock(this.selectedSeatLabels.join(","), false);
+        this.handleSeatLock(this.selectedSeatLabels.join(","), this.selectedSeatIds.join(","), false);
         this.resetForm(false);
       }
     },
