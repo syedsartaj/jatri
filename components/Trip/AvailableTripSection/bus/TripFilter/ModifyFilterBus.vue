@@ -1,6 +1,7 @@
 <template>
   <div
     class="bg-white border border-[#ededed] rounded-[10px] px-4 py-6 w-full h-auto"
+    id="filter-options"
   >
     <div class="flex justify-between gap-x-8">
       <button
@@ -244,6 +245,8 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import moment from "moment";
+import { scrollToTargetAdjustedDOM } from "@/helpers/utils";
+
 export default {
   data() {
     return {
@@ -309,10 +312,12 @@ export default {
     setBoardingPoint(point) {
       this.boardingPoint = point === this.boardingPoint ? null : point;
       this.handleTripFilter();
+      scrollToTargetAdjustedDOM('filter-options');
     },
     setBusCompany(bus) {
       this.busCompany = bus === this.busCompany ? null : bus;
       this.handleTripFilter();
+      scrollToTargetAdjustedDOM('filter-options');
     },
     async handleTripFilter() {
       this.$nuxt.$loading?.start();
@@ -364,7 +369,10 @@ export default {
         payload.priceFilterType = this.priceFilterType;
       }
       await this.getPbScheduleDataAction(payload);
-      
+      setTimeout(() => {
+          scrollToTargetAdjustedDOM(`bus-selector-${selectedTripId}`)
+        }, 1);
+
       this.$nuxt.$loading?.finish();
     },
     resetFilter() {

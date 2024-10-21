@@ -83,3 +83,15 @@ export const extractApiResMessage = (error) => {
   if (Object.hasOwn(error, "response")) {
   }
 };
+
+export const scrollToTargetAdjustedDOM = (targetElement, offset = 100) => {
+  var element = document.getElementById(targetElement);
+  var headerOffset = offset;
+  var elementPosition = element.getBoundingClientRect().top;
+  var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: "smooth"
+  });
+};

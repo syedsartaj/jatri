@@ -2,6 +2,7 @@
   <div
     class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4"
     :ref="`bus-selector-${busIndex}`"
+    :id="`bus-selector-${busIndex}`"
   >
     <div
       class="lg:flex justify-between gap-x-6"
@@ -314,6 +315,7 @@
 
         <div
           ref="busForm"
+          id="busForm"
           class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0"
         >
           <!-- Trip Information -->
@@ -590,7 +592,8 @@ import {
   isValidEmail,
   isValidPhoneNumber,
   moduleType,
-} from "../../../../helpers/utils";
+  scrollToTargetAdjustedDOM
+} from "@/helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
 
 export default {
@@ -807,10 +810,10 @@ export default {
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading?.finish();
         this.$emit("selectedTripId", selectedTripId);
-        const el = this.$refs[`bus-selector-${selectedTripId}`];
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        // scroll to top of the selected DOM element
+        setTimeout(() => {
+          scrollToTargetAdjustedDOM(`bus-selector-${selectedTripId}`)
+        }, 1);
       });
     },
     fireGTMEventForViewSeat() {
@@ -1111,12 +1114,8 @@ export default {
         ) {
           this.$refs.passengerPhoneInput.focus();
         }
-        this.$nextTick(async () => {
-          const el = this.$refs[`busForm`];
-          setTimeout(() => {
-            window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
-          }, 1);
-        });
+        // scroll to top of the selected DOM element
+        scrollToTargetAdjustedDOM('busForm')
       } else {
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
