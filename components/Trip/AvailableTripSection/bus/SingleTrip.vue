@@ -123,7 +123,7 @@
           />
           <PointPolicyButton
             text="Cancellation Policy"
-            :click="() => setCurrentTab(TabData.CANCEL_POLICY)"
+            :click="() => setSelectedTab(TabData.CANCEL_POLICY)"
           />
           <PointAndPolicyModal
             v-if="showPointPolicyModal"
@@ -601,6 +601,7 @@ export default {
     "busIndex",
     "setSelectedBuxIndex",
     "selectedBuxIndex",
+    "uid",
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
@@ -750,21 +751,23 @@ export default {
       return coachType || "";
     },
     setCurrentTab(value) {
-      if (this.selectedBuxIndex !== this.busIndex) {
+      if (this.selectedBuxIndex !== this.uid) {
         this.setDroppingPoints([]);
         this.setModalBoardingPoints([]);
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
           const payload = this.getPayloadForSeatView();
           await this.getBoardingPointForBus(payload);
+          this.setSelectedBuxIndex(this.uid);
           this.$nuxt.$loading?.finish();
-          this.setSelectedBuxIndex(this.busIndex);
           this.showPointPolicyModal = true;
         });
-      } else {
-        this.showPointPolicyModal = true;
       }
-      this.selectedTab = value;
+      this.setSelectedTab(value);
+    },
+    setSelectedTab(tab) {
+      this.showPointPolicyModal = true;
+      this.selectedTab = tab;
       this.stopBackgroundScroll(true);
     },
     handlePointPolicyModal() {
@@ -787,7 +790,11 @@ export default {
       if (selectedTripId === "") {
         // Unlock all seats while close seat view
         if (this.selectedSeatLabels?.length) {
-          this.handleSeatLock(this.selectedSeatLabels.join(","), this.selectedSeatIds.join(","), false);
+          this.handleSeatLock(
+            this.selectedSeatLabels.join(","),
+            this.selectedSeatIds.join(","),
+            false
+          );
         }
         this.$emit("selectedTripId", null);
         this.resetForm(true);
@@ -966,7 +973,11 @@ export default {
 
       if (this.isSitAlreadySelected(seat)) {
         // Action for sit unselect
-        this.handleSeatLock([seat.seatNo].join(","), [seat.id].join(","), false);
+        this.handleSeatLock(
+          [seat.seatNo].join(","),
+          [seat.id].join(","),
+          false
+        );
         this.handleSitUnSelect(seat);
         this.disCountCalculationOnSitUnselect(seat);
         this.promoCalculationOnUnSelect();
@@ -1087,10 +1098,17 @@ export default {
         !isValidPhoneNumber(this.passengerPhone)
       ) {
         this.errorOccurred = true;
-        if (!this.passengerName && this.boardingPoint.name && this.droppingPoint.name) {
+        if (
+          !this.passengerName &&
+          this.boardingPoint.name &&
+          this.droppingPoint.name
+        ) {
           this.$refs.passengerNameInput.focus();
-        }
-        else if (!this.passengerPhone && this.boardingPoint.name && this.droppingPoint.name) {
+        } else if (
+          !this.passengerPhone &&
+          this.boardingPoint.name &&
+          this.droppingPoint.name
+        ) {
           this.$refs.passengerPhoneInput.focus();
         }
         this.$nextTick(async () => {
@@ -1322,12 +1340,14 @@ export default {
       const notAvailableSeatsLabels = notAvailableSeats.map(
         (seat) => seat.seatNo
       );
-      const notAvailableSeatsIds = notAvailableSeats.map(
-        (seat) => seat.id
-      );
+      const notAvailableSeatsIds = notAvailableSeats.map((seat) => seat.id);
 
       if (notAvailableSeatsLabels?.length) {
-        this.handleSeatLock(notAvailableSeatsLabels.join(","), notAvailableSeatsIds.join(","), false);
+        this.handleSeatLock(
+          notAvailableSeatsLabels.join(","),
+          notAvailableSeatsIds.join(","),
+          false
+        );
       }
     },
     manageSeatSelectionAndPromoCalculation() {
@@ -1386,7 +1406,11 @@ export default {
         value != this.busIndex &&
         this.selectedSeatLabels?.length
       ) {
-        this.handleSeatLock(this.selectedSeatLabels.join(","), this.selectedSeatIds.join(","), false);
+        this.handleSeatLock(
+          this.selectedSeatLabels.join(","),
+          this.selectedSeatIds.join(","),
+          false
+        );
         this.resetForm(false);
       }
     },

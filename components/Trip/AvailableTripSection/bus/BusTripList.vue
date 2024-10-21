@@ -7,6 +7,7 @@
         :trip="trip"
         :selectedTrip="selectedBusId"
         :busIndex="index"
+        :uid="trip.uid"
         @selectedTripId="selectTrip"
         :selectedBuxIndex="selectedBusIndex"
         :setSelectedBuxIndex="(value) => (selectedBusIndex = value)"

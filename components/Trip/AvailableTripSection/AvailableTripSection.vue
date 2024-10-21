@@ -17,7 +17,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { ServiceType } from "../../../helpers/utils";
+import { ServiceType } from "@/helpers/utils";
 export default {
   name: "AvailableTripSection",
   data() {
