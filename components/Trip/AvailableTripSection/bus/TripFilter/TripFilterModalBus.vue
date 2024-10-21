@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-[99999999]">
+  <div class="relative z-[99999999]" id="filter-options">
     <div
       class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"
     ></div>
@@ -304,6 +304,8 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import moment from "moment";
 import Cookies from "js-cookie";
+import { scrollToTargetAdjustedDOM } from "@/helpers/utils";
+
 export default {
   props: ["close"],
   data() {
@@ -377,6 +379,7 @@ export default {
         boardingPoint: point,
       };
       this.updateMobileFilterData(newFilterData);
+      scrollToTargetAdjustedDOM('filter-options');
     },
     setPriceFilterType(type) {
       const newFilterData = {
@@ -391,6 +394,7 @@ export default {
         busCompany: bus,
       };
       this.updateMobileFilterData(newFilterData);
+      scrollToTargetAdjustedDOM('filter-options');
     },
     setTime(time) {
       const newFilterData = {
