@@ -333,7 +333,7 @@
             />
             <!-- :options="getSeatBoardingPointArray" -->
           </div>
-          <div class="mt-4" v-if="getSeatDroppingPointArray.length">
+          <div class="mt-4" v-if="isDroppingPointAvailable">
             <SelectOption
               ref="droppingPoint"
               v-model="droppingPoint"
@@ -608,12 +608,10 @@ export default {
   ],
   mounted() {
     this.imageUrl = process.env.OFFER_IMAGE_BASE_URL;
-    this.moduleType = moduleType;
   },
   data() {
     return {
       selectedTab: "",
-      moduleType: null,
       TabData: {
         BOARDING_POINT: "BOARDING_POINT",
         DROPPING_POINT: "DROPPING_POINT",
@@ -640,7 +638,6 @@ export default {
       promoCode: "",
       totalPromoAmount: 0,
       errorOccurred: false,
-      moduleType: this.trip.moduleType,
       showToolTip: false,
       emailReg: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       requestOnGoing: false,
@@ -663,6 +660,9 @@ export default {
       "getModalBoardingPoints",
       "getDroppingPoints",
     ]),
+    isDroppingPointAvailable(){
+      return ((this.trip.moduleType !== moduleType.HANIF) && (this.getSeatDroppingPointArray.length))
+    },
     isValidPassengerEmail() {
       return isValidEmail(this.passengerEmail);
     },
@@ -1096,7 +1096,7 @@ export default {
         (this.passengerEmail && !this.isValidPassengerEmail) ||
         !this.selectedSeatIds.length ||
         !this.boardingPoint?.name ||
-        (this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
+        ((this.trip.moduleType !== moduleType.HANIF) && this.getSeatDroppingPointArray.length && !this.droppingPoint?.name) ||
         this.passengerName.length < 3 ||
         !isValidPhoneNumber(this.passengerPhone)
       ) {
