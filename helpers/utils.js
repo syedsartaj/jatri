@@ -20,6 +20,7 @@ export const moduleType = {
   PARIBAHAN: "paribahan",
   LONDON_EXPRESS: "london-express",
   SHOHAGH: "shohagh",
+  HANIF: "hanif"
 };
 
 export const ServiceType = {
