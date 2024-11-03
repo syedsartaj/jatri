@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white">
-    <BusBannerLarge/>
+    <BusBannerLarge />
     <SearchFilterForm />
-    <BusBannerSmall/>
+    <BusBannerSmall />
     <HomePageOfferAndPromo />
     <WhyChooseSection />
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />
@@ -11,14 +11,14 @@
     <PopularRouteSection />
     <Blog />
     <HelpSection />
-    <GlobalFooter  />
+    <GlobalFooter />
   </div>
 </template>
 
 <script>
 export default {
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // ctx.$gtm.push({ event: "ssr" });
   },
   data() {
     return {

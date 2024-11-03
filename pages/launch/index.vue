@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white">
-    <LaunchBannerLarge/>
+    <LaunchBannerLarge />
     <SearchFilterForm />
-    <LaunchBannerSmall/>
+    <LaunchBannerSmall />
     <!-- <HomePageOfferAndPromo /> -->
     <WhyChooseSection />
     <EasyStepSection :handleOnClick="handleHowToBuyModal" />
@@ -18,7 +18,7 @@
 <script>
 export default {
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // ctx.$gtm.push({ event: "ssr" });
   },
   data() {
     return {

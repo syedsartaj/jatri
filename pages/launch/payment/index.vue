@@ -5,7 +5,7 @@
 <script>
 export default {
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // ctx.$gtm.push({ event: "ssr" });
   },
   validate({ query }) {
     const { tnxId } = query;

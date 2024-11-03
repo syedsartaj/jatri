@@ -1,86 +1,46 @@
 <template>
-  <div
-    :class="{
-      '': isTripPage,
-      '-translate-y-10': !isTripPage,
-      'top-[168px]':
-        getHeadLine?.length &&
-        (getHeadLine[0]?.busSettings?.headline ||
-          getHeadLine[0]?.launchSettings?.headline),
-      'top-[136px]': !(
-        getHeadLine?.length &&
-        (getHeadLine[0]?.busSettings?.headline ||
-          getHeadLine[0]?.launchSettings?.headline)
-      ),
-      'hidden lg:block w-full z-[999998] lg:pr-4 xl:pr-[100px] lg:pl-4 xl:pl-[100px]': true,
-      sticky: !isTripPage,
-    }"
-  >
-    <div
-      v-if="getSelectedServiceType != ''"
-      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[16px] gap-x-4"
-    >
+  <div :class="{
+    '': isTripPage,
+    '-translate-y-10': !isTripPage,
+    'top-[168px]':
+      getHeadLine?.length &&
+      (getHeadLine[0]?.busSettings?.headline ||
+        getHeadLine[0]?.launchSettings?.headline),
+    'top-[136px]': !(
+      getHeadLine?.length &&
+      (getHeadLine[0]?.busSettings?.headline ||
+        getHeadLine[0]?.launchSettings?.headline)
+    ),
+    'hidden lg:block w-full z-[999998] lg:pr-4 xl:pr-[100px] lg:pl-4 xl:pl-[100px]': true,
+    sticky: !isTripPage,
+  }">
+    <div v-if="getSelectedServiceType != ''"
+      class="bg-white searchbar rounded-[10px] flex justify-between w-full p-[16px] gap-x-4">
       <div class="flex justify-between w-[86%] gap-x-4">
-        <SearchCityFilter
-          v-model="departure"
-          :defaultValue="departureName"
-          :label="'From'"
-          :default-option="'Choose a location'"
-          :allow-filter="true"
-          :options="cityListWithoutToCity"
-          :errorOccured="errorOccured"
-        />
-        <SearchCityFilter
-          v-model="destination"
-          :defaultValue="destinationName"
-          :label="'To'"
-          :default-option="'Choose a location'"
-          :allow-filter="true"
-          :options="cityListWithoutFromCity"
-          :errorOccured="errorOccured"
-        />
-        <SearchBusFilter
-          v-if="getSelectedServiceType === ServiceType.BUS"
-          v-model="coachType"
-          :defaultValue="''"
-          :label="'Bus Type'"
-          :default-option="'Choose bus type'"
-          :allow-filter="false"
-          :options="coachTypes"
-          :errorOccured="errorOccured"
-        />
-        <DatePicker
-          v-model="departingDate"
-          :label="'DEPARTURE DATE'"
-          :default-option="'Select Journey Date'"
-          :allow-filter="true"
-          :errorOccured="errorOccured"
-        />
-        <SearchTimeFilter
-          v-if="getSelectedServiceType === ServiceType.LAUNCH"
-          v-model="selectedTime"
-          :defaultValue="''"
-          :label="'DEPARTURE TIME'"
-          :default-option="'Select time'"
-          :allow-filter="false"
-          :options="timeList"
-          :errorOccured="errorOccured"
-        />
+        <SearchCityFilter v-model="departure" :defaultValue="departureName" :label="'From'"
+          :default-option="'Choose a location'" :allow-filter="true" :options="cityListWithoutToCity"
+          :errorOccured="errorOccured" />
+        <SearchCityFilter v-model="destination" :defaultValue="destinationName" :label="'To'"
+          :default-option="'Choose a location'" :allow-filter="true" :options="cityListWithoutFromCity"
+          :errorOccured="errorOccured" />
+        <SearchBusFilter v-if="getSelectedServiceType === ServiceType.BUS" v-model="coachType" :defaultValue="''"
+          :label="'Bus Type'" :default-option="'Choose bus type'" :allow-filter="false" :options="coachTypes"
+          :errorOccured="errorOccured" />
+        <DatePicker v-model="departingDate" :label="'DEPARTURE DATE'" :default-option="'Select Journey Date'"
+          :allow-filter="true" :errorOccured="errorOccured" />
+        <SearchTimeFilter v-if="getSelectedServiceType === ServiceType.LAUNCH" v-model="selectedTime" :defaultValue="''"
+          :label="'DEPARTURE TIME'" :default-option="'Select time'" :allow-filter="false" :options="timeList"
+          :errorOccured="errorOccured" />
       </div>
       <div class="flex justify-end items-center">
-        <button
-          class="rounded-full text-white text-base font-medium lg:px-[24px] h-[46px] whitespace-nowrap"
-          :class="
-            !departure || !destination || !coachType || !departingDate
-              ? isTripPage
-                ? 'bg-[#1E88E5]'
-                : 'bg-corporate'
-              : isTripPage
+        <button class="rounded-full text-white text-base font-medium lg:px-[24px] h-[46px] whitespace-nowrap" :class="!departure || !destination || !coachType || !departingDate
+            ? isTripPage
+              ? 'bg-[#1E88E5]'
+              : 'bg-corporate'
+            : isTripPage
               ? 'bg-[#1E88E5] cursor-pointer'
               : 'bg-corporate cursor-pointer'
-          "
-          @click="handleFromSubmit"
-        >
+          " @click="handleFromSubmit">
           {{ isTripPage ? "Modify Search" : "Search ticket" }}
         </button>
       </div>
@@ -92,6 +52,10 @@
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
 import { ServiceType } from "../../helpers/utils";
+import {gtmAnalyticsKey} from "@/constant/AnalyticsKeywordList"
+import {dateFormat} from "@/helpers/dateTimeFormat"
+import { fireGTMEventForSearch } from "@/helpers/AnalyticsEventHandler";
+
 export default {
   name: "SearchFilterForm",
   data() {
@@ -174,10 +138,10 @@ export default {
             this.selectedTime === "4 am - 12 pm"
               ? "morning"
               : this.selectedTime === "12 pm - 06 pm"
-              ? "day"
-              : "night";
+                ? "day"
+                : "night";
         }
-        this.fireGTMEventForSearch();
+        fireGTMEventForSearch(this, this.departure, this.destination, this.departingDate, this.coachType)
         const pathName =
           this.getSelectedServiceType === ServiceType.BUS
             ? "/bus/trip"
@@ -203,27 +167,7 @@ export default {
         }
       }
     },
-    fireGTMEventForSearch() {
-      const eventData = {
-        event: "searchTrip",
-        from: this.departure,
-        to: this.destination,
-        date: this.departingDate,
-      };
-
-      if (this.getSelectedServiceType === ServiceType.BUS) {
-        eventData.type = this.coachType;
-      } else {
-        eventData.time =
-          this.selectedTime === "4 am - 12 pm"
-            ? "morning"
-            : this.selectedTime === "12 pm - 06 pm"
-            ? "day"
-            : "night";
-      }
-
-      this.$gtm.push(eventData);
-    },
+   
   },
   mounted() {
   },
@@ -262,8 +206,8 @@ export default {
             time === "morning"
               ? "4 am - 12 pm"
               : time === "day"
-              ? "12 pm - 06 pm"
-              : "06 pm - 03 am";
+                ? "12 pm - 06 pm"
+                : "06 pm - 03 am";
         }
         if (this.$route?.fullPath?.includes("/trip")) {
           const isRightLocation =
