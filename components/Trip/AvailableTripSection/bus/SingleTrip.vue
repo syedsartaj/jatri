@@ -31,7 +31,16 @@
             "
             @mouseleave="showToolTip = false"
           >
-            <img
+            <img v-if="trip.moduleType === 'hanif'"
+              :src="
+                (trip.companyImages?.logo &&
+                  `${trip.companyImages?.logo}`) ||
+                  require(`@/assets/images/busDefaultImage.svg`)
+              "
+              class="h-[40px] w[40px] rounded-full"
+              alt=""
+            />
+            <img v-else
               :src="
                 (trip.companyImages?.logo &&
                   `${imageUrl}${trip.companyImages?.logo}`) ||
