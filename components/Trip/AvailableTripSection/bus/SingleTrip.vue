@@ -16,10 +16,24 @@
             @click="handleBusImagePreviewModal" @mouseover="
               showToolTip = trip.companyImages?.gallery?.length && true
               " @mouseleave="showToolTip = false">
-            <img :src="(trip.companyImages?.logo &&
-                `${imageUrl}${trip.companyImages?.logo}`) ||
-              require(`@/assets/images/busDefaultImage.svg`)
-              " class="h-[40px] w[40px] rounded-full" alt="" />
+              <img v-if="trip.moduleType === 'hanif'"
+                :src="
+                  (trip.companyImages?.logo &&
+                    `${trip.companyImages?.logo}`) ||
+                    require(`@/assets/images/busDefaultImage.svg`)
+                "
+                class="h-[40px] w[40px] rounded-full"
+                alt=""
+              />
+              <img v-else
+                :src="
+                  (trip.companyImages?.logo &&
+                    `${imageUrl}${trip.companyImages?.logo}`) ||
+                  require(`@/assets/images/busDefaultImage.svg`)
+                "
+                class="h-[40px] w[40px] rounded-full"
+                alt=""
+              />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
                 {{ trip.company }}
@@ -585,7 +599,7 @@ export default {
       });
     },
 
-    
+
     getPayloadForSeatView() {
       return {
         moduleType: this.trip.moduleType,
