@@ -1,68 +1,30 @@
 <template>
   <div>
     <div class="grid md:grid-cols-2 gap-[14px] md:gap-4">
-      <SearchCityFilterMobile
-        v-model="departure"
-        :componentUniqueId="'from-city-input'"
-        :defaultValue="departureName"
-        :label="'From'"
-        :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
-        :default-option="'From city or your location'"
-        :allow-filter="true"
-        :options="cityListWithoutToCity"
-        :errorOccured="errorOccured"
-        ref="departure"
-      />
-      <SearchCityFilterMobile
-        v-model="destination"
-        :componentUniqueId="'to-city-input'"
-        :defaultValue="destinationName"
-        :label="'To'"
-        :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
-        :default-option="'To city or your destination'"
-        :allow-filter="true"
-        :options="cityListWithoutFromCity"
-        :errorOccured="errorOccured"
-        ref="destination"
-      />
-      <DatePickerMobile
-        v-model="departingDate"
-        :label="'Journey date'"
-        :icon="require('@/assets/images/icons/datepickerIcon.svg')"
-        :default-option="'Select Journey Date'"
-        :allow-filter="true"
-      />
-      <SearchBusFilterMobile
-        v-if="getSelectedServiceType === ServiceType.BUS"
-        v-model="coachType"
-        :defaultValue="''"
-        :label="'Bus type, Ac or Non Ac'"
-        :icon="require('@/assets/images/icons/searchTypeIcon.svg')"
-        :default-option="'Choose bus type'"
-        :allow-filter="false"
-        :options="coachTypes"
-      />
-      <SearchTimeFilterMobile
-        v-if="getSelectedServiceType === ServiceType.LAUNCH"
-        v-model="selectedTime"
-        :defaultValue="''"
-        :label="'Departure time'"
-        :icon="require('@/assets/images/icons/searchTimeIcon.svg')"
-        :default-option="'Departure time'"
-        :allow-filter="false"
-        :options="timeList"
-      />
+      <SearchCityFilterMobile v-model="departure" :componentUniqueId="'from-city-input'" :defaultValue="departureName"
+        :label="'From'" :icon="require('@/assets/images/icons/fromStoppageIcon.svg')"
+        :default-option="'From city or your location'" :allow-filter="true" :options="cityListWithoutToCity"
+        :errorOccured="errorOccured" ref="departure" />
+      <SearchCityFilterMobile v-model="destination" :componentUniqueId="'to-city-input'" :defaultValue="destinationName"
+        :label="'To'" :icon="require('@/assets/images/icons/toStoppageIcon.svg')"
+        :default-option="'To city or your destination'" :allow-filter="true" :options="cityListWithoutFromCity"
+        :errorOccured="errorOccured" ref="destination" />
+      <DatePickerMobile v-model="departingDate" :label="'Journey date'"
+        :icon="require('@/assets/images/icons/datepickerIcon.svg')" :default-option="'Select Journey Date'"
+        :allow-filter="true" />
+      <SearchBusFilterMobile v-if="getSelectedServiceType === ServiceType.BUS" v-model="coachType" :defaultValue="''"
+        :label="'Bus type, Ac or Non Ac'" :icon="require('@/assets/images/icons/searchTypeIcon.svg')"
+        :default-option="'Choose bus type'" :allow-filter="false" :options="coachTypes" />
+      <SearchTimeFilterMobile v-if="getSelectedServiceType === ServiceType.LAUNCH" v-model="selectedTime"
+        :defaultValue="''" :label="'Departure time'" :icon="require('@/assets/images/icons/searchTimeIcon.svg')"
+        :default-option="'Departure time'" :allow-filter="false" :options="timeList" />
     </div>
     <div class="w-full flex items-center mt-6 justify-center">
-      <button
-        class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[10px] px-[26px]"
-        :class="
-          !departure || !destination || !coachType || !departingDate
+      <button class="w-full max-w-[348px] rounded-full text-white text-sm font-medium leading-5 py-[10px] px-[26px]"
+        :class="!departure || !destination || !coachType || !departingDate
             ? 'bg-corporate'
             : 'bg-corporate cursor-pointer border border-primary'
-        "
-        @click="handleFromSubmit"
-      >
+          " @click="handleFromSubmit">
         Search Ticket
       </button>
     </div>
@@ -72,7 +34,9 @@
 <script>
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
-import { ServiceType } from "../../../helpers/utils";
+import { ServiceType } from "@/helpers/utils";
+import { fireGTMEventForSearch } from "@/helpers/AnalyticsEventHandler";
+
 export default {
   name: "SearchFilterFormMobile",
   data() {
@@ -144,10 +108,10 @@ export default {
             this.selectedTime === "4 am - 12 pm"
               ? "morning"
               : this.selectedTime === "12 pm - 06 pm"
-              ? "day"
-              : "night";
+                ? "day"
+                : "night";
         }
-        this.fireGTMEventForSearch();
+        fireGTMEventForSearch(this, this.departure, this.destination, this.departingDate, this.coachType)
         Cookies.remove("process-allow");
         const pathName =
           this.getSelectedServiceType === ServiceType.BUS
@@ -182,17 +146,7 @@ export default {
         this.handleToastMessage("Please insert departure date");
       }
     },
-    fireGTMEventForSearch() {
-      const eventData = {
-        event: "searchTrip",
-        from: this.departure,
-        to: this.destination,
-        type: this.coachType,
-        date: this.departingDate,
-      };
-
-      this.$gtm.push(eventData);
-    },
+   
   },
   watch: {
     "$route.query": {
@@ -225,8 +179,8 @@ export default {
             time === "morning"
               ? "4 am - 12 pm"
               : time === "day"
-              ? "12 pm - 06 pm"
-              : "06 pm - 03 am";
+                ? "12 pm - 06 pm"
+                : "06 pm - 03 am";
         }
       },
       deep: true,

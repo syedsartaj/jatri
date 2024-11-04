@@ -3,10 +3,8 @@
     <div class="md:bg-white p-4 md:p-[40px]">
       <!-- mobile dropdown-->
       <div class="block md:hidden bg-white">
-        <button
-          @click="toggler"
-          class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between"
-        >
+        <button @click="toggler"
+          class="w-full py-3 px-2 leading-5 text-sm font-medium text-blackPrimary rounded flex justify-between">
           Terms & Conditions
           <img src="@/assets/images/ashDropDown.svg" alt="" />
         </button>
@@ -16,38 +14,18 @@
           </p>
 
           <hr class="mt-2 border-t border-[#DBDBDB]" />
-          <a
-            @click="selectedContent = 'terms-condition'"
-            href="#terms-and-conditions"
-            :class="
-              $route.hash === '#terms-and-conditions'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-            "
-            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-            >Terms & Conditions</a
-          >
-          <a
-            @click="selectedContent = 'return-policy'"
-            href="#return-and-refund-policy"
-            :class="
-              $route.hash === '#return-and-refund-policy'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-            "
-            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-            >Return & Refund Policies</a
-          >
-          <a
-            @click="selectedContent = 'privacy-policy'"
-            href="#privacy-policy"
-            :class="
-              $route.hash === '#privacy-policy'
-                ? 'text-white bg-[#1E88E5]'
-                : 'text-black bg-transparent'
-            "
-            class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-            >Privacy Policy
+          <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions'
+              ? 'text-white bg-[#1E88E5]'
+              : 'text-black bg-transparent'
+            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
+          <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'
+              ? 'text-white bg-[#1E88E5]'
+              : 'text-black bg-transparent'
+            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
+          <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="$route.hash === '#privacy-policy'
+              ? 'text-white bg-[#1E88E5]'
+              : 'text-black bg-transparent'
+            " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy
           </a>
         </div>
       </div>
@@ -59,38 +37,18 @@
               Table of contents
             </p>
             <hr class="mt-2 border-t border-[#DBDBDB]" />
-            <a
-              @click="selectedContent = 'terms-condition'"
-              href="#terms-and-conditions"
-              :class="
-                $route.hash === '#terms-and-conditions'
-                  ? 'text-white bg-[#1E88E5]'
-                  : 'text-black bg-transparent'
-              "
-              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-              >Terms & Conditions</a
-            >
-            <a
-              @click="selectedContent = 'return-policy'"
-              href="#return-and-refund-policy"
-              :class="
-                $route.hash === '#return-and-refund-policy'
-                  ? 'text-white bg-[#1E88E5]'
-                  : 'text-black bg-transparent'
-              "
-              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-              >Return & Refund Policies</a
-            >
-            <a
-              @click="selectedContent = 'privacy-policy'"
-              href="#privacy-policy"
-              :class="
-                $route.hash === '#privacy-policy'
-                  ? 'text-white bg-[#1E88E5]'
-                  : 'text-black bg-transparent'
-              "
-              class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded"
-              >Privacy Policy
+            <a @click="selectedContent = 'terms-condition'" href="#terms-and-conditions" :class="$route.hash === '#terms-and-conditions'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Terms & Conditions</a>
+            <a @click="selectedContent = 'return-policy'" href="#return-and-refund-policy" :class="$route.hash === '#return-and-refund-policy'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Return & Refund Policies</a>
+            <a @click="selectedContent = 'privacy-policy'" href="#privacy-policy" :class="$route.hash === '#privacy-policy'
+                ? 'text-white bg-[#1E88E5]'
+                : 'text-black bg-transparent'
+              " class="mt-4 block w-full leading-5 text-sm font-medium p-2 rounded">Privacy Policy
             </a>
           </div>
         </div>
@@ -100,9 +58,7 @@
           <p id="terms-and-conditions">&nbsp;</p>
           <!-- Terms and Condition -->
           <div :class="$route.hash === '#terms-and-conditions' ? 'mt-20' : ' '">
-            <p
-              class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
-            >
+            <p class="text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
               Terms & Conditions
             </p>
             <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
@@ -110,8 +66,7 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify"
-              >
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter text-justify">
                 <li class="">
                   The ticket will be treated as cancelled if the passenger fails
                   to report at the reporting station 15 minutes before the bus
@@ -134,9 +89,7 @@
             <p class="text-blackPrimary text-xl font-bold mt-4 md:mt-8">
               Other Terms:
             </p>
-            <p
-              class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8"
-            >
+            <p class="text-[16px] md:text-sm text-blackPrimary font-[300] mt-4 md:mt-8">
               Jatri.co is only the ticket reseller. It does not operate
               bus/cruise services of its own.
             </p>
@@ -146,8 +99,7 @@
             </p>
             <div class="md:ml-9">
               <ul
-                class="list-disc dash-type mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc dash-type mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li class="">
                   Issuing a valid e-ticket (a ticket that will be accepted by
                   the bus/cruise operators) for its' network of operations;
@@ -164,8 +116,7 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>The bus/cruise operator changes ticket price.</li>
                 <li>The bus/cruise not departing/ reaching on time.</li>
                 <li>
@@ -209,15 +160,12 @@
               the bus/cruise.
             </p>
 
-            <p
-              class="text-blackPrimary text-xl font-medium ml-4 md:ml-9 mt-4 md:mt-8"
-            >
+            <p class="text-blackPrimary text-xl font-medium ml-4 md:ml-9 mt-4 md:mt-8">
               Cancellation Policy:
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   The tickets booked through Jatri.co are only cancellable from
                   Jatri Online as per Cancellation Policy
@@ -296,17 +244,11 @@
             </div>
           </div>
 
-          <hr
-            id="return-and-refund-policy"
-            class="mt-6 border-t border-[#DBDBDB]"
-          />
+          <hr id="return-and-refund-policy" class="mt-6 border-t border-[#DBDBDB]" />
           <!-- Return and refund policy -->
-          <div
-            :class="$route.hash === '#return-and-refund-policy' ? 'mt-20' : ' '"
-          >
+          <div :class="$route.hash === '#return-and-refund-policy' ? 'mt-20' : ' '">
             <p
-              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
-            >
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
               Return & Refund Policies
             </p>
             <p class="text-base font-bold text-blackPrimary mt-4">
@@ -317,16 +259,13 @@
             <p class="text-base font-bold text-blackPrimary mt-4">
               Cancellation Policy:
             </p>
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-2 md:mt-4">
               Tickets bought through Jatri.co can be cancelled as per the
               cancellation policy below:
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   <span class="font-medium"> Jatri.co</span>
                   is bound to comply with the terms set by the operator/event
@@ -336,7 +275,8 @@
                   unable to issue such refund.
                 </li>
                 <li>
-                  Migrated tickets are non cancellable non refundable in any circumstances, unless the trip is cancelled by the operator.
+                  Migrated tickets are non cancellable non refundable in any circumstances, unless the trip is cancelled
+                  by the operator.
                 </li>
               </ul>
             </div>
@@ -346,8 +286,7 @@
             </p>
             <div class="ml-4 md:ml-9 mt=4">
               <ul
-                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   The ticket will be treated as cancelled if the passenger fails
                   to report at the reporting station 15 minutes before the bus
@@ -361,8 +300,7 @@
             </p>
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   No ticket will be activated unless the customer has paid the
                   full amount mentioned on the screen.
@@ -387,9 +325,7 @@
               Regular Time (Non-Eid Period):
             </p>
 
-            <p
-              class="text-base font-medium text-blackPrimary mt-4 text-justify"
-            >
+            <p class="text-base font-medium text-blackPrimary mt-4 text-justify">
               To be eligible for refund, customers need to cancel the ticket
               from jatri.co before the applicable time before the departure. And
               must report the cancelation to the support centre (i.e. Call
@@ -399,9 +335,7 @@
             <div class="mt-4 border border-[#DBDBDB] rounded">
               <table class="min-w-full text-center">
                 <thead>
-                  <tr
-                    class="bg-[#F7F7F7] p-1 leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
-                  >
+                  <tr class="bg-[#F7F7F7] p-1 leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium">
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]"></th>
                     <th class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Hours before trip time
@@ -410,9 +344,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    class="leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium"
-                  >
+                  <tr class="leading-[16px] md:leading-6 text-[12px] md:text-[16px] font-medium">
                     <td class="p-1 md:p-4 border-r border-[#DBDBDB]">
                       Jatri Online
                     </td>
@@ -449,9 +381,7 @@
               Regular Time (Non-Eid Period):
             </p>
 
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               No ticket will be refunded unless it has been cancelled as per the
               cancellation policy above. In case of technical problems or any
               failed transaction due to network failure, time delay on complete
@@ -462,8 +392,7 @@
 
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   Incase of refunding the money, it will take 7 business days
                   for MFS(bKash, Nagad) and 12/15 business days for SSL Commerz/
@@ -492,8 +421,7 @@
             </p>
             <div class="ml-4 md:ml-9">
               <ul
-                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc mt-2 md:mt-4 leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>Ticket PNR (required if a ticket was issued)</li>
                 <li>Mobile number used while buying the ticket</li>
                 <li>Category (e.g Bus/Launch)</li>
@@ -510,26 +438,18 @@
               Where refund should be given to:
             </p>
             <div>
-              <p
-                class="text-base font-normal text-blackPrimary text-justify mt-2"
-              >
+              <p class="text-base font-normal text-blackPrimary text-justify mt-2">
                 Personal bKash Number (If paid through bkash) OR
               </p>
-              <p
-                class="text-base font-normal text-blackPrimary text-justify mt-2"
-              >
+              <p class="text-base font-normal text-blackPrimary text-justify mt-2">
                 OR Bank details (if paid through card/online banking/DBBL mobile
                 banking) with Account Number, Bank Account Name, Bank Name,
                 Branch Name and Routing Code.
               </p>
-              <p
-                class="text-base font-normal text-blackPrimary text-justify mt-2"
-              >
+              <p class="text-base font-normal text-blackPrimary text-justify mt-2">
                 No cash refund will be given
               </p>
-              <p
-                class="text-base font-normal text-blackPrimary text-justify mt-2"
-              >
+              <p class="text-base font-normal text-blackPrimary text-justify mt-2">
                 For cards, refund will be given only to the card used for
                 purchase
               </p>
@@ -538,9 +458,7 @@
             <p class="text-base font-bold text-blackPrimary mt-4">
               Amount of Refund:
             </p>
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               Jatri.co convenience fee is refundable only in case of trip
               cancellations by operators during non-Eid times. For Eid tickets,
               the convenience fee is non-refundable even if the operator has
@@ -548,16 +466,12 @@
               passenger cancels the tickets due to a change of decision to
               travel.
             </p>
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               As per policy of an operator, Jatri.co may deduct a certain
               percentage (%) of the ticket price towards cancellation fee,
               where-ever applicable
             </p>
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               For refunds through mobile payment gateways (e.g. bKash, Nagad), a
               fee is charged by the mobile payment company which will be
               deducted from the eligible refund amount. Similar conditions will
@@ -570,8 +484,7 @@
 
             <div class="ml-4 md:ml-9 mt-4">
               <ul
-                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-              >
+                class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
                 <li>
                   If a customer has sent payment to Jatri.co but the e-ticket is
                   not confirmed or generated, i.e., there is no transaction ID
@@ -631,14 +544,11 @@
           <!-- privacy policy data -->
           <div :class="$route.hash === '#privacy-policy' ? 'mt-20' : ' '">
             <p
-              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold"
-            >
+              class="mt-6 text-blackPrimary leading-8 md:leading-9 text-2xl md:text-[28px] font-medium md:font-semibold">
               Privacy Policy
             </p>
 
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               Jatri services Limited values the relationship with the customers.
               We are committed to handling customer information in a
               professional manner. We take the issue of privacy of our customers
@@ -646,9 +556,7 @@
               visit our website.
             </p>
 
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               If you provide unique identifying information, such as name,
               address and other information to us, such information may be used
               for statistical and/or other purposes. Any personally identifiable
@@ -656,17 +564,13 @@
               disclosed, disseminated without your consent.
             </p>
 
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               Jatri services Ltd. may use your personal contact information such
               as Email, Mobile number to update you on any information regarding
               your travel or to update you on any offer(s).
             </p>
 
-            <p
-              class="text-base font-normal text-blackPrimary text-justify mt-4"
-            >
+            <p class="text-base font-normal text-blackPrimary text-justify mt-4">
               We want you to feel confident about using Jatri.co to plan and
               purchase your bus tickets. Your personal information is safe and
               secure with us. We have implemented appropriate administrative,
@@ -679,9 +583,7 @@
             Cancellation process:
           </p>
           <div class="ml-4 md:ml-9">
-            <ul
-              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-            >
+            <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
               <li>
                 First, you have to go to the ticket history option. You need to
                 input your phone number/PNR/transaction ID to search for your
@@ -705,9 +607,7 @@
           </p>
 
           <div class="ml-4 md:ml-9">
-            <ul
-              class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter"
-            >
+            <ul class="list-disc leading-6 md:leading-5 text-[16px] md:text-sm text-blackPrimary font-[300] font-inter">
               <li>
                 Auto cancellation will happen if the customer fails to report at
                 the reporting station 15 minutes before the bus arrives.
@@ -769,7 +669,7 @@ html {
 <script>
 export default {
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // ctx.$gtm.push({ event: "ssr" });
   },
   data() {
     return {

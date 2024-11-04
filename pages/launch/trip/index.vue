@@ -6,21 +6,15 @@
       <ModifyFilterMobileLaunch />
 
       <!-- Mobile device filter button -->
-      <button
-        v-if="getMobileFloatingFilter"
-        @click="toggleTripFilterModal"
-        class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-[88px] z-[999999] rounded-full"
-      >
+      <button v-if="getMobileFloatingFilter" @click="toggleTripFilterModal"
+        class="w-[98px] lg:hidden flex justify-center items-center gap-x-[10.67px] py-[10px] text-corporate text-sm font-medium bg-white shadow-xl fixed left-4 bottom-[88px] z-[999999] rounded-full">
         <img src="@/assets/images/icons/filterIcon.svg" alt="" />
         <span>Filter</span>
       </button>
 
       <!-- Filter modal -->
       <div class="block lg:hidden" v-if="isTripFilterModalOpen">
-        <TripFilterModalLaunch
-          :close="toggleTripFilterModal"
-          @handleTripFilterModal="toggleTripFilterModal"
-        />
+        <TripFilterModalLaunch :close="toggleTripFilterModal" @handleTripFilterModal="toggleTripFilterModal" />
       </div>
     </div>
 
@@ -34,7 +28,7 @@ import { handleScrollBehaviour } from "../../../helpers/utils";
 
 export default {
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // ctx.$gtm.push({ event: "ssr" });
   },
 
   data() {
@@ -50,7 +44,7 @@ export default {
     ]),
   },
 
- 
+
 
   methods: {
     ...mapMutations("busStore", ["updateMobileFilterData"]),

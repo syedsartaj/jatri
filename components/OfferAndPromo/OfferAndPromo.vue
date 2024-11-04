@@ -1,135 +1,74 @@
 <template>
   <div>
     <!-- Offer & Promos Section Mobile -->
-    <div
-      class="py-[10px] px-1 w-full bg-[#FFFFFF] rounded-2xl flex justify-between md:hidden items-center mb-[20px]"
-      v-if="offerPromoGetter && offerPromoGetter.length"
-    >
-      <img
-        src="@/assets/images/arrowLeftBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer mr-1"
-        @click="prevSlide('mobile')"
-      />
-      <div
-        class="flex justify-center min-w-[84%] md:hidden"
-        v-if="offerPromoGetter && offerPromoGetter.length"
-      >
-        
-          <div class="w-full overflow-hidden">
-            <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
-              <slide
-                v-for="(offer, index) in generateOfferImgArrForMobile()"
-                :key="index"
-              >
-                <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                    <img
-                      :id="index"
-                      :src="offer.image"
-                      alt="offer image"
-                      class="rounded-2xl w-full  pointer-events-none"
-                    />
-                </div>
-              </slide>
-            </hooper>
-          </div>
-        
+    <div class="py-[10px] px-1 w-full bg-[#FFFFFF] rounded-2xl flex justify-between md:hidden items-center mb-[20px]"
+      v-if="offerPromoGetter && offerPromoGetter.length">
+      <img src="@/assets/images/arrowLeftBlack.svg" alt="" class="h-4 w-4 cursor-pointer mr-1"
+        @click="prevSlide('mobile')" />
+      <div class="flex justify-center min-w-[84%] md:hidden" v-if="offerPromoGetter && offerPromoGetter.length">
+
+        <div class="w-full overflow-hidden">
+          <hooper ref="hooperSlideMobile" :settings="hooperSettingsMobile">
+            <slide v-for="(offer, index) in generateOfferImgArrForMobile()" :key="index">
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <img :id="index" :src="offer.image" alt="offer image" class="rounded-2xl w-full  pointer-events-none" />
+              </div>
+            </slide>
+          </hooper>
+        </div>
+
       </div>
-      <img
-        src="@/assets/images/arrowRightBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer ml-[12px]"
-        @click="nextSlide('mobile')"
-      />
+      <img src="@/assets/images/arrowRightBlack.svg" alt="" class="h-4 w-4 cursor-pointer ml-[12px]"
+        @click="nextSlide('mobile')" />
     </div>
 
     <!-- Offer & Promos Section Tab -->
     <div
       class="p-[10px] w-full bg-[#FFFFFF] rounded-[10px] hidden md:flex justify-between xl:hidden items-center mb-[20px]"
-      v-if="offerPromoGetter && offerPromoGetter.length"
-    >
-      <img
-        src="@/assets/images/arrowLeftBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer mr-[12px]"
-        @click="prevSlide('tab')"
-      />
-      <div
-        class="justify-center w-[89%] hidden md:flex xl:hidden"
-        v-if="offerPromoGetter && offerPromoGetter.length"
-      >
-      
-       
-          <div class=" w-full overflow-hidden">
-            <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
-              <slide
-                v-for="(offer, index) in generateOfferImgArrForTab()"
-                :key="index"
-              >
-                <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                    <img
-                      :id="index"
-                      :src="offer.image"
-                      alt="offer image"
-                      class="rounded-2xl w-full"
-                    />
-                </div>
-              </slide>
-            </hooper>
-          </div>
-       
+      v-if="offerPromoGetter && offerPromoGetter.length">
+      <img src="@/assets/images/arrowLeftBlack.svg" alt="" class="h-4 w-4 cursor-pointer mr-[12px]"
+        @click="prevSlide('tab')" />
+      <div class="justify-center w-[89%] hidden md:flex xl:hidden" v-if="offerPromoGetter && offerPromoGetter.length">
+
+
+        <div class=" w-full overflow-hidden">
+          <hooper ref="hooperSlideTab" :settings="hooperSettingsTab">
+            <slide v-for="(offer, index) in generateOfferImgArrForTab()" :key="index">
+              <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
+                <img :id="index" :src="offer.image" alt="offer image" class="rounded-2xl w-full" />
+              </div>
+            </slide>
+          </hooper>
+        </div>
+
       </div>
-      <img
-        src="@/assets/images/arrowRightBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer ml-[12px]"
-        @click="nextSlide('tab')"
-      />
+      <img src="@/assets/images/arrowRightBlack.svg" alt="" class="h-4 w-4 cursor-pointer ml-[12px]"
+        @click="nextSlide('tab')" />
     </div>
 
     <!-- Offer & Promos Section Large -->
 
-    <div
-      class="p-[10px] w-full bg-[#FFFFFF] rounded-2xl hidden xl:flex justify-between items-center mb-[20px]"
-      v-if="offerPromoGetter && offerPromoGetter.length"
-    >
-      <img
-        src="@/assets/images/arrowLeftBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer mr-[12px]"
-        @click="prevSlide('large')"
-      />
-      <div
-        class="justify-center w-[92%] hidden xl:flex"
-        v-if="offerPromoGetter && offerPromoGetter.length"
-      >
+    <div class="p-[10px] w-full bg-[#FFFFFF] rounded-2xl hidden xl:flex justify-between items-center mb-[20px]"
+      v-if="offerPromoGetter && offerPromoGetter.length">
+      <img src="@/assets/images/arrowLeftBlack.svg" alt="" class="h-4 w-4 cursor-pointer mr-[12px]"
+        @click="prevSlide('large')" />
+      <div class="justify-center w-[92%] hidden xl:flex" v-if="offerPromoGetter && offerPromoGetter.length">
         <div class="overflow-hidden xl:w-full h-auto">
           <div>
             <hooper ref="hooperSlideWeb" :settings="hooperSettingsWeb">
-              <slide
-                v-for="(offer, index) in generateOfferImgArrForLarge()"
-                :key="index"
-              >
+              <slide v-for="(offer, index) in generateOfferImgArrForLarge()" :key="index">
                 <div :style="{ marginRight: gapBetweenImageInPx + 'px' }">
-                    <img
-                      :id="index"
-                      :src="offer.image"
-                      alt="offer image"
-                      class="rounded-2xl w-full pointer-events-none"
-                    />
-                    
+                  <img :id="index" :src="offer.image" alt="offer image"
+                    class="rounded-2xl w-full pointer-events-none" />
+
                 </div>
               </slide>
             </hooper>
           </div>
         </div>
       </div>
-      <img
-        src="@/assets/images/arrowRightBlack.svg"
-        alt=""
-        class="h-4 w-4 cursor-pointer ml-[12px]"
-        @click="nextSlide('large')"
-      />
+      <img src="@/assets/images/arrowRightBlack.svg" alt="" class="h-4 w-4 cursor-pointer ml-[12px]"
+        @click="nextSlide('large')" />
     </div>
   </div>
 </template>
@@ -142,7 +81,7 @@ import "hooper/dist/hooper.css";
 export default {
   name: "OfferAndPromo",
   middleware(ctx) {
-    ctx.$gtm.push({ event: "ssr" });
+    // // ctx.$gtm.push({ event: "ssr" });
   },
   data() {
     return {
@@ -197,7 +136,7 @@ export default {
     if (this.offerPromoGetter.length) {
       this.$nextTick(() => {
         this.updateCarousel();
-  
+
         window.addEventListener("resize", this.updateCarousel);
       });
     }
@@ -234,7 +173,7 @@ export default {
       this.slideRight = true;
       this.slideLeft = false;
     },
-   
+
 
     updateCarousel() {
       if (window.innerWidth >= 1280) {
@@ -400,7 +339,7 @@ export default {
 </script>
 
 <style scoped>
-.hooper{
+.hooper {
   height: auto;
 }
 </style>

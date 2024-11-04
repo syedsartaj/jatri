@@ -1,54 +1,25 @@
 <template>
-  <div
-    class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4"
-    :ref="`bus-selector-${busIndex}`"
-    :id="`bus-selector-${busIndex}`"
-  >
-    <div
-      class="lg:flex justify-between gap-x-6"
-      :class="
-        selectedTrip === busIndex
-          ? 'border-b border-[#DBDBDB]'
-          : 'border-0 border-[#DBDBDB]'
-      "
-    >
-      <p
-        v-if="trip.tripType === 'eid'"
-        class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-[290px] ml-[-5px] mt-[4px] h-[20px] bg-no-repeat text-white text-[10px] px-6 pt-[2px] font-medium absolute z-50"
-      >
+  <div class="bg-white border border-[#ededed] rounded-[10px] mb-[10px] lg:mb-4" :ref="`bus-selector-${busIndex}`"
+    :id="`bus-selector-${busIndex}`">
+    <div class="lg:flex justify-between gap-x-6" :class="selectedTrip === busIndex
+        ? 'border-b border-[#DBDBDB]'
+        : 'border-0 border-[#DBDBDB]'
+      ">
+      <p v-if="trip.tripType === 'eid'"
+        class="bg-[url('@/assets/images/eidBusTicketlabel.svg')] w-[290px] ml-[-5px] mt-[4px] h-[20px] bg-no-repeat text-white text-[10px] px-6 pt-[2px] font-medium absolute z-50">
         Eid ticket-Non refundable-Non cancelable
       </p>
-      <div
-        :class="trip.tripType === 'eid' ? 'pt-[26px] pb-5' : 'py-5'"
-        class="w-full lg:w-4/5 px-4 lg:px-6 divide-y divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]"
-      >
+      <div :class="trip.tripType === 'eid' ? 'pt-[26px] pb-5' : 'py-5'"
+        class="w-full lg:w-4/5 px-4 lg:px-6 divide-y divide-dashed divide-[#DBDBDB] lg:border-r lg:border-[#DBDBDB]">
         <div class="flex justify-between items-center pb-[15px] order-first">
-          <div
-            class="flex justify-start gap-x-4 items-center w-7/12 md:w-9/12 lg:w-7/12 xl:w-9/12 cursor-pointer"
-            @click="handleBusImagePreviewModal"
-            @mouseover="
+          <div class="flex justify-start gap-x-4 items-center w-7/12 md:w-9/12 lg:w-7/12 xl:w-9/12 cursor-pointer"
+            @click="handleBusImagePreviewModal" @mouseover="
               showToolTip = trip.companyImages?.gallery?.length && true
-            "
-            @mouseleave="showToolTip = false"
-          >
-            <img v-if="trip.moduleType === 'hanif'"
-              :src="
-                (trip.companyImages?.logo &&
-                  `${trip.companyImages?.logo}`) ||
-                  require(`@/assets/images/busDefaultImage.svg`)
-              "
-              class="h-[40px] w[40px] rounded-full"
-              alt=""
-            />
-            <img v-else
-              :src="
-                (trip.companyImages?.logo &&
-                  `${imageUrl}${trip.companyImages?.logo}`) ||
-                require(`@/assets/images/busDefaultImage.svg`)
-              "
-              class="h-[40px] w[40px] rounded-full"
-              alt=""
-            />
+              " @mouseleave="showToolTip = false">
+            <img :src="(trip.companyImages?.logo &&
+                `${imageUrl}${trip.companyImages?.logo}`) ||
+              require(`@/assets/images/busDefaultImage.svg`)
+              " class="h-[40px] w[40px] rounded-full" alt="" />
             <div>
               <h2 class="text-sm lg:text-xl font-medium text-blackPrimary">
                 {{ trip.company }}
@@ -56,14 +27,13 @@
               <p class="text-xs">
                 <span class="font-normal text-blackLight">{{
                   getTripMeta(trip)
-                }}</span>
+                  }}</span>
               </p>
             </div>
           </div>
           <div
             class="mt-[95px] ml-0 w-auto bg-[#EDEDED] rounded-md shadow-xl z-[1000] before:block before:-mt-2 before:ml-4 before:bg-[#EDEDED] before:h-4 before:w-4 before:rotate-45 absolute"
-            v-if="showToolTip"
-          >
+            v-if="showToolTip">
             <div class="text-center p-[5px] pt-[0px]">
               <h2 class="text-xs font-normal">
                 <span>Click here to view bus image</span>
@@ -71,18 +41,9 @@
             </div>
           </div>
 
-          <div
-            v-if="trip?.hasOwnProperty('available')"
-            class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right"
-          >
-            <div
-              class="h-[30px] bg-[#F1F9F1] flex flex-row items-center justify-center rounded-full"
-            >
-              <img
-                src="@/assets/images/ticket/seat.svg"
-                alt="seat"
-                class="mr-[10px]"
-              />
+          <div v-if="trip?.hasOwnProperty('available')" class="w-5/12 md:w-4/12 lg:w-5/12 xl:w-3/12 text-right">
+            <div class="h-[30px] bg-[#F1F9F1] flex flex-row items-center justify-center rounded-full">
+              <img src="@/assets/images/ticket/seat.svg" alt="seat" class="mr-[10px]" />
               <p class="text-[#48A43F] text-xs">
                 <span>{{ trip.available }}</span>
                 <span v-if="trip.available > 1">Seats left</span>
@@ -91,19 +52,13 @@
             </div>
           </div>
         </div>
-        <div
-          class="flex justify-between items-start py-[14px] order-last lg:order-1"
-        >
+        <div class="flex justify-between items-start py-[14px] order-last lg:order-1">
           <p class="text-xs font-normal text-blackLight">Route</p>
-          <h2
-            class="text-xs lg:text-sm font-medium text-blackPrimary text-right"
-          >
+          <h2 class="text-xs lg:text-sm font-medium text-blackPrimary text-right">
             {{ trip.route.name }}
           </h2>
         </div>
-        <div
-          class="flex justify-between items-center py-4 order-1 lg:order-last"
-        >
+        <div class="flex justify-between items-center py-4 order-1 lg:order-last">
           <p class="text-xs font-normal text-blackLight">Departure Time</p>
           <h2 class="text-sm lg:text-base font-medium text-blackPrimary">
             {{
@@ -114,80 +69,43 @@
           </h2>
         </div>
 
-        <BusImagePreviewModal
-          v-if="showBusImageModal"
-          :companyName="trip.company"
-          :close="handleBusImagePreviewModal"
-          :companyImages="trip.companyImages"
-        />
+        <BusImagePreviewModal v-if="showBusImageModal" :companyName="trip.company" :close="handleBusImagePreviewModal"
+          :companyImages="trip.companyImages" />
         <div
-          class="flex justify-evenly md:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]"
-        >
-          <PointPolicyButton
-            text="Boarding Point"
-            :click="() => setCurrentTab(TabData.BOARDING_POINT)"
-          />
-          <PointPolicyButton
-            text="Dropping Point"
-            :click="() => setCurrentTab(TabData.DROPPING_POINT)"
-          />
-          <PointPolicyButton
-            text="Cancellation Policy"
-            :click="() => setSelectedTab(TabData.CANCEL_POLICY)"
-          />
-          <PointAndPolicyModal
-            v-if="showPointPolicyModal"
-            :selectedTab="selectedTab"
-            :setCurrentTab="setCurrentTab"
-            :handlePointPolicyModal="handlePointPolicyModal"
-            :boardingPoints="getModalBoardingPoints"
-            :droppingPoints="getDroppingPoints"
-          />
+          class="flex justify-evenly md:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]">
+          <PointPolicyButton text="Boarding Point" :click="() => setCurrentTab(TabData.BOARDING_POINT)" />
+          <PointPolicyButton text="Dropping Point" :click="() => setCurrentTab(TabData.DROPPING_POINT)" />
+          <PointPolicyButton text="Cancellation Policy" :click="() => setSelectedTab(TabData.CANCEL_POLICY)" />
+          <PointAndPolicyModal v-if="showPointPolicyModal" :selectedTab="selectedTab" :setCurrentTab="setCurrentTab"
+            :handlePointPolicyModal="handlePointPolicyModal" :boardingPoints="getModalBoardingPoints"
+            :droppingPoints="getDroppingPoints" />
         </div>
       </div>
       <!-- <div class="hidden lg:block h-full w-[1px] bg-[#DBDBDB] mx-6"></div> -->
       <div class="block lg:hidden h-[1px] bg-[#DBDBDB] mb-[10px]"></div>
 
       <div
-        class="w-full lg:w-[30%] xl:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col"
-      >
+        class="w-full lg:w-[30%] xl:w-1/5 py-4 lg:py-5 px-4 lg:px-0 lg:pr-6 flex justify-between items-center lg:items-start lg:flex-col">
         <div class="hidden lg:block">
-          <img
-            src="@/assets/images/icons/fareIcon.svg"
-            alt=""
-            class="w-[30px]"
-          />
-          <h2
-            v-if="trip.discountSeatFare"
-            class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
-          >
+          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]" />
+          <h2 v-if="trip.discountSeatFare" class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary">
             <span class="line-through text-corporate">{{ trip.seatFare }}</span>
             {{ trip.discountSeatFare }}
             <span class="text-base">TK</span>
           </h2>
-          <h2
-            v-else
-            class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary"
-          >
+          <h2 v-else class="mt-[10px] text-base lg:text-xl font-semibold text-blackPrimary">
             {{ trip.seatFare }}
             <span class="text-base">TK</span>
           </h2>
           <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
         </div>
         <div class="lg:hidden flex justify-start items-center gap-x-3">
-          <img
-            src="@/assets/images/icons/fareIcon.svg"
-            alt=""
-            class="w-[30px]"
-          />
+          <img src="@/assets/images/icons/fareIcon.svg" alt="" class="w-[30px]" />
           <div>
-            <h2
-              v-if="trip.discountSeatFare"
-              class="text-xl font-semibold text-blackPrimary"
-            >
+            <h2 v-if="trip.discountSeatFare" class="text-xl font-semibold text-blackPrimary">
               <span class="line-through text-corporate">{{
                 trip.seatFare
-              }}</span>
+                }}</span>
               {{ trip.discountSeatFare }}
               <span class="text-xs">TK</span>
             </h2>
@@ -198,162 +116,85 @@
             <p class="text-xs font-normal text-blackLight mt-1">Per Seat</p>
           </div>
         </div>
-        <button
-          @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
-          class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]"
-        >
+        <button @click="handleSeatView(selectedTrip === busIndex ? '' : busIndex)"
+          class="lg:w-full bg-corporate rounded-full flex justify-center gap-x-[11.76px] items-center text-white text-xs font-medium p-3 lg:mt-[26px]">
           {{ selectedTrip === busIndex ? "Close Seats" : "View Seats" }}
           <span>
-            <img
-              src="@/assets/images/icons/viewSeatIcon.svg"
-              alt=""
-              :class="
-                selectedTrip === busIndex &&
-                'transition-all ease-in-out rotate-180'
-              "
-              class="w-[8.49px] h-[5.19px]"
-            />
+            <img src="@/assets/images/icons/viewSeatIcon.svg" alt="" :class="selectedTrip === busIndex &&
+              'transition-all ease-in-out rotate-180'
+              " class="w-[8.49px] h-[5.19px]" />
           </span>
         </button>
       </div>
     </div>
 
     <!-- accordion start -->
-    <div
-      v-if="selectedTrip === busIndex"
-      class="bg-white rounded-b-[10px] pt-4 pr-2 lg:pr-6 pb-6 pl-2"
-      :class="
-        selectedTrip === busIndex
-          ? 'max-h-max transition-all ease-in-out duration-700'
-          : 'h-0'
-      "
-    >
+    <div v-if="selectedTrip === busIndex" class="bg-white rounded-b-[10px] pt-4 pr-2 lg:pr-6 pb-6 pl-2" :class="selectedTrip === busIndex
+        ? 'max-h-max transition-all ease-in-out duration-700'
+        : 'h-0'
+      ">
       <div class="flex flex-wrap justify-between xl:divide-x">
         <!-- Bus Design -->
         <div class="w-full lg:w-1/2">
-          <div
-            class="rounded-[10px] py-4 lg:py-6 px-1 xl:px-4 xl:mr-6 bg-[#f7f7f7]"
-          >
+          <div class="rounded-[10px] py-4 lg:py-6 px-1 xl:px-4 xl:mr-6 bg-[#f7f7f7]">
             <div
-              class="flex lg:flex-wrap xl:flex-nowrap gap-y-2 justify-between lg:border-t lg:border-b border-dashed items-center py-1 lg:py-2 lg:mt-5"
-            >
-              <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
-              >
-                <img
-                  src="@/assets/images/seats/available-seats.svg"
-                  alt="Available"
-                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
+              class="flex lg:flex-wrap xl:flex-nowrap gap-y-2 justify-between lg:border-t lg:border-b border-dashed items-center py-1 lg:py-2 lg:mt-5">
+              <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
+                <img src="@/assets/images/seats/available-seats.svg" alt="Available"
+                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5" />
+                <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight">
                   Available
                 </p>
               </div>
-              <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
-              >
-                <ArmChairIcon
-                  :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'"
-                  :fill="'#8D8D8F'"
-                  :stroke="'#8D8D8F'"
-                  height="24"
-                  width="24"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
+              <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
+                <ArmChairIcon :class="'w-[15px] lg:w-[23px] h-[15px] lg:h-5'" :fill="'#8D8D8F'" :stroke="'#8D8D8F'"
+                  height="24" width="24" />
+                <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight">
                   Booked
                 </p>
               </div>
-              <div
-                class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]"
-              >
-                <img
-                  src="@/assets/images/seats/selected-seats.svg"
-                  alt="Selected"
-                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5"
-                />
-                <p
-                  class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight"
-                >
+              <div class="flex gap-x-2 justify-center items-center border-r last:border-r-0 px-[14px]">
+                <img src="@/assets/images/seats/selected-seats.svg" alt="Selected"
+                  class="w-[15px] lg:w-[23px] h-[15px] lg:h-5" />
+                <p class="text-xs xl:text-sm leading-[18px] font-medium lg:font-normal text-blackLight">
                   Selected
                 </p>
               </div>
             </div>
 
             <div v-if="getSeatArray?.length">
-              <SeatView
-                :showDriver="true"
-                :seatArray="getSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="NORMAL_DECK"
-                :boardingPoint="boardingPoint"
-                :droppingPoint="droppingPoint"
-              />
+              <SeatView :showDriver="true" :seatArray="getSeatArray" :addSeatHandler="addSeatHandler"
+                :selectedSeatIds="selectedSeatIds" seatType="NORMAL_DECK" :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint" />
             </div>
 
             <div v-if="getLowerDeckSeatArray?.length">
               <DeckName name="LOWER DECK" />
-              <SeatView
-                :showDriver="true"
-                :seatArray="getLowerDeckSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="LOWER_DECK"
-                :boardingPoint="boardingPoint"
-                :droppingPoint="droppingPoint"
-              />
+              <SeatView :showDriver="true" :seatArray="getLowerDeckSeatArray" :addSeatHandler="addSeatHandler"
+                :selectedSeatIds="selectedSeatIds" seatType="LOWER_DECK" :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint" />
             </div>
             <div v-if="getUpperDeckSeatArray?.length">
               <DeckName name="UPPER DECK" />
-              <SeatView
-                :showDriver="false"
-                :seatArray="getUpperDeckSeatArray"
-                :addSeatHandler="addSeatHandler"
-                :selectedSeatIds="selectedSeatIds"
-                seatType="UPPER_DECK"
-                :boardingPoint="boardingPoint"
-                :droppingPoint="droppingPoint"
-              />
+              <SeatView :showDriver="false" :seatArray="getUpperDeckSeatArray" :addSeatHandler="addSeatHandler"
+                :selectedSeatIds="selectedSeatIds" seatType="UPPER_DECK" :boardingPoint="boardingPoint"
+                :droppingPoint="droppingPoint" />
             </div>
           </div>
         </div>
 
-        <div
-          ref="busForm"
-          id="busForm"
-          class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0"
-        >
+        <div ref="busForm" id="busForm" class="w-full lg:w-1/2 lg:pl-6 mt-4 pt-4 lg:pt-0 lg:mt-0">
           <!-- Trip Information -->
           <div class="">
-            <SelectOption
-              ref="boardingPoint"
-              v-model="boardingPoint"
-              :default-option="'Select Your Boarding Location'"
-              :label="'Boarding point'"
-              :options="getSeatBoardingPointArray"
-              propertyName="name"
-              :isRequired="true"
-              :errorMessage="errorOccurred && !boardingPoint.name"
-              :isPassengerForm="true"
-            />
+            <SelectOption ref="boardingPoint" v-model="boardingPoint" :default-option="'Select Your Boarding Location'"
+              :label="'Boarding point'" :options="getSeatBoardingPointArray" propertyName="name" :isRequired="true"
+              :errorMessage="errorOccurred && !boardingPoint.name" :isPassengerForm="true" />
             <!-- :options="getSeatBoardingPointArray" -->
           </div>
           <div class="mt-4" v-if="isDroppingPointAvailable">
-            <SelectOption
-              ref="droppingPoint"
-              v-model="droppingPoint"
-              :default-option="'Select Your Dropping Location'"
-              :label="'Dropping point'"
-              :options="getSeatDroppingPointArray"
-              propertyName="name"
-              :isRequired="true"
-              :errorMessage="errorOccurred && !droppingPoint.name"
-              :isPassengerForm="true"
-            />
+            <SelectOption ref="droppingPoint" v-model="droppingPoint" :default-option="'Select Your Dropping Location'"
+              :label="'Dropping point'" :options="getSeatDroppingPointArray" propertyName="name" :isRequired="true"
+              :errorMessage="errorOccurred && !droppingPoint.name" :isPassengerForm="true" />
             <!-- :options="getSeatDroppingPointArray" -->
           </div>
           <div class="mt-4">
@@ -368,57 +209,37 @@
           </div>
 
           <!-- Seat Fare Table -->
-          <div
-            v-if="selectedSeatsObjArray.length"
-            class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]"
-          >
-            <div
-              class="grid grid-cols-3 gap-x-[14px] px-[14px] py-[10px] border-b"
-            >
+          <div v-if="selectedSeatsObjArray.length" class="mt-4 bg-[#f7f7f7] rounded border border-[#EDEDED]">
+            <div class="grid grid-cols-3 gap-x-[14px] px-[14px] py-[10px] border-b">
               <p class="text-sm lg:text-xs font-semibold text-blackPrimary">
                 Seat
               </p>
-              <p
-                class="text-sm lg:text-xs font-semibold text-blackPrimary text-center"
-              >
+              <p class="text-sm lg:text-xs font-semibold text-blackPrimary text-center">
                 Class
               </p>
-              <p
-                class="text-sm lg:text-xs font-semibold text-blackPrimary text-right"
-              >
+              <p class="text-sm lg:text-xs font-semibold text-blackPrimary text-right">
                 Fare
               </p>
             </div>
 
             <div class="px-4 py-3">
-              <div
-                v-for="seat in selectedCustomizeSeatList"
-                :key="seat.id"
-                class="grid grid-cols-3 gap-x-4 py-2 border-b last:border-b-0 border-dashed"
-              >
+              <div v-for="seat in selectedCustomizeSeatList" :key="seat.id"
+                class="grid grid-cols-3 gap-x-4 py-2 border-b last:border-b-0 border-dashed">
                 <p class="text-xs lg:text-sm font-medium text-blackPrimary">
                   {{ seat.seatNo }}
                 </p>
-                <p
-                  class="text-xs lg:text-sm font-medium text-blackPrimary text-center"
-                >
+                <p class="text-xs lg:text-sm font-medium text-blackPrimary text-center">
                   {{ seat.class }}
                 </p>
-                <p
-                  class="text-xs lg:text-sm font-medium text-blackPrimary text-right"
-                >
+                <p class="text-xs lg:text-sm font-medium text-blackPrimary text-right">
                   {{ seat.fare }}
                 </p>
               </div>
             </div>
 
-            <div
-              v-if="totalDiscountFare > 0"
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
+            <div v-if="totalDiscountFare > 0"
+              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
+              <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">
                 Discount amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
@@ -426,32 +247,24 @@
               </p>
             </div>
 
-            <div
-              v-if="totalPromoAmount > 0"
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
+            <div v-if="totalPromoAmount > 0"
+              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
+              <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">
                 Promo amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT {{ totalPromoAmount }}
               </p>
             </div>
-            <div
-              class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]"
-            >
-              <p
-                class="text-xs font-semibold text-blackLight lg:text-blackPrimary"
-              >
+            <div class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
+              <p class="text-xs font-semibold text-blackLight lg:text-blackPrimary">
                 Total fare
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT
                 <span>{{
                   totalAmount - (totalDiscountFare + totalPromoAmount)
-                }}</span>
+                  }}</span>
               </p>
             </div>
           </div>
@@ -461,27 +274,15 @@
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
               Passenger name <span class="text-[#E0293B]">*</span>
             </h2>
-            <input
-              ref="passengerNameInput"
-              :class="
-                errorOccurred &&
-                passengerName.length < 3 &&
-                'bg-[#FDF0F1] border border-[#E0293B]'
+            <input ref="passengerNameInput" :class="errorOccurred &&
+              passengerName.length < 3 &&
+              'bg-[#FDF0F1] border border-[#E0293B]'
               "
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
-              type="text"
-              placeholder="Enter your name"
-              v-model="passengerName"
-            />
-            <div
-              v-if="errorOccurred && passengerName.length < 3"
-              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
-            >
-              <img
-                src="@/assets/images/icons/warningRed.svg"
-                class="h-4 w-4"
-                alt="error"
-              />
+              type="text" placeholder="Enter your name" v-model="passengerName" />
+            <div v-if="errorOccurred && passengerName.length < 3"
+              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]">
+              <img src="@/assets/images/icons/warningRed.svg" class="h-4 w-4" alt="error" />
               <div>Length must be at least 3 characters.</div>
             </div>
           </div>
@@ -490,97 +291,51 @@
             <h2 class="text-xs lg:text-base font-medium text-blackPrimary">
               Phone no <span class="text-[#E0293B]">*</span>
             </h2>
-            <div
-              :class="
-                errorOccurred &&
-                !isValidPassengerNumber &&
-                'bg-[#FDF0F1] border border-[#E0293B]'
-              "
-              class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]"
-            >
+            <div :class="errorOccurred &&
+              !isValidPassengerNumber &&
+              'bg-[#FDF0F1] border border-[#E0293B]'
+              " class="flex h-[56px] bg-[#F7F7F7] rounded pl-[16px]">
               <div class="flex items-center shrink-0">
-                <img
-                  class="w-[48px] h-[32px]"
-                  src="@/assets/images/bd-flag.svg"
-                  alt=""
-                />
-                <div
-                  class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]"
-                >
+                <img class="w-[48px] h-[32px]" src="@/assets/images/bd-flag.svg" alt="" />
+                <div class="text-[14px] leading-[24px] font-Inter font-[400] tracking-wide text-[#747476] ml-[14px]">
                   +880
                 </div>
-                <img
-                  class="w-[2px] h-[28px] ml-[4px]"
-                  src="@/assets/images/input-separator.svg"
-                  alt=""
-                />
+                <img class="w-[2px] h-[28px] ml-[4px]" src="@/assets/images/input-separator.svg" alt="" />
               </div>
-              <input
-                ref="passengerPhoneInput"
+              <input ref="passengerPhoneInput"
                 class="bg-[#f7f7f7] px-4 py-[13px] mt-[0px] rounded w-full focus:outline-0 text-xs focus:appearance-none placeholder:text-blackSecondary text-blackPrimary"
-                type="number"
-                autocomplete="something-to-fool-chrome"
-                minlength="11"
-                maxlength="11"
-                required=""
-                placeholder="Enter your phone"
-                v-model="passengerPhone"
-                @input="handleInput"
-                @paste="handlePaste"
-                @wheel="$event.target.blur()"
-              />
+                type="number" autocomplete="something-to-fool-chrome" minlength="11" maxlength="11" required=""
+                placeholder="Enter your phone" v-model="passengerPhone" @input="handleInput" @paste="handlePaste"
+                @wheel="$event.target.blur()" />
             </div>
-            <div
-              v-if="errorOccurred && !isValidPassengerNumber"
-              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]"
-            >
-              <img
-                src="@/assets/images/icons/warningRed.svg"
-                class="h-4 w-4"
-                alt="error"
-              />
+            <div v-if="errorOccurred && !isValidPassengerNumber"
+              class="w-full flex flex-row gap-x-2 items-center text-xs font-medium text-[#E0293B] mt-[10px]">
+              <img src="@/assets/images/icons/warningRed.svg" class="h-4 w-4" alt="error" />
               <div>Please enter a valid phone number.</div>
             </div>
           </div>
 
           <div class="mt-4">
-            <h2
-              class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between"
-            >
+            <h2 class="text-xs lg:text-base font-medium text-blackPrimary flex justify-between">
               <span>Email id </span>
               <span class="text-[#8D8D8F] text-xs">Optional</span>
             </h2>
             <input
               class="bg-[#f7f7f7] px-4 py-[13px] mt-[10px] rounded w-full focus:outline-0 text-xs placeholder:text-blackSecondary text-blackPrimary"
-              type="email"
-              placeholder="Enter your email id"
-              v-model="passengerEmail"
-            />
+              type="email" placeholder="Enter your email id" v-model="passengerEmail" />
           </div>
 
-          <LoaderButton
-            :loading="getLoading"
+          <LoaderButton :loading="getLoading"
             class="bg-corporate rounded-full py-[13px] w-full text-white text-sm font-medium mt-6"
-            @onClick="paymentPendingBlockHandler"
-          >
+            @onClick="paymentPendingBlockHandler">
             Next
           </LoaderButton>
 
-          <div
-            class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2"
-          >
-            <a
-              href="/bus/policies#terms-and-conditions"
-              target="_blank"
-              class="w-full underline text-blackPrimary text-sm font-normal"
-              >Terms and Conditions</a
-            >
-            <a
-              href="/bus/policies#return-and-refund-policy"
-              target="_blank"
-              class="w-full underline text-blackPrimary text-sm font-normal"
-              >Cancellation Policy</a
-            >
+          <div class="text-center mt-[20px] flex justify-center items-center gap-x-2 divide-x-2">
+            <a href="/bus/policies#terms-and-conditions" target="_blank"
+              class="w-full underline text-blackPrimary text-sm font-normal">Terms and Conditions</a>
+            <a href="/bus/policies#return-and-refund-policy" target="_blank"
+              class="w-full underline text-blackPrimary text-sm font-normal">Cancellation Policy</a>
           </div>
         </div>
       </div>
@@ -604,6 +359,10 @@ import {
   scrollToTargetAdjustedDOM
 } from "@/helpers/utils";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
+import { fireGTMEventForViewSeat, fireGTMEventForSeatSelection, fireGTMEventForPassengerDetails,
+  fireGTMEventForNextStep, fireGTMEventForDetailsView
+ } from "@/helpers/AnalyticsEventHandler";
+
 
 export default {
   components: { SleeperBedIcon },
@@ -669,7 +428,7 @@ export default {
       "getModalBoardingPoints",
       "getDroppingPoints",
     ]),
-    isDroppingPointAvailable(){
+    isDroppingPointAvailable() {
       return ((this.trip.moduleType !== moduleType.HANIF) && (this.getSeatDroppingPointArray.length))
     },
     isValidPassengerEmail() {
@@ -814,7 +573,7 @@ export default {
       }
       this.$nextTick(async () => {
         this.$nuxt.$loading?.start();
-        this.fireGTMEventForViewSeat();
+        fireGTMEventForViewSeat(this, this.trip.company, this.trip.coach.type, this.trip.available, this.trip.route.name, this.trip.tripDateTime, "", "")
         const payload = this.getPayloadForSeatView();
         await this.getPbSeatViewAction(payload);
         this.$nuxt.$loading?.finish();
@@ -825,18 +584,8 @@ export default {
         }, 1);
       });
     },
-    fireGTMEventForViewSeat() {
-      const eventData = {
-        event: "viewSeats",
-        from: this.trip.fromCity,
-        to: this.trip.toCity,
-        coach: this.trip.coach.name,
-        company: this.trip.company,
-        journeyDate: this.departureDateTime,
-      };
 
-      this.$gtm.push(eventData);
-    },
+    
     getPayloadForSeatView() {
       return {
         moduleType: this.trip.moduleType,
@@ -940,9 +689,9 @@ export default {
         const foundIndex = seat.fareList.findIndex((item) => {
           return (
             item?.boardingPoint?.toLowerCase() ===
-              this.boardingPoint?.name.toLowerCase() &&
+            this.boardingPoint?.name.toLowerCase() &&
             item?.droppingPoint?.toLowerCase() ===
-              this.droppingPoint?.name.toLowerCase()
+            this.droppingPoint?.name.toLowerCase()
           );
         });
 
@@ -1128,7 +877,13 @@ export default {
       } else {
         this.$nextTick(async () => {
           this.$nuxt.$loading?.start();
-          this.fireGTMEventForAddToCart();
+          // this.fireGTMEventForAddToCart();
+          // fireGTMEventForSeatSelection, fireGTMEventForPassengerDetails,fireGTMEventForNextStep, fireGTMEventForDetailsView
+          const validPassengerMobile = this.passengerPhone?.length === 10
+            ? `0${this.passengerPhone}`
+            : `${this.passengerPhone}`;
+          fireGTMEventForSeatSelection(this, this.selectedSeatLabels.join(), this.selectedSeatLabels.length)
+          fireGTMEventForPassengerDetails(this, this.passengerName, validPassengerMobile, this.passengerEmail)
           const payload = {
             moduleType: this.trip.moduleType,
             busServiceType: this.trip.busServiceType,
@@ -1164,10 +919,7 @@ export default {
             boardingDateTime: this.boardingPoint.scheduleTime,
             reportingDateTime: this.boardingPoint.reportingTime,
             passengerName: this.passengerName,
-            passengerMobile:
-              this.passengerPhone?.length === 10
-                ? `0${this.passengerPhone}`
-                : `${this.passengerPhone}`,
+            passengerMobile: validPassengerMobile,
             passengerEmail: this.passengerEmail,
             passengerAddress: "dhaka",
             passengerGender: "male",
@@ -1222,6 +974,8 @@ export default {
                     to: this.$route.query.to,
                   },
                 });
+                fireGTMEventForNextStep(this)
+                fireGTMEventForDetailsView(this, this.trip.fromCity.name, this.trip.toCity.name, this.trip.tripDateTime, this.boardingPoint.name, this.droppingPoint.name, this.selectedSeatLabels.join(), this.selectedSeatLabels.length)
               }
             }
             this.$nuxt.$loading?.finish();
@@ -1229,22 +983,22 @@ export default {
         });
       }
     },
-    fireGTMEventForAddToCart() {
-      const eventData = {
-        event: "addToCart",
-        currency: "BDT",
-        from: this.trip.fromCity,
-        to: this.trip.toCity,
-        coach: this.trip.coach.name,
-        company: this.trip.company,
-        journeyDate: this.departureDateTime,
-        seatCount: this.selectedSeatIds.length,
-        totalFare:
-          this.totalAmount - (this.totalDiscountFare + this.totalPromoAmount),
-      };
+    // fireGTMEventForAddToCart() {
+    //   const eventData = {
+    //     event: "addToCart",
+    //     currency: "BDT",
+    //     from: this.trip.fromCity,
+    //     to: this.trip.toCity,
+    //     coach: this.trip.coach.name,
+    //     company: this.trip.company,
+    //     journeyDate: this.departureDateTime,
+    //     seatCount: this.selectedSeatIds.length,
+    //     totalFare:
+    //       this.totalAmount - (this.totalDiscountFare + this.totalPromoAmount),
+    //   };
 
-      this.$gtm.push(eventData);
-    },
+    //   // // this.$gtm.push(eventData);
+    // },
 
     resetForm(clearUserInfo) {
       if (clearUserInfo) {
