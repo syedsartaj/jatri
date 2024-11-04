@@ -34,7 +34,9 @@
 <script>
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
-import { ServiceType } from "../../../helpers/utils";
+import { ServiceType } from "@/helpers/utils";
+import { fireGTMEventForSearch } from "@/helpers/AnalyticsEventHandler";
+
 export default {
   name: "SearchFilterFormMobile",
   data() {
@@ -109,7 +111,7 @@ export default {
                 ? "day"
                 : "night";
         }
-        this.fireGTMEventForSearch();
+        fireGTMEventForSearch(this, this.departure, this.destination, this.departingDate, this.coachType)
         Cookies.remove("process-allow");
         const pathName =
           this.getSelectedServiceType === ServiceType.BUS
@@ -144,17 +146,7 @@ export default {
         this.handleToastMessage("Please insert departure date");
       }
     },
-    fireGTMEventForSearch() {
-      const eventData = {
-        event: "searchTrip",
-        from: this.departure,
-        to: this.destination,
-        type: this.coachType,
-        date: this.departingDate,
-      };
-
-      // // this.$gtm.push(eventData);
-    },
+   
   },
   watch: {
     "$route.query": {
