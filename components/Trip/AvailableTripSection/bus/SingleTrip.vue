@@ -22,7 +22,7 @@
                     `${trip.companyImages?.logo}`) ||
                     require(`@/assets/images/busDefaultImage.svg`)
                 "
-                class="h-[40px] w[40px] rounded-full"
+                class="h-[40px] w-[40px] rounded-full"
                 alt=""
               />
               <img v-else
@@ -31,7 +31,7 @@
                     `${imageUrl}${trip.companyImages?.logo}`) ||
                   require(`@/assets/images/busDefaultImage.svg`)
                 "
-                class="h-[40px] w[40px] rounded-full"
+                class="h-[40px] w-[40px] rounded-full"
                 alt=""
               />
             <div>
