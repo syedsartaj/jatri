@@ -21,6 +21,9 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { fireGTMEventForBookingConfirmed } from "@/helpers/AnalyticsEventHandler";
+import moment from "moment";
+
 export default {
   middleware(ctx) {
     // ctx.$gtm.push({ event: "ssr" });
@@ -36,25 +39,12 @@ export default {
   },
   methods: {
     ...mapActions("busStore", ["getTicketByTnxId"]),
-    fireGTMEventForConfirmTicket() {
-      const eventData = {
-        event: "confirmTicket",
-        currency: "BDT",
-        from: this.getTicketDetails.ticket.fromCity,
-        to: this.getTicketDetails.ticket.toCity,
-        coach: this.getTicketDetails.ticket.coach,
-        company: this.getTicketDetails.ticket.companyName,
-        journeyDate: this.getTicketDetails.ticket.departureDateTime,
-        seatCount: this.getTicketDetails.ticket.seatNumbers.length,
-        totalFare: this.getTicketDetails.payment.amount,
-      };
-
-      // this.$gtm.push(eventData);
-    },
+    
   },
   computed: {
     ...mapGetters("busStore", ["getTicketDetails"]),
   },
+
   async created() {
     this.$nextTick(async () => {
       this.$nuxt.$loading?.start();
@@ -63,10 +53,10 @@ export default {
           this.$router.push("/");
         }
       }
-      this.fireGTMEventForConfirmTicket();
-
+      fireGTMEventForBookingConfirmed(this, this.getTicketDetails.ticket.fromCity, this.getTicketDetails.ticket.toCity, this.getTicketDetails.ticket.boardingDateTime, this.getTicketDetails.ticket.departureDateTime, this.getTicketDetails.ticket.boardingPlace, this.getTicketDetails.ticket.droppingPoint, this.getTicketDetails.ticket.seatNumbers.join(), this.getTicketDetails.ticket.seatNumbers.length, (this.getTicketDetails.ticket.discount ?? 0) + this.getTicketDetails.ticket.totalAmount, (this.getTicketDetails.ticket.discount ?? 0), 0, this.getTicketDetails.ticket.totalAmount)
       this.$nuxt.$loading?.finish();
     });
+
   },
   async asyncData({ query, store }) {
     await store.dispatch("busStore/getTicketByTnxId", {
