@@ -23,7 +23,16 @@
           <div class="bg-white py-6 px-10 w-full">
             <div class="flex justify-between">
               <div class="flex justify-start gap-x-4 items-center w-10/12">
-                <img
+                <img v-if="moduleType === 'hanif'"
+                  :src="
+                    (companyImages?.logo &&
+                    `${companyImages?.logo}`) ||
+                    require(`@/assets/images/busDefaultImage.svg`)
+                  "
+                  class="h-[56px] w-[56px]"
+                  alt=""
+                />
+                <img v-else
                   :src="
                     (companyImages?.logo &&
                       `${imageUrl}${companyImages?.logo}`) ||
@@ -62,7 +71,8 @@
                 :key="bus"
                 class="gallery-item flex items-center rounded-md justify-center"
               >
-                <img :src="imageUrl + bus" class="md:w-[376px] lg:w-[750px]" />
+                <img v-if="moduleType === 'hanif'" :src="bus" class="md:w-[376px] lg:w-[750px]" />
+                <img v-else :src="imageUrl + bus" class="md:w-[376px] lg:w-[750px]" />
               </li>
             </ul>
           </div>
@@ -74,7 +84,7 @@
 
 <script>
 export default {
-  props: ["companyName", "close", "companyImages"],
+  props: ["companyName", "close", "companyImages", "moduleType"],
   data() {
     return {
       imageUrl: "",

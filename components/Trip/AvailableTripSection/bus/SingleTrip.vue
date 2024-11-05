@@ -84,7 +84,7 @@
         </div>
 
         <BusImagePreviewModal v-if="showBusImageModal" :companyName="trip.company" :close="handleBusImagePreviewModal"
-          :companyImages="trip.companyImages" />
+          :companyImages="trip.companyImages" :moduleType="trip.moduleType" />
         <div
           class="flex justify-evenly md:gap-[16px] items-center lg:order-last w-full pt-[15px] pb-[15px] lg:pb-[0px]">
           <PointPolicyButton text="Boarding Point" :click="() => setCurrentTab(TabData.BOARDING_POINT)" />
