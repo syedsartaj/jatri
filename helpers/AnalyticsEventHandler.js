@@ -142,5 +142,6 @@ export function fireGTMEventForBookingConfirmed(ctx, fromCity, toCity, boardingT
             
         }
     }
+    console.log("conf=======", eventData)
   pushGTMEvent(ctx, eventData);
 }

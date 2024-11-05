@@ -536,10 +536,9 @@ export default {
         try {
           this.$nuxt.$loading?.start();
           const { data } = await this.ticketConfirmAction(payload);
-
           if (data?.gatewayUrl) {
             const departureDateTime = moment(this.getBookingInfoDetails.invoice.departureDate + " " + this.getBookingInfoDetails.invoice.departureTime)
-            fireGTMEventForBookingConfirmed(this, this.getBookingInfoDetails.invoice.fromCity, this.getBookingInfoDetails.invoice.toCity, this.getBookingInfoDetails.invoice.boardingDateTime, departureDateTime, this.getBookingInfoDetails.invoice.boardingPoint, this.getBookingInfoDetails.invoice.droppingPoint, this.getBookingInfoDetails.invoice.seatNo.join(), this.getBookingInfoDetails.invoice.seatNo.length, (this.getBookingInfoDetails.invoice.discount ?? 0) + this.getBookingInfoDetails.amount, (this.getBookingInfoDetails.invoice.discount ?? 0), 0, this.getBookingInfoDetails.amount)
+            // fireGTMEventForBookingConfirmed(this, this.getBookingInfoDetails.invoice.fromCity, this.getBookingInfoDetails.invoice.toCity, this.getBookingInfoDetails.invoice.boardingDateTime, departureDateTime, this.getBookingInfoDetails.invoice.boardingPoint, this.getBookingInfoDetails.invoice.droppingPoint, this.getBookingInfoDetails.invoice.seatNo.join(), this.getBookingInfoDetails.invoice.seatNo.length, (this.getBookingInfoDetails.invoice.discount ?? 0) + this.getBookingInfoDetails.amount, (this.getBookingInfoDetails.invoice.discount ?? 0), 0, this.getBookingInfoDetails.amount)
             window.location.href = data.gatewayUrl;
             this.$nuxt.$loading?.finish();
           }
