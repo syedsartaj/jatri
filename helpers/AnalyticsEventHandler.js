@@ -25,7 +25,6 @@ export function fireGTMEventForSearch(
       bus_type: busType,
     },
   };
-  console.log("search=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -51,7 +50,6 @@ export function fireGTMEventForViewSeat(
       dropping_point: droppingPoint,
     },
   };
-  console.log("seat view=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -63,7 +61,6 @@ export function fireGTMEventForSeatSelection(ctx, seatLables, totalSeat){
             total_seats_selected: totalSeat
         }
     }
-    console.log("seat=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -76,7 +73,6 @@ export function fireGTMEventForPassengerDetails(ctx, name, phone, email){
             email: email ?? "" 
         }
     }
-    console.log("passenger=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -101,7 +97,6 @@ export function fireGTMEventForDetailsView(ctx, fromCity, toCity, departureTime,
             passenger_count: passengerCount,
         }
     }
-    console.log("details=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -117,7 +112,6 @@ export function fireGTMEventForPaymentMethodSelection(ctx, paymentMethod, isprom
             final_amount: finalAmount,
         }
     }
-    console.log("payment method=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
@@ -126,16 +120,16 @@ export function fireGTMEventForPaymentInit(ctx){
         event: gtmAnalyticsKey.PAYMENT_INITIATED,
         payment_action: "proceed_to_pay"
     }
-    console.log("payment init=======", eventData)
   pushGTMEvent(ctx, eventData);
 }
 
-export function fireGTMEventForBookingConfirmed(ctx, fromCity, toCity, departureTime, boardingPoint, droppingPoint, selectedSeat, passengerCount, totalAmount, discount, tax, finalAmount){
+export function fireGTMEventForBookingConfirmed(ctx, fromCity, toCity, boardingTime, departureTime, boardingPoint, droppingPoint, selectedSeat, passengerCount, totalAmount, discount, tax, finalAmount){
     const eventData = {
         event: gtmAnalyticsKey.BOOKING_CONFIRMED,
         confirmation_details: {
             origin: fromCity,
             destination: toCity,
+            boarding_time:  dateFormat(boardingTime, 6, "YYYY-MM-DDTHH:MM:SS"),
             departure_time: dateFormat(departureTime, 6, "YYYY-MM-DDTHH:MM:SS"),
             boarding_point: boardingPoint,
             dropping_point: droppingPoint,
@@ -148,6 +142,5 @@ export function fireGTMEventForBookingConfirmed(ctx, fromCity, toCity, departure
             
         }
     }
-    console.log("book=======", eventData)
   pushGTMEvent(ctx, eventData);
 }

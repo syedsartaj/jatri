@@ -3,7 +3,7 @@ export const gtmAnalyticsKey = {
   BUS_VIEWED: "bus_viewed",
   SEAT_SELECTED: "seat_selected",
   PASSENGER_DETAILS_ENTERED: "passenger_details_entered",
-  NEXT_STEP: "next_step",
+  NEXT_STEP: "next_step [checkout_intiated]",
   BOOKING_DETAILS_VIEWED: "booking_details_viewed",
   PAYMENT_METHOD_SELECTED: "payment_method_selected",
   PAYMENT_INITIATED: "payment_initiated",
