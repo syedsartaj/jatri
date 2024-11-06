@@ -18,6 +18,7 @@
             transition-all
             w-full
             lg:pb-10
+            top-[60px]
           "
         >
           <div class="bg-white py-6 px-10 w-full">
