@@ -202,7 +202,7 @@
             alt=""
           />
           <p class="text-white text-sm font-medium">
-            All rights reserved, Jatri Services Limited. 2023
+            All rights reserved, Jatri Services Limited. 2024
           </p>
         </div>
 
