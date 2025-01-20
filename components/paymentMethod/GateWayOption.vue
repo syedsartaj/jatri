@@ -9,30 +9,8 @@
     @click="updateActivePlan"
     @keydown.space="updateActivePlan"
   >
-    <div class="flex flex-wrap justify-start items-center gap-x-3">
-      <div
-        class="grid grid-cols-4 lg:grid-cols-2 gap-x-[5.57px] lg:gap-x-3 lg:gap-y-[7px] order-last lg:order-first"
-      >
-        <img src="@/assets/images/amex-logo.svg" alt="amex" class="w-5" />
-        <img
-          src="@/assets/images/mastercard-logo.svg"
-          alt="mastercard"
-          class="w-[18px]"
-        />
-        <img src="@/assets/images/visa-logo.svg" alt="visa" class="w-[21px]" />
-        <img
-          src="@/assets/images/bkash-logo.svg"
-          alt="bkash"
-          class="w-[27px]"
-        />
-      </div>
-      <div class="bg-[#D9D9D9] w-[1px] h-9 hidden lg:block"></div>
-      <img
-        src="@/assets/images/sslcommerz-logo.svg"
-        alt=""
-        class="mb-[6px] lg:mb-0"
-      />
-    </div>
+    <img class="xl:hidden" src="@/assets/images/card-payment-small.png" alt="card payment button"/>
+    <img class="hidden xl:block" src="@/assets/images/card-payment-large.png" alt="card payment button"/>
     <span class="">{{ planDiscount }}</span>
     <img
       v-if="activePlan === planName"
