@@ -360,9 +360,14 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
+import {
+  fireGTMEventForDetailsView,
+  fireGTMEventForNextStep,
+  fireGTMEventForPassengerDetails,
+  fireGTMEventForSeatSelection,
+  fireGTMEventForViewSeat
+} from "@/helpers/AnalyticsEventHandler";
 import { dateTimeFormat, timeFormat } from "@/helpers/dateTimeFormat";
-import moment from "moment";
-import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import {
   cleanAndValidatePastedText,
   cleanAndValidatePhoneNumber,
@@ -372,10 +377,9 @@ import {
   moduleType,
   scrollToTargetAdjustedDOM
 } from "@/helpers/utils";
+import moment from "moment";
+import { dateFormat } from "../../../../helpers/dateTimeFormat";
 import SleeperBedIcon from "../../../Svg/SleeperBedIcon.vue";
-import { fireGTMEventForViewSeat, fireGTMEventForSeatSelection, fireGTMEventForPassengerDetails,
-  fireGTMEventForNextStep, fireGTMEventForDetailsView
- } from "@/helpers/AnalyticsEventHandler";
 
 
 export default {
@@ -654,8 +658,11 @@ export default {
       } else {
         this.totalDiscountAmount -= 0;
       }
-
-      if (
+      if(this.trip.offer.offerType === 'fixed'){
+        this.totalDiscountFare -= seat.fare - seat.discountFare;
+      }
+      else{
+        if (
         this.trip.offer &&
         this.totalDiscountAmount <= this.trip.offer.maxOfferAmount
       ) {
@@ -665,6 +672,7 @@ export default {
         this.totalDiscountAmount > this.trip.offer.maxOfferAmount
       ) {
         this.totalDiscountFare -= 0;
+      }
       }
     },
     promoCalculationOnUnSelect() {
@@ -724,7 +732,10 @@ export default {
     disCountCalculationOnSitSelect(seat) {
       if (seat.discountFare !== null) {
         this.totalDiscountAmount += seat.fare - seat.discountFare;
-        if (
+        if(this.trip.offer.offerType === 'fixed'){
+          this.totalDiscountFare = this.totalDiscountAmount
+        }else{
+          if (
           this.trip.offer &&
           this.totalDiscountAmount <= this.trip.offer.maxOfferAmount
         ) {
@@ -734,6 +745,7 @@ export default {
           this.totalDiscountAmount >= this.trip.offer.maxOfferAmount
         ) {
           this.totalDiscountFare = this.trip.offer.maxOfferAmount;
+        }
         }
       }
     },
