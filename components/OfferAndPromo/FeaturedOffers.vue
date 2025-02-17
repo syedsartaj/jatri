@@ -40,11 +40,9 @@
             </div>
             <div class="pt-4 text-[#151414] font-inter text-xl font-medium">
               {{
-                !offer.code
-                  ? `BDT ${offer.amount} per seat upto BDT ${offer.maxOfferAmount}`
-                  : offer.amountType === "percentage"
-                  ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`
-                  : `BDT ${offer.amount}`
+                  offer.offerType === "percentage"
+                  ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`
+                  : `BDT ${offer.amount} per seat`
               }}
             </div>
           </div>
@@ -159,8 +157,8 @@
 </template>
 
 <script>
+import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import { mapGetters } from "vuex";
-import { timeFormat, dateTimeFormat } from "@/helpers/dateTimeFormat";
 
 export default {
   name: "FeaturedOffers",
