@@ -38,11 +38,18 @@
                 Discount amount
               </div>
             </div>
-            <div class="pt-4 text-[#151414] font-inter text-xl font-medium">
+            <div v-if="offer.type === 'promo'" class="pt-4 text-[#151414] font-inter text-xl font-medium">
               {{
-                  offer.offerType === "percentage"
-                  ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`
+                offer.amountType === "percentage"
+                  ? `${offer.amount}% upto BDT ${offer.maxPromoAmount}`
                   : `BDT ${offer.amount} per seat`
+              }}
+            </div>
+            <div v-else class="pt-4 text-[#151414] font-inter text-xl font-medium">
+              {{
+                offer.offerType === "percentage"
+                  ? `${offer.amount}% upto BDT ${offer.maxOfferAmount}`
+              : `BDT ${offer.amount} per seat`
               }}
             </div>
           </div>
