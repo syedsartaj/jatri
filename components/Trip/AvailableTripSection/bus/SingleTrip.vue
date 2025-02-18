@@ -654,12 +654,19 @@ export default {
     },
     disCountCalculationOnSitUnselect(seat) {
       if (seat.discountFare != null) {
-        this.totalDiscountAmount -= seat.fare - seat.discountFare;
+        let correctFareAmount = this.getTheCorrectSeatFare(seat);
+        const tempFare =  this.trip?.offer?.offerType === 'percentage' ? correctFareAmount * (this.trip?.offer?.amount / 100) 
+                : this.trip?.offer?.amount;
+     
+        this.totalDiscountAmount -= tempFare;
       } else {
         this.totalDiscountAmount -= 0;
       }
-      if(this.trip.offer.offerType === 'fixed'){
-        this.totalDiscountFare -= seat.fare - seat.discountFare;
+      if(this.trip?.offer?.offerType === 'fixed'){
+        let correctFareAmount = this.getTheCorrectSeatFare(seat);
+        const tempFare =  this.trip?.offer?.offerType === 'percentage' ? correctFareAmount * (this.trip?.offer?.amount / 100) 
+                : this.trip?.offer?.amount;
+        this.totalDiscountFare -= tempFare;
       }
       else{
         if (
@@ -731,15 +738,17 @@ export default {
     },
     disCountCalculationOnSitSelect(seat) {
       if (seat.discountFare !== null) {
-        this.totalDiscountAmount += seat.fare - seat.discountFare;
-        if(this.trip.offer.offerType === 'fixed'){
+        const correctFareAmount = this.getTheCorrectSeatFare(seat);
+        const tempFare = this.trip?.offer ? this.trip?.offer?.offerType === 'percentage' ? correctFareAmount * (this.trip?.offer?.amount / 100) : this.trip?.offer?.amount : 0;
+        this.totalDiscountAmount += tempFare;
+        if(this.trip?.offer?.offerType === 'fixed'){
           this.totalDiscountFare = this.totalDiscountAmount
         }else{
           if (
           this.trip.offer &&
           this.totalDiscountAmount <= this.trip.offer.maxOfferAmount
         ) {
-          this.totalDiscountFare += seat.fare - seat.discountFare;
+          this.totalDiscountFare += tempFare;
         } else if (
           this.trip.offer &&
           this.totalDiscountAmount >= this.trip.offer.maxOfferAmount
@@ -1100,7 +1109,6 @@ export default {
     updateTotalDiscountAndFareAmount() {
       let tempTotalDiscountAmount = 0;
       let tempTotalDiscountFare = 0;
-
       this.selectedSeatsObjArray.forEach((seat) => {
         if (seat.discountFare !== null) {
           const discountAmount =
