@@ -257,7 +257,7 @@
                 Discount amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
-                BDT {{ totalDiscountFare }}
+                BDT {{ Math.ceil(totalDiscountFare) }}
               </p>
             </div>
 
@@ -267,7 +267,7 @@
                 Promo amount
               </p>
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
-                BDT {{ totalPromoAmount }}
+                BDT {{ Math.ceil(totalPromoAmount) }}
               </p>
             </div>
             <div class="bg-[#EFF7FD] border-t flex justify-between items-center px-4 py-[10px]">
@@ -277,7 +277,7 @@
               <p class="text-base lg:text-xs font-semibold text-blackPrimary">
                 BDT
                 <span>{{
-                  totalAmount - (totalDiscountFare + totalPromoAmount)
+                  totalAmount - (Math.ceil(totalDiscountFare) + Math.ceil(totalPromoAmount))
                   }}</span>
               </p>
             </div>
