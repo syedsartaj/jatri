@@ -45,7 +45,7 @@
               </div>
               <div
                 :class="getServiceClassName(ServiceType.LAUNCH)"
-                @click="handleServiceChange(ServiceType.LAUNCH)"
+                  @click="launchApp"
               >
                 <div class="linkItem">
                   <img
@@ -90,10 +90,14 @@ export default {
       showHamburgerMenu: false,
       RENTAL_URL: process.env.RENTAL_URL,
       JATRI_URL: process.env.JATRI_URL,
+      LAUNCH_URL: process.env.LAUNCH_URL,
     };
   },
   methods: {
     ...mapMutations("common", ["setSelectedService"]),
+    launchApp() {
+      window.location.assign(this.LAUNCH_URL);
+    },
     handleServiceChange(value) {
       this.$router.push(`/${value.toLowerCase()}`);
     },
