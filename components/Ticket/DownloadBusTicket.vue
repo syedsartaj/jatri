@@ -649,8 +649,8 @@
                 arrival
               </li>
               <li>
-                The authority reserves the right to change schedules/seats in
-                case of emergencies
+                The authority reserves the right to change schedule / Trips / seats in case of
+                emergencies & unavoidable reasons.
               </li>
               <li>
                 The authority will not be responsible for any illegal goods
@@ -676,7 +676,7 @@
                 padding-bottom: 2px;
               "
             >
-              *Trip may delay due to traffics during occasions
+              *Trip may delay / cancel due to traffics & mechanical problems during occasion.
             </p>
           </div>
 
@@ -952,13 +952,14 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 19px;
-        margin-bottom: 22px;
+        margin-top: 11px;
+        margin-bottom: 11px;
         margin-left: 16px;
       "
     >
       <p style="color: #f04935">
-        This is an Eid ticket it is non cancellable & non refundable
+        EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
+        Operator’s Decision)
       </p>
       <p>
         N.B: Please carry a print out copy to make your journey
@@ -973,8 +974,8 @@
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 22px;
-        margin-bottom: 35px;
+        margin-top: 18px;
+        margin-bottom: 26px;
       "
     >
         N.B: Please carry a print out copy to make your journey

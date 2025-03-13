@@ -638,8 +638,8 @@
                   arrival
                 </li>
                 <li>
-                  The authority reserves the right to change schedules/seats in
-                  case of emergencies
+                  The authority reserves the right to change schedule / Trips / seats in case of
+                  emergencies & unavoidable reasons.
                 </li>
                 <li>
                   The authority will not be responsible for any illegal goods
@@ -665,7 +665,7 @@
                   padding-bottom: 2px;
                 "
               >
-                *Trip may delay due to traffics during occasions
+                *Trip may delay / cancel due to traffics & mechanical problems during occasion.
               </p>
             </td>
 
@@ -932,15 +932,17 @@
         margin-left: 16px;
       "
     >
-      <div v-if="isFirefox" style="margin-top: 20px; margin-bottom: 17px">
-        <p style="color: #f04935">
-          This is an Eid ticket it is non cancellable & non refundable
+      <div v-if="isFirefox" style="margin-top: 10px; margin-bottom: 10px">
+        <p style="color: #f04935; z-index: 1001;">
+          EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
+          Operator’s Decision)
         </p>
         <p>N.B: Please carry a print out copy to make your journey</p>
       </div>
-      <div v-else style="margin-top: 25px; margin-bottom: 22px">
-        <p style="color: #f04935">
-          This is an Eid ticket it is non cancellable & non refundable
+      <div v-else style="margin-top: 11px; margin-bottom: 11px">
+        <p style="color: #f04935; z-index: 9999;">
+          EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
+          Operator’s Decision)
         </p>
         <p>N.B: Please carry a print out copy to make your journey</p>
       </div>
@@ -956,10 +958,10 @@
         color: #151414;
       "
     >
-      <p v-if="isFirefox" style="margin-top: 22px; margin-bottom: 31px">
+      <p v-if="isFirefox" style="margin-top: 13px; margin-bottom: 20px">
         N.B: Please carry a print out copy to make your journey
       </p>
-      <p v-else style="margin-top: 25px; margin-bottom: 38px">
+      <p v-else style="margin-top: 16px; margin-bottom: 22px">
         N.B: Please carry a print out copy to make your journey
       </p>
     </div>
