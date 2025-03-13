@@ -925,7 +925,7 @@
       style="
         max-width: 595px;
         text-align: left;
-        font-size: 11px;
+        font-size: 9px;
         line-height: 16px;
         font-weight: 400;
         color: #151414;
@@ -939,8 +939,8 @@
         </p>
         <p>N.B: Please carry a print out copy to make your journey</p>
       </div>
-      <div v-else style="margin-top: 11px; margin-bottom: 11px">
-        <p style="color: #f04935; z-index: 9999;">
+      <div v-else style="margin-top: 11px; margin-bottom: 11px; z-index: 9999; position:relative;">
+        <p style="color: #f04935; ">
           EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
           Operator’s Decision)
         </p>
@@ -969,7 +969,7 @@
       v-if="ticketDetails.tripType === 'eid'"
       :src="require('@/assets/images/ticket/eidFooter.svg')"
       alt="eidStamp"
-      style="top: 636px; left: 436px; position: absolute"
+      style="bottom: 44px; right: 0px; position: absolute"
     />
     <!-- ========= Footer part ========= -->
     <div

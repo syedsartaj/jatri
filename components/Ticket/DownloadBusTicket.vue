@@ -948,13 +948,15 @@
       style="
         max-width: 595px;
         text-align: left;
-        font-size: 11px;
+        font-size: 9px;
         line-height: 16px;
         font-weight: 400;
         color: #151414;
         margin-top: 11px;
         margin-bottom: 11px;
         margin-left: 16px;
+        z-index: 9999; 
+        position:relative;
       "
     >
       <p style="color: #f04935">
@@ -984,7 +986,7 @@
       v-if="ticketDetails.tripType === 'eid'"
       :src="require('@/assets/images/ticket/eidFooterDownload.svg')"
       alt="eidStamp"
-      style="top: 673px; left: 455px; position: absolute"
+      style="bottom: 44px; right: 0px; position: absolute"
     />
     <!-- ========= Footer part ========= -->
     <div
