@@ -73,7 +73,7 @@
         display: inline-flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
         margin-left: 16px;
         margin-right: 16px;
       "
@@ -595,7 +595,7 @@
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          gap: 16px;
+          gap: 6px;
           align-self: stretch;
           position: relative;
           z-index: 999 !important;
@@ -972,12 +972,12 @@
       style="
         max-width: 595px;
         text-align: center;
-        font-size: 11px;
+        font-size: 9px;
         line-height: 16px;
         font-weight: 400;
         color: #151414;
-        margin-top: 18px;
-        margin-bottom: 26px;
+        margin-top: 12px;
+        margin-bottom: 20px;
       "
     >
         N.B: Please carry a print out copy to make your journey

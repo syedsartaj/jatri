@@ -70,7 +70,7 @@
         display: inline-flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
         margin-left: 16px;
         margin-right: 16px;
       "
@@ -596,7 +596,7 @@
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          gap: 16px;
+          gap: 6px;
           align-self: stretch;
           z-index: 999;
         "
@@ -932,14 +932,14 @@
         margin-left: 16px;
       "
     >
-      <div v-if="isFirefox" style="margin-top: 10px; margin-bottom: 10px">
+      <div v-if="isFirefox" style="margin-top: 3px; margin-bottom: 4px">
         <p style="color: #f04935; z-index: 1001;">
           EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
           Operator’s Decision)
         </p>
         <p>N.B: Please carry a print out copy to make your journey</p>
       </div>
-      <div v-else style="margin-top: 11px; margin-bottom: 11px; z-index: 9999; position:relative;">
+      <div v-else style="margin-top: 5px; margin-bottom: 6px; z-index: 9999; position:relative;">
         <p style="color: #f04935; ">
           EID tickets are non-cancellable, non-changeable & non-refundable. (Depends on Bus
           Operator’s Decision)
@@ -952,16 +952,16 @@
       style="
         max-width: 595px;
         text-align: center;
-        font-size: 11px;
+        font-size: 9px;
         line-height: 16px;
         font-weight: 400;
         color: #151414;
       "
     >
-      <p v-if="isFirefox" style="margin-top: 13px; margin-bottom: 20px">
+      <p v-if="isFirefox" style="margin-top: 5px; margin-bottom: 6px">
         N.B: Please carry a print out copy to make your journey
       </p>
-      <p v-else style="margin-top: 16px; margin-bottom: 22px">
+      <p v-else style="margin-top: 5px; margin-bottom: 6px">
         N.B: Please carry a print out copy to make your journey
       </p>
     </div>
