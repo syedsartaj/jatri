@@ -90,8 +90,12 @@
               >
             </li>
             <li>
+<!--              <a @click="launchApp" target="_blank" class="text-white text-base cursor-pointer"-->
+<!--                >Launch ticketing-->
+<!--              </a-->
+<!--              >-->
               <nuxt-link to="/launch" target="_blank" class="text-white text-base"
-                >Launch ticketing</nuxt-link
+              >Launch ticketing</nuxt-link
               >
             </li>
           </ul>
@@ -263,10 +267,16 @@ export default {
       return this.getSelectedServiceType.toLowerCase();
     },
   },
+  methods: {
+    launchApp() {
+      window.location.assign(this.LAUNCH_URL);
+    },
+  },
   data() {
     return {
       RENTAL_URL: process.env.RENTAL_URL,
       JATRI_URL: process.env.JATRI_URL,
+      LAUNCH_URL: process.env.LAUNCH_URL,
     };
   },
 };
