@@ -49,7 +49,7 @@
 <!--              >-->
               <div
                 :class="getServiceClassName(ServiceType.LAUNCH)"
-                  @click="launchApp"
+                @click="handleServiceChange(ServiceType.LAUNCH)"
               >
                 <div class="linkItem">
                   <img
