@@ -222,15 +222,24 @@
 
       <div class="mt-4 py-4 px-5 bg-white rounded-[10px] border border-[#EDEDED]">
         <div class="flex items-center justify-between gap-x-4">
-          <div>
-            <h4>EMI Available</h4>
+          <div class="flex gap-x-2 md:gap-x-4">
+            <img src="" alt="emi" class="shrink-0">
+            <div>
+              <h4 class="text-[16px] md:text-xl text-blackPrimary font-medium">EMI Available</h4>
+              <p class="mt-1 text-sm text-[#676769]">Get EMI on bookings over 5000 BDT using credit car,<br class="hidden md:block"> select your plan in payment gateway.</p>
+            </div>
           </div>
-          <div>
+          <div class="shrink-0">
             <button @click="handleEmiModal" class="text-sm text-[#1E88E5] font-medium underline">
               See details
             </button>
             <EmiDetailsModal v-if="showEmiModal" @close-modal="showEmiModal = false" />
           </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-[#EDEDED] flex items-center gap-x-3">
+          <input type="checkbox" id="emi-pay" class="size-5 accent-green-600">
+          <label for="emi-pay" class="text-blackPrimary font-medium">Pay with EMI</label>
         </div>
       </div>
 
