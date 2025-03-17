@@ -41,7 +41,7 @@ export default {
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
                 <select v-model="selectedBankName" name="cars" id="cars" class="outline-none border border-[#8FC4F2] rounded-lg w-full py-2 px-4 text-sm">
-                  <option v-for="bank in bankList" >{{ bank.bankName }}</option>
+                  <option v-for="bank in bankList" :key="bank.bankName" >{{ bank.bankName }}</option>
                 </select>
               </div>
               <div>
@@ -56,7 +56,7 @@ export default {
                     </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="emi in selectedBank.data">
+                      <tr v-for="emi in selectedBank.data" :key="JSON.stringify(emi)">
                         <td>{{ emi.months }}</td>
                         <td>{{ emi.monthlyEMI }}</td>
                         <td>{{ emi.totalCost }}</td>
