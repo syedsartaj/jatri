@@ -1,0 +1,1012 @@
+[
+    {
+        "bankName": "Standard Chartered Bank",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0363",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0582",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.087",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.1173",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1561",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.2121",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2903",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "City Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "30 Months",
+                "monthlyEMI": "0.1976",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Eastern Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "30 Months",
+                "monthlyEMI": "0.1976",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "BRAC Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Dutch Bangla Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Mutual Trust bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Southeast Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "30 Months",
+                "monthlyEMI": "0.1976",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Standard Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "National Credit & Commerce (NCC) Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "NRB Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Meghana Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Jamuna Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Midland Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Bank Asia Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Dhaka Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "South Bangla Agriculture and Commerce Bank Limited (SBAC)",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Lanka Bangla Financial Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "NRB Commercial Bank",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Shahjalal Islami Bank Limited (SJIBL)",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "United Commercial Bank (UCB)",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Export Import Bank of Bangladesh Limited (Exim Bank)",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Prime Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Al-Arafah Islami Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Community Bank Bangladesh Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "One Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Trust Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Mercantile Bank Limited",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "18 Months",
+                "monthlyEMI": "0.1299",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "24 Months",
+                "monthlyEMI": "0.1834",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "30 Months",
+                "monthlyEMI": "0.1976",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "36 Months",
+                "monthlyEMI": "0.2422",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "Premiere Bank",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    },
+    {
+        "bankName": "AB Bank",
+        "data": [
+            {
+                "months": "3 Months",
+                "monthlyEMI": "0.0309",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "6 Months",
+                "monthlyEMI": "0.0471",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "9 Months",
+                "monthlyEMI": "0.0695",
+                "totalCost": "Min 5000 to above"
+            },
+            {
+                "months": "12 Months",
+                "monthlyEMI": "0.0929",
+                "totalCost": "Min 5000 to above"
+            }
+        ]
+    }
+]
