@@ -1,8 +1,20 @@
 <script>
+import bankList from "@/static/emi.json"
 export default {
+  data() {
+    return {
+      bankList: bankList,
+      selectedBankName: bankList[0].bankName,
+    };
+  },
   methods: {
     closeModal() {
       this.$emit("close-modal");
+    }
+  },
+  computed: {
+    selectedBank(){
+      return this.bankList.find(bank => bank.bankName === this.selectedBankName)
     }
   }
 };
@@ -28,14 +40,10 @@ export default {
               <div>
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
-                <select name="cars" id="cars" class="outline-none border border-[#8FC4F2] rounded-lg w-full py-2 px-4 text-sm">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                <select v-model="selectedBankName" name="cars" id="cars" class="outline-none border border-[#8FC4F2] rounded-lg w-full py-2 px-4 text-sm">
+                  <option v-for="bank in bankList" :key="bank.bankName" >{{ bank.bankName }}</option>
                 </select>
               </div>
-
               <div>
                 <h4 class="mb-4 text-blackPrimary font-medium">Breakdown</h4>
                 <div>
@@ -47,30 +55,11 @@ export default {
                       <th>Total Cost</th>
                     </tr>
                     </thead>
-
                     <tbody>
-                      <tr>
-                        <td>3 Months</td>
-                        <td>3.63%</td>
-                        <td>Min 5,000 to above</td>
-                      </tr>
-
-                      <tr>
-                        <td>3 Months</td>
-                        <td>3.63%</td>
-                        <td>Min 5,000 to above</td>
-                      </tr>
-
-                      <tr>
-                        <td>3 Months</td>
-                        <td>3.63%</td>
-                        <td>Min 5,000 to above</td>
-                      </tr>
-
-                      <tr>
-                        <td>3 Months</td>
-                        <td>3.63%</td>
-                        <td>Min 5,000 to above</td>
+                      <tr v-for="emi in selectedBank.data" :key="JSON.stringify(emi)">
+                        <td>{{ emi.months }}</td>
+                        <td>{{ emi.monthlyEMI }}</td>
+                        <td>{{ emi.totalCost }}</td>
                       </tr>
                     </tbody>
                   </table>
