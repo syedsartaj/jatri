@@ -219,6 +219,21 @@
         </div>
       </div>
 
+
+      <div class="mt-4 py-4 px-5 bg-white rounded-[10px] border border-[#EDEDED]">
+        <div class="flex items-center justify-between gap-x-4">
+          <div>
+            <h4>EMI Available</h4>
+          </div>
+          <div>
+            <button @click="handleEmiModal" class="text-sm text-[#1E88E5] font-medium underline">
+              See details
+            </button>
+            <EmiDetailsModal v-if="showEmiModal" @close-modal="showEmiModal = false" />
+          </div>
+        </div>
+      </div>
+
       <div class="mt-4 bg-white rounded-[10px] border border-[#EDEDED]">
         <div class="flex justify-between items-center gap-x-4 px-5 py-[16px] border-b">
           <p class="text-base sm:text-xl font-medium text-blackPrimary">
@@ -294,13 +309,16 @@
 </template>
 
 <script>
+import EmiDetailsModal from "@/components/Modal/EmiDetailsModal.vue";
 import ERROR_CODE from "@/constant/errorCodeEnum";
 import { dateTimeFormat } from "@/helpers/dateTimeFormat";
 import moment from "moment";
 import { mapActions, mapGetters } from "vuex";
 import {fireGTMEventForPaymentMethodSelection, fireGTMEventForPaymentInit, fireGTMEventForBookingConfirmed} from "@/helpers/AnalyticsEventHandler";
+import {handleScrollBehaviour} from "@/helpers/utils";
 
 export default {
+  components: { EmiDetailsModal },
   middleware(ctx) {
     // ctx.$gtm.push({ event: "ssr" });
   },
@@ -310,6 +328,7 @@ export default {
   },
   data() {
     return {
+      showEmiModal: false,
       gatewayType: "",
       activePromo: null,
       paymentAllowStatus: true,
@@ -353,7 +372,7 @@ export default {
     },
   },
   mounted() {
-    
+
 
     if (this.availablePromos?.length && this?.$refs?.promoSlider) {
       const slider = this.$refs.promoSlider;
@@ -458,6 +477,10 @@ export default {
       "getSurpriseDealAction",
       "updateGatewayAction",
     ]),
+    handleEmiModal() {
+      handleScrollBehaviour(this.showEmiModal);
+      this.showEmiModal = !this.showEmiModal;
+    },
     calculateSecondsLeft(timeToCompare) {
       const currentTime = moment();
       const targetTime = moment(timeToCompare);
@@ -559,7 +582,7 @@ export default {
         }
       });
     },
-   
+
     timeUp() {
       this.paymentAllowStatus = false;
     },
