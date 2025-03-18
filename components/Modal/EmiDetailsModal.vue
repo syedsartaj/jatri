@@ -51,7 +51,9 @@ export default {
               <div>
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
-                <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName" />
+                <div class="emi-bank-dropdown">
+                  <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName"/>
+                </div>
               </div>
               <div>
                 <h4 class="mb-4 text-blackPrimary font-medium">Breakdown</h4>
@@ -180,4 +182,41 @@ export default {
   tbody tr:nth-child(even) td {
     @apply bg-[#DBDBDB];
   }
+</style>
+
+<style>
+.emi-bank-dropdown .p-dropdown {
+  border-radius: 8px !important;
+  border: 1px solid #8FC4F2 !important;
+}
+
+.emi-bank-dropdown .p-dropdown.p-focus {
+  box-shadow: none !important;
+}
+
+.emi-bank-dropdown .p-dropdown-label {
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  color: #4D4D4F !important;
+}
+
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.5rem 1rem !important;
+  font-size: 14px !important;
+  color: #4D4D4F !important;
+}
+
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(:last-child) {
+  border-bottom: 1px solid #EDEDED !important;
+}
+
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #1E88E5 !important;
+  background: #fff !important;
+}
+
+.emi-bank-dropdown .p-dropdown .pi {
+  color: #030D45 !important;
+  font-size: 14px !important;
+}
 </style>

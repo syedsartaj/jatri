@@ -238,7 +238,7 @@
         </div>
 
         <div class="mt-4 pt-4 border-t border-[#EDEDED] flex items-center gap-x-3">
-          <input v-model="isPayWithEMI" type="checkbox" id="emi-pay" class="size-5 accent-green-600"> 
+          <input v-model="isPayWithEMI" type="checkbox" id="emi-pay" class="size-5 accent-green-600">
           <label for="emi-pay" class="text-blackPrimary font-medium">Pay with EMI</label>
         </div>
       </div>
@@ -355,6 +355,18 @@ export default {
     };
   },
   watch: {
+    // showEmiModal(newValue) {
+    //   const body = document.getElementsByTagName("body")[0];
+    //   const html = document.getElementsByTagName("html")[0];
+    //
+    //   if (newValue) {
+    //     body.style.overflow = "hidden";
+    //     html.style.overflow = "hidden";
+    //   } else {
+    //     body.style.overflow = "";
+    //     html.style.overflow = "";
+    //   }
+    // },
     async gatewayType() {
       const payload = {
         paymentId: this.getBookingInfoDetails._id,
@@ -483,7 +495,7 @@ export default {
     showPromoInput() {
       return this.getBookingInfoDetails?.invoice?.promo;
     },
-    
+
   },
   methods: {
     ...mapActions("busStore", [
@@ -494,7 +506,7 @@ export default {
       "updateGatewayAction",
     ]),
     handleEmiModal() {
-      handleScrollBehaviour(this.showEmiModal);
+      // handleScrollBehaviour(this.showEmiModal);
       this.showEmiModal = !this.showEmiModal;
     },
     calculateSecondsLeft(timeToCompare) {
