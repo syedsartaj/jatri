@@ -1,5 +1,6 @@
 <script>
 import bankList from "@/static/emi.json"
+import Dropdown from 'primevue/dropdown';
 export default {
   data() {
     return {
@@ -16,6 +17,9 @@ export default {
     selectedBank(){
       return this.bankList.find(bank => bank.bankName === this.selectedBankName)
     }
+  },
+  components: {
+    Dropdown
   }
 };
 </script>
@@ -47,9 +51,7 @@ export default {
               <div>
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
-                <select v-model="selectedBankName" name="cars" id="cars" class="outline-none border border-[#8FC4F2] rounded-lg w-full py-2 px-4 text-sm">
-                  <option v-for="bank in bankList" :key="bank.bankName" >{{ bank.bankName }}</option>
-                </select>
+                <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName" />
               </div>
               <div>
                 <h4 class="mb-4 text-blackPrimary font-medium">Breakdown</h4>

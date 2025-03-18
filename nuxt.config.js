@@ -103,7 +103,7 @@ export default {
   primevue: {
     theme: "md-light-indigo",
     ripple: true,
-    components: ["Button", "Dialog", "RadioButton", "InputText", "Skeleton"],
+    components: ["Button", "Dialog", "RadioButton", "InputText", "Skeleton",],
     directives: [],
   },
   axios: {

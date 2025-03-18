@@ -220,7 +220,7 @@
       </div>
 
 
-      <div class="mt-4 py-4 px-5 bg-white rounded-[10px] border border-[#EDEDED]">
+      <div v-if="getBookingInfoDetails.amount >= 5000" class="mt-4 py-4 px-5 bg-white rounded-[10px] border border-[#EDEDED]">
         <div class="flex items-center justify-between gap-x-4">
           <div class="flex items-start gap-x-2 md:gap-x-4">
             <img src="@/assets/images/icons/emi.png" alt="emi" class="shrink-0">
@@ -238,7 +238,7 @@
         </div>
 
         <div class="mt-4 pt-4 border-t border-[#EDEDED] flex items-center gap-x-3">
-          <input type="checkbox" id="emi-pay" class="size-5 accent-green-600">
+          <input v-model="isPayWithEMI" type="checkbox" id="emi-pay" class="size-5 accent-green-600"> 
           <label for="emi-pay" class="text-blackPrimary font-medium">Pay with EMI</label>
         </div>
       </div>
@@ -257,7 +257,7 @@
           </div>
         </div>
         <div class="p-4 flex justify-between gap-x-3">
-          <BkashOption plan-name="bkash" plan-discount="10%" v-model="gatewayType" />
+          <BkashOption :disabled="isPayWithEMI" plan-name="bkash" plan-discount="10%" v-model="gatewayType" />
           <!-- <NagadOption
             plan-name="nagad"
             plan-discount="10%"
@@ -351,6 +351,7 @@ export default {
       isLeftScrollDisabled: true,
       isRightScrollDisabled: true,
       selectedPromoObjectIndex: null,
+      isPayWithEMI: false,
     };
   },
   watch: {
@@ -379,6 +380,11 @@ export default {
         this.makeSelectedPromoCenter(this.selectedPromoObjectIndex);
       }
     },
+    isPayWithEMI(value){
+      if(value){
+        this.gatewayType = 'sslcommerz'
+      }
+    }
   },
   mounted() {
 
@@ -477,6 +483,7 @@ export default {
     showPromoInput() {
       return this.getBookingInfoDetails?.invoice?.promo;
     },
+    
   },
   methods: {
     ...mapActions("busStore", [
