@@ -24,19 +24,26 @@ export default {
   <div class="relative z-[999999999]">
     <div class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"></div>
 
-    <div class="fixed inset-0 z-10 p-[11px] lg:p-0 flex items-center justify-center">
-      <div class="relative transform overflow-hidden rounded-lg p-4 lg:p-6 bg-white shadow-xl transition-all w-[70%]">
+    <div class="fixed inset-0 z-10 md:p-4 flex md:items-center justify-center">
+      <div class="relative transform overflow-hidden md:rounded-lg bg-white shadow-xl transition-all xl:w-[70%]">
           <div>
-            <div class="flex justify-between pb-4 border-b border-[#EDEDED]">
-              <h2 class="text-xl font-medium text-blackPrimary">
-                EMI details
-              </h2>
-              <button @click="closeModal" class="pr-[6px]">
-                <img src="@/assets/images/icons/closeIcon.svg" alt="close modal" />
-              </button>
+            <div class="sticky top-0">
+              <div @click="closeModal" class="p-4 bg-[#FEF2F0] flex items-center gap-x-4 cursor-pointer md:hidden">
+                <img src="@/assets/images/icons/leftArrow.svg" alt="back to payment">
+                <h4 class="text-blackPrimary font-medium">Back to Payment details</h4>
+              </div>
+
+              <div class="p-4 lg:p-6 flex justify-center md:justify-between pb-4 border-b border-[#EDEDED]">
+                <h2 class="text-xl font-medium text-blackPrimary">
+                  EMI details
+                </h2>
+                <button @click="closeModal" class="pr-[6px] hidden md:block">
+                  <img src="@/assets/images/icons/close-circle.png" alt="close modal" />
+                </button>
+              </div>
             </div>
 
-            <div class="pt-4 pr-4 space-y-4 max-h-[80vh] overflow-y-auto">
+            <div class="p-4 lg:p-6 space-y-4 max-h-[83vh] md:max-h-[80vh] overflow-y-auto">
               <div>
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
@@ -87,10 +94,13 @@ export default {
                 <div class="space-y-3 text-[#4D4D4F] text-xs leading-5">
                   <ul class="list-decimal pl-4">
                     <li>EMI is available for Online Bus Ticketing, Car Rental, and Flight Bookings on Jatri.</li>
-                    <li>EMI is available for Online Bus Ticketing, Car Rental, and Flight Bookings on Jatri.</li>
-                    <li>EMI is available for Online Bus Ticketing, Car Rental, and Flight Bookings on Jatri.</li>
-                    <li>EMI is available for Online Bus Ticketing, Car Rental, and Flight Bookings on Jatri.</li>
-                    <li>EMI is available for Online Bus Ticketing, Car Rental, and Flight Bookings on Jatri.</li>
+                    <li>The minimum billing amount to avail of the EMI facility is BDT 5,000.</li>
+                    <li>EMI is applicable only for eligible credit cards issued by selected banks.</li>
+                    <li>Depending on the issuing bank, customers can choose EMI plans for up to 36 months.</li>
+                    <li>It may take 3 to 5 working days for the installment plan to reflect on your credit card statement, depending on your bank.</li>
+                    <li>Upon transaction, the full amount will be blocked on your credit card until the installment payments are completed.</li>
+                    <li>A Convenience Fee may apply based on the EMI tenure. This fee is non-refundable.</li>
+                    <li>Jatri will follow the policies of the respective bank/payment service provider to resolve any disputes or issues.</li>
                   </ul>
                 </div>
               </div>
@@ -104,20 +114,32 @@ export default {
                       - EMI is available for credit cards issued by selected banks. The transaction amount must be BDT 5,000 or higher to qualify for bus tickets.
                     </li>
                     <li>
-                      What credit cards are eligible?<br>
-                      - EMI is available for credit cards issued by selected banks. The transaction amount must be BDT 5,000 or higher to qualify for bus tickets.
+                      Can I use a debit card for EMI?<br>
+                      - No, debit card transactions are not eligible for EMI, as per bank policy.
                     </li>
-                    <li>
-                      What credit cards are eligible?<br>
-                      - EMI is available for credit cards issued by selected banks. The transaction amount must be BDT 5,000 or higher to qualify for bus tickets.
+                    <li>Is there any additional charge for EMI?<br>
+                      - Jatri offers EMI without additional charges, only the EMI interest percentage will be applicable.
                     </li>
-                    <li>
-                      What credit cards are eligible?<br>
-                      - EMI is available for credit cards issued by selected banks. The transaction amount must be BDT 5,000 or higher to qualify for bus tickets.
+                    <li>What are the available EMI tenures?<br>
+                      - You can select from 3 to 36 months based on the terms set by your credit card issuer.
                     </li>
-                    <li>
-                      What credit cards are eligible?<br>
-                      - EMI is available for credit cards issued by selected banks. The transaction amount must be BDT 5,000 or higher to qualify for bus tickets.
+                    <li>Do I need to submit any physical documents for EMI processing?<br>
+                      - No, this is a completely online process. No physical documents are required.
+                    </li>
+                    <li>Can I settle my EMI early?<br>
+                      - Yes, but early settlement policies vary by bank. Please contact your card-issuing bank for details on early settlement fees and procedures.
+                    </li>
+                    <li>Is EMI available for international credit cards?<br>
+                      - No, EMI is only available for credit cards issued in Bangladesh.
+                    </li>
+                    <li>What is the refund policy for EMI transactions?<br>
+                      - If a refund is processed, the EMI charge will be deducted from the refundable amount.
+                    </li>
+                    <li>What should I do if my purchase has not been converted to EMI within 7 working days?<br>
+                      - For such issues or concerns, please contact your card-issuing bank directly, as they are responsible for processing the EMI conversion.
+                    </li>
+                    <li>What should I do if I face any issues?<br>
+                      - If you encounter any issues or queries, feel free to contact us:
                     </li>
                   </ul>
 
@@ -142,7 +164,7 @@ export default {
   }
 
   thead tr th {
-    @apply w-[33.33%] p-2.5 font-medium text-blackPrimary text-center;
+    @apply w-[33.33%] p-2.5 font-medium text-blackPrimary text-center text-sm md:text-base;
   }
 
   tbody tr td {
