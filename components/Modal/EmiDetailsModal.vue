@@ -52,7 +52,23 @@ export default {
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
                 <div class="emi-bank-dropdown">
-                  <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName"/>
+                  <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName">
+                    <template #value="slotProps">
+                      <div class="dropdown-selected-item" v-if="slotProps.value">
+                        <img :alt="slotProps.value.bankIcon" :src="'/bank-icon/' + selectedBank?.bankIcon + '.png'" class="size-5" />
+                        <span>{{slotProps.value}}</span>
+                      </div>
+                      <span v-else>
+                        {{slotProps.placeholder}}
+                      </span>
+                    </template>
+                    <template #option="slotProps">
+                      <div class="dropdown-item">
+                        <img :alt="slotProps.option.bankIcon" :src="'/bank-icon/' + slotProps.option.bankIcon + '.png'" class="size-5" />
+                        <span>{{slotProps.option.bankName}}</span>
+                      </div>
+                    </template>
+                  </Dropdown>
                 </div>
               </div>
               <div>
@@ -251,5 +267,12 @@ export default {
 .emi-bank-dropdown .p-dropdown .pi {
   color: #030D45 !important;
   font-size: 14px !important;
+}
+
+.emi-bank-dropdown .dropdown-item,
+.emi-bank-dropdown .dropdown-selected-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 </style>
