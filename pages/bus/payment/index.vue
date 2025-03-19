@@ -222,15 +222,15 @@
 
       <div v-if="getBookingInfoDetails.amount >= 5000" class="mt-4 py-4 px-5 bg-white rounded-[10px] border border-[#EDEDED]">
         <div class="flex items-center justify-between gap-x-4">
-          <div class="flex items-start gap-x-2 md:gap-x-4">
+          <div class="flex items-center md:items-start gap-x-2 md:gap-x-4">
             <img src="@/assets/images/icons/emi.png" alt="emi" class="shrink-0">
             <div>
               <h4 class="text-[16px] md:text-xl text-blackPrimary font-medium">EMI Available</h4>
-              <p class="mt-1 text-sm text-[#676769]">Get EMI on bookings over 5000 BDT using credit car,<br class="hidden md:block"> select your plan in payment gateway.</p>
+              <p class="mt-1 text-sm text-[#676769]">Get EMI on bookings over 5000 BDT using credit card,<br class="hidden md:block"> select your plan in payment gateway.</p>
             </div>
           </div>
           <div class="shrink-0">
-            <button @click="handleEmiModal" class="text-sm text-[#1E88E5] font-medium underline">
+            <button @click="handleEmiModal" class="text-sm text-[#1E88E5] font-medium underline capitalize">
               See details
             </button>
             <EmiDetailsModal v-if="showEmiModal" @close-modal="showEmiModal = false" />

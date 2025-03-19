@@ -29,7 +29,7 @@ export default {
     <div class="fixed inset-0 bg-blackPrimary bg-opacity-50 transition-opacity"></div>
 
     <div class="fixed inset-0 z-10 md:p-4 flex md:items-center justify-center">
-      <div class="relative transform overflow-hidden md:rounded-lg bg-white shadow-xl transition-all xl:w-[70%]">
+      <div class="relative transform overflow-hidden md:rounded-lg bg-white shadow-xl transition-all xl:w-[1240px]">
           <div>
             <div class="sticky top-0">
               <div @click="closeModal" class="p-4 bg-[#FEF2F0] flex items-center gap-x-4 cursor-pointer md:hidden">
@@ -52,7 +52,23 @@ export default {
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
                 <div class="emi-bank-dropdown">
-                  <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName"/>
+                  <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName">
+                    <template #value="slotProps">
+                      <div class="dropdown-selected-item" v-if="slotProps.value">
+                        <img :alt="slotProps.value.bankIcon" :src="'/bank-icon/' + selectedBank?.bankIcon + '.png'" class="size-5" />
+                        <span>{{slotProps.value}}</span>
+                      </div>
+                      <span v-else>
+                        {{slotProps.placeholder}}
+                      </span>
+                    </template>
+                    <template #option="slotProps">
+                      <div class="dropdown-item">
+                        <img :alt="slotProps.option.bankIcon" :src="'/bank-icon/' + slotProps.option.bankIcon + '.png'" class="size-5" />
+                        <span>{{slotProps.option.bankName}}</span>
+                      </div>
+                    </template>
+                  </Dropdown>
                 </div>
               </div>
               <div>
@@ -190,6 +206,20 @@ export default {
   border: 1px solid #8FC4F2 !important;
 }
 
+.emi-bank-dropdown .p-dropdown-panel {
+  width: 100% !important;
+  top: 48px !important;
+  left: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.16) !important;
+}
+
+.emi-bank-dropdown .p-dropdown-items-wrapper {
+  border: 1px solid #DBDBDB;
+  border-radius: 8px;
+  padding-inline: 16px;
+}
+
 .emi-bank-dropdown .p-dropdown.p-focus {
   box-shadow: none !important;
 }
@@ -201,7 +231,7 @@ export default {
 }
 
 .emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-  padding: 0.5rem 1rem !important;
+  padding: 0.5rem 0 !important;
   font-size: 14px !important;
   color: #4D4D4F !important;
 }
@@ -210,13 +240,39 @@ export default {
   border-bottom: 1px solid #EDEDED !important;
 }
 
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  background: #fff !important;
+  color: #1E88E5 !important;
+}
+
 .emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
   color: #1E88E5 !important;
   background: #fff !important;
 }
 
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("@/assets/images/icons/tick-circle-blue.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  width: 16px;
+  height: 16px;
+}
+
 .emi-bank-dropdown .p-dropdown .pi {
   color: #030D45 !important;
   font-size: 14px !important;
+}
+
+.emi-bank-dropdown .dropdown-item,
+.emi-bank-dropdown .dropdown-selected-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 </style>
