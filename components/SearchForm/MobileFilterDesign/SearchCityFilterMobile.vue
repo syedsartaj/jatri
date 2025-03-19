@@ -110,7 +110,7 @@ export default {
       selectedOption: "",
       searchKey: "",
       secondHand: "",
-      
+
     };
   },
   methods: {
@@ -225,7 +225,7 @@ export default {
       const searchKey = this.searchKey.toLowerCase().trim();
 
       const filteredOptions = this.options.filter((option) => {
-        return option.city_name.toLowerCase().startsWith(searchKey);
+        return option.city_name.toLowerCase().includes(searchKey);
       });
 
       return filteredOptions.sort((a, b) =>

@@ -124,7 +124,7 @@ export default {
         this.secondHand = this.searchKey;
         this.$emit("input", this.searchKey);
       } else if (this.isCityAvailable(this.searchKey)) {
-        
+
         this.searchKey = this.secondHand;
         this.$emit("input", this.searchKey);
       }
@@ -208,7 +208,7 @@ export default {
       const searchKey = this.searchKey.toLowerCase().trim();
 
       const filteredOptions = this.options.filter((option) => {
-        return option.city_name.toLowerCase().startsWith(searchKey);
+        return option.city_name.toLowerCase().includes(searchKey);
       });
 
       return filteredOptions.sort((a, b) =>
