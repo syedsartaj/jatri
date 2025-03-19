@@ -238,8 +238,10 @@
         </div>
 
         <div class="mt-4 pt-4 border-t border-[#EDEDED] flex items-center gap-x-3">
-          <input v-model="isPayWithEMI" type="checkbox" id="emi-pay" class="size-5 accent-green-600">
-          <label for="emi-pay" class="text-blackPrimary font-medium">Pay with EMI</label>
+          <div class="form-group">
+            <input v-model="isPayWithEMI" type="checkbox" id="emi-pay" class="size-5 accent-green-600">
+            <label for="emi-pay" class="text-blackPrimary font-medium">Pay with EMI</label>
+          </div>
         </div>
       </div>
 
@@ -735,5 +737,46 @@ export default {
   .custom-width {
     width: calc(100% - 181px);
   }
+}
+
+.form-group input[type=checkbox] {
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  margin: -1px 8px 0 0;
+  outline: 0;
+  padding: 0 !important;
+  vertical-align: text-top;
+  height: 22px;
+  width: 22px;
+  -webkit-appearance: none;
+  opacity: .5;
+}
+
+.form-group input[type=checkbox]:hover {
+  opacity: 1;
+}
+
+.form-group input[type=checkbox]:checked {
+  background-color: #68C160;
+  border: 2px solid #68C160;
+  opacity: 1;
+}
+
+.form-group input[type=checkbox]:before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: 6px;
+  height: 12px;
+  border: solid #FFF;
+  border-width: 0 2px 2px 0;
+  margin: -1px -1px 0 -1px;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index: 2;
 }
 </style>
