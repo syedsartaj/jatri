@@ -55,7 +55,7 @@ export default {
                   <Dropdown class="w-full" v-model="selectedBankName" :options="bankList" optionValue="bankName" optionLabel="bankName">
                     <template #value="slotProps">
                       <div class="dropdown-selected-item" v-if="slotProps.value">
-                        <img :alt="slotProps.value.bankIcon" :src="'/bank-icon/' + selectedBank?.bankIcon + '.png'" class="size-5" />
+                        <img :alt="slotProps.value.bankIcon" :src="'/bank-icon/' + selectedBank?.bankIcon + '.png'" class="size-5 object-contain" />
                         <span>{{slotProps.value}}</span>
                       </div>
                       <span v-else>
@@ -64,7 +64,7 @@ export default {
                     </template>
                     <template #option="slotProps">
                       <div class="dropdown-item">
-                        <img :alt="slotProps.option.bankIcon" :src="'/bank-icon/' + slotProps.option.bankIcon + '.png'" class="size-5" />
+                        <img :alt="slotProps.option.bankIcon" :src="'/bank-icon/' + slotProps.option.bankIcon + '.png'" class="size-5 object-contain" />
                         <span>{{slotProps.option.bankName}}</span>
                       </div>
                     </template>
@@ -73,7 +73,7 @@ export default {
               </div>
               <div>
                 <h4 class="mb-4 text-blackPrimary font-medium">Breakdown</h4>
-                <div>
+                <div class="overflow-hidden border border-white rounded-lg">
                   <table>
                     <thead>
                     <tr>
@@ -188,7 +188,7 @@ export default {
   }
 
   tbody tr td {
-    @apply p-2.5 border-r-2 border-white font-normal text-sm text-blackLight text-left;
+    @apply p-2.5 border-r-2 last:border-r-0 border-white font-normal text-sm text-blackLight text-left;
   }
 
   tbody tr:nth-child(odd) td {
@@ -236,6 +236,13 @@ export default {
   color: #4D4D4F !important;
 }
 
+.emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+
 .emi-bank-dropdown .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(:last-child) {
   border-bottom: 1px solid #EDEDED !important;
 }
@@ -274,5 +281,12 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.emi-bank-dropdown .dropdown-selected-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
 }
 </style>
