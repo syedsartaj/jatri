@@ -357,18 +357,18 @@ export default {
     };
   },
   watch: {
-    // showEmiModal(newValue) {
-    //   const body = document.getElementsByTagName("body")[0];
-    //   const html = document.getElementsByTagName("html")[0];
-    //
-    //   if (newValue) {
-    //     body.style.overflow = "hidden";
-    //     html.style.overflow = "hidden";
-    //   } else {
-    //     body.style.overflow = "";
-    //     html.style.overflow = "";
-    //   }
-    // },
+    showEmiModal(newValue) {
+      const body = document.getElementsByTagName("body")[0];
+      const html = document.getElementsByTagName("html")[0];
+
+      if (newValue) {
+        body.style.overflow = "hidden";
+        html.style.overflow = "hidden";
+      } else {
+        body.style.overflow = "";
+        html.style.overflow = "";
+      }
+    },
     async gatewayType() {
       const payload = {
         paymentId: this.getBookingInfoDetails._id,
