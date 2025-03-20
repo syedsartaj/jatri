@@ -554,6 +554,11 @@ export const mutations = {
         },
         ...data,
       };
-    } 
+    } else {
+      state.bookingInfoDetails = {
+        ...state.bookingInfoDetails,
+        ...data,
+      };
+    }
   },
 };
