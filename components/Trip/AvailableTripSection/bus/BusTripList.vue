@@ -62,7 +62,7 @@ export default {
         if (from) {
           this.getCities?.filter((s) => {
             if (s.city_name.toLowerCase() === from.toLowerCase()) {
-              payload["from"] = s.city;
+              payload["from"] = {...s.city, name: s.city?.name === "Chittagong" ? "Chattogram" : s.city?.name};
             }
           });
         }
@@ -70,14 +70,14 @@ export default {
         if (to) {
           this.getCities?.filter((s) => {
             if (s.city_name.toLowerCase() === to.toLowerCase()) {
-              payload["to"] = s.city;
+              payload["to"] = {...s.city, name: s.city?.name === "Chittagong" ? "Chattogram" : s.city?.name}
             }
           });
         }
 
         payload.date = formattedDate;
         payload.busType = type;
-
+        console.log("payload", payload);
         if (payload.from && payload.to) {
           await this.getPbScheduleDataAction(payload);
         }else{ //from & to is not matched so we are invalidating already fetched trips

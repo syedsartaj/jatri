@@ -302,8 +302,8 @@ export const mutations = {
     data.cities.forEach((city) => {
       if (city?.name) {
         tempData.push({
-          city_name: city.name,
-          city: city,
+          city_name: city.name === "Chattogram" ? "Chittagong" : city.name,
+          city: {...city, name: city.name === "Chattogram" ? "Chittagong" : city.name},
         });
       }
     });
