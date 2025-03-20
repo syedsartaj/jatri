@@ -73,7 +73,7 @@ export default {
               </div>
               <div>
                 <h4 class="mb-4 text-blackPrimary font-medium">Breakdown</h4>
-                <div>
+                <div class="overflow-hidden border border-white rounded-lg">
                   <table>
                     <thead>
                     <tr>
@@ -188,7 +188,7 @@ export default {
   }
 
   tbody tr td {
-    @apply p-2.5 border-r-2 border-white font-normal text-sm text-blackLight text-left;
+    @apply p-2.5 border-r-2 last:border-r-0 border-white font-normal text-sm text-blackLight text-left;
   }
 
   tbody tr:nth-child(odd) td {
