@@ -47,7 +47,7 @@ export default {
               </div>
             </div>
 
-            <div class="p-4 lg:p-6 space-y-4 max-h-[83vh] md:max-h-[80vh] overflow-y-auto">
+            <div class="p-4 pb-12 lg:p-6 space-y-4 max-h-[83vh] md:max-h-[80vh] overflow-y-auto">
               <div>
                 <h4 class="text-blackPrimary font-medium">Select Bank</h4>
                 <p class="mt-0.5 mb-4 text-[11px] text-[#4D4D4F]">Select your credit card's bank</p>
