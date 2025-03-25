@@ -1,69 +1,69 @@
-# Digital-Ticketing-Frontend
+# Digital Ticketing Web
 
-## Build Setup
+This is a Nuxt 2 project for digital ticketing, using [Bun](https://bun.sh/) as the package manager and runtime.
 
-```bash
-# install dependencies
-$ yarn install
+## Prerequisites
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+Ensure you have the following installed:
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+- [Node.js](https://nodejs.org/) (16.x)
+- [Bun](https://bun.sh/) (Latest version)
+- [Git](https://git-scm.com/)
 
-# generate static project
-$ yarn generate
+## Installation
+
+1. **Clone the repository**
+
+   ```sh
+   git clone https://github.com/Jatri-Digital-Ticketing/digital-ticketing-web.git
+   ```
+
+2. **Navigate to the project directory**
+
+   ```sh
+   cd digital-ticketing-web
+   ```
+
+3. **Install dependencies using Bun**
+
+   ```sh
+   bun install
+   ```
+
+4. **Create an environment file**
+   ```sh
+   cp .env.example .env
+   ```
+
+## Running the Project
+
+To start the Nuxt development server:
+
+```sh
+bun run dev
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+The project should now be accessible at [http://localhost:3002](http://localhost:3002).
 
-## Special Directories
+## Build and Production
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+To generate a production build:
 
-### `assets`
+```sh
+bun run build
+```
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+Then start the production server:
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+```sh
+bun run start
+```
 
-### `components`
+## Contributing
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+Feel free to fork the repository and submit a pull request.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+## License
 
-### `layouts`
+This project is licensed under the [MIT License](LICENSE).
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
