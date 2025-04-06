@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",  
+    "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "nuxt generate && gh-pages -d dist"
   },
@@ -25,6 +25,7 @@
     "moment": "^2.29.1",
     "nuxt": "^2.15.8",
     "nuxt-tailvue": "^1.0.95",
+    "postcss-nesting": "^13.0.1",
     "primeicons": "^5.0.0",
     "primevue": "2.8.0",
     "v-calendar": "^2.4.1",
