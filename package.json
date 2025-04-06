@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "start": "nuxt start",  
+    "generate": "nuxt generate",
+    "deploy": "nuxt generate && gh-pages -d dist"
   },
   "dependencies": {
     "@bachdgvn/vue-otp-input": "^1.0.8",
@@ -44,6 +45,7 @@
     "@nuxtjs/tailwindcss": "^4.2.1",
     "autoprefixer": "^10.4.2",
     "daisyui": "^1.14.2",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.0.23"
   }
